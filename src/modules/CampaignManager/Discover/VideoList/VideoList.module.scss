@@ -1,0 +1,16 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.videoContainer {
+  max-width: 1580px;
+  width: 100%;
+}
+
+.linkToDetails {
+  background-color: $common-black;
+  padding: spacing(2);
+  color: $common-white;
+  font-weight: 600;
+  width: 50%;
+  text-align: center;
+}

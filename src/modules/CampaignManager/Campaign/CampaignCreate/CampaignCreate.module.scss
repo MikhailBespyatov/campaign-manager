@@ -1,0 +1,62 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.darkGrey {
+  color: #6b6b6b;
+}
+
+.campaignTitleWrapper {
+  width: 300px;
+}
+
+.filterLabel {
+  min-width: 250px;
+}
+
+.selectedVideoWrapper {
+  width: 325px;
+}
+
+.similarVideoContainer {
+  height: 524px;
+  border-top: 2px solid $grey-2;
+  border-bottom: 2px solid $grey-2;
+  flex: 1 1 39%;
+}
+
+.emptyVideoList {
+  margin: 0 auto;
+}
+
+.similarVideoWrapper {
+  min-width: 280px;
+}
+
+.borderedSection {
+  padding: spacing(2) 0;
+  border-bottom: 2px solid $grey-2;
+}
+
+.financialBlock {
+  min-width: 357px;
+}
+
+.iconContainer {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.startDateInput,
+.budgetAmountInput {
+  width: 200px;
+}
+
+.daysAmountInput {
+  width: 96px;
+}
+
+.submitBtnWrapper {
+  width: 200px;
+}

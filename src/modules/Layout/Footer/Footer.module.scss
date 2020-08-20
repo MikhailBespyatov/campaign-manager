@@ -1,0 +1,17 @@
+@import "styles/variables";
+
+.root {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.logoPlaceholder {
+  width: 100px;
+  height: 50px;
+  background-color: $grey-1;
+}
+
+.bottomText {
+  font-size: 12px;
+  line-height: 25px;
+}

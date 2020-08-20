@@ -1,0 +1,34 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.selectInput {
+  appearance: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.outlined {
+  background-color: $common-white;
+  color: $common-black;
+  border: 2px solid $common-black;
+  transition: all 150ms ease-in;
+
+  &:hover {
+    background-color: #e7e7e7;
+  }
+}
+
+.disabled {
+  border-color: $grey-2;
+  background: $grey-2;
+  color: $grey-1;
+  cursor: default;
+
+  &:hover {
+    background-color: $grey-2;
+  }
+}
+
+.arrow {
+  pointer-events: none;
+}

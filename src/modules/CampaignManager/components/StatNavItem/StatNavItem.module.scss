@@ -1,0 +1,33 @@
+@import "styles/variables";
+
+:global(.nav-tabs) {
+
+  .navLink {
+    border: 0;
+    padding: spacing(2);
+
+    &:hover, &:focus {
+      border: 0;
+    }
+
+    &.active {
+      background-color: $common-white;
+    }
+  }
+}
+
+.fall {
+  color: $fall-color;
+
+  &:before {
+    content: "⬇";
+  }
+}
+
+.grow {
+  color: $grow-color;
+
+  &:before {
+    content: "⬆";
+  }
+}

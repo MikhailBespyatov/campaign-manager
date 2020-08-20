@@ -1,0 +1,17 @@
+@import "styles/variables";
+
+.fall {
+  color: $fall-color;
+
+  &:before {
+    content: "⬇";
+  }
+}
+
+.grow {
+  color: $grow-color;
+
+  &:before {
+    content: "⬆";
+  }
+}

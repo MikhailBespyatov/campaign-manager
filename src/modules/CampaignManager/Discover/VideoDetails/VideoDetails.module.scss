@@ -1,0 +1,49 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.contentWrapper {
+  border: 2px solid #ededed;
+  border-radius: spacing(3);
+}
+
+.goBackBtn {
+  border: 3px solid $common-black;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+}
+
+.promoteBtn {
+  width: 200px;
+}
+
+.selectContainer {
+  min-width: 130px;
+}
+
+.detailsData {
+  font-size: 18px;
+}
+
+.detailsLabel {
+  color: $grey-1;
+}
+
+.videoContainer {
+  width: 371px;
+}
+
+.productInfo {
+
+  .detailsLabel {
+    min-width: 110px;
+  }
+}
+
+.engagementContainer {
+  width: 300px;
+}
+
+.fontSizeSmall {
+  font-size: 14px;
+}

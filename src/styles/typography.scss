@@ -1,0 +1,46 @@
+
+@import "variables";
+
+html {
+  font-size: $font-size-main;
+}
+
+body {
+  color: $text-default;
+  font-family: $font-family-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1 {
+  font-size: $font-size-h1;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2, .h2 {
+  font-size: $font-size-h2;
+  font-weight: 600;
+  margin: 0;
+}
+
+h3, .h3 {
+  font-size: $font-size-h3;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.font-semi-bold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-small {
+  font-size: 12px;
+}

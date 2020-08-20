@@ -1,0 +1,29 @@
+@import "../../../../styles/functions";
+@import "../../../../styles/variables";
+
+.pageOverlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.loginForm {
+  z-index: 10;
+  width: 500px;
+  background-color: $common-white;
+  border-radius: 30px;
+}
+
+.organisationLogo {
+  background-color: $grey-1;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+}
+
+.formSubtitle {
+  font-size: 18px;
+}
+
+.submitBtnWrapper {
+  width: 224px;
+}

@@ -1,0 +1,33 @@
+@import "styles/variables";
+
+.iconContainer {
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.md {
+  width: $icon-md;
+  height: $icon-md;
+  min-width: $icon-md;
+  min-height: $icon-md;
+}
+
+.lg {
+  width: $icon-lg;
+  height: $icon-lg;
+  min-width: $icon-lg;
+  min-height: $icon-lg;
+}
+
+.xl {
+  width: $icon-xl;
+  height: $icon-xl;
+  min-width: $icon-xl;
+  min-height: $icon-xl;
+}
