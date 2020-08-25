@@ -12,7 +12,7 @@ import {
     disableDefaultButtonStyleMixin,
     transitionTime,
     white
-} from '../../../constants';
+} from '../../../../constants';
 
 export const Button = styled.button`
     ${disableDefaultButtonStyleMixin};
