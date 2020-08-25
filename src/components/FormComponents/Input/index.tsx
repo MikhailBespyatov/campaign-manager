@@ -13,7 +13,7 @@ interface Props {
 export const Input = ({ error, value, onChange, label, name, type = name }: Props) => (
     <Wrapper>
         <Label error={!!error}>{label}</Label>
-        <InputWrapper>
+        <InputWrapper error={!!error}>
             <StyledInput name={name} type={type} value={value} onChange={onChange} />
         </InputWrapper>
         {<ErrorSpan>{error}</ErrorSpan>}
