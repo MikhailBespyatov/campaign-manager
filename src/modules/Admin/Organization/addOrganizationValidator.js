@@ -1,14 +1,12 @@
-import errorMessages from 'constants/errorMessages';
+import errorMessages from "constants/messages";
 
-const addOrganizationValidator = (
-  {
-    companyName,
-    mandatoryTag,
-    adminFirstName,
-    adminLastName,
-    adminEmail,
-  },
-) => {
+const addOrganizationValidator = ({
+  companyName,
+  mandatoryTag,
+  adminFirstName,
+  adminLastName,
+  adminEmail,
+}) => {
   const errors = {};
 
   if (!companyName) {
@@ -17,9 +15,11 @@ const addOrganizationValidator = (
 
   if (!mandatoryTag) {
     errors.mandatoryTag = [errorMessages.requiredField];
-  } else if (mandatoryTag.includes(' ')
-    || mandatoryTag.includes('#')
-    || mandatoryTag.length > 20) {
+  } else if (
+    mandatoryTag.includes(" ") ||
+    mandatoryTag.includes("#") ||
+    mandatoryTag.length > 20
+  ) {
     errors.mandatoryTag = [errorMessages.tagIsInvalid];
   }
 

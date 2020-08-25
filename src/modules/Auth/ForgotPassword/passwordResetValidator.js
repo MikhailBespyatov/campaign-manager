@@ -1,7 +1,10 @@
-import errorMessages from 'constants/errorMessages';
+import errorMessages from "constants/messages";
 
-
-const passwordResetValidator = ({ confirmationToken, password, confirmPassword }) => {
+const passwordResetValidator = ({
+  confirmationToken,
+  password,
+  confirmPassword,
+}) => {
   const errors = {};
   const regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
 

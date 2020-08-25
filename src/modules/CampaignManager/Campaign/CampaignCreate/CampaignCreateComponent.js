@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, Form, FormSpy } from 'react-final-form';
 import TextInputWrapper from 'components/forms/finalFormWrappers/TextInputWrapper';
-import TagInput from 'components/ui/TagInput/TagInput';
+import TagInput from 'constants/ui/TagInput/TagInput';
 import BorderedSection from 'modules/CampaignManager/Campaign/CampaignCreate/components/BorderedSection';
 import LanguageSwitchBar from 'modules/CampaignManager/Campaign/CampaignCreate/components/LanguageSwitchBar';
 import ContentSelectWrapper from 'components/forms/finalFormWrappers/ContentSelectWrapper';

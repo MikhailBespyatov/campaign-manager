@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'react-final-form';
 import BitmapIcon from 'components/icons/BitmapIcon/BitmapIcon';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
+import PrimaryButton from 'constants/ui/buttons/PrimaryButton';
 import TextInputWrapper from 'components/forms/finalFormWrappers/TextInputWrapper';
 import womTokenLogo from 'assets/img/wom-token-logo.png';
 import classes from 'modules/CampaignManager/Campaign/CampaignCreate/CampaignCreate.module.scss';

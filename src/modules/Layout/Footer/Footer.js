@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import routeByName from 'constants/routes';
-import TextButton from 'components/ui/buttons/TextButton';
+import TextButton from 'constants/ui/buttons/TextButton';
 import classes from './Footer.module.scss';
 
 
