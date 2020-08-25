@@ -33,7 +33,7 @@ export const SignIn = () => {
 
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (!Object.values(errors).filter(i => i !== '').length) console.log('submitted data');
+        //if (!Object.values(errors).filter(i => i !== '').length) console.log('submitted data');
     };
 
     return (
