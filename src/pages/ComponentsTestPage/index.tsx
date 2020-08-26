@@ -3,6 +3,7 @@ import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
+import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import React, { useState } from 'react';
 
 const disabled = true;
@@ -51,6 +52,7 @@ export const Test = () => {
             <Space />
             <Radio checked={checked} disabled={disabled} onChange={onChange} />
             <Space />
+            <VideoCard />
             <Space />
             <Space />
             <Space />
