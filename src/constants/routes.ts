@@ -3,6 +3,7 @@ const adminPrefix = '/admin';
 const campaignPrefix = '/campaign_manager';
 
 export const routes = {
+    test: '/components_test_page',
     home: '/',
     signIn: '/sign_in',
     signUp: '/sign_up',

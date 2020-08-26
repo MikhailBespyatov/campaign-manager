@@ -4,6 +4,7 @@ import { AcceptInviteContainer } from 'modules/Auth/AcceptInvite/AcceptInviteCon
 import ForgotPasswordContainer from 'modules/Auth/ForgotPassword/ForgotPasswordContainer';
 import CampaignManagerContainer from 'modules/CampaignManager/CampaignManagerContainer';
 import { BaseLayout } from 'modules/Layout/BaseLayout';
+import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
 import React from 'react';
 import { Redirect, Switch } from 'react-router';
@@ -17,6 +18,7 @@ const App = () => (
     <>
         <BaseLayout>
             <Switch>
+                <PublicRoute exact component={Test} path={routes.test} />
                 <PublicRoute exact component={SignIn} path={routes.signIn} />
                 <PublicRoute exact component={UnderConstruction} path={routes.signUp} />
                 <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} />
