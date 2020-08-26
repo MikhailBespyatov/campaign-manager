@@ -6,7 +6,7 @@ import routeByName from 'constants/routes';
 import CampaignAuthForm from 'modules/Auth/components/CampaignAuthForm/CampaignAuthForm';
 import signInValidator from 'modules/Auth/SignIn/signInValidator';
 import TextInputWrapper from 'components/forms/finalFormWrappers/TextInputWrapper';
-import TextButton from 'components/ui/buttons/TextButton';
+import TextButton from 'constants/ui/buttons/TextButton';
 
 
 const SignInComponent = ({ onSubmit }) => {

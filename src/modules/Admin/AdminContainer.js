@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import routeByName from 'constants/routes';
 import OrganizationContainer from 'modules/Admin/Organization/OrganizationContainer';
 import UsersContainer from 'modules/Admin/Users/UsersContainer';
-import NavBar from 'components/ui/NavBar/NavBar';
+import NavBar from 'constants/ui/NavBar/NavBar';
 import { getNavLinksByRole } from 'modules/Admin/helpers';
 
 

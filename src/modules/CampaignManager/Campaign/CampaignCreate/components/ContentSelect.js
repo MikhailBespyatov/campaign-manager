@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from 'modules/CampaignManager/Campaign/CampaignCreate/CampaignCreate.module.scss';
 import VideoCard from 'modules/CampaignManager/components/VideoCard/VideoCard';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
+import PrimaryButton from 'constants/ui/buttons/PrimaryButton';
 
 class ContentSelect extends React.PureComponent {
   addVideo = ({ currentTarget }) => {

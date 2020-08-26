@@ -1,12 +1,6 @@
-import errorMessages from 'constants/errorMessages';
+import errorMessages from "constants/messages";
 
-const addUserValidator = (
-  {
-    firstName,
-    lastName,
-    email,
-  },
-) => {
+const addUserValidator = ({ firstName, lastName, email }) => {
   const errors = {};
 
   if (!firstName) {

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import routeByName from 'constants/routes';
-import PaginationPanel from 'components/ui/PaginationPanel/PaginationPanel';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
+import PaginationPanel from 'constants/ui/PaginationPanel/PaginationPanel';
+import PrimaryButton from 'constants/ui/buttons/PrimaryButton';
 import CampaignTable from 'modules/CampaignManager/Campaign/CampaignList/components/CampaignTable/CampaignTable';
 import classes from 'modules/CampaignManager/Campaign/CampaignList/CampaignList.module.scss';
 

@@ -1,56 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Modal from 'reactstrap/es/Modal';
-import ModalBody from 'reactstrap/es/ModalBody';
-import TextInput from 'components/forms/inputs/TextInput/TextInput';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
-import TextButton from 'components/ui/buttons/TextButton';
-import errorMessages from 'constants/errorMessages';
-import classes from 'modules/Admin/components/modals/modals.module.scss';
+import TextInput from "components/forms/inputs/TextInput/TextInput";
+import PrimaryButton from "constants/ui/buttons/PrimaryButton";
+import TextButton from "constants/ui/buttons/TextButton";
+import errorMessages from "constants/messages";
+import classes from "modules/Admin/components/modals/modals.module.scss";
+import PropTypes from "prop-types";
+import React from "react";
+import Modal from "reactstrap/es/Modal";
+import ModalBody from "reactstrap/es/ModalBody";
 
 const validateTag = (tag) => {
   let error;
   if (!tag) {
     error = errorMessages.requiredField;
-  } else if (tag.includes(' ') || tag.includes('#') || tag.length > 20) {
+  } else if (tag.includes(" ") || tag.includes("#") || tag.length > 20) {
     error = errorMessages.tagIsInvalid;
   }
   return error;
 };
 
 const AddTagModal = ({ isOpen, onClose, onAddTag }) => {
-  const [inputText, setInputText] = React.useState('');
+  const [inputText, setInputText] = React.useState("");
   const [errorText, setErrorText] = React.useState(undefined);
 
-  const onInputChange = React.useCallback(
-    ({ target: { value } }) => {
-      setInputText(value);
-      setErrorText(validateTag(value));
-    },
-    [],
-  );
+  const onInputChange = React.useCallback(({ target: { value } }) => {
+    setInputText(value);
+    setErrorText(validateTag(value));
+  }, []);
 
-  const cancel = React.useCallback(
-    () => {
-      setInputText('');
-      onClose();
-    },
-    [],
-  );
+  const cancel = React.useCallback(() => {
+    setInputText("");
+    onClose();
+  }, []);
 
-  const addTag = React.useCallback(
-    () => {
-      const error = validateTag(inputText);
-      if (error) {
-        setErrorText(error);
-        return;
-      }
+  const addTag = React.useCallback(() => {
+    const error = validateTag(inputText);
+    if (error) {
+      setErrorText(error);
+      return;
+    }
 
-      onAddTag(inputText);
-      setInputText('');
-    },
-    [inputText],
-  );
+    onAddTag(inputText);
+    setInputText("");
+  }, [inputText]);
 
   return (
     <Modal
@@ -77,9 +68,7 @@ const AddTagModal = ({ isOpen, onClose, onAddTag }) => {
             </PrimaryButton>
           </div>
           <div className={classes.actionBtnContainer}>
-            <TextButton onClick={cancel}>
-              Cancel
-            </TextButton>
+            <TextButton onClick={cancel}>Cancel</TextButton>
           </div>
         </div>
       </ModalBody>

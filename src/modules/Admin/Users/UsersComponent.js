@@ -2,9 +2,9 @@ import React, {} from 'react';
 import * as PropTypes from 'prop-types';
 import SearchInput from 'components/forms/inputs/SearchInput/SearchInput';
 import AdminTable from 'modules/Admin/components/AdminTable/AdminTable';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
+import PrimaryButton from 'constants/ui/buttons/PrimaryButton';
 import SpriteIcon from 'components/icons/SpriteIcon/SpriteIcon';
-import PaginationPanel from 'components/ui/PaginationPanel/PaginationPanel';
+import PaginationPanel from 'constants/ui/PaginationPanel/PaginationPanel';
 
 
 const UsersComponent = (

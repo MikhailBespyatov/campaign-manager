@@ -1,4 +1,4 @@
-import errorMessages from 'constants/errorMessages';
+import errorMessages from "constants/messages";
 
 const signInValidator = ({ email, password }) => {
   const errors = {};

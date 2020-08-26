@@ -1,5 +1,4 @@
-import errorMessages from 'constants/errorMessages';
-
+import errorMessages from "constants/messages";
 
 const requestCodeValidator = ({ email }) => {
   const errors = {};

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HashTag from 'components/ui/HashTag/HashTag';
+import HashTag from 'constants/ui/HashTag/HashTag';
 
 
 const HashTagBlock = ({ tags }) => (

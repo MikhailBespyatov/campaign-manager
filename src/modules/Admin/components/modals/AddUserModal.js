@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'reactstrap/es/Modal';
 import ModalBody from 'reactstrap/es/ModalBody';
-import PrimaryButton from 'components/ui/buttons/PrimaryButton';
+import PrimaryButton from 'constants/ui/buttons/PrimaryButton';
 import classes from 'modules/Admin/components/modals/modals.module.scss';
 import { Field, Form } from 'react-final-form';
 import TextInputWrapper from 'components/forms/finalFormWrappers/TextInputWrapper';

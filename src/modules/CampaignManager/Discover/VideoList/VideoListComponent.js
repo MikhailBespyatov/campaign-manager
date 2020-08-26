@@ -4,9 +4,9 @@ import Row from 'reactstrap/es/Row';
 import Col from 'reactstrap/es/Col';
 import { Link } from 'react-router-dom';
 import VideoCard from 'modules/CampaignManager/components/VideoCard/VideoCard';
-import PaginationPanel from 'components/ui/PaginationPanel/PaginationPanel';
+import PaginationPanel from 'constants/ui/PaginationPanel/PaginationPanel';
 import routeByName from 'constants/routes';
-import TagInput from 'components/ui/TagInput/TagInput';
+import TagInput from 'constants/ui/TagInput/TagInput';
 import classes from './VideoList.module.scss';
 
 

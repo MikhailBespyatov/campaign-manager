@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import routeByName from 'constants/routes';
 import StatNavItem from 'modules/CampaignManager/components/StatNavItem/StatNavItem';
 import LineChart from 'modules/CampaignManager/components/charts/LineChart';
-import OutlinedButton from 'components/ui/buttons/OutlinedButton';
+import OutlinedButton from 'constants/ui/buttons/OutlinedButton';
 import classes from './CampaignDetails.module.scss';
 
 
