@@ -1,5 +1,5 @@
-import { checkboxBorderRadius, checkboxDiameter, spanPadding } from 'components/common/Checkbox/constants';
-import { CheckboxProps } from 'components/common/Checkbox/types';
+import { checkboxBorderRadius, checkboxDiameter, spanPadding } from 'components/common/inputs/Checkbox/constants';
+import { CheckboxProps } from 'components/common/inputs/Checkbox/types';
 import styled from 'styled-components';
 import {
     black,
@@ -10,7 +10,7 @@ import {
     flexCenter,
     transitionTime,
     white
-} from '../../../constants';
+} from '../../../../constants';
 
 export const Wrapper = styled.div`
     display: inline-block;

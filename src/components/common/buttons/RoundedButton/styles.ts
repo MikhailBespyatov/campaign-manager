@@ -2,14 +2,18 @@ import {
     buttonBorderRadius,
     buttonHeight,
     buttonMarginBottom,
-    buttonWidth
-} from 'components/FormComponents/Button/constants';
+    buttonWidth,
+    spanFontSize,
+    spanLetterSpacing,
+    spanLineHeight
+} from 'components/common/buttons/RoundedButton/constants';
 import styled from 'styled-components';
 import {
     black,
     buttonActiveMixin,
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
+    formTextStyleMixin,
     transitionTime,
     white
 } from '../../../../constants';
@@ -33,4 +37,15 @@ export const Button = styled.button`
     :active {
         ${buttonActiveMixin};
     }
+    z-index: 2;
+`;
+
+export const Span = styled.span`
+    ${formTextStyleMixin};
+    font-size: ${spanFontSize};
+    line-height: ${spanLineHeight};
+    text-align: center;
+    letter-spacing: ${spanLetterSpacing};
+    text-transform: uppercase;
+    z-index: 1;
 `;

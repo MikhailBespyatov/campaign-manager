@@ -1,4 +1,8 @@
-export const buttonWidth = '224px';
-export const buttonHeight = '50px';
-export const buttonBorderRadius = '35px';
-export const buttonMarginBottom = '36px';
+export const buttonWidth = '160px';
+export const buttonHeight = '32px';
+export const buttonBorderRadius = '20px';
+export const buttonMarginBottom = '16px';
+
+export const spanFontSize = '15px';
+export const spanLineHeight = '12px';
+export const spanLetterSpacing = '-0.0999999px';
