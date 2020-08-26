@@ -1,5 +1,6 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Checkbox } from 'components/common/inputs/Checkbox';
+import { LinkInput } from 'components/common/inputs/LinkInput';
 import { TextInput } from 'components/common/inputs/TextInput';
 import React, { useState } from 'react';
 
@@ -39,6 +40,11 @@ export const Test = () => {
             <Space />
             <TextInput error="error" label="Some label" name="username" value="" />
             <Space />
+            <LinkInput error="" label="Some label" name="username" value="" />
+            <Space />
+            <LinkInput disabled={disabled} error="" label="Some label" name="username" value="" />
+            <Space />
+            <LinkInput error="error" label="Some label" name="username" value="" />
             <Space />
             <Space />
             <Space />
