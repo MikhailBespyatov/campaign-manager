@@ -1,6 +1,7 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
+import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
 import React, { useState } from 'react';
 
@@ -46,7 +47,9 @@ export const Test = () => {
             <Space />
             <LinkInput error="error" label="Some label" name="username" value="" />
             <Space />
+            <Radio checked={checked} onChange={onChange} />
             <Space />
+            <Radio checked={checked} disabled={disabled} onChange={onChange} />
             <Space />
             <Space />
             <Space />
