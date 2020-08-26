@@ -55,7 +55,7 @@ export const Label = styled.label<WithError>`
 `;
 
 export const ErrorSpan = styled.span`
-    height: ${errorSpanHeight};
+    min-height: ${errorSpanHeight};
     min-width: 1px;
     color: ${errorColor};
     margin-bottom: ${errorSpanMarginBottom};

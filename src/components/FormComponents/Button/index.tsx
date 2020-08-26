@@ -2,7 +2,7 @@ import { Button as StyledButton } from 'components/FormComponents/Button/styles'
 import React, { FC } from 'react';
 
 interface Props {
-    onClick: () => void;
+    onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
     disabled?: boolean;
 }
 
