@@ -44,3 +44,13 @@ export const disableDefaultButtonStyleMixin = css`
     cursor: pointer;
     outline: inherit;
 `;
+
+export const buttonDisabledMixin = css`
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #565656;
+    background-blend-mode: darken, color;
+`;
+
+export const buttonActiveMixin = css`
+    background: rgba(0, 0, 0, 0.1);
+    background-blend-mode: darken;
+`;
