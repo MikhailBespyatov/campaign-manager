@@ -14,3 +14,4 @@ export const cardBackgroundColor = 'white'; //"#f5fcfe";
 export const textInfoColor = '#585858';
 
 export const formPrimaryColor = '#0F1642';
+export const mainBackground = '#0F1642';

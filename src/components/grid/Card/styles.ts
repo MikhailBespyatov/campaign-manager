@@ -67,7 +67,7 @@ export const Card = styled.div<CardProps>`
 // `;
 
 export const CardRow = styled.div<CardRowProps>`
-    width: 100%;
+    //width: 100%;
     ${flexStart};
     ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
@@ -78,7 +78,7 @@ export const CardRow = styled.div<CardRowProps>`
 `;
 
 export const CardColumn = styled.div<CardColumnProps>`
-    width: 100%;
+    //width: 100%;
     ${flexStart};
     ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
