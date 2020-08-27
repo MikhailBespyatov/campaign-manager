@@ -18,7 +18,9 @@ export interface CardRowProps {
     marginBottom?: string;
 }
 
-export interface CardColumnProps extends CardRowProps {}
+export interface CardColumnProps extends CardRowProps {
+    marginRight?: string;
+}
 
 export interface PinnedBlockProps {
     left?: string;

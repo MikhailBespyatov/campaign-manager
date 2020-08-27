@@ -4,6 +4,7 @@ import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { Footer } from 'components/grid/Footer';
+import { Header } from 'components/grid/Header';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
@@ -19,6 +20,7 @@ export const Test = () => {
 
     return (
         <>
+            <Header />
             <div
                 style={{
                     width: '600px',
