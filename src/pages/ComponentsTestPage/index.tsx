@@ -4,6 +4,7 @@ import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
+import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
 
 const disabled = true;
@@ -54,6 +55,7 @@ export const Test = () => {
             <Space />
             <VideoCard />
             <Space />
+            <Pagination />
             <Space />
             <Space />
             <Space />
