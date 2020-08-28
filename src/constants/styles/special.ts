@@ -8,4 +8,4 @@ export const responsiveNumber = 12;
 export const cardPaddingMultiplier = 2;
 
 export const copyButtonType = 'dashed';
-export const hashTagPrefix = '@';
+export const hashTagPrefix = '#';

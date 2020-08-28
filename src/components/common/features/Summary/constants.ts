@@ -3,7 +3,7 @@ export const imgHeight = '75px';
 
 export const wrapperWidth = '291px';
 export const wrapperHeight = '99px';
-export const wrapperBorderRadius = '49.5px';
+export const wrapperBorderRadius = `calc(${wrapperHeight} / 2)`;
 export const wrapperBackground = '#F5F4F5';
 
 export const spanFontWeight = '300';
