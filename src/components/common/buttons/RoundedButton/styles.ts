@@ -1,12 +1,14 @@
 import {
     buttonBorderRadius,
+    buttonBorderWidth,
     buttonHeight,
-    buttonMarginBottom,
     buttonWidth,
+    hoverButtonColor,
     spanFontSize,
     spanLetterSpacing,
     spanLineHeight
 } from 'components/common/buttons/RoundedButton/constants';
+import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import styled from 'styled-components';
 import {
     black,
@@ -14,22 +16,24 @@ import {
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
     formTextStyleMixin,
+    reverseColor,
     transitionTime,
     white
 } from '../../../../constants';
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     width: ${buttonWidth};
     height: ${buttonHeight};
-    background-color: ${black};
+    background-color: ${({ reverse }) => (reverse ? white : black)};
+    border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
     color: ${white};
     text-transform: uppercase;
-    margin-bottom: ${buttonMarginBottom};
+    margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     transition: ${transitionTime};
     :hover {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: ${hoverButtonColor};
     }
     :disabled {
         ${buttonDisabledMixin};
@@ -40,8 +44,9 @@ export const Button = styled.button`
     z-index: 2;
 `;
 
-export const Span = styled.span`
+export const Span = styled.span<ButtonProps>`
     ${formTextStyleMixin};
+    color: ${({ reverse }) => (reverse ? reverseColor : white)};
     font-size: ${spanFontSize};
     line-height: ${spanLineHeight};
     text-align: center;
