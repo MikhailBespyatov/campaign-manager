@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { borderWidth, grey, padding } from '..';
+import { defaultFontFamily, defaultFontStyle, defaultFontWeight } from '../defaults';
 
 export const marginBottomMixin = css`
     margin-bottom: ${padding};
@@ -28,9 +29,9 @@ export const ellipsisMixin = css`
 `;
 
 export const formTextStyleMixin = css`
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
+    font-family: ${defaultFontFamily};
+    font-style: ${defaultFontStyle};
+    font-weight: ${defaultFontWeight};
     font-size: 16px;
     line-height: 20px;
 `;

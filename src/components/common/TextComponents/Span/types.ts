@@ -1,3 +1,3 @@
-export interface SpanProps {
-    color?: string;
-}
+import { Color, TextProperties } from 'types';
+
+export interface SpanProps extends Color, TextProperties {}
