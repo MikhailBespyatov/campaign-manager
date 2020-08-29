@@ -32,14 +32,17 @@ export interface Rotation {
     rotate?: number;
 }
 
-export interface FlexBooleanAlignment {
-    alignCenter?: boolean;
-    alignBaseline?: boolean;
-    justifyCenter?: boolean;
+export interface NoWrap {
     noWrap?: boolean;
 }
 
-export interface TextProperties {
+export interface FlexBooleanAlignment extends NoWrap {
+    alignCenter?: boolean;
+    alignBaseline?: boolean;
+    justifyCenter?: boolean;
+}
+
+export interface TextProperties extends NoWrap {
     fontFamily?: string;
     fontStyle?: string;
     fontSize?: string;

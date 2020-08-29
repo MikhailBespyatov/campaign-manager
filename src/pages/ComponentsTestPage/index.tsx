@@ -7,6 +7,7 @@ import { Radio } from 'components/common/inputs/Radio';
 import { RowRadio } from 'components/common/inputs/RowRadio';
 import { Switch } from 'components/common/inputs/Switch';
 import { TextInput } from 'components/common/inputs/TextInput';
+import { CampaignInputsTable } from 'components/common/tables/CampaignInputsTable';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
@@ -88,6 +89,7 @@ export const Test = () => {
                 <Space />
                 <NumberCounter />
                 <Space />
+                <CampaignInputsTable />
                 <Space />
             </div>
             <Footer />

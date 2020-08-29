@@ -16,4 +16,5 @@ export const Span = styled.span<SpanProps>`
     font-size: ${({ fontSize }) => (fontSize ? fontSize : defaultFontSize)};
     line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : defaultLineHeight)};
     color: ${({ color }) => (color ? color : defaultTextColor)};
+    ${({ noWrap }) => (noWrap ? 'white-space: nowrap' : '')};
 `;

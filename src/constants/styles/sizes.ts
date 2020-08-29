@@ -30,4 +30,5 @@ export const lg_1 = '991px';
 export const xl_1 = '1199px';
 export const xxl_1 = '1599px';
 
-export const scrollBarWidth = '7px';
+export const scrollBarWidth = '19px';
+export const scrollBarBorderRadius = `calc(${scrollBarWidth} / 2)`;
