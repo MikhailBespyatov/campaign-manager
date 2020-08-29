@@ -63,3 +63,7 @@ export interface Pointer {
 export interface Active {
     active?: boolean;
 }
+
+export interface NoopClick {
+    onClick?: noop;
+}
