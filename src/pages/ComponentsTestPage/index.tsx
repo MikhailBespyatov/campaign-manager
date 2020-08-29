@@ -1,6 +1,7 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
 import { Checkbox } from 'components/common/inputs/Checkbox';
+import { InputAddTag } from 'components/common/inputs/InputAddTag';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { Radio } from 'components/common/inputs/Radio';
@@ -20,6 +21,8 @@ import React, { useState } from 'react';
 const disabled = true;
 
 //const onCountChange = (value: number) => console.log(value);
+
+//const onClick = (value: string) => console.log(value);
 
 const Space = () => <div style={{ marginBottom: '10px' }}></div>;
 
@@ -90,6 +93,11 @@ export const Test = () => {
                 <NumberCounter />
                 <Space />
                 <CampaignInputsTable />
+                <Space />
+                <InputAddTag />
+                <Space />
+                <Space />
+                <Space />
                 <Space />
             </div>
             <Footer />

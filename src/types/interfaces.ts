@@ -93,3 +93,7 @@ export interface MaxSizes {
 export interface TextAlignment {
     alignTextCenter?: boolean;
 }
+
+export interface Placeholder {
+    placeholder?: string;
+}
