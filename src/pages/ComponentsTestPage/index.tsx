@@ -1,4 +1,5 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
@@ -96,6 +97,7 @@ export const Test = () => {
                 <Space />
                 <InputAddTag />
                 <Space />
+                <Budget subtitle="Campaigns Running" title="20.000" />
                 <Space />
                 <Space />
                 <Space />
