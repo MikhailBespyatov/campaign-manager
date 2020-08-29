@@ -5,3 +5,5 @@ export const userStorageName = 'campaignManagerUser';
 export const siteName = 'Campaign Manager';
 
 export const defaultAlt = 'img';
+
+export const noop = () => {};

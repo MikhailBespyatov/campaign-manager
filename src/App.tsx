@@ -10,12 +10,13 @@ import React from 'react';
 import { Redirect, Switch } from 'react-router';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import { PublicRoute } from 'routes/PublicRoute';
-import { routes } from './constants';
+import { GlobalStyle, routes } from './constants';
 
 console.log(routes.signIn);
 
 const App = () => (
     <>
+        <GlobalStyle />
         <BaseLayout>
             <Switch>
                 <PublicRoute exact component={Test} path={routes.test} />
