@@ -13,6 +13,7 @@ import { CampaignInputsTable } from 'components/common/tables/CampaignInputsTabl
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
+import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
@@ -99,6 +100,7 @@ export const Test = () => {
                 <Space />
                 <Budget subtitle="Campaigns Running" title="20.000" />
                 <Space />
+                <TopBar />
                 <Space />
                 <Space />
             </div>

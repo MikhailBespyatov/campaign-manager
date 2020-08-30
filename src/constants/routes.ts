@@ -32,6 +32,9 @@ export const routes = {
             create: `${campaignPrefix}/campaign/create`,
             details: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/details/${campaignId}`,
             edit: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/edit/${campaignId}`
+        },
+        overview: {
+            index: `${campaignPrefix}/overview`
         }
     },
     static: {
@@ -39,6 +42,25 @@ export const routes = {
         press: '/press'
     }
 };
+
+export const routesArray = [
+    {
+        path: routes.campaignManager.dashboard.index,
+        name: 'Dashboard'
+    },
+    {
+        path: routes.campaignManager.discover.list,
+        name: 'Discover'
+    },
+    {
+        path: routes.campaignManager.campaign.list,
+        name: 'Campaign'
+    },
+    {
+        path: routes.campaignManager.overview.index,
+        name: 'Overview'
+    }
+];
 
 const routeByName = {
     home: '/',
