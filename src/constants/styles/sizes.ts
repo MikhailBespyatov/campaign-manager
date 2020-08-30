@@ -5,7 +5,7 @@ export const borderRadius = '4px';
 export const textInfoFontSize = '14px';
 export const textInfoLineHeight = '16px';
 
-export const headerHeight = '40px';
+export const headerHeight = '90px';
 export const sideBarWidth = '200px';
 export const miniPlayerHeight = '200px';
 export const pinnedSphereDiameter = '32px';

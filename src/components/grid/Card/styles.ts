@@ -84,6 +84,7 @@ export const CardColumn = styled.div<CardColumnProps>`
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
     flex-direction: column;
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
+    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
 `;
 
 // export const CardRowSlider = styled.div`
