@@ -12,10 +12,11 @@ interface Props {
     checked: boolean;
     disabled?: boolean;
     onChange?: () => void;
-    label?: string;
+    value?: string;
+    name?: string;
 }
 
-export const Checkbox = ({ checked, disabled = false, onChange, label = 'some label' }: Props) => (
+export const Checkbox = ({ checked, disabled = false, onChange, value = 'some value', name = 'name' }: Props) => (
     <Wrapper>
         <Label>
             <StyledCheckbox checked={checked} disabled={disabled}>
@@ -23,9 +24,9 @@ export const Checkbox = ({ checked, disabled = false, onChange, label = 'some la
                     <polyline points="20 6 9 17 4 12" />
                 </Icon>
             </StyledCheckbox>
-            <HiddenCheckbox checked={checked} disabled={disabled} onChange={onChange} />
+            <HiddenCheckbox checked={checked} disabled={disabled} name={name} onChange={onChange} />
             <Span checked={checked} disabled={disabled}>
-                {label}
+                {value}
             </Span>
         </Label>
     </Wrapper>
