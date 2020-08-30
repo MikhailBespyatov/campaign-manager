@@ -3,6 +3,7 @@ import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
+import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
@@ -61,6 +62,7 @@ export const Test = () => {
                 <Space />
                 <Pagination />
                 <Space />
+                <CampaignTable />
                 <Space />
                 <Space />
                 <Space />
