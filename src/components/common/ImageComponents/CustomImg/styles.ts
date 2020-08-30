@@ -14,4 +14,5 @@ export const ImgWrapper = styled.div<ImgWrapperProps>`
     ${flexCenter};
     ${({ borderRadius }) => (borderRadius ? `border-radius: ${borderRadius}; overflow: hidden` : ``)};
     ${({ rotate }) => (rotate ? `transform: rotate(${rotate}deg);` : ``)};
+    ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
 `;

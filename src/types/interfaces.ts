@@ -1,3 +1,5 @@
+import { noop } from './types';
+
 export interface AuthUserRequest {
     email: string;
     password: string;
@@ -47,4 +49,13 @@ export interface TextProperties {
 
 export interface Color {
     color?: string;
+}
+
+export interface Closable {
+    closable?: boolean;
+    onClose?: noop;
+}
+
+export interface Pointer {
+    pointer?: boolean;
 }
