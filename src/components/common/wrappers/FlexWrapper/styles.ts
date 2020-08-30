@@ -23,3 +23,15 @@ export const Column = styled.div<ColumnProps>`
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
 `;
+
+export const Section = styled.section<RowProps>`
+    width: 100%;
+    ${flexStart};
+    ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
+    ${({ alignBaseline }) => (alignBaseline ? `align-items: baseline;` : '')};
+    ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
+    flex-direction: row;
+    flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
+    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
+    z-index: 1;
+`;

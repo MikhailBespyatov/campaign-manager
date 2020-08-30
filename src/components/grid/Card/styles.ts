@@ -37,6 +37,8 @@ export const Card = styled.div<CardProps>`
     width: ${cardWidth};
     height: ${cardHeight};
     border-radius: ${CardBorderRadius};
+    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
+    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     overflow: hidden;
     ${flexCenter};
     flex-direction: column;

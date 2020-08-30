@@ -3,6 +3,7 @@ import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import {
     imgHeight,
     imgWidth,
+    intermediatePadding,
     spanFontSize,
     spanFontWeight,
     spanLineHeight,
@@ -10,18 +11,21 @@ import {
 } from 'components/common/tags/ClosableTag/constants';
 import { Wrapper } from 'components/common/tags/ClosableTag/styles';
 import { Span } from 'components/common/TextComponents/Span';
+import { Column } from 'components/common/wrappers/FlexWrapper';
 import React, { FC } from 'react';
-import { Closable } from 'types';
+import { Closable, MarginRightBottom, WithHashtag } from 'types';
 import { hashTagPrefix } from '../../../../constants';
 
-interface Props extends Closable {}
+interface Props extends Closable, WithHashtag, MarginRightBottom {}
 
-export const ClosableTag: FC<Props> = ({ children, onClose, closable }) => (
-    <Wrapper>
-        <Span color={tagColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
-            {hashTagPrefix}
-            {children}
-        </Span>
+export const ClosableTag: FC<Props> = ({ children, onClose, closable, hashtag, ...marginRightBottom }) => (
+    <Wrapper {...marginRightBottom}>
+        <Column marginRight={closable ? intermediatePadding : '0'}>
+            <Span color={tagColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
+                {hashtag && hashTagPrefix}
+                {children}
+            </Span>
+        </Column>
         {closable && <CustomImg pointer height={imgHeight} src={closableTagImg} width={imgWidth} onClick={onClose} />}
     </Wrapper>
 );

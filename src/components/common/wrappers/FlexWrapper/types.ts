@@ -1,9 +1,5 @@
-import { FlexBooleanAlignment } from 'types';
+import { FlexBooleanAlignment, MarginBottom, MarginRight } from 'types';
 
-export interface RowProps extends FlexBooleanAlignment {
-    marginBottom?: string;
-}
+export interface RowProps extends FlexBooleanAlignment, MarginBottom {}
 
-export interface ColumnProps extends RowProps {
-    marginRight?: string;
-}
+export interface ColumnProps extends RowProps, MarginRight {}
