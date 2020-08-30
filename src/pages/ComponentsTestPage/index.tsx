@@ -1,4 +1,5 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { Summary } from 'components/common/features/Summary';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
@@ -64,6 +65,7 @@ export const Test = () => {
                 <Space />
                 <CampaignTable />
                 <Space />
+                <Summary summary="0.00" />
                 <Space />
                 <Space />
                 <Space />

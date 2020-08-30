@@ -36,3 +36,15 @@ export interface FlexBooleanAlignment {
     justifyCenter?: boolean;
     noWrap?: boolean;
 }
+
+export interface TextProperties {
+    fontFamily?: string;
+    fontStyle?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    lineHeight?: string;
+}
+
+export interface Color {
+    color?: string;
+}
