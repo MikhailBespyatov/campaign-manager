@@ -1,4 +1,6 @@
-import { Checkbox } from 'components/common/Checkbox';
+import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { Checkbox } from 'components/common/inputs/Checkbox';
+import { TextInput } from 'components/common/inputs/TextInput';
 import React, { useState } from 'react';
 
 const disabled = true;
@@ -14,7 +16,7 @@ export const Test = () => {
         <div
             style={{
                 width: '600px',
-                minHeight: '600px',
+                //minHeight: '600px',
                 margin: 'auto',
                 background: 'white',
                 display: 'flex',
@@ -23,9 +25,30 @@ export const Test = () => {
                 flexDirection: 'column'
             }}
         >
+            <RoundedButton>normal</RoundedButton>
+            <Space />
+            <RoundedButton disabled={disabled}>disabled</RoundedButton>
+            <Space />
             <Checkbox checked={checked} onChange={onChange} />
             <Space />
             <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
+            <Space />
+            <TextInput error="" label="Some label" name="username" value="" />
+            <Space />
+            <TextInput disabled={disabled} error="" label="Some label" name="username" value="" />
+            <Space />
+            <TextInput error="error" label="Some label" name="username" value="" />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
+            <Space />
             <Space />
         </div>
     );

@@ -5,7 +5,7 @@ import {
     Span,
     StyledCheckbox,
     Wrapper
-} from 'components/common/Checkbox/styles';
+} from 'components/common/inputs/Checkbox/styles';
 import React from 'react';
 
 interface Props {

@@ -1,4 +1,4 @@
-import { Button as StyledButton } from 'components/FormComponents/Button/styles';
+import { Button, Span } from 'components/common/buttons/RoundedButton/styles';
 import React, { FC } from 'react';
 
 interface Props {
@@ -6,8 +6,8 @@ interface Props {
     disabled?: boolean;
 }
 
-export const Button: FC<Props> = ({ children, onClick, disabled = true }) => (
-    <StyledButton disabled={disabled} onClick={onClick}>
-        {children}
-    </StyledButton>
+export const RoundedButton: FC<Props> = ({ children, onClick, disabled }) => (
+    <Button disabled={disabled} onClick={onClick}>
+        <Span>{children}</Span>
+    </Button>
 );
