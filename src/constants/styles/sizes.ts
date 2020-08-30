@@ -12,7 +12,7 @@ export const pinnedSphereDiameter = '32px';
 export const featureHeight = '40px';
 export const avatarDiameter = '40px';
 export const iconsFontSIze = '20px';
-export const footerHeight = '113px';
+export const footerHeight = '456px';
 export const CloseButtonDiameter = '40px';
 export const hashtagsSliderHeight = '30px';
 
@@ -31,4 +31,3 @@ export const xl_1 = '1199px';
 export const xxl_1 = '1599px';
 
 export const scrollBarWidth = '7px';
-

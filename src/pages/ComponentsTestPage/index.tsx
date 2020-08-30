@@ -3,6 +3,7 @@ import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
+import { Footer } from 'components/grid/Footer';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
@@ -17,52 +18,55 @@ export const Test = () => {
     const onChange = () => setChecked(!checked);
 
     return (
-        <div
-            style={{
-                width: '600px',
-                //minHeight: '600px',
-                margin: 'auto',
-                background: 'white',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column'
-            }}
-        >
-            <RoundedButton>normal</RoundedButton>
-            <Space />
-            <RoundedButton disabled={disabled}>disabled</RoundedButton>
-            <Space />
-            <Checkbox checked={checked} onChange={onChange} />
-            <Space />
-            <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
-            <Space />
-            <TextInput error="" label="Some label" name="username" value="" />
-            <Space />
-            <TextInput disabled={disabled} error="" label="Some label" name="username" value="" />
-            <Space />
-            <TextInput error="error" label="Some label" name="username" value="" />
-            <Space />
-            <LinkInput error="" label="Some label" name="username" value="" />
-            <Space />
-            <LinkInput disabled={disabled} error="" label="Some label" name="username" value="" />
-            <Space />
-            <LinkInput error="error" label="Some label" name="username" value="" />
-            <Space />
-            <Radio checked={checked} onChange={onChange} />
-            <Space />
-            <Radio checked={checked} disabled={disabled} onChange={onChange} />
-            <Space />
-            <VideoCard />
-            <Space />
-            <Pagination />
-            <Space />
-            <Space />
-            <Space />
-            <Space />
-            <Space />
-            <Space />
-            <Space />
-        </div>
+        <>
+            <div
+                style={{
+                    width: '600px',
+                    //minHeight: '600px',
+                    margin: 'auto',
+                    background: 'white',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column'
+                }}
+            >
+                <RoundedButton>normal</RoundedButton>
+                <Space />
+                <RoundedButton disabled={disabled}>disabled</RoundedButton>
+                <Space />
+                <Checkbox checked={checked} onChange={onChange} />
+                <Space />
+                <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
+                <Space />
+                <TextInput error="" label="Some label" name="username" value="" />
+                <Space />
+                <TextInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <Space />
+                <TextInput error="error" label="Some label" name="username" value="" />
+                <Space />
+                <LinkInput error="" label="Some label" name="username" value="" />
+                <Space />
+                <LinkInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <Space />
+                <LinkInput error="error" label="Some label" name="username" value="" />
+                <Space />
+                <Radio checked={checked} onChange={onChange} />
+                <Space />
+                <Radio checked={checked} disabled={disabled} onChange={onChange} />
+                <Space />
+                <VideoCard />
+                <Space />
+                <Pagination />
+                <Space />
+                <Space />
+                <Space />
+                <Space />
+                <Space />
+                <Space />
+                <Space />
+            </div>
+            <Footer />
+        </>
     );
 };
