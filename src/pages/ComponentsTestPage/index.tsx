@@ -6,6 +6,7 @@ import { Radio } from 'components/common/inputs/Radio';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
+import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
@@ -72,6 +73,7 @@ export const Test = () => {
                 <Space />
                 <ClosableTag>ADIDAS</ClosableTag>
                 <Space />
+                <DropDownMenuTag>7 DAYS</DropDownMenuTag>
                 <Space />
                 <Space />
             </div>
