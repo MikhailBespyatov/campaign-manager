@@ -97,3 +97,8 @@ export interface TextAlignment {
 export interface Placeholder {
     placeholder?: string;
 }
+
+export interface Title {
+    title: string;
+    subtitle?: string;
+}
