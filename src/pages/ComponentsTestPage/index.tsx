@@ -2,6 +2,7 @@ import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
+import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { Radio } from 'components/common/inputs/Radio';
 import { RowRadio } from 'components/common/inputs/RowRadio';
 import { Switch } from 'components/common/inputs/Switch';
@@ -16,6 +17,8 @@ import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
 
 const disabled = true;
+
+//const onCountChange = (value: number) => console.log(value);
 
 const Space = () => <div style={{ marginBottom: '10px' }}></div>;
 
@@ -83,6 +86,7 @@ export const Test = () => {
                 <Space />
                 <Switch active={disabled} />
                 <Space />
+                <NumberCounter />
                 <Space />
                 <Space />
             </div>

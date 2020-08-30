@@ -51,6 +51,10 @@ export interface Color {
     color?: string;
 }
 
+export interface Background {
+    background?: string;
+}
+
 export interface Closable {
     closable?: boolean;
     onClose?: noop;
@@ -66,4 +70,23 @@ export interface Active {
 
 export interface NoopClick {
     onClick?: noop;
+}
+
+export interface Sizes {
+    width?: string;
+    height?: string;
+}
+
+export interface MinSizes {
+    minWidth?: string;
+    minHeight?: string;
+}
+
+export interface MaxSizes {
+    maxWidth?: string;
+    maxHeight?: string;
+}
+
+export interface TextAlignment {
+    alignTextCenter?: boolean;
 }
