@@ -59,3 +59,7 @@ export interface Closable {
 export interface Pointer {
     pointer?: boolean;
 }
+
+export interface Active {
+    active?: boolean;
+}
