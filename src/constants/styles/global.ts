@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { backgroundColor, primaryColor, scrollBarWidth, white } from '../';
+import { backgroundColor, primaryColor, scrollBarBorderRadius, scrollBarWidth, white } from '../';
 import { defaultFontFamily } from '../defaults';
 
 export const GlobalStyle = createGlobalStyle`
@@ -25,14 +25,15 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-track
   {
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    background-color: red;
   }
 
   ::-webkit-scrollbar
   {
     width: ${scrollBarWidth};
     height: ${scrollBarWidth};
-    background-color: #F5F5F5;
+    border-radius: ${scrollBarBorderRadius};
+    //background-color: #F5F5F5;
   }
 
   ::-webkit-scrollbar-thumb

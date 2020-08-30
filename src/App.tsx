@@ -12,8 +12,6 @@ import { PrivateRoute } from 'routes/PrivateRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { GlobalStyle, routes } from './constants';
 
-console.log(routes.signIn);
-
 const App = () => (
     <>
         <GlobalStyle />

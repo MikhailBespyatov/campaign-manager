@@ -8,7 +8,6 @@ import {
     tableRowBottomPadding,
     tableRowVerticalPadding
 } from 'components/common/tables/CampaignTable/constants';
-import { tableBorderColor, tableBorderWidth } from 'components/common/tables/Table/constants';
 import styled from 'styled-components';
 
 // export const Table = styled.table`
@@ -29,7 +28,7 @@ export const LegendaryTableColumn = styled.td`
     vertical-align: initial;
     padding: ${legendaryTableRowVerticalPadding} ${legendaryTableRowHorizontalPadding};
     padding-bottom: 0;
-    border-top: ${tableBorderWidth} solid ${tableBorderColor};
+    border-top: ${tableRowBorderWidth} solid ${tableRowBorderColor};
     &:first-child {
         min-width: calc(${firstTableColumnMinWidth} - 2 * ${legendaryTableRowHorizontalPadding});
     }
@@ -52,9 +51,4 @@ export const TableColumn = styled.td`
         border-top-right-radius: ${tableRowBorderRadius};
         border-bottom-right-radius: ${tableRowBorderRadius};
     }
-`;
-
-export const TableWrapper = styled.div`
-    width: 100%;
-    overflow: auto;
 `;
