@@ -4,6 +4,7 @@ import { Checkbox } from 'components/common/inputs/Checkbox';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { Radio } from 'components/common/inputs/Radio';
 import { RowRadio } from 'components/common/inputs/RowRadio';
+import { Switch } from 'components/common/inputs/Switch';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
@@ -77,6 +78,12 @@ export const Test = () => {
                 <DropDownMenuTag>7 DAYS</DropDownMenuTag>
                 <Space />
                 <RowRadio />
+                <Space />
+                <Switch active={false} />
+                <Space />
+                <Switch active={disabled} />
+                <Space />
+                <Space />
                 <Space />
             </div>
             <Footer />
