@@ -14,7 +14,8 @@ function isRequiredVariablesDefined() {
 }
 
 if (!isRequiredVariablesDefined()) {
-    throw new Error('Some of required environment variable is undefined!');
+    console.error('Some of required environment variable is undefined!');
+    // throw new Error('Some of required environment variable is undefined!');
 }
 
 export default config;
