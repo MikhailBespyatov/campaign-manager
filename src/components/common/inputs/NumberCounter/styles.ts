@@ -6,9 +6,10 @@ import {
     wrapperPadding
 } from 'components/common/inputs/NumberCounter/constants';
 import styled from 'styled-components';
+import { BorderRadiusProperties } from 'types';
 import { flexCenter } from '../../../../constants';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<BorderRadiusProperties>`
     ${flexCenter};
     justify-content: space-around;
     min-width: ${wrapperMinWidth};
@@ -16,4 +17,11 @@ export const Wrapper = styled.div`
     border-radius: ${wrapperBorderRadius};
     background-color: ${wrapperBackground};
     padding: ${wrapperPadding};
+    ${({ borderRadius }) => (borderRadius ? `border-radius: ${borderRadius};` : ``)};
+    ${({ borderTopLeftRadius }) => (borderTopLeftRadius ? `border-top-left-radius: ${borderTopLeftRadius};` : ``)};
+    ${({ borderTopRightRadius }) => (borderTopRightRadius ? `border-top-right-radius: ${borderTopRightRadius};` : ``)};
+    ${({ borderBottomLeftRadius }) =>
+        borderBottomLeftRadius ? `border-bottom-left-radius: ${borderBottomLeftRadius};` : ``};
+    ${({ borderBottomRightRadius }) =>
+        borderBottomRightRadius ? `border-bottom-right-radius: ${borderBottomRightRadius};` : ``};
 `;

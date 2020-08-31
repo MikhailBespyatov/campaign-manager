@@ -13,13 +13,13 @@ import { Wrapper } from 'components/common/tags/ClosableTag/styles';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column } from 'components/common/wrappers/FlexWrapper';
 import React, { FC } from 'react';
-import { Closable, MarginRightBottom, WithHashtag } from 'types';
+import { BorderRadiusProperties, Closable, MarginRightBottom, WithHashtag } from 'types';
 import { hashTagPrefix } from '../../../../constants';
 
-interface Props extends Closable, WithHashtag, MarginRightBottom {}
+interface Props extends Closable, WithHashtag, MarginRightBottom, BorderRadiusProperties {}
 
-export const ClosableTag: FC<Props> = ({ children, onClose, closable, hashtag, ...marginRightBottom }) => (
-    <Wrapper {...marginRightBottom}>
+export const ClosableTag: FC<Props> = ({ children, onClose, closable, hashtag, ...rest }) => (
+    <Wrapper {...rest}>
         <Column marginRight={closable ? intermediatePadding : '0'}>
             <Span color={tagColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
                 {hashtag && hashTagPrefix}

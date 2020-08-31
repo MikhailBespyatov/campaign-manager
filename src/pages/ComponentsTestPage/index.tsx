@@ -15,6 +15,7 @@ import { CampaignInputsTable } from 'components/common/tables/CampaignInputsTabl
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { AddableTag } from 'components/common/tags/AddableTag';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
+import { CounterTag } from 'components/common/tags/CounterTag';
 import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
@@ -109,6 +110,8 @@ export const Test = () => {
                 <AddButton />
                 <Space />
                 <LanguageSwitch>WW</LanguageSwitch>
+                <Space />
+                <CounterTag hashtag>ADIDAS</CounterTag>
             </div>
             <Footer />
         </>
