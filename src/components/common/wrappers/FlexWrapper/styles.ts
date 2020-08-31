@@ -10,6 +10,7 @@ export const Row = styled.div<RowProps>`
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
     flex-direction: row;
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
+    ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
     z-index: 1;
 `;
@@ -22,6 +23,7 @@ export const Column = styled.div<ColumnProps>`
     flex-direction: column;
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
+    ${({ maxWidth }) => (maxWidth ? `max-width: ${maxWidth};` : ``)};
 `;
 
 export const Section = styled.section<RowProps>`
