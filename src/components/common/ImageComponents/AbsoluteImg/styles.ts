@@ -7,8 +7,9 @@ export const ImgWrapper = styled.div<ImgWrapperProps>`
     left: 0;
     width: 100%;
     height: 100%;
-    ${({ backgroundColor }) => (backgroundColor ? `background-color: ${backgroundColor};` : ``)};
+    ${({ background }) => (background ? `background: ${background};` : ``)};
     z-index: 1;
+    ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
 `;
 
 export const Img = styled.img`

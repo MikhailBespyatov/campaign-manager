@@ -123,3 +123,16 @@ export interface AbsoluteLocation {
     top?: string;
     bottom?: string;
 }
+
+export interface Opacity {
+    opacity?: number;
+}
+
+export interface Visibility {
+    visible?: boolean;
+}
+
+export interface imgProperties {
+    src: string;
+    alt?: string;
+}

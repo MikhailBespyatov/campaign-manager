@@ -1,3 +1,3 @@
-import { Color, TextProperties } from 'types';
+import { Color, Opacity, TextProperties } from 'types';
 
-export interface SpanProps extends Color, TextProperties {}
+export interface SpanProps extends Color, TextProperties, Opacity {}

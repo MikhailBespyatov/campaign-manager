@@ -10,57 +10,62 @@ import { Card, CardColumn, CardRow, CardRowFeatures, Description, FeatureCell } 
 import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
 import { ProductSpan, RatingSpan } from 'components/Layouts/Cards/VideoCard/styles';
 import React from 'react';
+import { modalEvents } from 'stores/modal';
 import { MarginRightBottom } from 'types';
 
 interface Props extends MarginRightBottom {}
 
-export const VideoCard = ({ ...marginRightBottom }: Props) => (
-    <Card {...marginRightBottom}>
-        <Description>
-            <AbsoluteImg src={defaultImage} />
-            <CardRow>
-                <CardColumn>
-                    <CardRow>
-                        <CustomImg height="30px" src={smilesImage} width="224px" />
-                    </CardRow>
-                    <CardRow>
-                        <RatingSpan>some bla bla</RatingSpan>
-                    </CardRow>
-                </CardColumn>
-            </CardRow>
-            <CardRow marginBottom="0">
-                <CardColumn>
-                    <CardRow marginBottom="13px">
-                        <CardColumn>
-                            <CardRow alignCenter marginBottom="3px">
-                                <CustomImg height={productImgDiameter} src={group1img} width={productImgDiameter} />
-                                <ProductSpan>Adidas</ProductSpan>
-                            </CardRow>
-                            <CardRow alignCenter marginBottom="3px">
-                                <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
-                                <ProductSpan>Shoes</ProductSpan>
-                            </CardRow>
-                            <CardRow alignCenter marginBottom="3px">
-                                <CustomImg height={productImgDiameter} src={group3img} width={productImgDiameter} />
-                                <ProductSpan>Sport Shoes</ProductSpan>
-                            </CardRow>
-                            <CardRow alignCenter marginBottom="3px">
-                                <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
-                                <ProductSpan>Superstar</ProductSpan>
-                            </CardRow>
-                        </CardColumn>
-                    </CardRow>
-                    <CardRow marginBottom="3px">
-                        <RatingSpan>some bla bla</RatingSpan>
-                    </CardRow>
-                </CardColumn>
-            </CardRow>
-        </Description>
-        <CardRowFeatures>
-            <FeatureCell background={backgroundTheme1} color={colorTheme1} quantity={2}>
-                Play Video
-            </FeatureCell>
-            <FeatureCell quantity={2}>Details here</FeatureCell>
-        </CardRowFeatures>
-    </Card>
-);
+export const VideoCard = ({ ...marginRightBottom }: Props) => {
+    const openCardModal = () => modalEvents.openCardModal('some id');
+
+    return (
+        <Card {...marginRightBottom}>
+            <Description>
+                <AbsoluteImg pointer src={defaultImage} onClick={openCardModal} />
+                <CardRow>
+                    <CardColumn>
+                        <CardRow>
+                            <CustomImg height="30px" src={smilesImage} width="224px" />
+                        </CardRow>
+                        <CardRow>
+                            <RatingSpan>some bla bla</RatingSpan>
+                        </CardRow>
+                    </CardColumn>
+                </CardRow>
+                <CardRow marginBottom="0">
+                    <CardColumn>
+                        <CardRow marginBottom="13px">
+                            <CardColumn>
+                                <CardRow alignCenter marginBottom="3px">
+                                    <CustomImg height={productImgDiameter} src={group1img} width={productImgDiameter} />
+                                    <ProductSpan>Adidas</ProductSpan>
+                                </CardRow>
+                                <CardRow alignCenter marginBottom="3px">
+                                    <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
+                                    <ProductSpan>Shoes</ProductSpan>
+                                </CardRow>
+                                <CardRow alignCenter marginBottom="3px">
+                                    <CustomImg height={productImgDiameter} src={group3img} width={productImgDiameter} />
+                                    <ProductSpan>Sport Shoes</ProductSpan>
+                                </CardRow>
+                                <CardRow alignCenter marginBottom="3px">
+                                    <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
+                                    <ProductSpan>Superstar</ProductSpan>
+                                </CardRow>
+                            </CardColumn>
+                        </CardRow>
+                        <CardRow marginBottom="3px">
+                            <RatingSpan>some bla bla</RatingSpan>
+                        </CardRow>
+                    </CardColumn>
+                </CardRow>
+            </Description>
+            <CardRowFeatures>
+                <FeatureCell background={backgroundTheme1} color={colorTheme1} quantity={2}>
+                    Play Video
+                </FeatureCell>
+                <FeatureCell quantity={2}>Details here</FeatureCell>
+            </CardRowFeatures>
+        </Card>
+    );
+};

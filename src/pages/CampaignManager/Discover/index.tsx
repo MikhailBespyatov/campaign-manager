@@ -3,6 +3,7 @@ import { TagFilter } from 'components/filters/TagFilter';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import { Pagination } from 'components/Layouts/Pagination';
+import { CardModal } from 'components/modals/CardModal';
 import { testArray } from 'pages/CampaignManager/Discover/constants';
 import React from 'react';
 
@@ -19,5 +20,6 @@ export const Discover = () => (
         <Section justifyCenter>
             <Pagination />
         </Section>
+        <CardModal />
     </MainLayout>
 );
