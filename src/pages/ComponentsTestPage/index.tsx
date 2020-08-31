@@ -1,3 +1,4 @@
+import { AddButton } from 'components/common/buttons/AddButton';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
@@ -105,6 +106,7 @@ export const Test = () => {
                 <Space />
                 <AddableTag>ADIDAS</AddableTag>
                 <Space />
+                <AddButton />
             </div>
             <Footer />
         </>
