@@ -1,0 +1,24 @@
+@import "styles/variables";
+
+.navLink {
+  color: $grey-1;
+  font-size: 22px;
+
+  &.active {
+    position: relative;
+    color: $text-default;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      width: 25px;
+      height: 3px;
+      border-radius: 2px;
+      background-color: $text-default;
+    }
+  }
+}

@@ -1,26 +1,42 @@
-import summaryImg from 'assets/img/summary.svg';
 import {
-    imgHeight,
-    imgWidth,
-    spanFontSize,
-    spanFontWeight,
-    spanLineHeight,
-    summaryColor
+    subtitleColor,
+    subtitleFontSize,
+    subtitleFontWeight,
+    subtitleLineHeight,
+    titleColor,
+    titleFontSize,
+    titleFontWeight,
+    titleLineHeight
 } from 'components/common/features/Summary/constants';
 import { Wrapper } from 'components/common/features/Summary/styles';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { Span } from 'components/common/TextComponents/Span';
+import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import React from 'react';
+import { MarginRightBottom, Title } from 'types';
 
-interface Props {
-    summary: string;
-}
+interface Props extends Title, MarginRightBottom {}
 
-export const Summary = ({ summary }: Props) => (
-    <Wrapper>
-        <CustomImg height={imgHeight} src={summaryImg} width={imgWidth} />
-        <Span color={summaryColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
-            {summary}
-        </Span>
+export const Summary = ({ title, subtitle = '', ...marginRightBottom }: Props) => (
+    <Wrapper {...marginRightBottom}>
+        <Column>
+            <Row marginBottom="12px">
+                <Span
+                    color={titleColor}
+                    fontSize={titleFontSize}
+                    fontWeight={titleFontWeight}
+                    lineHeight={titleLineHeight}
+                >
+                    {title}
+                </Span>
+            </Row>
+            <Span
+                color={subtitleColor}
+                fontSize={subtitleFontSize}
+                fontWeight={subtitleFontWeight}
+                lineHeight={subtitleLineHeight}
+            >
+                {subtitle}
+            </Span>
+        </Column>
     </Wrapper>
 );

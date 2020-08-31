@@ -23,7 +23,7 @@ import {
 
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
-    width: ${buttonWidth};
+    min-width: ${buttonWidth};
     height: ${buttonHeight};
     background-color: ${({ reverse }) => (reverse ? white : black)};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};

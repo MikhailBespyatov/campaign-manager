@@ -78,7 +78,7 @@ export const Test = () => {
                 <Space />
                 <CampaignTable />
                 <Space />
-                <Summary summary="0.00" />
+                <Summary subtitle="Campaigns Running" title="20.000" />
                 <Space />
                 <ClosableTag closable>ADIDAS</ClosableTag>
                 <Space />
@@ -98,7 +98,7 @@ export const Test = () => {
                 <Space />
                 <InputAddTag />
                 <Space />
-                <Budget subtitle="Campaigns Running" title="20.000" />
+                <Budget summary="0.00" />
                 <Space />
                 <TopBar />
                 <Space />

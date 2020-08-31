@@ -3,8 +3,10 @@ import AdminContainer from 'modules/Admin/AdminContainer';
 import { AcceptInviteContainer } from 'modules/Auth/AcceptInvite/AcceptInviteContainer';
 import ForgotPasswordContainer from 'modules/Auth/ForgotPassword/ForgotPasswordContainer';
 import { CampaignManager } from 'pages/CampaignManager';
+import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
 import { Discover } from 'pages/CampaignManager/Discover';
+import { Overview } from 'pages/CampaignManager/Overview';
 import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
 import React from 'react';
@@ -22,6 +24,8 @@ const App = () => (
             <PublicRoute exact component={CampaignManager} path={routes.campaignManager.index} />
             <PublicRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
             <PublicRoute exact component={Discover} path={routes.campaignManager.discover.list} />
+            <PublicRoute exact component={Campaign} path={routes.campaignManager.campaign.list} />
+            <PublicRoute exact component={Overview} path={routes.campaignManager.overview.index} />
 
             <PublicRoute exact component={UnderConstruction} path={routes.signUp} />
             <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} />
