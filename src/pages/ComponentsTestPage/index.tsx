@@ -4,6 +4,7 @@ import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
+import { LanguageSwitch } from 'components/common/inputs/LanguageSwitch';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { Radio } from 'components/common/inputs/Radio';
@@ -90,9 +91,8 @@ export const Test = () => {
                 <Space />
                 <RowRadio />
                 <Space />
-                <Switch active={false} />
                 <Space />
-                <Switch active={disabled} />
+                <Switch />
                 <Space />
                 <NumberCounter />
                 <Space />
@@ -107,6 +107,8 @@ export const Test = () => {
                 <AddableTag>ADIDAS</AddableTag>
                 <Space />
                 <AddButton />
+                <Space />
+                <LanguageSwitch>WW</LanguageSwitch>
             </div>
             <Footer />
         </>

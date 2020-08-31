@@ -96,10 +96,10 @@ export const CampaignInputsTable = () => (
                         </Span>
                     </TableColumn>
                     <TableColumn>
-                        <Switch active={false} />
+                        <Switch />
                     </TableColumn>
                     <TableColumn>
-                        <Switch active={false} />
+                        <Switch />
                     </TableColumn>
                     <TableColumn>
                         <NumberCounter />
