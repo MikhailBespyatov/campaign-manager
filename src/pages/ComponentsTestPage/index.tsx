@@ -11,6 +11,7 @@ import { Switch } from 'components/common/inputs/Switch';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { CampaignInputsTable } from 'components/common/tables/CampaignInputsTable';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
+import { AddableTag } from 'components/common/tags/AddableTag';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { TopBar } from 'components/grid/bars/TopBar';
@@ -102,6 +103,7 @@ export const Test = () => {
                 <Space />
                 <TopBar />
                 <Space />
+                <AddableTag>ADIDAS</AddableTag>
                 <Space />
             </div>
             <Footer />
