@@ -1,0 +1,50 @@
+# Using the node alpine image to build the React app
+image: node:alpine
+
+# Cache node modules - speeds up future builds
+cache:
+    paths:
+        - node_modules
+
+# Name the stages involved in the pipeline
+stages:
+    - lint/build
+    - build
+    - deploy
+
+lint/build:
+    stage: lint/build
+    script:
+        - yarn
+        - echo "Building deploy package"
+        - yarn build
+        - echo "Build successful"
+    only:
+        - merge_requests
+
+build:
+    stage: build
+    script:
+        - echo "Building deploy package"
+        - yarn
+        - yarn build
+        - echo "Build successful"
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - build
+    only:
+        - master
+        - development
+
+deploy:
+    stage: deploy
+    before_script:
+        - apk update
+        - apk add --update --no-cache openssh sshpass
+        - export SSHPASS=$USER_PASS_ICWT
+    script:
+        - echo "Deploying to ICWT server"
+        - sshpass -e scp -o stricthostkeychecking=no -r ./build/* $USER_ICWT@$HOST_ICWT:$TARGET_DIR_ON_HOST_ICWT
+    only:
+        - master
