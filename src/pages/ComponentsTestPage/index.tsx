@@ -2,6 +2,7 @@ import { AddButton } from 'components/common/buttons/AddButton';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
+import { Hr } from 'components/common/Hr';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
 import { LanguageSwitch } from 'components/common/inputs/LanguageSwitch';
@@ -112,6 +113,12 @@ export const Test = () => {
                 <LanguageSwitch>WW</LanguageSwitch>
                 <Space />
                 <CounterTag hashtag>ADIDAS</CounterTag>
+                <Space />
+                <Hr />
+                <Space />
+                <Space />
+                <Space />
+                <Space />
             </div>
             <Footer />
         </>
