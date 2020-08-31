@@ -24,9 +24,15 @@ export interface Reverse {
     reverse?: boolean;
 }
 
+export interface MarginRight {
+    marginRight?: string;
+}
+
 export interface MarginBottom {
     marginBottom?: string;
 }
+
+export interface MarginRightBottom extends MarginRight, MarginBottom {}
 
 export interface Rotation {
     rotate?: number;
@@ -101,4 +107,19 @@ export interface Placeholder {
 export interface Title {
     title: string;
     subtitle?: string;
+}
+
+export interface WithHashtag {
+    hashtag?: boolean;
+}
+
+export interface Disabled {
+    disabled?: boolean;
+}
+
+export interface AbsoluteLocation {
+    left?: string;
+    right?: string;
+    top?: string;
+    bottom?: string;
 }

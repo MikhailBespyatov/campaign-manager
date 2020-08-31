@@ -10,9 +10,12 @@ import { Card, CardColumn, CardRow, CardRowFeatures, Description, FeatureCell } 
 import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
 import { ProductSpan, RatingSpan } from 'components/Layouts/Cards/VideoCard/styles';
 import React from 'react';
+import { MarginRightBottom } from 'types';
 
-export const VideoCard = () => (
-    <Card>
+interface Props extends MarginRightBottom {}
+
+export const VideoCard = ({ ...marginRightBottom }: Props) => (
+    <Card {...marginRightBottom}>
         <Description>
             <AbsoluteImg src={defaultImage} />
             <CardRow>

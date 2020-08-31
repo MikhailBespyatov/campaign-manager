@@ -4,6 +4,7 @@ import { AcceptInviteContainer } from 'modules/Auth/AcceptInvite/AcceptInviteCon
 import ForgotPasswordContainer from 'modules/Auth/ForgotPassword/ForgotPasswordContainer';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
+import { Discover } from 'pages/CampaignManager/Discover';
 import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
 import React from 'react';
@@ -18,8 +19,9 @@ const App = () => (
         <Switch>
             <PublicRoute exact component={Test} path={routes.test} />
             <PublicRoute exact component={SignIn} path={routes.signIn} />
-            <PublicRoute component={CampaignManager} path={routes.campaignManager.index} />
-            <PublicRoute component={Dashboard} path={routes.campaignManager.dashboard.index} />
+            <PublicRoute exact component={CampaignManager} path={routes.campaignManager.index} />
+            <PublicRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
+            <PublicRoute exact component={Discover} path={routes.campaignManager.discover.list} />
 
             <PublicRoute exact component={UnderConstruction} path={routes.signUp} />
             <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} />

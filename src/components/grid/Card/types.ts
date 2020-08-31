@@ -1,6 +1,6 @@
-export interface CardProps {
-    disabled?: boolean;
-}
+import { AbsoluteLocation, Disabled, FlexBooleanAlignment, MarginBottom, MarginRight, MarginRightBottom } from 'types';
+
+export interface CardProps extends Disabled, MarginRightBottom {}
 
 export interface DescriptionCellProps {
     height?: string;
@@ -12,22 +12,11 @@ export interface FeatureCellProps {
     background?: string;
 }
 
-export interface CardRowProps {
-    alignCenter?: boolean;
-    justifyCenter?: boolean;
-    marginBottom?: string;
-}
+export interface CardRowProps extends FlexBooleanAlignment, MarginBottom {}
 
-export interface CardColumnProps extends CardRowProps {
-    marginRight?: string;
-}
+export interface CardColumnProps extends CardRowProps, MarginRight {}
 
-export interface PinnedBlockProps {
-    left?: string;
-    right?: string;
-    top?: string;
-    bottom?: string;
-}
+export interface PinnedBlockProps extends AbsoluteLocation {}
 
 export interface DescriptionCellProps {
     height?: string;
