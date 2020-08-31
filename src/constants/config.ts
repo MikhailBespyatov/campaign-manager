@@ -1,6 +1,6 @@
 export const config = {
     isDev: process.env.NODE_ENV !== 'production',
-    apiUrl: process.env.REACT_APP_apiUrl,
+    apiUrl: 'https://api-v1.womprotocol.io/',
     maxFileSize: {
         number: 1000 * 1000 * 10,
         string: '10MB'
