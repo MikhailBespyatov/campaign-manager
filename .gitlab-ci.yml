@@ -15,7 +15,10 @@ stages:
 lint/build:
     stage: lint/build
     script:
+        - echo "Linting"
         - yarn
+        - yarn lint
+        - echo "Linting successful"
         - echo "Building deploy package"
         - yarn build
         - echo "Build successful"

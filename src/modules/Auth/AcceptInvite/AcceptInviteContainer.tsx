@@ -5,7 +5,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 
 export const AcceptInviteContainer = () => {
-    const { inviteCode } = useParams();
+    const { inviteCode: _ } = useParams();
 
     // const acceptInviteAndLogin = React.useCallback(
     //     async ({ password }) => {

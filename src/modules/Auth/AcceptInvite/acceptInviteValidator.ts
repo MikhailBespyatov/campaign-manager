@@ -8,7 +8,7 @@
 
 const acceptInviteValidator = () => {
     const errors = {};
-    const regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
+    const _regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
 
     // if (!password) {
     //     errors.password = [requiredFieldMessage];

@@ -9,7 +9,7 @@ const logout = createEvent();
 const setAuth = createEvent<Auth>();
 
 const loadToken = createEffect({
-    handler: async (values: AuthUserRequest) => {
+    handler: async (_values: AuthUserRequest) => {
         try {
             loadingEffects.setLoading(true);
             // const data = await API.user.authenticateUser(values);
