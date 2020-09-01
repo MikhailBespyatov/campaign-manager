@@ -1,8 +1,11 @@
+import { AddButton } from 'components/common/buttons/AddButton';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
+import { Hr } from 'components/common/Hr';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
+import { LanguageSwitch } from 'components/common/inputs/LanguageSwitch';
 import { LinkInput } from 'components/common/inputs/LinkInput';
 import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { Radio } from 'components/common/inputs/Radio';
@@ -11,7 +14,9 @@ import { Switch } from 'components/common/inputs/Switch';
 import { TextInput } from 'components/common/inputs/TextInput';
 import { CampaignInputsTable } from 'components/common/tables/CampaignInputsTable';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
+import { AddableTag } from 'components/common/tags/AddableTag';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
+import { CounterTag } from 'components/common/tags/CounterTag';
 import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
@@ -78,7 +83,7 @@ export const Test = () => {
                 <Space />
                 <CampaignTable />
                 <Space />
-                <Summary summary="0.00" />
+                <Summary subtitle="Campaigns Running" title="20.000" />
                 <Space />
                 <ClosableTag closable>ADIDAS</ClosableTag>
                 <Space />
@@ -88,9 +93,8 @@ export const Test = () => {
                 <Space />
                 <RowRadio />
                 <Space />
-                <Switch active={false} />
                 <Space />
-                <Switch active={disabled} />
+                <Switch />
                 <Space />
                 <NumberCounter />
                 <Space />
@@ -98,9 +102,21 @@ export const Test = () => {
                 <Space />
                 <InputAddTag />
                 <Space />
-                <Budget subtitle="Campaigns Running" title="20.000" />
+                <Budget summary="0.00" />
                 <Space />
                 <TopBar />
+                <Space />
+                <AddableTag>ADIDAS</AddableTag>
+                <Space />
+                <AddButton />
+                <Space />
+                <LanguageSwitch>WW</LanguageSwitch>
+                <Space />
+                <CounterTag hashtag>ADIDAS</CounterTag>
+                <Space />
+                <Hr />
+                <Space />
+                <Space />
                 <Space />
                 <Space />
             </div>

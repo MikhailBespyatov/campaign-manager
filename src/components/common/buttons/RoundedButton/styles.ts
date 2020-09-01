@@ -2,6 +2,8 @@ import {
     buttonBorderRadius,
     buttonBorderWidth,
     buttonHeight,
+    buttonHorizontalPadding,
+    buttonVerticalPadding,
     buttonWidth,
     hoverButtonColor,
     spanFontSize,
@@ -23,14 +25,15 @@ import {
 
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
-    width: ${buttonWidth};
+    min-width: ${buttonWidth};
     height: ${buttonHeight};
     background-color: ${({ reverse }) => (reverse ? white : black)};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
     color: ${white};
-    text-transform: uppercase;
+    //text-transform: uppercase;
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
+    padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
     transition: ${transitionTime};
     :hover {
         background-color: ${hoverButtonColor};
@@ -51,6 +54,6 @@ export const Span = styled.span<ButtonProps>`
     line-height: ${spanLineHeight};
     text-align: center;
     letter-spacing: ${spanLetterSpacing};
-    text-transform: uppercase;
+    //text-transform: uppercase;
     z-index: 1;
 `;

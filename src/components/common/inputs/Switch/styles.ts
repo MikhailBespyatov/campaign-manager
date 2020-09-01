@@ -4,6 +4,7 @@ import {
     ballBorderRadius,
     ballBoxShadow,
     ballDiameter,
+    ballTopPosition,
     defaultColor,
     wrapperBorderRadius,
     wrapperHeight,
@@ -25,8 +26,8 @@ export const Wrapper = styled.div<Active>`
 
 export const Ball = styled.div<Active>`
     position: absolute;
-    top: -7px;
-    ${({ active }) => (active ? 'right: 0;' : 'left: 0;')};
+    top: ${ballTopPosition};
+    left: ${({ active }) => (active ? `calc(${wrapperWidth} - ${ballDiameter})` : '0')};
     width: ${ballDiameter};
     height: ${ballDiameter};
     border-radius: ${ballBorderRadius};

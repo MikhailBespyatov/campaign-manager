@@ -136,3 +136,19 @@ export interface imgProperties {
     src: string;
     alt?: string;
 }
+
+export interface NumberInput {
+    defaultValue?: number;
+    onChange?: (value: number) => void;
+    min?: number;
+    max?: number;
+    step?: number;
+}
+
+export interface BorderRadiusProperties {
+    borderRadius?: string;
+    borderTopLeftRadius?: string;
+    borderTopRightRadius?: string;
+    borderBottomLeftRadius?: string;
+    borderBottomRightRadius?: string;
+}

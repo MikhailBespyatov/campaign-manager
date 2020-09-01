@@ -12,6 +12,7 @@ export const Row = styled.div<RowProps>`
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
+    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     z-index: 1;
 `;
 

@@ -19,7 +19,7 @@ export const CardModal = () => {
     return (
         <Wrapper visible={visible}>
             <Modal>
-                <Section marginBottom="32px">
+                <Section alignCenter marginBottom="32px">
                     <Column marginRight="41px">
                         <CustomImg
                             pointer

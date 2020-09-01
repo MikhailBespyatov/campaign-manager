@@ -15,17 +15,19 @@ import {
 } from 'components/common/inputs/NumberCounter/constants';
 import { Wrapper } from 'components/common/inputs/NumberCounter/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { BorderRadiusProperties, NumberInput as INumberInput } from 'types';
 import { noop } from '../../../../constants';
 
-interface Props {
-    defaultValue?: number;
-    onChange?: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-}
+interface Props extends INumberInput, BorderRadiusProperties {}
 
-export const NumberCounter = ({ defaultValue = 0, onChange = noop, min = 0, max = 10, step = 1 }: Props) => {
+export const NumberCounter = ({
+    defaultValue = 0,
+    onChange = noop,
+    min = 0,
+    max = 10,
+    step = 1,
+    ...borderRadiusProperties
+}: Props) => {
     const [value, setValue] = useState(defaultValue);
 
     const increment = () => setValue(value + 1);
@@ -39,7 +41,7 @@ export const NumberCounter = ({ defaultValue = 0, onChange = noop, min = 0, max 
     }, [value]);
 
     return (
-        <Wrapper>
+        <Wrapper {...borderRadiusProperties}>
             <CustomImg pointer height={imgHeight} src={decrementImg} width={imgWidth} onClick={decrement} />
             <NumberInput
                 alignTextCenter
