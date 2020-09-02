@@ -4,7 +4,7 @@ import axios from './axios';
 export const authenticateUser = (data: AuthUserRequest) =>
     axios<AuthUserResponse>(
         {
-            url: '/user/authenticate',
+            url: '/validation-user/authenticate',
             data
         },
         false

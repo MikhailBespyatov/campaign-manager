@@ -1,8 +1,8 @@
 import { AddButton } from 'components/common/buttons/AddButton';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { Hr } from 'components/common/dividers/Hr';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
-import { Hr } from 'components/common/Hr';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
 import { LanguageSwitch } from 'components/common/inputs/LanguageSwitch';

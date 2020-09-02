@@ -1,7 +1,8 @@
 import { createEffect, createEvent, createStore } from 'effector';
+import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { Auth, AuthUserRequest, AuthUserResponse } from 'types';
-import { giveAccess, wait } from 'utils/usefulFunctions';
+import { giveAccess } from 'utils/usefulFunctions';
 import { errorDataMessage, notEntryAllowedMessage, userStorageName } from '../constants';
 
 //const updateLoading = createEvent();
@@ -9,24 +10,16 @@ const logout = createEvent();
 const setAuth = createEvent<Auth>();
 
 const loadToken = createEffect({
-    handler: async (_values: AuthUserRequest) => {
+    handler: async (values: AuthUserRequest) => {
         try {
             loadingEffects.setLoading(true);
-            // const data = await API.user.authenticateUser(values);
-            await wait(2000);
-            const data = {
-                user: {
-                    name: 'test user',
-                    roles: ['Administrator']
-                },
-                token: 'some token'
-            };
+            const data = await API.user.authenticateUser(values);
             loadingEffects.setLoading(false);
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
-            loadingEffects.setLoading(true);
+            loadingEffects.setLoading(false);
             return {};
         }
     }

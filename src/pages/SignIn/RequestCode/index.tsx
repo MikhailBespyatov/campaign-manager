@@ -4,13 +4,12 @@ import { Form } from 'components/FormComponents/Form';
 import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { useStore } from 'effector-react';
-import { Link, LinkWrapper } from 'pages/SignIn/styles';
+import { Link, LinkWrapper } from 'pages/SignIn/RequestCode/styles';
 import React, { MouseEvent, useState } from 'react';
 import { loadingStores } from 'stores/loading';
-import { userEffects } from 'stores/user';
-import { invalidEmailMessage, requiredFieldMessage, routes } from '../../constants';
+import { invalidEmailMessage, requiredFieldMessage, routes } from '../../../constants';
 
-export const SignIn = () => {
+export const RequestCode = () => {
     const loading = useStore(loadingStores.loading);
 
     const [values, setValues] = useState({
@@ -37,12 +36,12 @@ export const SignIn = () => {
 
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (!Object.values(errors).filter(i => i !== '').length) userEffects.loadToken(values);
+        // if (!Object.values(errors).filter(i => i !== '').length) userEffects.loadToken(values);
     };
 
     return (
         <AuthLayout>
-            <Form>
+            <Form subtitle="Request code">
                 <TextInput error={errors.email} label="Email" name="email" onChange={onEmailChange} />
                 <TextInput error={errors.password} label="Password" name="password" onChange={onPasswordChange} />
                 <LinkWrapper>

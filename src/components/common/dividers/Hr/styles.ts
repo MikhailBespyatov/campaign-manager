@@ -1,4 +1,4 @@
-import { hrBackground, hrHeight } from 'components/common/Hr/constants';
+import { hrBackground, hrHeight } from 'components/common/dividers/Hr/constants';
 import styled from 'styled-components';
 
 export const Hr = styled.hr`

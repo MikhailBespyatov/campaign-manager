@@ -1,16 +1,5 @@
 import { noop } from './types';
 
-export interface AuthUserRequest {
-    email: string;
-    password: string;
-}
-
-// TODO: [any]
-export interface AuthUserResponse {
-    user?: any;
-    token?: string;
-}
-
 export interface Auth {
     access: number;
     authDenyReason?: string;
@@ -105,7 +94,7 @@ export interface Placeholder {
 }
 
 export interface Title {
-    title: string;
+    title?: string;
     subtitle?: string;
 }
 
@@ -143,6 +132,15 @@ export interface NumberInput {
     min?: number;
     max?: number;
     step?: number;
+}
+
+export interface TextFormInput {
+    error: string;
+    defaultValue?: string;
+    onChange?: (value: string) => void;
+    label: string;
+    name: string;
+    type?: string;
 }
 
 export interface BorderRadiusProperties {

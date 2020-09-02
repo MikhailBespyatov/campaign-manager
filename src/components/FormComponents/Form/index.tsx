@@ -2,12 +2,10 @@ import organizationLogo from 'assets/img/organization_logo.svg';
 import { logoDiameter } from 'components/FormComponents/Form/constants';
 import { CustomImgForm, FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
 import React, { FC } from 'react';
+import { Title } from 'types';
 import { defaultImgAlt } from '../../../constants';
 
-interface Props {
-    title?: string;
-    subtitle?: string;
-}
+interface Props extends Title {}
 
 export const Form: FC<Props> = ({
     children,
