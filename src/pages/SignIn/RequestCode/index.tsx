@@ -42,14 +42,12 @@ export const RequestCode = () => {
     return (
         <AuthLayout>
             <Form subtitle="Request code">
-                <TextInput error={errors.email} label="Email" name="email" onChange={onEmailChange} />
-                <TextInput error={errors.password} label="Password" name="password" onChange={onPasswordChange} />
+                <TextInput error={errors.email} label="Email" name="email" value="" />
+                <TextInput error={errors.password} label="Password" name="password" value="" />
                 <LinkWrapper>
                     <Link to={routes.signIn.requestCode}>Forgot password?</Link>
                 </LinkWrapper>
-                <Button disabled={loading} onClick={handleSubmit}>
-                    {loading ? <Loader /> : 'Login'}
-                </Button>
+                <Button disabled={loading}>{loading ? <Loader /> : 'Login'}</Button>
             </Form>
         </AuthLayout>
     );

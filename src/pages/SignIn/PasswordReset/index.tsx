@@ -40,11 +40,9 @@ export const PasswordReset = () => {
     return (
         <AuthLayout>
             <Form subtitle="Password reset">
-                <TextInput error={errors.code} label="Security code" name="code" type="text" onChange={onEmailChange} />
-                <TextInput error={errors.password} label="New password" name="password" onChange={onPasswordChange} />
-                <Button disabled={loading} onClick={handleSubmit}>
-                    {loading ? <Loader /> : 'Set'}
-                </Button>
+                <TextInput error={errors.code} label="Security code" name="code" type="text" value="" />
+                <TextInput error={errors.password} label="New password" name="password" value="" />
+                <Button disabled={loading}>{loading ? <Loader /> : 'Set'}</Button>
             </Form>
         </AuthLayout>
     );

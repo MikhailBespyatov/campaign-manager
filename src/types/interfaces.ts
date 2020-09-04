@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { noop } from './types';
 
 export interface Auth {
@@ -8,6 +9,7 @@ export interface Auth {
 export interface WithError {
     error?: boolean;
     success?: boolean;
+    touched?: boolean;
 }
 
 export interface Reverse {
@@ -136,7 +138,16 @@ export interface NumberInput {
 }
 
 export interface TextFormInput extends Disabled {
-    error: string;
+    error: string | undefined;
+    defaultValue?: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    label: string;
+    name: string;
+    type?: string;
+}
+
+export interface TextInput extends Disabled {
+    error: string | undefined;
     defaultValue?: string;
     onChange?: (value: string) => void;
     label: string;
@@ -150,4 +161,8 @@ export interface BorderRadiusProperties {
     borderTopRightRadius?: string;
     borderBottomLeftRadius?: string;
     borderBottomRightRadius?: string;
+}
+
+export interface HTMLButtonType {
+    type?: 'submit' | 'button' | 'reset' | undefined;
 }

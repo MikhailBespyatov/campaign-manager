@@ -64,26 +64,18 @@ export const CreateWallet = () => {
     return (
         <AuthLayout>
             <Form subtitle="To execute campaigns, you need a positive WOM balance. You can purchase WOM now">
-                <TextInput error={errors.wom} label="WOM" name="wom" type="text" onChange={onWomChange} />
-                <TextInput error={errors.usd} label="USD" name="password" onChange={onUsdChange} />
+                <TextInput error={errors.wom} label="WOM" name="wom" type="text" value="" />
+                <TextInput error={errors.usd} label="USD" name="password" value="" />
                 <TextInput
                     error={errors.creditCardNumber}
                     label="Credit Card Number"
                     name="creditCardNumber"
                     type="text"
-                    onChange={onCreditCardNumberChange}
+                    value=""
                 />
-                <TextInput
-                    error={errors.expireDate}
-                    label="Expire Date"
-                    name="expireDate"
-                    type="text"
-                    onChange={onExpireDateChange}
-                />
-                <TextInput error={errors.cvc} label="CVC" name="cvc" type="text" onChange={onCvcChange} />
-                <Button disabled={loading} onClick={handleSubmit}>
-                    {loading ? <Loader /> : 'Purchase now'}
-                </Button>
+                <TextInput error={errors.expireDate} label="Expire Date" name="expireDate" type="text" value="" />
+                <TextInput error={errors.cvc} label="CVC" name="cvc" type="text" value="" />
+                <Button disabled={loading}>{loading ? <Loader /> : 'Purchase now'}</Button>
             </Form>
         </AuthLayout>
     );

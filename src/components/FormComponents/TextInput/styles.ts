@@ -17,7 +17,7 @@ import {
 import { InputWrapperProps } from 'components/FormComponents/TextInput/types';
 import styled from 'styled-components';
 import { WithError } from 'types';
-import { black, borderWidth, errorColor, formTextStyleMixin, successColor } from '../../../constants';
+import { black, borderWidth, errorColor, formTextStyleMixin, successColor, untouchedColor } from '../../../constants';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -40,6 +40,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     display: flex;
     align-items: center;
     border: ${borderWidth} solid ${({ error }) => (error ? errorColor : successColor)};
+    ${({ touched }) => (!touched ? `border-color: ${untouchedColor};` : ``)};
     background-color: ${inputBackground};
     ${({ disabled }) => (disabled ? `background-color: ${disabledColor}; border-color: ${disabledColor};` : ``)};
     border-radius: ${inputWrapperBorderRadius};

@@ -57,25 +57,11 @@ export const CreateAccount = () => {
     return (
         <AuthLayout>
             <Form subtitle="Create an account">
-                <TextInput
-                    error={errors.companyName}
-                    label="Company Name"
-                    name="companyName"
-                    type="text"
-                    onChange={onCompanyNameChange}
-                />
-                <TextInput
-                    error={errors.username}
-                    label="Username"
-                    name="username"
-                    type="text"
-                    onChange={onUsernameChange}
-                />
-                <TextInput error={errors.email} label="Email" name="email" onChange={onEmailChange} />
-                <TextInput error={errors.password} label="Password" name="password" onChange={onPasswordChange} />
-                <Button disabled={loading} onClick={handleSubmit}>
-                    {loading ? <Loader /> : 'Sign up and accept'}
-                </Button>
+                <TextInput error={errors.companyName} label="Company Name" name="companyName" type="text" value="" />
+                <TextInput error={errors.username} label="Username" name="username" type="text" value="" />
+                <TextInput error={errors.email} label="Email" name="email" value="" />
+                <TextInput error={errors.password} label="Password" name="password" value="" />
+                <Button disabled={loading}>{loading ? <Loader /> : 'Sign up and accept'}</Button>
             </Form>
         </AuthLayout>
     );

@@ -20,15 +20,16 @@ import { Span } from 'components/common/TextComponents/Span';
 import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
 import { Row } from 'components/common/wrappers/FlexWrapper';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { TextFormInput } from 'types';
+import { TextInput as TextInputProps } from 'types';
 import { defaultAlt, errorColor, noop, successColor } from '../../../../constants';
 
-interface Props extends TextFormInput {}
+interface Props extends TextInputProps {}
 
 export const TextInput = ({
     error,
     defaultValue = '',
     onChange = noop,
+
     label,
     name,
     type = name,

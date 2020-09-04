@@ -1,13 +1,11 @@
 import { Button as StyledButton } from 'components/FormComponents/Button/styles';
 import React, { FC } from 'react';
+import { Disabled, HTMLButtonType } from 'types';
 
-interface Props {
-    onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
-    disabled?: boolean;
-}
+interface Props extends Disabled, HTMLButtonType {}
 
-export const Button: FC<Props> = ({ children, onClick, disabled = false }) => (
-    <StyledButton disabled={disabled} onClick={onClick}>
+export const Button: FC<Props> = ({ children, disabled = false, type = 'submit' }) => (
+    <StyledButton disabled={disabled} type={type}>
         {children}
     </StyledButton>
 );
