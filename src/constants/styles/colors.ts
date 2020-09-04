@@ -19,3 +19,5 @@ export const textInfoColor = '#585858';
 export const formPrimaryColor = '#0F1642';
 export const mainBackground = '#0F1642';
 export const reverseColor = mainBackground;
+
+export const disabledColor = grey2;

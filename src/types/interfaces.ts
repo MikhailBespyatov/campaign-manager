@@ -7,6 +7,7 @@ export interface Auth {
 
 export interface WithError {
     error?: boolean;
+    success?: boolean;
 }
 
 export interface Reverse {
@@ -134,7 +135,7 @@ export interface NumberInput {
     step?: number;
 }
 
-export interface TextFormInput {
+export interface TextFormInput extends Disabled {
     error: string;
     defaultValue?: string;
     onChange?: (value: string) => void;

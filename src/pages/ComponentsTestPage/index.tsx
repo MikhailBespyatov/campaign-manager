@@ -61,17 +61,17 @@ export const Test = () => {
                 <Space />
                 <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
                 <Space />
-                <TextInput error="" label="Some label" name="username" value="" />
+                <TextInput error="" label="Some label" name="username" />
                 <Space />
-                <TextInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <TextInput disabled={disabled} error="" label="Some label" name="username" />
                 <Space />
-                <TextInput error="error" label="Some label" name="username" value="" />
+                <TextInput error="error" label="Some label" name="username" />
                 <Space />
-                <LinkInput error="" label="Some label" name="username" value="" />
+                <LinkInput error="" label="Some label" name="username" />
                 <Space />
-                <LinkInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <LinkInput disabled={disabled} error="" label="Some label" name="username" />
                 <Space />
-                <LinkInput error="error" label="Some label" name="username" value="" />
+                <LinkInput error="error" label="Some label" name="username" />
                 <Space />
                 <Radio checked={checked} onChange={onChange} />
                 <Space />

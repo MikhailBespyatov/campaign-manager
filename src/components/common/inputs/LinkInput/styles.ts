@@ -1,24 +1,24 @@
 import {
-    borderColor,
     disabledColor,
     errorSpanHeight,
     errorSpanMarginBottom,
     inputBackground,
     inputWrapperBorderRadius,
+    inputWrapperBorderWidthLeft,
     inputWrapperHeight,
     inputWrapperMarginBottom,
+    inputWrapperVerticalPadding,
     inputWrapperWidth,
     labelColor,
     labelFontSize,
     labelFontWeight,
     labelLineHeight,
-    labelMarginBottom,
-    rightBorderWidth
+    labelMarginBottom
 } from 'components/common/inputs/LinkInput/constants';
 import { InputWrapperProps } from 'components/common/inputs/LinkInput/types';
 import styled from 'styled-components';
 import { WithError } from 'types';
-import { black, borderWidth, errorColor, formTextStyleMixin } from '../../../../constants';
+import { black, borderWidth, errorColor, formTextStyleMixin, successColor } from '../../../../constants';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -40,15 +40,17 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     position: relative;
     display: flex;
     align-items: center;
-    border: ${borderWidth} solid ${({ error }) => (error ? errorColor : borderColor)};
-    border-left-width: ${rightBorderWidth};
+    border: ${borderWidth} solid ${({ error }) => (error ? errorColor : successColor)};
     background-color: ${inputBackground};
     ${({ disabled }) => (disabled ? `background-color: ${disabledColor}; border-color: ${disabledColor};` : ``)};
     border-radius: ${inputWrapperBorderRadius};
-    overflow: hidden;
+    border-left-width: ${inputWrapperBorderWidthLeft};
+    //overflow: hidden;
     width: ${inputWrapperWidth};
     height: ${inputWrapperHeight};
     margin-bottom: ${inputWrapperMarginBottom};
+    padding-left: ${inputWrapperVerticalPadding};
+    padding-right: ${inputWrapperVerticalPadding};
 `;
 
 export const Label = styled.label<WithError>`
