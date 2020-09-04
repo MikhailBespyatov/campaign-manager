@@ -1,6 +1,6 @@
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { P } from 'components/common/TextComponents/P';
-import { H1 } from 'components/common/titles/H1';
+import { H1 } from 'components/common/titles/H';
 import {
     formBorderRadius,
     formHorizontalPadding,
