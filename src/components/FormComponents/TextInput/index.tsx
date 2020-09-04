@@ -1,17 +1,39 @@
+import errorImg from 'assets/img/error.svg';
+import successImg from 'assets/img/success.svg';
+import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { TextInput as StyledInput } from 'components/common/inputs/Input';
+import { Span } from 'components/common/TextComponents/Span';
+import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
+import { Row } from 'components/common/wrappers/FlexWrapper';
 import {
-    ErrorSpan,
-    Input as StyledInput,
-    InputWrapper,
-    Label,
-    Wrapper
-} from 'components/FormComponents/TextInput/styles';
+    absoluteIconRight,
+    absoluteIconTop,
+    disabledColor,
+    errorSpanHeight,
+    errorSpanMarginBottom,
+    iconDiameter,
+    inputBackground,
+    labelFontSize,
+    labelFontWeight,
+    labelLineHeight,
+    labelMarginBottom
+} from 'components/FormComponents/TextInput/constants';
+import { InputWrapper, Wrapper } from 'components/FormComponents/TextInput/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TextFormInput } from 'types';
-import { noop } from '../../../constants';
+import { defaultAlt, errorColor, noop, successColor } from '../../../constants';
 
 interface Props extends TextFormInput {}
 
-export const TextInput = ({ error, defaultValue = '', onChange = noop, label, name, type = name }: Props) => {
+export const TextInput = ({
+    error,
+    defaultValue = '',
+    onChange = noop,
+    label,
+    name,
+    type = name,
+    disabled = false
+}: Props) => {
     const [value, setValue] = useState(defaultValue);
 
     const inputChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
@@ -23,11 +45,49 @@ export const TextInput = ({ error, defaultValue = '', onChange = noop, label, na
 
     return (
         <Wrapper>
-            <Label error={!!error}>{label}</Label>
-            <InputWrapper error={!!error}>
-                <StyledInput name={name} type={type} value={value} onChange={inputChange} />
+            <Row marginBottom={labelMarginBottom}>
+                <Span
+                    color={disabled ? disabledColor : error ? errorColor : successColor}
+                    fontSize={labelFontSize}
+                    fontWeight={labelFontWeight}
+                    lineHeight={labelLineHeight}
+                >
+                    {label}
+                </Span>
+            </Row>
+            {/* <Label error={!!error}>{label}</Label> */}
+            <InputWrapper disabled={disabled} error={!!error} success={!disabled && !error}>
+                <StyledInput
+                    background={disabled ? disabledColor : inputBackground}
+                    disabled={disabled}
+                    name={name}
+                    type={type}
+                    value={value}
+                    width="100%"
+                    onChange={inputChange}
+                />
+                {!disabled && (
+                    <AbsoluteWrapper right={absoluteIconRight} top={absoluteIconTop}>
+                        <CustomImg
+                            alt={defaultAlt}
+                            height={iconDiameter}
+                            src={error ? errorImg : successImg}
+                            width={iconDiameter}
+                        />
+                    </AbsoluteWrapper>
+                )}
             </InputWrapper>
-            <ErrorSpan>{error}</ErrorSpan>
+            <Row alignCenter height={errorSpanHeight} marginBottom={errorSpanMarginBottom}>
+                <Span
+                    color={errorColor}
+                    fontSize={labelFontSize}
+                    fontWeight={labelFontWeight}
+                    lineHeight={labelLineHeight}
+                >
+                    {error}
+                </Span>
+            </Row>
+            {/* {<ErrorSpan>{error}</ErrorSpan>} */}
         </Wrapper>
     );
 };

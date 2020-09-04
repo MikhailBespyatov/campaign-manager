@@ -1,5 +1,4 @@
 import {
-    borderColor,
     disabledColor,
     errorSpanHeight,
     errorSpanMarginBottom,
@@ -7,6 +6,7 @@ import {
     inputWrapperBorderRadius,
     inputWrapperHeight,
     inputWrapperMarginBottom,
+    inputWrapperVerticalPadding,
     inputWrapperWidth,
     labelColor,
     labelFontSize,
@@ -17,7 +17,7 @@ import {
 import { InputWrapperProps } from 'components/common/inputs/TextInput/types';
 import styled from 'styled-components';
 import { WithError } from 'types';
-import { black, borderWidth, errorColor, formTextStyleMixin } from '../../../../constants';
+import { black, borderWidth, errorColor, formTextStyleMixin, successColor } from '../../../../constants';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -39,7 +39,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     position: relative;
     display: flex;
     align-items: center;
-    border: ${borderWidth} solid ${({ error }) => (error ? errorColor : borderColor)};
+    border: ${borderWidth} solid ${({ error }) => (error ? errorColor : successColor)};
     background-color: ${inputBackground};
     ${({ disabled }) => (disabled ? `background-color: ${disabledColor}; border-color: ${disabledColor};` : ``)};
     border-radius: ${inputWrapperBorderRadius};
@@ -47,6 +47,8 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     width: ${inputWrapperWidth};
     height: ${inputWrapperHeight};
     margin-bottom: ${inputWrapperMarginBottom};
+    padding-left: ${inputWrapperVerticalPadding};
+    padding-right: ${inputWrapperVerticalPadding};
 `;
 
 export const Label = styled.label<WithError>`
