@@ -1,4 +1,9 @@
 import backModalImg from 'assets/img/back.svg';
+import ballBuyImg from 'assets/img/ball_buy.svg';
+import ballClickImg from 'assets/img/ball_click.svg';
+import ballEngageImg from 'assets/img/ball_engage.svg';
+import ballPreviewImg from 'assets/img/ball_preview.svg';
+import ballViewImg from 'assets/img/ball_view.svg';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
@@ -11,6 +16,8 @@ import { TagFilter } from 'components/filters/TagFilter';
 import { CampaignContentCard } from 'components/Layouts/Cards/CampaignContentCard';
 import { closeModalImgDiameter } from 'components/Layouts/Cards/CampaignContentCard/constants';
 import { MainLayout } from 'components/Layouts/MainLayout';
+import ReactEcharts from 'echarts-for-react';
+import { ballDiameter, graphicOption } from 'pages/CampaignManager/Discover/Details/constants';
 import { ContentWrapper } from 'pages/CampaignManager/Discover/Details/styles';
 import React from 'react';
 import { useHistory } from 'react-router';
@@ -39,7 +46,7 @@ export const Details = () => {
             <ContentWrapper>
                 <OverflowAutoWrapper>
                     <Row noWrap widthMaxContent>
-                        <Column marginRight="20px">
+                        <Column marginRight="0">
                             <CampaignContentCard
                                 buttonTop={
                                     <CustomImg
@@ -72,7 +79,86 @@ export const Details = () => {
                                     <RowRadio active="Relative" values={['Absolute', 'Relative']} />
                                 </MarginWrapper>
                             </Row>
-                            <Row>some graphics</Row>
+                            <Section>
+                                <ReactEcharts
+                                    option={graphicOption('#FC4237')}
+                                    style={{ height: '300px', width: '100%' }}
+                                />
+                            </Section>
+                            <Section alignCenter justifyCenter>
+                                <Column marginRight="16px">
+                                    <CustomImg height={ballDiameter} src={ballPreviewImg} width={ballDiameter} />
+                                </Column>
+                                <Column>
+                                    <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                        Preview
+                                    </Span>
+                                </Column>
+                            </Section>
+                            <Section>
+                                <ReactEcharts
+                                    option={graphicOption('#AD0132')}
+                                    style={{ height: '300px', width: '100%' }}
+                                />
+                            </Section>
+                            <Section alignCenter justifyCenter>
+                                <Column marginRight="16px">
+                                    <CustomImg height={ballDiameter} src={ballViewImg} width={ballDiameter} />
+                                </Column>
+                                <Column>
+                                    <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                        View
+                                    </Span>
+                                </Column>
+                            </Section>
+                            <Section>
+                                <ReactEcharts
+                                    option={graphicOption('#15226B')}
+                                    style={{ height: '300px', width: '100%' }}
+                                />
+                            </Section>
+                            <Section alignCenter justifyCenter>
+                                <Column marginRight="16px">
+                                    <CustomImg height={ballDiameter} src={ballEngageImg} width={ballDiameter} />
+                                </Column>
+                                <Column>
+                                    <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                        Engage
+                                    </Span>
+                                </Column>
+                            </Section>
+                            <Section>
+                                <ReactEcharts
+                                    option={graphicOption('#0CB6D1')}
+                                    style={{ height: '300px', width: '100%' }}
+                                />
+                            </Section>
+                            <Section alignCenter justifyCenter>
+                                <Column marginRight="16px">
+                                    <CustomImg height={ballDiameter} src={ballClickImg} width={ballDiameter} />
+                                </Column>
+                                <Column>
+                                    <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                        Click
+                                    </Span>
+                                </Column>
+                            </Section>
+                            <Section>
+                                <ReactEcharts
+                                    option={graphicOption('#FE7500')}
+                                    style={{ height: '300px', width: '100%' }}
+                                />
+                            </Section>
+                            <Section alignCenter justifyCenter>
+                                <Column marginRight="16px">
+                                    <CustomImg height={ballDiameter} src={ballBuyImg} width={ballDiameter} />
+                                </Column>
+                                <Column>
+                                    <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                        Buy
+                                    </Span>
+                                </Column>
+                            </Section>
                         </Column>
                     </Row>
                 </OverflowAutoWrapper>

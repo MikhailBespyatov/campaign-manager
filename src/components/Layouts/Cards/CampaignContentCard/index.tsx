@@ -147,7 +147,7 @@ export const CampaignContentCard = ({ buttonTop }: Props) => (
                     </ClosableTag>
                 </Row>
             </Column>
-            <Column marginRight="0" maxWidth="400px">
+            <Column marginRight="0" maxWidth="300px">
                 <Row marginBottom="10px">
                     <Span color="#0F1642" fontSize="30px" lineHeight="37px">
                         Validators
