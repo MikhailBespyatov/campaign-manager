@@ -3,7 +3,8 @@ import { backgroundColor, primaryColor, scrollBarBorderRadius, scrollBarWidth, w
 import { defaultFontFamily } from '../defaults';
 export const GlobalStyle = createGlobalStyle`
   body, html {
-    height: 100%;
+    width: 100%;
+    min-height: 100%;
   }
   body {
     margin: 0;
@@ -62,9 +63,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #root {
+    position: relative;
     background-color: #121217;
     //background-color: ${backgroundColor};
     width: 100%;
-    height: 100%;
+    min-height: 100%;
   }
 `;

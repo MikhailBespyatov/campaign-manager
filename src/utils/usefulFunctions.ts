@@ -1,5 +1,12 @@
 import { AuthUserResponse } from 'types';
-import { accessRoles, accessValues } from '../constants';
+import {
+    accessRoles,
+    accessValues,
+    commaInserterRegExp,
+    removeRightSlashRegExp,
+    slashInserterRegExp,
+    spaceInserterRegExp
+} from '../constants';
 
 // give access a user as natural (-1 - no any access) number (the less number, the more rights user has)
 export const giveAccess: (user: AuthUserResponse) => number = user => {
@@ -17,3 +24,23 @@ export const giveAccess: (user: AuthUserResponse) => number = user => {
 
 // imitating async request
 export const wait = (ms: number) => new Promise(res => setTimeout(res, ms));
+
+// insert comma for every 3rd number
+export const commaInserter = (str: string) => str.match(commaInserterRegExp)?.join(',') || '';
+
+// insert space for every 4th number
+export const spaceInserter = (str: string) =>
+    str.split('').reverse().join('').match(spaceInserterRegExp)?.join(' ').split('').reverse().join('').trim() || '';
+
+// insert slash for every 2nd number
+export const slashInserter = (str: string) =>
+    str
+        .split('')
+        .reverse()
+        .join('')
+        .match(slashInserterRegExp)
+        ?.join('/')
+        .split('')
+        .reverse()
+        .join('')
+        .replace(removeRightSlashRegExp, '') || '';

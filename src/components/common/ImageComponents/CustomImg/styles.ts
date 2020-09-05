@@ -13,6 +13,7 @@ export const ImgWrapper = styled.div<ImgWrapperProps>`
     height: ${({ height }) => (height ? height : '100%')};
     ${flexCenter};
     ${({ borderRadius }) => (borderRadius ? `border-radius: ${borderRadius}; overflow: hidden` : ``)};
+    overflow: hidden;
     ${({ rotate }) => (rotate ? `transform: rotate(${rotate}deg);` : ``)};
     ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
 `;
