@@ -4,6 +4,7 @@ import { flexStart, padding } from '../../../../constants';
 
 export const Row = styled.div<RowProps>`
     //width: 100%;
+    ${({ widthMaxContent }) => (widthMaxContent ? 'width: max-content;' : '')};
     ${flexStart};
     ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
     ${({ alignBaseline }) => (alignBaseline ? `align-items: baseline;` : '')};

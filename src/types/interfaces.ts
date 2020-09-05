@@ -26,6 +26,12 @@ export interface MarginBottom {
 
 export interface MarginRightBottom extends MarginRight, MarginBottom {}
 
+export interface Margin extends MarginRightBottom {
+    margin?: string;
+    marginLeft?: string;
+    marginTop?: string;
+}
+
 export interface Rotation {
     rotate?: number;
 }
@@ -170,4 +176,8 @@ export interface HTMLButtonType {
 
 export interface WithSrc {
     src?: string;
+}
+
+export interface WidthMaxContent {
+    widthMaxContent?: boolean;
 }

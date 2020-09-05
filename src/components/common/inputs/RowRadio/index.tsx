@@ -29,7 +29,7 @@ export const RowRadio = ({
     values = ['Combined', 'smt else', 'Separated']
 }: //data = values
 WrapperProps) => (
-    <Row>
+    <Row noWrap marginBottom="0">
         {values.map(item => (
             <Item key={item} active={active === item} value={item} />
         ))}
