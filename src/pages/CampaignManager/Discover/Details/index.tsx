@@ -9,6 +9,7 @@ import { Summary } from 'components/common/features/Summary';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { RowRadio } from 'components/common/inputs/RowRadio';
 import { Span } from 'components/common/TextComponents/Span';
+import { ContentWrapper } from 'components/common/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { OverflowAutoWrapper } from 'components/common/wrappers/OverflowAutoWrapper';
@@ -18,7 +19,6 @@ import { closeModalImgDiameter } from 'components/Layouts/Cards/CampaignContentC
 import { MainLayout } from 'components/Layouts/MainLayout';
 import ReactEcharts from 'echarts-for-react';
 import { ballDiameter, graphicOption } from 'pages/CampaignManager/Discover/Details/constants';
-import { ContentWrapper } from 'pages/CampaignManager/Discover/Details/styles';
 import React from 'react';
 import { useHistory } from 'react-router';
 
@@ -76,7 +76,7 @@ export const Details = () => {
                                     <RoundedButton>End Promo</RoundedButton>
                                 </Column>
                                 <MarginWrapper marginLeft="auto">
-                                    <RowRadio active="Relative" values={['Absolute', 'Relative']} />
+                                    <RowRadio defaultActive="Relative" values={['Absolute', 'Relative']} />
                                 </MarginWrapper>
                             </Row>
                             <Section>

@@ -91,7 +91,7 @@ export const Test = () => {
                 <Space />
                 <DropDownMenuTag>7 DAYS</DropDownMenuTag>
                 <Space />
-                <RowRadio />
+                <RowRadio values={['hat1', 'hat2', 'hat3']} />
                 <Space />
                 <Space />
                 <Switch />
