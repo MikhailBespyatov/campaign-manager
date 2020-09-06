@@ -2,36 +2,49 @@ import { itemActiveColor, spanFontSize, spanLineHeight } from 'components/common
 import { StyledItem } from 'components/common/inputs/RowRadio/style';
 import { Span } from 'components/common/TextComponents/Span';
 import { Row } from 'components/common/wrappers/FlexWrapper';
-import React from 'react';
-import { Active } from 'types';
-import { white } from '../../../../constants';
+import React, { useState } from 'react';
+import { Active, RadioProperties } from 'types';
+import { noop, white } from '../../../../constants';
 
-interface WrapperProps {
-    active?: string;
-    values?: string[];
-    //data?: string[];
-}
+interface WrapperProps extends RadioProperties {}
 
 interface Props extends Active {
     value: string;
+    data: string;
+    onClick: (value: string) => void;
 }
 
-const Item = ({ active, value }: Props) => (
-    <StyledItem active={active}>
+const Item = ({ active, value, data, onClick }: Props) => (
+    <StyledItem active={active} onClick={() => onClick(value)}>
         <Span color={active ? white : itemActiveColor} fontSize={spanFontSize} lineHeight={spanLineHeight}>
-            {value}
+            {data}
         </Span>
     </StyledItem>
 );
 
-export const RowRadio = ({
-    active = 'Combined',
-    values = ['Combined', 'smt else', 'Separated']
-}: //data = values
-WrapperProps) => (
-    <Row noWrap marginBottom="0">
-        {values.map(item => (
-            <Item key={item} active={active === item} value={item} />
-        ))}
-    </Row>
-);
+export const RowRadio = ({ values, defaultActive = values[0], data = values, onChange = noop }: WrapperProps) => {
+    const [radio, setRadio] = useState(
+        values.map(i => ({
+            value: i,
+            active: i === defaultActive ? true : false
+        }))
+    );
+
+    const onClick = (value: string) => {
+        setRadio(
+            radio.map(i => ({
+                ...i,
+                active: i.value === value
+            }))
+        );
+        onChange(value);
+    };
+
+    return (
+        <Row noWrap marginBottom="0">
+            {radio.map((item, i) => (
+                <Item key={item.value} active={item.active} data={data[i]} value={item.value} onClick={onClick} />
+            ))}
+        </Row>
+    );
+};

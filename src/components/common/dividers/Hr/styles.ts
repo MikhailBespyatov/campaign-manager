@@ -1,4 +1,4 @@
-import { hrBackground, hrHeight } from 'components/common/dividers/Hr/constants';
+import { hrBackground, hrHeight, hrMarginBottom } from 'components/common/dividers/Hr/constants';
 import styled from 'styled-components';
 
 export const Hr = styled.hr`
@@ -6,4 +6,5 @@ export const Hr = styled.hr`
     height: ${hrHeight};
     border: none;
     background: ${hrBackground};
+    margin-bottom: ${hrMarginBottom};
 `;

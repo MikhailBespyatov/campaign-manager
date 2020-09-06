@@ -44,6 +44,7 @@ export interface FlexBooleanAlignment extends NoWrap {
     alignCenter?: boolean;
     alignBaseline?: boolean;
     justifyCenter?: boolean;
+    justifyEnd?: boolean;
 }
 
 export interface TextProperties extends NoWrap {
@@ -180,4 +181,19 @@ export interface WithSrc {
 
 export interface WidthMaxContent {
     widthMaxContent?: boolean;
+}
+
+export interface RadioProperties {
+    defaultActive?: string;
+    values: string[];
+    data?: string[];
+    onChange?: (active: string) => void;
+}
+
+export interface ForcedColor {
+    forcedColor?: string;
+}
+
+export interface Quantity {
+    quantity: number;
 }

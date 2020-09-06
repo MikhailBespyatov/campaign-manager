@@ -4,7 +4,7 @@ import {
     wrapperBorderWidth,
     wrapperHorizontalPadding,
     wrapperVerticalPadding
-} from 'pages/CampaignManager/Discover/Details/constants';
+} from 'components/common/wrappers/ContentWrapper/constants';
 import styled from 'styled-components';
 
 export const ContentWrapper = styled.div`
