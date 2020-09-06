@@ -1,4 +1,4 @@
-import { MainLayout } from 'components/Layouts/MainLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import React from 'react';
 
-export const CampaignManager = () => <MainLayout></MainLayout>;
+export const CampaignManager = () => <CampaignManagerLayout></CampaignManagerLayout>;

@@ -14,9 +14,9 @@ import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { OverflowAutoWrapper } from 'components/common/wrappers/OverflowAutoWrapper';
 import { TagFilter } from 'components/filters/TagFilter';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CampaignContentCard } from 'components/Layouts/Cards/CampaignContentCard';
 import { closeModalImgDiameter } from 'components/Layouts/Cards/CampaignContentCard/constants';
-import { MainLayout } from 'components/Layouts/MainLayout';
 import ReactEcharts from 'echarts-for-react';
 import { ballDiameter, graphicOption } from 'pages/CampaignManager/Discover/Details/constants';
 import React from 'react';
@@ -28,7 +28,7 @@ export const Details = () => {
     const onBack = () => history.goBack();
 
     return (
-        <MainLayout>
+        <CampaignManagerLayout>
             <Section alignCenter marginBottom="35px">
                 <TagFilter />
             </Section>
@@ -163,6 +163,6 @@ export const Details = () => {
                     </Row>
                 </OverflowAutoWrapper>
             </ContentWrapper>
-        </MainLayout>
+        </CampaignManagerLayout>
     );
 };
