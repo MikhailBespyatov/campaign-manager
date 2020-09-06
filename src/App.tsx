@@ -5,6 +5,7 @@ import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
 import { Discover } from 'pages/CampaignManager/Discover';
+import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
 import { Overview } from 'pages/CampaignManager/Overview';
 import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
@@ -33,8 +34,9 @@ const App = () => (
 
             <PublicRoute exact component={CampaignManager} path={routes.campaignManager.index} />
             <PublicRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
-            <PublicRoute exact component={Discover} path={routes.campaignManager.discover.list} />
-            <PublicRoute exact component={Campaign} path={routes.campaignManager.campaign.list} />
+            <PublicRoute exact component={Discover} path={routes.campaignManager.discover.index} />
+            <PublicRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
+            <PublicRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
             <PublicRoute exact component={Overview} path={routes.campaignManager.overview.index} />
 
             <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />

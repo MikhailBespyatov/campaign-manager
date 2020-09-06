@@ -10,13 +10,18 @@ import { Card, CardColumn, CardRow, CardRowFeatures, Description, FeatureCell } 
 import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
 import { ProductSpan, RatingSpan } from 'components/Layouts/Cards/VideoCard/styles';
 import React from 'react';
+import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
 import { MarginRightBottom } from 'types';
+import { routes } from '../../../../constants';
 
 interface Props extends MarginRightBottom {}
 
 export const VideoCard = ({ ...marginRightBottom }: Props) => {
+    const history = useHistory();
     const openCardModal = () => modalEvents.openCardModal('some id');
+
+    const handleDetail = () => history.push(routes.campaignManager.discover.index + '/id');
 
     return (
         <Card {...marginRightBottom}>
@@ -64,7 +69,9 @@ export const VideoCard = ({ ...marginRightBottom }: Props) => {
                 <FeatureCell background={backgroundTheme1} color={colorTheme1} quantity={2}>
                     Play Video
                 </FeatureCell>
-                <FeatureCell quantity={2}>Details here</FeatureCell>
+                <FeatureCell quantity={2} onClick={handleDetail}>
+                    Details here
+                </FeatureCell>
             </CardRowFeatures>
         </Card>
     );

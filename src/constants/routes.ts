@@ -26,11 +26,11 @@ export const routes = {
             index: `${campaignPrefix}/dashboard`
         },
         discover: {
-            list: `${campaignPrefix}/discover`,
-            details: (contentId = ':contentId') => `${campaignPrefix}/discover/${contentId}`
+            index: `${campaignPrefix}/discover`,
+            details: `${campaignPrefix}/discover/:discoverId`
         },
         campaign: {
-            list: `${campaignPrefix}/campaign`,
+            index: `${campaignPrefix}/campaign`,
             create: `${campaignPrefix}/campaign/create`,
             details: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/details/${campaignId}`,
             edit: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/edit/${campaignId}`
@@ -51,11 +51,11 @@ export const routesArray = [
         name: 'Dashboard'
     },
     {
-        path: routes.campaignManager.discover.list,
+        path: routes.campaignManager.discover.index,
         name: 'Discover'
     },
     {
-        path: routes.campaignManager.campaign.list,
+        path: routes.campaignManager.campaign.index,
         name: 'Campaign'
     },
     {
