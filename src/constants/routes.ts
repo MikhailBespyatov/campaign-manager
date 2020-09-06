@@ -1,14 +1,16 @@
-const forgotPasswordPrefix = '/forgot_password';
+const forgotPasswordPrefix = '/sign_in';
 const adminPrefix = '/admin';
 const campaignPrefix = '/campaign_manager';
 
 export const routes = {
     test: '/components_test_page',
     home: '/',
-    signIn: '/sign_in',
-    signUp: '/sign_up',
-    forgotPassword: {
-        index: forgotPasswordPrefix,
+    signUp: {
+        createAccount: '/create_account',
+        createWallet: '/create_wallet'
+    },
+    signIn: {
+        index: '/sign_in',
         requestCode: `${forgotPasswordPrefix}/request_code`,
         passwordReset: `${forgotPasswordPrefix}/password_reset`
     },

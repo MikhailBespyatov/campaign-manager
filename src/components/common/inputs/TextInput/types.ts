@@ -1,5 +1,3 @@
-import { WithError } from 'types';
+import { Disabled, WithError } from 'types';
 
-export interface InputWrapperProps extends WithError {
-    disabled?: boolean;
-}
+export interface InputWrapperProps extends WithError, Disabled {}

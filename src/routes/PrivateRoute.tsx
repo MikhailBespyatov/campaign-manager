@@ -11,5 +11,5 @@ export const PrivateRoute: FC<RouteProps> = props => {
         // remove trailing slash from the url
         if (props?.location?.pathname.slice(-1) !== '/') return <Route {...props} />;
         return <Redirect to={props?.location?.pathname.slice(0, -1)} />;
-    } else return <Redirect to={routes.signIn} />;
+    } else return <Redirect to={routes.signIn.index} />;
 };

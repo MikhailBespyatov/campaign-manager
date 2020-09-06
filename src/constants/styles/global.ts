@@ -1,10 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { backgroundColor, primaryColor, scrollBarBorderRadius, scrollBarWidth, white } from '../';
 import { defaultFontFamily } from '../defaults';
-
 export const GlobalStyle = createGlobalStyle`
   body, html {
-    min-height: 100%;
+    height: 100%;
   }
   body {
     margin: 0;
@@ -15,6 +14,27 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button, input, select, textarea {
+    outline: none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+    margin: 0;
   }
 
   ::selection {
@@ -42,19 +62,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    background-color: ${backgroundColor};
+    background-color: #121217;
+    //background-color: ${backgroundColor};
     width: 100%;
-    min-height: 100%;
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-    margin: 0;
+    height: 100%;
   }
 `;

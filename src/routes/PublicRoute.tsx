@@ -6,7 +6,6 @@ import { routes } from '../constants';
 
 export const PublicRoute: FC<RouteProps> = props => {
     const { access } = useStore(userStores.auth);
-    console.log(access);
 
     if (access === -1) {
         // remove trailing slash from the url

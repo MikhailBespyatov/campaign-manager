@@ -1,5 +1,5 @@
+import { Hr } from 'components/common/dividers/Hr';
 import { Summary } from 'components/common/features/Summary';
-import { Hr } from 'components/common/Hr';
 import { Section } from 'components/common/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import React from 'react';

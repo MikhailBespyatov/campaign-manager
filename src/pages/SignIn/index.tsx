@@ -1,71 +1,82 @@
+import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
-import { Input } from 'components/FormComponents/Input';
+import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { useStore } from 'effector-react';
+import { Formik } from 'formik';
+import { validationSchema } from 'pages/SignIn/constants';
 import { Link, LinkWrapper } from 'pages/SignIn/styles';
-import React, { ChangeEvent, MouseEvent, useState } from 'react';
-import { invalidEmailMessage, requiredFieldMessage, routes } from '../../constants';
+import React from 'react';
+import { loadingStores } from 'stores/loading';
+import { userEffects } from 'stores/user';
+import { AuthUserRequest } from 'types';
+import { routes } from '../../constants';
 
 export const SignIn = () => {
-    const [values, setValues] = useState({
-        email: '',
-        password: ''
-    });
-    const [errors, setErrors] = useState({
-        email: requiredFieldMessage,
-        password: requiredFieldMessage
-    });
+    const loading = useStore(loadingStores.loading);
 
-    const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setValues({ ...values, email: value });
-        if (!value) setErrors({ ...errors, email: requiredFieldMessage });
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) setErrors({ ...errors, email: invalidEmailMessage });
-        else setErrors({ ...errors, email: '' });
-    };
+    // const [values, setValues] = useState({
+    //     email: '',
+    //     password: ''
+    // });
+    // const [errors, setErrors] = useState({
+    //     email: requiredFieldMessage,
+    //     password: requiredFieldMessage
+    // });
 
-    const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setValues({ ...values, password: value });
-        if (!value) setErrors({ ...errors, password: requiredFieldMessage });
-        else setErrors({ ...errors, password: '' });
-    };
+    // const onEmailChange = (value: string) => {
+    //     setValues({ ...values, email: value });
+    //     if (!value) setErrors({ ...errors, email: requiredFieldMessage });
+    //     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) setErrors({ ...errors, email: invalidEmailMessage });
+    //     else setErrors({ ...errors, email: '' });
+    // };
 
-    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        //if (!Object.values(errors).filter(i => i !== '').length) console.log('submitted data');
-    };
+    // const onPasswordChange = (value: string) => {
+    //     setValues({ ...values, password: value });
+    //     if (!value) setErrors({ ...errors, password: requiredFieldMessage });
+    //     else setErrors({ ...errors, password: '' });
+    // };
+
+    // const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    //     e.preventDefault();
+    //     if (!Object.values(errors).filter(i => i !== '').length) userEffects.loadToken(values);
+    // };
 
     return (
-        // const email = useRef<HTMLInputElement>(null);
-        // const password = useRef<HTMLInputElement>(null);
-
-        // useEffect(() => {
-        //     email?.current?.focus();
-        // }, []);
-
-        // const keyDown: ((e: KeyboardEvent<HTMLInputElement>) => void) | undefined = e => {
-        //     if (e.key === 'Enter') {
-        //         e.preventDefault();
-        //         password?.current?.focus();
-        //     }
-        // };
-
         <AuthLayout>
-            <Form>
-                <Input error={errors.email} label="Email" name="email" value={values.email} onChange={onEmailChange} />
-                <Input
-                    error={errors.password}
-                    label="Password"
-                    name="password"
-                    value={values.password}
-                    onChange={onPasswordChange}
-                />
-                <LinkWrapper>
-                    <Link to={routes.signIn}>Forgot password?</Link>
-                </LinkWrapper>
-                <Button onClick={handleSubmit}>Login</Button>
-            </Form>
+            <Formik
+                initialValues={{ email: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={(values: AuthUserRequest) => userEffects.loadToken(values)}
+            >
+                {({ errors, handleChange, handleSubmit, touched, handleBlur, values }) => (
+                    <Form onSubmit={handleSubmit}>
+                        <TextInput
+                            error={errors.email}
+                            label="Email"
+                            name="email"
+                            touched={touched.email}
+                            value={values.email}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                        />
+                        <TextInput
+                            error={errors.password}
+                            label="Password"
+                            name="password"
+                            touched={touched.password}
+                            value={values.password}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                        />
+                        <LinkWrapper>
+                            <Link to={routes.signIn.requestCode}>Forgot password?</Link>
+                        </LinkWrapper>
+                        <Button disabled={loading}>{loading ? <Loader /> : 'Login'}</Button>
+                    </Form>
+                )}
+            </Formik>
         </AuthLayout>
     );
 };

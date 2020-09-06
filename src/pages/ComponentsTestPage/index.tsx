@@ -1,8 +1,8 @@
 import { AddButton } from 'components/common/buttons/AddButton';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { Hr } from 'components/common/dividers/Hr';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
-import { Hr } from 'components/common/Hr';
 import { Checkbox } from 'components/common/inputs/Checkbox';
 import { InputAddTag } from 'components/common/inputs/InputAddTag';
 import { LanguageSwitch } from 'components/common/inputs/LanguageSwitch';
@@ -61,17 +61,17 @@ export const Test = () => {
                 <Space />
                 <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
                 <Space />
-                <TextInput error="" label="Some label" name="username" value="" />
+                <TextInput error="" label="Some label" name="username" />
                 <Space />
-                <TextInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <TextInput disabled={disabled} error="" label="Some label" name="username" />
                 <Space />
-                <TextInput error="error" label="Some label" name="username" value="" />
+                <TextInput error="error" label="Some label" name="username" />
                 <Space />
-                <LinkInput error="" label="Some label" name="username" value="" />
+                <LinkInput error="" label="Some label" name="username" />
                 <Space />
-                <LinkInput disabled={disabled} error="" label="Some label" name="username" value="" />
+                <LinkInput disabled={disabled} error="" label="Some label" name="username" />
                 <Space />
-                <LinkInput error="error" label="Some label" name="username" value="" />
+                <LinkInput error="error" label="Some label" name="username" />
                 <Space />
                 <Radio checked={checked} onChange={onChange} />
                 <Space />
