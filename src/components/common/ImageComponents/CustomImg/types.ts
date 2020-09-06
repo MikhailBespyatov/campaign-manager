@@ -1,7 +1,3 @@
-import { Pointer, Rotation } from 'types';
+import { BorderRadiusProperties, Pointer, Rotation, Sizes } from 'types';
 
-export interface ImgWrapperProps extends Rotation, Pointer {
-    width?: string;
-    height?: string;
-    borderRadius?: string;
-}
+export interface ImgWrapperProps extends Rotation, Pointer, BorderRadiusProperties, Sizes {}

@@ -46,6 +46,7 @@ export interface TextProperties extends NoWrap {
     fontSize?: string;
     fontWeight?: string;
     lineHeight?: string;
+    alignCenter?: boolean;
 }
 
 export interface Color {
@@ -165,4 +166,8 @@ export interface BorderRadiusProperties {
 
 export interface HTMLButtonType {
     type?: 'submit' | 'button' | 'reset' | undefined;
+}
+
+export interface WithSrc {
+    src?: string;
 }

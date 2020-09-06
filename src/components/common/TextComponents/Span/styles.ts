@@ -18,4 +18,5 @@ export const Span = styled.span<SpanProps>`
     color: ${({ color }) => (color ? color : defaultTextColor)};
     ${({ noWrap }) => (noWrap ? 'white-space: nowrap' : '')};
     ${({ opacity }) => (opacity ? `opacity: ${opacity};` : ``)};
+    ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')}
 `;

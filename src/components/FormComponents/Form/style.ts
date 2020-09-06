@@ -4,6 +4,7 @@ import { H1 } from 'components/common/titles/H';
 import {
     formBorderRadius,
     formHorizontalPadding,
+    formPaddingBottom,
     formVerticalPadding,
     formWidth
 } from 'components/FormComponents/Form/constants';
@@ -17,6 +18,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     width: ${formWidth};
     padding: ${formVerticalPadding} ${formHorizontalPadding};
+    padding-bottom: ${formPaddingBottom};
     background-color: ${white};
     border-radius: ${formBorderRadius};
     z-index: 2;
@@ -35,9 +37,11 @@ export const H1Form = styled(H1)`
     margin-top: 36px;
     margin-bottom: 17px;
     color: ${formPrimaryColor};
+    text-align: center;
 `;
 
 export const PForm = styled(P)`
     margin-bottom: 46px;
     color: ${formPrimaryColor};
+    text-align: center;
 `;

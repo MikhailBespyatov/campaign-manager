@@ -1,2 +1,7 @@
-export const linkMarginTop = '0';
-export const linkMarginBottom = '57px';
+import * as Yup from 'yup';
+import { requiredFieldMessage } from '../../../constants';
+
+export const validationSchema = Yup.object().shape({
+    code: Yup.string().required(requiredFieldMessage),
+    password: Yup.string().required(requiredFieldMessage)
+});
