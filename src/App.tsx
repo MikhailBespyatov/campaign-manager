@@ -1,6 +1,3 @@
-import UnderConstruction from 'components/staticPages/UnderConstruction';
-import AdminContainer from 'modules/Admin/AdminContainer';
-import { AcceptInviteContainer } from 'modules/Auth/AcceptInvite/AcceptInviteContainer';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
@@ -32,20 +29,20 @@ const App = () => (
             <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
             <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
 
-            <PublicRoute exact component={CampaignManager} path={routes.campaignManager.index} />
-            <PublicRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
-            <PublicRoute exact component={Discover} path={routes.campaignManager.discover.index} />
-            <PublicRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
-            <PublicRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
-            <PublicRoute exact component={Overview} path={routes.campaignManager.overview.index} />
+            <PrivateRoute exact component={CampaignManager} path={routes.campaignManager.index} />
+            <PrivateRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
+            <PrivateRoute exact component={Discover} path={routes.campaignManager.discover.index} />
+            <PrivateRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
+            <PrivateRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
+            <PrivateRoute exact component={Overview} path={routes.campaignManager.overview.index} />
 
-            <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />
-            <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} />
+            {/* <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />
+            <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} /> */}
             {/* <PublicRoute component={ForgotPasswordContainer} path={routes.forgotPassword.index} /> */}
-            <PrivateRoute exact component={UnderConstruction} path={routes.static.privacy} />
-            <PrivateRoute exact component={UnderConstruction} path={routes.static.press} />
+            {/* <PrivateRoute exact component={UnderConstruction} path={routes.static.privacy} />
+            <PrivateRoute exact component={UnderConstruction} path={routes.static.press} /> */}
             {/* <PrivateRoute component={CampaignManagerContainer} path={routes.campaignManager.index} /> */}
-            <PrivateRoute component={AdminContainer} path={routes.admin.index} />
+            {/* <PrivateRoute component={AdminContainer} path={routes.admin.index} /> */}
 
             <Redirect to={routes.signIn.index} />
         </Switch>

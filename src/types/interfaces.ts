@@ -145,16 +145,22 @@ export interface NumberInput {
     step?: number;
 }
 
-export interface TextFormInput extends Disabled {
-    error: string | undefined;
-    defaultValue?: string;
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    label: string;
-    name: string;
+export interface Type {
     type?: string;
 }
 
-export interface TextInput extends Disabled {
+export interface Label {
+    label: string;
+}
+
+export interface TextFormInput extends Disabled, Type, Label {
+    error: string | undefined;
+    defaultValue?: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    name: string;
+}
+
+export interface TextInput extends Disabled, Label {
     error: string | undefined;
     defaultValue?: string;
     onChange?: (value: string) => void;

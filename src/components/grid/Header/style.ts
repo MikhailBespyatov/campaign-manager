@@ -23,6 +23,7 @@ export const StyledHeader = styled.header`
     height: ${headerHeight};
     padding: ${headerVerticalMargin} ${headerHorizontalMargin};
 `;
+
 export const StyledSpan1 = styled(Span)`
     ${formTextStyleMixin};
     font-size: ${styledSpanFontSize1};
@@ -43,4 +44,5 @@ export const StyledSpan3 = styled(Span)`
     font-size: ${styledSpanFontSize3};
     line-height: ${styledSpanLineHeight3};
     margin-left: auto;
+    cursor: pointer;
 `;

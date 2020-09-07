@@ -16,26 +16,10 @@ export const PasswordReset = () => {
     return (
         <AuthLayout>
             <Formik initialValues={{ code: '', password: '' }} validationSchema={validationSchema} onSubmit={noop}>
-                {({ errors, handleChange, handleSubmit, touched, handleBlur, values }) => (
+                {({ handleSubmit }) => (
                     <Form subtitle="Password Reset" onSubmit={handleSubmit}>
-                        <TextInput
-                            error={errors.code}
-                            label="Security code"
-                            name="code"
-                            touched={touched.code}
-                            value={values.code}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.password}
-                            label="New password"
-                            name="password"
-                            touched={touched.password}
-                            value={values.password}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
+                        <TextInput name="code" placeholder="Security code" type="password" />
+                        <TextInput name="password" placeholder="New password" type="password" />
                         <Button disabled={loading}>{loading ? <Loader /> : 'Reset'}</Button>
                     </Form>
                 )}

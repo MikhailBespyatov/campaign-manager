@@ -16,26 +16,10 @@ export const RequestCode = () => {
     return (
         <AuthLayout>
             <Formik initialValues={{ email: '', password: '' }} validationSchema={validationSchema} onSubmit={noop}>
-                {({ errors, handleChange, handleSubmit, touched, handleBlur, values }) => (
+                {({ handleSubmit }) => (
                     <Form subtitle="Request code" onSubmit={handleSubmit}>
-                        <TextInput
-                            error={errors.email}
-                            label="Email"
-                            name="email"
-                            touched={touched.email}
-                            value={values.email}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.password}
-                            label="Password"
-                            name="password"
-                            touched={touched.password}
-                            value={values.password}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
+                        <TextInput name="email" placeholder="Email" />
+                        <TextInput name="password" placeholder="Password" type="password" />
                         <Button disabled={loading}>{loading ? <Loader /> : 'Login'}</Button>
                     </Form>
                 )}

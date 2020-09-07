@@ -11,7 +11,9 @@ import { Formik } from 'formik';
 import { validationSchema } from 'pages/SignUp/CreateAccount/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { blue, noop } from '../../../constants';
+import { userEffects, userEvents, userStores } from 'stores/user';
+import { RegisterUserRequest } from 'types';
+import { blue } from '../../../constants';
 
 export const CreateAccount = () => {
     const loading = useStore(loadingStores.loading);
@@ -21,46 +23,23 @@ export const CreateAccount = () => {
             <Formik
                 initialValues={{ email: '', password: '', companyName: '', username: '' }}
                 validationSchema={validationSchema}
-                onSubmit={noop}
+                onSubmit={(values: RegisterUserRequest, { setErrors }) => {
+                    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
+                        setErrors({
+                            email: authDenyReason,
+                            password: authDenyReason
+                        });
+                        unwatch();
+                    });
+                    userEffects.createUserAndLoadToken(values);
+                }}
             >
-                {({ errors, handleChange, handleSubmit, touched, handleBlur, values }) => (
+                {({ handleSubmit }) => (
                     <Form src={womImg} title="Create an account" onSubmit={handleSubmit}>
-                        <TextInput
-                            error={errors.companyName}
-                            label="Company Name"
-                            name="companyName"
-                            touched={touched.companyName}
-                            value={values.companyName}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.username}
-                            label="Username"
-                            name="username"
-                            touched={touched.username}
-                            value={values.username}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.email}
-                            label="Email"
-                            name="email"
-                            touched={touched.email}
-                            value={values.email}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.password}
-                            label="Password"
-                            name="password"
-                            touched={touched.password}
-                            value={values.password}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
+                        <TextInput name="companyName" placeholder="Company Name" />
+                        <TextInput name="username" placeholder="Username" />
+                        <TextInput name="email" placeholder="Email" type="email" />
+                        <TextInput name="password" placeholder="Password" type="password" />
                         <Button background={blue} disabled={loading}>
                             {loading ? <Loader /> : 'SIGN UP & ACCEPT'}
                         </Button>

@@ -15,7 +15,7 @@ import {
     onExpiredDataChange,
     validationSchema
 } from 'pages/SignUp/CreateWallet/constants';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { loadingStores } from 'stores/loading';
 import { blue, noop } from '../../../constants';
 
@@ -29,7 +29,7 @@ export const CreateWallet = () => {
                 validationSchema={validationSchema}
                 onSubmit={noop}
             >
-                {({ errors, handleSubmit, touched, handleBlur, values, setFieldValue }) => (
+                {({ handleSubmit, setFieldValue }) => (
                     <Form
                         src={womImg}
                         subtitle="To execute campaigns, you need a positive WOM balance. You can purchase WOM now."
@@ -37,50 +37,30 @@ export const CreateWallet = () => {
                         onSubmit={handleSubmit}
                     >
                         <TextInput
-                            error={errors.wom}
-                            label="WOM"
                             name="wom"
-                            touched={touched.wom}
-                            value={values.wom}
-                            onBlur={handleBlur}
-                            onChange={e => onCurrencyChange(e, setFieldValue)}
+                            placeholder="WOM"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
                         />
                         <TextInput
-                            error={errors.usd}
-                            label="USD"
                             name="usd"
-                            touched={touched.usd}
-                            value={values.usd}
-                            onBlur={handleBlur}
-                            onChange={e => onCurrencyChange(e, setFieldValue)}
+                            placeholder="USD"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
                         />
                         <TextInput
-                            error={errors.cardNumber}
-                            label="Credit Card Number"
                             name="cardNumber"
-                            touched={touched.cardNumber}
-                            value={values.cardNumber}
-                            onBlur={handleBlur}
-                            onChange={e => onCardNumberChange(e, setFieldValue)}
+                            placeholder="Credit Card Number"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => onCardNumberChange(e, setFieldValue)}
                         />
                         <TextInput
-                            error={errors.expireDate}
-                            label="Expire Date"
                             name="expireDate"
-                            touched={touched.expireDate}
-                            value={values.expireDate}
-                            onBlur={handleBlur}
-                            onChange={e => onExpiredDataChange(e, setFieldValue)}
+                            placeholder="Expire Date"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => onExpiredDataChange(e, setFieldValue)}
                         />
                         <TextInput
-                            error={errors.cvc}
-                            label="CVC"
                             name="cvc"
-                            touched={touched.cvc}
+                            placeholder="CVC"
                             type="password"
-                            value={values.cvc}
-                            onBlur={handleBlur}
-                            onChange={e => onCvcChange(e, setFieldValue)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => onCvcChange(e, setFieldValue)}
                         />
                         <Button background={blue} disabled={loading}>
                             {loading ? <Loader /> : 'PURCHASE NOW'}
