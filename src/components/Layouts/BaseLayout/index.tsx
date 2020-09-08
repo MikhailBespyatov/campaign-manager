@@ -1,5 +1,5 @@
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { MainLayout } from 'components/Layouts/MainLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { userStores } from 'stores/user';
@@ -9,5 +9,5 @@ export const BaseLayout: FC = ({ children }) => {
 
     if (access === -1) return <AuthLayout>{children}</AuthLayout>;
 
-    return <MainLayout>{children}</MainLayout>;
+    return <CampaignManagerLayout>{children}</CampaignManagerLayout>;
 };

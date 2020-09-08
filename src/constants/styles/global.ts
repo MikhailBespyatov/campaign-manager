@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { backgroundColor, primaryColor, scrollBarBorderRadius, scrollBarWidth, white } from '../';
 import { defaultFontFamily } from '../defaults';
+import { backgroundColor, scrollBarWidth } from './';
+
 export const GlobalStyle = createGlobalStyle`
   body, html {
     width: 100%;
@@ -38,28 +39,30 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  ::selection {
-    background: ${primaryColor};
-    color: ${white};
-  }
+  // ::selection {
+  //   background: red;
+  //   color: green;
+  // }
 
   ::-webkit-scrollbar-track
   {
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-    background-color: red;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: rgba(157, 158, 159, 0.25);
+    border-radius:  23px;
   }
 
   ::-webkit-scrollbar
   {
     width: ${scrollBarWidth};
     height: ${scrollBarWidth};
-    border-radius: ${scrollBarBorderRadius};
-    //background-color: #F5F5F5;
+    background: unset;//#F5F5F5;
+    //border-radius: 23px;
   }
 
   ::-webkit-scrollbar-thumb
   {
-    background-color: ${primaryColor};
+    background-color: #9D9E9F;
+    border-radius: 23px;
   }
 
   #root {

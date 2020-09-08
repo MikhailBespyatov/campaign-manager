@@ -17,7 +17,7 @@ interface Props extends Title {}
 export const TagFilter = ({ title = 'Filter' }) => (
     <>
         <Column marginRight={filterMarginRight}>
-            <Span color={spanColor} fontSize={spanFontSize} lineHeight={spanLineHeight}>
+            <Span noWrap color={spanColor} fontSize={spanFontSize} lineHeight={spanLineHeight}>
                 {title}
             </Span>
         </Column>
