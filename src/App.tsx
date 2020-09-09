@@ -1,5 +1,6 @@
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
+import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
 import { Discover } from 'pages/CampaignManager/Discover';
 import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
@@ -35,6 +36,7 @@ const App = () => (
             <PrivateRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
             <PrivateRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
             <PrivateRoute exact component={Overview} path={routes.campaignManager.overview.index} />
+            <PrivateRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
 
             {/* <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />
             <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} /> */}

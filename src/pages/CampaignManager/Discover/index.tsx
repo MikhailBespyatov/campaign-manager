@@ -1,14 +1,14 @@
 import { Section } from 'components/common/wrappers/FlexWrapper';
 import { TagFilter } from 'components/filters/TagFilter';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
-import { MainLayout } from 'components/Layouts/MainLayout';
 import { Pagination } from 'components/Layouts/Pagination';
 import { CardModal } from 'components/modals/CardModal';
 import { testArray } from 'pages/CampaignManager/Discover/constants';
 import React from 'react';
 
 export const Discover = () => (
-    <MainLayout>
+    <CampaignManagerLayout>
         <Section alignCenter marginBottom="35px">
             <TagFilter />
         </Section>
@@ -21,5 +21,5 @@ export const Discover = () => (
             <Pagination />
         </Section>
         <CardModal />
-    </MainLayout>
+    </CampaignManagerLayout>
 );

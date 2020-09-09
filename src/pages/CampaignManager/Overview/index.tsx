@@ -1,4 +1,4 @@
-import { MainLayout } from 'components/Layouts/MainLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import React from 'react';
 
-export const Overview = () => <MainLayout>doshic</MainLayout>;
+export const Overview = () => <CampaignManagerLayout>doshic</CampaignManagerLayout>;

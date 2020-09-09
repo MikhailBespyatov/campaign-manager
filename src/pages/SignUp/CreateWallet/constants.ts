@@ -3,6 +3,8 @@ import { commaInserter, slashInserter, spaceInserter } from 'utils/usefulFunctio
 import * as Yup from 'yup';
 import { exactLimitMessage, requiredFieldMessage } from '../../../constants';
 
+export const initialValues = { wom: '', usd: '', cardNumber: '', expireDate: '', cvc: '' };
+
 export const validationSchema = Yup.object().shape({
     wom: Yup.string().required(requiredFieldMessage),
     usd: Yup.string().required(requiredFieldMessage),

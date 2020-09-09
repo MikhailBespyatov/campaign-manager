@@ -9,6 +9,7 @@ import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import {
+    initialValues,
     onCardNumberChange,
     onCurrencyChange,
     onCvcChange,
@@ -24,11 +25,7 @@ export const CreateWallet = () => {
 
     return (
         <AuthLayout src={bitmapImg}>
-            <Formik
-                initialValues={{ wom: '', usd: '', cardNumber: '', expireDate: '', cvc: '' }}
-                validationSchema={validationSchema}
-                onSubmit={noop}
-            >
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={noop}>
                 {({ handleSubmit, setFieldValue }) => (
                     <Form
                         src={womImg}

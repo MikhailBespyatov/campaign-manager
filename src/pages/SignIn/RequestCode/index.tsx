@@ -5,7 +5,7 @@ import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { validationSchema } from 'pages/SignIn/RequestCode/constants';
+import { initialValues, validationSchema } from 'pages/SignIn/RequestCode/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
 import { noop } from '../../../constants';
@@ -15,7 +15,7 @@ export const RequestCode = () => {
 
     return (
         <AuthLayout>
-            <Formik initialValues={{ email: '', password: '' }} validationSchema={validationSchema} onSubmit={noop}>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={noop}>
                 {({ handleSubmit }) => (
                     <Form subtitle="Request code" onSubmit={handleSubmit}>
                         <TextInput name="email" placeholder="Email" />

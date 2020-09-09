@@ -6,12 +6,10 @@ import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { validationSchema } from 'pages/SignIn/constants';
+import { onSubmit, validationSchema, initialValues } from 'pages/SignIn/constants';
 import { Link, LinkWrapper } from 'pages/SignIn/styles';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { AuthUserRequest } from 'types';
 
 export const SignIn = () => {
     const loading = useStore(loadingStores.loading);
@@ -45,20 +43,7 @@ export const SignIn = () => {
 
     return (
         <AuthLayout>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                validationSchema={validationSchema}
-                onSubmit={(values: AuthUserRequest, { setErrors }) => {
-                    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-                        setErrors({
-                            email: authDenyReason,
-                            password: authDenyReason
-                        });
-                        unwatch();
-                    });
-                    userEffects.loadToken(values);
-                }}
-            >
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     // {({ handleSubmit, isSubmitting }) => (
                     <Form onSubmit={handleSubmit}>

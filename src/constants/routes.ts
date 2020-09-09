@@ -32,8 +32,8 @@ export const routes = {
         campaign: {
             index: `${campaignPrefix}/campaign`,
             create: `${campaignPrefix}/campaign/create`,
-            details: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/details/${campaignId}`,
-            edit: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/edit/${campaignId}`
+            details: `${campaignPrefix}/campaign/details/:campaignId`,
+            edit: `${campaignPrefix}/campaign/edit/:campaignId`
         },
         overview: {
             index: `${campaignPrefix}/overview`

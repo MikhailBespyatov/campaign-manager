@@ -13,14 +13,14 @@ import { Span } from 'components/common/TextComponents/Span';
 import { ContentWrapper } from 'components/common/wrappers/ContentWrapper';
 import { Column, Section } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
-import { MainLayout } from 'components/Layouts/MainLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import ReactEcharts from 'echarts-for-react';
 import { graphicOption, testHeaderRadioArray } from 'pages/CampaignManager/Dashboard/constants';
 import { ballDiameter } from 'pages/CampaignManager/Discover/Details/constants';
 import React from 'react';
 
 export const Dashboard = () => (
-    <MainLayout>
+    <CampaignManagerLayout>
         <Section>
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
@@ -103,5 +103,5 @@ export const Dashboard = () => (
                 </Column>
             </Section>
         </ContentWrapper>
-    </MainLayout>
+    </CampaignManagerLayout>
 );

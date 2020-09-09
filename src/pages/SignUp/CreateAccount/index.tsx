@@ -8,11 +8,9 @@ import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { validationSchema } from 'pages/SignUp/CreateAccount/constants';
+import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/CreateAccount/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { RegisterUserRequest } from 'types';
 import { blue } from '../../../constants';
 
 export const CreateAccount = () => {
@@ -20,20 +18,7 @@ export const CreateAccount = () => {
 
     return (
         <AuthLayout src={bitmapImg}>
-            <Formik
-                initialValues={{ email: '', password: '', companyName: '', username: '' }}
-                validationSchema={validationSchema}
-                onSubmit={(values: RegisterUserRequest, { setErrors }) => {
-                    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-                        setErrors({
-                            email: authDenyReason,
-                            password: authDenyReason
-                        });
-                        unwatch();
-                    });
-                    userEffects.createUserAndLoadToken(values);
-                }}
-            >
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <Form src={womImg} title="Create an account" onSubmit={handleSubmit}>
                         <TextInput name="companyName" placeholder="Company Name" />
