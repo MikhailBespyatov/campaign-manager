@@ -3,15 +3,13 @@ import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
 import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { validationSchema } from 'pages/SignIn/constants';
+import { onSubmit, validationSchema, initialValues } from 'pages/SignIn/constants';
 import { Link, LinkWrapper } from 'pages/SignIn/styles';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { userEffects } from 'stores/user';
-import { AuthUserRequest } from 'types';
-import { routes } from '../../constants';
 
 export const SignIn = () => {
     const loading = useStore(loadingStores.loading);
@@ -45,34 +43,16 @@ export const SignIn = () => {
 
     return (
         <AuthLayout>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                validationSchema={validationSchema}
-                onSubmit={(values: AuthUserRequest) => userEffects.loadToken(values)}
-            >
-                {({ errors, handleChange, handleSubmit, touched, handleBlur, values }) => (
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                {({ handleSubmit }) => (
+                    // {({ handleSubmit, isSubmitting }) => (
                     <Form onSubmit={handleSubmit}>
-                        <TextInput
-                            error={errors.email}
-                            label="Email"
-                            name="email"
-                            touched={touched.email}
-                            value={values.email}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
-                        <TextInput
-                            error={errors.password}
-                            label="Password"
-                            name="password"
-                            touched={touched.password}
-                            value={values.password}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                        />
+                        <TextInput name="email" placeholder="Email" type="email" />
+                        <TextInput name="password" placeholder="Password" type="password" />
                         <LinkWrapper>
                             <Link to={routes.signIn.requestCode}>Forgot password?</Link>
                         </LinkWrapper>
+                        {/* <Button disabled={isSubmitting}>{isSubmitting ? <Loader /> : 'Login'}</Button> */}
                         <Button disabled={loading}>{loading ? <Loader /> : 'Login'}</Button>
                     </Form>
                 )}

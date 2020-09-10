@@ -4,7 +4,7 @@ const campaignPrefix = '/campaign_manager';
 
 export const routes = {
     test: '/components_test_page',
-    home: '/',
+    home: `${campaignPrefix}/dashboard`,
     signUp: {
         createAccount: '/create_account',
         createWallet: '/create_wallet'

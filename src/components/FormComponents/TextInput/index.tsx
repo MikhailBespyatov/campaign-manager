@@ -19,82 +19,93 @@ import {
     labelMarginBottom
 } from 'components/FormComponents/TextInput/constants';
 import { InputWrapper, Wrapper } from 'components/FormComponents/TextInput/styles';
-import React, { ChangeEvent, FocusEvent } from 'react';
-import { TextFormInput } from 'types';
-import { defaultAlt, errorColor, noop, requiredFieldMessage, successColor, untouchedColor } from '../../../constants';
+import { useField } from 'formik';
+import React, { ChangeEvent } from 'react';
+import { Disabled, Placeholder, Type } from 'types';
+import { defaultAlt, errorColor, requiredFieldMessage, successColor, untouchedColor } from '../../../constants';
 
-interface Props extends TextFormInput {
-    value: string;
+// interface Props extends TextFormInput {
+//     value: string;
+//     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+//     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+//     touched?: boolean;
+// }
+
+interface Props extends Disabled, Placeholder, Type {
+    name: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-    touched?: boolean;
 }
 
-export const TextInput = ({
-    error,
-    // defaultValue = '',
-    value,
-    onChange = noop,
-    label,
-    name,
-    type = name,
-    disabled = false,
-    onBlur = noop,
-    touched = false
-}: Props) => (
-    // const [value, setValue] = useState(defaultValue);
+// interface Props extends FieldHookConfig<string>, Disabled, Type, Label {}
 
-    // const inputChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+export const TextInput =
+    // ({
+    //     error,
+    //     // defaultValue = '',
+    //     value,
+    //     onChange = noop,
+    //     label,
+    //     name,
+    //     type = name,
+    //     disabled = false,
+    //     onBlur = noop,
+    //     touched = false
+    // }: Props) =>
+    // ({ placeholder = 'Email', disabled, ...props }: FieldHookConfig<string>) => {
+    ({ placeholder = 'Email', disabled, type = 'text', name, onChange }: Props) => {
+        const [field, { error, touched }] = useField(name);
 
-    // useEffect(() => {
-    //     onChange(value);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [value]);
+        const onInputChange = onChange || field.onChange;
 
-    <Wrapper>
-        <Row marginBottom={labelMarginBottom}>
-            <Span
-                color={disabled ? disabledColor : !touched ? untouchedColor : error ? errorColor : successColor}
-                fontSize={labelFontSize}
-                fontWeight={labelFontWeight}
-                lineHeight={labelLineHeight}
-            >
-                {label}
-            </Span>
-        </Row>
-        {/* <Label error={!!error}>{label}</Label> */}
-        <InputWrapper disabled={disabled} error={!!error} success={!disabled && !error} touched={touched}>
-            <StyledInput
-                background={disabled ? disabledColor : inputBackground}
-                disabled={disabled}
-                name={name}
-                type={type}
-                value={value}
-                width="100%"
-                onBlur={onBlur}
-                onChange={onChange}
-            />
-            {touched && !disabled && (
-                <AbsoluteWrapper right={absoluteIconRight} top={absoluteIconTop}>
-                    <CustomImg
-                        alt={defaultAlt}
-                        height={iconDiameter}
-                        src={error ? errorImg : successImg}
-                        width={iconDiameter}
+        //console.log(field.onChange, field.name);
+
+        // const context = useFormikContext();
+        // console.log(context);
+
+        return (
+            <Wrapper>
+                <Row marginBottom={labelMarginBottom}>
+                    <Span
+                        color={disabled ? disabledColor : !touched ? untouchedColor : error ? errorColor : successColor}
+                        fontSize={labelFontSize}
+                        fontWeight={labelFontWeight}
+                        lineHeight={labelLineHeight}
+                    >
+                        {placeholder}
+                    </Span>
+                </Row>
+                {/* <Label error={!!error}>{label}</Label> */}
+                <InputWrapper disabled={disabled} error={!!error} success={!disabled && !error} touched={touched}>
+                    <StyledInput
+                        background={disabled ? disabledColor : inputBackground}
+                        disabled={disabled}
+                        {...field}
+                        type={type}
+                        width="100%"
+                        onChange={onInputChange}
                     />
-                </AbsoluteWrapper>
-            )}
-        </InputWrapper>
-        <Row alignCenter height={errorSpanHeight} marginBottom={errorSpanMarginBottom}>
-            <Span
-                color={!touched ? untouchedColor : errorColor}
-                fontSize={labelFontSize}
-                fontWeight={labelFontWeight}
-                lineHeight={labelLineHeight}
-            >
-                {!touched ? requiredFieldMessage : error}
-            </Span>
-        </Row>
-        {/* {<ErrorSpan>{error}</ErrorSpan>} */}
-    </Wrapper>
-);
+                    {touched && !disabled && (
+                        <AbsoluteWrapper right={absoluteIconRight} top={absoluteIconTop}>
+                            <CustomImg
+                                alt={defaultAlt}
+                                height={iconDiameter}
+                                src={error ? errorImg : successImg}
+                                width={iconDiameter}
+                            />
+                        </AbsoluteWrapper>
+                    )}
+                </InputWrapper>
+                <Row alignCenter height={errorSpanHeight} marginBottom={errorSpanMarginBottom}>
+                    <Span
+                        color={!touched ? untouchedColor : errorColor}
+                        fontSize={labelFontSize}
+                        fontWeight={labelFontWeight}
+                        lineHeight={labelLineHeight}
+                    >
+                        {!touched ? requiredFieldMessage : error}
+                    </Span>
+                </Row>
+                {/* {<ErrorSpan>{error}</ErrorSpan>} */}
+            </Wrapper>
+        );
+    };

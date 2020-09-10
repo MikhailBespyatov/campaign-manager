@@ -1,11 +1,10 @@
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
-import { Auth, AuthUserRequest, AuthUserResponse } from 'types';
+import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import { giveAccess } from 'utils/usefulFunctions';
 import { errorDataMessage, notEntryAllowedMessage, userStorageName } from '../constants';
 
-//const updateLoading = createEvent();
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
 
@@ -25,14 +24,31 @@ const loadToken = createEffect({
     }
 });
 
-//const loading = createStore<boolean>(false).on(updateLoading, loading => !loading);
+const createUserAndLoadToken = createEffect({
+    handler: async (values: RegisterUserRequest) => {
+        try {
+            loadingEffects.setLoading(true);
+            const data = await API.user.createUser(values);
+            loadingEffects.setLoading(false);
+
+            localStorage.setItem(userStorageName, JSON.stringify(data));
+            return data;
+        } catch {
+            loadingEffects.setLoading(false);
+            return {};
+        }
+    }
+});
+
+const setToken = createEvent<AuthUserResponse>();
 
 const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userStorageName) || '{}'))
-    .on(loadToken.doneData, (_, user) => user)
+    .on([loadToken.doneData, createUserAndLoadToken.doneData], (_, user) => user)
     .on(logout, () => {
         localStorage.removeItem(userStorageName);
         return {};
-    });
+    })
+    .on(setToken, (_, token) => token);
 
 user.watch(state =>
     state === {}
@@ -69,8 +85,8 @@ const auth = createStore<Auth>(
           }
 ).on(setAuth, (_, auth) => auth);
 
-const userEvents = { logout };
-const userEffects = { loadToken };
+const userEvents = { logout, setAuth };
+const userEffects = { loadToken, createUserAndLoadToken };
 const userStores = { user, auth };
 
 export { userEffects, userStores, userEvents };
