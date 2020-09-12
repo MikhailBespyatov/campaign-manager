@@ -1,3 +1,5 @@
+import { routes } from 'constants/routes';
+import { GlobalStyle } from 'constants/styles';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
@@ -15,7 +17,6 @@ import React from 'react';
 import { Redirect, Switch } from 'react-router';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import { PublicRoute } from 'routes/PublicRoute';
-import { GlobalStyle, routes } from './constants';
 
 const App = () => (
     <>

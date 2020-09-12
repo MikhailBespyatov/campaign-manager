@@ -14,9 +14,9 @@ import {
     inputMinWidth
 } from 'components/common/inputs/NumberCounter/constants';
 import { Wrapper } from 'components/common/inputs/NumberCounter/styles';
+import { noop } from 'constants/global';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { BorderRadiusProperties, NumberInput as INumberInput } from 'types';
-import { noop } from '../../../../constants';
 
 interface Props extends INumberInput, BorderRadiusProperties {}
 

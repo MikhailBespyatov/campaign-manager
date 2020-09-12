@@ -6,8 +6,8 @@ import {
     wrapperVerticalPadding,
     wrapperWidth
 } from 'components/filters/TagFilter/constants';
+import { flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { flexCenter } from '../../../constants';
 
 export const Wrapper = styled.div`
     width: ${wrapperWidth};

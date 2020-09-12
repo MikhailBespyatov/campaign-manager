@@ -1,8 +1,8 @@
 import { Button, Span } from 'components/common/buttons/RoundedButton/styles';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { padding } from 'constants/styles';
 import React, { FC } from 'react';
-import { padding } from '../../../../constants';
 
 interface Props extends ButtonProps {
     onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;

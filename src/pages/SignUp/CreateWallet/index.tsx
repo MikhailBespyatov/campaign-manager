@@ -6,6 +6,8 @@ import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
 import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { noop } from 'constants/global';
+import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import {
@@ -18,7 +20,6 @@ import {
 } from 'pages/SignUp/CreateWallet/constants';
 import React, { ChangeEvent } from 'react';
 import { loadingStores } from 'stores/loading';
-import { blue, noop } from '../../../constants';
 
 export const CreateWallet = () => {
     const loading = useStore(loadingStores.loading);

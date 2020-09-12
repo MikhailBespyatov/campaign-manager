@@ -1,7 +1,7 @@
+import { invalidEmailMessage, requiredFieldMessage } from 'constants/messages';
 import { userEffects, userEvents, userStores } from 'stores/user';
 import { RegisterUserRequest } from 'types';
 import * as Yup from 'yup';
-import { invalidEmailMessage, requiredFieldMessage } from '../../../constants';
 
 export const initialValues = { email: '', password: '', companyName: '', username: '' };
 

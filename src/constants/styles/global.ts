@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { defaultFontFamily } from '../defaults';
-import { backgroundColor, scrollBarWidth } from './';
+import { backgroundColor } from './colors';
+import { scrollBarWidth } from './sizes';
 
 export const GlobalStyle = createGlobalStyle`
   body, html {

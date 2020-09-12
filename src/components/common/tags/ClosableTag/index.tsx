@@ -12,9 +12,9 @@ import {
 import { Wrapper } from 'components/common/tags/ClosableTag/styles';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column } from 'components/common/wrappers/FlexWrapper';
+import { hashTagPrefix } from 'constants/styles';
 import React, { FC } from 'react';
 import { BorderRadiusProperties, Closable, MarginRightBottom, WithHashtag } from 'types';
-import { hashTagPrefix } from '../../../../constants';
 
 interface Props extends Closable, WithHashtag, MarginRightBottom, BorderRadiusProperties {}
 

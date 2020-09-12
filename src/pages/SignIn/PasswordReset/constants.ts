@@ -1,5 +1,5 @@
+import { requiredFieldMessage } from 'constants/messages';
 import * as Yup from 'yup';
-import { requiredFieldMessage } from '../../../constants';
 
 export const initialValues = { code: '', password: '' };
 

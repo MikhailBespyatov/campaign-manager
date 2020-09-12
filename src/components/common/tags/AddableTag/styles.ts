@@ -5,9 +5,9 @@ import {
     wrapperVerticalPadding,
     wrapperWidth
 } from 'components/common/tags/AddableTag/constants';
+import { black, flexCenter } from 'constants/styles';
 import styled from 'styled-components';
 import { MarginRightBottom } from 'types';
-import { black, flexCenter } from '../../../../constants';
 
 export const Wrapper = styled.div<MarginRightBottom>`
     ${flexCenter};

@@ -2,9 +2,10 @@ import { itemActiveColor, spanFontSize, spanLineHeight } from 'components/common
 import { StyledItem } from 'components/common/inputs/RowRadio/style';
 import { Span } from 'components/common/TextComponents/Span';
 import { Row } from 'components/common/wrappers/FlexWrapper';
+import { noop } from 'constants/global';
+import { white } from 'constants/styles';
 import React, { useState } from 'react';
 import { Active, RadioProperties } from 'types';
-import { noop, white } from '../../../../constants';
 
 interface WrapperProps extends RadioProperties {}
 

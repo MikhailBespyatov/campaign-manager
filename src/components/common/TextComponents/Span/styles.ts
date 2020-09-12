@@ -1,5 +1,4 @@
 import { SpanProps } from 'components/common/TextComponents/Span/types';
-import styled from 'styled-components';
 import {
     defaultFontFamily,
     defaultFontSize,
@@ -7,7 +6,8 @@ import {
     defaultFontWeight,
     defaultLineHeight,
     defaultTextColor
-} from '../../../../constants';
+} from 'constants/defaults';
+import styled from 'styled-components';
 
 export const Span = styled.span<SpanProps>`
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : defaultFontFamily)};

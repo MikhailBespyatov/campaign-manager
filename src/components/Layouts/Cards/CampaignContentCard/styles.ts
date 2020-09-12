@@ -7,9 +7,9 @@ import {
     wrapperHorizontalPadding,
     wrapperVerticalPadding
 } from 'components/Layouts/Cards/CampaignContentCard/constants';
+import { flexStart, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
-import { flexStart, transitionTime } from '../../../../constants';
 
 export const Wrapper = styled.div<Visibility>`
     position: absolute;

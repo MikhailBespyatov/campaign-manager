@@ -1,7 +1,7 @@
+import { exactLimitMessage, requiredFieldMessage } from 'constants/messages';
 import { ChangeEvent } from 'react';
 import { commaInserter, slashInserter, spaceInserter } from 'utils/usefulFunctions';
 import * as Yup from 'yup';
-import { exactLimitMessage, requiredFieldMessage } from '../../../constants';
 
 export const initialValues = { wom: '', usd: '', cardNumber: '', expireDate: '', cvc: '' };
 

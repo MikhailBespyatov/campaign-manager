@@ -5,7 +5,6 @@ import {
     spanPadding
 } from 'components/common/inputs/Radio/constants';
 import { RadioProps } from 'components/common/inputs/Radio/types';
-import styled from 'styled-components';
 import {
     black,
     blue,
@@ -15,7 +14,8 @@ import {
     flexCenter,
     transitionTime,
     white
-} from '../../../../constants';
+} from 'constants/styles';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     display: inline-block;

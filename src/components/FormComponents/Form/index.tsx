@@ -2,9 +2,9 @@ import organizationLogo from 'assets/img/organization_logo.svg';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { logoDiameter } from 'components/FormComponents/Form/constants';
 import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
+import { noop } from 'constants/global';
 import React, { FC } from 'react';
 import { Title, WithSrc } from 'types';
-import { defaultImgAlt, noop } from '../../../constants';
 
 interface Props extends Title, WithSrc {
     onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
@@ -18,7 +18,7 @@ export const Form: FC<Props> = ({
     src = organizationLogo
 }) => (
     <Wrapper>
-        <CustomImg alt={defaultImgAlt} borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />
+        <CustomImg borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />
         <H1Form>{title}</H1Form>
         <PForm>{subtitle}</PForm>
         <FormWrapper onSubmit={onSubmit}>{children}</FormWrapper>

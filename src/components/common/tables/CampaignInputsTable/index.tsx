@@ -19,8 +19,8 @@ import {
 import { Table } from 'components/common/tables/Table';
 import { Span } from 'components/common/TextComponents/Span';
 import { TableWrapper } from 'components/common/wrappers/TableWrapper';
+import { hashTagPrefix } from 'constants/styles';
 import React from 'react';
-import { hashTagPrefix } from '../../../../constants';
 
 export const CampaignInputsTable = () => (
     <TableWrapper>

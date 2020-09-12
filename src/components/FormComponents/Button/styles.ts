@@ -5,8 +5,6 @@ import {
     buttonMarginBottom,
     buttonWidth
 } from 'components/FormComponents/Button/constants';
-import styled from 'styled-components';
-import { Background } from 'types';
 import {
     black,
     buttonActiveMixin,
@@ -14,7 +12,9 @@ import {
     disableDefaultButtonStyleMixin,
     transitionTime,
     white
-} from '../../../constants';
+} from 'constants/styles';
+import styled from 'styled-components';
+import { Background } from 'types';
 
 export const Button = styled.button<Background>`
     ${disableDefaultButtonStyleMixin};

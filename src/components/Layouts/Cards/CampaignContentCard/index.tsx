@@ -4,8 +4,8 @@ import { AddableTag } from 'components/common/tags/AddableTag';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
+import { errorColor, successColor } from 'constants/styles';
 import React from 'react';
-import { errorColor, successColor } from '../../../../constants';
 
 interface Props {
     buttonTop: JSX.Element;

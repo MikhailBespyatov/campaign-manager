@@ -4,8 +4,8 @@ import {
     wrapperHeight,
     wrapperWidth
 } from 'components/common/features/Budget/constants';
+import { flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { flexCenter } from '../../../../constants';
 
 export const Wrapper = styled.div`
     ${flexCenter};

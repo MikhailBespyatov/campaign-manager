@@ -8,9 +8,9 @@ import {
     spanLineHeight
 } from 'components/grid/bars/TopBarWithButton/constants';
 import { ButtonsWrapper, StyledBorder, StyledItem } from 'components/grid/bars/TopBarWithButton/style';
+import { routesArray } from 'constants/routes';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
-import { routesArray } from '../../../../constants';
 
 interface Props {
     buttons?: JSX.Element;

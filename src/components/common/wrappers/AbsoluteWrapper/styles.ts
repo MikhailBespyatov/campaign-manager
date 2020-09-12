@@ -1,6 +1,6 @@
 import { AbsoluteWrapperProps } from 'components/common/wrappers/AbsoluteWrapper/types';
+import { padding } from 'constants/styles';
 import styled from 'styled-components';
-import { padding } from '../../../../constants';
 
 export const AbsoluteWrapper = styled.div<AbsoluteWrapperProps>`
     ${({ top, bottom }) => (top ? `top: ${top}` : bottom ? `bottom: ${bottom}` : `top: ${padding}`)};

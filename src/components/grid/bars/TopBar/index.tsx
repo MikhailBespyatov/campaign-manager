@@ -8,9 +8,9 @@ import {
     spanLineHeight
 } from 'components/grid/bars/TopBar/constants';
 import { StyledBorder, StyledItem } from 'components/grid/bars/TopBar/style';
+import { routesArray } from 'constants/routes';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
-import { routesArray } from '../../../../constants';
 
 export const TopBar = () => {
     const location = useLocation();

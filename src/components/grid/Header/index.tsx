@@ -4,9 +4,10 @@ import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { CardColumn, CardRow } from 'components/grid/Card';
 import { headerAvatarDiameter, headerLogoHeight, headerLogoWidth } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
+import { siteName } from 'constants/global';
+import { padding, white } from 'constants/styles';
 import React from 'react';
 import { userEvents } from 'stores/user';
-import { padding, siteName, white } from '../../../constants';
 
 export const Header = () => {
     const onClick = () => userEvents.logout();

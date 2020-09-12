@@ -20,8 +20,8 @@ import { TableSpan } from 'components/common/TextComponents/TableSpan';
 import { TableSubSpan } from 'components/common/TextComponents/TableSubSpan';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import { TableWrapper } from 'components/common/wrappers/TableWrapper';
+import { padding } from 'constants/styles';
 import React from 'react';
-import { padding } from '../../../../constants';
 
 export const CampaignTable = () => (
     <TableWrapper>

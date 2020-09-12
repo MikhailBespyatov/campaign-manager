@@ -1,9 +1,10 @@
+import { userStorageName } from 'constants/global';
+import { errorDataMessage, notEntryAllowedMessage } from 'constants/messages';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import { giveAccess } from 'utils/usefulFunctions';
-import { errorDataMessage, notEntryAllowedMessage, userStorageName } from '../constants';
 
 const logout = createEvent();
 const setAuth = createEvent<Auth>();

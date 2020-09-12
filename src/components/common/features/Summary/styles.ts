@@ -5,9 +5,9 @@ import {
     wrapperHorizontalPadding,
     wrapperWidth
 } from 'components/common/features/Summary/constants';
+import { flexStart } from 'constants/styles';
 import styled from 'styled-components';
 import { MarginRightBottom } from 'types';
-import { flexStart } from '../../../../constants';
 
 export const Wrapper = styled.div<MarginRightBottom>`
     ${flexStart};

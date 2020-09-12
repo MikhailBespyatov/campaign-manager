@@ -11,7 +11,6 @@ import {
     spanLineHeight
 } from 'components/common/buttons/RoundedButton/constants';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
-import styled from 'styled-components';
 import {
     black,
     buttonActiveMixin,
@@ -21,7 +20,8 @@ import {
     reverseColor,
     transitionTime,
     white
-} from '../../../../constants';
+} from 'constants/styles';
+import styled from 'styled-components';
 
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};

@@ -9,11 +9,11 @@ import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { Card, CardColumn, CardRow, CardRowFeatures, Description, FeatureCell } from 'components/grid/Card';
 import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
 import { ProductSpan, RatingSpan } from 'components/Layouts/Cards/VideoCard/styles';
+import { routes } from 'constants/routes';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
 import { MarginRightBottom } from 'types';
-import { routes } from '../../../../constants';
 
 interface Props extends MarginRightBottom {}
 

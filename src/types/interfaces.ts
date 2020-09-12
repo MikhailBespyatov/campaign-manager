@@ -1,6 +1,18 @@
 import { ChangeEvent } from 'react';
 import { noop } from './types';
 
+export interface Subtitle {
+    subtitle?: string;
+}
+
+export interface StrictTitle extends Subtitle {
+    title: string;
+}
+
+export interface Title extends Subtitle {
+    title?: string;
+}
+
 export interface Auth {
     access: number;
     authDenyReason?: string;
@@ -104,11 +116,6 @@ export interface Placeholder {
     placeholder?: string;
 }
 
-export interface Title {
-    title?: string;
-    subtitle?: string;
-}
-
 export interface WithHashtag {
     hashtag?: boolean;
 }
@@ -150,7 +157,7 @@ export interface Type {
 }
 
 export interface Label {
-    label: string;
+    label?: string;
 }
 
 export interface TextFormInput extends Disabled, Type, Label {
@@ -202,4 +209,8 @@ export interface ForcedColor {
 
 export interface Quantity {
     quantity: number;
+}
+
+export interface UntouchedWarning {
+    untouchedWarning?: string;
 }

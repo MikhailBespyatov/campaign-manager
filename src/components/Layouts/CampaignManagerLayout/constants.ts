@@ -1,4 +1,4 @@
-import { white } from '../../../constants';
+import { white } from 'constants/styles';
 
 export const wrapperBorderRadius = '40px';
 export const wrapperBackground = white;

@@ -5,8 +5,8 @@ import { Span } from 'components/common/TextComponents/Span';
 import { CardRow } from 'components/grid/Card/styles';
 import { footerLogoHeight, footerLogoWidth } from 'components/grid/Footer/constants';
 import { StyledFooter } from 'components/grid/Footer/style';
+import { white } from 'constants/styles';
 import React from 'react';
-import { white } from '../../../constants';
 
 export const Footer = () => (
     <StyledFooter>

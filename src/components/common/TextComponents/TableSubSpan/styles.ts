@@ -4,8 +4,8 @@ import {
     tableSpanColor
 } from 'components/common/TextComponents/TableSubSpan/constants';
 import { TableSpanProps } from 'components/common/TextComponents/TableSubSpan/types';
+import { formTextStyleMixin } from 'constants/styles';
 import styled from 'styled-components';
-import { formTextStyleMixin } from '../../../../constants';
 
 export const TableSubSpan = styled.span<TableSpanProps>`
     ${formTextStyleMixin};

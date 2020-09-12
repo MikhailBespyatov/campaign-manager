@@ -8,7 +8,6 @@ import {
     verticalPadding
 } from 'components/grid/Card/constants';
 import { CardColumnProps, CardProps, CardRowProps, FeatureCellProps } from 'components/grid/Card/types';
-import styled from 'styled-components';
 //import { adaptiveCard } from 'utils/usefulFunctions';
 import {
     black,
@@ -26,7 +25,8 @@ import {
     primaryColor,
     transitionTime,
     white
-} from '../../../constants';
+} from 'constants/styles';
+import styled from 'styled-components';
 
 export const Card = styled.div<CardProps>`
     ${({ disabled }) => (disabled ? `opacity: ${disabledOpacity}` : '')};

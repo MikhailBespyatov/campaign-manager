@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
-import { borderWidth, grey, padding } from '..';
 import { defaultFontFamily, defaultFontStyle, defaultFontWeight } from '../defaults';
+import { grey } from './colors';
+import { borderWidth, padding } from './sizes';
 
 export const marginBottomMixin = css`
     margin-bottom: ${padding};

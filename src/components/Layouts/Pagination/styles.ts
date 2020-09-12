@@ -12,8 +12,8 @@ import {
     paginationWrapperHorizontalMargin
 } from 'components/Layouts/Pagination/constants';
 import { ArrowProps, PaginationCellProps } from 'components/Layouts/Pagination/types';
+import { disableDefaultButtonStyleMixin, flexCenter, flexStart, formTextStyleMixin } from 'constants/styles';
 import styled from 'styled-components';
-import { disableDefaultButtonStyleMixin, flexCenter, flexStart, formTextStyleMixin } from '../../../constants';
 
 export const Wrapper = styled.div`
     ${flexStart};

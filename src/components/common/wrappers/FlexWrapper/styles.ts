@@ -1,6 +1,6 @@
 import { ColumnProps, RowProps } from 'components/common/wrappers/FlexWrapper/types';
+import { flexStart, padding } from 'constants/styles';
 import styled from 'styled-components';
-import { flexStart, padding } from '../../../../constants';
 
 export const Row = styled.div<RowProps>`
     ${({ widthMaxContent }) => (widthMaxContent ? 'width: max-content;' : '')};

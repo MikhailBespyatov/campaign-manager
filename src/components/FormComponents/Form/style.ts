@@ -8,9 +8,9 @@ import {
     formVerticalPadding,
     formWidth
 } from 'components/FormComponents/Form/constants';
+import { formPrimaryColor, white } from 'constants/styles';
 import { flexCenter } from 'constants/styles/mixins';
 import styled from 'styled-components';
-import { formPrimaryColor, white } from '../../../constants';
 
 export const Wrapper = styled.div`
     ${flexCenter};

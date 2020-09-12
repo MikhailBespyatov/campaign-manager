@@ -1,6 +1,6 @@
 import { h1Margin, h2Margin, h3Margin, h4Margin } from 'components/common/titles/H/constants';
+import { grey1 } from 'constants/styles';
 import styled from 'styled-components';
-import { grey1 } from '../../../../constants';
 
 export const H1 = styled.h1`
     font-weight: 500;

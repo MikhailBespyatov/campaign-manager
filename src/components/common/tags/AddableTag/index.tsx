@@ -12,9 +12,9 @@ import {
 import { Wrapper } from 'components/common/tags/AddableTag/styles';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column } from 'components/common/wrappers/FlexWrapper';
+import { hashTagPrefix } from 'constants/styles';
 import React, { FC } from 'react';
 import { MarginRightBottom, NoopClick, WithHashtag } from 'types';
-import { hashTagPrefix } from '../../../../constants';
 
 interface Props extends NoopClick, WithHashtag, MarginRightBottom {}
 

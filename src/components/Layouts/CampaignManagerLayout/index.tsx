@@ -3,9 +3,9 @@ import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
 import { Main } from 'components/Layouts/CampaignManagerLayout/styles';
+import { routes } from 'constants/routes';
 import React, { FC } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import { routes } from '../../../constants';
 
 export const CampaignManagerLayout: FC = ({ children }) => {
     const location = useLocation();

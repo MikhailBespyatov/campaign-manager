@@ -5,9 +5,9 @@ import {
     itemPaddingBottom,
     StyledBorderWidth
 } from 'components/grid/bars/TopBarWithButton/constants';
+import { transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Active } from 'types';
-import { transitionTime } from '../../../../constants';
 
 export const StyledItem = styled.div<Active>`
     cursor: pointer;

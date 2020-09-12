@@ -1,4 +1,4 @@
-import { black } from '../../../../constants';
+import { black } from 'constants/styles';
 
 export const itemMinWidth = '120px';
 export const itemHeight = '40px';

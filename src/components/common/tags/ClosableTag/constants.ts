@@ -1,4 +1,4 @@
-import { white } from '../../../../constants';
+import { white } from 'constants/styles';
 
 export const wrapperWidth = '173px';
 export const wrapperHeight = '43px';

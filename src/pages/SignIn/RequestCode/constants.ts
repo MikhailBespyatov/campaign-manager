@@ -1,5 +1,5 @@
+import { invalidEmailMessage, requiredFieldMessage } from 'constants/messages';
 import * as Yup from 'yup';
-import { invalidEmailMessage, requiredFieldMessage } from '../../../constants';
 
 export const initialValues = { email: '', password: '' };
 

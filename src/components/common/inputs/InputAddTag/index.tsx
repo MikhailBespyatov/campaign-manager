@@ -16,9 +16,9 @@ import {
 } from 'components/common/inputs/InputAddTag/constants';
 import { Wrapper } from 'components/common/inputs/InputAddTag/styles';
 import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
+import { noop } from 'constants/global';
 import React, { ChangeEvent, FC, useState } from 'react';
 import { Placeholder } from 'types';
-import { noop } from '../../../../constants';
 
 interface Props extends Placeholder {
     onClick?: (value: string) => void;
