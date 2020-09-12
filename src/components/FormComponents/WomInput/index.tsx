@@ -5,7 +5,6 @@ import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import {
-    currencyToText,
     errorSpanHeight,
     inputFontSize,
     onCurrencyChange,
@@ -19,6 +18,7 @@ import { errorColor, formGrey5 } from 'constants/styles';
 import { useField } from 'formik';
 import React, { ChangeEvent, useState } from 'react';
 import { Disabled, Label, Placeholder, Type } from 'types';
+import { currencyToText } from 'utils/usefulFunctions';
 
 interface Props extends Disabled, Placeholder, Type, Label {
     name?: string;

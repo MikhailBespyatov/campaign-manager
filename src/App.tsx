@@ -15,6 +15,7 @@ import { RequestCode } from 'pages/SignIn/RequestCode';
 import { CreateAccount } from 'pages/SignUp';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
+import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
 import React from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { PrivateRoute } from 'routes/PrivateRoute';
@@ -30,6 +31,7 @@ const App = () => (
                 <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} />
                 <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                 <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
+                <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
                 <PublicRoute exact component={SignIn} path={routes.signIn.index} />
                 <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />

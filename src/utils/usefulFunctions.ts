@@ -43,3 +43,5 @@ export const slashInserter = (str: string) =>
         .reverse()
         .join('')
         .replace(removeRightSlashRegExp, '') || '';
+
+export const currencyToText = (currency: number) => '$' + currency + ' USD';

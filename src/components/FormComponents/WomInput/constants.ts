@@ -33,8 +33,6 @@ export const absoluteIconTop = `calc((${inputWrapperHeight} - ${iconDiameter}) /
 export const errorSpanHeight = '41px';
 export const errorSpanMarginBottom = '0';
 
-export const currencyToText = (currency: number) => '$' + currency + ' USD';
-
 export const onCurrencyChange = (
     e: ChangeEvent<HTMLInputElement>,
     setValue: (value: any, shouldValidate?: boolean | undefined) => void,
