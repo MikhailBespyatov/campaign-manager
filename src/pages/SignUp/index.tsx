@@ -10,7 +10,7 @@ import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/CreateAccount/constants';
+import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/constants';
 import React, { FC } from 'react';
 import { loadingStores } from 'stores/loading';
 

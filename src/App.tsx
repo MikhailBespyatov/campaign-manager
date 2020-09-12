@@ -11,7 +11,7 @@ import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { RequestCode } from 'pages/SignIn/RequestCode';
-import { CreateAccount } from 'pages/SignUp/CreateAccount';
+import { CreateAccount } from 'pages/SignUp';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import React from 'react';
 import { Redirect, Switch } from 'react-router';

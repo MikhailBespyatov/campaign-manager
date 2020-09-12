@@ -13,6 +13,7 @@ export const routes = {
     test: '/components_test_page',
     home: `${campaignPrefix}/dashboard`,
     signUp: {
+        index: signUpPrefix,
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
