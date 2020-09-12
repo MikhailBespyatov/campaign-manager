@@ -1,7 +1,6 @@
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { BooleanCheckbox } from 'components/FormComponents/BooleanCheckbox';
 import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
@@ -38,17 +37,15 @@ export const CreateAccount = () => {
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         />
-                        <MarginWrapper marginTop="30px">
-                            <Row alignCenter noWrap marginBottom="35px">
-                                <Column marginRight="15px">
-                                    <BooleanCheckbox />
-                                </Column>
-                                <Span color={formGrey5} fontSize="14px" fontWeight="500" lineHeight="17px">
-                                    I acknowledge that I have read <HighlightSpan>Privacy Policy</HighlightSpan> and
-                                    agree to the <HighlightSpan>Terms of Service</HighlightSpan>.
-                                </Span>
-                            </Row>
-                        </MarginWrapper>
+                        <Row alignCenter noWrap marginBottom="35px" marginTop="30px">
+                            <Column marginRight="15px">
+                                <BooleanCheckbox />
+                            </Column>
+                            <Span color={formGrey5} fontSize="14px" fontWeight="500" lineHeight="17px">
+                                I acknowledge that I have read <HighlightSpan>Privacy Policy</HighlightSpan> and agree
+                                to the <HighlightSpan>Terms of Service</HighlightSpan>.
+                            </Span>
+                        </Row>
                         <Button disabled={loading}>{loading ? <Loader /> : 'Sign up'}</Button>
                         {/* <Span alignCenter color="#9EA1B3" fontSize="18px" fontWeight="500" lineHeight="22px">
                             By tapping "Sign Up & Accept", you acknowledge that you have read the Privacy Policy and

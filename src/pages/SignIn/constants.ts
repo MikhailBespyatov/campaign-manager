@@ -1,4 +1,5 @@
 import { invalidEmailMessage, requiredFieldMessage } from 'constants/messages';
+import { FormikErrors } from 'formik';
 import { userEffects, userEvents, userStores } from 'stores/user';
 import { AuthUserRequest } from 'types';
 import * as Yup from 'yup';
@@ -13,8 +14,16 @@ export const validationSchema = Yup.object().shape({
     password: Yup.string().required(requiredFieldMessage)
 });
 
-// TODO: [any]
-export const onSubmit = (values: AuthUserRequest, { setErrors }: any) => {
+interface SetErrorsFormikProps {
+    setErrors: (
+        errors: FormikErrors<{
+            email?: string;
+            password?: string;
+        }>
+    ) => void;
+}
+
+export const onSubmit = (values: AuthUserRequest, { setErrors }: SetErrorsFormikProps) => {
     const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
         setErrors({
             email: authDenyReason,

@@ -5,12 +5,11 @@ import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
 import { WomInput } from 'components/FormComponents/WomInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { noop } from 'constants/global';
 import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { initialValues, validationSchema } from 'pages/SignUp/CreateWallet/constants';
+import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/CreateWallet/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
 
@@ -19,7 +18,7 @@ export const CreateWallet = () => {
 
     return (
         <AuthLayout>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={noop}>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, errors, touched }) => (
                     <Form
                         subSubtitle="We have created a WOM Wallet and associated this with <Company Name> account."
