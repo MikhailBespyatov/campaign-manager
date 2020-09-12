@@ -1,4 +1,3 @@
-import bitmapImg from 'assets/img/bitmap.png';
 import womImg from 'assets/img/wom_logo.svg';
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/TextComponents/Span';
@@ -25,7 +24,7 @@ export const CreateWallet = () => {
     const loading = useStore(loadingStores.loading);
 
     return (
-        <AuthLayout src={bitmapImg}>
+        <AuthLayout>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={noop}>
                 {({ handleSubmit, setFieldValue }) => (
                     <Form

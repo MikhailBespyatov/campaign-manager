@@ -57,9 +57,9 @@ export const Test = () => {
                 <Space />
                 <RoundedButton disabled={disabled}>disabled</RoundedButton>
                 <Space />
-                <Checkbox checked={checked} onChange={onChange} />
+                <Checkbox value={'value'} onChange={onChange} />
                 <Space />
-                <Checkbox checked={checked} disabled={disabled} onChange={onChange} />
+                <Checkbox disabled={disabled} value={'value2'} onChange={onChange} />
                 <Space />
                 <TextInput error="" label="Some label" name="username" />
                 <Space />

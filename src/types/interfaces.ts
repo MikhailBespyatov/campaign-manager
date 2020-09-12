@@ -66,6 +66,7 @@ export interface TextProperties extends NoWrap {
     fontWeight?: string;
     lineHeight?: string;
     alignCenter?: boolean;
+    alignEnd?: boolean;
 }
 
 export interface Color {
@@ -213,4 +214,12 @@ export interface Quantity {
 
 export interface UntouchedWarning {
     untouchedWarning?: string;
+}
+
+export interface TextDecoration {
+    textDecoration?: string;
+}
+
+export interface DefaultChecked {
+    defaultChecked?: boolean;
 }

@@ -1,5 +1,6 @@
 import { Span } from 'components/common/TextComponents/Span';
 import { Row } from 'components/common/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { errorSpanHeight, errorSpanMarginBottom } from 'components/FormComponents/TextInput/constants';
 import { TextFieldStyled, useStyles, Wrapper } from 'components/FormComponents/TextInput/styles';
 import { requiredFieldMessage } from 'constants/messages';
@@ -37,10 +38,12 @@ export const TextInput = ({
                 type={type}
                 onChange={onInputChange}
             />
-            <Row alignCenter height={errorSpanHeight} marginBottom={errorSpanMarginBottom}>
-                <Span color={!touched ? formGrey5 : errorColor} fontSize="12px" fontWeight="500" lineHeight="15px">
-                    {!touched ? (untouchedWarning ? untouchedWarning : requiredFieldMessage) : error}
-                </Span>
+            <Row marginBottom={errorSpanMarginBottom} minHeight={errorSpanHeight}>
+                <MarginWrapper marginTop="5px">
+                    <Span color={!touched ? formGrey5 : errorColor} fontSize="12px" fontWeight="500" lineHeight="15px">
+                        {!touched ? (untouchedWarning ? untouchedWarning : requiredFieldMessage) : error}
+                    </Span>
+                </MarginWrapper>
             </Row>
         </Wrapper>
     );

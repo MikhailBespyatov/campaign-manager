@@ -1,4 +1,4 @@
-import organizationLogo from 'assets/img/organization_logo.svg';
+import defaultLogo from 'assets/img/form_logo_1.svg';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { logoDiameter } from 'components/FormComponents/Form/constants';
 import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
@@ -15,7 +15,7 @@ export const Form: FC<Props> = ({
     title = 'Hello @adidas',
     subtitle = 'to discover & manage WOM Content',
     onSubmit = noop,
-    src = organizationLogo
+    src = defaultLogo
 }) => (
     <Wrapper>
         <CustomImg borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />

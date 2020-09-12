@@ -1,2 +1,4 @@
-export const authLayoutBackgroundColor = 'rgba(0, 0, 0, 0.3)';
+import { primaryBackground } from 'constants/styles';
+
+export const authLayoutBackgroundColor = primaryBackground;
 export const mainPadding = '100px';

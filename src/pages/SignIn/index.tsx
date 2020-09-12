@@ -6,7 +6,7 @@ import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { onSubmit, validationSchema, initialValues } from 'pages/SignIn/constants';
+import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/constants';
 import { Link, LinkWrapper } from 'pages/SignIn/styles';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
