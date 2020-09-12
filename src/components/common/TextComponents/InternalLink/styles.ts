@@ -1,4 +1,4 @@
-import { SpanProps } from 'components/common/TextComponents/Span/types';
+import { SpanProps } from 'components/common/TextComponents/InternalLink/types';
 import {
     defaultFontFamily,
     defaultFontSize,
@@ -7,9 +7,10 @@ import {
     defaultLineHeight,
     defaultTextColor
 } from 'constants/defaults';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Span = styled.span<SpanProps>`
+export const InternalLink = styled(Link)<SpanProps>`
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : defaultFontFamily)};
     font-style: ${({ fontStyle }) => (fontStyle ? fontStyle : defaultFontStyle)};
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : defaultFontWeight)};

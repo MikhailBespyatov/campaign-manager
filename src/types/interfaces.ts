@@ -65,6 +65,7 @@ export interface TextProperties extends NoWrap {
     fontSize?: string;
     fontWeight?: string;
     lineHeight?: string;
+    letterSpacing?: string;
     alignCenter?: boolean;
     alignEnd?: boolean;
 }

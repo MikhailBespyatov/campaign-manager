@@ -13,6 +13,7 @@ export const Row = styled.div<RowProps>`
     ${({ width }) => (width ? `width: ${width};` : ``)};
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ minHeight }) => (minHeight ? `min-height: ${minHeight};` : ``)};
+    ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     z-index: 1;
@@ -26,6 +27,7 @@ export const Column = styled.div<ColumnProps>`
     ${({ width }) => (width ? `width: ${width};` : ``)};
     ${({ maxWidth }) => (maxWidth ? `max-width: ${maxWidth};` : ``)};
     ${({ height }) => (height ? `height: ${height};` : ``)};
+    ${({ marginLeft }) => (marginLeft ? `margin-left: ${marginLeft};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
 `;

@@ -1,4 +1,4 @@
-import { SpanProps } from 'components/common/TextComponents/Span/types';
+import { SpanProps } from 'components/common/TextComponents/ExternalLink/types';
 import {
     defaultFontFamily,
     defaultFontSize,
@@ -9,7 +9,7 @@ import {
 } from 'constants/defaults';
 import styled from 'styled-components';
 
-export const Span = styled.span<SpanProps>`
+export const ExternalLink = styled.a<SpanProps>`
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : defaultFontFamily)};
     font-style: ${({ fontStyle }) => (fontStyle ? fontStyle : defaultFontStyle)};
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : defaultFontWeight)};

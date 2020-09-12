@@ -8,6 +8,7 @@ import { Title, WithSrc } from 'types';
 
 interface Props extends Title, WithSrc {
     onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+    subSubtitle?: string;
 }
 
 export const Form: FC<Props> = ({
@@ -15,12 +16,14 @@ export const Form: FC<Props> = ({
     title = 'Hello @adidas',
     subtitle = 'to discover & manage WOM Content',
     onSubmit = noop,
-    src = defaultLogo
+    src = defaultLogo,
+    subSubtitle
 }) => (
     <Wrapper>
         <CustomImg borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />
         <H1Form>{title}</H1Form>
         <PForm>{subtitle}</PForm>
+        {subSubtitle && <PForm>{subSubtitle}</PForm>}
         <FormWrapper onSubmit={onSubmit}>{children}</FormWrapper>
     </Wrapper>
 );
