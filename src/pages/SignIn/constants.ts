@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
-import { requiredFieldMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
+import { yupCompanyName } from 'constants/yupFields';
 import * as Yup from 'yup';
 
 export const linkMarginTop = '0';
@@ -9,7 +9,7 @@ export const linkMarginBottom = '57px';
 export const initialValues = { companyName: '' };
 
 export const validationSchema = Yup.object().shape({
-    companyName: Yup.string().required(requiredFieldMessage)
+    companyName: yupCompanyName
 });
 
 // interface SetErrorsFormikProps {

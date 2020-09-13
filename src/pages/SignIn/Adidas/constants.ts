@@ -1,4 +1,4 @@
-import { invalidEmailMessage, requiredFieldMessage } from 'constants/messages';
+import { yupEmailNoHint, yupPasswordNoHint } from 'constants/yupFields';
 import { FormikErrors } from 'formik';
 import { userEffects, userEvents, userStores } from 'stores/user';
 import { AuthUserRequest } from 'types';
@@ -10,13 +10,8 @@ export const linkMarginBottom = '57px';
 export const initialValues = { email: '', password: '' };
 
 export const validationSchema = Yup.object().shape({
-    email: Yup.string().email(invalidEmailMessage).required(requiredFieldMessage),
-    password: Yup.string().required(requiredFieldMessage)
-    // password: Yup.string()
-    // .required(requiredFieldMessage)
-    // .min(passwordMinimum, passwordLengthMessage(passwordMinimum))
-    // .matches(oneCapitalCharRequiredRegExp, oneCapitalCharRequiredMessage)
-    // .matches(atLeastOneNumberRequiredRegExp, atLeastOneNumberRequiredMessage)
+    email: yupEmailNoHint,
+    password: yupPasswordNoHint
 });
 
 interface SetErrorsFormikProps {

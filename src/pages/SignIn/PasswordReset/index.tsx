@@ -30,7 +30,7 @@ export const PasswordReset = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
-                        <Form onSubmit={handleSubmit}>
+                        <Form subtitle="Password Reset" onSubmit={handleSubmit}>
                             <TextInput name="email" type="email" />
                             <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
                                 <InternalLink
@@ -43,7 +43,7 @@ export const PasswordReset = () => {
                                 </InternalLink>
                             </MarginWrapper>
                             <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                                {loading ? <Loader /> : 'SEND A PASSWORD RESET'}
+                                {loading ? <Loader /> : 'CHANGE PASSWORD'}
                             </Button>
                         </Form>
                         <FormSignUpLink />

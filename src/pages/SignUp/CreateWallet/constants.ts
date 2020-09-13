@@ -1,12 +1,12 @@
 import history from 'BrowserHistory';
-import { requiredFieldMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
+import { yupWom } from 'constants/yupFields';
 import * as Yup from 'yup';
 
 export const initialValues = { wom: '' };
 
 export const validationSchema = Yup.object().shape({
-    wom: Yup.string().required(requiredFieldMessage)
+    wom: yupWom
 });
 
 // interface ValuesProps {

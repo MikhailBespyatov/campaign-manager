@@ -12,6 +12,7 @@ import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
 import { Adidas as SignInAdidas } from 'pages/SignIn/Adidas';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
+import { Password as NewPasswordReset } from 'pages/SignIn/PasswordReset/Password';
 import { RequestCode } from 'pages/SignIn/RequestCode';
 import { CreateAccount } from 'pages/SignUp';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
@@ -38,6 +39,7 @@ const App = () => (
                 <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} />
                 <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
                 <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
+                <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
 
                 <PrivateRoute exact component={CampaignManager} path={routes.campaignManager.index} />
                 <PrivateRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
