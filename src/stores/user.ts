@@ -4,7 +4,7 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
-import { giveAccess } from 'utils/usefulFunctions';
+import { giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
@@ -52,7 +52,7 @@ const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userS
     .on(setToken, (_, token) => token);
 
 user.watch(state =>
-    state === {}
+    objectIsEmpty(state)
         ? setAuth({
               access: -1,
               authDenyReason: errorDataMessage
@@ -70,7 +70,7 @@ user.watch(state =>
 
 const userStore = user.getState();
 const auth = createStore<Auth>(
-    userStore === {}
+    objectIsEmpty(userStore)
         ? {
               access: -1,
               authDenyReason: errorDataMessage

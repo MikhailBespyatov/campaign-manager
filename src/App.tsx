@@ -10,6 +10,7 @@ import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Detai
 import { Overview } from 'pages/CampaignManager/Overview';
 import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
+import { Adidas as SignInAdidas } from 'pages/SignIn/Adidas';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { RequestCode } from 'pages/SignIn/RequestCode';
 import { CreateAccount } from 'pages/SignUp';
@@ -34,6 +35,7 @@ const App = () => (
                 <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
                 <PublicRoute exact component={SignIn} path={routes.signIn.index} />
+                <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} />
                 <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
                 <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
 

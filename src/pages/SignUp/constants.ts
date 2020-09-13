@@ -7,6 +7,7 @@ import {
     requiredFieldMessage
 } from 'constants/messages';
 import { atLeastOneNumberRequiredRegExp, oneCapitalCharRequiredRegExp } from 'constants/regExp';
+import { FormikErrors } from 'formik';
 import { userEffects, userEvents, userStores } from 'stores/user';
 import { RegisterUserRequest } from 'types';
 import * as Yup from 'yup';
@@ -24,8 +25,16 @@ export const validationSchema = Yup.object().shape({
         .matches(atLeastOneNumberRequiredRegExp, atLeastOneNumberRequiredMessage)
 });
 
-//TODO: [any]
-export const onSubmit = (values: RegisterUserRequest, { setErrors }: any) => {
+interface SetErrorsFormikProps {
+    setErrors: (
+        errors: FormikErrors<{
+            email?: string;
+            password?: string;
+        }>
+    ) => void;
+}
+
+export const onSubmit = (values: RegisterUserRequest, { setErrors }: SetErrorsFormikProps) => {
     const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
         setErrors({
             email: authDenyReason,

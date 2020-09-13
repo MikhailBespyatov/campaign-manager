@@ -1,5 +1,5 @@
+import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
-import { InternalLink } from 'components/common/TextComponents/InternalLink';
 import { Row } from 'components/common/wrappers/FlexWrapper';
 import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
@@ -19,7 +19,7 @@ export const CreateWallet = () => {
     return (
         <AuthLayout>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                {({ handleSubmit, errors, touched }) => (
+                {({ handleSubmit, isValid, dirty }) => (
                     <Form
                         subSubtitle="We have created a WOM Wallet and associated this with <Company Name> account."
                         subtitle="To execute campaigns, you need a positive WOM balance. You can purchase WOM now."
@@ -27,19 +27,11 @@ export const CreateWallet = () => {
                         onSubmit={handleSubmit}
                     >
                         <WomInput />
-                        <Button
-                            background={touched.wom && !Object.values(errors).length ? blue : undefined}
-                            disabled={loading}
-                        >
+                        <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
                             {loading ? <Loader /> : 'PURCHASE NOW'}
                         </Button>
                         <Row marginTop="25px">
-                            <InternalLink
-                                //alignCenter
-                                fontSize="14px"
-                                lineHeight="21px"
-                                to={routes.campaignManager.index}
-                            >
+                            <InternalLink fontSize="14px" lineHeight="21px" to={routes.campaignManager.index}>
                                 Buy WOM later
                             </InternalLink>
                         </Row>

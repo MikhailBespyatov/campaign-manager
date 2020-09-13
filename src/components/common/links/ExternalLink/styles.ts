@@ -1,4 +1,4 @@
-import { SpanProps } from 'components/common/TextComponents/ExternalLink/types';
+import { SpanProps } from 'components/common/links/ExternalLink/types';
 import {
     defaultFontFamily,
     defaultFontSize,

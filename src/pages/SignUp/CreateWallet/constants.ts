@@ -13,14 +13,4 @@ export const validationSchema = Yup.object().shape({
 //     wom: string;
 // }
 
-// interface SetErrorsFormikProps {
-//     setErrors: (
-//         errors: FormikErrors<{
-//             email?: string;
-//             password?: string;
-//         }>
-//     ) => void;
-// }
-
-// export const onSubmit = ({ wom }: ValuesProps, { setErrors }: SetErrorsFormikProps) => {
 export const onSubmit = () => history.push(routes.signUp.payment);

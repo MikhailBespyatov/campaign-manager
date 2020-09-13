@@ -6,7 +6,7 @@ import { Button } from 'components/FormComponents/Button';
 import { Form } from 'components/FormComponents/Form';
 import { TextInput } from 'components/FormComponents/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { formGrey5 } from 'constants/styles';
+import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/constants';
@@ -25,7 +25,7 @@ export const CreateAccount = () => {
     return (
         <AuthLayout>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                {({ handleSubmit }) => (
+                {({ handleSubmit, isValid, dirty }) => (
                     <Form title="Create an account" onSubmit={handleSubmit}>
                         <TextInput label="Company Name" name="companyName" placeholder="Enter your company name" />
                         <TextInput label="Full name" name="username" placeholder="Enter your account name" />
@@ -46,7 +46,13 @@ export const CreateAccount = () => {
                                 to the <HighlightSpan>Terms of Service</HighlightSpan>.
                             </Span>
                         </Row>
-                        <Button disabled={loading}>{loading ? <Loader /> : 'Sign up'}</Button>
+                        <Button
+                            // background={isExactValuesQuantity(touched) && objectIsEmpty(errors) ? blue : undefined}
+                            background={isValid && dirty ? blue : undefined}
+                            disabled={loading}
+                        >
+                            {loading ? <Loader /> : 'SIGN UP'}
+                        </Button>
                         {/* <Span alignCenter color="#9EA1B3" fontSize="18px" fontWeight="500" lineHeight="22px">
                             By tapping "Sign Up & Accept", you acknowledge that you have read the Privacy Policy and
                             agree to the Terms of Service.

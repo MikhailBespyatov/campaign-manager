@@ -45,3 +45,9 @@ export const slashInserter = (str: string) =>
         .replace(removeRightSlashRegExp, '') || '';
 
 export const currencyToText = (currency: number) => '$' + currency + ' USD';
+
+export const objectIsEmpty = (obj: object) => !Object.values(obj).length;
+
+export const allValuesAreTrue = (obj: object) => !Object.values(obj).includes(false);
+
+export const isExactValuesQuantity = (obj: object, quantity: number = 1) => Object.values(obj).length === quantity;

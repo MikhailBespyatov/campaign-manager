@@ -5,8 +5,8 @@ import paypalImg from 'assets/img/paypal.svg';
 import visaImg from 'assets/img/visa.svg';
 import womImg from 'assets/img/wom_logo.svg';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
-import { InternalLink } from 'components/common/TextComponents/InternalLink';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { BooleanCheckbox } from 'components/FormComponents/BooleanCheckbox';
@@ -38,7 +38,7 @@ export const Payment = () => {
     return (
         <AuthLayout>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                {({ handleSubmit, setFieldValue, errors }) => (
+                {({ handleSubmit, setFieldValue, isValid, dirty }) => (
                     <Form
                         src={womImg}
                         subtitle="Select your payment method to purchase the WOM."
@@ -98,7 +98,7 @@ export const Payment = () => {
                                 Save card for payment
                             </Span>
                         </Section>
-                        <Button background={!Object.values(errors).length ? blue : undefined} disabled={loading}>
+                        <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
                             {loading ? <Loader /> : 'PURCHASE NOW'}
                         </Button>
                         <Row marginTop="25px">
