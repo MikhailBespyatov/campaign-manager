@@ -5,10 +5,7 @@ import {
     buttonHorizontalPadding,
     buttonVerticalPadding,
     buttonWidth,
-    hoverButtonColor,
-    spanFontSize,
-    spanLetterSpacing,
-    spanLineHeight
+    hoverButtonColor
 } from 'components/common/buttons/RoundedButton/constants';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import {
@@ -16,7 +13,6 @@ import {
     buttonActiveMixin,
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
-    formTextStyleMixin,
     reverseColor,
     transitionTime,
     white
@@ -31,7 +27,6 @@ export const Button = styled.button<ButtonProps>`
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
     color: ${white};
-    //text-transform: uppercase;
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
     transition: ${transitionTime};
@@ -47,13 +42,12 @@ export const Button = styled.button<ButtonProps>`
     z-index: 2;
 `;
 
-export const Span = styled.span<ButtonProps>`
-    ${formTextStyleMixin};
-    color: ${({ reverse }) => (reverse ? reverseColor : white)};
-    font-size: ${spanFontSize};
-    line-height: ${spanLineHeight};
-    text-align: center;
-    letter-spacing: ${spanLetterSpacing};
-    //text-transform: uppercase;
-    z-index: 1;
-`;
+// export const Span = styled.span<ButtonProps>`
+//     ${formTextStyleMixin};
+//     color: ${({ reverse }) => (reverse ? reverseColor : white)};
+//     font-size: ${spanFontSize};
+//     line-height: ${spanLineHeight};
+//     text-align: center;
+//     letter-spacing: ${spanLetterSpacing};
+//     z-index: 1;
+// `;

@@ -32,7 +32,7 @@ export const Adidas = () => {
                                 type="password"
                             />
                             <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
-                                <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.requestCode}>
+                                <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.passwordReset}>
                                     Forgot password?
                                 </InternalLink>
                             </MarginWrapper>
