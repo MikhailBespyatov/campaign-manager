@@ -22,6 +22,7 @@ export const yupPassword = Yup.string()
     .matches(oneCapitalCharRequiredRegExp, oneCapitalCharRequiredMessage)
     .matches(atLeastOneNumberRequiredRegExp, atLeastOneNumberRequiredMessage);
 export const yupPasswordNoHint = defaultYupField;
+export const yupSecurityCode = defaultYupField;
 
 export const yupWom = defaultYupField;
 export const yupCardName = defaultYupField;

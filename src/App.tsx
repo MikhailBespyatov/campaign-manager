@@ -13,7 +13,7 @@ import { SignIn } from 'pages/SignIn';
 import { Adidas as SignInAdidas } from 'pages/SignIn/Adidas';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { Password as NewPasswordReset } from 'pages/SignIn/PasswordReset/Password';
-import { RequestCode } from 'pages/SignIn/RequestCode';
+import { RequestCode } from 'pages/SignIn/PasswordReset/RequestCode';
 import { CreateAccount } from 'pages/SignUp';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';

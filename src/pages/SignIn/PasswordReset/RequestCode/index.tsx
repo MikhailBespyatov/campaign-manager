@@ -1,5 +1,6 @@
 import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { Loader } from 'components/common/Loader';
+import { Span } from 'components/common/TextComponents/Span';
 import { Column } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { Button } from 'components/FormComponents/Button';
@@ -13,7 +14,7 @@ import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/Password
 import React from 'react';
 import { loadingStores } from 'stores/loading';
 
-export const Password = () => {
+export const RequestCode = () => {
     const loading = useStore(loadingStores.loading);
 
     return (
@@ -21,7 +22,20 @@ export const Password = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
-                        <Form subtitle="Password Reset" onSubmit={handleSubmit}>
+                        <Form
+                            subtitle="Enter the security code we sent you and your new password"
+                            onSubmit={handleSubmit}
+                        >
+                            <TextInput
+                                label="Security Code"
+                                name="securityCode"
+                                placeholder="Type your security code"
+                            />
+                            <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
+                                <Span fontSize="16px" lineHeight="20px">
+                                    Send a new code ?
+                                </Span>
+                            </MarginWrapper>
                             <TextInput
                                 label="New Password"
                                 name="password"
