@@ -25,6 +25,12 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
   }
 
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
   button, input, select, textarea {
     outline: none;
   }

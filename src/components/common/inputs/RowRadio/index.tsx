@@ -5,17 +5,13 @@ import { Row } from 'components/common/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { white } from 'constants/styles';
 import React, { useState } from 'react';
-import { Active, RadioProperties } from 'types';
+import { Active, ItemRadioProperties, RadioProperties } from 'types';
 
 interface WrapperProps extends RadioProperties {}
 
-interface Props extends Active {
-    value: string;
-    data: string;
-    onClick: (value: string) => void;
-}
+interface Props extends Active, ItemRadioProperties {}
 
-const Item = ({ active, value, data, onClick }: Props) => (
+const Item = ({ active, value, data = value, onClick }: Props) => (
     <StyledItem active={active} onClick={() => onClick(value)}>
         <Span color={active ? white : itemActiveColor} fontSize={spanFontSize} lineHeight={spanLineHeight}>
             {data}

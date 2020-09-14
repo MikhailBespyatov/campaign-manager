@@ -186,6 +186,13 @@ export interface BorderRadiusProperties {
     borderBottomRightRadius?: string;
 }
 
+export interface BorderProperties {
+    border?: string;
+    borderWidth?: string;
+    borderStyle?: string;
+    borderColor?: string;
+}
+
 export interface HTMLButtonType {
     type?: 'submit' | 'button' | 'reset' | undefined;
 }
@@ -203,6 +210,12 @@ export interface RadioProperties {
     values: string[];
     data?: string[];
     onChange?: (active: string) => void;
+}
+
+export interface ItemRadioProperties {
+    value: string;
+    data?: string;
+    onClick: (value: string) => void;
 }
 
 export interface ForcedColor {
@@ -223,4 +236,12 @@ export interface TextDecoration {
 
 export interface DefaultChecked {
     defaultChecked?: boolean;
+}
+
+export interface IsClosed {
+    isClosed?: boolean;
+}
+
+export interface ZIndex {
+    zIndex?: string;
 }

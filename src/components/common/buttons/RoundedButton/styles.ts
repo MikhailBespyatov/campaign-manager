@@ -21,8 +21,8 @@ import styled from 'styled-components';
 
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
-    min-width: ${buttonWidth};
-    height: ${buttonHeight};
+    min-width: ${({ minWidth }) => (minWidth ? minWidth : buttonWidth)};
+    height: ${({ height }) => (height ? height : buttonHeight)};
     background-color: ${({ reverse }) => (reverse ? white : black)};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};

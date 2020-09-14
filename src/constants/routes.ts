@@ -6,8 +6,10 @@ const passwordResetPrefix = '/password_reset';
 
 const forgotPasswordPrefix = signInPrefix;
 
-const adminPrefix = '/admin';
 const campaignPrefix = '/campaign_manager';
+const userAdminPrefix = '/user_admin';
+
+const adminPrefix = '/admin';
 
 export const routes = {
     test: '/components_test_page',
@@ -27,6 +29,9 @@ export const routes = {
         requestCode: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/security_code`
     },
     acceptInvite: '/accept_invite/:inviteCode',
+    userAdmin: {
+        index: userAdminPrefix
+    },
     admin: {
         index: adminPrefix,
         organization: `${adminPrefix}/organization`,

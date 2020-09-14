@@ -18,6 +18,7 @@ import { CreateAccount } from 'pages/SignUp';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
 import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
+import { UserAdmin } from 'pages/UserAdmin';
 import React from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { PrivateRoute } from 'routes/PrivateRoute';
@@ -40,6 +41,8 @@ const App = () => (
                 <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
                 <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
                 <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
+
+                <PrivateRoute exact component={UserAdmin} path={routes.userAdmin.index} />
 
                 <PrivateRoute exact component={CampaignManager} path={routes.campaignManager.index} />
                 <PrivateRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
