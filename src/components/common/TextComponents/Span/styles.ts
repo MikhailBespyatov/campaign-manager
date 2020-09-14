@@ -1,5 +1,4 @@
 import { SpanProps } from 'components/common/TextComponents/Span/types';
-import styled from 'styled-components';
 import {
     defaultFontFamily,
     defaultFontSize,
@@ -7,7 +6,8 @@ import {
     defaultFontWeight,
     defaultLineHeight,
     defaultTextColor
-} from '../../../../constants';
+} from 'constants/defaults';
+import styled from 'styled-components';
 
 export const Span = styled.span<SpanProps>`
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : defaultFontFamily)};
@@ -15,8 +15,11 @@ export const Span = styled.span<SpanProps>`
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : defaultFontWeight)};
     font-size: ${({ fontSize }) => (fontSize ? fontSize : defaultFontSize)};
     line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : defaultLineHeight)};
+    ${({ letterSpacing }) => (letterSpacing ? `letter-spacing: ${letterSpacing};` : ``)};
     color: ${({ color }) => (color ? color : defaultTextColor)};
     ${({ noWrap }) => (noWrap ? 'white-space: nowrap' : '')};
     ${({ opacity }) => (opacity ? `opacity: ${opacity};` : ``)};
-    ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')}
+    ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
+    ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
+    ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : ``)};
 `;

@@ -1,5 +1,5 @@
+import { backgroundColor, flexCenter, footerHeight } from 'constants/styles';
 import styled from 'styled-components';
-import { backgroundColor, flexCenter, footerHeight } from '../../../constants';
 
 export const StyledFooter = styled.footer`
     ${flexCenter};

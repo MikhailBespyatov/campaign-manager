@@ -5,8 +5,8 @@ import {
     wrapperHeight,
     wrapperWidth
 } from 'components/common/tags/DropDownMenuTag/constants';
+import { black, flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { black, flexCenter } from '../../../../constants';
 
 export const Wrapper = styled.div`
     position: relative;

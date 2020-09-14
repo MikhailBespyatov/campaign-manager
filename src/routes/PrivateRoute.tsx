@@ -1,8 +1,8 @@
+import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
 import { userStores } from 'stores/user';
-import { routes } from '../constants';
 
 export const PrivateRoute: FC<RouteProps> = props => {
     const { access } = useStore(userStores.auth);

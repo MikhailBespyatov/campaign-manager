@@ -1,4 +1,4 @@
-import { white } from '../../../../constants';
+import { white } from 'constants/styles';
 
 export const wrapperBorderRadius = '0';
 export const wrapperBoxShadow = '0px 1px 2px rgba(0, 0, 0, 0.0001)';

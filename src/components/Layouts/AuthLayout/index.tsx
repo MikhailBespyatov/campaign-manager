@@ -1,16 +1,10 @@
-import backgroundImage from 'assets/img/organization-background.jpg';
-import { AbsoluteImg } from 'components/common/ImageComponents/AbsoluteImg';
 import { authLayoutBackgroundColor } from 'components/Layouts/AuthLayout/constants';
 import { Main } from 'components/Layouts/AuthLayout/styles';
 import React, { FC } from 'react';
-import { WithSrc } from 'types';
-import { defaultImgAlt } from '../../../constants';
+import { Background } from 'types';
 
-interface Props extends WithSrc {}
+interface Props extends Background {}
 
-export const AuthLayout: FC<Props> = ({ children, src = backgroundImage }) => (
-    <Main>
-        <AbsoluteImg alt={defaultImgAlt} background={authLayoutBackgroundColor} src={src} />
-        {children}
-    </Main>
+export const AuthLayout: FC<Props> = ({ children, background = authLayoutBackgroundColor }) => (
+    <Main background={background}>{children}</Main>
 );

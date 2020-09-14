@@ -1,6 +1,6 @@
 import { Ball, Wrapper } from 'components/common/inputs/Switch/styles';
+import { noop } from 'constants/global';
 import React, { FC, useEffect, useState } from 'react';
-import { noop } from '../../../../constants';
 
 interface Props {
     onChange?: (active: boolean) => void;

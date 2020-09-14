@@ -14,7 +14,7 @@ import { Title } from 'types';
 
 interface Props extends Title {}
 
-export const TagFilter = ({ title = 'Filter' }) => (
+export const TagFilter = ({ title = 'Filter' }: Props) => (
     <>
         <Column marginRight={filterMarginRight}>
             <Span noWrap color={spanColor} fontSize={spanFontSize} lineHeight={spanLineHeight}>

@@ -11,9 +11,9 @@ import {
     wrapperHorizontalPadding,
     wrapperWidth
 } from 'components/common/inputs/LanguageSwitch/constants';
+import { flexCenter, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Active } from 'types';
-import { flexCenter, transitionTime } from '../../../../constants';
 
 export const Wrapper = styled.div<Active>`
     ${flexCenter};

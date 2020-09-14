@@ -3,9 +3,9 @@ import { inactiveColor } from 'components/common/inputs/RowHeaderRadio/constants
 import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { noop } from 'constants/global';
 import React, { useState } from 'react';
 import { RadioProperties, RowHeaderRadioType } from 'types';
-import { noop } from '../../../../constants';
 
 interface Props extends Omit<RadioProperties, 'values'> {
     values: RowHeaderRadioType[];

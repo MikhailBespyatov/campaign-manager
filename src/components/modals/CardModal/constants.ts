@@ -1,4 +1,4 @@
-import { white } from '../../../constants';
+import { white } from 'constants/styles';
 
 export const wrapperBackground = 'rgba(0, 0, 0, 0.612407)';
 export const wrapperVerticalPadding = '90px';

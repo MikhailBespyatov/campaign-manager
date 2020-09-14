@@ -1,6 +1,6 @@
 import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+import { baseURL } from 'constants/global';
 import { userStores } from 'stores/user';
-import { baseURL } from '../constants';
 
 const yeayAxiosInstance = axios.create();
 

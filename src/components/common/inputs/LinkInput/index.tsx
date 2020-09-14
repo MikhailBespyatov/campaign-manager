@@ -21,9 +21,10 @@ import { InputWrapper, Wrapper } from 'components/common/inputs/LinkInput/styles
 import { Span } from 'components/common/TextComponents/Span';
 import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
 import { Row } from 'components/common/wrappers/FlexWrapper';
+import { noop } from 'constants/global';
+import { errorColor, successColor, white } from 'constants/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TextInput } from 'types';
-import { defaultAlt, errorColor, noop, successColor, white } from '../../../../constants';
 
 interface Props extends TextInput {}
 
@@ -76,12 +77,7 @@ export const LinkInput = ({
                 />
                 {!disabled && (
                     <AbsoluteWrapper right={absoluteIconRight} top={absoluteIconTop}>
-                        <CustomImg
-                            alt={defaultAlt}
-                            height={iconDiameter}
-                            src={error ? errorImg : successImg}
-                            width={iconDiameter}
-                        />
+                        <CustomImg height={iconDiameter} src={error ? errorImg : successImg} width={iconDiameter} />
                     </AbsoluteWrapper>
                 )}
             </InputWrapper>

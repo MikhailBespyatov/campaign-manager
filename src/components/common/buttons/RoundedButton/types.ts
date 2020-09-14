@@ -1,3 +1,3 @@
-import { MarginBottom, Reverse } from 'types';
+import { MarginBottom, MinSizes, Reverse, Sizes } from 'types';
 
-export interface ButtonProps extends Reverse, MarginBottom {}
+export interface ButtonProps extends Reverse, MarginBottom, Sizes, MinSizes {}

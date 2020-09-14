@@ -1,4 +1,4 @@
-import { black } from '../../../../constants';
+import { black } from 'constants/styles';
 
 export const imgWidth = '65px';
 export const imgHeight = '75px';

@@ -1,7 +1,7 @@
 import { Img, ImgWrapper } from 'components/common/ImageComponents/CustomImg/styles';
+import { defaultImgAlt } from 'constants/defaults';
 import React from 'react';
 import { BorderRadiusProperties, imgProperties, NoopClick, Pointer, Rotation, Sizes } from 'types';
-import { defaultImgAlt } from '../../../../constants';
 
 interface Props extends Rotation, Pointer, Sizes, NoopClick, imgProperties, BorderRadiusProperties {}
 

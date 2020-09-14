@@ -9,8 +9,8 @@ import {
     itemVerticalPadding
 } from 'components/common/inputs/RowRadio/constants';
 import { ItemProps } from 'components/common/inputs/RowRadio/types';
+import { flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { flexCenter } from '../../../../constants';
 
 export const StyledItem = styled.div<ItemProps>`
     ${flexCenter};

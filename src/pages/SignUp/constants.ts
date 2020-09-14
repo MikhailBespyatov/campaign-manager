@@ -1,19 +1,28 @@
+import { yupCompanyName, yupEmail, yupPassword, yupUsername } from 'constants/yupFields';
+import { FormikErrors } from 'formik';
 import { userEffects, userEvents, userStores } from 'stores/user';
 import { RegisterUserRequest } from 'types';
 import * as Yup from 'yup';
-import { invalidEmailMessage, requiredFieldMessage } from '../../../constants';
 
 export const initialValues = { email: '', password: '', companyName: '', username: '' };
 
 export const validationSchema = Yup.object().shape({
-    companyName: Yup.string().required(requiredFieldMessage),
-    username: Yup.string().required(requiredFieldMessage),
-    email: Yup.string().email(invalidEmailMessage).required(requiredFieldMessage),
-    password: Yup.string().required(requiredFieldMessage)
+    companyName: yupCompanyName,
+    username: yupUsername,
+    email: yupEmail,
+    password: yupPassword
 });
 
-//TODO: [any]
-export const onSubmit = (values: RegisterUserRequest, { setErrors }: any) => {
+interface SetErrorsFormikProps {
+    setErrors: (
+        errors: FormikErrors<{
+            email?: string;
+            password?: string;
+        }>
+    ) => void;
+}
+
+export const onSubmit = (values: RegisterUserRequest, { setErrors }: SetErrorsFormikProps) => {
     const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
         setErrors({
             email: authDenyReason,

@@ -1,5 +1,4 @@
 import { InputProps } from 'components/common/inputs/Input/types';
-import styled from 'styled-components';
 import {
     defaultFontFamily,
     defaultFontSize,
@@ -7,7 +6,8 @@ import {
     defaultFontWeight,
     defaultLineHeight,
     defaultTextColor
-} from '../../../../constants';
+} from 'constants/defaults';
+import styled from 'styled-components';
 
 export const NumberInput = styled.input.attrs({ type: 'number' })<InputProps>`
     outline: none;

@@ -5,9 +5,9 @@ import { arrowImgHeight, arrowImgWidth } from 'components/common/features/Percen
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { TableSubSpan } from 'components/common/TextComponents/TableSubSpan';
 import { Row } from 'components/common/wrappers/FlexWrapper';
+import { errorColor, successColor } from 'constants/styles';
 import React, { FC } from 'react';
 import { ForcedColor, infoType } from 'types';
-import { errorColor, successColor } from '../../../../constants';
 
 interface Props extends ForcedColor {
     type?: infoType;

@@ -1,12 +1,11 @@
-import { AuthUserResponse } from 'types';
 import {
-    accessRoles,
-    accessValues,
     commaInserterRegExp,
     removeRightSlashRegExp,
     slashInserterRegExp,
     spaceInserterRegExp
-} from '../constants';
+} from 'constants/regExp';
+import { accessRoles, accessValues } from 'constants/roles';
+import { AuthUserResponse } from 'types';
 
 // give access a user as natural (-1 - no any access) number (the less number, the more rights user has)
 export const giveAccess: (user: AuthUserResponse) => number = user => {
@@ -44,3 +43,11 @@ export const slashInserter = (str: string) =>
         .reverse()
         .join('')
         .replace(removeRightSlashRegExp, '') || '';
+
+export const currencyToText = (currency: number) => '$' + currency + ' USD';
+
+export const objectIsEmpty = (obj: object) => !Object.values(obj).length;
+
+export const allValuesAreTrue = (obj: object) => !Object.values(obj).includes(false);
+
+export const isExactValuesQuantity = (obj: object, quantity: number = 1) => Object.values(obj).length === quantity;

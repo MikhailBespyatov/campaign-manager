@@ -1,6 +1,18 @@
 import { ChangeEvent } from 'react';
 import { noop } from './types';
 
+export interface Subtitle {
+    subtitle?: string;
+}
+
+export interface StrictTitle extends Subtitle {
+    title: string;
+}
+
+export interface Title extends Subtitle {
+    title?: string;
+}
+
 export interface Auth {
     access: number;
     authDenyReason?: string;
@@ -53,7 +65,9 @@ export interface TextProperties extends NoWrap {
     fontSize?: string;
     fontWeight?: string;
     lineHeight?: string;
+    letterSpacing?: string;
     alignCenter?: boolean;
+    alignEnd?: boolean;
 }
 
 export interface Color {
@@ -104,11 +118,6 @@ export interface Placeholder {
     placeholder?: string;
 }
 
-export interface Title {
-    title?: string;
-    subtitle?: string;
-}
-
 export interface WithHashtag {
     hashtag?: boolean;
 }
@@ -150,7 +159,7 @@ export interface Type {
 }
 
 export interface Label {
-    label: string;
+    label?: string;
 }
 
 export interface TextFormInput extends Disabled, Type, Label {
@@ -177,6 +186,13 @@ export interface BorderRadiusProperties {
     borderBottomRightRadius?: string;
 }
 
+export interface BorderProperties {
+    border?: string;
+    borderWidth?: string;
+    borderStyle?: string;
+    borderColor?: string;
+}
+
 export interface HTMLButtonType {
     type?: 'submit' | 'button' | 'reset' | undefined;
 }
@@ -196,10 +212,36 @@ export interface RadioProperties {
     onChange?: (active: string) => void;
 }
 
+export interface ItemRadioProperties {
+    value: string;
+    data?: string;
+    onClick: (value: string) => void;
+}
+
 export interface ForcedColor {
     forcedColor?: string;
 }
 
 export interface Quantity {
     quantity: number;
+}
+
+export interface UntouchedWarning {
+    untouchedWarning?: string;
+}
+
+export interface TextDecoration {
+    textDecoration?: string;
+}
+
+export interface DefaultChecked {
+    defaultChecked?: boolean;
+}
+
+export interface IsClosed {
+    isClosed?: boolean;
+}
+
+export interface ZIndex {
+    zIndex?: string;
 }

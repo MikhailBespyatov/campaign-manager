@@ -12,8 +12,8 @@ import {
     styledSpanLineHeight3,
     styledSpanMarginLeft
 } from 'components/grid/Header/constants';
+import { flexCenter, formTextStyleMixin, headerHeight } from 'constants/styles';
 import styled from 'styled-components';
-import { flexCenter, formTextStyleMixin, headerHeight } from '../../../constants';
 
 export const StyledHeader = styled.header`
     ${flexCenter};

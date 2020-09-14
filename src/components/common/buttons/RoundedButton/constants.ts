@@ -1,5 +1,5 @@
-export const buttonWidth = '160px';
-export const buttonHeight = '32px';
+export const buttonWidth = '156px';
+export const buttonHeight = '45px';
 export const buttonBorderWidth = '2px';
 export const buttonBorderRadius = '20px';
 export const buttonMarginBottom = '16px';

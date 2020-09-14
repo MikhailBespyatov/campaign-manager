@@ -1,20 +1,37 @@
-const forgotPasswordPrefix = '/sign_in';
-const adminPrefix = '/admin';
+const signUpPrefix = '/register';
+const walletPrefix = '/create_wallet';
+const signInPrefix = '/login';
+const adidasPrefix = '/adidas';
+const passwordResetPrefix = '/password_reset';
+
+const forgotPasswordPrefix = signInPrefix;
+
 const campaignPrefix = '/campaign_manager';
+const userAdminPrefix = '/user_admin';
+
+const adminPrefix = '/admin';
 
 export const routes = {
     test: '/components_test_page',
     home: `${campaignPrefix}/dashboard`,
     signUp: {
-        createAccount: '/create_account',
-        createWallet: '/create_wallet'
+        index: signUpPrefix,
+        createAccount: signUpPrefix,
+        createWallet: `${signUpPrefix}${walletPrefix}`,
+        payment: `${signUpPrefix}${walletPrefix}/payment`,
+        success: `${signUpPrefix}${walletPrefix}/success`
     },
     signIn: {
-        index: '/sign_in',
-        requestCode: `${forgotPasswordPrefix}/request_code`,
-        passwordReset: `${forgotPasswordPrefix}/password_reset`
+        index: signInPrefix,
+        adidas: `${signInPrefix}${adidasPrefix}`,
+        passwordReset: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}`,
+        password: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/password`,
+        requestCode: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/security_code`
     },
     acceptInvite: '/accept_invite/:inviteCode',
+    userAdmin: {
+        index: userAdminPrefix
+    },
     admin: {
         index: adminPrefix,
         organization: `${adminPrefix}/organization`,

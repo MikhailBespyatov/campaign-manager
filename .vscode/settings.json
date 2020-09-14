@@ -26,6 +26,8 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
-    "Echarts"
+    "Echarts",
+    "mastercard",
+    "paypal"
   ]
 }

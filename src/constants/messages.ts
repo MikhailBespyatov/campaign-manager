@@ -3,7 +3,10 @@ export const requiredFieldMessage = 'This field is required';
 export const invalidEmailMessage = 'This email format is invalid';
 export const exactLimitMessage = (limit: number) => 'This field has exactly ' + limit + ' symbols';
 
-export const passwordLengthMessage = 'The password must be at least 8 characters long';
+export const passwordLengthMessage = (min: number) => 'The password must be at least ' + min + ' characters long';
+export const oneCapitalCharRequiredMessage = 'At least one uppercase char required';
+export const atLeastOneNumberRequiredMessage = 'At least on number char required';
+
 export const passwordPatternMessage = 'The password must contain a digit and an uppercase character';
 export const repeatPasswordMessage = 'Please, repeat your password';
 export const matchPasswordsMessage = 'Passwords are not identical';

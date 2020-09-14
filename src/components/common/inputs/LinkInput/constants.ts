@@ -1,4 +1,4 @@
-import { defaultFontSize } from '../../../../constants';
+import { defaultFontSize } from 'constants/defaults';
 
 export const inputBackground = 'white';
 export const labelColor = '#9EA1B3';

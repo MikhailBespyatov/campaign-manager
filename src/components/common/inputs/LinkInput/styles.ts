@@ -16,9 +16,9 @@ import {
     labelMarginBottom
 } from 'components/common/inputs/LinkInput/constants';
 import { InputWrapperProps } from 'components/common/inputs/LinkInput/types';
+import { black, borderWidth, errorColor, formTextStyleMixin, successColor } from 'constants/styles';
 import styled from 'styled-components';
 import { WithError } from 'types';
-import { black, borderWidth, errorColor, formTextStyleMixin, successColor } from '../../../../constants';
 
 export const Wrapper = styled.div`
     width: 100%;

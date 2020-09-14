@@ -1,7 +1,7 @@
+import { formPrimaryColor, formTextStyleMixin } from 'constants/styles';
 import { linkMarginBottom, linkMarginTop } from 'pages/SignIn/constants';
 import { Link as ReactLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { formPrimaryColor, formTextStyleMixin } from '../../constants';
 
 export const Link = styled(ReactLink)`
     ${formTextStyleMixin};

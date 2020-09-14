@@ -1,21 +1,21 @@
 import App from 'App';
-import { ReactComponent as Sprite } from 'assets/sprite.svg';
-import { ConnectedRouter } from 'connected-react-router';
 import config from 'constants/config';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, ReactReduxContext } from 'react-redux';
 import * as serviceWorker from 'serviceWorker/serviceWorker';
-import store, { history } from 'store/store';
+import store from 'store/store';
 import 'styles/index.scss';
 
 ReactDOM.render(
     <Provider store={store} context={ReactReduxContext}>
-        <ConnectedRouter history={history} context={ReactReduxContext}>
-            <Sprite />
+        {/* <ConnectedRouter history={history} context={ReactReduxContext}>
 
-            <App />
-        </ConnectedRouter>
+            <Sprite /> */}
+
+        <App />
+
+        {/* </ConnectedRouter> */}
     </Provider>,
 
     document.getElementById('root')

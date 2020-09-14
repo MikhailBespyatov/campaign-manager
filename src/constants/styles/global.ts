@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { defaultFontFamily } from '../defaults';
-import { backgroundColor, scrollBarWidth } from './';
+import { backgroundColor } from './colors';
+import { scrollBarWidth } from './sizes';
 
 export const GlobalStyle = createGlobalStyle`
   body, html {
@@ -22,6 +23,12 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   button, input, select, textarea {

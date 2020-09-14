@@ -1,6 +1,6 @@
 import { pMargin } from 'components/common/TextComponents/P/constants';
+import { grey1 } from 'constants/styles';
 import styled from 'styled-components';
-import { grey1 } from '../../../../constants';
 
 export const P = styled.p`
     font-weight: 500;

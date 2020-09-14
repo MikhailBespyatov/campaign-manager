@@ -1,13 +1,14 @@
-import organizationLogo from 'assets/img/organization_logo.svg';
+import defaultLogo from 'assets/img/form_logo_1.svg';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
 import { logoDiameter } from 'components/FormComponents/Form/constants';
 import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
+import { noop } from 'constants/global';
 import React, { FC } from 'react';
 import { Title, WithSrc } from 'types';
-import { defaultImgAlt, noop } from '../../../constants';
 
 interface Props extends Title, WithSrc {
     onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+    subSubtitle?: string;
 }
 
 export const Form: FC<Props> = ({
@@ -15,12 +16,14 @@ export const Form: FC<Props> = ({
     title = 'Hello @adidas',
     subtitle = 'to discover & manage WOM Content',
     onSubmit = noop,
-    src = organizationLogo
+    src = defaultLogo,
+    subSubtitle
 }) => (
     <Wrapper>
-        <CustomImg alt={defaultImgAlt} borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />
+        <CustomImg borderRadius="14px" height={logoDiameter} src={src} width={logoDiameter} />
         <H1Form>{title}</H1Form>
         <PForm>{subtitle}</PForm>
+        {subSubtitle && <PForm>{subSubtitle}</PForm>}
         <FormWrapper onSubmit={onSubmit}>{children}</FormWrapper>
     </Wrapper>
 );

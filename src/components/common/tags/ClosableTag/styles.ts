@@ -6,8 +6,8 @@ import {
     wrapperWidth
 } from 'components/common/tags/ClosableTag/constants';
 import { WrapperProps } from 'components/common/tags/ClosableTag/types';
+import { black, flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { black, flexCenter } from '../../../../constants';
 
 export const Wrapper = styled.div<WrapperProps>`
     ${flexCenter};

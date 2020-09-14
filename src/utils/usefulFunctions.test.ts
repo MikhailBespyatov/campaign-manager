@@ -1,4 +1,12 @@
-import { commaInserter, slashInserter, spaceInserter } from 'utils/usefulFunctions';
+import {
+    allValuesAreTrue,
+    commaInserter,
+    currencyToText,
+    isExactValuesQuantity,
+    objectIsEmpty,
+    slashInserter,
+    spaceInserter
+} from 'utils/usefulFunctions';
 
 describe('commaInserter', () => {
     it('Test for inserting a comma', () => {
@@ -30,5 +38,43 @@ describe('slashInserter', () => {
         expect(slashInserter('12')).toBe('12');
         expect(slashInserter('123')).toBe('12/3');
         expect(slashInserter('1234')).toBe('12/34');
+    });
+});
+
+describe('currencyToText', () => {
+    it('Test for converting to text', () => {
+        expect(currencyToText(0)).toBe('$0 USD');
+        expect(currencyToText(1)).toBe('$1 USD');
+        expect(currencyToText(1313.321)).toBe('$1313.321 USD');
+    });
+});
+
+describe('objectIsEmpty', () => {
+    it('Test for object Is Empty', () => {
+        expect(objectIsEmpty({})).toBe(true);
+        expect(objectIsEmpty({ bestLanguage: 'JS' })).toBe(false);
+        expect(objectIsEmpty({ bestFramework: 'REACT', bestFutureFramework: 'SVELTE' })).toBe(false);
+    });
+});
+
+describe('allValuesAreTrue', () => {
+    it('Test for all Values Are True', () => {
+        expect(allValuesAreTrue({})).toBe(true);
+        expect(allValuesAreTrue({ bestLanguage: 'JS' })).toBe(true);
+        expect(allValuesAreTrue({ bestFramework: 'REACT', bestFutureFramework: false })).toBe(false);
+        expect(allValuesAreTrue({ bestFramework: true, bestFutureFramework: false })).toBe(false);
+        expect(allValuesAreTrue({ bestLanguage: false })).toBe(false);
+        expect(allValuesAreTrue({ bestFramework: true, bestFutureFramework: true })).toBe(true);
+    });
+});
+
+describe('isExactValuesQuantity', () => {
+    it('Test for is Exact Values Quantity', () => {
+        expect(isExactValuesQuantity({})).toBe(false);
+        expect(isExactValuesQuantity({}, 3)).toBe(false);
+        expect(isExactValuesQuantity({}, 0)).toBe(true);
+        expect(isExactValuesQuantity({ bestLanguage: 'JS' })).toBe(true);
+        expect(isExactValuesQuantity({ bestLanguage: 'JS' }, 2)).toBe(false);
+        expect(isExactValuesQuantity({ bestFramework: 'REACT', bestFutureFramework: 'SVELTE' }, 2)).toBe(true);
     });
 });

@@ -1,3 +1,4 @@
+import { polylinePoints, viewBoxSizes } from 'components/common/inputs/Checkbox/constants';
 import {
     Checkbox as HiddenCheckbox,
     Icon,
@@ -6,28 +7,45 @@ import {
     StyledCheckbox,
     Wrapper
 } from 'components/common/inputs/Checkbox/styles';
-import React from 'react';
+import { noop } from 'constants/global';
+import React, { useEffect, useState } from 'react';
+import { DefaultChecked, Disabled } from 'types';
 
-interface Props {
-    checked: boolean;
-    disabled?: boolean;
-    onChange?: () => void;
-    value?: string;
+interface Props extends DefaultChecked, Disabled {
+    onChange?: (value: string, checked: boolean) => void;
+    value: string;
     name?: string;
 }
 
-export const Checkbox = ({ checked, disabled = false, onChange, value = 'some value', name = 'name' }: Props) => (
-    <Wrapper>
-        <Label>
-            <StyledCheckbox checked={checked} disabled={disabled}>
-                <Icon viewBox="0 0 24 24">
-                    <polyline points="20 6 9 17 4 12" />
-                </Icon>
-            </StyledCheckbox>
-            <HiddenCheckbox checked={checked} disabled={disabled} name={name} onChange={onChange} />
-            <Span checked={checked} disabled={disabled}>
-                {value}
-            </Span>
-        </Label>
-    </Wrapper>
-);
+export const Checkbox = ({
+    defaultChecked = false,
+    disabled = false,
+    onChange = noop,
+    name = 'name',
+    value
+}: Props) => {
+    const [checked, setChecked] = useState(defaultChecked);
+
+    const onCheckboxChange = () => setChecked(!checked);
+
+    useEffect(() => {
+        onChange(value, checked);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [checked]);
+
+    return (
+        <Wrapper>
+            <Label>
+                <StyledCheckbox checked={checked} disabled={disabled}>
+                    <Icon viewBox={viewBoxSizes}>
+                        <polyline points={polylinePoints} />
+                    </Icon>
+                </StyledCheckbox>
+                <HiddenCheckbox checked={checked} disabled={disabled} name={name} onChange={onCheckboxChange} />
+                <Span checked={checked} disabled={disabled}>
+                    {value}
+                </Span>
+            </Label>
+        </Wrapper>
+    );
+};

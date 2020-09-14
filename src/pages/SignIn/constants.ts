@@ -1,26 +1,23 @@
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { AuthUserRequest } from 'types';
+import history from 'BrowserHistory';
+import { routes } from 'constants/routes';
+import { yupCompanyName } from 'constants/yupFields';
 import * as Yup from 'yup';
-import { invalidEmailMessage, requiredFieldMessage } from '../../constants';
 
 export const linkMarginTop = '0';
 export const linkMarginBottom = '57px';
 
-export const initialValues = { email: '', password: '' };
+export const initialValues = { companyName: '' };
 
 export const validationSchema = Yup.object().shape({
-    email: Yup.string().email(invalidEmailMessage).required(requiredFieldMessage),
-    password: Yup.string().required(requiredFieldMessage)
+    companyName: yupCompanyName
 });
 
-// TODO: [any]
-export const onSubmit = (values: AuthUserRequest, { setErrors }: any) => {
-    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-        setErrors({
-            email: authDenyReason,
-            password: authDenyReason
-        });
-        unwatch();
-    });
-    userEffects.loadToken(values);
-};
+// interface SetErrorsFormikProps {
+//     setErrors: (
+//         errors: FormikErrors<{
+//             companyName?: string;
+//         }>
+//     ) => void;
+// }
+
+export const onSubmit = () => history.push(routes.signIn.adidas);

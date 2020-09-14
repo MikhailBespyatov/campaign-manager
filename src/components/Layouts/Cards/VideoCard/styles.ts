@@ -7,8 +7,8 @@ import {
     ratingSpanFontWeight,
     ratingSpanLineHeight
 } from 'components/Layouts/Cards/VideoCard/constants';
+import { formTextStyleMixin } from 'constants/styles';
 import styled from 'styled-components';
-import { formTextStyleMixin } from '../../../../constants';
 
 export const RatingSpan = styled.span`
     ${formTextStyleMixin};
