@@ -1,6 +1,5 @@
 import productImg from 'assets/img/product_img.svg';
 import removeButtonImg from 'assets/img/remove_button_img.svg';
-import history from 'BrowserHistory';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
@@ -9,24 +8,21 @@ import {
     tableBorderSpacing,
     tableProductImgDiameter,
     testArray
-} from 'components/common/tables/CampaignTable/constants';
+} from 'components/common/tables/CampaignTableElement/constants';
 import {
     LegendaryTableColumn,
     LegendaryTableRow,
     TableColumn,
     TableRow
-} from 'components/common/tables/CampaignTable/styles';
+} from 'components/common/tables/CampaignTableElement/styles';
 import { Table } from 'components/common/tables/Table';
 import { TableSpan } from 'components/common/TextComponents/TableSpan';
 import { TableSubSpan } from 'components/common/TextComponents/TableSubSpan';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { routes } from 'constants/routes';
 import { padding } from 'constants/styles';
 import React from 'react';
 
-const toDetails = () => history.push(routes.campaignManager.campaign.details);
-
-export const CampaignTable = () => (
+export const CampaignTableElement = () => (
     <Table borderSpacing={tableBorderSpacing}>
         <LegendaryTableRow>
             <LegendaryTableColumn>
@@ -170,9 +166,9 @@ export const CampaignTable = () => (
                                 Remove
                             </RoundedButton>
                         </Row>
-                        <Row>
-                            <RoundedButton onClick={toDetails}>Details</RoundedButton>
-                        </Row>
+                        {/* <Row>
+                            <RoundedButton>Details</RoundedButton>
+                        </Row> */}
                     </Column>
                 </TableColumn>
             </TableRow>

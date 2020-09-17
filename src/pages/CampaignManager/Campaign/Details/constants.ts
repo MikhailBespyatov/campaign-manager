@@ -1,4 +1,5 @@
-import { RowHeaderRadioType } from 'types';
+export const hideButtonImgDiameter = '15px';
+export const hideButtonImgHeight = '2px';
 
 export const seriesTestData = [
     [0, 0],
@@ -170,43 +171,3 @@ export const graphicOption = {
         }
     ]
 };
-
-// option.visualMap.target.inRange.color = ['red', 'blue'];
-
-export const testHeaderRadioArray: RowHeaderRadioType[] = [
-    {
-        title: 'Preview',
-        quantity: '1m 23',
-        inBrackets: '',
-        growType: 'error',
-        growNumber: 5.2
-    },
-    {
-        title: 'View',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Engage',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Click',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Buy',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    }
-];

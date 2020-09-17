@@ -42,6 +42,7 @@ export const Section = styled.section<RowProps>`
     flex-direction: row;
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
     ${({ height }) => (height ? `height: ${height};` : ``)};
+    ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
     z-index: 1;
 `;

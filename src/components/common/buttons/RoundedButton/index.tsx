@@ -27,7 +27,7 @@ interface Props extends ButtonProps, Disabled {
 export const RoundedButton: FC<Props> = ({ children, onClick, disabled, reverse, Img, marginBottom }) => (
     <Button disabled={disabled} marginBottom={marginBottom} reverse={reverse} onClick={onClick}>
         {Img ? (
-            <Row justifyCenter marginBottom="0">
+            <Row alignCenter justifyCenter marginBottom="0">
                 <Column marginRight={padding}>{Img}</Column>
                 <InnerSpan reverse={reverse}>{children}</InnerSpan>
             </Row>
