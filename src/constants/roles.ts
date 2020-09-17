@@ -12,6 +12,7 @@ export const accessRoles = [
     userRoles.campaignAdmin,
     'Validator'
 ];
+
 export const accessValues = [0, 1, 2, 3, 4];
 
 export default userRoles;
