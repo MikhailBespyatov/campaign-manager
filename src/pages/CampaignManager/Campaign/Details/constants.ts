@@ -1,3 +1,5 @@
+import { primaryColor } from 'constants/styles';
+
 export const hideButtonImgDiameter = '15px';
 export const hideButtonImgHeight = '2px';
 
@@ -31,9 +33,14 @@ const engageColor = '#03A3D6';
 const clickColor = '#8BD317';
 const buyColor = '#FECF00';
 
+const yeayColor = 'lightgreen';
+const adidasColor = 'silver';
+const testCampaignColor = 'pink';
+
 const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
 
 export const graphicOption = {
+    colors: ['#5793f3', '#d14a61', '#675bba'],
     textStyle: { color: graphicTextColor },
     tooltip: {
         trigger: 'axis',
@@ -62,19 +69,27 @@ export const graphicOption = {
     xAxis: [
         {
             type: 'category',
+            axisTick: { show: false },
             boundaryGap: false,
-            data: ['', '01', '05', '09', '13', '17', '21', '26', '31'],
-            nameTextStyle: {
-                color: '#EDEDED'
-            }
+            data: ['', '01', '05', '09', '13', '17', '21', '26', '31']
+        },
+        {
+            type: 'category',
+            axisTick: { show: false },
+            axisLine: { show: false },
+            axisLabel: {
+                color: primaryColor
+            },
+            boundaryGap: false,
+            data: ['', 'YEAY', '', 'Adidas US', '', 'Test Campaign1', '', 'Test Campaign2', '']
         }
     ],
     yAxis: [
         {
             type: 'value',
-            nameTextStyle: {
-                color: '#EDEDED'
-            }
+            //splitLine: { show: false },
+            axisTick: { show: false },
+            axisLine: { show: false }
         }
     ],
     series: [
@@ -89,6 +104,15 @@ export const graphicOption = {
                     position: 'top'
                 }
             },
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 1 }],
+                lineStyle: {
+                    color: yeayColor
+                }
+            },
             itemStyle: {
                 color: buyColor
             },
@@ -99,13 +123,22 @@ export const graphicOption = {
                 ...areaCommonStyle,
                 color: buyColor
             },
-            data: [0, 9320, 9010, 13340, 19900, 15300, 24700, 29400, 21170]
+            data: [0, 9320, 9010, 13340, 19900, 15300, 24700, 27400, 21170]
         },
         {
             name: 'Click',
             type: 'line',
             smooth: true,
             stack: 'Click',
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 3 }],
+                lineStyle: {
+                    color: adidasColor
+                }
+            },
             itemStyle: {
                 color: clickColor
             },
@@ -123,6 +156,15 @@ export const graphicOption = {
             type: 'line',
             smooth: true,
             stack: 'Engage',
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 5 }],
+                lineStyle: {
+                    color: testCampaignColor
+                }
+            },
             itemStyle: {
                 color: engageColor
             },
@@ -140,6 +182,15 @@ export const graphicOption = {
             type: 'line',
             smooth: true,
             stack: 'View',
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 7 }],
+                lineStyle: {
+                    color: testCampaignColor
+                }
+            },
             itemStyle: {
                 color: viewColor
             },
