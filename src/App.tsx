@@ -4,6 +4,7 @@ import { GlobalStyle } from 'constants/styles';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
+import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Dashboard } from 'pages/CampaignManager/Dashboard';
 import { Discover } from 'pages/CampaignManager/Discover';
 import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
@@ -49,6 +50,7 @@ const App = () => (
                 <PrivateRoute exact component={Discover} path={routes.campaignManager.discover.index} />
                 <PrivateRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
                 <PrivateRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
+                <PrivateRoute exact component={CampaignDetails} path={routes.campaignManager.campaign.details} />
                 <PrivateRoute exact component={Overview} path={routes.campaignManager.overview.index} />
                 <PrivateRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
 

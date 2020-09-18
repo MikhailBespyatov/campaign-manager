@@ -74,11 +74,11 @@ export const routesArray = [
     {
         path: routes.campaignManager.campaign.index,
         name: 'Campaign'
-    },
-    {
-        path: routes.campaignManager.overview.index,
-        name: 'Overview'
     }
+    // ,{
+    //     path: routes.campaignManager.overview.index,
+    //     name: 'Overview'
+    // }
 ];
 
 const routeByName = {

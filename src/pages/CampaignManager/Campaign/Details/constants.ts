@@ -1,4 +1,7 @@
-import { RowHeaderRadioType } from 'types';
+import { primaryColor } from 'constants/styles';
+
+export const hideButtonImgDiameter = '15px';
+export const hideButtonImgHeight = '2px';
 
 export const seriesTestData = [
     [0, 0],
@@ -29,6 +32,10 @@ const viewColor = '#FC4237';
 const engageColor = '#03A3D6';
 const clickColor = '#8BD317';
 const buyColor = '#FECF00';
+
+const yeayColor = 'lightgreen';
+const adidasColor = 'silver';
+const testCampaignColor = 'pink';
 
 const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
 
@@ -65,17 +72,17 @@ export const graphicOption = {
             axisTick: { show: false },
             boundaryGap: false,
             data: ['', '01', '05', '09', '13', '17', '21', '26', '31']
+        },
+        {
+            type: 'category',
+            axisTick: { show: false },
+            axisLine: { show: false },
+            axisLabel: {
+                color: primaryColor
+            },
+            boundaryGap: false,
+            data: ['', 'YEAY', '', 'Adidas US', '', 'Test Campaign1', '', 'Test Campaign2', '']
         }
-        // ,{
-        //     type: 'category',
-        //     axisTick: { show: false },
-        //     axisLine: { show: false },
-        //     axisLabel: {
-        //         color: primaryColor
-        //     },
-        //     boundaryGap: false,
-        //     data: ['', 'YEAY', '', 'Adidas US', '', 'Test Campaign1', '', 'Test Campaign2', '']
-        // }
     ],
     yAxis: [
         {
@@ -97,15 +104,15 @@ export const graphicOption = {
                     position: 'top'
                 }
             },
-            // markLine: {
-            //     symbol: 'circle',
-            //     symbolSize: 15,
-            //     label: { show: false, position: 'end' },
-            //     data: [{ xAxis: 1 }],
-            //     lineStyle: {
-            //         color: yeayColor
-            //     }
-            // },
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 1 }],
+                lineStyle: {
+                    color: yeayColor
+                }
+            },
             itemStyle: {
                 color: buyColor
             },
@@ -123,15 +130,15 @@ export const graphicOption = {
             type: 'line',
             smooth: true,
             stack: 'Click',
-            // markLine: {
-            //     symbol: 'circle',
-            //     symbolSize: 15,
-            //     label: { show: false, position: 'end' },
-            //     data: [{ xAxis: 3 }],
-            //     lineStyle: {
-            //         color: adidasColor
-            //     }
-            // },
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 3 }],
+                lineStyle: {
+                    color: adidasColor
+                }
+            },
             itemStyle: {
                 color: clickColor
             },
@@ -149,15 +156,15 @@ export const graphicOption = {
             type: 'line',
             smooth: true,
             stack: 'Engage',
-            // markLine: {
-            //     symbol: 'circle',
-            //     symbolSize: 15,
-            //     label: { show: false, position: 'end' },
-            //     data: [{ xAxis: 5 }],
-            //     lineStyle: {
-            //         color: testCampaignColor
-            //     }
-            // },
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 5 }],
+                lineStyle: {
+                    color: testCampaignColor
+                }
+            },
             itemStyle: {
                 color: engageColor
             },
@@ -175,15 +182,15 @@ export const graphicOption = {
             type: 'line',
             smooth: true,
             stack: 'View',
-            // markLine: {
-            //     symbol: 'circle',
-            //     symbolSize: 15,
-            //     label: { show: false, position: 'end' },
-            //     data: [{ xAxis: 7 }],
-            //     lineStyle: {
-            //         color: testCampaignColor
-            //     }
-            // },
+            markLine: {
+                symbol: 'circle',
+                symbolSize: 15,
+                label: { show: false, position: 'end' },
+                data: [{ xAxis: 7 }],
+                lineStyle: {
+                    color: testCampaignColor
+                }
+            },
             itemStyle: {
                 color: viewColor
             },
@@ -215,43 +222,3 @@ export const graphicOption = {
         }
     ]
 };
-
-// option.visualMap.target.inRange.color = ['red', 'blue'];
-
-export const testHeaderRadioArray: RowHeaderRadioType[] = [
-    {
-        title: 'Preview',
-        quantity: '1m 23',
-        inBrackets: '',
-        growType: 'error',
-        growNumber: 5.2
-    },
-    {
-        title: 'View',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Engage',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Click',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    },
-    {
-        title: 'Buy',
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 12.2
-    }
-];
