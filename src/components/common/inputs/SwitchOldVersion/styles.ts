@@ -4,13 +4,12 @@ import {
     ballBorderRadius,
     ballBoxShadow,
     ballDiameter,
-    ballMargin,
     ballTopPosition,
     defaultColor,
     wrapperBorderRadius,
     wrapperHeight,
     wrapperWidth
-} from 'components/common/inputs/Switch/constants';
+} from 'components/common/inputs/SwitchOldVersion/constants';
 import { transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Active } from 'types';
@@ -28,7 +27,7 @@ export const Wrapper = styled.div<Active>`
 export const Ball = styled.div<Active>`
     position: absolute;
     top: ${ballTopPosition};
-    left: ${({ active }) => (active ? `calc(${wrapperWidth} - ${ballDiameter} - ${ballMargin})` : ballMargin)};
+    left: ${({ active }) => (active ? `calc(${wrapperWidth} - ${ballDiameter})` : '0')};
     width: ${ballDiameter};
     height: ${ballDiameter};
     border-radius: ${ballBorderRadius};
