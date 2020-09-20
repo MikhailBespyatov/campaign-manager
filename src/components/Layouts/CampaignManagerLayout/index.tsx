@@ -14,14 +14,17 @@ export const CampaignManagerLayout: FC = ({ children }) => {
     const onClick = () => history.push(createRoute);
 
     return (
-        <MainLayout>
-            <TopBarWithButton
-                buttons={
-                    location.pathname !== createRoute ? (
-                        <RoundedButton onClick={onClick}>Create Campaign</RoundedButton>
-                    ) : undefined
-                }
-            />
+        <MainLayout
+            topBar={
+                <TopBarWithButton
+                    buttons={
+                        location.pathname !== createRoute ? (
+                            <RoundedButton onClick={onClick}>Create Campaign</RoundedButton>
+                        ) : undefined
+                    }
+                />
+            }
+        >
             {children}
         </MainLayout>
     );
