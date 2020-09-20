@@ -1,9 +1,9 @@
 export const primaryColor = '#0F1642';
-export const secondaryColor = '???';
+export const secondaryColor = '#0C0D21';
 export const black = 'black';
 export const white = '#fff';
 
-export const primaryBackground = '#0C0D21';
+export const primaryBackground = secondaryColor;
 
 export const formGrey1 = '#D3D3FF';
 export const formGrey2 = '#EDEDED';
