@@ -1,12 +1,17 @@
-export const imgWidth = '65px';
-export const imgHeight = '75px';
+import { formGrey2, formGrey3, formGrey4 } from 'constants/styles';
 
-export const wrapperWidth = '291px';
-export const wrapperHeight = '99px';
+export const imgWidth = '23px';
+export const imgHeight = '76px';
+
+export const wrapperWidth = '207px';
+export const wrapperHeight = '43px';
 export const wrapperBorderRadius = `calc(${wrapperHeight} / 2)`;
-export const wrapperBackground = '#F5F4F5';
+export const wrapperBorderWidth = '1px';
+export const wrapperBorderColor = formGrey3;
+export const wrapperBackground = formGrey2;
+export const wrapperHorizontalPadding = '20px';
 
-export const spanFontWeight = '300';
-export const spanFontSize = '55px';
-export const spanLineHeight = '67px';
-export const summaryColor = '#BBB2BB';
+export const spanFontWeight = '600';
+export const spanFontSize = '16px';
+export const spanLineHeight = '19px';
+export const spanColor = formGrey4;
