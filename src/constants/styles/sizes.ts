@@ -16,6 +16,8 @@ export const footerHeight = '456px';
 export const CloseButtonDiameter = '40px';
 export const hashtagsSliderHeight = '30px';
 
+export const mainLayoutBorderRadius = '30px';
+
 export const xs = '480px';
 export const sm = '576px';
 export const md = '768px';

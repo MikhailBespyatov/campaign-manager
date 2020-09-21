@@ -16,9 +16,8 @@ import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { OverflowAutoWrapper } from 'components/common/wrappers/OverflowAutoWrapper';
 import { TagFilter } from 'components/filters/TagFilter';
 import { wrapperHeight as TagFilterHeight } from 'components/filters/TagFilter/constants';
-import { imgHeight, imgWidth } from 'components/grid/bars/TopBarWithButton/constants';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { avatarDiameter } from 'pages/CampaignManager/Campaign/Create/constants';
+import { avatarDiameter, imgHeight, imgWidth } from 'pages/CampaignManager/Campaign/Create/constants';
 import React, { FC } from 'react';
 
 const FilterSpan: FC = ({ children }) => (

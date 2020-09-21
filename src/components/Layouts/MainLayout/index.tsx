@@ -1,12 +1,19 @@
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
-import { Main } from 'components/Layouts/MainLayout/styles';
+import { Main, Wrapper } from 'components/Layouts/MainLayout/styles';
 import React, { FC } from 'react';
 
-export const MainLayout: FC = ({ children }) => (
+interface Props {
+    topBar?: JSX.Element;
+}
+
+export const MainLayout: FC<Props> = ({ children, topBar }) => (
     <>
         <Header />
-        <Main>{children}</Main>
+        <Main>
+            {topBar}
+            <Wrapper>{children}</Wrapper>
+        </Main>
         <Footer />
     </>
 );
