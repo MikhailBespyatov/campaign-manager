@@ -10,7 +10,6 @@ import {
 } from 'components/common/features/Summary/constants';
 import { Wrapper } from 'components/common/features/Summary/styles';
 import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import React from 'react';
 import { MarginRightBottom, Title } from 'types';
 
@@ -18,25 +17,16 @@ interface Props extends Title, MarginRightBottom {}
 
 export const Summary = ({ title, subtitle = '', ...marginRightBottom }: Props) => (
     <Wrapper {...marginRightBottom}>
-        <Column>
-            <Row marginBottom="12px">
-                <Span
-                    color={titleColor}
-                    fontSize={titleFontSize}
-                    fontWeight={titleFontWeight}
-                    lineHeight={titleLineHeight}
-                >
-                    {title}
-                </Span>
-            </Row>
-            <Span
-                color={subtitleColor}
-                fontSize={subtitleFontSize}
-                fontWeight={subtitleFontWeight}
-                lineHeight={subtitleLineHeight}
-            >
-                {subtitle}
-            </Span>
-        </Column>
+        <Span color={titleColor} fontSize={titleFontSize} fontWeight={titleFontWeight} lineHeight={titleLineHeight}>
+            {title}
+        </Span>
+        <Span
+            color={subtitleColor}
+            fontSize={subtitleFontSize}
+            fontWeight={subtitleFontWeight}
+            lineHeight={subtitleLineHeight}
+        >
+            {subtitle}
+        </Span>
     </Wrapper>
 );
