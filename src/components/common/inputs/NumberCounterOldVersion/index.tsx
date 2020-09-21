@@ -12,15 +12,15 @@ import {
     inputHeight,
     inputLineHeight,
     inputMinWidth
-} from 'components/common/inputs/NumberCounter/constants';
-import { Wrapper } from 'components/common/inputs/NumberCounter/styles';
+} from 'components/common/inputs/NumberCounterOldVersion/constants';
+import { Wrapper } from 'components/common/inputs/NumberCounterOldVersion/styles';
 import { noop } from 'constants/global';
-import React, { ChangeEvent, useState } from 'react';
-import { BorderRadiusProperties, NumberInput as INumberInput, numberOrEmptyString } from 'types';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { BorderRadiusProperties, NumberInput as INumberInput } from 'types';
 
 interface Props extends INumberInput, BorderRadiusProperties {}
 
-export const NumberCounter = ({
+export const NumberCounterOldVersion = ({
     defaultValue = 0,
     onChange = noop,
     min = 0,
@@ -28,17 +28,17 @@ export const NumberCounter = ({
     step = 1,
     ...borderRadiusProperties
 }: Props) => {
-    const [value, setValue] = useState<numberOrEmptyString>(defaultValue);
+    const [value, setValue] = useState(defaultValue);
 
-    const increment = () => setValue(value === '' ? 1 : value + 1);
-    const decrement = () => setValue(value < 1 || value === '' ? 0 : value - 1);
+    const increment = () => setValue(value + 1);
+    const decrement = () => setValue(value < 1 ? 0 : value - 1);
 
-    const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+    const inputChange = (e: ChangeEvent<HTMLInputElement>) => setValue(Number(e.target.value));
 
-        value !== '' ? setValue(Number(value)) : setValue(value);
-        onChange(value === '' ? 0 : Number(value));
-    };
+    useEffect(() => {
+        onChange(value);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value]);
 
     return (
         <Wrapper {...borderRadiusProperties}>
