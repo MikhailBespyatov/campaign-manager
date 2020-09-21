@@ -2,10 +2,10 @@ import summaryImg from 'assets/img/summary.svg';
 import {
     imgHeight,
     imgWidth,
+    spanColor,
     spanFontSize,
     spanFontWeight,
-    spanLineHeight,
-    summaryColor
+    spanLineHeight
 } from 'components/common/features/Budget/constants';
 import { Wrapper } from 'components/common/features/Budget/styles';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
@@ -18,9 +18,9 @@ interface Props {
 
 export const Budget = ({ summary }: Props) => (
     <Wrapper>
-        <CustomImg height={imgHeight} src={summaryImg} width={imgWidth} />
-        <Span color={summaryColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
+        <Span color={spanColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
             {summary}
         </Span>
+        <CustomImg height={imgHeight} src={summaryImg} width={imgWidth} />
     </Wrapper>
 );
