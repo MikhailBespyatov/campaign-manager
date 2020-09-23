@@ -1,3 +1,5 @@
-export const hrHeight = '4px';
-export const hrBackground = '#F5F4F5';
+import { formGrey2 } from 'constants/styles';
+
+export const hrHeight = '1px';
+export const hrBackground = formGrey2;
 export const hrMarginBottom = '72px';

@@ -4,6 +4,7 @@ import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
+import { formGrey3, secondaryColor } from 'constants/styles';
 import React, { useState } from 'react';
 import { RadioProperties, RowHeaderRadioType } from 'types';
 
@@ -31,21 +32,26 @@ export const RowHeaderRadio = ({ values, defaultActive = values[0].title, onChan
     };
 
     return (
-        <Row width="100%">
+        <Row marginBottom="0" width="100%">
             {radio.map((item, i) => (
                 <Radio key={item.value} active={item.active} quantity={length} onClick={() => onClick(item.value)}>
                     <Column>
-                        <Row marginBottom="29px">
-                            <Span color={item.active ? '#0F1642' : inactiveColor} fontSize="30px" lineHeight="37px">
+                        <Row marginBottom="10px">
+                            <Span
+                                color={item.active ? secondaryColor : inactiveColor}
+                                fontSize="22px"
+                                fontWeight="700"
+                                lineHeight="28px"
+                            >
                                 {item.value}
                             </Span>
                         </Row>
-                        <Row alignCenter marginBottom="11px">
+                        <Row alignCenter marginBottom="10px">
                             <Span
-                                color={item.active ? '#0F1642' : inactiveColor}
-                                fontSize="24px"
+                                color={item.active ? formGrey3 : inactiveColor}
+                                fontSize="14px"
                                 fontWeight="normal"
-                                lineHeight="29px"
+                                lineHeight="22px"
                             >
                                 {values[i].quantity}
                             </Span>

@@ -21,6 +21,10 @@ export const UniversalWrapper = styled.div<Props>`
     ${({ borderBottomRightRadius }) =>
         borderBottomRightRadius ? `border-bottom-right-radius: ${borderBottomRightRadius};` : ``};
     ${({ border }) => (border ? `border: ${border};` : ``)};
+    ${({ borderTop }) => (borderTop ? `border-top: ${borderTop};` : ``)};
+    ${({ borderLeft }) => (borderLeft ? `border-left: ${borderLeft};` : ``)};
+    ${({ borderRight }) => (borderRight ? `border-right: ${borderRight};` : ``)};
+    ${({ borderBottom }) => (borderBottom ? `border-bottom: ${borderBottom};` : ``)};
     ${({ borderWidth }) => (borderWidth ? `border-width: ${borderWidth};` : ``)};
     ${({ borderStyle }) => (borderStyle ? `border-style: ${borderStyle};` : ``)};
     ${({ borderColor }) => (borderColor ? `border-color: ${borderColor};` : ``)};

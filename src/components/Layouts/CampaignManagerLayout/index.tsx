@@ -4,8 +4,11 @@ import { MainLayout } from 'components/Layouts/MainLayout';
 import { routes } from 'constants/routes';
 import React, { FC } from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { Background } from 'types';
 
-export const CampaignManagerLayout: FC = ({ children }) => {
+interface Props extends Background {}
+
+export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const location = useLocation();
     const history = useHistory();
 
@@ -15,6 +18,7 @@ export const CampaignManagerLayout: FC = ({ children }) => {
 
     return (
         <MainLayout
+            background={background}
             topBar={
                 <TopBarWithButton
                     buttons={

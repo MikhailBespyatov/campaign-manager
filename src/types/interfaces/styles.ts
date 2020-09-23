@@ -56,6 +56,10 @@ export interface BorderRadiusProperties {
 
 export interface BorderProperties {
     border?: string;
+    borderTop?: string;
+    borderLeft?: string;
+    borderRight?: string;
+    borderBottom?: string;
     borderWidth?: string;
     borderStyle?: string;
     borderColor?: string;

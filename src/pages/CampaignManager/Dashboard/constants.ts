@@ -1,4 +1,12 @@
+import { formGrey2, secondaryBorder } from 'constants/styles';
 import { RowHeaderRadioType } from 'types';
+
+export const tableUniversalWrapperBorder = secondaryBorder;
+export const tableUniversalWrapperPadding = '40px 52px';
+
+export const graphicBlockBorder = `2px solid ${formGrey2}`;
+
+export const testSelectArray = ['1 day', '7 days', '14days', '21 days', '31 days'];
 
 export const seriesTestData = [
     [0, 0],
@@ -24,11 +32,11 @@ export const seriesTestData = [
 const graphicTextColor = '#C3CBD4';
 const labelBackground = '#6a7985';
 
-const previewColor = '#FF6B00';
-const viewColor = '#FC4237';
-const engageColor = '#03A3D6';
-const clickColor = '#8BD317';
-const buyColor = '#FECF00';
+export const previewColor = '#FF6B00';
+export const viewColor = '#FC4237';
+export const engageColor = '#03A3D6';
+export const clickColor = '#8BD317';
+export const buyColor = '#FECF00';
 
 const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
 

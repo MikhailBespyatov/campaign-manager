@@ -1,14 +1,10 @@
-import { pMargin } from 'components/common/TextComponents/P/constants';
-import { grey1 } from 'constants/styles';
+import { secondaryColor } from 'constants/styles';
 import styled from 'styled-components';
 
 export const P = styled.p`
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -0.133333px;
-    color: ${grey1};
+    line-height: 24px;
+    color: ${secondaryColor};
     margin: 0;
-    margin-right: ${pMargin};
-    margin-bottom: ${pMargin};
 `;

@@ -1,4 +1,4 @@
-import { black } from 'constants/styles';
+import { black, blue } from 'constants/styles';
 
 export const itemMinWidth = '120px';
 export const itemHeight = '40px';
@@ -7,6 +7,7 @@ export const itemBorderRadius = `calc(${itemHeight} / 2)`;
 export const itemVerticalPadding = '10px';
 export const itemHorizontalPadding = '14px';
 
+export const itemActiveBorder = `4px solid ${blue}`;
 export const itemDefaultColor = '#F5F5F5';
 export const itemActiveColor = black;
 
