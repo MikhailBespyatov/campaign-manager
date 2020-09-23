@@ -1,3 +1,5 @@
+import { formGrey3 } from './colors';
+
 export const opacity = 0.8;
 export const disabledOpacity = 0.5;
 
@@ -9,3 +11,6 @@ export const cardPaddingMultiplier = 2;
 
 export const copyButtonType = 'dashed';
 export const hashTagPrefix = '#';
+
+export const primaryBorderRadius = '20px';
+export const primaryBorder = `1px solid ${formGrey3}`;

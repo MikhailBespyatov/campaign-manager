@@ -7,7 +7,7 @@ import { StrictTitle } from 'types';
 
 interface Props extends StrictTitle {}
 
-export const Block: FC<Props> = ({ children, title }) => (
+export const HighlightedTitleBlock: FC<Props> = ({ children, title }) => (
     <Column marginBottom="20px" marginRight="20px">
         <TitleWrapper>
             <Span color={spanFontColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>

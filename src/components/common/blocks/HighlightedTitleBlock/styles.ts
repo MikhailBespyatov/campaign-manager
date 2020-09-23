@@ -1,6 +1,7 @@
 import {
     contentWrapperHorizontalPadding,
     contentWrapperVerticalPadding,
+    titleWrapperBackground,
     titleWrapperHeight,
     titleWrapperHorizontalPadding,
     titleWrapperVerticalPadding
@@ -13,7 +14,7 @@ export const TitleWrapper = styled.div`
     border-top-left-radius: ${primaryBorderRadius};
     border-top-left-radius: ${primaryBorderRadius};
     border: ${primaryBorder};
-    border-bottom: none;
+    background: ${titleWrapperBackground};
     padding: ${titleWrapperVerticalPadding} ${titleWrapperHorizontalPadding};
     padding-bottom: 0;
 `;

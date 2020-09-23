@@ -1,6 +1,8 @@
 import cardModalImg from 'assets/img/card_modal_img.svg';
 import productImg from 'assets/img/product_img.svg';
-import summaryImg from 'assets/img/summary.svg';
+import womImg from 'assets/img/wom_logo.svg';
+import { AsideBlock } from 'components/common/blocks/AsideBlock';
+import { ColumnBlockCell } from 'components/common/blocks/BlockCell';
 import { Hr } from 'components/common/dividers/Hr';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
@@ -17,8 +19,21 @@ import { OverflowAutoWrapper } from 'components/common/wrappers/OverflowAutoWrap
 import { TagFilter } from 'components/filters/TagFilter';
 import { wrapperHeight as TagFilterHeight } from 'components/filters/TagFilter/constants';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { avatarDiameter, imgHeight, imgWidth } from 'pages/CampaignManager/Campaign/Create/constants';
+import { secondaryColor } from 'constants/styles';
+import { asideBlockPadding, avatarDiameter } from 'pages/CampaignManager/Campaign/Create/constants';
 import React, { FC } from 'react';
+
+const BudgetSpan: FC = ({ children }) => (
+    <Span color={secondaryColor} fontSize="12px" lineHeight="20px" opacity={0.4}>
+        {children}
+    </Span>
+);
+
+const DarkBudgetSpan: FC = ({ children }) => (
+    <Span color={secondaryColor} fontSize="16px" lineHeight="24px">
+        {children}
+    </Span>
+);
 
 const FilterSpan: FC = ({ children }) => (
     <Span color="#6B6B6B" fontSize="26px" lineHeight="32px">
@@ -38,22 +53,21 @@ const TitleSpan: FC = ({ children }) => (
     </Span>
 );
 
-const SubtitleSpan: FC = ({ children }) => (
-    <Span color="#0F1642" fontSize="28px" fontWeight="normal" lineHeight="34px" opacity={0.5}>
-        {children}
-    </Span>
-);
+// const SubtitleSpan: FC = ({ children }) => (
+//     <Span color="#0F1642" fontSize="28px" fontWeight="normal" lineHeight="34px" opacity={0.5}>
+//         {children}
+//     </Span>
+// );
 
-const NumberSpan: FC = ({ children }) => (
-    <Span color="#0F1642" fontSize="45px" fontWeight="500" lineHeight="55px">
-        {children}
-    </Span>
-);
+// const NumberSpan: FC = ({ children }) => (
+//     <Span color="#0F1642" fontSize="45px" fontWeight="500" lineHeight="55px">
+//         {children}
+//     </Span>
+// );
 
 export const Create = () => (
     <CampaignManagerLayout>
         <Section>
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="20.000" />
@@ -67,7 +81,7 @@ export const Create = () => (
         </Section>
         <OverflowAutoWrapper>
             <Section noWrap>
-                <Column marginRight="75px">
+                <Column marginRight="30px">
                     <Row alignCenter noWrap marginBottom="25px">
                         <Column marginRight="25px">
                             <CustomImg height={avatarDiameter} src={productImg} width={avatarDiameter} />
@@ -81,34 +95,41 @@ export const Create = () => (
                             </Span>
                         </Column>
                     </Row>
-                    <Row marginBottom="53px">
-                        <CustomImg height="591px" src={cardModalImg} width="372px" />
+                    <Row marginBottom="20px">
+                        <CustomImg height="410px" src={cardModalImg} width="258px" />
                     </Row>
-                    <Row marginBottom="39px">
-                        <TitleSpan>Budget</TitleSpan>
-                    </Row>
-                    <Row marginBottom="22px">
-                        <SubtitleSpan>Estimated cost per sale:</SubtitleSpan>
-                    </Row>
-                    <Row alignCenter marginBottom="44px">
-                        <Column marginRight="18px">
-                            <CustomImg height={imgHeight} src={summaryImg} width={imgWidth} />
-                        </Column>
-                        <Column marginRight="0">
-                            <NumberSpan>0.03</NumberSpan>
-                        </Column>
-                    </Row>
-                    <Row marginBottom="15px">
-                        <SubtitleSpan>Confidence</SubtitleSpan>
-                    </Row>
-                    <Row marginBottom="34px">
-                        <NumberSpan>85%</NumberSpan>
-                    </Row>
-                    <Row marginBottom="28px">
-                        <SubtitleSpan>Campaign Budget</SubtitleSpan>
-                    </Row>
-                    <Row marginBottom="0">
-                        <Budget summary="0.00" />
+                    <Row marginBottom="20px">
+                        <AsideBlock title="Budget">
+                            <ColumnBlockCell padding={asideBlockPadding}>
+                                <Section noWrap marginBottom="0">
+                                    <Column alignCenter justifyCenter width="50%">
+                                        <BudgetSpan>Estimated cost per sale</BudgetSpan>
+                                        <Row alignCenter marginBottom="0">
+                                            <Column marginRight="5px">
+                                                <DarkBudgetSpan>0.03</DarkBudgetSpan>
+                                            </Column>
+                                            <CustomImg height="17px" src={womImg} width="20px" />
+                                        </Row>
+                                    </Column>
+                                    <Column alignCenter justifyCenter width="50%">
+                                        <Row marginBottom="20px">
+                                            <BudgetSpan>Confidence</BudgetSpan>
+                                        </Row>
+                                        <DarkBudgetSpan>85%</DarkBudgetSpan>
+                                    </Column>
+                                </Section>
+                            </ColumnBlockCell>
+                            <ColumnBlockCell padding={asideBlockPadding}>
+                                <Column>
+                                    <Row marginBottom="20px">
+                                        <BudgetSpan>Campaign budget</BudgetSpan>
+                                    </Row>
+                                    <Row marginBottom="10px">
+                                        <Budget summary="0.00" />
+                                    </Row>
+                                </Column>
+                            </ColumnBlockCell>
+                        </AsideBlock>
                     </Row>
                 </Column>
                 <Column>

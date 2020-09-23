@@ -1,7 +1,7 @@
 import { formGrey2, formGrey3, formGrey4 } from 'constants/styles';
 
 export const imgWidth = '23px';
-export const imgHeight = '76px';
+export const imgHeight = '27px';
 
 export const wrapperWidth = '207px';
 export const wrapperHeight = '43px';
