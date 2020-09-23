@@ -14,3 +14,4 @@ export const hashTagPrefix = '#';
 
 export const primaryBorderRadius = '20px';
 export const primaryBorder = `1px solid ${formGrey3}`;
+export const secondaryBorder = `2px solid ${formGrey3}`;

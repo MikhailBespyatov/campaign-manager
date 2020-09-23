@@ -1,14 +1,15 @@
-import { mainBackground, mainBorderRadius, mainHorizontalPadding } from 'components/Layouts/MainLayout/constants';
-import { wrapperVerticalPadding } from 'components/Layouts/UserAdminLayout/constants';
+import { mainBorderRadius, mainHorizontalPadding, mainVerticalPadding } from 'components/Layouts/MainLayout/constants';
+import { white } from 'constants/styles';
 import styled from 'styled-components';
+import { Background } from 'types';
 
-export const Main = styled.main`
+export const Main = styled.main<Background>`
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     border-radius: ${mainBorderRadius};
-    background: ${mainBackground};
+    background: ${({ background }) => (background ? background : white)};
     overflow: hidden;
 `;
 
@@ -17,5 +18,5 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: ${wrapperVerticalPadding} ${mainHorizontalPadding};
+    padding: ${mainVerticalPadding} ${mainHorizontalPadding};
 `;
