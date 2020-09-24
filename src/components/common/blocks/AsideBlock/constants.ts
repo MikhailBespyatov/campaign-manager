@@ -1,7 +1,7 @@
-import { formGrey3, secondaryColor, white } from 'constants/styles';
+import { formGrey3, secondaryBorderRadius, secondaryColor, white } from 'constants/styles';
 
 export const blockWidth = '258px';
-export const blockBorderRadius = '10px';
+export const blockBorderRadius = secondaryBorderRadius;
 export const blockBackground = white;
 
 export const titleWrapperHeight = '77px';

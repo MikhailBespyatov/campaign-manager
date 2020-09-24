@@ -1,5 +1,8 @@
 import { formGrey2, formGrey4 } from 'constants/styles';
 
+export const cardWidth = '258px';
+export const cardHeight = '410px';
+
 export const ratingSpanFontWeight = '500';
 export const ratingSpanFontSize = '12px';
 export const ratingSpanLineHeight = '15px';

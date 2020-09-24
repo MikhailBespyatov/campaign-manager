@@ -1,5 +1,5 @@
 import { ColumnProps, RowProps } from 'components/common/wrappers/FlexWrapper/types';
-import { flexStart, padding } from 'constants/styles';
+import { flexStart, primaryPadding } from 'constants/styles';
 import styled from 'styled-components';
 
 export const Row = styled.div<RowProps>`
@@ -14,7 +14,7 @@ export const Row = styled.div<RowProps>`
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ minHeight }) => (minHeight ? `min-height: ${minHeight};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
-    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
+    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${primaryPadding};`)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     z-index: 1;
 `;
@@ -30,6 +30,7 @@ export const Column = styled.div<ColumnProps>`
     ${({ marginLeft }) => (marginLeft ? `margin-left: ${marginLeft};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
+    z-index: 1;
 `;
 
 export const Section = styled.section<RowProps>`
@@ -43,6 +44,6 @@ export const Section = styled.section<RowProps>`
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
-    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${padding};`)};
+    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${primaryPadding};`)};
     z-index: 1;
 `;

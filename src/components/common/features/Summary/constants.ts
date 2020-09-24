@@ -1,4 +1,4 @@
-import { formGrey3, formGrey4, secondaryColor, white } from 'constants/styles';
+import { formGrey3, formGrey4, primaryPadding, secondaryColor, white } from 'constants/styles';
 
 export const wrapperWidth = '200px';
 export const wrapperHeight = '125px';
@@ -6,7 +6,7 @@ export const wrapperBorderRadius = '20px';
 export const wrapperBorderWidth = '1px';
 export const wrapperBorderColor = formGrey3;
 export const wrapperBackground = white;
-export const wrapperMargin = '20px';
+export const wrapperMargin = primaryPadding;
 export const wrapperHorizontalPadding = '10px';
 
 export const titleFontWeight = '700';

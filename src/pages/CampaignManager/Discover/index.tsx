@@ -14,7 +14,7 @@ export const Discover = () => (
         </Section>
         <Section>
             {testArray.map(i => (
-                <VideoCard key={i} marginBottom="34px" marginRight="40px" />
+                <VideoCard key={i} />
             ))}
         </Section>
         <Section justifyCenter>

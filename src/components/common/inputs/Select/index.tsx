@@ -12,9 +12,9 @@ import { Span } from 'components/common/TextComponents/Span';
 import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
 import { noop } from 'constants/global';
 import React, { FC, useState } from 'react';
-import { Active, ItemRadioProperties, RadioProperties } from 'types';
+import { Active, ItemRadioProperties, RadioProperties, Sizes } from 'types';
 
-interface WrapperProps extends RadioProperties {}
+interface WrapperProps extends RadioProperties, Sizes {}
 
 interface Props extends Active, ItemRadioProperties {}
 
@@ -35,7 +35,8 @@ export const Select: FC<WrapperProps> = ({
     defaultActive = values[0],
     data = values,
     onChange = noop,
-    children
+    children,
+    ...styles
 }) => {
     const [isClosed, setIsClosed] = useState(true);
     //const [selected, setSelected] = useState(defaultActive);
@@ -60,7 +61,7 @@ export const Select: FC<WrapperProps> = ({
     };
 
     return (
-        <Wrapper>
+        <Wrapper {...styles}>
             <ItemSpan>{children}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
                 <CustomImg
@@ -72,7 +73,7 @@ export const Select: FC<WrapperProps> = ({
                     onClick={onClose}
                 />
             </AbsoluteWrapper>
-            <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%">
+            <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%" zIndex="2">
                 <SelectUl>
                     {radio.map((item, i) => (
                         <Item

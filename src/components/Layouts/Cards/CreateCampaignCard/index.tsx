@@ -9,14 +9,12 @@ import { P } from 'components/common/TextComponents/P';
 import { Span } from 'components/common/TextComponents/Span';
 import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
-import { Card, CardRowFeatures, Description, FeatureCell } from 'components/grid/Card';
-import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
-import { routes } from 'constants/routes';
+import { Card, Description } from 'components/grid/Card';
+import { cardHeight, cardWidth, productImgDiameter } from 'components/Layouts/Cards/CreateCampaignCard/constants';
 import { primaryPadding, secondaryPadding, white } from 'constants/styles';
 import React, { FC } from 'react';
-import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
-import { MarginRightBottom } from 'types';
+import { MarginRightBottom, Sizes } from 'types';
 
 const RatingSpan: FC = ({ children }) => (
     <Span color={white} fontSize="8px" lineHeight="12px">
@@ -30,17 +28,13 @@ const ProductSpan: FC = ({ children }) => (
     </Span>
 );
 
-interface Props extends MarginRightBottom {}
+interface Props extends MarginRightBottom, Sizes {}
 
-export const VideoCard = ({ ...marginRightBottom }: Props) => {
-    const history = useHistory();
-
+export const CreateCampaignCard = ({ ...styles }: Props) => {
     const openCardModal = () => modalEvents.openCardModal('some id');
 
-    const handleDetail = () => history.push(routes.campaignManager.discover.index + '/id');
-
     return (
-        <Card {...marginRightBottom}>
+        <Card height={cardHeight} width={cardWidth} {...styles}>
             <Description>
                 <AbsoluteImg pointer src={defaultImage} onClick={openCardModal} />
                 <Row marginBottom="5px">
@@ -84,14 +78,6 @@ export const VideoCard = ({ ...marginRightBottom }: Props) => {
                     </Column>
                 </MarginWrapper>
             </Description>
-            <CardRowFeatures>
-                <FeatureCell background={backgroundTheme1} color={colorTheme1} quantity={2}>
-                    Play Video
-                </FeatureCell>
-                <FeatureCell quantity={2} onClick={handleDetail}>
-                    Details here
-                </FeatureCell>
-            </CardRowFeatures>
         </Card>
     );
 };

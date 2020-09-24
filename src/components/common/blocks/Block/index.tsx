@@ -1,6 +1,5 @@
-import { spanFontColor, spanFontSize, spanFontWeight, spanLineHeight } from 'components/common/blocks/Block/constants';
 import { ContentWrapper, TitleWrapper } from 'components/common/blocks/Block/styles';
-import { Span } from 'components/common/TextComponents/Span';
+import { H3 } from 'components/common/titles/H';
 import { Column } from 'components/common/wrappers/FlexWrapper';
 import React, { FC } from 'react';
 import { StrictTitle } from 'types';
@@ -8,11 +7,11 @@ import { StrictTitle } from 'types';
 interface Props extends StrictTitle {}
 
 export const Block: FC<Props> = ({ children, title }) => (
-    <Column marginBottom="20px" marginRight="20px">
+    <Column>
         <TitleWrapper>
-            <Span color={spanFontColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
-                {title}
-            </Span>
+            {/* <Span color={spanFontColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}> */}
+            <H3>{title}</H3>
+            {/* </Span> */}
         </TitleWrapper>
         <ContentWrapper>{children}</ContentWrapper>
     </Column>
