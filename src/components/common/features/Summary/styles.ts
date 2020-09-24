@@ -21,6 +21,6 @@ export const Wrapper = styled.div<MarginRightBottom>`
     border: ${wrapperBorderWidth} solid ${wrapperBorderColor};
     background-color: ${wrapperBackground};
     padding: 0 ${wrapperHorizontalPadding};
-    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : wrapperMargin)};
-    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : wrapperMargin)};
+    margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : wrapperMargin)};
+    margin-right: ${({ marginRight }) => (marginRight ? marginRight : wrapperMargin)};
 `;

@@ -1,5 +1,6 @@
 import { Hr } from 'components/common/dividers/Hr';
 import { Summary } from 'components/common/features/Summary';
+import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { Select } from 'components/common/inputs/Select';
 import { Switch } from 'components/common/inputs/Switch';
@@ -10,7 +11,14 @@ import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
 import { UniversalWrapper } from 'components/common/wrappers/UniversalWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { black, primaryColor, secondaryColor } from 'constants/styles';
+import {
+    black,
+    primaryColor,
+    primaryPadding,
+    secondaryBorderRadius,
+    secondaryColor,
+    secondaryPadding
+} from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import {
     buyColor,
@@ -49,12 +57,12 @@ const GraphicBlockSpan: FC = ({ children }) => (
 export const Dashboard = () => (
     <CampaignManagerLayout>
         <Section>
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="25" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Budget" title="20,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Spent" title="12,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign spend per day" title="1,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Budget" title="10,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Duration" title="12d" />
+            <Summary subtitle="Campaigns Running" title="25" />
+            <Summary subtitle="Campaign Budget" title="20,000" />
+            <Summary subtitle="Campaign Spent" title="12,000" />
+            <Summary subtitle="Campaign spend per day" title="1,000" />
+            <Summary subtitle="Remaining Budget" title="10,000" />
+            <Summary subtitle="Remaining Duration" title="12d" />
         </Section>
         <ContentWrapper>
             <Section marginBottom="0">
@@ -121,7 +129,7 @@ export const Dashboard = () => (
                     </Column>
                 </MarginWrapper> */}
                 <Column width="100%">
-                    <Row alignCenter marginBottom="30px">
+                    <Row alignCenter marginBottom="0">
                         <ColorPromptLine background={previewColor} />
                         <TableHeaderSpan>New Shoes</TableHeaderSpan>
                         <ColorPromptLine background={viewColor} />
@@ -134,28 +142,69 @@ export const Dashboard = () => (
                         <TableHeaderSpan>YEAY General</TableHeaderSpan>
                     </Row>
                     <Section alignCenter noWrap>
-                        <ReactEcharts option={graphicOption} style={{ height: '516px', width: '100%' }} />
+                        <ReactEcharts option={graphicOption} style={{ height: '516px', width: '755px' }} />
                         <UniversalWrapper
                             border={graphicBlockBorder}
-                            borderRadius="10px"
+                            borderRadius={secondaryBorderRadius}
                             direction="column"
-                            marginRight="75px"
-                            padding="20px"
+                            marginLeft="75px"
+                            padding={primaryPadding}
                         >
-                            <Section alignCenter noWrap marginBottom="20px">
-                                <P>Timeline wiew</P>
+                            <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                <P noWrap>Timeline wiew</P>
                                 <MarginWrapper marginLeft="auto">
-                                    <Select values={testSelectArray}>31 days</Select>
+                                    <Select values={testSelectArray} width="127px">
+                                        31 days
+                                    </Select>
                                 </MarginWrapper>
                             </Section>
-                            <Section alignCenter noWrap marginBottom="20px">
-                                <P>Show us combined chart</P>
+                            <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                <Column marginRight="40px">
+                                    <P noWrap>Show us combined chart</P>
+                                </Column>
                                 <Switch />
                             </Section>
                             <Hr />
-                            <Section alignCenter noWrap marginBottom="20px">
-                                <Column marginRight="20px" width="50%">
-                                    <GraphicBlockSpan>Timeline view</GraphicBlockSpan>
+                            <Section alignCenter noWrap marginBottom={primaryPadding} marginTop={primaryPadding}>
+                                <Column marginRight={primaryPadding} width="50%">
+                                    <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
+                                    <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
+                                    <Row alignCenter noWrap>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
+                                </Column>
+                                <Column marginRight={primaryPadding} width="50%">
+                                    <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
+                                    <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
+                                    <Row alignCenter noWrap>
+                                        <Column marginRight={secondaryPadding}>
+                                            <BooleanCircleCheckbox name="name" />
+                                        </Column>
+                                        <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                    </Row>
                                 </Column>
                             </Section>
                         </UniversalWrapper>

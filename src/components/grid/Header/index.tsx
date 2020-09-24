@@ -1,7 +1,7 @@
 import headerBottomImg from 'assets/img/header_bottom.svg';
 import headerLogoImg from 'assets/img/header_logo.svg';
 import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { CardColumn, CardRow } from 'components/grid/Card';
+import { Column, Row } from 'components/common/wrappers/FlexWrapper';
 import { headerAvatarDiameter, headerLogoHeight, headerLogoWidth } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
 import { siteName } from 'constants/global';
@@ -14,19 +14,19 @@ export const Header = () => {
 
     return (
         <StyledHeader>
-            <CardRow alignCenter marginBottom="0">
+            <Row alignCenter marginBottom="0">
                 <CustomImg height={headerLogoHeight} src={headerLogoImg} width={headerLogoWidth} />
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
-            </CardRow>
-            <CardRow alignCenter marginBottom="0">
-                <CardColumn marginRight={padding}>
+            </Row>
+            <Row alignCenter marginBottom="0">
+                <Column marginRight={padding}>
                     <StyledSpan2 color={white}>John Doe</StyledSpan2>
                     <StyledSpan3 color={white} onClick={onClick}>
                         Logout
                     </StyledSpan3>
-                </CardColumn>
+                </Column>
                 <CustomImg height={headerAvatarDiameter} src={headerBottomImg} width={headerAvatarDiameter} />
-            </CardRow>
+            </Row>
         </StyledHeader>
     );
 };

@@ -1,5 +1,5 @@
 import { h1Margin, h2Margin, h3Margin, h4Margin } from 'components/common/titles/H/constants';
-import { grey1 } from 'constants/styles';
+import { grey1, secondaryColor } from 'constants/styles';
 import styled from 'styled-components';
 
 export const H1 = styled.h1`
@@ -25,14 +25,13 @@ export const H2 = styled.h1`
 `;
 
 export const H3 = styled.h1`
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.166666px;
-    color: ${grey1};
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    color: ${secondaryColor};
     margin: 0;
-    margin-right: ${h3Margin};
-    margin-bottom: ${h3Margin};
+    // margin-right: ${h3Margin};
+    // margin-bottom: ${h3Margin};
 `;
 
 export const H4 = styled.h1`

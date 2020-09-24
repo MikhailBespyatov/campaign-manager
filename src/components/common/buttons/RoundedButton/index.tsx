@@ -1,4 +1,4 @@
-import { spanFontSize, spanLetterSpacing, spanLineHeight } from 'components/common/buttons/RoundedButton/constants';
+import { spanFontSize, spanFontWeight, spanLineHeight } from 'components/common/buttons/RoundedButton/constants';
 import { Button } from 'components/common/buttons/RoundedButton/styles';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import { Span } from 'components/common/TextComponents/Span';
@@ -12,7 +12,7 @@ const InnerSpan: FC<Reverse> = ({ children, reverse }) => (
         alignCenter
         color={reverse ? reverseColor : white}
         fontSize={spanFontSize}
-        letterSpacing={spanLetterSpacing}
+        fontWeight={spanFontWeight}
         lineHeight={spanLineHeight}
     >
         {children}

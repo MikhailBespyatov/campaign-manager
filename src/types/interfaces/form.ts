@@ -6,8 +6,28 @@ export interface WithError {
     touched?: boolean;
 }
 
+export interface OnStringChange {
+    onChange?: (value: string) => void;
+}
+
+export interface OnNumberChange {
+    onChange?: (value: number) => void;
+}
+
+export interface OnBooleanChange {
+    onChange?: (value: boolean) => void;
+}
+
+export interface OnCheckedChange {
+    onChange?: (checked: boolean) => void;
+}
+
 export interface UntouchedWarning {
     untouchedWarning?: string;
+}
+
+export interface Name {
+    name: string;
 }
 
 export interface Type {
@@ -26,31 +46,31 @@ export interface Disabled {
     disabled?: boolean;
 }
 
+export interface DefaultValueString {
+    defaultValue?: string;
+}
+
+export interface DefaultValueNumber {
+    defaultValue?: number;
+}
+
 export interface DefaultChecked {
     defaultChecked?: boolean;
 }
 
-export interface NumberInput {
-    defaultValue?: number;
-    onChange?: (value: number) => void;
+export interface NumberInput extends OnNumberChange, DefaultValueNumber {
     min?: number;
     max?: number;
     step?: number;
 }
 
-export interface TextFormInput extends Disabled, Type, Label {
+export interface TextFormInput extends Disabled, Type, Label, Name, DefaultValueString {
     error: string | undefined;
-    defaultValue?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    name: string;
 }
 
-export interface TextInput extends Disabled, Label {
+export interface TextInput extends Disabled, Label, Name, OnStringChange, DefaultValueString {
     error: string | undefined;
-    defaultValue?: string;
-    onChange?: (value: string) => void;
-    label: string;
-    name: string;
     type?: string;
 }
 
@@ -66,6 +86,8 @@ export interface ItemRadioProperties {
     data?: string;
     onClick: (value: string) => void;
 }
+
+export interface BooleanCheckbox extends DefaultChecked, Disabled, Name, OnCheckedChange {}
 
 export interface HTMLButtonType {
     type?: 'submit' | 'button' | 'reset' | undefined;

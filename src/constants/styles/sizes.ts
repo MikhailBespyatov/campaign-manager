@@ -1,6 +1,16 @@
 export const padding = '10px';
+export const primaryPadding = '20px';
+export const secondaryPadding = '10px';
+export const tertiaryPadding = '30px';
+
+export const blockHorizontalPadding = '35px';
+
+export const primaryBorderRadius = '20px';
+export const secondaryBorderRadius = '10px';
+
 export const borderWidth = '1px';
-export const borderRadius = '4px';
+export const primaryBorderWidth = '1px';
+export const secondaryBorderWidth = '2px';
 
 export const textInfoFontSize = '14px';
 export const textInfoLineHeight = '16px';
@@ -9,7 +19,7 @@ export const headerHeight = '90px';
 export const sideBarWidth = '200px';
 export const miniPlayerHeight = '200px';
 export const pinnedSphereDiameter = '32px';
-export const featureHeight = '40px';
+export const featureHeight = '34px';
 export const avatarDiameter = '40px';
 export const iconsFontSIze = '20px';
 export const footerHeight = '456px';

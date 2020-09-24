@@ -6,8 +6,8 @@ import {
     buttonVerticalPadding,
     buttonWidth,
     hoverButtonColor
-} from 'components/common/buttons/RoundedButton/constants';
-import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
+} from 'components/common/buttons/AddButton/constants';
+import { ButtonProps } from 'components/common/buttons/AddButton/types';
 import {
     black,
     buttonActiveMixin,

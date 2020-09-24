@@ -11,13 +11,13 @@ import {
 } from 'components/common/inputs/Select/constants';
 import { flexStart } from 'constants/styles';
 import styled from 'styled-components';
-import { Active } from 'types';
+import { Active, Sizes } from 'types';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<Sizes>`
     position: relative;
     ${flexStart};
     align-items: center;
-    min-width: ${wrapperWidth};
+    min-width: ${({ width }) => (width ? width : wrapperWidth)};
     height: ${wrapperHeight};
     border-radius: ${wrapperBorderRadius};
     border: ${wrapperBorderWidth} solid ${wrapperBorderColor};
