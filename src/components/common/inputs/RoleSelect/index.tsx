@@ -1,6 +1,6 @@
 import arrowImg from 'assets/img/select_arrow.svg';
 import darkArrowImg from 'assets/img/select_arrow_dark.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     imgHeight,
     imgWidth,
@@ -9,8 +9,8 @@ import {
     wrapperImgTop
 } from 'components/common/inputs/RoleSelect/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/RoleSelect/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
+import { Span } from 'components/common/typography/Span';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 import { Active, ItemRadioProperties, RadioProperties, Reverse } from 'types';

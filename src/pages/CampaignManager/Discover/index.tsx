@@ -1,25 +1,42 @@
-import { Section } from 'components/common/wrappers/FlexWrapper';
+import { Loader } from 'components/common/Loader';
 import { TagFilter } from 'components/filters/TagFilter';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { Pagination } from 'components/Layouts/Pagination';
-import { CardModal } from 'components/modals/CardModal';
-import { testArray } from 'pages/CampaignManager/Discover/constants';
-import React from 'react';
+import { useStore } from 'effector-react';
+import React, { useEffect } from 'react';
+import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
+import { loadingStores } from 'stores/loading';
 
-export const Discover = () => (
-    <CampaignManagerLayout>
-        <Section alignCenter marginBottom="35px">
-            <TagFilter />
-        </Section>
-        <Section>
-            {testArray.map(i => (
-                <VideoCard key={i} />
-            ))}
-        </Section>
-        <Section justifyCenter>
-            <Pagination />
-        </Section>
-        <CardModal />
-    </CampaignManagerLayout>
-);
+export const Discover = () => {
+    const items = useStore(campaignContentStores.items);
+    const loading = useStore(loadingStores.loading);
+
+    useEffect(() => {
+        campaignContentEffects.getItems({
+            limit: 100,
+            pageIndex: 0
+        });
+    }, []);
+
+    return (
+        <CampaignManagerLayout>
+            <Section alignCenter marginBottom="35px">
+                <TagFilter />
+            </Section>
+            {loading ? (
+                <Section>
+                    <Loader />
+                </Section>
+            ) : (
+                <Section>
+                    {/* {console.log(items)} */}
+                    {items?.length ? items.map(item => <VideoCard key={item.womContentId} {...item} />) : 'no videos'}
+                </Section>
+            )}
+            <Section justifyCenter>{!loading && <Pagination />}</Section>
+            {/* <CardModal /> */}
+        </CampaignManagerLayout>
+    );
+};

@@ -1,6 +1,6 @@
 import decrementImg from 'assets/img/decrement.svg';
 import incrementImg from 'assets/img/increment.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { NumberInput } from 'components/common/inputs/Input';
 import {
     imgHeight,

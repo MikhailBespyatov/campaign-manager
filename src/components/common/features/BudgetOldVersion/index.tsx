@@ -8,8 +8,8 @@ import {
     spanLineHeight,
     summaryColor
 } from 'components/common/features/BudgetOldVersion/constants';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { Span } from 'components/common/TextComponents/Span';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
 import React from 'react';
 
 interface Props {

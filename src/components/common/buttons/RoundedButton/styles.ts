@@ -23,7 +23,7 @@ export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     min-width: ${({ minWidth }) => (minWidth ? minWidth : buttonWidth)};
     height: ${({ height }) => (height ? height : buttonHeight)};
-    background-color: ${({ reverse }) => (reverse ? white : black)};
+    background: ${({ reverse, background }) => (reverse ? white : background ? background : black)};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
     color: ${white};

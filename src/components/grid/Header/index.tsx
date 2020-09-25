@@ -1,9 +1,9 @@
 import headerBottomImg from 'assets/img/header_bottom.svg';
 import headerLogoImg from 'assets/img/header_logo.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { headerAvatarDiameter, headerLogoHeight, headerLogoWidth } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { siteName } from 'constants/global';
 import { padding, white } from 'constants/styles';
 import React from 'react';

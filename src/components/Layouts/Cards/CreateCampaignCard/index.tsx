@@ -3,18 +3,19 @@ import group1img from 'assets/img/group_1.svg';
 import group2img from 'assets/img/group_2.svg';
 import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
-import { AbsoluteImg } from 'components/common/ImageComponents/AbsoluteImg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { P } from 'components/common/TextComponents/P';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
+import { P } from 'components/common/typography/titles/P';
 import { Card, Description } from 'components/grid/Card';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { cardHeight, cardWidth, productImgDiameter } from 'components/Layouts/Cards/CreateCampaignCard/constants';
 import { primaryPadding, secondaryPadding, white } from 'constants/styles';
 import React, { FC } from 'react';
 import { modalEvents } from 'stores/modal';
 import { MarginRightBottom, Sizes } from 'types';
+import { roundScore } from 'utils/usefulFunctions';
 
 const RatingSpan: FC = ({ children }) => (
     <Span color={white} fontSize="8px" lineHeight="12px">
@@ -28,26 +29,29 @@ const ProductSpan: FC = ({ children }) => (
     </Span>
 );
 
-interface Props extends MarginRightBottom, Sizes {}
+interface Props extends MarginRightBottom, Sizes {
+    uriPrimary?: string;
+    womQualityScore?: WOM.WOMQualityScore;
+}
 
-export const CreateCampaignCard = ({ ...styles }: Props) => {
+export const CreateCampaignCard = ({ uriPrimary, womQualityScore, ...styles }: Props) => {
     const openCardModal = () => modalEvents.openCardModal('some id');
 
     return (
         <Card height={cardHeight} width={cardWidth} {...styles}>
             <Description>
-                <AbsoluteImg pointer src={defaultImage} onClick={openCardModal} />
+                <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} onClick={openCardModal} />
                 <Row marginBottom="5px">
                     <Column marginRight={primaryPadding}>
-                        <P color={white}>8.5</P>
+                        <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
                     </Column>
                     <Column marginRight={primaryPadding}>
-                        <P color={white}>7.8</P>
+                        <P color={white}>{roundScore(womQualityScore?.positivity || 0)}</P>
                     </Column>
-                    <P color={white}>9.2</P>
+                    <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                 </Row>
                 <Row>
-                    <RatingSpan>some bla bla</RatingSpan>
+                    <RatingSpan>some content</RatingSpan>
                 </Row>
                 <MarginWrapper marginTop="auto">
                     <Column>

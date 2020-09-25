@@ -4,12 +4,12 @@ import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleChe
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { Select } from 'components/common/inputs/Select';
 import { Switch } from 'components/common/inputs/Switch';
-import { P } from 'components/common/TextComponents/P';
-import { Span } from 'components/common/TextComponents/Span';
-import { ContentWrapper } from 'components/common/wrappers/ContentWrapper';
-import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
-import { UniversalWrapper } from 'components/common/wrappers/UniversalWrapper';
+import { Span } from 'components/common/typography/Span';
+import { P } from 'components/common/typography/titles/P';
+import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { UniversalWrapper } from 'components/grid/wrappers/UniversalWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import {
     black,

@@ -1,6 +1,6 @@
 import leftArrowImg from 'assets/img/left_arrow.svg';
 import rightArrowImg from 'assets/img/right_arrow.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { arrowImgHeight, arrowImgWidth, testArray } from 'components/Layouts/Pagination/constants';
 import { Arrow, PaginationCell, PaginationWrapper, Wrapper } from 'components/Layouts/Pagination/styles';
 import React from 'react';

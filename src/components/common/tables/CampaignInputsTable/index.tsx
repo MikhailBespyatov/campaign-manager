@@ -17,7 +17,7 @@ import {
     TableRow
 } from 'components/common/tables/CampaignInputsTable/styles';
 import { Table } from 'components/common/tables/Table';
-import { Span } from 'components/common/TextComponents/Span';
+import { Span } from 'components/common/typography/Span';
 import { hashTagPrefix } from 'constants/styles';
 import React from 'react';
 

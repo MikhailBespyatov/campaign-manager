@@ -1,6 +1,6 @@
 import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
-import { Row } from 'components/common/wrappers/FlexWrapper';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import React, { FC } from 'react';
 import { MarginRightBottom, NumberInput, WithHashtag } from 'types';

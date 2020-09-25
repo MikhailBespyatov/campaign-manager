@@ -1,5 +1,4 @@
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
 import {
     activeColor,
     defaultColor,
@@ -8,6 +7,7 @@ import {
     spanLineHeight
 } from 'components/grid/bars/TopBar/constants';
 import { StyledBorder, StyledItem } from 'components/grid/bars/TopBar/style';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { routesArray } from 'constants/routes';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';

@@ -1,5 +1,5 @@
 import { InternalLink } from 'components/common/links/InternalLink';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { routes } from 'constants/routes';
 import { white } from 'constants/styles';
 import React from 'react';

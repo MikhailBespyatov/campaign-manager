@@ -2,7 +2,7 @@ import companyImg from 'assets/img/adidas.svg';
 import deleteImg from 'assets/img/delete.svg';
 import arrowImg from 'assets/img/select_arrow_dark.svg';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { RoleSelect } from 'components/common/inputs/RoleSelect';
 import { testArray } from 'components/common/tables/CampaignTable/constants';
 import { Table } from 'components/common/tables/Table';
@@ -21,9 +21,9 @@ import {
     TableColumn,
     TableRow
 } from 'components/common/tables/UserAdminTable/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { BooleanCheckbox as Checkbox } from 'components/FormComponents/BooleanCheckbox';
+import { Span } from 'components/common/typography/Span';
+import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import React, { FC, useState } from 'react';
 
 const LegendaryTableSpan: FC = ({ children }) => (

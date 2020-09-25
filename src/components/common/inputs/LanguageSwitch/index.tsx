@@ -5,7 +5,7 @@ import {
     spanLineHeight
 } from 'components/common/inputs/LanguageSwitch/constants';
 import { Ball, Wrapper } from 'components/common/inputs/LanguageSwitch/styles';
-import { Span } from 'components/common/TextComponents/Span';
+import { Span } from 'components/common/typography/Span';
 import { noop } from 'constants/global';
 import { white } from 'constants/styles';
 import React, { FC, useEffect, useState } from 'react';

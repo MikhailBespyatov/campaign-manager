@@ -1,23 +1,35 @@
-import history from 'BrowserHistory';
-import { routes } from 'constants/routes';
-import { yupCompanyName } from 'constants/yupFields';
+import { yupEmailNoHint, yupPasswordNoHint } from 'constants/yupFields';
+import { FormikErrors } from 'formik';
+import { userEffects, userEvents, userStores } from 'stores/user';
+import { AuthUserRequest } from 'types';
 import * as Yup from 'yup';
 
 export const linkMarginTop = '0';
 export const linkMarginBottom = '57px';
 
-export const initialValues = { companyName: '' };
+export const initialValues = { email: '', password: '' };
 
 export const validationSchema = Yup.object().shape({
-    companyName: yupCompanyName
+    email: yupEmailNoHint,
+    password: yupPasswordNoHint
 });
 
-// interface SetErrorsFormikProps {
-//     setErrors: (
-//         errors: FormikErrors<{
-//             companyName?: string;
-//         }>
-//     ) => void;
-// }
+interface SetErrorsFormikProps {
+    setErrors: (
+        errors: FormikErrors<{
+            email?: string;
+            password?: string;
+        }>
+    ) => void;
+}
 
-export const onSubmit = () => history.push(routes.signIn.adidas);
+export const onSubmit = (values: AuthUserRequest, { setErrors }: SetErrorsFormikProps) => {
+    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
+        setErrors({
+            email: authDenyReason,
+            password: authDenyReason
+        });
+        unwatch();
+    });
+    userEffects.loadToken(values);
+};

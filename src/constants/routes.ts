@@ -16,6 +16,7 @@ export const routes = {
     home: `${campaignPrefix}/dashboard`,
     signUp: {
         index: signUpPrefix,
+        acceptInvite: '/invite-org/:inviteCode',
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
@@ -23,6 +24,7 @@ export const routes = {
     },
     signIn: {
         index: signInPrefix,
+        admin: `${signInPrefix}/admin`,
         adidas: `${signInPrefix}${adidasPrefix}`,
         passwordReset: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}`,
         password: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/password`,

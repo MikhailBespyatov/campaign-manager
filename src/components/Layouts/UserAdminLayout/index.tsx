@@ -1,19 +1,26 @@
 import backImg from 'assets/img/back_arrow.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Section } from 'components/common/wrappers/FlexWrapper';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
+import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import { backImgDiameter } from 'components/Layouts/UserAdminLayout/constants';
+import { routes } from 'constants/routes';
+import { blue } from 'constants/styles';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
 
 export const UserAdminLayout: FC = ({ children }) => {
     const history = useHistory();
 
-    const onClick = () => history.goBack();
+    const onClick = () => history.push(routes.campaignManager.discover.index);
 
     return (
         <MainLayout>
+            <Section>
+                <Span fontSize="26px" lineHeight="32px">
+                    User Admin
+                </Span>
+            </Section>
             <Section alignCenter marginBottom="51px">
                 <Column marginRight="15px">
                     <CustomImg
@@ -24,8 +31,8 @@ export const UserAdminLayout: FC = ({ children }) => {
                         onClick={onClick}
                     />
                 </Column>
-                <Span fontSize="26px" lineHeight="32px">
-                    User Admin
+                <Span color={blue} fontSize="26px" lineHeight="32px">
+                    Go to CampaignManager
                 </Span>
             </Section>
             {children}

@@ -1,5 +1,5 @@
 import searchImg from 'assets/img/search.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { TextInput } from 'components/common/inputs/Input';
 import {
     imgHeight,
@@ -13,7 +13,7 @@ import {
     inputMinWidth
 } from 'components/common/inputs/Search/constants';
 import { Wrapper } from 'components/common/inputs/Search/styles';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { noop } from 'constants/global';
 import React, { ChangeEvent, useState } from 'react';
 import { DefaultValueString, Placeholder } from 'types';

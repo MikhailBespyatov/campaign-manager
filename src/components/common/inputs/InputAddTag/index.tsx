@@ -1,5 +1,5 @@
 import addTagImg from 'assets/img/add_tag.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { TextInput } from 'components/common/inputs/Input';
 import {
     imgHeight,
@@ -15,7 +15,7 @@ import {
     top
 } from 'components/common/inputs/InputAddTag/constants';
 import { Wrapper } from 'components/common/inputs/InputAddTag/styles';
-import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { noop } from 'constants/global';
 import React, { ChangeEvent, FC, useState } from 'react';
 import { Placeholder } from 'types';

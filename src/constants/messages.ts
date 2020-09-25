@@ -7,6 +7,8 @@ export const passwordLengthMessage = (min: number) => 'The password must be at l
 export const oneCapitalCharRequiredMessage = 'At least one uppercase char required';
 export const atLeastOneNumberRequiredMessage = 'At least on number char required';
 
+export const incorrectOrgIdMessage = 'Incorrect organization id';
+
 export const passwordPatternMessage = 'The password must contain a digit and an uppercase character';
 export const repeatPasswordMessage = 'Please, repeat your password';
 export const matchPasswordsMessage = 'Passwords are not identical';

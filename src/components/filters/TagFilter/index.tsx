@@ -1,6 +1,5 @@
 import { ClosableTag } from 'components/common/tags/ClosableTag';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
 import {
     filterMarginRight,
     spanColor,
@@ -9,6 +8,7 @@ import {
     testArray
 } from 'components/filters/TagFilter/constants';
 import { Wrapper } from 'components/filters/TagFilter/styles';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
 import React from 'react';
 import { Title } from 'types';
 

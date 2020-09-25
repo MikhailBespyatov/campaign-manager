@@ -1,5 +1,5 @@
 import expandTagImg from 'assets/img/expand.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     imgHeight,
     imgWidth,
@@ -11,8 +11,8 @@ import {
     top
 } from 'components/common/tags/DropDownMenuTag/constants';
 import { Wrapper } from 'components/common/tags/DropDownMenuTag/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
+import { Span } from 'components/common/typography/Span';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import React, { FC } from 'react';
 import { noop } from 'types';
 

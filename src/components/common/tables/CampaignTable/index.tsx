@@ -3,7 +3,7 @@ import removeButtonImg from 'assets/img/remove_button_img.svg';
 import history from 'BrowserHistory';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     removeButtonImgDiameter,
     tableBorderSpacing,
@@ -17,9 +17,9 @@ import {
     TableRow
 } from 'components/common/tables/CampaignTable/styles';
 import { Table } from 'components/common/tables/Table';
-import { TableSpan } from 'components/common/TextComponents/TableSpan';
-import { TableSubSpan } from 'components/common/TextComponents/TableSubSpan';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { TableSpan } from 'components/common/typography/TableSpan';
+import { TableSubSpan } from 'components/common/typography/TableSubSpan';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { routes } from 'constants/routes';
 import { padding } from 'constants/styles';
 import React from 'react';

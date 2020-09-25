@@ -1,6 +1,6 @@
 import { ContentWrapper, TitleWrapper } from 'components/common/blocks/Block/styles';
-import { H3 } from 'components/common/titles/H';
-import { Column } from 'components/common/wrappers/FlexWrapper';
+import { H3 } from 'components/common/typography/titles/H';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
 import React, { FC } from 'react';
 import { StrictTitle } from 'types';
 

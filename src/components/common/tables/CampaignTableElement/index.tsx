@@ -2,7 +2,7 @@ import productImg from 'assets/img/product_img.svg';
 import removeButtonImg from 'assets/img/remove_button_img.svg';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     removeButtonImgDiameter,
     tableBorderSpacing,
@@ -16,9 +16,9 @@ import {
     TableRow
 } from 'components/common/tables/CampaignTableElement/styles';
 import { Table } from 'components/common/tables/Table';
-import { TableSpan } from 'components/common/TextComponents/TableSpan';
-import { TableSubSpan } from 'components/common/TextComponents/TableSubSpan';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { TableSpan } from 'components/common/typography/TableSpan';
+import { TableSubSpan } from 'components/common/typography/TableSubSpan';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { padding } from 'constants/styles';
 import React from 'react';
 

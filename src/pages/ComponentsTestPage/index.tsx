@@ -21,7 +21,6 @@ import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
-import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
 
@@ -77,7 +76,7 @@ export const Test = () => {
                 <Space />
                 <Radio checked={checked} disabled={disabled} onChange={onChange} />
                 <Space />
-                <VideoCard />
+                {/* <VideoCard /> */}
                 <Space />
                 <Pagination />
                 <Space />

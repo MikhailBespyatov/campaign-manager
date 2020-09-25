@@ -6,8 +6,8 @@ import {
     spanLineHeight
 } from 'components/common/blocks/AsideBlock/constants';
 import { ContentWrapper, TitleWrapper } from 'components/common/blocks/AsideBlock/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
 import React, { FC } from 'react';
 import { StrictTitle } from 'types';
 
