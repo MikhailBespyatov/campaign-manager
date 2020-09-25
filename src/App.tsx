@@ -1,4 +1,5 @@
 import history from 'BrowserHistory';
+import { CardModal } from 'components/modals/CardModal';
 import { routes } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
 import { CampaignManager } from 'pages/CampaignManager';
@@ -11,7 +12,8 @@ import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Detai
 import { Overview } from 'pages/CampaignManager/Overview';
 import { Test } from 'pages/ComponentsTestPage';
 import { SignIn } from 'pages/SignIn';
-import { Adidas as SignInAdidas } from 'pages/SignIn/Adidas';
+import { Admin as SignInAdmin } from 'pages/SignIn/Admin';
+// import { Adidas as SignInAdidas } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { Password as NewPasswordReset } from 'pages/SignIn/PasswordReset/Password';
 import { RequestCode } from 'pages/SignIn/PasswordReset/RequestCode';
@@ -22,12 +24,14 @@ import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Succes
 import { UserAdmin } from 'pages/UserAdmin';
 import React from 'react';
 import { Redirect, Router, Switch } from 'react-router';
+import { AdminRoute } from 'routes/AdminRoute';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 
 const App = () => (
     <>
         <GlobalStyle />
+        <CardModal />
         <Router history={history}>
             <Switch>
                 <PublicRoute exact component={Test} path={routes.test} />
@@ -38,12 +42,13 @@ const App = () => (
                 <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
                 <PublicRoute exact component={SignIn} path={routes.signIn.index} />
-                <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} />
+                <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} />
+                {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
                 <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
                 <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
                 <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
 
-                <PrivateRoute exact component={UserAdmin} path={routes.userAdmin.index} />
+                <AdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
 
                 <PrivateRoute exact component={CampaignManager} path={routes.campaignManager.index} />
                 <PrivateRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
@@ -63,6 +68,7 @@ const App = () => (
                 {/* <PrivateRoute component={AdminContainer} path={routes.admin.index} /> */}
 
                 <Redirect to={routes.signIn.index} />
+                {/* <CardModal /> */}
             </Switch>
         </Router>
     </>

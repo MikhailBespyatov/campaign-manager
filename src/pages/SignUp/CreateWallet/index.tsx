@@ -1,9 +1,9 @@
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
-import { Row } from 'components/common/wrappers/FlexWrapper';
-import { Button } from 'components/FormComponents/Button';
+import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/Form';
-import { WomInput } from 'components/FormComponents/WomInput';
+import { WomInput } from 'components/FormComponents/inputs/WomInput';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';

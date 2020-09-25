@@ -1,10 +1,10 @@
 import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { Loader } from 'components/common/Loader';
-import { Column } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
-import { Button } from 'components/FormComponents/Button';
+import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/Form';
-import { TextInput } from 'components/FormComponents/TextInput';
+import { TextInput } from 'components/FormComponents/inputs/TextInput';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';

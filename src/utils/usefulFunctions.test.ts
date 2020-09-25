@@ -4,6 +4,7 @@ import {
     currencyToText,
     isExactValuesQuantity,
     objectIsEmpty,
+    roundScore,
     slashInserter,
     spaceInserter
 } from 'utils/usefulFunctions';
@@ -76,5 +77,14 @@ describe('isExactValuesQuantity', () => {
         expect(isExactValuesQuantity({ bestLanguage: 'JS' })).toBe(true);
         expect(isExactValuesQuantity({ bestLanguage: 'JS' }, 2)).toBe(false);
         expect(isExactValuesQuantity({ bestFramework: 'REACT', bestFutureFramework: 'SVELTE' }, 2)).toBe(true);
+    });
+});
+
+describe('roundScore', () => {
+    it('Test for rounding a score', () => {
+        expect(roundScore(2.23)).toBe('2.2');
+        expect(roundScore(2.29)).toBe('2.3');
+        expect(roundScore(0)).toBe('0.0');
+        expect(roundScore(1.1212, 2)).toBe('1.12');
     });
 });

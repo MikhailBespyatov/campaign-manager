@@ -1,5 +1,5 @@
 import backgroundImage from 'assets/img/organization-background.jpg';
-import { AbsoluteImg } from 'components/common/ImageComponents/AbsoluteImg';
+import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { authLayoutBackgroundColor } from 'components/Layouts/AuthImageLayout/constants';
 import { Main } from 'components/Layouts/AuthImageLayout/styles';
 import React, { FC } from 'react';

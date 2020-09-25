@@ -1,6 +1,6 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { Span } from 'components/common/TextComponents/Span';
-import { Row, Section } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { Wrapper } from 'components/Layouts/ResultLayouts/CampaignEmpty/styles';
 import React from 'react';
 

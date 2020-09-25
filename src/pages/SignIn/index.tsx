@@ -1,10 +1,13 @@
 import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
+import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
-import { Column } from 'components/common/wrappers/FlexWrapper';
-import { Button } from 'components/FormComponents/Button';
+import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/Form';
-import { TextInput } from 'components/FormComponents/TextInput';
+import { TextInput } from 'components/FormComponents/inputs/TextInput';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
@@ -20,14 +23,28 @@ export const SignIn = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
-                        <Form
-                            subtitle="Enter the company name you used to create the account"
-                            title="Login"
-                            onSubmit={handleSubmit}
-                        >
-                            <TextInput label="Company name" name="companyName" placeholder="Enter your company name" />
+                        <Form onSubmit={handleSubmit}>
+                            <TextInput name="email" type="email" />
+                            <TextInput
+                                label="Password"
+                                name="password"
+                                placeholder="Enter your password"
+                                type="password"
+                            />
+                            <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
+                                <Column>
+                                    <Row>
+                                        <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.admin}>
+                                            Enter as Admin
+                                        </InternalLink>
+                                    </Row>
+                                    <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.passwordReset}>
+                                        Forgot password?
+                                    </InternalLink>
+                                </Column>
+                            </MarginWrapper>
                             <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                                {loading ? <Loader /> : 'CONTINUE'}
+                                {loading ? <Loader /> : 'LOGIN'}
                             </Button>
                         </Form>
                         <FormSignUpLink />

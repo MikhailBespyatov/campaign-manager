@@ -1,9 +1,9 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { InviteInput } from 'components/common/inputs/InviteInput';
 import { Select } from 'components/common/inputs/Select';
 import { UserAdminTable } from 'components/common/tables/UserAdminTable';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
+import { InviteForm } from 'components/FormComponents/userAdminForms/InviteForm';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { UserAdminLayout } from 'components/Layouts/UserAdminLayout';
 import { headersMarginBottom, testSelectArray } from 'pages/UserAdmin/constants';
 import React from 'react';
@@ -24,6 +24,8 @@ export const UserAdmin = () => (
                     <RoundedButton>APPLY</RoundedButton>
                 </Row>
             </Column>
+        </Section>
+        <Section noWrap marginBottom="25px">
             <Column>
                 <Row marginBottom={headersMarginBottom}>
                     <Span fontSize="18px" lineHeight="22px">
@@ -31,10 +33,11 @@ export const UserAdmin = () => (
                     </Span>
                 </Row>
                 <Row alignCenter marginBottom="0">
-                    <Column marginRight={headersMarginBottom}>
+                    <InviteForm />
+                    {/* <Column marginRight={headersMarginBottom}>
                         <InviteInput error="" label="" name="email" />
                     </Column>
-                    <RoundedButton>SEND INVITE</RoundedButton>
+                    <RoundedButton>SEND INVITE</RoundedButton> */}
                 </Row>
             </Column>
         </Section>

@@ -1,10 +1,10 @@
 import footerBottomImg from 'assets/img/footer_bottom.svg';
 import footerLogoImg from 'assets/img/footer_logo.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { Span } from 'components/common/TextComponents/Span';
-import { Row } from 'components/common/wrappers/FlexWrapper';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
 import { footerLogoHeight, footerLogoWidth } from 'components/grid/Footer/constants';
 import { StyledFooter } from 'components/grid/Footer/style';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { white } from 'constants/styles';
 import React from 'react';
 

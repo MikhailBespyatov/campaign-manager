@@ -763,146 +763,146 @@ declare namespace WOM {
     /**
      * contentQueryRequest
      */
-    export interface ContentQueryRequest {
-        /**
-         * int32
-         */
-        limit: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
-        /**
-         * hashSet1
-         * Query by a list of content ids.
-         */
-        byContentIds: string /* objectId */[] | null;
-        validationResult: /**
-         * validationResult
-         * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
-         */
-        ValidationResult /* int32 */;
-        validationEndedReason: /**
-         * validationEndedReason
-         * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
-         */
-        ValidationEndedReason /* int32 */;
-        validationStage: /**
-         * validationStage
-         * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
-         */
-        ValidationStage /* int32 */;
-        /**
-         * nullable1
-         * Filter by documents that are currently being validated.
-         */
-        currentlyValidating: boolean | null;
-        /**
-         * nullable1
-         * Filter by reported state
-         */
-        isReported: boolean | null;
-        /**
-         * nullable1
-         * Filter by live state
-         */
-        isLive: boolean | null;
-        /**
-         * nullable1
-         * Filter by whether this user participated during consensus.
-         */
-        partOfConsensus: boolean | null;
-        /**
-         * boolean
-         * Implies: PartOfConsensus, returns validation documents that the user participated in, but did not get rewarded for or that are no longer live.
-         */
-        partOfConsensusComplete: boolean;
-        /**
-         * objectId
-         * Return only documents owned by this user Id.
-         * example:
-         * 000000000000000000000000
-         */
-        byUserId: string; // objectId
-        /**
-         * string
-         * Return only documents owned by this remote user Id.
-         * You must request with a token issued on the target remote network for a match to occur.
-         */
-        byRemoteUserId: string | null;
-        /**
-         * string
-         * Return only documents owned by this remote Id.
-         * You must request with a token issued on the target remote network for a match to occur.
-         */
-        byRemoteId: string | null;
-        /**
-         * objectId
-         * Return only documents from this segment.
-         * example:
-         * 000000000000000000000000
-         */
-        bySegmentId: string; // objectId
-        /**
-         * nullable1
-         * Filter by documents that are single channel audio
-         */
-        isSingleChannelAudio: boolean | null;
-        /**
-         * nullable1
-         * Filter by documents that are unlimited length
-         */
-        isUnlimitedLength: boolean | null;
-        /**
-         * nullable1
-         * Filter by documents that were filmed in portrait mode
-         */
-        isPortraitAspect: boolean | null;
-        /**
-         * nullable1
-         * Filter by documents with subtitles.
-         */
-        hasSubtitles: boolean | null;
-        /**
-         * tags
-         * Return documents that match any of these tags
-         */
-        tagsAny: string /* string */[] | null;
-        /**
-         * tags
-         * Return documents that contain all of these tags
-         */
-        tagsAll: string /* string */[] | null;
-        /**
-         * boolean
-         * Enable the 'is document hidden by user' feature.
-         */
-        returnUserValidatorHidden: boolean;
-        /**
-         * boolean
-         * Enable the 'user flag inappropriate' feature.
-         */
-        returnUserFlagInappropriate: boolean;
-        /**
-         * boolean
-         * Enable the 'user specific validation details' feature.
-         */
-        returnUserValidationDetails: boolean;
-        /**
-         * boolean
-         * Enable the 'user details' feature, which returns more comprehensive information on the owner.
-         */
-        returnUserDetails: boolean;
-        /**
-         * boolean
-         * Will order the results by 'validation timer' ascending.
-         */
-        orderByValidationTimer: boolean;
-    }
+    // export interface ContentQueryRequest {
+    //     /**
+    //      * int32
+    //      */
+    //     limit: number; // int32
+    //     /**
+    //      * boolean
+    //      */
+    //     returnQueryCount: boolean;
+    //     /**
+    //      * int32
+    //      */
+    //     pageIndex: number; // int32
+    //     /**
+    //      * hashSet1
+    //      * Query by a list of content ids.
+    //      */
+    //     byContentIds: string /* objectId */[] | null;
+    //     validationResult: /**
+    //      * validationResult
+    //      * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
+    //      */
+    //     ValidationResult /* int32 */;
+    //     validationEndedReason: /**
+    //      * validationEndedReason
+    //      * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
+    //      */
+    //     ValidationEndedReason /* int32 */;
+    //     validationStage: /**
+    //      * validationStage
+    //      * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
+    //      */
+    //     ValidationStage /* int32 */;
+    //     /**
+    //      * nullable1
+    //      * Filter by documents that are currently being validated.
+    //      */
+    //     currentlyValidating: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by reported state
+    //      */
+    //     isReported: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by live state
+    //      */
+    //     isLive: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by whether this user participated during consensus.
+    //      */
+    //     partOfConsensus: boolean | null;
+    //     /**
+    //      * boolean
+    //      * Implies: PartOfConsensus, returns validation documents that the user participated in, but did not get rewarded for or that are no longer live.
+    //      */
+    //     partOfConsensusComplete: boolean;
+    //     /**
+    //      * objectId
+    //      * Return only documents owned by this user Id.
+    //      * example:
+    //      * 000000000000000000000000
+    //      */
+    //     byUserId: string; // objectId
+    //     /**
+    //      * string
+    //      * Return only documents owned by this remote user Id.
+    //      * You must request with a token issued on the target remote network for a match to occur.
+    //      */
+    //     byRemoteUserId: string | null;
+    //     /**
+    //      * string
+    //      * Return only documents owned by this remote Id.
+    //      * You must request with a token issued on the target remote network for a match to occur.
+    //      */
+    //     byRemoteId: string | null;
+    //     /**
+    //      * objectId
+    //      * Return only documents from this segment.
+    //      * example:
+    //      * 000000000000000000000000
+    //      */
+    //     bySegmentId: string; // objectId
+    //     /**
+    //      * nullable1
+    //      * Filter by documents that are single channel audio
+    //      */
+    //     isSingleChannelAudio: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by documents that are unlimited length
+    //      */
+    //     isUnlimitedLength: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by documents that were filmed in portrait mode
+    //      */
+    //     isPortraitAspect: boolean | null;
+    //     /**
+    //      * nullable1
+    //      * Filter by documents with subtitles.
+    //      */
+    //     hasSubtitles: boolean | null;
+    //     /**
+    //      * tags
+    //      * Return documents that match any of these tags
+    //      */
+    //     tagsAny: string /* string */[] | null;
+    //     /**
+    //      * tags
+    //      * Return documents that contain all of these tags
+    //      */
+    //     tagsAll: string /* string */[] | null;
+    //     /**
+    //      * boolean
+    //      * Enable the 'is document hidden by user' feature.
+    //      */
+    //     returnUserValidatorHidden: boolean;
+    //     /**
+    //      * boolean
+    //      * Enable the 'user flag inappropriate' feature.
+    //      */
+    //     returnUserFlagInappropriate: boolean;
+    //     /**
+    //      * boolean
+    //      * Enable the 'user specific validation details' feature.
+    //      */
+    //     returnUserValidationDetails: boolean;
+    //     /**
+    //      * boolean
+    //      * Enable the 'user details' feature, which returns more comprehensive information on the owner.
+    //      */
+    //     returnUserDetails: boolean;
+    //     /**
+    //      * boolean
+    //      * Will order the results by 'validation timer' ascending.
+    //      */
+    //     orderByValidationTimer: boolean;
+    // }
     /**
      * contentQueryResponse
      */

@@ -1,10 +1,10 @@
 import { Loader } from 'components/common/Loader';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { BooleanCheckbox } from 'components/FormComponents/BooleanCheckbox';
-import { Button } from 'components/FormComponents/Button';
+import { Span } from 'components/common/typography/Span';
+import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/Form';
-import { TextInput } from 'components/FormComponents/TextInput';
+import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbox';
+import { TextInput } from 'components/FormComponents/inputs/TextInput';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';

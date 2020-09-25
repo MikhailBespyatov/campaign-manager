@@ -1,8 +1,8 @@
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { inactiveColor } from 'components/common/inputs/RowHeaderRadio/constants';
 import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { formGrey3, secondaryColor } from 'constants/styles';
 import React, { useState } from 'react';

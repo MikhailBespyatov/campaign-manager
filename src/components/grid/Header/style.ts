@@ -1,4 +1,4 @@
-import { Span } from 'components/common/TextComponents/Span';
+import { Span } from 'components/common/typography/Span';
 import {
     headerHorizontalMargin,
     headerVerticalMargin,

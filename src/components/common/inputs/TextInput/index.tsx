@@ -1,6 +1,6 @@
 import errorImg from 'assets/img/error.svg';
 import successImg from 'assets/img/success.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { TextInput as StyledInput } from 'components/common/inputs/Input';
 import {
     absoluteIconRight,
@@ -16,9 +16,9 @@ import {
     labelMarginBottom
 } from 'components/common/inputs/TextInput/constants';
 import { InputWrapper, Wrapper } from 'components/common/inputs/TextInput/styles';
-import { Span } from 'components/common/TextComponents/Span';
-import { AbsoluteWrapper } from 'components/common/wrappers/AbsoluteWrapper';
-import { Row } from 'components/common/wrappers/FlexWrapper';
+import { Span } from 'components/common/typography/Span';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { errorColor, successColor } from 'constants/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';

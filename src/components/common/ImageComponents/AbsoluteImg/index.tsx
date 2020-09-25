@@ -1,4 +1,4 @@
-import { Img, ImgWrapper } from 'components/common/ImageComponents/AbsoluteImg/styles';
+import { Img, ImgWrapper } from 'components/common/imageComponents/AbsoluteImg/styles';
 import { defaultImgAlt } from 'constants/defaults';
 import React from 'react';
 import { Background, imgProperties, NoopClick, Pointer } from 'types';

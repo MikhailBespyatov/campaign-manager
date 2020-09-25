@@ -8,7 +8,7 @@ import {
     checkboxFocusShadow,
     checkboxInactiveBorder
 } from 'components/common/inputs/BooleanCircleCheckbox/constants';
-import { CheckboxProps } from 'components/FormComponents/BooleanCheckbox/types';
+import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/types';
 import {
     blue,
     disableDefaultCheckboxStyleMixin,

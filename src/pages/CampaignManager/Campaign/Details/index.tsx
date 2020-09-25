@@ -7,13 +7,13 @@ import hideButtonImg from 'assets/img/hide_button_img.svg';
 import history from 'BrowserHistory';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ballDiameter } from 'components/common/inputs/LanguageSwitch/constants';
 import { CampaignTableElement } from 'components/common/tables/CampaignTableElement';
-import { Span } from 'components/common/TextComponents/Span';
-import { ContentWrapper } from 'components/common/wrappers/ContentWrapper';
-import { Column, Section } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { Span } from 'components/common/typography/Span';
+import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
+import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import ReactEcharts from 'echarts-for-react';
 import {

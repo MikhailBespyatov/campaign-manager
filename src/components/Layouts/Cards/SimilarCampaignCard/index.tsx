@@ -4,12 +4,12 @@ import group2img from 'assets/img/group_2.svg';
 import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
 import { AddButton } from 'components/common/buttons/AddButton';
-import { AbsoluteImg } from 'components/common/ImageComponents/AbsoluteImg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
 import { Card, Description } from 'components/grid/Card';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import {
     cardHeight,
     cardWidth,

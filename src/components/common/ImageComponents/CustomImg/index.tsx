@@ -1,4 +1,4 @@
-import { Img, ImgWrapper } from 'components/common/ImageComponents/CustomImg/styles';
+import { Img, ImgWrapper } from 'components/common/imageComponents/CustomImg/styles';
 import { defaultImgAlt } from 'constants/defaults';
 import React from 'react';
 import { BorderRadiusProperties, imgProperties, NoopClick, Pointer, Rotation, Sizes } from 'types';

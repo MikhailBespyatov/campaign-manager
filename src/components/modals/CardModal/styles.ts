@@ -12,8 +12,8 @@ import styled from 'styled-components';
 import { Visibility } from 'types';
 
 export const Wrapper = styled.div<Visibility>`
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     left: 0;
     ${flexStart};
     width: 100%;
@@ -21,7 +21,7 @@ export const Wrapper = styled.div<Visibility>`
     background: ${wrapperBackground};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
     //transition: ${transitionTime};
-    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+    display: ${({ visible }) => (visible ? 'block' : 'none')};
     z-index: 9;
 `;
 

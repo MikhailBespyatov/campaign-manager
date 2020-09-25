@@ -1,4 +1,4 @@
-import { ImgWrapperProps } from 'components/common/ImageComponents/AbsoluteImg/types';
+import { ImgWrapperProps } from 'components/common/imageComponents/AbsoluteImg/types';
 import styled from 'styled-components';
 
 export const ImgWrapper = styled.div<ImgWrapperProps>`

@@ -1,6 +1,4 @@
-import { Span } from 'components/common/TextComponents/Span';
-import { Column } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
+import { Span } from 'components/common/typography/Span';
 import {
     activeColor,
     itemOpacity,
@@ -9,6 +7,8 @@ import {
     spanLineHeight
 } from 'components/grid/bars/TopBarWithButton/constants';
 import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/style';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { routesArray } from 'constants/routes';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';

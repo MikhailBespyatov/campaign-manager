@@ -1,6 +1,6 @@
 import { Summary } from 'components/common/features/Summary';
 import { CampaignTable } from 'components/common/tables/CampaignTable';
-import { Section } from 'components/common/wrappers/FlexWrapper';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { Pagination } from 'components/Layouts/Pagination';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';

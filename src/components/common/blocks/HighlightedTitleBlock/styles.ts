@@ -7,10 +7,12 @@ import {
     titleWrapperHorizontalPadding,
     titleWrapperVerticalPadding
 } from 'components/common/blocks/HighlightedTitleBlock/constants';
-import { primaryBorder, primaryBorderRadius } from 'constants/styles';
+import { flexCenter, primaryBorder, primaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 
 export const TitleWrapper = styled.div`
+    ${flexCenter};
+    flex-direction: row;
     width: 100%;
     height: ${titleWrapperHeight};
     border-top-left-radius: ${primaryBorderRadius};

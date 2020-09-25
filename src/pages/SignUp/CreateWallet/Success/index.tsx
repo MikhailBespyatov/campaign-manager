@@ -1,11 +1,11 @@
 import successImg from 'assets/img/big_success.svg';
 import womLogo from 'assets/img/wom_logo.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
-import { Span } from 'components/common/TextComponents/Span';
-import { Column, Row } from 'components/common/wrappers/FlexWrapper';
-import { Button } from 'components/FormComponents/Button';
+import { Span } from 'components/common/typography/Span';
+import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/Form';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';

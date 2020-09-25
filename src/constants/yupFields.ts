@@ -10,22 +10,22 @@ import {
 import { atLeastOneNumberRequiredRegExp, oneCapitalCharRequiredRegExp } from 'constants/regExp';
 import * as Yup from 'yup';
 
-const defaultYupField = Yup.string().required(requiredFieldMessage);
+export const yupDefault = Yup.string().required(requiredFieldMessage);
 
-export const yupCompanyName = defaultYupField;
-export const yupUsername = defaultYupField;
+export const yupCompanyName = yupDefault;
+export const yupUsername = yupDefault;
 export const yupEmail = Yup.string().email(invalidEmailMessage).required(requiredFieldMessage);
-export const yupEmailNoHint = defaultYupField;
+export const yupEmailNoHint = yupDefault;
 export const yupPassword = Yup.string()
     .required(requiredFieldMessage)
     .min(passwordMinimum, passwordLengthMessage(passwordMinimum))
     .matches(oneCapitalCharRequiredRegExp, oneCapitalCharRequiredMessage)
     .matches(atLeastOneNumberRequiredRegExp, atLeastOneNumberRequiredMessage);
-export const yupPasswordNoHint = defaultYupField;
-export const yupSecurityCode = defaultYupField;
+export const yupPasswordNoHint = yupDefault;
+export const yupSecurityCode = yupDefault;
 
-export const yupWom = defaultYupField;
-export const yupCardName = defaultYupField;
+export const yupWom = yupDefault;
+export const yupCardName = yupDefault;
 export const yupCardNumber = Yup.string()
     .min(19, exactLimitMessage(16))
     .max(19, exactLimitMessage(16))

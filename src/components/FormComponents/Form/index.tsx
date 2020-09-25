@@ -1,5 +1,5 @@
 import defaultLogo from 'assets/img/form_logo_1.svg';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { logoDiameter } from 'components/FormComponents/Form/constants';
 import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
 import { noop } from 'constants/global';
@@ -13,8 +13,8 @@ interface Props extends Title, WithSrc {
 
 export const Form: FC<Props> = ({
     children,
-    title = 'Hello @adidas',
-    subtitle = 'to discover & manage WOM Content',
+    title = 'Hello, please enter as User',
+    subtitle = 'To discover & manage WOM Content',
     onSubmit = noop,
     src = defaultLogo,
     subSubtitle

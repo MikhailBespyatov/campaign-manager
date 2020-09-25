@@ -6,14 +6,14 @@ import ballPreviewImg from 'assets/img/ball_preview.svg';
 import ballViewImg from 'assets/img/ball_view.svg';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
-import { CustomImg } from 'components/common/ImageComponents/CustomImg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { RowRadio } from 'components/common/inputs/RowRadio';
-import { Span } from 'components/common/TextComponents/Span';
-import { ContentWrapper } from 'components/common/wrappers/ContentWrapper';
-import { Column, Row, Section } from 'components/common/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/common/wrappers/MarginWrapper';
-import { OverflowAutoWrapper } from 'components/common/wrappers/OverflowAutoWrapper';
+import { Span } from 'components/common/typography/Span';
 import { TagFilter } from 'components/filters/TagFilter';
+import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { OverflowAutoWrapper } from 'components/grid/wrappers/OverflowAutoWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CampaignContentCard } from 'components/Layouts/Cards/CampaignContentCard';
 import { closeModalImgDiameter } from 'components/Layouts/Cards/CampaignContentCard/constants';
@@ -57,6 +57,7 @@ export const Details = () => {
                                         onClick={onBack}
                                     />
                                 }
+                                id="id"
                             />
                         </Column>
                         <Column>

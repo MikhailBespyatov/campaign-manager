@@ -1,4 +1,4 @@
-import { ImgWrapperProps } from 'components/common/ImageComponents/CustomImg/types';
+import { ImgWrapperProps } from 'components/common/imageComponents/CustomImg/types';
 import { flexCenter } from 'constants/styles/mixins';
 import styled from 'styled-components';
 

@@ -8,10 +8,13 @@ const cardModal = createStore<CardModal>({
     visible: false,
     id: ''
 })
-    .on(openCardModal, (_, id) => ({
-        visible: true,
-        id: id
-    }))
+    .on(openCardModal, (_, id) =>
+        // console.log(id);
+        ({
+            visible: true,
+            id: id
+        })
+    )
     .on(closeCardModal, () => ({
         visible: false,
         id: ''

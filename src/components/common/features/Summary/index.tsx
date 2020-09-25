@@ -9,7 +9,7 @@ import {
     titleLineHeight
 } from 'components/common/features/Summary/constants';
 import { Wrapper } from 'components/common/features/Summary/styles';
-import { Span } from 'components/common/TextComponents/Span';
+import { Span } from 'components/common/typography/Span';
 import React from 'react';
 import { MarginRightBottom, Title } from 'types';
 
