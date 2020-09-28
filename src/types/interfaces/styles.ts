@@ -54,6 +54,10 @@ export interface BorderRadiusProperties {
     borderBottomRightRadius?: string;
 }
 
+export interface RemoveBorder {
+    removeBorder?: boolean;
+}
+
 export interface BorderProperties {
     border?: string;
     borderTop?: string;
@@ -85,7 +89,7 @@ export interface ForcedColor {
     forcedColor?: string;
 }
 
-export interface TextProperties extends NoWrap, Color {
+export interface TextProperties extends NoWrap, Color, Opacity {
     fontFamily?: string;
     fontStyle?: string;
     fontSize?: string;

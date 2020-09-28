@@ -25,7 +25,7 @@ export const TitleWrapper = styled.div`
 
 export const ContentWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     border-bottom-left-radius: ${primaryBorderRadius};
     border-bottom-right-radius: ${primaryBorderRadius};

@@ -12,14 +12,14 @@ const setAuth = createEvent<Auth>();
 const loadToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             const data = await API.user.authenticateUser(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             return {};
         }
     }
@@ -28,14 +28,14 @@ const loadToken = createEffect({
 const loadAdminToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             const data = await API.user.authenticateAdmin(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             return {};
         }
     }
@@ -44,11 +44,11 @@ const loadAdminToken = createEffect({
 const inviteUser = createEffect({
     handler: async ({ values, setErrors }: InviteRequestProps) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             await API.user.inviteUser(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             setErrors({
                 organizationId: incorrectOrgIdMessage
             });
@@ -59,14 +59,14 @@ const inviteUser = createEffect({
 const createUserAndLoadToken = createEffect({
     handler: async (values: RegisterUserRequest) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             const data = await API.user.createUser(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             return {};
         }
     }
@@ -75,14 +75,14 @@ const createUserAndLoadToken = createEffect({
 const acceptInvitationAndLoadToken = createEffect({
     handler: async (values: WOM.UserAcceptInviteCampaignAccountRequest) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             const data = await API.user.acceptInvitation(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             return {};
         }
     }

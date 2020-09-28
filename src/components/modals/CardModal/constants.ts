@@ -15,3 +15,5 @@ export const modalVerticalPadding = '36px';
 export const modalHorizontalPadding = '48px';
 
 export const closeModalImgDiameter = '40px';
+
+export const miniMarginBottom = '4px';
