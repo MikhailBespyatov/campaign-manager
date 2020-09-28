@@ -17,6 +17,7 @@ export const tagInvalidMessage = "A hashtag cannot have any '#' or whitespaces w
 // error auth
 export const errorDataMessage = 'Your data is incorrect';
 export const notEntryAllowedMessage = 'You have no rights to enter';
+export const wrongInviteCodeMessage = 'Wrong invite code';
 
 const errorMessages = {
     requiredField: 'This field is required',

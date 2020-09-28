@@ -21,8 +21,22 @@ export interface SetErrorsInviteRequest {
     ) => void;
 }
 
+export interface SetErrorsAcceptInviteRequest {
+    setErrors: (
+        errors: FormikErrors<{
+            inviteCode?: string | undefined;
+            username?: string | undefined;
+            password?: string | undefined;
+        }>
+    ) => void;
+}
+
 export interface InviteRequestProps extends SetErrorsInviteRequest {
     values: WOM.SendOrganizationInvitationsRequest;
+}
+
+export interface AcceptInviteRequestProps extends SetErrorsAcceptInviteRequest {
+    values: WOM.OrganizationAcceptInviteRequest;
 }
 
 export interface Id {
