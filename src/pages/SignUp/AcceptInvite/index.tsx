@@ -12,6 +12,7 @@ import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/AcceptInvite/constants';
 import React from 'react';
+import { useParams } from 'react-router';
 import { loadingStores } from 'stores/loading';
 
 // const HighlightSpan: FC = ({ children }) => (
@@ -20,16 +21,24 @@ import { loadingStores } from 'stores/loading';
 //     </Span>
 // );
 
-interface ParamsProps {}
+interface ParamsProps {
+    inviteCode?: string;
+}
 
 export const AcceptInvite = () => {
+    const { inviteCode } = useParams<ParamsProps>();
     const loading = useStore(loadingStores.loading);
 
     return (
         <AuthLayout>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+            <Formik
+                initialValues={{ ...initialValues, inviteCode: inviteCode || '' }}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+            >
                 {({ handleSubmit, isValid, dirty }) => (
-                    <Form title="Create an account" onSubmit={handleSubmit}>
+                    <Form subtitle="Accept invite" title="Create an account" onSubmit={handleSubmit}>
+                        <TextInput disabled label="Invite Code" name="inviteCode" placeholder="" />
                         <TextInput label="Login" name="username" placeholder="Enter your account name" />
                         <TextInput
                             label="Password"
@@ -50,26 +59,9 @@ export const AcceptInvite = () => {
                                 </InternalLink>
                             </Column>
                         </MarginWrapper>
-                        {/* <Row alignCenter noWrap marginBottom="35px" marginTop="30px">
-                            <Column marginRight="15px">
-                                <BooleanCheckbox />
-                            </Column>
-                            <Span color={formGrey5} fontSize="14px" fontWeight="500" lineHeight="17px">
-                                I acknowledge that I have read <HighlightSpan>Privacy Policy</HighlightSpan> and agree
-                                to the <HighlightSpan>Terms of Service</HighlightSpan>.
-                            </Span>
-                        </Row> */}
-                        <Button
-                            // background={isExactValuesQuantity(touched) && objectIsEmpty(errors) ? blue : undefined}
-                            background={isValid && dirty ? blue : undefined}
-                            disabled={loading}
-                        >
-                            {loading ? <Loader /> : 'SIGN UP'}
+                        <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
+                            {loading ? <Loader /> : 'ACCEPT INVITE'}
                         </Button>
-                        {/* <Span alignCenter color="#9EA1B3" fontSize="18px" fontWeight="500" lineHeight="22px">
-                            By tapping "Sign Up & Accept", you acknowledge that you have read the Privacy Policy and
-                            agree to the Terms of Service.
-                        </Span> */}
                     </Form>
                 )}
             </Formik>

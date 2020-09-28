@@ -12,4 +12,10 @@ declare namespace WOM {
     export interface ContentItemResponse {
         womContentId: string;
     }
+
+    export interface OrganizationAcceptInviteRequest {
+        inviteCode: string;
+        username: string;
+        password: string;
+    }
 }

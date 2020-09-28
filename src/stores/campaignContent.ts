@@ -5,13 +5,13 @@ import { loadingEffects } from 'stores/loading';
 const getItemById = createEffect({
     handler: async (id: string) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateLoading();
             const data = await API.campaignContent.getItemById({ contentId: id });
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
 
             return data;
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateLoading();
             return {};
         }
     }
@@ -20,13 +20,13 @@ const getItemById = createEffect({
 const getItems = createEffect({
     handler: async (values: WOM.ContentQueryRequest) => {
         try {
-            loadingEffects.setLoading(true);
+            loadingEffects.updateInitialLoading();
             const data = await API.campaignContent.getItems(values);
-            loadingEffects.setLoading(false);
+            loadingEffects.updateInitialLoading();
 
             return data.items ? data.items : [];
         } catch {
-            loadingEffects.setLoading(false);
+            loadingEffects.updateInitialLoading();
             return [];
         }
     }

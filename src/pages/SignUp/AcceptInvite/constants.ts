@@ -1,34 +1,23 @@
-import { yupCompanyName, yupEmail, yupPassword, yupUsername } from 'constants/yupFields';
-import { FormikErrors } from 'formik';
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { RegisterUserRequest } from 'types';
+import { yupDefault } from 'constants/yupFields';
+import { userEffects } from 'stores/user';
+import { SetErrorsAcceptInviteRequest } from 'types';
 import * as Yup from 'yup';
 
-export const initialValues = { email: '', password: '', companyName: '', username: '' };
+interface Props extends WOM.OrganizationAcceptInviteRequest {}
+
+export const initialValues: Props = { inviteCode: '', username: '', password: '' };
 
 export const validationSchema = Yup.object().shape({
-    companyName: yupCompanyName,
-    username: yupUsername,
-    email: yupEmail,
-    password: yupPassword
+    inviteCode: yupDefault,
+    username: yupDefault,
+    password: yupDefault
 });
 
-interface SetErrorsFormikProps {
-    setErrors: (
-        errors: FormikErrors<{
-            email?: string;
-            password?: string;
-        }>
-    ) => void;
-}
+interface SetErrorsFormikProps extends SetErrorsAcceptInviteRequest {}
 
-export const onSubmit = (values: RegisterUserRequest, { setErrors }: SetErrorsFormikProps) => {
-    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-        setErrors({
-            email: authDenyReason,
-            password: authDenyReason
-        });
-        unwatch();
+export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) => {
+    userEffects.acceptInvitationAndLoadToken({
+        values: values,
+        setErrors: setErrors
     });
-    userEffects.createUserAndLoadToken(values);
 };

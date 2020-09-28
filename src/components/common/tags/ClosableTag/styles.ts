@@ -6,7 +6,7 @@ import {
     wrapperWidth
 } from 'components/common/tags/ClosableTag/constants';
 import { WrapperProps } from 'components/common/tags/ClosableTag/types';
-import { black, flexCenter } from 'constants/styles';
+import { black, flexCenter, primaryPadding } from 'constants/styles';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -17,8 +17,8 @@ export const Wrapper = styled.div<WrapperProps>`
     border-radius: ${wrapperBorderRadius};
     background-color: ${black};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
-    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
-    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
+    margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : primaryPadding)};
+    margin-right: ${({ marginRight }) => (marginRight ? marginRight : primaryPadding)};
     ${({ borderRadius }) => (borderRadius ? `border-radius: ${borderRadius};` : ``)};
     ${({ borderTopLeftRadius }) => (borderTopLeftRadius ? `border-top-left-radius: ${borderTopLeftRadius};` : ``)};
     ${({ borderTopRightRadius }) => (borderTopRightRadius ? `border-top-right-radius: ${borderTopRightRadius};` : ``)};

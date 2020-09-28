@@ -25,6 +25,7 @@ export const iconsFontSIze = '20px';
 export const footerHeight = '456px';
 export const CloseButtonDiameter = '40px';
 export const hashtagsSliderHeight = '30px';
+export const closableTagHeight = '35px';
 
 export const mainLayoutBorderRadius = '30px';
 

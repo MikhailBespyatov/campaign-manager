@@ -18,6 +18,7 @@ import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { Password as NewPasswordReset } from 'pages/SignIn/PasswordReset/Password';
 import { RequestCode } from 'pages/SignIn/PasswordReset/RequestCode';
 import { CreateAccount } from 'pages/SignUp';
+import { AcceptInvite } from 'pages/SignUp/AcceptInvite';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
 import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
@@ -37,6 +38,7 @@ const App = () => (
                 <PublicRoute exact component={Test} path={routes.test} />
 
                 <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} />
+                <PublicRoute exact component={AcceptInvite} path={routes.signUp.acceptInvite} />
                 <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                 <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                 <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />

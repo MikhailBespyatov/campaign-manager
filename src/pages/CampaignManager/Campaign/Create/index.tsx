@@ -33,23 +33,23 @@ const DarkBudgetSpan: FC = ({ children }) => (
     </Span>
 );
 
-const FilterSpan: FC = ({ children }) => (
-    <Span color="#6B6B6B" fontSize="26px" lineHeight="32px">
-        {children}
-    </Span>
-);
+// const FilterSpan: FC = ({ children }) => (
+//     <Span color="#6B6B6B" fontSize="26px" lineHeight="32px">
+//         {children}
+//     </Span>
+// );
 
-const OptionSpan: FC = ({ children }) => (
-    <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
-        {children}
-    </Span>
-);
+// const OptionSpan: FC = ({ children }) => (
+//     <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+//         {children}
+//     </Span>
+// );
 
-const TitleSpan: FC = ({ children }) => (
-    <Span color="#0F1642" fontSize="50px" fontWeight="bold" lineHeight="61px">
-        {children}
-    </Span>
-);
+// const TitleSpan: FC = ({ children }) => (
+//     <Span color="#0F1642" fontSize="50px" fontWeight="bold" lineHeight="61px">
+//         {children}
+//     </Span>
+// );
 
 // const SubtitleSpan: FC = ({ children }) => (
 //     <Span color="#0F1642" fontSize="28px" fontWeight="normal" lineHeight="34px" opacity={0.5}>
@@ -128,81 +128,83 @@ export const Create = () => (
                 </Row>
                 <Row marginBottom={primaryPadding}>
                     <HighlightedTitleBlock title="Similar Campaigns">
-                        <RowBlockCell padding={primaryPadding}>
-                            <Column>
-                                <Row>
-                                    <Search />
-                                </Row>
-                                <Section noWrap>
-                                    <Column width="50%">
-                                        <Row>
-                                            <P>Recomended</P>
-                                        </Row>
-                                        <Row marginBottom={tertiaryPadding}>
-                                            <AddableTag>Adidas</AddableTag>
-                                        </Row>
-                                        <Row marginBottom={tertiaryPadding}>
-                                            <AddableTag>Adidas</AddableTag>
-                                        </Row>
-                                    </Column>
-                                    <Column width="50%">
-                                        <Row>
-                                            <P>Compatible</P>
-                                        </Row>
-                                        <Row marginBottom={tertiaryPadding}>
-                                            <AddableTag>Adidas</AddableTag>
-                                        </Row>
-                                        <Row marginBottom={tertiaryPadding}>
-                                            <AddableTag>Adidas</AddableTag>
-                                        </Row>
-                                    </Column>
-                                </Section>
-                            </Column>
-                        </RowBlockCell>
-                        <RowBlockCell padding={primaryPadding}>
-                            <Column marginBottom="auto">
-                                <Section marginTop="26px">
-                                    <P>Watched Override</P>
-                                    <MarginWrapper marginLeft="auto">
-                                        <Switch />
-                                    </MarginWrapper>
-                                </Section>
-                                <Section>
-                                    <P>Must Watch</P>
-                                    <MarginWrapper marginLeft="auto">
-                                        <Switch />
-                                    </MarginWrapper>
-                                </Section>
-                                <Section>
-                                    <P>Boost Content</P>
-                                    <MarginWrapper marginLeft="40px">
-                                        <NumberCounter />
-                                    </MarginWrapper>
-                                </Section>
-                            </Column>
-                        </RowBlockCell>
-                        <RowBlockCell padding={primaryPadding}>
-                            <Column marginBottom="auto">
-                                <Section marginTop="26px">
-                                    <P>Boost Creator</P>
-                                    <MarginWrapper marginLeft="auto">
-                                        <NumberCounter />
-                                    </MarginWrapper>
-                                </Section>
-                                <Section>
-                                    <P>Hashtag #Adidas</P>
-                                    <MarginWrapper marginLeft="auto">
-                                        <NumberCounter />
-                                    </MarginWrapper>
-                                </Section>
-                                <Section>
-                                    <P>Hashtag #Sports...</P>
-                                    <MarginWrapper marginLeft="40px">
-                                        <NumberCounter />
-                                    </MarginWrapper>
-                                </Section>
-                            </Column>
-                        </RowBlockCell>
+                        <ColumnBlockCell>
+                            <RowBlockCell padding={primaryPadding}>
+                                <Column>
+                                    <Row>
+                                        <Search />
+                                    </Row>
+                                    <Section noWrap>
+                                        <Column width="50%">
+                                            <Row>
+                                                <P>Recomended</P>
+                                            </Row>
+                                            <Row marginBottom={tertiaryPadding}>
+                                                <AddableTag>Adidas</AddableTag>
+                                            </Row>
+                                            <Row marginBottom={tertiaryPadding}>
+                                                <AddableTag>Adidas</AddableTag>
+                                            </Row>
+                                        </Column>
+                                        <Column width="50%">
+                                            <Row>
+                                                <P>Compatible</P>
+                                            </Row>
+                                            <Row marginBottom={tertiaryPadding}>
+                                                <AddableTag>Adidas</AddableTag>
+                                            </Row>
+                                            <Row marginBottom={tertiaryPadding}>
+                                                <AddableTag>Adidas</AddableTag>
+                                            </Row>
+                                        </Column>
+                                    </Section>
+                                </Column>
+                            </RowBlockCell>
+                            <RowBlockCell padding={primaryPadding}>
+                                <Column marginBottom="auto">
+                                    <Section marginTop="26px">
+                                        <P>Watched Override</P>
+                                        <MarginWrapper marginLeft="auto">
+                                            <Switch />
+                                        </MarginWrapper>
+                                    </Section>
+                                    <Section>
+                                        <P>Must Watch</P>
+                                        <MarginWrapper marginLeft="auto">
+                                            <Switch />
+                                        </MarginWrapper>
+                                    </Section>
+                                    <Section>
+                                        <P>Boost Content</P>
+                                        <MarginWrapper marginLeft="40px">
+                                            <NumberCounter />
+                                        </MarginWrapper>
+                                    </Section>
+                                </Column>
+                            </RowBlockCell>
+                            <RowBlockCell padding={primaryPadding}>
+                                <Column marginBottom="auto">
+                                    <Section marginTop="26px">
+                                        <P>Boost Creator</P>
+                                        <MarginWrapper marginLeft="auto">
+                                            <NumberCounter />
+                                        </MarginWrapper>
+                                    </Section>
+                                    <Section>
+                                        <P>Hashtag #Adidas</P>
+                                        <MarginWrapper marginLeft="auto">
+                                            <NumberCounter />
+                                        </MarginWrapper>
+                                    </Section>
+                                    <Section>
+                                        <P>Hashtag #Sports...</P>
+                                        <MarginWrapper marginLeft="40px">
+                                            <NumberCounter />
+                                        </MarginWrapper>
+                                    </Section>
+                                </Column>
+                            </RowBlockCell>
+                        </ColumnBlockCell>
                     </HighlightedTitleBlock>
                 </Row>
             </Column>

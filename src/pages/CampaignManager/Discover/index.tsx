@@ -11,7 +11,7 @@ import { loadingStores } from 'stores/loading';
 
 export const Discover = () => {
     const items = useStore(campaignContentStores.items);
-    const loading = useStore(loadingStores.loading);
+    const loading = useStore(loadingStores.initialLoading);
 
     useEffect(() => {
         campaignContentEffects.getItems({

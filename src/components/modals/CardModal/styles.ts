@@ -7,7 +7,7 @@ import {
     wrapperHorizontalPadding,
     wrapperVerticalPadding
 } from 'components/modals/CardModal/constants';
-import { flexStart, transitionTime } from 'constants/styles';
+import { flexStart, primaryPadding, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
 
@@ -20,9 +20,11 @@ export const Wrapper = styled.div<Visibility>`
     height: 100%;
     background: ${wrapperBackground};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
+    padding-bottom: ${primaryPadding};
     //transition: ${transitionTime};
     display: ${({ visible }) => (visible ? 'block' : 'none')};
     z-index: 9;
+    overflow: auto;
 `;
 
 export const Modal = styled.div`
