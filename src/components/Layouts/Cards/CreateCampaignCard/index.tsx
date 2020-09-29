@@ -11,6 +11,7 @@ import { Card, Description } from 'components/grid/Card';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { cardHeight, cardWidth, productImgDiameter } from 'components/Layouts/Cards/CreateCampaignCard/constants';
+import { noContentMessage } from 'constants/messages';
 import { primaryPadding, secondaryPadding, white } from 'constants/styles';
 import React, { FC } from 'react';
 import { modalEvents } from 'stores/modal';
@@ -29,13 +30,17 @@ const ProductSpan: FC = ({ children }) => (
     </Span>
 );
 
+//TODO [any]
 interface Props extends MarginRightBottom, Sizes {
     uriPrimary?: string;
     womQualityScore?: WOM.WOMQualityScore;
+    products?: any;
 }
 
-export const CreateCampaignCard = ({ uriPrimary, womQualityScore, ...styles }: Props) => {
+export const CreateCampaignCard = ({ uriPrimary, womQualityScore, products, ...styles }: Props) => {
     const openCardModal = () => modalEvents.openCardModal('some id');
+
+    const productsItem = products && products.length && products[0];
 
     return (
         <Card height={cardHeight} width={cardWidth} {...styles}>
@@ -59,25 +64,31 @@ export const CreateCampaignCard = ({ uriPrimary, womQualityScore, ...styles }: P
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group1img} width={productImgDiameter} />
                             </Column>
-                            <ProductSpan>Adidas</ProductSpan>
+                            <ProductSpan>
+                                {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
+                            </ProductSpan>
                         </Row>
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
                             </Column>
-                            <ProductSpan>Shoes</ProductSpan>
+                            <ProductSpan>
+                                {productsItem?.tagCategory ? productsItem.tagCategory : noContentMessage}
+                            </ProductSpan>
                         </Row>
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group3img} width={productImgDiameter} />
                             </Column>
-                            <ProductSpan>Sport Shoes</ProductSpan>
+                            <ProductSpan>
+                                {productsItem?.tagSubCategory ? productsItem.tagSubCategory : noContentMessage}
+                            </ProductSpan>
                         </Row>
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
                             </Column>
-                            <ProductSpan>Superstar</ProductSpan>
+                            <ProductSpan>{productsItem?.item ? productsItem.item : noContentMessage}</ProductSpan>
                         </Row>
                     </Column>
                 </MarginWrapper>

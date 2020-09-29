@@ -41,7 +41,6 @@ export const buyColor = '#FECF00';
 const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
 
 export const graphicOption = {
-    colors: ['#5793f3', '#d14a61', '#675bba'],
     textStyle: { color: graphicTextColor },
     tooltip: {
         trigger: 'axis',

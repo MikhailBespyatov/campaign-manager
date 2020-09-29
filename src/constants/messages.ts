@@ -19,6 +19,9 @@ export const errorDataMessage = 'Your data is incorrect';
 export const notEntryAllowedMessage = 'You have no rights to enter';
 export const wrongInviteCodeMessage = 'Wrong invite code';
 
+// global
+export const noContentMessage = 'No content';
+
 const errorMessages = {
     requiredField: 'This field is required',
     invalidEmail: 'This email format is invalid',

@@ -1,3 +1,4 @@
+import avatarImg from 'assets/img/avatar.svg';
 import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
@@ -18,8 +19,9 @@ import {
     validatorsPadding
 } from 'components/modals/CardModal/constants';
 import { Wrapper } from 'components/modals/CardModal/styles';
+import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { primaryPadding, secondaryPadding, tertiaryPadding } from 'constants/styles';
+import { avatarDiameter, primaryPadding, secondaryPadding, tertiaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -58,8 +60,10 @@ const EngagementSpan: FC = ({ children }) => (
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
     // @ts-ignore
-    const { uriPrimary, womQualityScore, engagement } = useStore(campaignContentStores.item);
+    const { uriPrimary, womQualityScore, engagement, products } = useStore(campaignContentStores.item);
     const loading = useStore(loadingStores.loading);
+
+    const productsItem = products && products.length && products[0];
 
     useEffect(() => {
         visible && campaignContentEffects.getItemById(id);
@@ -97,7 +101,11 @@ export const CardModal = () => {
                             <RowBlockCell padding={primaryPadding}>
                                 <Row marginBottom="0">
                                     <Column marginRight={primaryPadding}>
-                                        <CreateCampaignCard uriPrimary={uriPrimary} womQualityScore={womQualityScore} />
+                                        <CreateCampaignCard
+                                            products={products}
+                                            uriPrimary={uriPrimary}
+                                            womQualityScore={womQualityScore}
+                                        />
                                     </Column>
                                     <Column>
                                         <Row>
@@ -105,37 +113,48 @@ export const CardModal = () => {
                                         </Row>
                                         <SmallSpan>Brand</SmallSpan>
                                         <Row>
-                                            <P>Adidas</P>
+                                            <P>{productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Category</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Shoes</P>
+                                            <P>
+                                                {productsItem?.tagCategory
+                                                    ? productsItem.tagCategory
+                                                    : noContentMessage}
+                                            </P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Sub-cat</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Sport shoes</P>
+                                            <P>
+                                                {productsItem?.tagSubCategory
+                                                    ? productsItem.tagSubCategory
+                                                    : noContentMessage}
+                                            </P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Item</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Superstar</P>
+                                            <P>{productsItem?.item ? productsItem.item : noContentMessage}</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Videos</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>10 (20)</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Creator</SmallSpan>
                                         </Row>
-                                        <Row>
-                                            <P>Miles Stone</P>
+                                        <Row alignCenter>
+                                            <Column marginRight={secondaryPadding}>
+                                                <P>Miles Stone</P>
+                                            </Column>
+                                            <CustomImg height={avatarDiameter} src={avatarImg} width={avatarDiameter} />
                                         </Row>
                                     </Column>
                                 </Row>
