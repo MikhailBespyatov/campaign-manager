@@ -1,8 +1,7 @@
-import avatarImg from 'assets/img/avatar.svg';
+import defaultAvatar from 'assets/img/avatar.svg';
 import { Block } from 'components/common/blocks/Block';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
-import { Summary } from 'components/common/features/Summary';
 import { ColorPromptLine } from 'components/common/grpahicComponents/ColorPromptLine';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
@@ -21,6 +20,7 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import { miniMarginBottom, scoreTitleColor, validatorsPadding } from 'components/modals/CardModal/constants';
+import { noContentMessage } from 'constants/messages';
 import { avatarDiameter, primaryPadding, secondaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
@@ -44,9 +44,14 @@ interface ParamsProps {
 
 export const Details = () => {
     const { campaignId } = useParams<ParamsProps>();
-    // @ts-ignore
-    const { uriPrimary, womQualityScore, engagement } = useStore(campaignContentStores.item);
+    const { uriPrimary, womQualityScore, engagement, products, userDetails, tags } = useStore(
+        campaignContentStores.item
+    );
     const loading = useStore(loadingStores.loading);
+
+    const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
+    const username = userDetails && userDetails?.username;
+    const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
 
     useEffect(() => {
         campaignId && campaignContentEffects.getItemById(campaignId);
@@ -57,17 +62,17 @@ export const Details = () => {
             <Section alignCenter marginBottom="35px">
                 <TagFilter />
             </Section>
-            <Section marginBottom="0">
+            {/* <Section marginBottom="0">
                 <Summary subtitle="Campaigns Running" title="25" />
                 <Summary subtitle="Campaign Budget" title="20,000" />
                 <Summary subtitle="Campaign Spent" title="12,000" />
                 <Summary subtitle="Campaign spend per day" title="1,000" />
                 <Summary subtitle="Remaining Budget" title="10,000" />
                 <Summary subtitle="Remaining Duration" title="12d" />
-            </Section>
+            </Section> */}
             <ContentWrapper>
                 <Section noWrap>
-                    <Block title="Video Name">
+                    <Block title="??">
                         {loading ? (
                             <RowBlockCell padding={primaryPadding}>
                                 <Loader />
@@ -89,42 +94,54 @@ export const Details = () => {
                                                 </Row>
                                                 <SmallSpan>Brand</SmallSpan>
                                                 <Row>
-                                                    <P>Adidas</P>
+                                                    <P>
+                                                        {productsItem?.tagBrand
+                                                            ? productsItem.tagBrand
+                                                            : noContentMessage}
+                                                    </P>
                                                 </Row>
                                                 <Row marginBottom={miniMarginBottom}>
                                                     <SmallSpan>Category</SmallSpan>
                                                 </Row>
                                                 <Row>
-                                                    <P>Shoes</P>
+                                                    <P>
+                                                        {productsItem?.tagCategory
+                                                            ? productsItem.tagCategory
+                                                            : noContentMessage}
+                                                    </P>
                                                 </Row>
                                                 <Row marginBottom={miniMarginBottom}>
                                                     <SmallSpan>Sub-cat</SmallSpan>
                                                 </Row>
                                                 <Row>
-                                                    <P>Sport shoes</P>
+                                                    <P>
+                                                        {productsItem?.tagSubCategory
+                                                            ? productsItem.tagSubCategory
+                                                            : noContentMessage}
+                                                    </P>
                                                 </Row>
                                                 <Row marginBottom={miniMarginBottom}>
                                                     <SmallSpan>Item</SmallSpan>
                                                 </Row>
                                                 <Row>
-                                                    <P>Superstar</P>
+                                                    <P>{productsItem?.item ? productsItem.item : noContentMessage}</P>
                                                 </Row>
                                                 <Row marginBottom={miniMarginBottom}>
                                                     <SmallSpan>Videos</SmallSpan>
                                                 </Row>
                                                 <Row>
-                                                    <P>10 (20)</P>
+                                                    <P>??</P>
                                                 </Row>
                                                 <Row marginBottom={miniMarginBottom}>
                                                     <SmallSpan>Creator</SmallSpan>
                                                 </Row>
                                                 <Row alignCenter>
                                                     <Column marginRight={secondaryPadding}>
-                                                        <P>Miles Stone</P>
+                                                        <P>{username ? username : noContentMessage}</P>
                                                     </Column>
                                                     <CustomImg
                                                         height={avatarDiameter}
-                                                        src={avatarImg}
+                                                        src={imageUrl ? imageUrl : defaultAvatar}
                                                         width={avatarDiameter}
                                                     />
                                                 </Row>
@@ -156,13 +173,14 @@ export const Details = () => {
                                             <SmallSpan>Preview</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>1200</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>View</SmallSpan>
                                         </Row>
                                         <Row alignCenter>
-                                            <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan>
+                                            {/* <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan> */}
+                                            <P>??</P>
                                         </Row>
                                         <Row>
                                             <Column marginRight={primaryPadding}>
@@ -226,7 +244,7 @@ export const Details = () => {
                                                 <Row alignCenter marginBottom={secondaryPadding}>
                                                     <P>{engagement?.ratingCount}</P>&nbsp;
                                                     <SmallSpan opacity={0.5}>
-                                                        ({engagement?.RatingsPercentage || 0}%)
+                                                        ({engagement?.ratingsPercentage || 0}%)
                                                     </SmallSpan>
                                                 </Row>
                                             </Column>
@@ -235,10 +253,12 @@ export const Details = () => {
                                                     <SmallSpan>Honesty</SmallSpan>
                                                 </Row>
                                                 <Row alignCenter marginBottom={secondaryPadding}>
-                                                    <P>{engagement?.honestyCount || 0}</P>&nbsp;
+                                                    {/* <P>{engagement?.honestyCount || 0}</P>&nbsp;
                                                     <SmallSpan opacity={0.5}>
                                                         ({engagement?.honestyPercentage || 0}%)
-                                                    </SmallSpan>
+                                                    </SmallSpan> */}
+                                                    <P>??</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>??</SmallSpan>
                                                 </Row>
                                             </Column>
                                         </Row>
@@ -248,10 +268,12 @@ export const Details = () => {
                                                     <SmallSpan>Creativity</SmallSpan>
                                                 </Row>
                                                 <Row alignCenter marginBottom={secondaryPadding}>
-                                                    <P>{engagement?.likeCount}</P>&nbsp;
+                                                    {/* <P>{engagement?.likeCount}</P>&nbsp;
                                                     <SmallSpan opacity={0.5}>
-                                                        ({engagement?.likePercentage || 0}%)
-                                                    </SmallSpan>
+                                                        ({engagement?.likesPercentage || 0}%)
+                                                    </SmallSpan> */}
+                                                    <P>??</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>??</SmallSpan>
                                                 </Row>
                                             </Column>
                                             <Column marginRight="40px">
@@ -259,10 +281,12 @@ export const Details = () => {
                                                     <SmallSpan>Positivity</SmallSpan>
                                                 </Row>
                                                 <Row alignCenter marginBottom={secondaryPadding}>
-                                                    <P>{engagement?.likeCount}</P>&nbsp;
+                                                    {/* <P>{engagement?.likeCount}</P>&nbsp;
                                                     <SmallSpan opacity={0.5}>
-                                                        ({engagement?.likePercentage || 0}%)
-                                                    </SmallSpan>
+                                                        ({engagement?.likesPercentage || 0}%)
+                                                    </SmallSpan> */}
+                                                    <P>??</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>??</SmallSpan>
                                                 </Row>
                                             </Column>
                                             <Column marginRight="40px">
@@ -299,19 +323,19 @@ export const Details = () => {
                                             <SmallSpan>Category</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Apparel, Accessories</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Sub-category</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Socks, Sunglasses</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Item</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>8 Pack sports whipstart</P>
+                                            <P>??</P>
                                         </Row>
                                     </RowBlockCell>
                                     <RowBlockCell removeBorder padding={validatorsPadding}>
@@ -322,19 +346,19 @@ export const Details = () => {
                                             <SmallSpan>In-use</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>YEAY, Zelando, Submarino</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>In-promotion</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>Zelando</P>
+                                            <P>??</P>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Available</SmallSpan>
                                         </Row>
                                         <Row>
-                                            <P>YEAY, Zelando, Submarino, Adidas</P>
+                                            <P>??</P>
                                         </Row>
                                     </RowBlockCell>
                                 </ColumnBlockCell>
@@ -344,9 +368,9 @@ export const Details = () => {
                                             <Subtitle>Hashtags</Subtitle>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
-                                            <ClosableTag closable>ADIDAS</ClosableTag>
-                                            <ClosableTag closable>SUPERSTAR</ClosableTag>
-                                            <ClosableTag closable>SPORTSHOE</ClosableTag>
+                                            {tags &&
+                                                tags.length &&
+                                                tags.map(i => <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>)}
                                         </Row>
                                     </RowBlockCell>
                                 </ColumnBlockCell>
@@ -355,7 +379,7 @@ export const Details = () => {
                     </Block>
                     <Column>
                         <BorderBlock>
-                            <Section justifyCenter>
+                            <Section alignCenter justifyCenter>
                                 <ColorPromptLine background={previewColor} />
                                 <TableHeaderSpan>New Shoes</TableHeaderSpan>
                             </Section>
@@ -365,7 +389,7 @@ export const Details = () => {
                             />
                         </BorderBlock>
                         <BorderBlock>
-                            <Section justifyCenter>
+                            <Section alignCenter justifyCenter>
                                 <ColorPromptLine background={viewColor} />
                                 <TableHeaderSpan>Brand Only</TableHeaderSpan>
                             </Section>
@@ -375,7 +399,7 @@ export const Details = () => {
                             />
                         </BorderBlock>
                         <BorderBlock>
-                            <Section justifyCenter>
+                            <Section alignCenter justifyCenter>
                                 <ColorPromptLine background={engageColor} />
                                 <TableHeaderSpan>Test Campaign</TableHeaderSpan>
                             </Section>
@@ -385,7 +409,7 @@ export const Details = () => {
                             />
                         </BorderBlock>
                         <BorderBlock>
-                            <Section justifyCenter>
+                            <Section alignCenter justifyCenter>
                                 <ColorPromptLine background={clickColor} />
                                 <TableHeaderSpan>Zalando Push</TableHeaderSpan>
                             </Section>
@@ -395,7 +419,7 @@ export const Details = () => {
                             />
                         </BorderBlock>
                         <BorderBlock>
-                            <Section justifyCenter>
+                            <Section alignCenter justifyCenter>
                                 <ColorPromptLine background={buyColor} />
                                 <TableHeaderSpan>YEAY General</TableHeaderSpan>
                             </Section>

@@ -1,4 +1,4 @@
-import avatarImg from 'assets/img/avatar.svg';
+import defaultAvatar from 'assets/img/avatar.svg';
 import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
@@ -59,22 +59,29 @@ const EngagementSpan: FC = ({ children }) => (
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
-    // @ts-ignore
-    const { uriPrimary, womQualityScore, engagement, products } = useStore(campaignContentStores.item);
+    const { uriPrimary, womQualityScore, engagement, products, userDetails, tags } = useStore(
+        campaignContentStores.item
+    );
     const loading = useStore(loadingStores.loading);
 
-    const productsItem = products && products.length && products[0];
-
-    useEffect(() => {
-        visible && campaignContentEffects.getItemById(id);
-    }, [id, visible]);
+    const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
+    const username = userDetails && userDetails?.username;
+    const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
+    // const tagBrand = productsItem !== 0 ? productsItem?.tagBrand : '';
+    // const tagCategory = productsItem !== 0 ? productsItem?.tagCategory : '';
+    // const tagSubCategory = productsItem !== 0 ? productsItem?.tagSubCategory : '';
+    // const item = productsItem !== 0 ? productsItem?.item : '';
 
     const onClose = () => modalEvents.closeCardModal();
 
     const onDetailsClick = () => {
-        history.push(routes.campaignManager.discover.details);
+        history.push(routes.campaignManager.discover.details + '/' + id);
         modalEvents.closeCardModal();
     };
+
+    useEffect(() => {
+        visible && campaignContentEffects.getItemById(id);
+    }, [id, visible]);
 
     return (
         <Wrapper visible={visible}>
@@ -152,9 +159,13 @@ export const CardModal = () => {
                                         </Row>
                                         <Row alignCenter>
                                             <Column marginRight={secondaryPadding}>
-                                                <P>Miles Stone</P>
+                                                <P>{username ? username : noContentMessage}</P>
                                             </Column>
-                                            <CustomImg height={avatarDiameter} src={avatarImg} width={avatarDiameter} />
+                                            <CustomImg
+                                                height={avatarDiameter}
+                                                src={imageUrl ? imageUrl : defaultAvatar}
+                                                width={avatarDiameter}
+                                            />
                                         </Row>
                                     </Column>
                                 </Row>
@@ -184,13 +195,14 @@ export const CardModal = () => {
                                     <SmallSpan>Preview</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>1200</P>
+                                    <P>??</P>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>View</SmallSpan>
                                 </Row>
                                 <Row alignCenter>
-                                    <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan>
+                                    {/* <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan> */}
+                                    <P>??</P>
                                 </Row>
                                 <Row>
                                     <Column marginRight={primaryPadding}>
@@ -241,14 +253,18 @@ export const CardModal = () => {
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
                                             <P>{engagement?.ratingCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.RatingsPercentage || 0}%)</SmallSpan>
+                                            <SmallSpan opacity={0.5}>({engagement?.ratingsPercentage || 0}%)</SmallSpan>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Honesty</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.honestyCount || 0}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.honestyPercentage || 0}%)</SmallSpan>
+                                            {/* <P>{engagement?.honestyCount || 0}</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>
+                                                        ({engagement?.honestyPercentage || 0}%)
+                                                    </SmallSpan> */}
+                                            <P>??</P>&nbsp;
+                                            <SmallSpan opacity={0.5}>??</SmallSpan>
                                         </Row>
                                     </Column>
                                     <Column>
@@ -256,15 +272,23 @@ export const CardModal = () => {
                                             <SmallSpan>Creativity</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.likeCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.likePercentage || 0}%)</SmallSpan>
+                                            {/* <P>{engagement?.likeCount}</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>
+                                                        ({engagement?.likesPercentage || 0}%)
+                                                    </SmallSpan> */}
+                                            <P>??</P>&nbsp;
+                                            <SmallSpan opacity={0.5}>??</SmallSpan>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Positivity</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.likeCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.likePercentage || 0}%)</SmallSpan>
+                                            {/* <P>{engagement?.likeCount}</P>&nbsp;
+                                                    <SmallSpan opacity={0.5}>
+                                                        ({engagement?.likesPercentage || 0}%)
+                                                    </SmallSpan> */}
+                                            <P>??</P>&nbsp;
+                                            <SmallSpan opacity={0.5}>??</SmallSpan>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Click</SmallSpan>
@@ -293,19 +317,19 @@ export const CardModal = () => {
                                     <SmallSpan>Category</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>Apparel, Accessories</P>
+                                    <P>??</P>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>Sub-category</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>Socks, Sunglasses</P>
+                                    <P>??</P>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>Item</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>8 Pack sports whipstart</P>
+                                    <P>??</P>
                                 </Row>
                             </RowBlockCell>
                             <RowBlockCell removeBorder padding={validatorsPadding}>
@@ -316,19 +340,19 @@ export const CardModal = () => {
                                     <SmallSpan>In-use</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>YEAY, Zelando, Submarino</P>
+                                    <P>??</P>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>In-promotion</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>Zelando</P>
+                                    <P>??</P>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>Available</SmallSpan>
                                 </Row>
                                 <Row>
-                                    <P>YEAY, Zelando, Submarino, Adidas</P>
+                                    <P>??</P>
                                 </Row>
                             </RowBlockCell>
                             <RowBlockCell removeBorder padding={validatorsPadding}>
@@ -336,18 +360,21 @@ export const CardModal = () => {
                                     <Subtitle>Hashtags</Subtitle>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
-                                    <ClosableTag closable>ADIDAS</ClosableTag>
+                                    {tags &&
+                                        tags.length &&
+                                        tags.map(i => <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>)}
+                                    {/* <ClosableTag closable>ADIDAS</ClosableTag>
                                     <ClosableTag closable>SUPERSTAR</ClosableTag>
-                                    <ClosableTag closable>SPORTSHOE</ClosableTag>
+                                    <ClosableTag closable>SPORTSHOE</ClosableTag> */}
                                 </Row>
                             </RowBlockCell>
                         </ColumnBlockCell>
                         <ColumnBlockCell>
                             <Section justifyCenter marginBottom={tertiaryPadding}>
-                                <Column marginRight="50px">
-                                    <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
-                                </Column>
-                                <RoundedButton reverse>+&nbsp;PROMOTE</RoundedButton>
+                                {/* <Column marginRight="50px"> */}
+                                <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
+                                {/* </Column> */}
+                                {/* <RoundedButton reverse>+&nbsp;PROMOTE</RoundedButton> */}
                             </Section>
                         </ColumnBlockCell>
                     </>

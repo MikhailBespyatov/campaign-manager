@@ -7,6 +7,7 @@ import {
     defaultLineHeight,
     defaultTextColor
 } from 'constants/defaults';
+import { ellipsisMixin } from 'constants/styles';
 import styled from 'styled-components';
 
 export const Span = styled.span<SpanProps>`
@@ -17,7 +18,7 @@ export const Span = styled.span<SpanProps>`
     line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : defaultLineHeight)};
     ${({ letterSpacing }) => (letterSpacing ? `letter-spacing: ${letterSpacing};` : ``)};
     color: ${({ color }) => (color ? color : defaultTextColor)};
-    ${({ noWrap }) => (noWrap ? 'white-space: nowrap' : '')};
+    ${({ noWrap }) => (noWrap ? ellipsisMixin : '')};
     ${({ opacity }) => (opacity ? `opacity: ${opacity};` : ``)};
     ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};

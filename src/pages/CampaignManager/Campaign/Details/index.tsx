@@ -6,7 +6,6 @@ import ballViewImg from 'assets/img/ball_view.svg';
 import hideButtonImg from 'assets/img/hide_button_img.svg';
 import history from 'BrowserHistory';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { Summary } from 'components/common/features/Summary';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ballDiameter } from 'components/common/inputs/LanguageSwitch/constants';
 import { CampaignTableElement } from 'components/common/tables/CampaignTableElement';
@@ -27,14 +26,14 @@ const onBack = () => history.goBack();
 
 export const Details = () => (
     <CampaignManagerLayout>
-        <Section>
+        {/* <Section>
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="25" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Budget" title="20,000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Spent" title="12,000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign spend per day" title="1,000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Budget" title="10,000" />
             <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Duration" title="12d" />
-        </Section>
+        </Section> */}
         <Section>
             <CampaignTableElement />
         </Section>

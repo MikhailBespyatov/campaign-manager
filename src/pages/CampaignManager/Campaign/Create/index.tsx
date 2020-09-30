@@ -1,10 +1,8 @@
 import womImg from 'assets/img/wom_logo.svg';
 import { AsideBlock } from 'components/common/blocks/AsideBlock';
-import { Block } from 'components/common/blocks/Block';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
 import { Budget } from 'components/common/features/Budget';
-import { Summary } from 'components/common/features/Summary';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { NumberCounter } from 'components/common/inputs/NumberCounter';
 import { Search } from 'components/common/inputs/Search';
@@ -16,7 +14,6 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import { SimilarCampaignCard } from 'components/Layouts/Cards/SimilarCampaignCard';
 import { formGrey2, primaryPadding, secondaryColor, secondaryPadding, tertiaryPadding } from 'constants/styles';
 import { asideBlockPadding } from 'pages/CampaignManager/Campaign/Create/constants';
 import React, { FC } from 'react';
@@ -65,14 +62,14 @@ const DarkBudgetSpan: FC = ({ children }) => (
 
 export const Create = () => (
     <CampaignManagerLayout background={formGrey2}>
-        <Section marginBottom="0">
+        {/* <Section marginBottom="0">
             <Summary subtitle="Campaigns Running" title="20.000" />
             <Summary subtitle="Campaigns Running" title="20.000" />
             <Summary subtitle="Campaigns Running" title="20.000" />
             <Summary subtitle="Campaigns Running" title="20.000" />
             <Summary subtitle="Campaigns Running" title="20.000" />
             <Summary subtitle="Campaigns Running" title="20.000" />
-        </Section>
+        </Section> */}
         <Section>
             <Column marginRight={tertiaryPadding}>
                 {/* <CustomImg height="410px" src={cardModalImg} width="258px" /> */}
@@ -114,7 +111,7 @@ export const Create = () => (
                 </Row>
             </Column>
             <Column>
-                <Row marginBottom={primaryPadding}>
+                {/* <Row marginBottom={primaryPadding}>
                     <Block title="Similar Campaigns">
                         <RowBlockCell padding={primaryPadding}>
                             <Row marginBottom="0">
@@ -125,7 +122,7 @@ export const Create = () => (
                             </Row>
                         </RowBlockCell>
                     </Block>
-                </Row>
+                </Row> */}
                 <Row marginBottom={primaryPadding}>
                     <HighlightedTitleBlock title="Similar Campaigns">
                         <ColumnBlockCell>

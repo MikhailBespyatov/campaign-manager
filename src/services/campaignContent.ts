@@ -1,6 +1,6 @@
 import axios from './axios';
 
-export const getItemById = (data: /* WOM.ContentGetRequest */ { contentId: string }) =>
+export const getItemById = (data: WOM.ContentGetRequest) =>
     axios<WOM.ContentItemResponse>({
         url: '/catalogue/get',
         data

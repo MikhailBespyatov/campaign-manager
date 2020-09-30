@@ -1,6 +1,5 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { Hr } from 'components/common/dividers/Hr';
-import { Summary } from 'components/common/features/Summary';
 import { ColorPromptLine } from 'components/common/grpahicComponents/ColorPromptLine';
 import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
@@ -35,14 +34,6 @@ import React from 'react';
 
 export const Dashboard = () => (
     <CampaignManagerLayout>
-        <Section>
-            <Summary subtitle="Campaigns Running" title="25" />
-            <Summary subtitle="Campaign Budget" title="20,000" />
-            <Summary subtitle="Campaign Spent" title="12,000" />
-            <Summary subtitle="Campaign spend per day" title="1,000" />
-            <Summary subtitle="Remaining Budget" title="10,000" />
-            <Summary subtitle="Remaining Duration" title="12d" />
-        </Section>
         <ContentWrapper>
             <Section marginBottom="0">
                 <RowHeaderRadio values={testHeaderRadioArray} />

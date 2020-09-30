@@ -14,7 +14,7 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         userId: string; // objectId
-        addressAccountType: /**
+        addressAccountType?: /**
          * addressAccountType
          * Representing the wallet types<br/><br/>Values:<br/>0 = None<br/>1 = WOM<br/>2 = RP
          */
@@ -29,61 +29,61 @@ declare namespace WOM {
          * string
          * The name used to describe this address.
          */
-        name: string | null;
+        name?: string | null;
         /**
          * dateTime
          * The utc date of this address's creation.
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * string
          * This address's account type.
          */
-        accountType: string | null;
+        accountType?: string | null;
         /**
          * string
          * The unique address for this particular token account.
          */
-        address: string | null;
+        address?: string | null;
         /**
          * boolean
          * Only true if this address has previously participated in a transaction.
          */
-        hasTransacted: boolean;
+        hasTransacted?: boolean;
         /**
          * boolean
          * True, if this is the default address for this account type.
          */
-        isDefault: boolean;
+        isDefault?: boolean;
         /**
          * bigInteger
          * The balance currently on this address denominated in WEI
          * example:
          * 100000000000000000000000
          */
-        balanceWei: string; // string
+        balanceWei?: string; // string
         /**
          * decimal
          * The balance currently on this address denominated in Ether
          */
-        balance: number; // double
+        balance?: number; // double
         /**
          * bigInteger
          * The balance pending on this address denominated in WEI
          * example:
          * 100000000000000000000000
          */
-        pendingBalanceWei: string; // string
+        pendingBalanceWei?: string; // string
         /**
          * decimal
          * The balance pending on this address denominated in Ether
          */
-        pendingBalance: number; // double
+        pendingBalance?: number; // double
         /**
          * dateTime
          * The UTC datetime representation of the balance request.
          */
-        balanceQueriedAtUtc: string; // date-time
+        balanceQueriedAtUtc?: string; // date-time
     }
     /**
      * analyzeEmailRequest
@@ -98,7 +98,7 @@ declare namespace WOM {
      * analyzeEmailResponse
      */
     export interface AnalyzeEmailResponse {
-        result: /**
+        result?: /**
          * emailValidity
          * <br/><br/>Values:<br/>0 = NotExists<br/>1 = InvalidFormat<br/>2 = SingleUseDomain<br/>3 = Exists
          */
@@ -125,36 +125,36 @@ declare namespace WOM {
      * bridgeSystemBalanceResponse
      */
     export interface BridgeSystemBalanceResponse {
-        woMx: /* systemBalanceResponse */ SystemBalanceResponse;
-        ethereum: /* systemBalanceResponse */ SystemBalanceResponse;
+        woMx?: /* systemBalanceResponse */ SystemBalanceResponse;
+        ethereum?: /* systemBalanceResponse */ SystemBalanceResponse;
         /**
          * string
          */
-        escrowAddress: string | null;
+        escrowAddress?: string | null;
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        escrowEthBalanceWei: string; // string
+        escrowEthBalanceWei?: string; // string
         /**
          * decimal
          */
-        escrowEthBalance: number; // double
+        escrowEthBalance?: number; // double
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        missingFromEscrowWei: string; // string
+        missingFromEscrowWei?: string; // string
         /**
          * decimal
          */
-        readonly missingFromEscrow: number; // double
+        readonly missingFromEscrow?: number; // double
         /**
          * boolean
          */
-        readonly isBalanced: boolean;
+        readonly isBalanced?: boolean;
     }
     /**
      * campaignBudget
@@ -164,29 +164,29 @@ declare namespace WOM {
          * decimal
          * The amount of money allocated to this campaign.
          */
-        amount: number; // double
+        amount?: number; // double
         /**
          * decimal
          * The amount spent on this campaign so far.
          */
-        spend: number; // double
+        spend?: number; // double
         /**
          * decimal
          * The amount being spent per day.
          */
-        spendPerDay: number; // double
+        spendPerDay?: number; // double
         /**
          * decimal
          * The remaining amount to be spent.
          */
-        readonly remaining: number; // double
+        readonly remaining?: number; // double
         /**
          * timeSpan
          * The approximate amount of days left at this spending per day rate.
          * example:
          * 0
          */
-        readonly remainingDuration: number; // int64
+        readonly remainingDuration?: number; // int64
     }
     /**
      * campaignDetailResponse
@@ -198,54 +198,54 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id: string; // objectId
+        id?: string; // objectId
         /**
          * string
          * The user generated name of this campaign.
          */
-        title: string | null;
+        title?: string | null;
         /**
          * objectId
          * The id of the organization that owns this campaign.
          * example:
          * 000000000000000000000000
          */
-        organizationId: string; // objectId
+        organizationId?: string; // objectId
         /**
          * objectId
          * The id of the user who initially created this campaign.
          * example:
          * 000000000000000000000000
          */
-        creatorId: string; // objectId
+        creatorId?: string; // objectId
         /**
          * objectId
          * The id of the user who last updated this campaign.
          * example:
          * 000000000000000000000000
          */
-        updatedById: string; // objectId
+        updatedById?: string; // objectId
         /**
          * dateTime
          * The UTC creation date
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * dateTime
          * The UTC date of the last change.
          */
-        utcLastUpdated: string; // date-time
+        utcLastUpdated?: string; // date-time
         /**
          * hashSet1
          * The IDs of the content items used for this campaign.
          */
-        contentIds: string /* objectId */[] | null;
-        budget: /* campaignBudget */ CampaignBudget;
-        engagement: /* engagementStatistics */ EngagementStatistics;
-        deltaStatistics: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
-        womQualityScore: /* WOMQualityScore */ WOMQualityScore;
-        settings: /* campaignSettings */ CampaignSettings;
-        schedule: /* campaignScheduleStatus */ CampaignScheduleStatus;
+        contentIds?: string /* objectId */[] | null;
+        budget?: /* campaignBudget */ CampaignBudget;
+        engagement?: /* engagementStatistics */ EngagementStatistics;
+        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
+        settings?: /* campaignSettings */ CampaignSettings;
+        schedule?: /* campaignScheduleStatus */ CampaignScheduleStatus;
     }
     /**
      * campaignGetRequest
@@ -257,12 +257,12 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        campaignId: string; // objectId
+        campaignId?: string; // objectId
         /**
          * int32
          * If set the query will return statistics based on the period (in days) specified here.
          */
-        returnStatisticsPeriod: number; // int32
+        returnStatisticsPeriod?: number; // int32
     }
     /**
      * campaignSchedule
@@ -271,11 +271,11 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        utcToStart: string; // date-time
+        utcToStart?: string; // date-time
         /**
          * dateTime
          */
-        utcToEnd: string; // date-time
+        utcToEnd?: string; // date-time
     }
     /**
      * campaignScheduleStatus
@@ -284,43 +284,43 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        utcToStart: string; // date-time
+        utcToStart?: string; // date-time
         /**
          * dateTime
          */
-        utcToEnd: string; // date-time
+        utcToEnd?: string; // date-time
         /**
          * dateTime
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * dateTime
          */
-        utcStarted: string; // date-time
+        utcStarted?: string; // date-time
         /**
          * dateTime
          */
-        utcEnded: string; // date-time
+        utcEnded?: string; // date-time
         /**
          * timeSpan
          * example:
          * 0
          */
-        readonly duration: number; // int64
+        readonly duration?: number; // int64
         /**
          * timeSpan
          * example:
          * 0
          */
-        readonly remainingDuration: number; // int64
+        readonly remainingDuration?: number; // int64
         /**
          * boolean
          */
-        readonly isActive: boolean;
+        readonly isActive?: boolean;
         /**
          * boolean
          */
-        hasStarted: boolean;
+        hasStarted?: boolean;
     }
     /**
      * campaignSettings
@@ -330,22 +330,22 @@ declare namespace WOM {
          * boolean
          * Enable / disable 'watch override'
          */
-        watchOverride: boolean;
+        watchOverride?: boolean;
         /**
          * boolean
          * Enable / disable 'must watch'
          */
-        mustWatch: boolean;
+        mustWatch?: boolean;
         /**
          * int32
          * Boost the content by supplied value.
          */
-        boostContentValue: number; // int32
+        boostContentValue?: number; // int32
         /**
          * int32
          * Boost the creator by supplied value.
          */
-        boostCreatorValue: number; // int32
+        boostCreatorValue?: number; // int32
     }
     /**
      * campaignStatisticsQueryRequest
@@ -354,33 +354,33 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * objectId
          * The id of the campaign.
          * example:
          * 000000000000000000000000
          */
-        campaignId: string; // objectId
+        campaignId?: string; // objectId
         /**
          * date
          * Retrieve statistics starting with this date
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateFrom: string; // string
+        dateFrom?: string; // string
         /**
          * date
          * Retrieve statistics up until and including this date
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateTo: string; // string
+        dateTo?: string; // string
         /**
          * int32
          * The amount of historical comparison sets to generate
          */
-        historicalSets: number; // int32
+        historicalSets?: number; // int32
     }
     /**
      * campaignStatisticsQueryResponse
@@ -389,17 +389,17 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
-        request: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        deltaStatistics: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        readonly returnedRecords?: number; // int32
+        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
+        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
         /**
          * list1
          */
-        readonly sets: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
+        readonly sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
     }
     /**
      * campaignStatisticsQuerySetResponse
@@ -408,17 +408,17 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /* dailyAggregatedCampaignStatistics */ DailyAggregatedCampaignStatistics[] | null;
-        request: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        summary: /* engagementStatistics */ EngagementStatistics;
+        items?: /* dailyAggregatedCampaignStatistics */ DailyAggregatedCampaignStatistics[] | null;
+        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
+        summary?: /* engagementStatistics */ EngagementStatistics;
     }
     /**
      * campaignUpsertRequest
@@ -430,32 +430,32 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id: string | null; // objectId
+        id?: string | null; // objectId
         /**
          * objectId
          * The unique identifier of the organization (this cannot be changed)
          * example:
          * 000000000000000000000000
          */
-        organizationId: string; // objectId
+        organizationId?: string; // objectId
         /**
          * string
          * The user generated name of this campaign.
          */
-        title: string | null;
+        title?: string | null;
         /**
          * tags
          * This campaign's tags
          */
-        tags: string /* string */[] | null;
+        tags?: string /* string */[] | null;
         /**
          * hashSet1
          * The IDs of the content items used for this campaign.
          */
-        contentIds: string /* objectId */[] | null;
-        schedule: /* campaignSchedule */ CampaignSchedule;
-        budget: /* campaignBudget */ CampaignBudget;
-        settings: /* campaignSettings */ CampaignSettings;
+        contentIds?: string /* objectId */[] | null;
+        schedule?: /* campaignSchedule */ CampaignSchedule;
+        budget?: /* campaignBudget */ CampaignBudget;
+        settings?: /* campaignSettings */ CampaignSettings;
     }
     /**
      * campaignsQueryRequest
@@ -468,7 +468,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * int32
          */
@@ -483,17 +483,17 @@ declare namespace WOM {
          * list1
          * Return documents that match any of these tags
          */
-        tagsAny: string[] | null;
+        tagsAny?: string[] | null;
         /**
          * list1
          * Return documents that contain all of these tags
          */
-        tagsAll: string[] | null;
+        tagsAll?: string[] | null;
         /**
          * int32
          * If set the query will return statistics based on the period (in days) specified here.
          */
-        returnStatisticsPeriod: number; // int32
+        returnStatisticsPeriod?: number; // int32
     }
     /**
      * campaignsQueryResponse
@@ -502,45 +502,23 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /* campaignDetailResponse */ CampaignDetailResponse[] | null;
+        items?: /* campaignDetailResponse */ CampaignDetailResponse[] | null;
         /**
          * int32
          */
-        totalPages: number; // int32
+        totalPages?: number; // int32
         /**
          * int32
          */
-        currentPageIndex: number; // int32
-    }
-    /**
-     * changeOrganizationUserRequest
-     */
-    export interface ChangeOrganizationUserRequest {
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId: string; // objectId
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        userId: string; // objectId
-        permission: /**
-         * organizationPermission
-         * <br/><br/>Values:<br/>0 = None<br/>1 = Member<br/>2 = Admin
-         */
-        OrganizationPermission /* int32 */;
+        currentPageIndex?: number; // int32
     }
     /**
      * contentFlagInappropriateRequest
@@ -552,13 +530,13 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          * Remote id of the content to be flagged.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
     }
     /**
      * contentGetRequest
@@ -570,38 +548,38 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          * Search by the remote id ('your' id) of this content.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * string
          * Search by the primary Uri of this content.
          */
-        uriPrimary: string | null;
+        uriPrimary?: string | null;
         /**
          * boolean
          * Enable the 'is document hidden by user' feature.
          */
-        returnUserValidatorHidden: boolean;
+        returnUserValidatorHidden?: boolean;
         /**
          * boolean
          * Enable the 'user flag inappropriate' feature.
          */
-        returnUserFlagInappropriate: boolean;
+        returnUserFlagInappropriate?: boolean;
         /**
          * boolean
          * Enable the 'user specific validation details' feature.
          */
-        returnUserValidationDetails: boolean;
+        returnUserValidationDetails?: boolean;
         /**
          * boolean
          * Enable the 'user details' feature, which returns more comprehensive information on the owner.
          */
-        returnUserDetails: boolean;
+        returnUserDetails?: boolean;
     }
     /**
      * contentItemResponse
@@ -613,93 +591,93 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id: string; // objectId
+        id?: string; // objectId
         /**
          * dateTime
          */
-        createdUtc: string; // date-time
+        createdUtc?: string; // date-time
         /**
          * string
          * The id for this content on the remote network that created it.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * objectId
          * The UserId of this content's owner.
          * example:
          * 000000000000000000000000
          */
-        userId: string; // objectId
+        userId?: string; // objectId
         /**
          * objectId
          * The segment Id of the originating (source) network.
          * example:
          * 000000000000000000000000
          */
-        segmentId: string; // objectId
+        segmentId?: string; // objectId
         /**
          * string
          * The title given to this content by the creator.
          */
-        title: string | null;
+        title?: string | null;
         /**
          * list1
          * The first is the primary product of this content, followed by additional products if available.
          */
-        products: /* productResponse */ ProductResponse[] | null;
+        products?: /* productResponse */ ProductResponse[] | null;
         /**
          * hashSet1
          * The ids of campaigns this content is currently participating in.
          */
-        inCampaignIds: string /* objectId */[] | null;
+        inCampaignIds?: string /* objectId */[] | null;
         /**
          * hashSet1
          * The ids of campaigns this content is currently being promoted in.
          */
-        inCampaignPromotionIds: string /* objectId */[] | null;
+        inCampaignPromotionIds?: string /* objectId */[] | null;
         /**
          * boolean
          * True if this content is currently in use in any campaigns.
          */
-        readonly inCampaignUse: boolean;
+        readonly inCampaignUse?: boolean;
         /**
          * boolean
          * True if this content is currently in use in any promotions.
          */
-        readonly inCampaignPromotionUse: boolean;
+        readonly inCampaignPromotionUse?: boolean;
         /**
          * tags
          * The tags associated with this content.
          */
-        tags: string /* string */[] | null;
+        tags?: string /* string */[] | null;
         /**
          * string
          * The primary Uri of the content on the originating network.
          */
-        uriPrimary: string | null;
-        streamDetails: /* streamDetails */ StreamDetails;
-        videoAnalysis: /* videoAnalysisResponse */ VideoAnalysisResponse;
-        validationState: /* validationStateResponse */ ValidationStateResponse;
-        womQualityScore: /* WOMQualityScore */ WOMQualityScore;
-        engagement: /* engagementStatistics */ EngagementStatistics;
+        uriPrimary?: string | null;
+        streamDetails?: /* streamDetails */ StreamDetails;
+        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
+        validationState?: /* validationStateResponse */ ValidationStateResponse;
+        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
+        engagement?: /* engagementStatistics */ EngagementStatistics;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        facilitatorId: string; // objectId
+        facilitatorId?: string; // objectId
         /**
          * nullable1
          * If requested in a query, this field shows if the requesting user has hidden this content for validation / authentication.
          */
-        userValidatorHidden: boolean | null;
+        userValidatorHidden?: boolean | null;
         /**
          * nullable1
          * If requested in a query, this field shows if the requesting user has marked this content as inappropriate.
          */
-        userFlagInappropriate: boolean | null;
-        userValidationDetails: /* userValidationDetails */ UserValidationDetails;
-        userDetails: /* getUserResponse */ GetUserResponse;
+        userFlagInappropriate?: boolean | null;
+        userValidationDetails?: /* userValidationDetails */ UserValidationDetails;
+        userDetails?: /* getUserResponse */ GetUserResponse;
     }
     /**
      * contentPutRequest
@@ -709,45 +687,45 @@ declare namespace WOM {
          * string
          * The remote id of this content, can be used to look up this content later.
          */
-        remoteId: string | null;
+        remoteId?: string | null;
         /**
          * string
          * The title of this content.
          */
-        title: string | null;
+        title?: string | null;
         /**
          * tags
          * The tags associated with this content.
          */
-        tags: string /* string */[] | null;
+        tags?: string /* string */[] | null;
         /**
          * string
          * The primary Uri of this content, as determined by the remote network sending it.
          */
-        uriPrimary: string | null;
-        streamDetails: /* streamDetails */ StreamDetails;
-        videoAnalysis: /* videoAnalysisResponse */ VideoAnalysisResponse;
+        uriPrimary?: string | null;
+        streamDetails?: /* streamDetails */ StreamDetails;
+        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
         /**
          * boolean
          * If true, allows to accept the video details at a later time.
          */
-        isDelayedProcessing: boolean;
-        primaryProduct: /* productUpsertRequest */ ProductUpsertRequest;
+        isDelayedProcessing?: boolean;
+        primaryProduct?: /* productUpsertRequest */ ProductUpsertRequest;
         /**
          * list1
          * Optional list of secondary products.
          */
-        secondaryProducts: /* productUpsertRequest */ ProductUpsertRequest[] | null;
+        secondaryProducts?: /* productUpsertRequest */ ProductUpsertRequest[] | null;
         /**
          * string
          * The id of the facilitator on the calling network. Leave null if none specified.
          */
-        facilitatorUserId: string | null;
+        facilitatorUserId?: string | null;
         /**
          * string
          * The id of the publisher organization/system/user.
          */
-        publisherId: string | null;
+        publisherId?: string | null;
     }
     /**
      * contentPutResponse
@@ -758,151 +736,151 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id: string; // objectId
+        id?: string; // objectId
     }
     /**
      * contentQueryRequest
      */
-    // export interface ContentQueryRequest {
-    //     /**
-    //      * int32
-    //      */
-    //     limit: number; // int32
-    //     /**
-    //      * boolean
-    //      */
-    //     returnQueryCount: boolean;
-    //     /**
-    //      * int32
-    //      */
-    //     pageIndex: number; // int32
-    //     /**
-    //      * hashSet1
-    //      * Query by a list of content ids.
-    //      */
-    //     byContentIds: string /* objectId */[] | null;
-    //     validationResult: /**
-    //      * validationResult
-    //      * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
-    //      */
-    //     ValidationResult /* int32 */;
-    //     validationEndedReason: /**
-    //      * validationEndedReason
-    //      * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
-    //      */
-    //     ValidationEndedReason /* int32 */;
-    //     validationStage: /**
-    //      * validationStage
-    //      * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
-    //      */
-    //     ValidationStage /* int32 */;
-    //     /**
-    //      * nullable1
-    //      * Filter by documents that are currently being validated.
-    //      */
-    //     currentlyValidating: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by reported state
-    //      */
-    //     isReported: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by live state
-    //      */
-    //     isLive: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by whether this user participated during consensus.
-    //      */
-    //     partOfConsensus: boolean | null;
-    //     /**
-    //      * boolean
-    //      * Implies: PartOfConsensus, returns validation documents that the user participated in, but did not get rewarded for or that are no longer live.
-    //      */
-    //     partOfConsensusComplete: boolean;
-    //     /**
-    //      * objectId
-    //      * Return only documents owned by this user Id.
-    //      * example:
-    //      * 000000000000000000000000
-    //      */
-    //     byUserId: string; // objectId
-    //     /**
-    //      * string
-    //      * Return only documents owned by this remote user Id.
-    //      * You must request with a token issued on the target remote network for a match to occur.
-    //      */
-    //     byRemoteUserId: string | null;
-    //     /**
-    //      * string
-    //      * Return only documents owned by this remote Id.
-    //      * You must request with a token issued on the target remote network for a match to occur.
-    //      */
-    //     byRemoteId: string | null;
-    //     /**
-    //      * objectId
-    //      * Return only documents from this segment.
-    //      * example:
-    //      * 000000000000000000000000
-    //      */
-    //     bySegmentId: string; // objectId
-    //     /**
-    //      * nullable1
-    //      * Filter by documents that are single channel audio
-    //      */
-    //     isSingleChannelAudio: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by documents that are unlimited length
-    //      */
-    //     isUnlimitedLength: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by documents that were filmed in portrait mode
-    //      */
-    //     isPortraitAspect: boolean | null;
-    //     /**
-    //      * nullable1
-    //      * Filter by documents with subtitles.
-    //      */
-    //     hasSubtitles: boolean | null;
-    //     /**
-    //      * tags
-    //      * Return documents that match any of these tags
-    //      */
-    //     tagsAny: string /* string */[] | null;
-    //     /**
-    //      * tags
-    //      * Return documents that contain all of these tags
-    //      */
-    //     tagsAll: string /* string */[] | null;
-    //     /**
-    //      * boolean
-    //      * Enable the 'is document hidden by user' feature.
-    //      */
-    //     returnUserValidatorHidden: boolean;
-    //     /**
-    //      * boolean
-    //      * Enable the 'user flag inappropriate' feature.
-    //      */
-    //     returnUserFlagInappropriate: boolean;
-    //     /**
-    //      * boolean
-    //      * Enable the 'user specific validation details' feature.
-    //      */
-    //     returnUserValidationDetails: boolean;
-    //     /**
-    //      * boolean
-    //      * Enable the 'user details' feature, which returns more comprehensive information on the owner.
-    //      */
-    //     returnUserDetails: boolean;
-    //     /**
-    //      * boolean
-    //      * Will order the results by 'validation timer' ascending.
-    //      */
-    //     orderByValidationTimer: boolean;
-    // }
+    export interface ContentQueryRequest {
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * hashSet1
+         * Query by a list of content ids.
+         */
+        byContentIds?: string /* objectId */[] | null;
+        validationResult?: /**
+         * validationResult
+         * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
+         */
+        ValidationResult /* int32 */;
+        validationEndedReason?: /**
+         * validationEndedReason
+         * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
+         */
+        ValidationEndedReason /* int32 */;
+        validationStage?: /**
+         * validationStage
+         * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
+         */
+        ValidationStage /* int32 */;
+        /**
+         * nullable1
+         * Filter by documents that are currently being validated.
+         */
+        currentlyValidating?: boolean | null;
+        /**
+         * nullable1
+         * Filter by reported state
+         */
+        isReported?: boolean | null;
+        /**
+         * nullable1
+         * Filter by live state
+         */
+        isLive?: boolean | null;
+        /**
+         * nullable1
+         * Filter by whether this user participated during consensus.
+         */
+        partOfConsensus?: boolean | null;
+        /**
+         * boolean
+         * Implies: PartOfConsensus, returns validation documents that the user participated in, but did not get rewarded for or that are no longer live.
+         */
+        partOfConsensusComplete?: boolean;
+        /**
+         * objectId
+         * Return only documents owned by this user Id.
+         * example:
+         * 000000000000000000000000
+         */
+        byUserId?: string; // objectId
+        /**
+         * string
+         * Return only documents owned by this remote user Id.
+         * You must request with a token issued on the target remote network for a match to occur.
+         */
+        byRemoteUserId?: string | null;
+        /**
+         * string
+         * Return only documents owned by this remote Id.
+         * You must request with a token issued on the target remote network for a match to occur.
+         */
+        byRemoteId?: string | null;
+        /**
+         * objectId
+         * Return only documents from this segment.
+         * example:
+         * 000000000000000000000000
+         */
+        bySegmentId?: string; // objectId
+        /**
+         * nullable1
+         * Filter by documents that are single channel audio
+         */
+        isSingleChannelAudio?: boolean | null;
+        /**
+         * nullable1
+         * Filter by documents that are unlimited length
+         */
+        isUnlimitedLength?: boolean | null;
+        /**
+         * nullable1
+         * Filter by documents that were filmed in portrait mode
+         */
+        isPortraitAspect?: boolean | null;
+        /**
+         * nullable1
+         * Filter by documents with subtitles.
+         */
+        hasSubtitles?: boolean | null;
+        /**
+         * tags
+         * Return documents that match any of these tags
+         */
+        tagsAny?: string /* string */[] | null;
+        /**
+         * tags
+         * Return documents that contain all of these tags
+         */
+        tagsAll?: string /* string */[] | null;
+        /**
+         * boolean
+         * Enable the 'is document hidden by user' feature.
+         */
+        returnUserValidatorHidden?: boolean;
+        /**
+         * boolean
+         * Enable the 'user flag inappropriate' feature.
+         */
+        returnUserFlagInappropriate?: boolean;
+        /**
+         * boolean
+         * Enable the 'user specific validation details' feature.
+         */
+        returnUserValidationDetails?: boolean;
+        /**
+         * boolean
+         * Enable the 'user details' feature, which returns more comprehensive information on the owner.
+         */
+        returnUserDetails?: boolean;
+        /**
+         * boolean
+         * Will order the results by 'validation timer' ascending.
+         */
+        orderByValidationTimer?: boolean;
+    }
     /**
      * contentQueryResponse
      */
@@ -910,24 +888,24 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /* contentItemResponse */ ContentItemResponse[] | null;
+        items?: /* contentItemResponse */ ContentItemResponse[] | null;
         /**
          * int32
          */
-        totalPages: number; // int32
+        totalPages?: number; // int32
         /**
          * int32
          */
-        currentPageIndex: number; // int32
-        request: /* contentQueryRequest */ ContentQueryRequest;
+        currentPageIndex?: number; // int32
+        request?: /* contentQueryRequest */ ContentQueryRequest;
     }
     /**
      * contentStatisticsQueryRequest
@@ -936,39 +914,39 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * objectId
          * Search by the id of the content required.
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          * Search by the remote id ('your' id) of this content.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * string
          * Search by the primary Uri of this content.
          */
-        uriPrimary: string | null;
+        uriPrimary?: string | null;
         /**
          * date
          * Retrieve statistics starting with this date
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateFrom: string; // string
+        dateFrom?: string; // string
         /**
          * date
          * Retrieve statistics up until and including this date
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateTo: string; // string
+        dateTo?: string; // string
     }
     /**
      * contentStatisticsQueryResponse
@@ -977,17 +955,17 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /* statisticsDaily */ StatisticsDaily[] | null;
-        request: /* contentStatisticsQueryRequest */ ContentStatisticsQueryRequest;
-        totalsInPage: /* engagementStatistics */ EngagementStatistics;
+        items?: /* statisticsDaily */ StatisticsDaily[] | null;
+        request?: /* contentStatisticsQueryRequest */ ContentStatisticsQueryRequest;
+        totalsInPage?: /* engagementStatistics */ EngagementStatistics;
     }
     /**
      * contentStreamUpdateRequest
@@ -999,19 +977,19 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          * The remote id of this content, can be used to look up this content later.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * string
          * The primary Uri of this content, as determined by the remote network sending it.
          */
-        uriPrimary: string | null;
-        streamDetails: /* streamDetails */ StreamDetails;
-        videoAnalysis: /* videoAnalysisResponse */ VideoAnalysisResponse;
+        uriPrimary?: string | null;
+        streamDetails?: /* streamDetails */ StreamDetails;
+        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
     }
     /**
      * createNetworkAdministratorRequest
@@ -1020,11 +998,11 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteIssuer: string | null;
+        remoteIssuer?: string | null;
         /**
          * string
          */
-        remoteId: string | null;
+        remoteId?: string | null;
     }
     /**
      * createOrganizationRequest
@@ -1034,17 +1012,17 @@ declare namespace WOM {
          * string
          * The title of this organization.
          */
-        companyName: string | null;
+        companyName?: string | null;
         /**
          * string
          * Supply an email for the initial administrator of this organization.
          */
-        administratorEmail: string | null;
+        administratorEmail?: string | null;
         /**
          * tags
          * The mandatory tags of this organization.
          */
-        mandatoryTags: string /* string */[] | null;
+        mandatoryTags?: string /* string */[] | null;
     }
     /**
      * cryptoInformationResponse
@@ -1053,16 +1031,16 @@ declare namespace WOM {
         /**
          * list1
          */
-        addresses: /**
+        addresses?: /**
          * addressResponse
          * A strongly typed entity representing the amount of tokens in a user's account.
          */
         AddressResponse[] | null;
-        bridgeBalanceReport: /* bridgeSystemBalanceResponse */ BridgeSystemBalanceResponse;
+        bridgeBalanceReport?: /* bridgeSystemBalanceResponse */ BridgeSystemBalanceResponse;
         /**
          * transactionQueueReportResponse
          */
-        pendingBalanceReport: /* transactionQueueReportItemResponse */ TransactionQueueReportItemResponse[] | null;
+        pendingBalanceReport?: /* transactionQueueReportItemResponse */ TransactionQueueReportItemResponse[] | null;
     }
     /**
      * dailyAggregatedCampaignStatistics
@@ -1072,140 +1050,140 @@ declare namespace WOM {
          * int32
          * The total number of views
          */
-        viewCount: number; // int32
+        viewCount?: number; // int32
         /**
          * int32
          * Views that had a duration less than 25%
          */
-        viewD1Count: number; // int32
+        viewD1Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD1Percentage: number; // double
+        readonly viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
          */
-        viewD2Count: number; // int32
+        viewD2Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD2Percentage: number; // double
+        readonly viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
          */
-        viewD3Count: number; // int32
+        viewD3Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD3Percentage: number; // double
+        readonly viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
          */
-        viewD4Count: number; // int32
+        viewD4Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD4Percentage: number; // double
+        readonly viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
          */
-        likeCount: number; // int32
+        likeCount?: number; // int32
         /**
          * decimal
          */
-        readonly likesPercentage: number; // double
+        readonly likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
          */
-        ratingCount: number; // int32
+        ratingCount?: number; // int32
         /**
          * decimal
          */
-        readonly ratingsPercentage: number; // double
+        readonly ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
          */
-        saveCount: number; // int32
+        saveCount?: number; // int32
         /**
          * decimal
          */
-        readonly savesPercentage: number; // double
+        readonly savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
          */
-        shareCount: number; // int32
+        shareCount?: number; // int32
         /**
          * decimal
          */
-        readonly sharesPercentage: number; // double
+        readonly sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
          */
-        commentCount: number; // int32
+        commentCount?: number; // int32
         /**
          * decimal
          */
-        readonly commentsPercentage: number; // double
+        readonly commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
          */
-        clickCount: number; // int32
+        clickCount?: number; // int32
         /**
          * decimal
          */
-        readonly clicksPercentage: number; // double
+        readonly clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
          */
-        buyCount: number; // int32
+        buyCount?: number; // int32
         /**
          * decimal
          */
-        readonly buysPercentage: number; // double
+        readonly buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total: number; // int32
+        readonly total?: number; // int32
         /**
          * date
          * The date (does not include a time component) of this statistics entry.
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateUtc: string; // string
+        dateUtc?: string; // string
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity: number | null; // double
+        authenticity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity: number | null; // double
+        creativity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity: number | null; // double
+        positivity?: number | null; // double
         /**
          * objectId
          * The ID of the campaign
          * example:
          * 000000000000000000000000
          */
-        campaignId: string; // objectId
+        campaignId?: string; // objectId
     }
     /**
      * dailyAggregatedOrganizationStatistics
@@ -1215,140 +1193,140 @@ declare namespace WOM {
          * int32
          * The total number of views
          */
-        viewCount: number; // int32
+        viewCount?: number; // int32
         /**
          * int32
          * Views that had a duration less than 25%
          */
-        viewD1Count: number; // int32
+        viewD1Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD1Percentage: number; // double
+        readonly viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
          */
-        viewD2Count: number; // int32
+        viewD2Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD2Percentage: number; // double
+        readonly viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
          */
-        viewD3Count: number; // int32
+        viewD3Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD3Percentage: number; // double
+        readonly viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
          */
-        viewD4Count: number; // int32
+        viewD4Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD4Percentage: number; // double
+        readonly viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
          */
-        likeCount: number; // int32
+        likeCount?: number; // int32
         /**
          * decimal
          */
-        readonly likesPercentage: number; // double
+        readonly likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
          */
-        ratingCount: number; // int32
+        ratingCount?: number; // int32
         /**
          * decimal
          */
-        readonly ratingsPercentage: number; // double
+        readonly ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
          */
-        saveCount: number; // int32
+        saveCount?: number; // int32
         /**
          * decimal
          */
-        readonly savesPercentage: number; // double
+        readonly savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
          */
-        shareCount: number; // int32
+        shareCount?: number; // int32
         /**
          * decimal
          */
-        readonly sharesPercentage: number; // double
+        readonly sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
          */
-        commentCount: number; // int32
+        commentCount?: number; // int32
         /**
          * decimal
          */
-        readonly commentsPercentage: number; // double
+        readonly commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
          */
-        clickCount: number; // int32
+        clickCount?: number; // int32
         /**
          * decimal
          */
-        readonly clicksPercentage: number; // double
+        readonly clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
          */
-        buyCount: number; // int32
+        buyCount?: number; // int32
         /**
          * decimal
          */
-        readonly buysPercentage: number; // double
+        readonly buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total: number; // int32
+        readonly total?: number; // int32
         /**
          * date
          * The date (does not include a time component) of this statistics entry.
          * example:
          * 2020-01-01T00:00:00Z
          */
-        dateUtc: string; // string
+        dateUtc?: string; // string
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity: number | null; // double
+        authenticity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity: number | null; // double
+        creativity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity: number | null; // double
+        positivity?: number | null; // double
         /**
          * objectId
          * The ID of the organization
          * example:
          * 000000000000000000000000
          */
-        organizationId: string; // objectId
+        organizationId?: string; // objectId
     }
     /**
      * emailValidity
@@ -1362,19 +1340,19 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteId: string | null;
+        remoteId?: string | null;
         /**
          * string
          */
-        remoteUsername: string | null;
+        remoteUsername?: string | null;
         /**
          * string
          */
-        remoteValidatedEmail: string | null;
+        remoteValidatedEmail?: string | null;
         /**
          * string
          */
-        remoteVerifiedMobileNumber: string | null;
+        remoteVerifiedMobileNumber?: string | null;
     }
     /**
      * engagementStatistics
@@ -1384,111 +1362,111 @@ declare namespace WOM {
          * int32
          * The total number of views
          */
-        viewCount: number; // int32
+        viewCount?: number; // int32
         /**
          * int32
          * Views that had a duration less than 25%
          */
-        viewD1Count: number; // int32
+        viewD1Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD1Percentage: number; // double
+        readonly viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
          */
-        viewD2Count: number; // int32
+        viewD2Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD2Percentage: number; // double
+        readonly viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
          */
-        viewD3Count: number; // int32
+        viewD3Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD3Percentage: number; // double
+        readonly viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
          */
-        viewD4Count: number; // int32
+        viewD4Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD4Percentage: number; // double
+        readonly viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
          */
-        likeCount: number; // int32
+        likeCount?: number; // int32
         /**
          * decimal
          */
-        readonly likesPercentage: number; // double
+        readonly likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
          */
-        ratingCount: number; // int32
+        ratingCount?: number; // int32
         /**
          * decimal
          */
-        readonly ratingsPercentage: number; // double
+        readonly ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
          */
-        saveCount: number; // int32
+        saveCount?: number; // int32
         /**
          * decimal
          */
-        readonly savesPercentage: number; // double
+        readonly savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
          */
-        shareCount: number; // int32
+        shareCount?: number; // int32
         /**
          * decimal
          */
-        readonly sharesPercentage: number; // double
+        readonly sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
          */
-        commentCount: number; // int32
+        commentCount?: number; // int32
         /**
          * decimal
          */
-        readonly commentsPercentage: number; // double
+        readonly commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
          */
-        clickCount: number; // int32
+        clickCount?: number; // int32
         /**
          * decimal
          */
-        readonly clicksPercentage: number; // double
+        readonly clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
          */
-        buyCount: number; // int32
+        buyCount?: number; // int32
         /**
          * decimal
          */
-        readonly buysPercentage: number; // double
+        readonly buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total: number; // int32
+        readonly total?: number; // int32
     }
     /**
      * engagementStatisticsHistorical
@@ -1497,63 +1475,63 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        dateFromHistorical: string; // date-time
+        dateFromHistorical?: string; // date-time
         /**
          * dateTime
          */
-        dateToHistorical: string; // date-time
+        dateToHistorical?: string; // date-time
         /**
          * dateTime
          */
-        dateFromLatest: string; // date-time
+        dateFromLatest?: string; // date-time
         /**
          * dateTime
          */
-        dateToLatest: string; // date-time
+        dateToLatest?: string; // date-time
         /**
          * decimal
          */
-        readonly viewsDelta: number; // double
+        readonly viewsDelta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD1Delta: number; // double
+        readonly viewsD1Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD2Delta: number; // double
+        readonly viewsD2Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD3Delta: number; // double
+        readonly viewsD3Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD4Delta: number; // double
+        readonly viewsD4Delta?: number; // double
         /**
          * decimal
          */
-        readonly likesDelta: number; // double
+        readonly likesDelta?: number; // double
         /**
          * decimal
          */
-        readonly ratingsDelta: number; // double
+        readonly ratingsDelta?: number; // double
         /**
          * decimal
          */
-        readonly savesDelta: number; // double
+        readonly savesDelta?: number; // double
         /**
          * decimal
          */
-        readonly sharesDelta: number; // double
+        readonly sharesDelta?: number; // double
         /**
          * decimal
          */
-        readonly clicksDelta: number; // double
+        readonly clicksDelta?: number; // double
         /**
          * decimal
          */
-        readonly buysDelta: number; // double
+        readonly buysDelta?: number; // double
     }
     /**
      * error400BadRequest
@@ -1562,12 +1540,12 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message: string | null;
+        readonly message?: string | null;
         /**
          * boolean
          */
-        readonly isSuccess: boolean;
-        loggingLevel: /**
+        readonly isSuccess?: boolean;
+        loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
          */
@@ -1575,17 +1553,17 @@ declare namespace WOM {
         /**
          * dictionary2
          */
-        errors: {
+        errors?: {
             [name: string]: string[];
         } | null;
         /**
          * string
          */
-        title: string | null;
+        title?: string | null;
         /**
          * string
          */
-        traceId: string | null;
+        traceId?: string | null;
     }
     /**
      * error404NotFoundResponse
@@ -1594,12 +1572,12 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message: string | null;
+        readonly message?: string | null;
         /**
          * boolean
          */
-        readonly isSuccess: boolean;
-        loggingLevel: /**
+        readonly isSuccess?: boolean;
+        loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
          */
@@ -1612,12 +1590,12 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message: string | null;
+        readonly message?: string | null;
         /**
          * boolean
          */
-        readonly isSuccess: boolean;
-        loggingLevel: /**
+        readonly isSuccess?: boolean;
+        loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
          */
@@ -1630,11 +1608,11 @@ declare namespace WOM {
         /**
          * string
          */
-        assetName: string | null;
+        assetName?: string | null;
         /**
          * decimal
          */
-        price: number; // double
+        price?: number; // double
     }
     /**
      * exchangeRateRequest
@@ -1647,12 +1625,12 @@ declare namespace WOM {
         /**
          * list1
          */
-        rates: /* exchangeRateItem */ ExchangeRateItem[] | null;
+        rates?: /* exchangeRateItem */ ExchangeRateItem[] | null;
         /**
          * dateTime
          * The time at which this request to the token information external API was made.
          */
-        utcRequested: string; // date-time
+        utcRequested?: string; // date-time
     }
     /**
      * existenceResponse
@@ -1661,7 +1639,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        exists: boolean;
+        exists?: boolean;
     }
     /**
      * getCurrentAuthorizationsRequest
@@ -1672,7 +1650,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId: string | null; // objectId
+        userId?: string | null; // objectId
     }
     /**
      * getCurrentAuthorizationsResponse
@@ -1687,19 +1665,19 @@ declare namespace WOM {
         /**
          * roles
          */
-        roles: string /* string */[] | null;
+        roles?: string /* string */[] | null;
         /**
          * string
          */
-        email: string | null;
+        email?: string | null;
         /**
          * boolean
          */
-        isEmailValidated: boolean;
+        isEmailValidated?: boolean;
         /**
          * boolean
          */
-        isAccountVerified: boolean;
+        isAccountVerified?: boolean;
     }
     /**
      * getNotificationsRequest
@@ -1712,13 +1690,13 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        lastId: string; // objectId
+        lastId?: string; // objectId
     }
     /**
      * getOrganizationRequest
@@ -1751,7 +1729,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId: string | null; // objectId
+        userId?: string | null; // objectId
     }
     /**
      * getUserResponse
@@ -1766,90 +1744,90 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * dateTime
          */
-        utcUpdated: string; // date-time
+        utcUpdated?: string; // date-time
         /**
          * dateTime
          */
-        utcLastAuthentication: string; // date-time
+        utcLastAuthentication?: string; // date-time
         /**
          * roles
          */
-        roles: string /* string */[] | null;
+        roles?: string /* string */[] | null;
         /**
          * string
          */
-        email: string | null;
+        email?: string | null;
         /**
          * string
          */
-        mobileNumber: string | null;
+        mobileNumber?: string | null;
         /**
          * string
          */
-        username: string | null;
+        username?: string | null;
         /**
          * boolean
          */
-        isAccountVerified: boolean;
+        isAccountVerified?: boolean;
         /**
          * boolean
          */
-        isEmailValidated: boolean;
-        profile: /* userProfileResponse */ UserProfileResponse;
+        isEmailValidated?: boolean;
+        profile?: /* userProfileResponse */ UserProfileResponse;
         /**
          * objectId
          * WOM's id for this user.
          * example:
          * 000000000000000000000000
          */
-        womUserId: string; // objectId
+        womUserId?: string; // objectId
         /**
          * string
          */
-        firstName: string | null;
+        firstName?: string | null;
         /**
          * string
          */
-        lastName: string | null;
+        lastName?: string | null;
         /**
          * string
          */
-        readonly fullName: string | null;
+        readonly fullName?: string | null;
         /**
          * string
          * The user's remote id (not WOM userId) if it exists.
          */
-        remoteUserId: string | null;
+        remoteUserId?: string | null;
         /**
          * string
          * The user's remote username if it exists.
          */
-        remoteUsername: string | null;
+        remoteUsername?: string | null;
         /**
          * string
          * The remote issuer that created this user, if it exists.
          */
-        remoteIssuer: string | null;
+        remoteIssuer?: string | null;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        walletId: string; // objectId
+        walletId?: string; // objectId
         /**
          * boolean
          */
-        hasWallet: boolean;
+        hasWallet?: boolean;
         /**
          * int32
          * If this user is allowed free stakes, the amount of stakes remaining.
          */
-        freeStakesRemaining: number; // int32
-        organizationMembership: /* organizationMembership */ OrganizationMembership;
+        freeStakesRemaining?: number; // int32
+        organizationMembership?: /* organizationMembership */ OrganizationMembership;
     }
     /**
      * getValidationDetailRequest
@@ -1860,11 +1838,11 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
     }
     /**
      * getValidationStateRequest
@@ -1875,11 +1853,11 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
     }
     /**
      * hour
@@ -1888,11 +1866,11 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly hoursSinceEpoch: number; // int32
+        readonly hoursSinceEpoch?: number; // int32
         /**
          * boolean
          */
-        readonly isDefault: boolean;
+        readonly isDefault?: boolean;
     }
     /**
      * IQueryRequest
@@ -1901,15 +1879,15 @@ declare namespace WOM {
         /**
          * int32
          */
-        limit: number; // int32
+        limit?: number; // int32
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * boolean
          */
-        enableUnboundQueryCount: boolean;
+        enableUnboundQueryCount?: boolean;
     }
     /**
      * IRequestContext
@@ -1918,40 +1896,40 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isAuthenticated: boolean;
+        readonly isAuthenticated?: boolean;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        readonly userId: string; // objectId
+        readonly userId?: string; // objectId
         /**
          * boolean
          */
-        readonly isRemote: boolean;
+        readonly isRemote?: boolean;
         /**
          * string
          */
-        readonly remoteUserId: string | null;
+        readonly remoteUserId?: string | null;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        readonly segmentId: string; // objectId
+        readonly segmentId?: string; // objectId
         /**
          * string
          */
-        readonly currentWebDomain: string | null;
+        readonly currentWebDomain?: string | null;
         /**
          * string
          */
-        readonly authenticationToken: string | null;
+        readonly authenticationToken?: string | null;
         /**
          * string
          */
-        readonly issuer: string | null;
-        clientApiVersion: /* version */ Version;
+        readonly issuer?: string | null;
+        clientApiVersion?: /* version */ Version;
     }
     /**
      * IUserResponse
@@ -1962,19 +1940,19 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId: string; // objectId
+        userId?: string; // objectId
         /**
          * roles
          */
-        roles: string /* string */[] | null;
+        roles?: string /* string */[] | null;
         /**
          * string
          */
-        email: string | null;
+        email?: string | null;
         /**
          * boolean
          */
-        isAccountVerified: boolean;
+        isAccountVerified?: boolean;
     }
     /**
      * logLevel
@@ -1988,11 +1966,11 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message: string | null;
+        readonly message?: string | null;
         /**
          * boolean
          */
-        isSuccess: boolean;
+        isSuccess?: boolean;
     }
     /**
      * notificationItemResponse
@@ -2001,29 +1979,29 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * string
          */
-        type: string | null;
+        type?: string | null;
         /**
          * string
          */
-        receiverUserId: string | null;
+        receiverUserId?: string | null;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        receiverNetworkId: string; // objectId
+        receiverNetworkId?: string; // objectId
         /**
          * boolean
          */
-        isImportant: boolean;
+        isImportant?: boolean;
         /**
          * list1
          */
-        arguments: string[] | null;
+        arguments?: string[] | null;
     }
     /**
      * notificationsResponse
@@ -2032,13 +2010,71 @@ declare namespace WOM {
         /**
          * list1
          */
-        readonly items: /* notificationItemResponse */ NotificationItemResponse[] | null;
+        readonly items?: /* notificationItemResponse */ NotificationItemResponse[] | null;
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        maxId: string; // objectId
+        maxId?: string; // objectId
+    }
+    /**
+     * organizationAcceptInviteRequest
+     */
+    export interface OrganizationAcceptInviteRequest {
+        /**
+         * string
+         * The invite code will associate the created user with the correct organization
+         */
+        inviteCode: string;
+        /**
+         * string
+         * The user name of this account
+         */
+        username: string;
+        /**
+         * string
+         * The password must be at least 8 characters long, contain a digit and an uppercase character.
+         */
+        password: string;
+    }
+    /**
+     * organizationAnalyzeEmailRequest
+     */
+    export interface OrganizationAnalyzeEmailRequest {
+        /**
+         * string
+         */
+        email: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+    }
+    /**
+     * organizationAuthenticateWithTokenRequest
+     */
+    export interface OrganizationAuthenticateWithTokenRequest {
+        /**
+         * string
+         */
+        email: string;
+        /**
+         * string
+         */
+        password: string;
+        /**
+         * string
+         */
+        confirmationToken: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
     }
     /**
      * organizationInvitationItem
@@ -2061,11 +2097,33 @@ declare namespace WOM {
         /**
          * hashSet1
          */
-        memberOf: string /* objectId */[] | null;
+        memberOf?: string /* objectId */[] | null;
         /**
          * hashSet1
          */
-        adminOf: string /* objectId */[] | null;
+        adminOf?: string /* objectId */[] | null;
+    }
+    /**
+     * organizationModifyUserRequest
+     */
+    export interface OrganizationModifyUserRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        userId: string; // objectId
+        permission: /**
+         * organizationPermission
+         * <br/><br/>Values:<br/>0 = None<br/>1 = Member<br/>2 = Admin
+         */
+        OrganizationPermission /* int32 */;
     }
     /**
      * organizationPermission
@@ -2073,293 +2131,9 @@ declare namespace WOM {
      */
     export type OrganizationPermission = 0 | 1 | 2; // int32
     /**
-     * organizationResponse
+     * organizationQueryUsersRequest
      */
-    export interface OrganizationResponse {
-        /**
-         * objectId
-         * The unique identifier for this organization
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId: string; // objectId
-        /**
-         * string
-         * The title of this organization.
-         */
-        title: string | null;
-        /**
-         * tags
-         * The mandatory tags of this organization.
-         */
-        mandatoryTags: string /* string */[] | null;
-        /**
-         * list1
-         * The users (by id) that have admin rights over this organization.
-         */
-        adminIds: string /* objectId */[] | null;
-        /**
-         * list1
-         * The users (by id) that are members of this organization.
-         */
-        memberIds: string /* objectId */[] | null;
-        /**
-         * objectId
-         * If created, the identifier of this organization's wallet
-         * example:
-         * 000000000000000000000000
-         */
-        walletId: string; // objectId
-        /**
-         * boolean
-         * True if this organization has a token wallet.
-         */
-        hasWallet: boolean;
-    }
-    /**
-     * organizationStatisticsQueryRequest
-     */
-    export interface OrganizationStatisticsQueryRequest {
-        /**
-         * boolean
-         */
-        returnQueryCount: boolean;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId: string; // objectId
-        /**
-         * date
-         * Retrieve statistics starting with this date
-         * example:
-         * 2020-01-01T00:00:00Z
-         */
-        dateFrom: string; // string
-        /**
-         * date
-         * Retrieve statistics up until and including this date
-         * example:
-         * 2020-01-01T00:00:00Z
-         */
-        dateTo: string; // string
-        /**
-         * int32
-         * The amount of historical comparison sets to generate
-         */
-        historicalSets: number; // int32
-    }
-    /**
-     * organizationStatisticsQueryResponse
-     */
-    export interface OrganizationStatisticsQueryResponse {
-        /**
-         * int32
-         */
-        totalRecords: number; // int32
-        /**
-         * int32
-         */
-        readonly returnedRecords: number; // int32
-        request: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        deltaStatistics: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
-        /**
-         * list1
-         */
-        readonly sets: /* organizationStatisticsQuerySetResponse */
-        OrganizationStatisticsQuerySetResponse[] | null;
-    }
-    /**
-     * organizationStatisticsQuerySetResponse
-     */
-    export interface OrganizationStatisticsQuerySetResponse {
-        /**
-         * int32
-         */
-        totalRecords: number; // int32
-        /**
-         * int32
-         */
-        readonly returnedRecords: number; // int32
-        /**
-         * list1
-         */
-        items: /* dailyAggregatedOrganizationStatistics */ DailyAggregatedOrganizationStatistics[] | null;
-        request: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        summary: /* engagementStatistics */ EngagementStatistics;
-    }
-    /**
-     * organizationStatisticsRequest
-     */
-    export interface OrganizationStatisticsRequest {
-        /**
-         * objectId
-         * The id of the organization.
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId: string; // objectId
-    }
-    /**
-     * organizationStatisticsResponse
-     */
-    export interface OrganizationStatisticsResponse {
-        /**
-         * decimal
-         * The amount of money allocated to this campaign.
-         */
-        amount: number; // double
-        /**
-         * decimal
-         * The amount spent on this campaign so far.
-         */
-        spend: number; // double
-        /**
-         * decimal
-         * The amount being spent per day.
-         */
-        spendPerDay: number; // double
-        /**
-         * decimal
-         * The remaining amount to be spent.
-         */
-        readonly remaining: number; // double
-        /**
-         * timeSpan
-         * The approximate amount of days left at this spending per day rate.
-         * example:
-         * 0
-         */
-        readonly remainingDuration: number; // int64
-        /**
-         * int32
-         */
-        campaignsRunning: number; // int32
-    }
-    /**
-     * organizationTagsResponse
-     */
-    export interface OrganizationTagsResponse {
-        /**
-         * tags
-         */
-        discoveryTags: string /* string */[] | null;
-    }
-    /**
-     * organizationUsersResponse
-     */
-    export interface OrganizationUsersResponse {
-        /**
-         * int32
-         */
-        totalRecords: number; // int32
-        /**
-         * int32
-         */
-        readonly returnedRecords: number; // int32
-        /**
-         * list1
-         */
-        items: /* getUserResponse */ GetUserResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex: number; // int32
-    }
-    /**
-     * productResponse
-     */
-    export interface ProductResponse {
-        /**
-         * objectId
-         * The product's unique identifier
-         * example:
-         * 000000000000000000000000
-         */
-        readonly id: string; // objectId
-        /**
-         * string
-         * This product's brand name
-         */
-        brandName: string | null;
-        /**
-         * string
-         * The item name of this product.
-         */
-        item: string | null;
-        /**
-         * tag
-         * The tag that represents this product's brand.
-         * example:
-         * string
-         */
-        tagBrand: string; // string
-        /**
-         * tag
-         * The main category tag
-         * example:
-         * string
-         */
-        tagCategory: string; // string
-        /**
-         * tag
-         * The sub category tag
-         * example:
-         * string
-         */
-        tagSubCategory: string; // string
-        /**
-         * tags
-         * Extra tags, will not include other tags referenced here.
-         */
-        extraTags: string /* string */[] | null;
-    }
-    /**
-     * productUpsertRequest
-     */
-    export interface ProductUpsertRequest {
-        /**
-         * string
-         */
-        remoteId: string | null;
-        /**
-         * hashSet1
-         */
-        upcCodes: string[] | null;
-        /**
-         * string
-         */
-        brandName: string | null;
-        /**
-         * string
-         */
-        itemName: string | null;
-        /**
-         * string
-         */
-        primaryCategory: string | null;
-        /**
-         * hashSet1
-         */
-        secondaryCategories: string[] | null;
-        /**
-         * string
-         */
-        brandProductImageUrl: string | null;
-        /**
-         * tags
-         */
-        tags: string /* string */[] | null;
-    }
-    /**
-     * queryOrganizationUsersRequest
-     */
-    export interface QueryOrganizationUsersRequest {
+    export interface OrganizationQueryUsersRequest {
         /**
          * int32
          */
@@ -2367,7 +2141,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * int32
          */
@@ -2381,7 +2155,355 @@ declare namespace WOM {
         /**
          * string
          */
-        textSearch: string | null;
+        textSearch?: string | null;
+    }
+    /**
+     * organizationQueryUsersResponse
+     */
+    export interface OrganizationQueryUsersResponse {
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: /* getUserResponse */ GetUserResponse[] | null;
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+    }
+    /**
+     * organizationResponse
+     */
+    export interface OrganizationResponse {
+        /**
+         * objectId
+         * The unique identifier for this organization
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * string
+         * The title of this organization.
+         */
+        title?: string | null;
+        /**
+         * tags
+         * The mandatory tags of this organization.
+         */
+        mandatoryTags?: string /* string */[] | null;
+        /**
+         * list1
+         * The users (by id) that have admin rights over this organization.
+         */
+        adminIds?: string /* objectId */[] | null;
+        /**
+         * list1
+         * The users (by id) that are members of this organization.
+         */
+        memberIds?: string /* objectId */[] | null;
+        /**
+         * objectId
+         * If created, the identifier of this organization's wallet
+         * example:
+         * 000000000000000000000000
+         */
+        walletId?: string; // objectId
+        /**
+         * boolean
+         * True if this organization has a token wallet.
+         */
+        hasWallet?: boolean;
+    }
+    /**
+     * organizationSendInvitationsRequest
+     */
+    export interface OrganizationSendInvitationsRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId: string; // objectId
+        /**
+         * list1
+         */
+        invitations: /* organizationInvitationItem */ OrganizationInvitationItem[];
+    }
+    /**
+     * organizationStatisticsQueryRequest
+     */
+    export interface OrganizationStatisticsQueryRequest {
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * date
+         * Retrieve statistics starting with this date
+         * example:
+         * 2020-01-01T00:00:00Z
+         */
+        dateFrom?: string; // string
+        /**
+         * date
+         * Retrieve statistics up until and including this date
+         * example:
+         * 2020-01-01T00:00:00Z
+         */
+        dateTo?: string; // string
+        /**
+         * int32
+         * The amount of historical comparison sets to generate
+         */
+        historicalSets?: number; // int32
+    }
+    /**
+     * organizationStatisticsQueryResponse
+     */
+    export interface OrganizationStatisticsQueryResponse {
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
+        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        /**
+         * list1
+         */
+        readonly sets?: /* organizationStatisticsQuerySetResponse */
+        OrganizationStatisticsQuerySetResponse[] | null;
+    }
+    /**
+     * organizationStatisticsQuerySetResponse
+     */
+    export interface OrganizationStatisticsQuerySetResponse {
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: /* dailyAggregatedOrganizationStatistics */ DailyAggregatedOrganizationStatistics[] | null;
+        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
+        summary?: /* engagementStatistics */ EngagementStatistics;
+    }
+    /**
+     * organizationStatisticsRequest
+     */
+    export interface OrganizationStatisticsRequest {
+        /**
+         * objectId
+         * The id of the organization.
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+    }
+    /**
+     * organizationStatisticsResponse
+     */
+    export interface OrganizationStatisticsResponse {
+        /**
+         * decimal
+         * The amount of money allocated to this campaign.
+         */
+        amount?: number; // double
+        /**
+         * decimal
+         * The amount spent on this campaign so far.
+         */
+        spend?: number; // double
+        /**
+         * decimal
+         * The amount being spent per day.
+         */
+        spendPerDay?: number; // double
+        /**
+         * decimal
+         * The remaining amount to be spent.
+         */
+        readonly remaining?: number; // double
+        /**
+         * timeSpan
+         * The approximate amount of days left at this spending per day rate.
+         * example:
+         * 0
+         */
+        readonly remainingDuration?: number; // int64
+        /**
+         * int32
+         */
+        campaignsRunning?: number; // int32
+    }
+    /**
+     * organizationTagsResponse
+     */
+    export interface OrganizationTagsResponse {
+        /**
+         * tags
+         */
+        discoveryTags?: string /* string */[] | null;
+    }
+    /**
+     * organizationUserAuthChallengeRequest
+     */
+    export interface OrganizationUserAuthChallengeRequest {
+        /**
+         * string
+         */
+        email: string;
+        /**
+         * string
+         */
+        password: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+    }
+    /**
+     * organizationUserWantsForgottenPasswordRequest
+     */
+    export interface OrganizationUserWantsForgottenPasswordRequest {
+        /**
+         * string
+         */
+        email: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+    }
+    /**
+     * organizationUserWantsValidationLinkEmailRequest
+     */
+    export interface OrganizationUserWantsValidationLinkEmailRequest {
+        /**
+         * string
+         */
+        email: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+    }
+    /**
+     * productResponse
+     */
+    export interface ProductResponse {
+        /**
+         * objectId
+         * The product's unique identifier
+         * example:
+         * 000000000000000000000000
+         */
+        readonly id?: string; // objectId
+        /**
+         * string
+         * This product's brand name
+         */
+        brandName?: string | null;
+        /**
+         * string
+         * The item name of this product.
+         */
+        item?: string | null;
+        /**
+         * tag
+         * The tag that represents this product's brand.
+         * example:
+         * string
+         */
+        tagBrand?: string; // string
+        /**
+         * tag
+         * The main category tag
+         * example:
+         * string
+         */
+        tagCategory?: string; // string
+        /**
+         * tag
+         * The sub category tag
+         * example:
+         * string
+         */
+        tagSubCategory?: string; // string
+        /**
+         * tags
+         * Extra tags, will not include other tags referenced here.
+         */
+        extraTags?: string /* string */[] | null;
+    }
+    /**
+     * productUpsertRequest
+     */
+    export interface ProductUpsertRequest {
+        /**
+         * string
+         */
+        remoteId?: string | null;
+        /**
+         * hashSet1
+         */
+        upcCodes?: string[] | null;
+        /**
+         * string
+         */
+        brandName?: string | null;
+        /**
+         * string
+         */
+        itemName?: string | null;
+        /**
+         * string
+         */
+        primaryCategory?: string | null;
+        /**
+         * hashSet1
+         */
+        secondaryCategories?: string[] | null;
+        /**
+         * string
+         */
+        brandProductImageUrl?: string | null;
+        /**
+         * tags
+         */
+        tags?: string /* string */[] | null;
     }
     /**
      * responseTransform
@@ -2390,10 +2512,10 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isApplicable: boolean;
-        version: /* version */ Version;
-        clientVersion: /* version */ Version;
-        mode: /**
+        readonly isApplicable?: boolean;
+        version?: /* version */ Version;
+        clientVersion?: /* version */ Version;
+        mode?: /**
          * transformMode
          * <br/><br/>Values:<br/>0 = ForVersion<br/>1 = BeforeAndForVersion<br/>2 = BeforeVersion<br/>3 = AfterVersion<br/>4 = AfterAndForVersion
          */
@@ -2416,26 +2538,11 @@ declare namespace WOM {
          * example:
          * 100000000000000000000000
          */
-        valueWei: string; // string
+        valueWei?: string; // string
         /**
          * decimal
          */
-        value: number; // double
-    }
-    /**
-     * sendOrganizationInvitationsRequest
-     */
-    export interface SendOrganizationInvitationsRequest {
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId: string; // objectId
-        /**
-         * list1
-         */
-        invitations: /* organizationInvitationItem */ OrganizationInvitationItem[];
+        value?: number; // double
     }
     /**
      * statisticsDaily
@@ -2445,151 +2552,151 @@ declare namespace WOM {
          * int32
          * The total number of views
          */
-        viewCount: number; // int32
+        viewCount?: number; // int32
         /**
          * int32
          * Views that had a duration less than 25%
          */
-        viewD1Count: number; // int32
+        viewD1Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD1Percentage: number; // double
+        readonly viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
          */
-        viewD2Count: number; // int32
+        viewD2Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD2Percentage: number; // double
+        readonly viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
          */
-        viewD3Count: number; // int32
+        viewD3Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD3Percentage: number; // double
+        readonly viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
          */
-        viewD4Count: number; // int32
+        viewD4Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD4Percentage: number; // double
+        readonly viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
          */
-        likeCount: number; // int32
+        likeCount?: number; // int32
         /**
          * decimal
          */
-        readonly likesPercentage: number; // double
+        readonly likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
          */
-        ratingCount: number; // int32
+        ratingCount?: number; // int32
         /**
          * decimal
          */
-        readonly ratingsPercentage: number; // double
+        readonly ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
          */
-        saveCount: number; // int32
+        saveCount?: number; // int32
         /**
          * decimal
          */
-        readonly savesPercentage: number; // double
+        readonly savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
          */
-        shareCount: number; // int32
+        shareCount?: number; // int32
         /**
          * decimal
          */
-        readonly sharesPercentage: number; // double
+        readonly sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
          */
-        commentCount: number; // int32
+        commentCount?: number; // int32
         /**
          * decimal
          */
-        readonly commentsPercentage: number; // double
+        readonly commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
          */
-        clickCount: number; // int32
+        clickCount?: number; // int32
         /**
          * decimal
          */
-        readonly clicksPercentage: number; // double
+        readonly clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
          */
-        buyCount: number; // int32
+        buyCount?: number; // int32
         /**
          * decimal
          */
-        readonly buysPercentage: number; // double
+        readonly buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total: number; // int32
+        readonly total?: number; // int32
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        id: string; // objectId
+        id?: string; // objectId
         /**
          * objectId
          * The ID of the content known to WOM.
          * example:
          * 000000000000000000000000
          */
-        womContentId: string; // objectId
+        womContentId?: string; // objectId
         /**
          * string
          * The ID of the content known to the remote network.
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity: number | null; // double
+        authenticity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity: number | null; // double
+        creativity?: number | null; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity: number | null; // double
+        positivity?: number | null; // double
         /**
          * date
          * The date (does not include a time component) of this statistics entry.
          * example:
          * 2020-01-01T00:00:00Z
          */
-        date: string; // string
+        date?: string; // string
     }
     /**
      * statisticsHourly
@@ -2599,140 +2706,140 @@ declare namespace WOM {
          * int32
          * The total number of views
          */
-        viewCount: number; // int32
+        viewCount?: number; // int32
         /**
          * int32
          * Views that had a duration less than 25%
          */
-        viewD1Count: number; // int32
+        viewD1Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD1Percentage: number; // double
+        readonly viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
          */
-        viewD2Count: number; // int32
+        viewD2Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD2Percentage: number; // double
+        readonly viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
          */
-        viewD3Count: number; // int32
+        viewD3Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD3Percentage: number; // double
+        readonly viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
          */
-        viewD4Count: number; // int32
+        viewD4Count?: number; // int32
         /**
          * decimal
          */
-        readonly viewsD4Percentage: number; // double
+        readonly viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
          */
-        likeCount: number; // int32
+        likeCount?: number; // int32
         /**
          * decimal
          */
-        readonly likesPercentage: number; // double
+        readonly likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
          */
-        ratingCount: number; // int32
+        ratingCount?: number; // int32
         /**
          * decimal
          */
-        readonly ratingsPercentage: number; // double
+        readonly ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
          */
-        saveCount: number; // int32
+        saveCount?: number; // int32
         /**
          * decimal
          */
-        readonly savesPercentage: number; // double
+        readonly savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
          */
-        shareCount: number; // int32
+        shareCount?: number; // int32
         /**
          * decimal
          */
-        readonly sharesPercentage: number; // double
+        readonly sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
          */
-        commentCount: number; // int32
+        commentCount?: number; // int32
         /**
          * decimal
          */
-        readonly commentsPercentage: number; // double
+        readonly commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
          */
-        clickCount: number; // int32
+        clickCount?: number; // int32
         /**
          * decimal
          */
-        readonly clicksPercentage: number; // double
+        readonly clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
          */
-        buyCount: number; // int32
+        buyCount?: number; // int32
         /**
          * decimal
          */
-        readonly buysPercentage: number; // double
+        readonly buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total: number; // int32
-        hour: /* hour */ Hour;
+        readonly total?: number; // int32
+        hour?: /* hour */ Hour;
         /**
          * nullable1
          */
-        authenticity: number | null; // double
+        authenticity?: number | null; // double
         /**
          * nullable1
          */
-        creativity: number | null; // double
+        creativity?: number | null; // double
         /**
          * nullable1
          */
-        positivity: number | null; // double
+        positivity?: number | null; // double
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        readonly id: string; // objectId
+        readonly id?: string; // objectId
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
-        womContentId: string; // objectId
+        womContentId?: string; // objectId
         /**
          * string
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
     }
     /**
      * statisticsHourlyUploadRequest
@@ -2741,7 +2848,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items: /* statisticsHourly */ StatisticsHourly[] | null;
+        items?: /* statisticsHourly */ StatisticsHourly[] | null;
     }
     /**
      * streamDetails
@@ -2750,41 +2857,41 @@ declare namespace WOM {
         /**
          * string
          */
-        screenGrabUrl: string | null;
+        screenGrabUrl?: string | null;
         /**
          * string
          */
-        hlsUrl: string | null;
+        hlsUrl?: string | null;
         /**
          * boolean
          */
-        isHD: boolean;
+        isHD?: boolean;
         /**
          * boolean
          */
-        isSingleChannelAudio: boolean;
+        isSingleChannelAudio?: boolean;
         /**
          * boolean
          */
-        isUnlimitedLength: boolean;
+        isUnlimitedLength?: boolean;
         /**
          * boolean
          */
-        isPortraitAspect: boolean;
+        isPortraitAspect?: boolean;
         /**
          * boolean
          */
-        hasSubtitles: boolean;
+        hasSubtitles?: boolean;
         /**
          * list1
          * The languages available on this content.
          */
-        languageSpoken: string[] | null;
+        languageSpoken?: string[] | null;
         /**
          * list1
          * The subtitle languages available for this content.
          */
-        languageSubtitle: string[] | null;
+        languageSubtitle?: string[] | null;
     }
     /**
      * systemBalanceResponse
@@ -2795,31 +2902,31 @@ declare namespace WOM {
          * example:
          * 100000000000000000000000
          */
-        sumBalanceWei: string; // string
+        sumBalanceWei?: string; // string
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        escrowBalanceWei: string; // string
+        escrowBalanceWei?: string; // string
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        circulationBalanceWei: string; // string
+        circulationBalanceWei?: string; // string
         /**
          * decimal
          */
-        readonly sumBalance: number; // double
+        readonly sumBalance?: number; // double
         /**
          * decimal
          */
-        readonly escrowBalance: number; // double
+        readonly escrowBalance?: number; // double
         /**
          * decimal
          */
-        readonly circulationBalance: number; // double
+        readonly circulationBalance?: number; // double
     }
     /**
      * transactionCreateRequest
@@ -2829,17 +2936,17 @@ declare namespace WOM {
          * decimal
          * The amount to transfer.
          */
-        value: number; // double
+        value?: number; // double
         /**
          * string
          * The account in the source wallet. Either WOM or RP.
          */
-        addressFrom: string | null;
+        addressFrom?: string | null;
         /**
          * string
          * The account in the destination wallet. Either WOM or RP.
          */
-        addressTo: string | null;
+        addressTo?: string | null;
     }
     /**
      * transactionGetRequest
@@ -2851,7 +2958,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        transactionId: string; // objectId
+        transactionId?: string; // objectId
     }
     /**
      * transactionNarrativeType
@@ -2869,7 +2976,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * int32
          */
@@ -2880,13 +2987,13 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId: string | null; // objectId
-        status: /**
+        userId?: string | null; // objectId
+        status?: /**
          * transactionStatus
          * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
          */
         TransactionStatus /* int32 */;
-        type: /* transactionType */ TransactionType /* int32 */;
+        type?: /* transactionType */ TransactionType /* int32 */;
     }
     /**
      * transactionQueryResponse
@@ -2895,15 +3002,15 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /**
+        items?: /**
          * transactionResponse
          * Describes the current status of any transaction.
          */
@@ -2911,11 +3018,11 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalPages: number; // int32
+        totalPages?: number; // int32
         /**
          * int32
          */
-        currentPageIndex: number; // int32
+        currentPageIndex?: number; // int32
     }
     /**
      * transactionQueueReportItemResponse
@@ -2924,41 +3031,41 @@ declare namespace WOM {
         /**
          * string
          */
-        name: string | null;
+        name?: string | null;
         /**
          * string
          */
-        address: string | null;
+        address?: string | null;
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        balanceWei: string; // string
+        balanceWei?: string; // string
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        queuedWei: string; // string
+        queuedWei?: string; // string
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        requiredWei: string; // string
+        requiredWei?: string; // string
         /**
          * decimal
          */
-        balance: number; // double
+        balance?: number; // double
         /**
          * decimal
          */
-        queued: number; // double
+        queued?: number; // double
         /**
          * decimal
          */
-        required: number; // double
+        required?: number; // double
     }
     /**
      * transactionResponse
@@ -2971,35 +3078,35 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        transactionId: string; // objectId
+        transactionId?: string; // objectId
         /**
          * string
          */
-        ethereumTransactionHash: string | null;
+        ethereumTransactionHash?: string | null;
         /**
          * dateTime
          */
-        utcCreated: string; // date-time
+        utcCreated?: string; // date-time
         /**
          * string
          */
-        from: string | null;
+        from?: string | null;
         /**
          * string
          */
-        to: string | null;
+        to?: string | null;
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
-        valueWei: string; // string
-        status: /**
+        valueWei?: string; // string
+        status?: /**
          * transactionStatus
          * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
          */
         TransactionStatus /* int32 */;
-        type: /**
+        type?: /**
          * transactionNarrativeType
          * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync
          */
@@ -3007,11 +3114,11 @@ declare namespace WOM {
         /**
          * decimal
          */
-        value: number; // double
+        value?: number; // double
         /**
          * string
          */
-        meta: string | null;
+        meta?: string | null;
     }
     /**
      * transactionStatus
@@ -3055,27 +3162,7 @@ declare namespace WOM {
         /**
          * string
          */
-        imageUrl: string | null;
-    }
-    /**
-     * userAcceptInviteCampaignAccountRequest
-     */
-    export interface UserAcceptInviteCampaignAccountRequest {
-        /**
-         * string
-         * The invite code will associate the created user with the correct organization
-         */
-        inviteCode: string;
-        /**
-         * string
-         * The user name of this account
-         */
-        username: string;
-        /**
-         * string
-         * The password must be at least 8 characters long, contain a digit and an uppercase character.
-         */
-        password: string;
+        imageUrl?: string | null;
     }
     /**
      * userAuthChallengeRequest
@@ -3115,8 +3202,8 @@ declare namespace WOM {
         /**
          * string
          */
-        token: string | null;
-        user: /* getUserResponse */ GetUserResponse;
+        token?: string | null;
+        user?: /* getUserResponse */ GetUserResponse;
     }
     /**
      * userProfileResponse
@@ -3125,11 +3212,11 @@ declare namespace WOM {
         /**
          * string
          */
-        primaryLanguage: string | null;
+        primaryLanguage?: string | null;
         /**
          * string
          */
-        imageUrl: string | null;
+        imageUrl?: string | null;
     }
     /**
      * userQueryRequest
@@ -3142,7 +3229,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        returnQueryCount: boolean;
+        returnQueryCount?: boolean;
         /**
          * int32
          */
@@ -3152,35 +3239,35 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        segmentId: string; // objectId
+        segmentId?: string; // objectId
         /**
          * list1
          */
-        userIds: string /* objectId */[] | null;
+        userIds?: string /* objectId */[] | null;
         /**
          * string
          */
-        userName: string | null;
+        userName?: string | null;
         /**
          * string
          */
-        email: string | null;
+        email?: string | null;
         /**
          * string
          */
-        mobileNumber: string | null;
+        mobileNumber?: string | null;
         /**
          * string
          */
-        textSearch: string | null;
+        textSearch?: string | null;
         /**
          * roles
          */
-        rolesAll: string /* string */[] | null;
+        rolesAll?: string /* string */[] | null;
         /**
          * roles
          */
-        rolesAny: string /* string */[] | null;
+        rolesAny?: string /* string */[] | null;
     }
     /**
      * userQueryResponse
@@ -3189,23 +3276,23 @@ declare namespace WOM {
         /**
          * int32
          */
-        totalRecords: number; // int32
+        totalRecords?: number; // int32
         /**
          * int32
          */
-        readonly returnedRecords: number; // int32
+        readonly returnedRecords?: number; // int32
         /**
          * list1
          */
-        items: /* getUserResponse */ GetUserResponse[] | null;
+        items?: /* getUserResponse */ GetUserResponse[] | null;
         /**
          * int32
          */
-        totalPages: number; // int32
+        totalPages?: number; // int32
         /**
          * int32
          */
-        currentPageIndex: number; // int32
+        currentPageIndex?: number; // int32
     }
     /**
      * userRoleChangeRequest
@@ -3220,11 +3307,11 @@ declare namespace WOM {
         /**
          * boolean
          */
-        remove: boolean;
+        remove?: boolean;
         /**
          * string
          */
-        role: string | null;
+        role?: string | null;
     }
     /**
      * userTokenRequest
@@ -3250,15 +3337,15 @@ declare namespace WOM {
         /**
          * string
          */
-        email: string | null;
+        email?: string | null;
         /**
          * string
          */
-        firstName: string | null;
+        firstName?: string | null;
         /**
          * string
          */
-        lastName: string | null;
+        lastName?: string | null;
     }
     /**
      * userValidationDetails
@@ -3267,27 +3354,27 @@ declare namespace WOM {
         /**
          * string
          */
-        payoutAddress: string | null;
+        payoutAddress?: string | null;
         /**
          * bigInteger
          * Amount paid out so far.
          * example:
          * 100000000000000000000000
          */
-        paidOutWei: string; // string
+        paidOutWei?: string; // string
         /**
          * bigInteger
          * The content creator's initial WOM stake for this validation
          * example:
          * 100000000000000000000000
          */
-        stakedWei: string; // string
+        stakedWei?: string; // string
         /**
          * boolean
          * Is this user the content creator
          */
-        isContentCreator: boolean;
-        rating: /* WOMScore */ WOMScore;
+        isContentCreator?: boolean;
+        rating?: /* WOMScore */ WOMScore;
     }
     /**
      * userWantsForgottenPasswordRequest
@@ -3314,7 +3401,7 @@ declare namespace WOM {
         /**
          * string
          */
-        username: string | null;
+        username?: string | null;
     }
     /**
      * validateContentRequest
@@ -3336,7 +3423,7 @@ declare namespace WOM {
          * boolean
          * Request a free promotional stake, if available.
          */
-        requestStakingPromotion: boolean;
+        requestStakingPromotion?: boolean;
         /**
          * decimal
          * Creativity rating
@@ -3380,40 +3467,40 @@ declare namespace WOM {
          * decimal
          * The amount of WOM the submitter is staking for validation to begin.
          */
-        stakeAmount: number; // double
+        stakeAmount?: number; // double
         /**
          * string
          * Submit for validation on behalf of this user. [Remote server only]
          */
-        remoteUserId: string | null;
+        remoteUserId?: string | null;
         /**
          * boolean
          * If set, this validation sequence will require further steps.
          */
-        startWithHold: boolean;
+        startWithHold?: boolean;
         /**
          * objectId
          * The wallet id that will supply the stake amount.
          * example:
          * 000000000000000000000000
          */
-        stakeWalletId: string; // objectId
+        stakeWalletId?: string; // objectId
         /**
          * nullable1
          * Optional: Specify a different payout wallet from the staking wallet.
          * example:
          * 000000000000000000000000
          */
-        payoutWalletId: string | null; // objectId
+        payoutWalletId?: string | null; // objectId
     }
     /**
      * validationDetailResponse
      */
     export interface ValidationDetailResponse {
-        validationState: /* validationStateResponse */ ValidationStateResponse;
-        engagement: /* engagementStatistics */ EngagementStatistics;
-        womQualityScore: /* WOMQualityScore */ WOMQualityScore;
-        userValidationDetails: /* userValidationDetails */ UserValidationDetails;
+        validationState?: /* validationStateResponse */ ValidationStateResponse;
+        engagement?: /* engagementStatistics */ EngagementStatistics;
+        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
+        userValidationDetails?: /* userValidationDetails */ UserValidationDetails;
     }
     /**
      * validationEndedReason
@@ -3429,15 +3516,15 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * boolean
          */
-        terminate: boolean;
+        terminate?: boolean;
     }
     /**
      * validationResetRequest
@@ -3448,11 +3535,11 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        contentId: string; // objectId
+        contentId?: string; // objectId
         /**
          * string
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
     }
     /**
      * validationResult
@@ -3474,27 +3561,27 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        womContentId: string; // objectId
+        womContentId?: string; // objectId
         /**
          * string
          * Remote content id (if available).
          */
-        remoteContentId: string | null;
+        remoteContentId?: string | null;
         /**
          * dateTime
          */
-        utcValidateBy: string; // date-time
-        currentStage: /**
+        utcValidateBy?: string; // date-time
+        currentStage?: /**
          * validationStage
          * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
          */
         ValidationStage /* int32 */;
-        validationResult: /**
+        validationResult?: /**
          * validationResult
          * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
          */
         ValidationResult /* int32 */;
-        endedReason: /**
+        endedReason?: /**
          * validationEndedReason
          * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
          */
@@ -3505,12 +3592,12 @@ declare namespace WOM {
          * example:
          * 100000000000000000000000
          */
-        womStakedWei: string; // string
+        womStakedWei?: string; // string
         /**
          * decimal
          * The amount of WOM the creator staked to begin validation.
          */
-        womStaked: number; // double
+        womStaked?: number; // double
     }
     /**
      * version
@@ -3519,27 +3606,27 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly major: number; // int32
+        readonly major?: number; // int32
         /**
          * int32
          */
-        readonly minor: number; // int32
+        readonly minor?: number; // int32
         /**
          * int32
          */
-        readonly build: number; // int32
+        readonly build?: number; // int32
         /**
          * int32
          */
-        readonly revision: number; // int32
+        readonly revision?: number; // int32
         /**
          * int16
          */
-        readonly majorRevision: number; // int32
+        readonly majorRevision?: number; // int32
         /**
          * int16
          */
-        readonly minorRevision: number; // int32
+        readonly minorRevision?: number; // int32
     }
     /**
      * videoAnalysisResponse
@@ -3550,11 +3637,11 @@ declare namespace WOM {
          * example:
          * 0
          */
-        duration: number; // int64
+        duration?: number; // int64
         /**
          * int64
          */
-        size: number; // int64
+        size?: number; // int64
     }
     /**
      * WOMQualityScore
@@ -3564,22 +3651,22 @@ declare namespace WOM {
          * decimal
          * The WOM authenticity score as determined by the WOM validation process.
          */
-        authenticity: number; // double
+        authenticity?: number; // double
         /**
          * decimal
          * The WOM creativity score as determined by the WOM validation process.
          */
-        creativity: number; // double
+        creativity?: number; // double
         /**
          * decimal
          * The WOM positivity score as determined by the WOM validation process.
          */
-        positivity: number; // double
+        positivity?: number; // double
         /**
          * decimal
          * The WOM quality score is the sum of the other ratings multiplied by individual weights.
          */
-        quality: number; // double
+        quality?: number; // double
     }
     /**
      * WOMScore
@@ -3589,17 +3676,17 @@ declare namespace WOM {
          * decimal
          * The WOM authenticity score as determined by the WOM validation process.
          */
-        authenticity: number; // double
+        authenticity?: number; // double
         /**
          * decimal
          * The WOM creativity score as determined by the WOM validation process.
          */
-        creativity: number; // double
+        creativity?: number; // double
         /**
          * decimal
          * The WOM positivity score as determined by the WOM validation process.
          */
-        positivity: number; // double
+        positivity?: number; // double
     }
     /**
      * walletCreateRequest
@@ -3622,12 +3709,12 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        walletId: string | null; // objectId
+        walletId?: string | null; // objectId
         /**
          * string
          * If specified the wallet for the given address will be displayed (Admin only)
          */
-        publicAddress: string | null;
+        publicAddress?: string | null;
     }
     /**
      * walletResponse
@@ -3639,22 +3726,22 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        walletId: string; // objectId
+        walletId?: string; // objectId
         /**
          * boolean
          * Determines if this user has a wallet
          */
-        hasWallet: boolean;
+        hasWallet?: boolean;
         /**
          * boolean
          * Has the user participated in any WOM or RP token transactions.
          */
-        hasTransacted: boolean;
+        hasTransacted?: boolean;
         /**
          * list1
          * The addresses held in this wallet if available
          */
-        items: /**
+        items?: /**
          * addressResponse
          * A strongly typed entity representing the amount of tokens in a user's account.
          */
@@ -3668,98 +3755,20 @@ declare namespace WOM {
          * string
          * The source address, if not specified the calling user's primary account will be used.
          */
-        addressFrom: string | null;
+        addressFrom?: string | null;
         /**
          * string
          * The destination address, must be a valid Ethereum WOM ERC20 destination.
          */
-        addressTo: string | null;
+        addressTo?: string | null;
         /**
          * decimal
          * This value is denominated in ETHER (WOM), it is a decimal value where 10.5 WOM tokens should be written as 10.5
          */
-        value: number; // double
+        value?: number; // double
     }
 }
 declare namespace Paths {
-    namespace CampaignContentFlagInappropriate {
-        namespace Post {
-            export type RequestBody = /* contentFlagInappropriateRequest */ Components.Schemas.ContentFlagInappropriateRequest;
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
-            }
-        }
-    }
-    namespace CampaignContentGet {
-        namespace Post {
-            export type RequestBody = /* contentGetRequest */ Components.Schemas.ContentGetRequest;
-            namespace Responses {
-                export type $200 = /* contentItemResponse */ Components.Schemas.ContentItemResponse;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
-            }
-        }
-    }
-    namespace CampaignContentPut {
-        namespace Post {
-            export type RequestBody = /* contentPutRequest */ Components.Schemas.ContentPutRequest;
-            namespace Responses {
-                export type $200 = /* contentPutResponse */ Components.Schemas.ContentPutResponse;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
-            }
-        }
-    }
-    namespace CampaignContentQuery {
-        namespace Post {
-            export type RequestBody = /* contentQueryRequest */ Components.Schemas.ContentQueryRequest;
-            namespace Responses {
-                export type $200 = /* contentQueryResponse */ Components.Schemas.ContentQueryResponse;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-            }
-        }
-    }
-    namespace CampaignContentQueryStatistics {
-        namespace Post {
-            export type RequestBody = /* contentStatisticsQueryRequest */ Components.Schemas.ContentStatisticsQueryRequest;
-            namespace Responses {
-                export type $200 = /* contentStatisticsQueryResponse */ Components.Schemas.ContentStatisticsQueryResponse;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
-                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
-            }
-        }
-    }
-    namespace CampaignContentSendStatisticsHourly {
-        namespace Post {
-            export type RequestBody = /* statisticsHourlyUploadRequest */ Components.Schemas.StatisticsHourlyUploadRequest;
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
-                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
-            }
-        }
-    }
-    namespace CampaignContentStreamUpdate {
-        namespace Post {
-            export type RequestBody = /* contentStreamUpdateRequest */ Components.Schemas.ContentStreamUpdateRequest;
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
-            }
-        }
-    }
     namespace CampaignGet {
         namespace Post {
             export type RequestBody = /* campaignGetRequest */ Components.Schemas.CampaignGetRequest;
@@ -3801,6 +3810,84 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CatalogueFlagInappropriate {
+        namespace Post {
+            export type RequestBody = /* contentFlagInappropriateRequest */ Components.Schemas.ContentFlagInappropriateRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CatalogueGet {
+        namespace Post {
+            export type RequestBody = /* contentGetRequest */ Components.Schemas.ContentGetRequest;
+            namespace Responses {
+                export type $200 = /* contentItemResponse */ Components.Schemas.ContentItemResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CataloguePut {
+        namespace Post {
+            export type RequestBody = /* contentPutRequest */ Components.Schemas.ContentPutRequest;
+            namespace Responses {
+                export type $200 = /* contentPutResponse */ Components.Schemas.ContentPutResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace CatalogueQuery {
+        namespace Post {
+            export type RequestBody = /* contentQueryRequest */ Components.Schemas.ContentQueryRequest;
+            namespace Responses {
+                export type $200 = /* contentQueryResponse */ Components.Schemas.ContentQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace CatalogueQueryStatistics {
+        namespace Post {
+            export type RequestBody = /* contentStatisticsQueryRequest */ Components.Schemas.ContentStatisticsQueryRequest;
+            namespace Responses {
+                export type $200 = /* contentStatisticsQueryResponse */ Components.Schemas.ContentStatisticsQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace CatalogueSendStatisticsHourly {
+        namespace Post {
+            export type RequestBody = /* statisticsHourlyUploadRequest */ Components.Schemas.StatisticsHourlyUploadRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace CatalogueStreamUpdate {
+        namespace Post {
+            export type RequestBody = /* contentStreamUpdateRequest */ Components.Schemas.ContentStreamUpdateRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
             }
         }
     }
@@ -3884,7 +3971,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserAnalyzeEmail {
         namespace Post {
-            export type RequestBody = /* analyzeEmailRequest */ Components.Schemas.AnalyzeEmailRequest;
+            export type RequestBody = /* organizationAnalyzeEmailRequest */ Components.Schemas.OrganizationAnalyzeEmailRequest;
             namespace Responses {
                 export type $200 = /* analyzeEmailResponse */ Components.Schemas.AnalyzeEmailResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3895,7 +3982,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserAuthenticate {
         namespace Post {
-            export type RequestBody = /* userAuthChallengeRequest */ Components.Schemas.UserAuthChallengeRequest;
+            export type RequestBody = /* organizationUserAuthChallengeRequest */ Components.Schemas.OrganizationUserAuthChallengeRequest;
             namespace Responses {
                 export type $200 = /* userJwtTokenResponse */ Components.Schemas.UserJwtTokenResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3905,7 +3992,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserAuthenticateToken {
         namespace Post {
-            export type RequestBody = /* authenticateWithTokenRequest */ Components.Schemas.AuthenticateWithTokenRequest;
+            export type RequestBody = /* organizationAuthenticateWithTokenRequest */ Components.Schemas.OrganizationAuthenticateWithTokenRequest;
             namespace Responses {
                 export type $200 = /* userJwtTokenResponse */ Components.Schemas.UserJwtTokenResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3915,7 +4002,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserMembershipAcceptInvite {
         namespace Post {
-            export type RequestBody = /* userAcceptInviteCampaignAccountRequest */ Components.Schemas.UserAcceptInviteCampaignAccountRequest;
+            export type RequestBody = /* organizationAcceptInviteRequest */ Components.Schemas.OrganizationAcceptInviteRequest;
             namespace Responses {
                 export type $200 = /* userJwtTokenResponse */ Components.Schemas.UserJwtTokenResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3925,7 +4012,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserMembershipInvite {
         namespace Post {
-            export type RequestBody = /* sendOrganizationInvitationsRequest */ Components.Schemas.SendOrganizationInvitationsRequest;
+            export type RequestBody = /* organizationSendInvitationsRequest */ Components.Schemas.OrganizationSendInvitationsRequest;
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3936,7 +4023,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserMembershipModify {
         namespace Post {
-            export type RequestBody = /* changeOrganizationUserRequest */ Components.Schemas.ChangeOrganizationUserRequest;
+            export type RequestBody = /* organizationModifyUserRequest */ Components.Schemas.OrganizationModifyUserRequest;
             namespace Responses {
                 export type $200 = /* organizationResponse */ Components.Schemas.OrganizationResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3946,9 +4033,9 @@ declare namespace Paths {
     }
     namespace OrganizationUserQuery {
         namespace Post {
-            export type RequestBody = /* queryOrganizationUsersRequest */ Components.Schemas.QueryOrganizationUsersRequest;
+            export type RequestBody = /* organizationQueryUsersRequest */ Components.Schemas.OrganizationQueryUsersRequest;
             namespace Responses {
-                export type $200 = /* organizationUsersResponse */ Components.Schemas.OrganizationUsersResponse;
+                export type $200 = /* organizationQueryUsersResponse */ Components.Schemas.OrganizationQueryUsersResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
             }
@@ -3956,7 +4043,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserSendForgottenPasswordEmail {
         namespace Post {
-            export type RequestBody = /* userWantsForgottenPasswordRequest */ Components.Schemas.UserWantsForgottenPasswordRequest;
+            export type RequestBody = /* organizationUserWantsForgottenPasswordRequest */ Components.Schemas.OrganizationUserWantsForgottenPasswordRequest;
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -3966,7 +4053,7 @@ declare namespace Paths {
     }
     namespace OrganizationUserSendValidationLinkEmail {
         namespace Post {
-            export type RequestBody = /* userWantsValidationLinkEmailRequest */ Components.Schemas.UserWantsValidationLinkEmailRequest;
+            export type RequestBody = /* organizationUserWantsValidationLinkEmailRequest */ Components.Schemas.OrganizationUserWantsValidationLinkEmailRequest;
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -4006,7 +4093,7 @@ declare namespace Paths {
                 export type Userid = string | null;
             }
             export interface QueryParameters {
-                userid: /* string */ Parameters.Userid;
+                userid?: /* string */ Parameters.Userid;
             }
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
@@ -4024,7 +4111,7 @@ declare namespace Paths {
                 export type Name = string | null;
             }
             export interface QueryParameters {
-                name: /* string */ Parameters.Name;
+                name?: /* string */ Parameters.Name;
             }
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;

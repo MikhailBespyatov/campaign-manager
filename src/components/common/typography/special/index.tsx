@@ -2,7 +2,7 @@ import { Span } from 'components/common/typography/Span';
 import { percentageSpanColor } from 'components/common/typography/special/constants';
 import { SmallSpanProps } from 'components/common/typography/special/types';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
-import { primaryColor, secondaryColor } from 'constants/styles';
+import { primaryColor, secondaryColor, white } from 'constants/styles';
 import React, { FC } from 'react';
 
 export const Subtitle: FC = ({ children }) => (
@@ -42,3 +42,17 @@ export const GraphicBlockSpan: FC = ({ children }) => (
         {children}
     </Span>
 );
+
+export const RatingSpan: FC = ({ children }) => (
+    <Span color={white} fontSize="8px" lineHeight="12px">
+        {children}
+    </Span>
+);
+
+export * from './styles';
+
+// export const ProductSpan: FC = ({ children }) => (
+//     <Span noWrap color={white} fontSize="14px" lineHeight="29px">
+//         {children}
+//     </Span>
+// );

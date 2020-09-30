@@ -32,7 +32,7 @@ export interface SetErrorsAcceptInviteRequest {
 }
 
 export interface InviteRequestProps extends SetErrorsInviteRequest {
-    values: WOM.SendOrganizationInvitationsRequest;
+    values: WOM.OrganizationSendInvitationsRequest;
 }
 
 export interface AcceptInviteRequestProps extends SetErrorsAcceptInviteRequest {
