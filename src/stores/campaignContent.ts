@@ -24,16 +24,16 @@ const getItems = createEffect({
             const data = await API.campaignContent.getItems(values);
             loadingEffects.updateInitialLoading();
 
-            return data.items ? data.items : [];
+            return data ? data : {};
         } catch {
             loadingEffects.updateInitialLoading();
-            return [];
+            return {};
         }
     }
 });
 
-const item = createStore<WOM.ContentItemResponse | {}>({}).on(getItemById.doneData, (_, newState) => newState);
-const items = createStore<WOM.ContentItemResponse[]>([]).on(getItems.doneData, (_, newState) => newState);
+const item = createStore<WOM.ContentItemResponse>({}).on(getItemById.doneData, (_, newState) => newState);
+const items = createStore<WOM.ContentQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
 
 const campaignContentEvents = {};
 const campaignContentEffects = { getItems, getItemById };

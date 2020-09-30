@@ -19,7 +19,7 @@ export const authenticateAdmin = (data: AuthUserRequest) =>
         false
     );
 
-export const inviteUser = (data: WOM.SendOrganizationInvitationsRequest) =>
+export const inviteUser = (data: WOM.OrganizationSendInvitationsRequest) =>
     axios<WOM.MessageResponseBase>({
         url: '/organization-user/membership-invite',
         data
@@ -34,7 +34,7 @@ export const createUser = (data: RegisterUserRequest) =>
         false
     );
 
-export const acceptInvitation = (data: WOM.UserAcceptInviteCampaignAccountRequest) =>
+export const acceptInvitation = (data: WOM.OrganizationAcceptInviteRequest) =>
     axios<AuthUserResponse>(
         {
             url: '/organization-user/membership-accept-invite',

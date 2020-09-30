@@ -9,9 +9,9 @@ declare namespace WOM {
         pageIndex: number;
     }
 
-    export interface ContentItemResponse {
-        womContentId: string;
-    }
+    // export interface ContentItemResponse {
+    //     womContentId: string;
+    // }
 
     export interface OrganizationAcceptInviteRequest {
         inviteCode: string;

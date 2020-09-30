@@ -1,3 +1,3 @@
-import { formGrey2 } from 'constants/styles';
+import { primaryBorder } from 'constants/styles';
 
-export const wrapperBorder = `2px solid ${formGrey2}`;
+export const wrapperBorder = primaryBorder; //`2px solid ${formGrey2}`;
