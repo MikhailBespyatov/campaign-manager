@@ -20,7 +20,7 @@ export const notEntryAllowedMessage = 'You have no rights to enter';
 export const wrongInviteCodeMessage = 'Wrong invite code';
 
 // global
-export const noContentMessage = 'No content';
+export const noContentMessage = '...';
 
 const errorMessages = {
     requiredField: 'This field is required',

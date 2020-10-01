@@ -1,8 +1,6 @@
 import { CampaignTable } from 'components/common/tables/CampaignTable';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { Pagination } from 'components/Layouts/Pagination';
-import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import React from 'react';
 
 export const Campaign = () => (
@@ -10,9 +8,9 @@ export const Campaign = () => (
         <Section>
             <CampaignTable />
         </Section>
-        <Section justifyCenter>
+        {/* <Section justifyCenter>
             <Pagination />
-        </Section>
-        <CampaignEmpty />
+        </Section> */}
+        {/* <CampaignEmpty /> */}
     </CampaignManagerLayout>
 );

@@ -26,7 +26,7 @@ import { UserAdmin } from 'pages/UserAdmin';
 import React from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { AdminRoute } from 'routes/AdminRoute';
-import { PrivateRoute } from 'routes/PrivateRoute';
+import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 
 const App = () => (
@@ -52,14 +52,22 @@ const App = () => (
 
                 <AdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
 
-                <PrivateRoute exact component={CampaignManager} path={routes.campaignManager.index} />
-                <PrivateRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
-                <PrivateRoute exact component={Discover} path={routes.campaignManager.discover.index} />
-                <PrivateRoute exact component={DiscoverDetails} path={routes.campaignManager.discover.details} />
-                <PrivateRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
-                <PrivateRoute exact component={CampaignDetails} path={routes.campaignManager.campaign.details} />
-                <PrivateRoute exact component={Overview} path={routes.campaignManager.overview.index} />
-                <PrivateRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
+                <CampaignManagerRoute exact component={CampaignManager} path={routes.campaignManager.index} />
+                <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
+                <CampaignManagerRoute exact component={Discover} path={routes.campaignManager.discover.index} />
+                <CampaignManagerRoute
+                    exact
+                    component={DiscoverDetails}
+                    path={routes.campaignManager.discover.details}
+                />
+                <CampaignManagerRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
+                <CampaignManagerRoute
+                    exact
+                    component={CampaignDetails}
+                    path={routes.campaignManager.campaign.details}
+                />
+                <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} />
+                <CampaignManagerRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
 
                 {/* <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />
             <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} /> */}

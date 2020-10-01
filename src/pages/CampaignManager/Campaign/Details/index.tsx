@@ -1,112 +1,303 @@
-import ballBuyImg from 'assets/img/ball_buy.svg';
-import ballClickImg from 'assets/img/ball_click.svg';
-import ballEngageImg from 'assets/img/ball_engage.svg';
-import ballPreviewImg from 'assets/img/ball_preview.svg';
-import ballViewImg from 'assets/img/ball_view.svg';
-import hideButtonImg from 'assets/img/hide_button_img.svg';
-import history from 'BrowserHistory';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { ballDiameter } from 'components/common/inputs/LanguageSwitch/constants';
-import { CampaignTableElement } from 'components/common/tables/CampaignTableElement';
-import { Span } from 'components/common/typography/Span';
+import { BorderBlock } from 'components/common/blocks/BorderBlock';
+import { Hr } from 'components/common/dividers/Hr';
+import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
+import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
+import { Select } from 'components/common/inputs/Select';
+import { Switch } from 'components/common/inputs/Switch';
+import { Loader } from 'components/common/Loader';
+import { GraphicBlockSpan } from 'components/common/typography/special';
+import { H1 } from 'components/common/typography/titles/H';
+import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
-import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { primaryPadding, secondaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
+import { useStore } from 'effector-react';
 import {
+    areaCommonStyle,
+    color1,
+    color2,
+    color3,
+    color4,
+    color5,
     graphicOption,
-    hideButtonImgDiameter,
-    hideButtonImgHeight
+    name1,
+    name2,
+    name3,
+    name4,
+    name5,
+    testSelectArray
 } from 'pages/CampaignManager/Campaign/Details/constants';
-import React from 'react';
+import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router';
+import { campaignsEffects, campaignsStores } from 'stores/campaigns';
+import { loadingStores } from 'stores/loading';
+import { RowHeaderRadioType } from 'types';
+import { parseMonthDate } from 'utils/usefulFunctions';
 
-const onBack = () => history.goBack();
+// const ColorPromptLine = ({ background }: Background) => (
+//     <UniversalWrapper background={background || black} height="2px" marginRight="10px" width="12px" />
+// );
 
-export const Details = () => (
-    <CampaignManagerLayout>
-        {/* <Section>
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaigns Running" title="25" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Budget" title="20,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign Spent" title="12,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Campaign spend per day" title="1,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Budget" title="10,000" />
-            <Summary marginBottom="20px" marginRight="20px" subtitle="Remaining Duration" title="12d" />
-        </Section> */}
-        <Section>
-            <CampaignTableElement />
-        </Section>
-        {/* <Hr /> */}
-        <ContentWrapper>
-            <Section noWrap marginBottom="0">
-                <MarginWrapper margin="auto">
-                    <Column justifyCenter>
-                        <Section alignCenter noWrap>
-                            <Column marginRight="16px">
-                                <CustomImg height={ballDiameter} src={ballPreviewImg} width={ballDiameter} />
-                            </Column>
-                            <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
-                                    Preview
-                                </Span>
-                            </Column>
+interface ParamsProps {
+    campaignId?: string;
+}
+
+export const Details = () => {
+    const { campaignId } = useParams<ParamsProps>();
+    const { sets } = useStore(campaignsStores.statisticsItems);
+    const { title, schedule } = useStore(campaignsStores.item);
+    const initialLoading = useStore(loadingStores.initialLoading);
+    const loading = useStore(loadingStores.loading);
+
+    const utcStarted = schedule?.utcStarted || '';
+    const utcEnded = schedule?.utcEnded || '';
+
+    const items = useMemo(() => (sets?.length && sets[0].items?.length ? sets[0].items.reverse() : []), [sets]);
+    const summary = useMemo(() => (sets?.length && sets[0].summary ? sets[0].summary : {}), [sets]);
+
+    const radioArray: RowHeaderRadioType[] = [
+        {
+            title: name1,
+            quantity: summary?.viewCount?.toString() || '0',
+            growType: 'success',
+            growNumber: 0
+        },
+        {
+            title: name2,
+            quantity: summary?.likeCount?.toString() || '0',
+            inBrackets: `(${summary?.likesPercentage || 0}%)`,
+            growType: 'success',
+            growNumber: 0
+        },
+        {
+            title: name3,
+            quantity: summary?.saveCount?.toString() || '0',
+            inBrackets: `(${summary?.savesPercentage || 0}%)`,
+            growType: 'success',
+            growNumber: 0
+        },
+        {
+            title: name4,
+            quantity: summary?.commentCount?.toString() || '0',
+            inBrackets: `(${summary?.commentsPercentage || 0}%)`,
+            growType: 'success',
+            growNumber: 0
+        },
+        {
+            title: name5,
+            quantity: summary?.shareCount?.toString() || '0',
+            inBrackets: `(${summary?.sharesPercentage || 0}%)`,
+            growType: 'success',
+            growNumber: 0
+        }
+    ];
+
+    const [yAxisData, setYAxisData] = useState(items.map(i => i.shareCount));
+    const [graphicColor, setGraphicColor] = useState(color1);
+    const [graphicName, setGraphicName] = useState(name1);
+
+    const series = [
+        {
+            name: graphicName,
+            type: 'line',
+            smooth: true,
+            stack: 'Buy',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                color: graphicColor
+            },
+            lineStyle: {
+                color: graphicColor
+            },
+            areaStyle: {
+                ...areaCommonStyle,
+                color: graphicColor
+            },
+            data: yAxisData
+        }
+    ];
+
+    const xAxis = [
+        {
+            type: 'category',
+            axisTick: { show: false },
+            boundaryGap: false,
+            data: ['', ...items.map(i => parseMonthDate(new Date(i?.dateUtc || '')))]
+        }
+    ];
+
+    const onChange = (active: string) => {
+        setGraphicName(active);
+        switch (active) {
+            case name1:
+                setYAxisData(items.map(i => i.viewCount));
+                setGraphicColor(color1);
+                break;
+            case name2:
+                setYAxisData(items.map(i => i.likeCount));
+                setGraphicColor(color2);
+                break;
+            case name3:
+                setYAxisData(items.map(i => i.saveCount));
+                setGraphicColor(color3);
+                break;
+            case name4:
+                setYAxisData(items.map(i => i.commentCount));
+                setGraphicColor(color4);
+                break;
+            default:
+                setYAxisData(items.map(i => i.shareCount));
+                setGraphicColor(color5);
+        }
+    };
+
+    useEffect(() => {
+        campaignId && campaignsEffects.getItemById(campaignId);
+    }, [campaignId]);
+
+    useEffect(() => {
+        utcStarted &&
+            utcEnded &&
+            campaignsEffects.getStatisticsItems({
+                returnQueryCount: false,
+                campaignId: campaignId,
+                dateFrom: '2020-08-15T00:00:00Z',
+                dateTo: '2020-09-01T00:00:00Z',
+                historicalSets: 2
+            });
+    }, [utcStarted, utcEnded, campaignId]);
+
+    useEffect(() => {
+        items?.length && setYAxisData(items.map(i => i.viewCount));
+    }, [items]);
+
+    return (
+        <CampaignManagerLayout>
+            <ContentWrapper>
+                <Section>
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <Column>
+                            <H1>Campaign id: {campaignId}</H1>
+                            <H1>Campaign Name: {title}</H1>
+                        </Column>
+                    )}
+                </Section>
+                {initialLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <Section marginBottom="0">
+                            <RowHeaderRadio values={radioArray} onChange={onChange} />
                         </Section>
-                        <Section alignCenter noWrap>
-                            <Column marginRight="16px">
-                                <CustomImg height={ballDiameter} src={ballViewImg} width={ballDiameter} />
+                        <Wrapper>
+                            <Column width="100%">
+                                {/* <Row alignCenter marginBottom="0">
+                                    <ColorPromptLine background={previewColor} />
+                                    <TableHeaderSpan>New Shoes</TableHeaderSpan>
+                                    <ColorPromptLine background={viewColor} />
+                                    <TableHeaderSpan>Brand Only</TableHeaderSpan>
+                                    <ColorPromptLine background={engageColor} />
+                                    <TableHeaderSpan>Test Campaign</TableHeaderSpan>
+                                    <ColorPromptLine background={clickColor} />
+                                    <TableHeaderSpan>Zalando Push</TableHeaderSpan>
+                                    <ColorPromptLine background={buyColor} />
+                                    <TableHeaderSpan>YEAY General</TableHeaderSpan>
+                                </Row> */}
+                                <Section alignCenter noWrap>
+                                    <Column marginRight="25px">
+                                        <ReactEcharts
+                                            option={{ ...graphicOption, xAxis: xAxis, series: series }}
+                                            style={{ height: '516px', width: '1000px' }}
+                                        />
+                                    </Column>
+                                    {/* <UniversalWrapper
+                            border={graphicBlockBorder}
+                            borderRadius={secondaryBorderRadius}
+                            direction="column"
+                            marginLeft="75px"
+                            padding={primaryPadding}
+                        > */}
+                                    <BorderBlock>
+                                        <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                            <P noWrap>Timeline wiew</P>
+                                            <MarginWrapper marginLeft="auto">
+                                                <Select values={testSelectArray} width="127px">
+                                                    31 days
+                                                </Select>
+                                            </MarginWrapper>
+                                        </Section>
+                                        <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                            <Column marginRight="40px">
+                                                <P noWrap>Show us combined chart</P>
+                                            </Column>
+                                            <Switch />
+                                        </Section>
+                                        <Hr />
+                                        <Section
+                                            alignCenter
+                                            noWrap
+                                            marginBottom={primaryPadding}
+                                            marginTop={primaryPadding}
+                                        >
+                                            <Column marginRight={primaryPadding} width="50%">
+                                                <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                                <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                                <Row alignCenter noWrap>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                            </Column>
+                                            <Column marginRight={primaryPadding} width="50%">
+                                                <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                                <Row alignCenter noWrap marginBottom={primaryPadding}>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                                <Row alignCenter noWrap>
+                                                    <Column marginRight={secondaryPadding}>
+                                                        <BooleanCircleCheckbox name="name" />
+                                                    </Column>
+                                                    <GraphicBlockSpan>New shoes</GraphicBlockSpan>
+                                                </Row>
+                                            </Column>
+                                        </Section>
+                                    </BorderBlock>
+                                </Section>
                             </Column>
-                            <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
-                                    View
-                                </Span>
-                            </Column>
-                        </Section>
-                        <Section alignCenter noWrap>
-                            <Column marginRight="16px">
-                                <CustomImg height={ballDiameter} src={ballEngageImg} width={ballDiameter} />
-                            </Column>
-                            <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
-                                    Engage
-                                </Span>
-                            </Column>
-                        </Section>
-                        <Section alignCenter noWrap>
-                            <Column marginRight="16px">
-                                <CustomImg height={ballDiameter} src={ballClickImg} width={ballDiameter} />
-                            </Column>
-                            <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
-                                    Click
-                                </Span>
-                            </Column>
-                        </Section>
-                        <Section alignCenter noWrap>
-                            <Column marginRight="16px">
-                                <CustomImg height={ballDiameter} src={ballBuyImg} width={ballDiameter} />
-                            </Column>
-                            <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
-                                    Buy
-                                </Span>
-                            </Column>
-                        </Section>
-                    </Column>
-                </MarginWrapper>
-                <Column width="100%">
-                    <ReactEcharts option={graphicOption} style={{ height: '516px', width: '100%' }} />
-                </Column>
-            </Section>
-        </ContentWrapper>
-        <Section justifyEnd marginBottom="46px" marginTop="70px">
-            <RoundedButton
-                reverse
-                Img={<CustomImg height={hideButtonImgHeight} src={hideButtonImg} width={hideButtonImgDiameter} />}
-                onClick={onBack}
-            >
-                HIDE DETAILS
-            </RoundedButton>
-        </Section>
-    </CampaignManagerLayout>
-);
+                        </Wrapper>
+                    </>
+                )}
+            </ContentWrapper>
+        </CampaignManagerLayout>
+    );
+};

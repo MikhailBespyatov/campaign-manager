@@ -1,5 +1,5 @@
 import defaultAvatar from 'assets/img/avatar.svg';
-import headerLogoImg from 'assets/img/header_logo.svg';
+import headerLogoImg from 'assets/img/logo.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { headerAvatarDiameter, headerLogoHeight, headerLogoWidth } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';

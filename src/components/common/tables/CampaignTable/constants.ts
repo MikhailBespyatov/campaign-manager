@@ -1,21 +1,56 @@
-// export const tableBorderWidth = '4px';
-// export const tableBorderColor = '#F5F5F5';
+import { formGrey1, formGrey2, tertiaryPadding } from 'constants/styles';
 
-export const legendaryTableRowHorizontalPadding = '26px';
-export const legendaryTableRowVerticalPadding = '24px';
+export const legendarySpanFontSize = '27px';
+export const legendarySpanLineHeight = '32px';
+export const legendarySpanColor = '#0F1642';
 
+export const spanFontWeight = 'normal';
+export const spanFontSize = '28px';
+export const spanLineHeight = '34px';
+export const spanColor = '#9D9E9F';
+
+export const legendaryTableRowWidth = '100%';
+export const legendaryTableRowHeight = '85px';
+export const legendaryTableRowHorizontalPadding = tertiaryPadding;
+export const legendaryTableRowVerticalPadding = '0';
+
+export const tableRowWidth = legendaryTableRowWidth;
+export const tableRowHeight = legendaryTableRowHeight;
 export const tableRowHorizontalPadding = legendaryTableRowHorizontalPadding;
-export const tableRowVerticalPadding = '39px';
-export const tableRowBottomPadding = '22px';
-export const tableRowBorderRadius = '20px';
-export const tableRowBorderWidth = '3px';
-export const tableRowBorderColor = '#EDEDED';
-export const tableBorderSpacing = '0 30px';
+export const tableRowVerticalPadding = legendaryTableRowHorizontalPadding;
+export const tableRowBottomPadding = legendaryTableRowHorizontalPadding;
+export const tableRowBorderRadius = '30px';
+export const tableRowBorderWidth = '2px';
+export const tableRowBorderColor = formGrey2;
+export const tableBorderSpacing = '';
 
-export const firstTableColumnMinWidth = '371px';
+export const tableBorder = `${tableRowBorderWidth} solid ${tableRowBorderColor}`;
 
-export const tableProductImgDiameter = '80px';
+export const tableColumnWidth = `calc(340px - 2 * ${legendaryTableRowHorizontalPadding})`;
 
-export const removeButtonImgDiameter = '12px';
+export const activeColor = formGrey1;
 
-export const testArray = [0, 1, 2];
+export const tableMargin = '15px';
+
+export const arrowImgWidth = '10px';
+export const arrowImgHeight = '5px';
+
+export const companyImgBorderRadius = '10px';
+export const companyImgDiameter = '45px';
+
+export const deleteImgDiameter = '45px';
+
+export const moreInfoImgWidth = '4px';
+export const moreInfoImgHeight = '21px';
+
+export const testArray = [
+    'Brand Retail',
+    'Retail Partners',
+    'Retail Affiliates',
+    'Branded Aware',
+    'Branded Unaware',
+    'General Aware',
+    'General Unaware'
+];
+
+export const selectTestArray = ['Admin', 'User'];

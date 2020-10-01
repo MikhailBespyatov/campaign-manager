@@ -4,6 +4,7 @@ import {
     currencyToText,
     isExactValuesQuantity,
     objectIsEmpty,
+    parseMonthDate,
     roundScore,
     slashInserter,
     spaceInserter
@@ -86,5 +87,15 @@ describe('roundScore', () => {
         expect(roundScore(2.29)).toBe('2.3');
         expect(roundScore(0)).toBe('0.0');
         expect(roundScore(1.1212, 2)).toBe('1.12');
+    });
+});
+
+describe('parseMonthDate', () => {
+    it('Test for month dates', () => {
+        expect(parseMonthDate(new Date('dadadad'))).toBe('invalid date');
+        expect(parseMonthDate(new Date(''))).toBe('invalid date');
+        expect(parseMonthDate(new Date('undefined'))).toBe('invalid date');
+        expect(parseMonthDate(new Date('2020-07-23T06:18:07.264Z'))).toBe('23.07');
+        expect(parseMonthDate(new Date('2020-07-03T06:18:07.264Z'))).toBe('03.07');
     });
 });

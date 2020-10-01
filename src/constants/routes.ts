@@ -51,7 +51,7 @@ export const routes = {
         campaign: {
             index: `${campaignPrefix}/campaign`,
             create: `${campaignPrefix}/campaign/create`,
-            details: `${campaignPrefix}/campaign/details/:campaignId`,
+            details: `${campaignPrefix}/campaign/:campaignId`,
             edit: `${campaignPrefix}/campaign/edit/:campaignId`
         },
         overview: {
@@ -65,10 +65,10 @@ export const routes = {
 };
 
 export const routesArray = [
-    {
-        path: routes.campaignManager.dashboard.index,
-        name: 'Dashboard'
-    },
+    // {
+    //     path: routes.campaignManager.dashboard.index,
+    //     name: 'Dashboard'
+    // },
     {
         path: routes.campaignManager.discover.index,
         name: 'Discover'
