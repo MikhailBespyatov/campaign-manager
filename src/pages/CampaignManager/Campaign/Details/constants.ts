@@ -1,7 +1,12 @@
-import { primaryColor } from 'constants/styles';
+import { formGrey2, secondaryBorder } from 'constants/styles';
+import { RowHeaderRadioType } from 'types';
 
-export const hideButtonImgDiameter = '15px';
-export const hideButtonImgHeight = '2px';
+export const wrapperBorder = secondaryBorder;
+export const wrapperPadding = '40px 52px';
+
+export const graphicBlockBorder = `2px solid ${formGrey2}`;
+
+export const testSelectArray = ['1 day', '7 days', '14days', '21 days', '31 days'];
 
 export const seriesTestData = [
     [0, 0],
@@ -27,20 +32,26 @@ export const seriesTestData = [
 const graphicTextColor = '#C3CBD4';
 const labelBackground = '#6a7985';
 
-const previewColor = '#FF6B00';
-const viewColor = '#FC4237';
-const engageColor = '#03A3D6';
-const clickColor = '#8BD317';
-const buyColor = '#FECF00';
+export const name1 = 'Share';
+export const name2 = 'View';
+export const name3 = 'Save';
+export const name4 = 'Click';
+export const name5 = 'Buy';
 
-const yeayColor = 'lightgreen';
-const adidasColor = 'silver';
-const testCampaignColor = 'pink';
+// export const previewColor = '#FF6B00';
+// export const viewColor = '#FC4237';
+// export const engageColor = '#03A3D6';
+// export const clickColor = '#8BD317';
+// export const buyColor = '#FECF00';
+export const color1 = '#FF6B00';
+export const color2 = '#FC4237';
+export const color3 = '#03A3D6';
+export const color4 = '#8BD317';
+export const color5 = '#FECF00';
 
-const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
+export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
 
 export const graphicOption = {
-    colors: ['#5793f3', '#d14a61', '#675bba'],
     textStyle: { color: graphicTextColor },
     tooltip: {
         trigger: 'axis',
@@ -72,17 +83,17 @@ export const graphicOption = {
             axisTick: { show: false },
             boundaryGap: false,
             data: ['', '01', '05', '09', '13', '17', '21', '26', '31']
-        },
-        {
-            type: 'category',
-            axisTick: { show: false },
-            axisLine: { show: false },
-            axisLabel: {
-                color: primaryColor
-            },
-            boundaryGap: false,
-            data: ['', 'YEAY', '', 'Adidas US', '', 'Test Campaign1', '', 'Test Campaign2', '']
         }
+        // ,{
+        //     type: 'category',
+        //     axisTick: { show: false },
+        //     axisLine: { show: false },
+        //     axisLabel: {
+        //         color: primaryColor
+        //     },
+        //     boundaryGap: false,
+        //     data: ['', 'YEAY', '', 'Adidas US', '', 'Test Campaign1', '', 'Test Campaign2', '']
+        // }
     ],
     yAxis: [
         {
@@ -104,121 +115,161 @@ export const graphicOption = {
                     position: 'top'
                 }
             },
-            markLine: {
-                symbol: 'circle',
-                symbolSize: 15,
-                label: { show: false, position: 'end' },
-                data: [{ xAxis: 1 }],
-                lineStyle: {
-                    color: yeayColor
-                }
-            },
+            // markLine: {
+            //     symbol: 'circle',
+            //     symbolSize: 15,
+            //     label: { show: false, position: 'end' },
+            //     data: [{ xAxis: 1 }],
+            //     lineStyle: {
+            //         color: yeayColor
+            //     }
+            // },
             itemStyle: {
-                color: buyColor
+                color: color1
             },
             lineStyle: {
-                color: buyColor
+                color: color1
             },
             areaStyle: {
                 ...areaCommonStyle,
-                color: buyColor
+                color: color1
             },
             data: [0, 9320, 9010, 13340, 19900, 15300, 24700, 27400, 21170]
-        },
-        {
-            name: 'Click',
-            type: 'line',
-            smooth: true,
-            stack: 'Click',
-            markLine: {
-                symbol: 'circle',
-                symbolSize: 15,
-                label: { show: false, position: 'end' },
-                data: [{ xAxis: 3 }],
-                lineStyle: {
-                    color: adidasColor
-                }
-            },
-            itemStyle: {
-                color: clickColor
-            },
-            lineStyle: {
-                color: clickColor
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                color: clickColor
-            },
-            data: [0, 3320, 7010, 8340, 9900, 3300, 13200, 7400, 5200]
-        },
-        {
-            name: 'Engage',
-            type: 'line',
-            smooth: true,
-            stack: 'Engage',
-            markLine: {
-                symbol: 'circle',
-                symbolSize: 15,
-                label: { show: false, position: 'end' },
-                data: [{ xAxis: 5 }],
-                lineStyle: {
-                    color: testCampaignColor
-                }
-            },
-            itemStyle: {
-                color: engageColor
-            },
-            lineStyle: {
-                color: engageColor
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                color: engageColor
-            },
-            data: [0, 4320, 2010, 7540, 6900, 1330, 5100, 3700, 5100]
-        },
-        {
-            name: 'View',
-            type: 'line',
-            smooth: true,
-            stack: 'View',
-            markLine: {
-                symbol: 'circle',
-                symbolSize: 15,
-                label: { show: false, position: 'end' },
-                data: [{ xAxis: 7 }],
-                lineStyle: {
-                    color: testCampaignColor
-                }
-            },
-            itemStyle: {
-                color: viewColor
-            },
-            lineStyle: {
-                color: viewColor
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                color: viewColor
-            },
-            data: [0, 1820, 2910, 2340, 2900, 1330, 4100, 3300, 5000]
-        },
-        {
-            name: 'Preview',
-            type: 'line',
-            smooth: true,
-            stack: 'Preview',
-            itemStyle: {
-                color: previewColor
-            },
-            lineStyle: {
-                color: previewColor
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                color: previewColor
-            },
-            data: [0, 1320, 1010, 134, 900, 2300, 2100, 2700, 3500]
         }
+        // {
+        //     name: 'Click',
+        //     type: 'line',
+        //     smooth: true,
+        //     stack: 'Click',
+        //     // markLine: {
+        //     //     symbol: 'circle',
+        //     //     symbolSize: 15,
+        //     //     label: { show: false, position: 'end' },
+        //     //     data: [{ xAxis: 3 }],
+        //     //     lineStyle: {
+        //     //         color: adidasColor
+        //     //     }
+        //     // },
+        //     itemStyle: {
+        //         color: clickColor
+        //     },
+        //     lineStyle: {
+        //         color: clickColor
+        //     },
+        //     areaStyle: {
+        //         ...areaCommonStyle,
+        //         color: clickColor
+        //     },
+        //     data: [0, 3320, 7010, 8340, 9900, 3300, 13200, 7400, 5200]
+        // },
+        // {
+        //     name: 'Engage',
+        //     type: 'line',
+        //     smooth: true,
+        //     stack: 'Engage',
+        //     // markLine: {
+        //     //     symbol: 'circle',
+        //     //     symbolSize: 15,
+        //     //     label: { show: false, position: 'end' },
+        //     //     data: [{ xAxis: 5 }],
+        //     //     lineStyle: {
+        //     //         color: testCampaignColor
+        //     //     }
+        //     // },
+        //     itemStyle: {
+        //         color: engageColor
+        //     },
+        //     lineStyle: {
+        //         color: engageColor
+        //     },
+        //     areaStyle: {
+        //         ...areaCommonStyle,
+        //         color: engageColor
+        //     },
+        //     data: [0, 4320, 2010, 7540, 6900, 1330, 5100, 3700, 5100]
+        // },
+        // {
+        //     name: 'View',
+        //     type: 'line',
+        //     smooth: true,
+        //     stack: 'View',
+        //     // markLine: {
+        //     //     symbol: 'circle',
+        //     //     symbolSize: 15,
+        //     //     label: { show: false, position: 'end' },
+        //     //     data: [{ xAxis: 7 }],
+        //     //     lineStyle: {
+        //     //         color: testCampaignColor
+        //     //     }
+        //     // },
+        //     itemStyle: {
+        //         color: viewColor
+        //     },
+        //     lineStyle: {
+        //         color: viewColor
+        //     },
+        //     areaStyle: {
+        //         ...areaCommonStyle,
+        //         color: viewColor
+        //     },
+        //     data: [0, 1820, 2910, 2340, 2900, 1330, 4100, 3300, 5000]
+        // },
+        // {
+        //     name: 'Preview',
+        //     type: 'line',
+        //     smooth: true,
+        //     stack: 'Preview',
+        //     itemStyle: {
+        //         color: previewColor
+        //     },
+        //     lineStyle: {
+        //         color: previewColor
+        //     },
+        //     areaStyle: {
+        //         ...areaCommonStyle,
+        //         color: previewColor
+        //     },
+        //     data: [0, 1320, 1010, 134, 900, 2300, 2100, 2700, 3500]
+        // }
     ]
 };
+
+// option.visualMap.target.inRange.color = ['red', 'blue'];
+
+export const testHeaderRadioArray: RowHeaderRadioType[] = [
+    {
+        title: name1,
+        quantity: '1m 23',
+        inBrackets: '',
+        growType: 'success',
+        growNumber: 0
+    },
+    {
+        title: name2,
+        quantity: '100K',
+        inBrackets: '(71.1%)',
+        growType: 'success',
+        growNumber: 0
+    },
+    {
+        title: name3,
+        quantity: '100K',
+        inBrackets: '(71.1%)',
+        growType: 'success',
+        growNumber: 0
+    },
+    {
+        title: name4,
+        quantity: '100K',
+        inBrackets: '(71.1%)',
+        growType: 'success',
+        growNumber: 0
+    },
+    {
+        title: name5,
+        quantity: '100K',
+        inBrackets: '(71.1%)',
+        growType: 'success',
+        growNumber: 0
+    }
+];

@@ -4,8 +4,8 @@ import axios from './axios';
 export const authenticateUser = (data: AuthUserRequest) =>
     axios<AuthUserResponse>(
         {
-            url: '/organization-user/authenticate',
-            data
+            url: '/organization/user/authenticate',
+            data: { ...data, organizationId: '5ddbdd2efd92595cf6d94dc1' }
         },
         false
     );
@@ -21,7 +21,7 @@ export const authenticateAdmin = (data: AuthUserRequest) =>
 
 export const inviteUser = (data: WOM.OrganizationSendInvitationsRequest) =>
     axios<WOM.MessageResponseBase>({
-        url: '/organization-user/membership-invite',
+        url: '/organization/user/membership-invite',
         data
     });
 
@@ -37,7 +37,7 @@ export const createUser = (data: RegisterUserRequest) =>
 export const acceptInvitation = (data: WOM.OrganizationAcceptInviteRequest) =>
     axios<AuthUserResponse>(
         {
-            url: '/organization-user/membership-accept-invite',
+            url: '/organization/user/membership-accept-invite',
             data
         },
         false

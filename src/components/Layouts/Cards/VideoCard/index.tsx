@@ -21,15 +21,15 @@ import { roundScore } from 'utils/usefulFunctions';
 
 interface Props extends WOM.ContentItemResponse {}
 
-export const VideoCard = ({ id, uriPrimary, womQualityScore, products }: Props) => {
+export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products }: Props) => {
     const history = useHistory();
 
-    const ID = id ? id : '';
+    const ID = womContentId ? womContentId : '';
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
 
     const openCardModal = () => modalEvents.openCardModal(ID);
 
-    const handleDetail = () => history.push(routes.campaignManager.discover.details + '/' + ID);
+    const handleDetail = () => history.push(routes.campaignManager.discover.index + '/' + ID);
 
     return (
         <Card>

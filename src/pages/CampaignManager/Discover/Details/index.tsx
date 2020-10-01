@@ -14,7 +14,6 @@ import {
     TableHeaderSpan
 } from 'components/common/typography/special';
 import { P } from 'components/common/typography/titles/P';
-import { TagFilter } from 'components/filters/TagFilter';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
@@ -59,9 +58,9 @@ export const Details = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section alignCenter marginBottom="35px">
+            {/* <Section alignCenter marginBottom="35px">
                 <TagFilter />
-            </Section>
+            </Section> */}
             {/* <Section marginBottom="0">
                 <Summary subtitle="Campaigns Running" title="25" />
                 <Summary subtitle="Campaign Budget" title="20,000" />

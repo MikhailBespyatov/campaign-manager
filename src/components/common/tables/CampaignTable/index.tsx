@@ -1,14 +1,17 @@
-import productImg from 'assets/img/product_img.svg';
-import removeButtonImg from 'assets/img/remove_button_img.svg';
+import deleteImg from 'assets/img/delete.svg';
+import moreInfoImg from 'assets/img/ellipsis_line.svg';
+import arrowImg from 'assets/img/select_arrow_dark.svg';
 import history from 'BrowserHistory';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Loader } from 'components/common/Loader';
 import {
-    removeButtonImgDiameter,
-    tableBorderSpacing,
-    tableProductImgDiameter,
-    testArray
+    arrowImgHeight,
+    arrowImgWidth,
+    deleteImgDiameter,
+    moreInfoImgHeight,
+    moreInfoImgWidth,
+    tableMargin
 } from 'components/common/tables/CampaignTable/constants';
 import {
     LegendaryTableColumn,
@@ -17,165 +20,213 @@ import {
     TableRow
 } from 'components/common/tables/CampaignTable/styles';
 import { Table } from 'components/common/tables/Table';
-import { TableSpan } from 'components/common/typography/TableSpan';
-import { TableSubSpan } from 'components/common/typography/TableSubSpan';
+import { Span } from 'components/common/typography/Span';
+import { SmallSpan } from 'components/common/typography/special';
+import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
+import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { padding } from 'constants/styles';
-import React from 'react';
+import { useStore } from 'effector-react';
+import React, { FC, useEffect, useState } from 'react';
+import { campaignsEffects, campaignsStores } from 'stores/campaigns';
+import { loadingStores } from 'stores/loading';
+import { getOrganizationId } from 'utils/usefulFunctions';
 
-const toDetails = () => history.push(routes.campaignManager.campaign.details);
+const LegendaryTableSpan: FC = ({ children }) => (
+    <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
+        {children}
+    </Span>
+);
 
-export const CampaignTable = () => (
-    <Table borderSpacing={tableBorderSpacing}>
-        <LegendaryTableRow>
+const TableSpan: FC = ({ children }) => (
+    <Span fontSize="18px" lineHeight="22px">
+        {children}
+    </Span>
+);
+
+const LegendaryItem = () => {
+    const [checked, setChecked] = useState(false);
+
+    const onChange = (checked: boolean) => setChecked(checked);
+
+    return (
+        <LegendaryTableRow active={checked}>
             <LegendaryTableColumn>
-                <TableSpan legendary>Campaign Name</TableSpan>
+                <Row alignCenter noWrap marginBottom="0">
+                    <Column marginRight={tableMargin}>
+                        <Checkbox onChange={onChange} />
+                    </Column>
+                    <Column marginRight={tableMargin}>
+                        <LegendaryTableSpan>Campaign Name</LegendaryTableSpan>
+                    </Column>
+                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+                </Row>
+            </LegendaryTableColumn>
+            {/* <LegendaryTableColumn>
+                <Row alignCenter noWrap marginBottom="0">
+                    <Column marginRight={tableMargin}>
+                        <LegendaryTableSpan>Product</LegendaryTableSpan>
+                    </Column>
+                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+                </Row>
+            </LegendaryTableColumn> */}
+            <LegendaryTableColumn>
+                <LegendaryTableSpan>Budget</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>product</TableSpan>
+                <LegendaryTableSpan>Spend</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>Budget</TableSpan>
+                <LegendaryTableSpan>Preview</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>Spend</TableSpan>
+                <LegendaryTableSpan>View</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>Preview</TableSpan>
+                <LegendaryTableSpan>Engage</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>View</TableSpan>
+                <LegendaryTableSpan>Click</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>Engage</TableSpan>
+                <LegendaryTableSpan>Buy</LegendaryTableSpan>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <TableSpan legendary>Click</TableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <TableSpan legendary>Buy</TableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <TableSpan legendary></TableSpan>
+                <LegendaryTableSpan></LegendaryTableSpan>
             </LegendaryTableColumn>
         </LegendaryTableRow>
-        {testArray.map(i => (
-            <TableRow key={i}>
-                <TableColumn>
-                    <TableSpan>New Shoes</TableSpan>
-                </TableColumn>
-                <TableColumn>
-                    <TableSpan>
-                        <Column>
-                            <Row marginBottom="15px">Niterunner</Row>
-                            <Row marginBottom="0">
-                                <CustomImg
-                                    height={tableProductImgDiameter}
-                                    src={productImg}
-                                    width={tableProductImgDiameter}
-                                />
-                            </Row>
+    );
+};
+
+interface ItemProps extends WOM.CampaignDetailResponse {}
+
+const Item = ({ id, title, budget, engagement }: ItemProps) => {
+    const [checked, setChecked] = useState(false);
+
+    const onChange = (checked: boolean) => setChecked(checked);
+
+    const onMoreInfoClick = () => history.push(routes.campaignManager.campaign.index + '/' + id);
+
+    return (
+        <TableRow active={checked}>
+            <TableColumn>
+                <Row alignCenter noWrap marginBottom="0">
+                    <Column marginRight={tableMargin}>
+                        <Checkbox onChange={onChange} />
+                    </Column>
+                    <TableSpan>{title ? title : noContentMessage}</TableSpan>
+                </Row>
+            </TableColumn>
+            {/* <TableColumn>
+                <TableSpan>??</TableSpan>
+            </TableColumn> */}
+            <TableColumn>
+                <TableSpan>{budget?.amount ? budget?.amount : noContentMessage}</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <TableSpan>{budget?.spend ? budget?.spend : noContentMessage}</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <TableSpan>??</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <Column>
+                    <Row marginBottom="5px">
+                        <TableSpan>{engagement?.viewCount ? engagement.viewCount : 0}</TableSpan>
+                    </Row>
+                    <Row alignCenter noWrap marginBottom="0">
+                        <Column marginRight="5px">
+                            <SmallSpan>??</SmallSpan>
                         </Column>
-                    </TableSpan>
-                </TableColumn>
-                <TableColumn>
-                    <TableSpan>20000</TableSpan>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row marginBottom="7px">
-                            <TableSpan>10000</TableSpan>
-                        </Row>
-                        <Row marginBottom="0">
-                            <TableSubSpan>50%</TableSubSpan>
-                        </Row>
+                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
+                    </Row>
+                </Column>
+            </TableColumn>
+            <TableColumn>
+                <TableSpan>??</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <Column>
+                    <Row marginBottom="5px">
+                        <TableSpan>{engagement?.clickCount ? engagement.clickCount : 0}</TableSpan>
+                    </Row>
+                    <Row alignCenter noWrap marginBottom="0">
+                        <Column marginRight="5px">
+                            <SmallSpan>{engagement?.clicksPercentage ? engagement.clicksPercentage : 0}%</SmallSpan>
+                        </Column>
+                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
+                    </Row>
+                </Column>
+            </TableColumn>
+            <TableColumn>
+                <Column>
+                    <Row marginBottom="5px">
+                        <TableSpan>{engagement?.buyCount ? engagement.buyCount : 0}</TableSpan>
+                    </Row>
+                    <Row alignCenter noWrap marginBottom="0">
+                        <Column marginRight="5px">
+                            <SmallSpan>{engagement?.buysPercentage ? engagement.buysPercentage : 0}%</SmallSpan>
+                        </Column>
+                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
+                    </Row>
+                </Column>
+            </TableColumn>
+            <TableColumn>
+                <Row alignCenter noWrap marginBottom="0">
+                    <Column marginRight="29px">
+                        <CustomImg pointer height={deleteImgDiameter} src={deleteImg} width={deleteImgDiameter} />
                     </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row marginBottom="7px">
-                            <TableSpan>1m 23</TableSpan>
-                        </Row>
-                        <Row marginBottom="0">
-                            <PercentageGrowth type="success">2</PercentageGrowth>
-                        </Row>
-                    </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row noWrap marginBottom="7px">
-                            <TableSpan>1m 1</TableSpan>
-                        </Row>
-                        <Row noWrap marginBottom="0">
-                            <Column marginRight="5px">
-                                <TableSubSpan>89%</TableSubSpan>
-                            </Column>
-                            <PercentageGrowth type="error">3</PercentageGrowth>
-                        </Row>
-                    </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row noWrap marginBottom="7px">
-                            <TableSpan>1m 1</TableSpan>
-                        </Row>
-                        <Row noWrap marginBottom="0">
-                            <Column marginRight="5px">
-                                <TableSubSpan>89%</TableSubSpan>
-                            </Column>
-                            <PercentageGrowth type="error">3</PercentageGrowth>
-                        </Row>
-                    </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row noWrap marginBottom="7px">
-                            <TableSpan>1m 1</TableSpan>
-                        </Row>
-                        <Row noWrap marginBottom="0">
-                            <Column marginRight="5px">
-                                <TableSubSpan>89%</TableSubSpan>
-                            </Column>
-                            <PercentageGrowth type="error">3</PercentageGrowth>
-                        </Row>
-                    </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row noWrap marginBottom="7px">
-                            <TableSpan>1m 1</TableSpan>
-                        </Row>
-                        <Row noWrap marginBottom="0">
-                            <Column marginRight="5px">
-                                <TableSubSpan>89%</TableSubSpan>
-                            </Column>
-                            <PercentageGrowth type="error">3</PercentageGrowth>
-                        </Row>
-                    </Column>
-                </TableColumn>
-                <TableColumn>
-                    <Column>
-                        <Row marginBottom={padding}>
-                            <RoundedButton
-                                reverse
-                                Img={
-                                    <CustomImg
-                                        height={removeButtonImgDiameter}
-                                        src={removeButtonImg}
-                                        width={removeButtonImgDiameter}
-                                    />
-                                }
-                            >
-                                Remove
-                            </RoundedButton>
-                        </Row>
-                        <Row>
-                            <RoundedButton onClick={toDetails}>Details</RoundedButton>
-                        </Row>
-                    </Column>
-                </TableColumn>
-            </TableRow>
-        ))}
-    </Table>
-);
+                    <CustomImg
+                        pointer
+                        height={moreInfoImgHeight}
+                        src={moreInfoImg}
+                        width={moreInfoImgWidth}
+                        onClick={onMoreInfoClick}
+                    />
+                </Row>
+            </TableColumn>
+        </TableRow>
+    );
+};
+
+export const CampaignTable = () => {
+    // const { sets } = useStore(campaignsStores.statisticsItems);
+    const { items } = useStore(campaignsStores.items);
+    const loading = useStore(loadingStores.initialLoading);
+
+    const defaultOrganizationId = getOrganizationId();
+
+    // useEffect(() => {
+    //     // campaignsEffects.getStatisticsItems({
+    //     //     returnQueryCount: false,
+    //     //     campaignId: '5dfb9a1669819a1e9a77fb30',
+    //     //     dateFrom: '2020-08-01T00:00:00Z',
+    //     //     dateTo: '2020-09-01T00:00:00Z',
+    //     //     historicalSets: 1
+    //     // });
+    //     campaignsEffects.getItemById('5dfb9a1669819a1e9a77fb30');
+    // }, []);
+
+    useEffect(() => {
+        defaultOrganizationId &&
+            campaignsEffects.getItems({ organizationId: defaultOrganizationId, limit: 10, pageIndex: 0 });
+    }, [defaultOrganizationId]);
+
+    return (
+        <>
+            {loading ? (
+                <Loader />
+            ) : items?.length ? (
+                <Table>
+                    <LegendaryItem />
+                    {items.map(i => (
+                        <Item key={i.id} {...i} />
+                    ))}
+                </Table>
+            ) : (
+                <CampaignEmpty />
+            )}
+        </>
+    );
+};

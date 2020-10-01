@@ -9,9 +9,12 @@ import {
 import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/style';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { routesArray } from 'constants/routes';
+import { routes, routesArray } from 'constants/routes';
+import { blue } from 'constants/styles';
+import { useStore } from 'effector-react';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { userStores } from 'stores/user';
 
 interface Props {
     buttons?: JSX.Element;
@@ -20,8 +23,11 @@ interface Props {
 export const TopBarWithButton = ({ buttons }: Props) => {
     const location = useLocation();
     const history = useHistory();
+    const { access } = useStore(userStores.auth);
 
     const onClick = (path: string) => history.push(path);
+
+    const onUsersClick = () => history.push(routes.userAdmin.index);
 
     return (
         <Wrapper>
@@ -45,6 +51,20 @@ export const TopBarWithButton = ({ buttons }: Props) => {
                     </StyledItem>
                 );
             })}
+            {access === 1 && (
+                <StyledItem onClick={onUsersClick}>
+                    <Column alignCenter>
+                        <Span
+                            color={blue}
+                            fontSize={spanFontSize}
+                            fontWeight={spanFontWeight}
+                            lineHeight={spanLineHeight}
+                        >
+                            Users
+                        </Span>
+                    </Column>
+                </StyledItem>
+            )}
             <MarginWrapper marginLeft="auto">{buttons}</MarginWrapper>
         </Wrapper>
     );

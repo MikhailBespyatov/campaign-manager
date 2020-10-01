@@ -16,7 +16,7 @@ export const Discover = () => {
 
     useEffect(() => {
         campaignContentEffects.getItems({
-            limit: 100,
+            limit: 40,
             pageIndex: 0
         });
     }, []);
@@ -33,7 +33,9 @@ export const Discover = () => {
             ) : (
                 <Section>
                     {/* {console.log(items)} */}
-                    {items?.length ? items.map(item => <VideoCard key={item.id} {...item} />) : noContentMessage}
+                    {items?.length
+                        ? items.map(item => <VideoCard key={item.womContentId} {...item} />)
+                        : noContentMessage}
                 </Section>
             )}
             <Section justifyCenter>{!loading && <Pagination />}</Section>

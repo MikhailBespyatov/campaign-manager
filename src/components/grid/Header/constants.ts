@@ -1,8 +1,11 @@
 export const headerHorizontalMargin = '22px';
 export const headerVerticalMargin = '13px';
 
-export const headerLogoWidth = '80px';
+const womLogoDivider = 0.46;
+
 export const headerLogoHeight = '52x';
+// export const headerLogoWidth = '80px';
+export const headerLogoWidth = `calc(${headerLogoHeight} / ${womLogoDivider})`;
 
 export const styledSpanFontSize1 = '18px';
 export const styledSpanLineHeight1 = '22px';
