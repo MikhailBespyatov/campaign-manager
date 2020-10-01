@@ -1,3 +1,7 @@
+interface RemoveValues {
+    removeValues: string[];
+}
+
 declare namespace WOM {
     export interface UserJwtTokenResponse {
         token?: string | null;
@@ -17,5 +21,9 @@ declare namespace WOM {
         inviteCode: string;
         username: string;
         password: string;
+    }
+
+    export interface UpdateAndRemoveCampaignContentValues extends RemoveValues {
+        updateValues?: ContentQueryRequest;
     }
 }

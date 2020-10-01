@@ -7,7 +7,7 @@ import {
     Wrapper
 } from 'components/FormComponents/inputs/BooleanCheckbox/styles';
 import { noop } from 'constants/global';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DefaultChecked, Disabled } from 'types';
 
 interface Props extends DefaultChecked, Disabled {
@@ -23,12 +23,10 @@ export const BooleanCheckbox = ({
 }: Props) => {
     const [checked, setChecked] = useState(defaultChecked);
 
-    const onCheckboxChange = () => setChecked(!checked);
-
-    useEffect(() => {
-        onChange(checked);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [checked]);
+    const onCheckboxChange = () => {
+        setChecked(!checked);
+        onChange(!checked);
+    };
 
     return (
         <Wrapper>
