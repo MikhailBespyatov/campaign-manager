@@ -31,11 +31,12 @@ import {
     testSelectArray
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { RowHeaderRadioType } from 'types';
+import { parseMonthDate } from 'utils/usefulFunctions';
 
 // const ColorPromptLine = ({ background }: Background) => (
 //     <UniversalWrapper background={background || black} height="2px" marginRight="10px" width="12px" />
@@ -48,16 +49,20 @@ interface ParamsProps {
 export const Details = () => {
     const { campaignId } = useParams<ParamsProps>();
     const { sets } = useStore(campaignsStores.statisticsItems);
-    const loading = useStore(loadingStores.initialLoading);
+    const { title, schedule } = useStore(campaignsStores.item);
+    const initialLoading = useStore(loadingStores.initialLoading);
+    const loading = useStore(loadingStores.loading);
 
-    const items = sets?.length && sets[0].items?.length ? sets[0].items : [];
-    const summary = sets?.length && sets[0].summary ? sets[0].summary : {};
+    const utcStarted = schedule?.utcStarted || '';
+    const utcEnded = schedule?.utcEnded || '';
+
+    const items = useMemo(() => (sets?.length && sets[0].items?.length ? sets[0].items.reverse() : []), [sets]);
+    const summary = useMemo(() => (sets?.length && sets[0].summary ? sets[0].summary : {}), [sets]);
 
     const radioArray: RowHeaderRadioType[] = [
         {
             title: name1,
             quantity: summary?.viewCount?.toString() || '0',
-            inBrackets: `(${summary?.viewsD1Percentage || 0}%)`,
             growType: 'success',
             growNumber: 0
         },
@@ -126,7 +131,7 @@ export const Details = () => {
             type: 'category',
             axisTick: { show: false },
             boundaryGap: false,
-            data: ['', ...items.map(i => new Date(i?.dateUtc || '').getDate())]
+            data: ['', ...items.map(i => parseMonthDate(new Date(i?.dateUtc || '')))]
         }
     ];
 
@@ -156,15 +161,20 @@ export const Details = () => {
     };
 
     useEffect(() => {
-        campaignId &&
+        campaignId && campaignsEffects.getItemById(campaignId);
+    }, [campaignId]);
+
+    useEffect(() => {
+        utcStarted &&
+            utcEnded &&
             campaignsEffects.getStatisticsItems({
                 returnQueryCount: false,
                 campaignId: campaignId,
-                dateFrom: '2020-08-01T00:00:00Z',
+                dateFrom: '2020-08-15T00:00:00Z',
                 dateTo: '2020-09-01T00:00:00Z',
-                historicalSets: 0
+                historicalSets: 2
             });
-    }, [campaignId]);
+    }, [utcStarted, utcEnded, campaignId]);
 
     useEffect(() => {
         items?.length && setYAxisData(items.map(i => i.viewCount));
@@ -174,9 +184,16 @@ export const Details = () => {
         <CampaignManagerLayout>
             <ContentWrapper>
                 <Section>
-                    <H1>Campaign id: {campaignId}</H1>
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <Column>
+                            <H1>Campaign id: {campaignId}</H1>
+                            <H1>Campaign Name: {title}</H1>
+                        </Column>
+                    )}
                 </Section>
-                {loading ? (
+                {initialLoading ? (
                     <Loader />
                 ) : (
                     <>
@@ -198,10 +215,10 @@ export const Details = () => {
                                     <TableHeaderSpan>YEAY General</TableHeaderSpan>
                                 </Row> */}
                                 <Section alignCenter noWrap>
-                                    <Column marginRight="75px">
+                                    <Column marginRight="25px">
                                         <ReactEcharts
                                             option={{ ...graphicOption, xAxis: xAxis, series: series }}
-                                            style={{ height: '516px', width: '755px' }}
+                                            style={{ height: '516px', width: '1000px' }}
                                         />
                                     </Column>
                                     {/* <UniversalWrapper

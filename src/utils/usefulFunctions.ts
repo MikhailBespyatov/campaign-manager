@@ -61,3 +61,11 @@ export const getOrganizationId = () => {
 };
 
 export const roundScore = (num: number, n = numbersAfterComma) => num.toFixed(n);
+
+// parse month date
+export const parseMonthDate: (date: Date) => string = date =>
+    date.toString() === 'Invalid Date'
+        ? 'invalid date'
+        : (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) +
+          '.' +
+          (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
