@@ -4,7 +4,7 @@ import arrowImg from 'assets/img/select_arrow_dark.svg';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { RoleSelect } from 'components/common/inputs/RoleSelect';
-import { testArray } from 'components/common/tables/CampaignTable/constants';
+import { testArray } from 'components/common/tables/CampaignTableOldVersion/constants';
 import { Table } from 'components/common/tables/Table';
 import {
     arrowImgHeight,
@@ -46,7 +46,7 @@ const LegendaryItem = () => {
     return (
         <LegendaryTableRow active={checked}>
             <LegendaryTableColumn>
-                <Row alignCenter noWrap>
+                <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column>
@@ -57,7 +57,7 @@ const LegendaryItem = () => {
                 </Row>
             </LegendaryTableColumn>
             <LegendaryTableColumn>
-                <Row alignCenter noWrap>
+                <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <LegendaryTableSpan>Email</LegendaryTableSpan>
                     </Column>
@@ -82,7 +82,7 @@ const Item = () => {
     return (
         <TableRow active={checked}>
             <TableColumn>
-                <Row alignCenter noWrap>
+                <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column>
@@ -104,7 +104,7 @@ const Item = () => {
                 <RoleSelect reverse={checked} values={selectTestArray} />
             </TableColumn>
             <TableColumn>
-                <Row alignCenter noWrap>
+                <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <RoundedButton>RESET PASSWORD</RoundedButton>
                     </Column>

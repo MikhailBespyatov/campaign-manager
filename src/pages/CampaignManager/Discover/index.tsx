@@ -48,7 +48,9 @@ export const Discover = () => {
                 </Section>
             ) : (
                 <Section>
-                    {items?.length ? items.map(item => <VideoCard key={item.id} {...item} />) : noContentMessage}
+                    {items?.length
+                        ? items.map(item => <VideoCard key={item.womContentId} {...item} />)
+                        : noContentMessage}
                 </Section>
             )}
             <Section justifyCenter>{!loading && <Pagination />}</Section>

@@ -6,11 +6,14 @@ import { MainLayout } from 'components/Layouts/MainLayout';
 import { backImgDiameter } from 'components/Layouts/UserAdminLayout/constants';
 import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
+import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
+import { userStores } from 'stores/user';
 
 export const UserAdminLayout: FC = ({ children }) => {
     const history = useHistory();
+    const { access } = useStore(userStores.auth);
 
     const onClick = () => history.push(routes.campaignManager.discover.index);
 
@@ -21,20 +24,22 @@ export const UserAdminLayout: FC = ({ children }) => {
                     User Admin
                 </Span>
             </Section>
-            <Section alignCenter marginBottom="51px">
-                <Column marginRight="15px">
-                    <CustomImg
-                        pointer
-                        height={backImgDiameter}
-                        src={backImg}
-                        width={backImgDiameter}
-                        onClick={onClick}
-                    />
-                </Column>
-                <Span color={blue} fontSize="26px" lineHeight="32px">
-                    Go to CampaignManager
-                </Span>
-            </Section>
+            {access === 1 && (
+                <Section alignCenter marginBottom="51px">
+                    <Column marginRight="15px">
+                        <CustomImg
+                            pointer
+                            height={backImgDiameter}
+                            src={backImg}
+                            width={backImgDiameter}
+                            onClick={onClick}
+                        />
+                    </Column>
+                    <Span color={blue} fontSize="26px" lineHeight="32px">
+                        Go to CampaignManager
+                    </Span>
+                </Section>
+            )}
             {children}
         </MainLayout>
     );

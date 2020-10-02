@@ -32,12 +32,12 @@ export const TagFilter = ({
     const removeValue = (value: string) => setValues(values.filter(i => i !== value));
 
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        // @ts-ignore
-        const value = e.target.value;
+        // // @ts-ignore
+        const value = (e.target as HTMLInputElement).value;
         if (e.key === 'Enter' && !values.includes(value)) {
             addValue(value);
-            // @ts-ignore
-            e.target.value = '';
+            // // @ts-ignore
+            (e.target as HTMLInputElement).value = '';
         }
     };
 
@@ -73,7 +73,7 @@ export const TagFilter = ({
                         {i}
                     </ClosableTag>
                 ))}
-                <TextInput background={wrapperBackground} width="100%" onKeyDown={onKeyDown} />
+                <TextInput background={wrapperBackground} type="text" width="100%" onKeyDown={onKeyDown} />
             </Wrapper>
         </Section>
     );

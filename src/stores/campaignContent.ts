@@ -40,6 +40,10 @@ const updateValues = createEvent<WOM.ContentQueryRequest>();
 const updateAndRemoveValues = createEvent<WOM.UpdateAndRemoveCampaignContentValues>();
 const setDefaultValues = createEvent();
 
+// values store keeps request values,
+// after updating or removing some fields of the values,
+// watcher initiate getItems request due the new values
+// (old fields of values are not removed if they are not pointed as remove values in removeAndUpdateValues event)
 let isFirst = true;
 const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues)
     .on(updateValues, (state, values: WOM.ContentQueryRequest) => ({ ...state, ...values }))
