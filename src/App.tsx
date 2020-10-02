@@ -2,6 +2,7 @@ import history from 'BrowserHistory';
 import { CardModal } from 'components/modals/CardModal';
 import { routes } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
+import { CreateOrganization } from 'pages/Admin/CreateOrganization';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
@@ -28,6 +29,7 @@ import { Redirect, Router, Switch } from 'react-router';
 import { AdminRoute } from 'routes/AdminRoute';
 import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
+import { UserAdminRoute } from 'routes/UserAdminRoute';
 
 const App = () => (
     <>
@@ -50,7 +52,8 @@ const App = () => (
                 <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
                 <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
 
-                <AdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
+                <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} />
+                <UserAdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
 
                 <CampaignManagerRoute exact component={CampaignManager} path={routes.campaignManager.index} />
                 <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />

@@ -1,6 +1,6 @@
 import { yupDefault } from 'constants/yupFields';
+import { SetErrorsAcceptInviteRequest } from 'pages/SignUp/AcceptInvite/types';
 import { userEffects } from 'stores/user';
-import { SetErrorsAcceptInviteRequest } from 'types';
 import * as Yup from 'yup';
 
 interface Props extends WOM.OrganizationAcceptInviteRequest {}

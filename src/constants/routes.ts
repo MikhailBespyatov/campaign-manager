@@ -28,14 +28,13 @@ export const routes = {
         password: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/password`,
         requestCode: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/security_code`
     },
-    acceptInvite: '/accept_invite/:inviteCode',
     userAdmin: {
         index: userAdminPrefix
     },
     admin: {
-        index: adminPrefix,
-        organization: `${adminPrefix}/organization`,
-        user: `${adminPrefix}/user`
+        //index: adminPrefix,
+        createOrganization: `${adminPrefix}/create_organization`
+        //user: `${adminPrefix}/user`
     },
     campaignManager: {
         index: campaignPrefix,

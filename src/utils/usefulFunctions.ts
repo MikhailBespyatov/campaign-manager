@@ -15,7 +15,9 @@ export const giveAccess: (user: AuthUserResponse) => number = user => {
     if (roles && roles.length) {
         accessRoles.forEach(
             (role, i) =>
-                roles.includes(role) && (access > accessValues[i] || access === -1) && (access = accessValues[i])
+                roles.includes(role.toLowerCase()) &&
+                (access > accessValues[i] || access === -1) &&
+                (access = accessValues[i])
         );
     }
 

@@ -1,14 +1,8 @@
+import { Props, SetErrorsInviteRequest } from 'components/FormComponents/userAdminForms/InviteForm/types';
 import { yupDefault, yupEmail } from 'constants/yupFields';
 import { ChangeEvent } from 'react';
 import { userEffects } from 'stores/user';
-import { SetErrorsInviteRequest } from 'types';
 import * as Yup from 'yup';
-
-interface Props {
-    email: string;
-    organizationId: string;
-    permission: string;
-}
 
 export const initialValues: Props = { email: '', organizationId: '', permission: '2' };
 
