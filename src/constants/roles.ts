@@ -1,5 +1,5 @@
 export const userRoles = {
-    admin: 'Administrator',
+    admin: 'administrator',
     orgAdmin: 'OrganizationAdministrator',
     orgMember: 'OrganizationMember',
     campaignAdmin: 'CampaignAdministrator'

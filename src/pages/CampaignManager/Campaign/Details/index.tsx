@@ -55,6 +55,7 @@ export const Details = () => {
     const utcEnded = schedule?.utcEnded || '';
 
     const items = useMemo(() => (sets?.length && sets[0].items?.length ? sets[0].items.reverse() : []), [sets]);
+    const items1 = useMemo(() => (sets?.length && sets[1].items?.length ? sets[1].items.reverse() : []), [sets]);
     const summary = useMemo(() => (sets?.length && sets[0].summary ? sets[0].summary : {}), [sets]);
 
     const radioArray: RowHeaderRadioType[] = [
@@ -94,6 +95,7 @@ export const Details = () => {
     ];
 
     const [yAxisData, setYAxisData] = useState(items.map(i => i.shareCount));
+    const [yAxisData1, setYAxisData1] = useState(items1.map(i => i.shareCount));
     const [graphicColor, setGraphicColor] = useState(color1);
     const [graphicName, setGraphicName] = useState(name1);
 
@@ -117,7 +119,32 @@ export const Details = () => {
             },
             areaStyle: {
                 ...areaCommonStyle,
+                opacity: 0.1,
                 color: graphicColor
+            },
+            data: yAxisData1
+        },
+        {
+            name: graphicName,
+            type: 'line',
+            smooth: true,
+            stack: 'Buy',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                color: 'green'
+            },
+            lineStyle: {
+                color: 'green'
+            },
+            areaStyle: {
+                ...areaCommonStyle,
+                opacity: 0.1,
+                color: 'green'
             },
             data: yAxisData
         }
@@ -137,22 +164,27 @@ export const Details = () => {
         switch (active) {
             case name1:
                 setYAxisData(items.map(i => i.viewCount));
+                setYAxisData1(items1.map(i => i.viewCount));
                 setGraphicColor(color1);
                 break;
             case name2:
                 setYAxisData(items.map(i => i.likeCount));
+                setYAxisData1(items1.map(i => i.likeCount));
                 setGraphicColor(color2);
                 break;
             case name3:
                 setYAxisData(items.map(i => i.saveCount));
+                setYAxisData1(items1.map(i => i.saveCount));
                 setGraphicColor(color3);
                 break;
             case name4:
                 setYAxisData(items.map(i => i.commentCount));
+                setYAxisData1(items1.map(i => i.commentCount));
                 setGraphicColor(color4);
                 break;
             default:
                 setYAxisData(items.map(i => i.shareCount));
+                setYAxisData1(items1.map(i => i.shareCount));
                 setGraphicColor(color5);
         }
     };
@@ -167,15 +199,16 @@ export const Details = () => {
             campaignsEffects.getStatisticsItems({
                 returnQueryCount: false,
                 campaignId: '5dfb9a1669819a1e9a77fb30',
-                dateFrom: '2020-08-01T00:00:00Z',
+                dateFrom: '2020-09-01T00:00:00Z',
                 dateTo: '2020-10-01T00:00:00Z',
-                historicalSets: 0
+                historicalSets: 1
             });
     }, [utcStarted, utcEnded, campaignId]);
 
     useEffect(() => {
         items?.length && setYAxisData(items.map(i => i.viewCount));
-    }, [items]);
+        items1?.length && setYAxisData1(items1.map(i => i.viewCount));
+    }, [items, items1]);
 
     return (
         <CampaignManagerLayout>

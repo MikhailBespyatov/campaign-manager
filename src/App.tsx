@@ -40,7 +40,11 @@ const App = () => (
                 <PublicRoute exact component={Test} path={routes.test} />
 
                 <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} />
-                <PublicRoute exact component={AcceptInvite} path={routes.signUp.acceptInvite} />
+                <PublicRoute
+                    exact
+                    component={AcceptInvite}
+                    path={[routes.signUp.acceptInvite, routes.signUp.acceptOrgInvite]}
+                />
                 <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                 <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                 <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />

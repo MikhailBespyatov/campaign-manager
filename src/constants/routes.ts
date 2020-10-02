@@ -14,7 +14,8 @@ export const routes = {
     home: `${campaignPrefix}/dashboard`,
     signUp: {
         index: signUpPrefix,
-        acceptInvite: '/invite-org/:inviteCode',
+        acceptInvite: '/accept-invite/:inviteCode',
+        acceptOrgInvite: '/invite-org/:inviteCode',
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
