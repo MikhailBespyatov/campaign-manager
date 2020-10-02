@@ -1,7 +1,9 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { Hr } from 'components/common/dividers/Hr';
 import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
+import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
+import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Select } from 'components/common/inputs/Select';
 import { Switch } from 'components/common/inputs/Switch';
 import { Loader } from 'components/common/Loader';
@@ -23,6 +25,7 @@ import {
     color4,
     color5,
     graphicOption,
+    growSpread,
     name1,
     name2,
     name3,
@@ -35,12 +38,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
-import { RowHeaderRadioType } from 'types';
 import { parseMonthDate } from 'utils/usefulFunctions';
-
-// const ColorPromptLine = ({ background }: Background) => (
-//     <UniversalWrapper background={background || black} height="2px" marginRight="10px" width="12px" />
-// );
 
 interface ParamsProps {
     campaignId?: string;
@@ -48,7 +46,7 @@ interface ParamsProps {
 
 export const Details = () => {
     const { campaignId } = useParams<ParamsProps>();
-    const { sets } = useStore(campaignsStores.statisticsItems);
+    const { sets, deltaStatistics } = useStore(campaignsStores.statisticsItems);
     const { title, schedule } = useStore(campaignsStores.item);
     const initialLoading = useStore(loadingStores.initialLoading);
     const loading = useStore(loadingStores.loading);
@@ -62,37 +60,36 @@ export const Details = () => {
     const radioArray: RowHeaderRadioType[] = [
         {
             title: name1,
-            quantity: summary?.viewCount?.toString() || '0',
-            growType: 'success',
-            growNumber: 0
+            quantity: summary?.viewCount?.toString() || '0'
         },
         {
             title: name2,
             quantity: summary?.likeCount?.toString() || '0',
             inBrackets: `(${summary?.likesPercentage || 0}%)`,
-            growType: 'success',
-            growNumber: 0
+            ...growSpread(deltaStatistics?.likesDelta)
+            // growType: deltaStatistics?.likesDelta && deltaStatistics.likesDelta > 0 ? 'success' : 'error',
+            // growNumber: deltaStatistics?.likesDelta ? deltaStatistics.likesDelta : 0
         },
         {
             title: name3,
             quantity: summary?.saveCount?.toString() || '0',
             inBrackets: `(${summary?.savesPercentage || 0}%)`,
-            growType: 'success',
-            growNumber: 0
+            ...growSpread(deltaStatistics?.savesDelta)
+            // growType: deltaStatistics?.savesDelta && deltaStatistics.savesDelta > 0 ? 'success' : 'error',
+            // growNumber: deltaStatistics?.savesDelta ? deltaStatistics.savesDelta : 0
         },
         {
             title: name4,
             quantity: summary?.commentCount?.toString() || '0',
-            inBrackets: `(${summary?.commentsPercentage || 0}%)`,
-            growType: 'success',
-            growNumber: 0
+            inBrackets: `(${summary?.commentsPercentage || 0}%)`
         },
         {
             title: name5,
             quantity: summary?.shareCount?.toString() || '0',
             inBrackets: `(${summary?.sharesPercentage || 0}%)`,
-            growType: 'success',
-            growNumber: 0
+            ...growSpread(deltaStatistics?.sharesDelta)
+            // growType: deltaStatistics?.sharesDelta && deltaStatistics.sharesDelta > 0 ? 'success' : 'error',
+            // growNumber: deltaStatistics?.sharesDelta ? deltaStatistics.sharesDelta : 0
         }
     ];
 
@@ -169,10 +166,10 @@ export const Details = () => {
             utcEnded &&
             campaignsEffects.getStatisticsItems({
                 returnQueryCount: false,
-                campaignId: campaignId,
-                dateFrom: '2020-08-15T00:00:00Z',
-                dateTo: '2020-09-01T00:00:00Z',
-                historicalSets: 2
+                campaignId: '5dfb9a1669819a1e9a77fb30',
+                dateFrom: '2020-08-01T00:00:00Z',
+                dateTo: '2020-10-01T00:00:00Z',
+                historicalSets: 0
             });
     }, [utcStarted, utcEnded, campaignId]);
 
@@ -221,14 +218,13 @@ export const Details = () => {
                                             style={{ height: '516px', width: '1000px' }}
                                         />
                                     </Column>
-                                    {/* <UniversalWrapper
-                            border={graphicBlockBorder}
-                            borderRadius={secondaryBorderRadius}
-                            direction="column"
-                            marginLeft="75px"
-                            padding={primaryPadding}
-                        > */}
                                     <BorderBlock>
+                                        <Section>
+                                            <DatePickerBetween
+                                                defaultDateFrom={utcStarted || new Date().toISOString()}
+                                                defaultDateTo={utcEnded || new Date().toISOString()}
+                                            />
+                                        </Section>
                                         <Section alignCenter noWrap marginBottom={primaryPadding}>
                                             <P noWrap>Timeline wiew</P>
                                             <MarginWrapper marginLeft="auto">

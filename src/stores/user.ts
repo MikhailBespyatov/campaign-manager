@@ -152,6 +152,7 @@ const auth = createStore<Auth>(
               authDenyReason: notEntryAllowedMessage
           }
 ).on(setAuth, (_, auth) => auth);
+//auth.watch(state => console.log(state));
 
 const userEvents = { logout, setAuth };
 const userEffects = { loadToken, createUserAndLoadToken, loadAdminToken, inviteUser, acceptInvitationAndLoadToken };

@@ -1,5 +1,5 @@
 import { formGrey2, secondaryBorder } from 'constants/styles';
-import { RowHeaderRadioType } from 'types';
+import { infoType } from 'types';
 
 export const wrapperBorder = secondaryBorder;
 export const wrapperPadding = '40px 52px';
@@ -7,6 +7,9 @@ export const wrapperPadding = '40px 52px';
 export const graphicBlockBorder = `2px solid ${formGrey2}`;
 
 export const testSelectArray = ['1 day', '7 days', '14days', '21 days', '31 days'];
+
+export const growSpread: (value: undefined | number) => { growType?: infoType; growNumber?: number } = value =>
+    value !== undefined ? { growType: value > 0 ? 'success' : 'error', growNumber: value } : {};
 
 export const seriesTestData = [
     [0, 0],
@@ -32,11 +35,11 @@ export const seriesTestData = [
 const graphicTextColor = '#C3CBD4';
 const labelBackground = '#6a7985';
 
-export const name1 = 'Share';
-export const name2 = 'View';
+export const name1 = 'View';
+export const name2 = 'Like';
 export const name3 = 'Save';
-export const name4 = 'Click';
-export const name5 = 'Buy';
+export const name4 = 'Comment';
+export const name5 = 'Share';
 
 // export const previewColor = '#FF6B00';
 // export const viewColor = '#FC4237';
@@ -236,40 +239,40 @@ export const graphicOption = {
 
 // option.visualMap.target.inRange.color = ['red', 'blue'];
 
-export const testHeaderRadioArray: RowHeaderRadioType[] = [
-    {
-        title: name1,
-        quantity: '1m 23',
-        inBrackets: '',
-        growType: 'success',
-        growNumber: 0
-    },
-    {
-        title: name2,
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 0
-    },
-    {
-        title: name3,
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 0
-    },
-    {
-        title: name4,
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 0
-    },
-    {
-        title: name5,
-        quantity: '100K',
-        inBrackets: '(71.1%)',
-        growType: 'success',
-        growNumber: 0
-    }
-];
+// export const testHeaderRadioArray: RowHeaderRadioType[] = [
+//     {
+//         title: name1,
+//         quantity: '1m 23',
+//         inBrackets: '',
+//         growType: 'success',
+//         growNumber: 0
+//     },
+//     {
+//         title: name2,
+//         quantity: '100K',
+//         inBrackets: '(71.1%)',
+//         growType: 'success',
+//         growNumber: 0
+//     },
+//     {
+//         title: name3,
+//         quantity: '100K',
+//         inBrackets: '(71.1%)',
+//         growType: 'success',
+//         growNumber: 0
+//     },
+//     {
+//         title: name4,
+//         quantity: '100K',
+//         inBrackets: '(71.1%)',
+//         growType: 'success',
+//         growNumber: 0
+//     },
+//     {
+//         title: name5,
+//         quantity: '100K',
+//         inBrackets: '(71.1%)',
+//         growType: 'success',
+//         growNumber: 0
+//     }
+// ];
