@@ -1,6 +1,7 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { Hr } from 'components/common/dividers/Hr';
 import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
+import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Select } from 'components/common/inputs/Select';
@@ -165,10 +166,10 @@ export const Details = () => {
             utcEnded &&
             campaignsEffects.getStatisticsItems({
                 returnQueryCount: false,
-                campaignId: campaignId,
-                dateFrom: '2020-08-15T00:00:00Z',
-                dateTo: '2020-09-01T00:00:00Z',
-                historicalSets: 2
+                campaignId: '5dfb9a1669819a1e9a77fb30',
+                dateFrom: '2020-08-01T00:00:00Z',
+                dateTo: '2020-10-01T00:00:00Z',
+                historicalSets: 0
             });
     }, [utcStarted, utcEnded, campaignId]);
 
@@ -218,6 +219,12 @@ export const Details = () => {
                                         />
                                     </Column>
                                     <BorderBlock>
+                                        <Section>
+                                            <DatePickerBetween
+                                                defaultDateFrom={utcStarted || new Date().toISOString()}
+                                                defaultDateTo={utcEnded || new Date().toISOString()}
+                                            />
+                                        </Section>
                                         <Section alignCenter noWrap marginBottom={primaryPadding}>
                                             <P noWrap>Timeline wiew</P>
                                             <MarginWrapper marginLeft="auto">

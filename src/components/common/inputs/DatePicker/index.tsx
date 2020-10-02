@@ -1,54 +1,57 @@
 import DateFnsUtils from '@date-io/date-fns';
-import Grid from '@material-ui/core/Grid';
-import { KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { ThemeProvider } from '@material-ui/styles';
+import {
+    defaultFormat,
+    defaultKeyboardButtonProps,
+    materialTheme
+} from 'components/common/inputs/DatePicker/constants';
+import { noop } from 'constants/global';
 import 'date-fns';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export const MaterialUIPickers = () => {
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date('2014-08-18T21:11:54'));
+interface Props {
+    defaultDateFrom: string;
+    defaultDateTo: string;
+    onChange?: (dateFrom: string, dateTo: string) => void;
+}
 
-    const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
-    };
+export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = noop }: Props) => {
+    const [selectedDateFrom, setSelectedDateFrom] = useState<Date | null>(new Date(defaultDateFrom));
+    const [selectedDateTo, setSelectedDateTo] = useState<Date | null>(new Date(defaultDateTo));
+
+    const handleDateChangeFrom = (date: Date | null) => setSelectedDateFrom(date);
+    const handleDateChangeTo = (date: Date | null) => setSelectedDateTo(date);
+
+    useEffect(() => {
+        onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedDateFrom, selectedDateTo]);
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
+        <ThemeProvider theme={materialTheme}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                    disableToolbar
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date'
-                    }}
-                    format="MM/dd/yyyy"
-                    id="date-picker-inline"
-                    label="Date picker inline"
+                    KeyboardButtonProps={defaultKeyboardButtonProps}
+                    format={defaultFormat}
+                    label="Choose date from"
                     margin="normal"
-                    value={selectedDate}
-                    variant="inline"
-                    onChange={handleDateChange}
+                    maxDate={new Date(defaultDateTo)}
+                    minDate={new Date(defaultDateFrom)}
+                    value={selectedDateFrom}
+                    onChange={handleDateChangeFrom}
                 />
                 <KeyboardDatePicker
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date'
-                    }}
-                    format="MM/dd/yyyy"
-                    id="date-picker-dialog"
-                    label="Date picker dialog"
+                    KeyboardButtonProps={defaultKeyboardButtonProps}
+                    format={defaultFormat}
+                    label="Choose date to"
                     margin="normal"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    maxDate={new Date(defaultDateTo)}
+                    minDate={new Date(defaultDateFrom)}
+                    value={selectedDateTo}
+                    onChange={handleDateChangeTo}
                 />
-                <KeyboardTimePicker
-                    KeyboardButtonProps={{
-                        'aria-label': 'change time'
-                    }}
-                    id="time-picker"
-                    label="Time picker"
-                    margin="normal"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                />
-            </Grid>
-        </MuiPickersUtilsProvider>
+            </MuiPickersUtilsProvider>
+        </ThemeProvider>
     );
 };

@@ -4,8 +4,6 @@ const signInPrefix = '/login';
 const adidasPrefix = '/adidas';
 const passwordResetPrefix = '/password_reset';
 
-const forgotPasswordPrefix = signInPrefix;
-
 const campaignPrefix = '/campaign_manager';
 const userAdminPrefix = '/user_admin';
 
@@ -82,42 +80,3 @@ export const routesArray = [
     //     name: 'Overview'
     // }
 ];
-
-const routeByName = {
-    home: '/',
-    signIn: '/sign-in',
-    signUp: '/sign-up',
-    forgotPassword: {
-        index: forgotPasswordPrefix,
-        requestCode: `${forgotPasswordPrefix}/request-code`,
-        passwordReset: `${forgotPasswordPrefix}/password-reset`
-    },
-    acceptInvite: '/accept-invite/:inviteCode',
-    admin: {
-        index: adminPrefix,
-        organization: `${adminPrefix}/organization`,
-        user: `${adminPrefix}/user`
-    },
-    campaignManager: {
-        index: campaignPrefix,
-        dashboard: {
-            index: `${campaignPrefix}/dashboard`
-        },
-        discover: {
-            list: `${campaignPrefix}/discover`,
-            details: (contentId = ':contentId') => `${campaignPrefix}/discover/${contentId}`
-        },
-        campaign: {
-            list: `${campaignPrefix}/campaign`,
-            create: `${campaignPrefix}/campaign/create`,
-            details: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/details/${campaignId}`,
-            edit: (campaignId = ':campaignId') => `${campaignPrefix}/campaign/edit/${campaignId}`
-        }
-    },
-    static: {
-        privacy: '/privacy-policy',
-        press: '/press'
-    }
-};
-
-export default routeByName;

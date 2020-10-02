@@ -79,4 +79,8 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100%;
   }
+
+  .MuiFormControl-root {
+    width: 100%;
+  }
 `;
