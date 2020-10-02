@@ -1,4 +1,5 @@
-import { createEffect, createStore } from 'effector';
+import { defaultCampaignContentValues } from 'constants/defaults/campaignContent';
+import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 
@@ -35,7 +36,30 @@ const getItems = createEffect({
 const item = createStore<WOM.ContentItemResponse>({}).on(getItemById.doneData, (_, newState) => newState);
 const items = createStore<WOM.ContentQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
 
-const campaignContentEvents = {};
+const updateValues = createEvent<WOM.ContentQueryRequest>();
+const updateAndRemoveValues = createEvent<WOM.UpdateAndRemoveCampaignContentValues>();
+const setDefaultValues = createEvent();
+
+// values store keeps request values,
+// after updating or removing some fields of the values,
+// watcher initiate getItems request due the new values
+// (old fields of values are not removed if they are not pointed as remove values in removeAndUpdateValues event)
+let isFirst = true;
+const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues)
+    .on(updateValues, (state, values: WOM.ContentQueryRequest) => ({ ...state, ...values }))
+    .on(updateAndRemoveValues, (state, values: WOM.UpdateAndRemoveCampaignContentValues) => {
+        let formerState = state;
+        values.removeValues.forEach(
+            //@ts-ignore
+            key => formerState.hasOwnProperty(key) && delete formerState[key]
+        );
+
+        return { ...formerState, ...values.updateValues };
+    })
+    .on(setDefaultValues, () => defaultCampaignContentValues);
+values.watch(state => (isFirst ? (isFirst = false) : getItems(state)));
+
+const campaignContentEvents = { updateValues, updateAndRemoveValues, setDefaultValues };
 const campaignContentEffects = { getItems, getItemById };
 const campaignContentStores = { items, item };
 
