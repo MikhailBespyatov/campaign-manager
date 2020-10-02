@@ -69,16 +69,7 @@ const App = () => (
                 <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} />
                 <CampaignManagerRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
 
-                {/* <PublicRoute exact component={UnderConstruction} path={routes.signUp.createAccount} />
-            <PublicRoute exact component={AcceptInviteContainer} path={routes.acceptInvite} /> */}
-                {/* <PublicRoute component={ForgotPasswordContainer} path={routes.forgotPassword.index} /> */}
-                {/* <PrivateRoute exact component={UnderConstruction} path={routes.static.privacy} />
-            <PrivateRoute exact component={UnderConstruction} path={routes.static.press} /> */}
-                {/* <PrivateRoute component={CampaignManagerContainer} path={routes.campaignManager.index} /> */}
-                {/* <PrivateRoute component={AdminContainer} path={routes.admin.index} /> */}
-
                 <Redirect to={routes.signIn.index} />
-                {/* <CardModal /> */}
             </Switch>
         </Router>
     </>
