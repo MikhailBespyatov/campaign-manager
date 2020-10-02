@@ -1,5 +1,5 @@
+import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { formGrey2, secondaryBorder } from 'constants/styles';
-import { RowHeaderRadioType } from 'types';
 
 export const tableUniversalWrapperBorder = secondaryBorder;
 export const tableUniversalWrapperPadding = '40px 52px';

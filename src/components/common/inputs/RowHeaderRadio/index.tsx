@@ -1,12 +1,13 @@
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { inactiveColor } from 'components/common/inputs/RowHeaderRadio/constants';
 import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
+import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { formGrey3, secondaryColor } from 'constants/styles';
 import React, { useState } from 'react';
-import { RadioProperties, RowHeaderRadioType } from 'types';
+import { RadioProperties } from 'types';
 
 interface Props extends Omit<RadioProperties, 'values'> {
     values: RowHeaderRadioType[];
@@ -67,11 +68,16 @@ export const RowHeaderRadio = ({ values, defaultActive = values[0].title, onChan
                                 </Span>
                             )}
                         </Row>
-                        <Row marginBottom="0">
-                            <PercentageGrowth forcedColor={item.active ? '' : inactiveColor} type={values[i].growType}>
-                                {values[i].growNumber}
-                            </PercentageGrowth>
-                        </Row>
+                        {values[i].growType && (
+                            <Row marginBottom="0">
+                                <PercentageGrowth
+                                    forcedColor={item.active ? '' : inactiveColor}
+                                    type={values[i].growType}
+                                >
+                                    {values[i].growNumber}
+                                </PercentageGrowth>
+                            </Row>
+                        )}
                     </Column>
                 </Radio>
             ))}

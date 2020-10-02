@@ -6,11 +6,3 @@ export type CardModal = {
     visible: boolean;
     id: string;
 };
-
-export type RowHeaderRadioType = {
-    title: string;
-    quantity: string;
-    inBrackets?: string;
-    growType: infoType;
-    growNumber: number;
-};

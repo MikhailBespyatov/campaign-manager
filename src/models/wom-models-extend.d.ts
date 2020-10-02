@@ -26,4 +26,8 @@ declare namespace WOM {
     export interface UpdateAndRemoveCampaignContentValues extends RemoveValues {
         updateValues?: ContentQueryRequest;
     }
+
+    export interface UpdateAndRemoveCampaignStatisticsValues extends RemoveValues {
+        updateValues?: CampaignStatisticsQueryRequest;
+    }
 }
