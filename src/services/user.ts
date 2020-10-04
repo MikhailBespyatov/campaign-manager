@@ -42,3 +42,21 @@ export const acceptInvitation = (data: WOM.OrganizationAcceptInviteRequest) =>
         },
         false
     );
+
+export const sendSecurityCode = (data: WOM.OrganizationUserWantsForgottenPasswordRequest) =>
+    axios<WOM.MessageResponseBase>(
+        {
+            url: '/organization/user/send-forgotten-password-email',
+            data
+        },
+        false
+    );
+
+export const resetPasswordAndLoadToken = (data: WOM.OrganizationAuthenticateWithTokenRequest) =>
+    axios<AuthUserResponse>(
+        {
+            url: '/organization/user/authenticate-token',
+            data
+        },
+        false
+    );
