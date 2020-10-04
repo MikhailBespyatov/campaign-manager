@@ -1,44 +1,35 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
-import { Hr } from 'components/common/dividers/Hr';
-import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Select } from 'components/common/inputs/Select';
-import { Switch } from 'components/common/inputs/Switch';
 import { Loader } from 'components/common/Loader';
-import { GraphicBlockSpan } from 'components/common/typography/special';
 import { H1 } from 'components/common/typography/titles/H';
 import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { primaryPadding, secondaryPadding } from 'constants/styles';
+import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
+import { primaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
 import {
     areaCommonStyle,
-    color1,
-    color2,
-    color3,
-    color4,
-    color5,
+    colors,
     graphicOption,
     growSpread,
     name1,
     name2,
     name3,
     name4,
-    name5,
-    testSelectArray
+    name5
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
-import { campaignsEffects, campaignsStores } from 'stores/campaigns';
+import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
-import { parseMonthDate } from 'utils/usefulFunctions';
 
 interface ParamsProps {
     campaignId?: string;
@@ -51,11 +42,18 @@ export const Details = () => {
     const initialLoading = useStore(loadingStores.initialLoading);
     const loading = useStore(loadingStores.loading);
 
-    const utcStarted = schedule?.utcStarted || '';
-    const utcEnded = schedule?.utcEnded || '';
+    let isFirstDatesLoaded = true;
 
-    const items = useMemo(() => (sets?.length && sets[0].items?.length ? sets[0].items.reverse() : []), [sets]);
-    const items1 = useMemo(() => (sets?.length && sets[1].items?.length ? sets[1].items.reverse() : []), [sets]);
+    // const utcStarted = schedule?.utcStarted || '';
+    // const utcEnded = schedule?.utcEnded || '';
+
+    const utcToStart = useMemo(() => schedule?.utcToStart || '', [schedule]);
+    const utcToEnd = useMemo(() => schedule?.utcToEnd || '', [schedule]);
+
+    //console.log(utcToStart, utcToEnd);
+
+    // const items = useMemo(() => (sets?.length && sets[0].items?.length ? sets[0].items.reverse() : []), [sets]);
+    // const items1 = useMemo(() => (sets?.length && sets[1].items?.length ? sets[1].items.reverse() : []), [sets]);
     const summary = useMemo(() => (sets?.length && sets[0].summary ? sets[0].summary : {}), [sets]);
 
     const radioArray: RowHeaderRadioType[] = [
@@ -94,13 +92,15 @@ export const Details = () => {
         }
     ];
 
-    const [yAxisData, setYAxisData] = useState(items.map(i => i.shareCount));
-    const [yAxisData1, setYAxisData1] = useState(items1.map(i => i.shareCount));
-    const [graphicColor, setGraphicColor] = useState(color1);
+    const [setsData, setSetsData] = useState(sets?.map(i => i?.items?.map(i => i.viewCount)));
+
+    // const [yAxisData, setYAxisData] = useState(items.map(i => i.viewCount));
+    // const [yAxisData1, setYAxisData1] = useState(items1.map(i => i.viewCount));
+    // const [graphicColor, setGraphicColor] = useState(color1);
     const [graphicName, setGraphicName] = useState(name1);
 
-    const series = [
-        {
+    const series =
+        sets?.map((_, i) => ({
             name: graphicName,
             type: 'line',
             smooth: true,
@@ -112,50 +112,27 @@ export const Details = () => {
                 }
             },
             itemStyle: {
-                color: graphicColor
+                color: colors[i]
             },
             lineStyle: {
-                color: graphicColor
+                color: colors[i]
             },
             areaStyle: {
                 ...areaCommonStyle,
-                opacity: 0.1,
-                color: graphicColor
+                color: colors[i]
             },
-            data: yAxisData1
-        },
-        {
-            name: graphicName,
-            type: 'line',
-            smooth: true,
-            stack: 'Buy',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top'
-                }
-            },
-            itemStyle: {
-                color: 'green'
-            },
-            lineStyle: {
-                color: 'green'
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                opacity: 0.1,
-                color: 'green'
-            },
-            data: yAxisData
-        }
-    ];
+            data: setsData?.length ? setsData[i] : []
+        })) || [];
 
     const xAxis = [
         {
             type: 'category',
             axisTick: { show: false },
             boundaryGap: false,
-            data: ['', ...items.map(i => parseMonthDate(new Date(i?.dateUtc || '')))]
+            data:
+                sets?.length && sets[0]?.items
+                    ? ['', ...sets[0].items.map(i => new Date(i?.dateUtc || '').getDate())]
+                    : []
         }
     ];
 
@@ -163,52 +140,79 @@ export const Details = () => {
         setGraphicName(active);
         switch (active) {
             case name1:
-                setYAxisData(items.map(i => i.viewCount));
-                setYAxisData1(items1.map(i => i.viewCount));
-                setGraphicColor(color1);
+                // setYAxisData(items.map(i => i.viewCount));
+                // setYAxisData1(items1.map(i => i.viewCount));
+                // setGraphicColor(color1);
+                setSetsData(sets?.map(i => i?.items?.map(i => i.viewCount)));
                 break;
             case name2:
-                setYAxisData(items.map(i => i.likeCount));
-                setYAxisData1(items1.map(i => i.likeCount));
-                setGraphicColor(color2);
+                // setYAxisData(items.map(i => i.likeCount));
+                // setYAxisData1(items1.map(i => i.likeCount));
+                // setGraphicColor(color2);
+                setSetsData(sets?.map(i => i?.items?.map(i => i.likeCount)));
                 break;
             case name3:
-                setYAxisData(items.map(i => i.saveCount));
-                setYAxisData1(items1.map(i => i.saveCount));
-                setGraphicColor(color3);
+                // setYAxisData(items.map(i => i.saveCount));
+                // setYAxisData1(items1.map(i => i.saveCount));
+                // setGraphicColor(color3);
+                setSetsData(sets?.map(i => i?.items?.map(i => i.saveCount)));
                 break;
             case name4:
-                setYAxisData(items.map(i => i.commentCount));
-                setYAxisData1(items1.map(i => i.commentCount));
-                setGraphicColor(color4);
+                // setYAxisData(items.map(i => i.commentCount));
+                // setYAxisData1(items1.map(i => i.commentCount));
+                // setGraphicColor(color4);
+                setSetsData(sets?.map(i => i?.items?.map(i => i.commentCount)));
                 break;
             default:
-                setYAxisData(items.map(i => i.shareCount));
-                setYAxisData1(items1.map(i => i.shareCount));
-                setGraphicColor(color5);
+                // setYAxisData(items.map(i => i.shareCount));
+                // setYAxisData1(items1.map(i => i.shareCount));
+                // setGraphicColor(color5);
+                setSetsData(sets?.map(i => i?.items?.map(i => i.shareCount)));
         }
     };
+
+    const onHistoricalSetsChange = (value: string) => {
+        // graphic do not update series lines quantity after first query
+        // so i need a double query, do not know how resolve this problem so far
+        campaignsEvents.updateStatisticsValues({
+            historicalSets: Number(value)
+        });
+        campaignsEvents.updateStatisticsValues({
+            historicalSets: Number(value)
+        });
+    };
+
+    const onDatesBetweenChange = (dateFrom: string, dateTo: string) =>
+        isFirstDatesLoaded
+            ? (isFirstDatesLoaded = false)
+            : campaignsEvents.updateStatisticsValues({
+                  dateFrom: dateFrom,
+                  dateTo: dateTo
+              });
 
     useEffect(() => {
         campaignId && campaignsEffects.getItemById(campaignId);
     }, [campaignId]);
 
     useEffect(() => {
-        utcStarted &&
-            utcEnded &&
-            campaignsEffects.getStatisticsItems({
+        utcToStart && utcToEnd && campaignId && console.log('ye');
+        utcToStart &&
+            utcToEnd &&
+            campaignId &&
+            campaignsEvents.updateStatisticsValues({
                 returnQueryCount: false,
-                campaignId: '5dfb9a1669819a1e9a77fb30',
-                dateFrom: '2020-09-01T00:00:00Z',
-                dateTo: '2020-10-01T00:00:00Z',
-                historicalSets: 1
+                campaignId: campaignId,
+                dateFrom: utcToStart,
+                dateTo: utcToEnd,
+                historicalSets: Number(historicalSetsDefault)
             });
-    }, [utcStarted, utcEnded, campaignId]);
+    }, [utcToStart, utcToEnd, campaignId]);
 
     useEffect(() => {
-        items?.length && setYAxisData(items.map(i => i.viewCount));
-        items1?.length && setYAxisData1(items1.map(i => i.viewCount));
-    }, [items, items1]);
+        // items?.length && setYAxisData(items.map(i => i.viewCount));
+        // items1?.length && setYAxisData1(items1.map(i => i.viewCount));
+        setSetsData(sets?.map(i => i?.items?.map(i => i.viewCount)));
+    }, [sets]);
 
     return (
         <CampaignManagerLayout>
@@ -217,56 +221,29 @@ export const Details = () => {
                     {loading ? (
                         <Loader />
                     ) : (
-                        <Column>
-                            <H1>Campaign id: {campaignId}</H1>
-                            <H1>Campaign Name: {title}</H1>
-                        </Column>
-                    )}
-                </Section>
-                {initialLoading ? (
-                    <Loader />
-                ) : (
-                    <>
-                        <Section marginBottom="0">
-                            <RowHeaderRadio values={radioArray} onChange={onChange} />
-                        </Section>
-                        <Wrapper>
-                            <Column width="100%">
-                                {/* <Row alignCenter marginBottom="0">
-                                    <ColorPromptLine background={previewColor} />
-                                    <TableHeaderSpan>New Shoes</TableHeaderSpan>
-                                    <ColorPromptLine background={viewColor} />
-                                    <TableHeaderSpan>Brand Only</TableHeaderSpan>
-                                    <ColorPromptLine background={engageColor} />
-                                    <TableHeaderSpan>Test Campaign</TableHeaderSpan>
-                                    <ColorPromptLine background={clickColor} />
-                                    <TableHeaderSpan>Zalando Push</TableHeaderSpan>
-                                    <ColorPromptLine background={buyColor} />
-                                    <TableHeaderSpan>YEAY General</TableHeaderSpan>
-                                </Row> */}
-                                <Section alignCenter noWrap>
-                                    <Column marginRight="25px">
-                                        <ReactEcharts
-                                            option={{ ...graphicOption, xAxis: xAxis, series: series }}
-                                            style={{ height: '516px', width: '1000px' }}
+                        <>
+                            <BorderBlock>
+                                <Section>
+                                    {utcToStart && utcToEnd && (
+                                        <DatePickerBetween
+                                            defaultDateFrom={utcToStart}
+                                            defaultDateTo={utcToEnd}
+                                            onChange={onDatesBetweenChange}
                                         />
-                                    </Column>
-                                    <BorderBlock>
-                                        <Section>
-                                            <DatePickerBetween
-                                                defaultDateFrom={utcStarted || new Date().toISOString()}
-                                                defaultDateTo={utcEnded || new Date().toISOString()}
-                                            />
-                                        </Section>
-                                        <Section alignCenter noWrap marginBottom={primaryPadding}>
-                                            <P noWrap>Timeline wiew</P>
-                                            <MarginWrapper marginLeft="auto">
-                                                <Select values={testSelectArray} width="127px">
-                                                    31 days
-                                                </Select>
-                                            </MarginWrapper>
-                                        </Section>
-                                        <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                    )}
+                                </Section>
+                                <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                    <P noWrap>Historical Sets: </P>
+                                    <MarginWrapper marginLeft="auto">
+                                        <Select
+                                            defaultActive={historicalSetsDefault}
+                                            values={historicalSetsFilterValues}
+                                            width="80px"
+                                            onChange={onHistoricalSetsChange}
+                                        />
+                                    </MarginWrapper>
+                                </Section>
+                                {/* <Section alignCenter noWrap marginBottom={primaryPadding}>
                                             <Column marginRight="40px">
                                                 <P noWrap>Show us combined chart</P>
                                             </Column>
@@ -319,8 +296,44 @@ export const Details = () => {
                                                     <GraphicBlockSpan>New shoes</GraphicBlockSpan>
                                                 </Row>
                                             </Column>
-                                        </Section>
-                                    </BorderBlock>
+                                        </Section> */}
+                            </BorderBlock>
+
+                            <Column>
+                                <H1>Campaign id: {campaignId}</H1>
+                                <H1>Campaign Name: {title}</H1>
+                            </Column>
+                        </>
+                    )}
+                </Section>
+                {initialLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <Section marginBottom="0">
+                            <RowHeaderRadio values={radioArray} onChange={onChange} />
+                        </Section>
+                        <Wrapper>
+                            <Column width="100%">
+                                {/* <Row alignCenter marginBottom="0">
+                                    <ColorPromptLine background={previewColor} />
+                                    <TableHeaderSpan>New Shoes</TableHeaderSpan>
+                                    <ColorPromptLine background={viewColor} />
+                                    <TableHeaderSpan>Brand Only</TableHeaderSpan>
+                                    <ColorPromptLine background={engageColor} />
+                                    <TableHeaderSpan>Test Campaign</TableHeaderSpan>
+                                    <ColorPromptLine background={clickColor} />
+                                    <TableHeaderSpan>Zalando Push</TableHeaderSpan>
+                                    <ColorPromptLine background={buyColor} />
+                                    <TableHeaderSpan>YEAY General</TableHeaderSpan>
+                                </Row> */}
+                                <Section alignCenter noWrap>
+                                    {/* <Column marginRight="25px"> */}
+                                    <ReactEcharts
+                                        option={{ series: series, ...graphicOption, xAxis: xAxis }}
+                                        style={{ height: '516px', width: '100%' }}
+                                    />
+                                    {/* </Column> */}
                                 </Section>
                             </Column>
                         </Wrapper>

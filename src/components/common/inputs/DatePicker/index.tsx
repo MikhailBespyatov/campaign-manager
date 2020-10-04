@@ -47,7 +47,7 @@ export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = n
                     label="Choose date to"
                     margin="normal"
                     maxDate={new Date(defaultDateTo)}
-                    minDate={new Date(defaultDateFrom)}
+                    minDate={selectedDateFrom}
                     value={selectedDateTo}
                     onChange={handleDateChangeTo}
                 />

@@ -23,6 +23,7 @@ export const Wrapper = styled.div<Sizes>`
     border: ${wrapperBorderWidth} solid ${wrapperBorderColor};
     padding: 0 ${wrapperHorizontalPadding};
     background-color: ${wrapperBackground};
+    z-index: 1;
 `;
 
 export const SelectUl = styled.ul`
