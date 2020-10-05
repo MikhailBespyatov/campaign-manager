@@ -1,3 +1,4 @@
+import { InviteRequestProps } from 'components/FormComponents/userAdminForms/InviteForm/types';
 import { userStorageName } from 'constants/global';
 import {
     errorDataMessage,
@@ -6,16 +7,10 @@ import {
     wrongInviteCodeMessage
 } from 'constants/messages';
 import { createEffect, createEvent, createStore } from 'effector';
+import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
-import {
-    AcceptInviteRequestProps,
-    Auth,
-    AuthUserRequest,
-    AuthUserResponse,
-    InviteRequestProps,
-    RegisterUserRequest
-} from 'types';
+import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import { giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();

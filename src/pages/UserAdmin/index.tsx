@@ -19,7 +19,7 @@ export const UserAdmin = () => (
                 </Row>
                 <Row alignCenter marginBottom="0">
                     <Column marginRight={headersMarginBottom}>
-                        <Select values={testSelectArray}>Bulk Actions</Select>
+                        <Select values={testSelectArray} />
                     </Column>
                     <RoundedButton>APPLY</RoundedButton>
                 </Row>

@@ -124,9 +124,7 @@ export const Dashboard = () => (
                             <Section alignCenter noWrap marginBottom={primaryPadding}>
                                 <P noWrap>Timeline wiew</P>
                                 <MarginWrapper marginLeft="auto">
-                                    <Select values={testSelectArray} width="127px">
-                                        31 days
-                                    </Select>
+                                    <Select values={testSelectArray} width="127px" />
                                 </MarginWrapper>
                             </Section>
                             <Section alignCenter noWrap marginBottom={primaryPadding}>

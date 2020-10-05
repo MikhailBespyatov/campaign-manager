@@ -30,16 +30,15 @@ const Item = ({ active, value, data = value, onClick }: Props) => (
     </SelectLi>
 );
 
-export const Select: FC<WrapperProps> = ({
+export const Select = ({
     values,
     defaultActive = values[0],
     data = values,
     onChange = noop,
-    children,
     ...styles
-}) => {
+}: WrapperProps) => {
     const [isClosed, setIsClosed] = useState(true);
-    //const [selected, setSelected] = useState(defaultActive);
+    const [selected, setSelected] = useState(defaultActive);
     const [radio, setRadio] = useState(
         values.map(i => ({
             value: i,
@@ -56,13 +55,14 @@ export const Select: FC<WrapperProps> = ({
                 active: i.value === value
             }))
         );
-        //setSelected(value);
+        setSelected(value);
         onChange(value);
+        onClose();
     };
 
     return (
         <Wrapper {...styles}>
-            <ItemSpan>{children}</ItemSpan>
+            <ItemSpan>{selected}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
                 <CustomImg
                     pointer

@@ -4,5 +4,5 @@ import { RouteProps } from 'react-router';
 import { AccessRoute } from 'routes/AccessRoute';
 
 export const PublicRoute: FC<RouteProps> = props => (
-    <AccessRoute proxy={[-1]} {...props} redirectTo={routes.userAdmin.index} />
+    <AccessRoute proxy={[-1]} {...props} redirectTo={routes.admin.createOrganization} />
 );

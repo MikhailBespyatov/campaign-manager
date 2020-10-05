@@ -77,7 +77,7 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
-const campaignsEvents = {};
+const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues };
 const campaignsEffects = { getItems, getItemById, getStatisticsItems };
 const campaignsStores = { items, item, statisticsItems };
 

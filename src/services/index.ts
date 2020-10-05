@@ -1,3 +1,4 @@
+import * as admin from './admin';
 import * as campaignContent from './campaignContent';
 import * as campaigns from './campaigns';
 import * as organizations from './organizations';
@@ -9,5 +10,6 @@ export const API = {
     users,
     campaignContent,
     campaigns,
-    organizations
+    organizations,
+    admin
 };

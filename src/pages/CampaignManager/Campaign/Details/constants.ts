@@ -52,7 +52,9 @@ export const color3 = '#03A3D6';
 export const color4 = '#8BD317';
 export const color5 = '#FECF00';
 
-export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 1 };
+export const colors = [color1, color2, color3, color4, color5];
+
+export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 0.1 };
 
 export const graphicOption = {
     textStyle: { color: graphicTextColor },
@@ -105,136 +107,136 @@ export const graphicOption = {
             axisTick: { show: false },
             axisLine: { show: false }
         }
-    ],
-    series: [
-        {
-            name: 'Buy',
-            type: 'line',
-            smooth: true,
-            stack: 'Buy',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top'
-                }
-            },
-            // markLine: {
-            //     symbol: 'circle',
-            //     symbolSize: 15,
-            //     label: { show: false, position: 'end' },
-            //     data: [{ xAxis: 1 }],
-            //     lineStyle: {
-            //         color: yeayColor
-            //     }
-            // },
-            itemStyle: {
-                color: color1
-            },
-            lineStyle: {
-                color: color1
-            },
-            areaStyle: {
-                ...areaCommonStyle,
-                color: color1
-            },
-            data: [0, 9320, 9010, 13340, 19900, 15300, 24700, 27400, 21170]
-        }
-        // {
-        //     name: 'Click',
-        //     type: 'line',
-        //     smooth: true,
-        //     stack: 'Click',
-        //     // markLine: {
-        //     //     symbol: 'circle',
-        //     //     symbolSize: 15,
-        //     //     label: { show: false, position: 'end' },
-        //     //     data: [{ xAxis: 3 }],
-        //     //     lineStyle: {
-        //     //         color: adidasColor
-        //     //     }
-        //     // },
-        //     itemStyle: {
-        //         color: clickColor
-        //     },
-        //     lineStyle: {
-        //         color: clickColor
-        //     },
-        //     areaStyle: {
-        //         ...areaCommonStyle,
-        //         color: clickColor
-        //     },
-        //     data: [0, 3320, 7010, 8340, 9900, 3300, 13200, 7400, 5200]
-        // },
-        // {
-        //     name: 'Engage',
-        //     type: 'line',
-        //     smooth: true,
-        //     stack: 'Engage',
-        //     // markLine: {
-        //     //     symbol: 'circle',
-        //     //     symbolSize: 15,
-        //     //     label: { show: false, position: 'end' },
-        //     //     data: [{ xAxis: 5 }],
-        //     //     lineStyle: {
-        //     //         color: testCampaignColor
-        //     //     }
-        //     // },
-        //     itemStyle: {
-        //         color: engageColor
-        //     },
-        //     lineStyle: {
-        //         color: engageColor
-        //     },
-        //     areaStyle: {
-        //         ...areaCommonStyle,
-        //         color: engageColor
-        //     },
-        //     data: [0, 4320, 2010, 7540, 6900, 1330, 5100, 3700, 5100]
-        // },
-        // {
-        //     name: 'View',
-        //     type: 'line',
-        //     smooth: true,
-        //     stack: 'View',
-        //     // markLine: {
-        //     //     symbol: 'circle',
-        //     //     symbolSize: 15,
-        //     //     label: { show: false, position: 'end' },
-        //     //     data: [{ xAxis: 7 }],
-        //     //     lineStyle: {
-        //     //         color: testCampaignColor
-        //     //     }
-        //     // },
-        //     itemStyle: {
-        //         color: viewColor
-        //     },
-        //     lineStyle: {
-        //         color: viewColor
-        //     },
-        //     areaStyle: {
-        //         ...areaCommonStyle,
-        //         color: viewColor
-        //     },
-        //     data: [0, 1820, 2910, 2340, 2900, 1330, 4100, 3300, 5000]
-        // },
-        // {
-        //     name: 'Preview',
-        //     type: 'line',
-        //     smooth: true,
-        //     stack: 'Preview',
-        //     itemStyle: {
-        //         color: previewColor
-        //     },
-        //     lineStyle: {
-        //         color: previewColor
-        //     },
-        //     areaStyle: {
-        //         ...areaCommonStyle,
-        //         color: previewColor
-        //     },
-        //     data: [0, 1320, 1010, 134, 900, 2300, 2100, 2700, 3500]
-        // }
     ]
+    // series: [
+    //     {
+    //         name: 'Buy',
+    //         type: 'line',
+    //         smooth: true,
+    //         stack: 'Buy',
+    //         label: {
+    //             normal: {
+    //                 show: true,
+    //                 position: 'top'
+    //             }
+    //         },
+    //         // markLine: {
+    //         //     symbol: 'circle',
+    //         //     symbolSize: 15,
+    //         //     label: { show: false, position: 'end' },
+    //         //     data: [{ xAxis: 1 }],
+    //         //     lineStyle: {
+    //         //         color: yeayColor
+    //         //     }
+    //         // },
+    //         itemStyle: {
+    //             color: color1
+    //         },
+    //         lineStyle: {
+    //             color: color1
+    //         },
+    //         areaStyle: {
+    //             ...areaCommonStyle,
+    //             color: color1
+    //         },
+    //         data: [0, 9320, 9010, 13340, 19900, 15300, 24700, 27400, 21170]
+    //     }
+    //     // {
+    //     //     name: 'Click',
+    //     //     type: 'line',
+    //     //     smooth: true,
+    //     //     stack: 'Click',
+    //     //     // markLine: {
+    //     //     //     symbol: 'circle',
+    //     //     //     symbolSize: 15,
+    //     //     //     label: { show: false, position: 'end' },
+    //     //     //     data: [{ xAxis: 3 }],
+    //     //     //     lineStyle: {
+    //     //     //         color: adidasColor
+    //     //     //     }
+    //     //     // },
+    //     //     itemStyle: {
+    //     //         color: clickColor
+    //     //     },
+    //     //     lineStyle: {
+    //     //         color: clickColor
+    //     //     },
+    //     //     areaStyle: {
+    //     //         ...areaCommonStyle,
+    //     //         color: clickColor
+    //     //     },
+    //     //     data: [0, 3320, 7010, 8340, 9900, 3300, 13200, 7400, 5200]
+    //     // },
+    //     // {
+    //     //     name: 'Engage',
+    //     //     type: 'line',
+    //     //     smooth: true,
+    //     //     stack: 'Engage',
+    //     //     // markLine: {
+    //     //     //     symbol: 'circle',
+    //     //     //     symbolSize: 15,
+    //     //     //     label: { show: false, position: 'end' },
+    //     //     //     data: [{ xAxis: 5 }],
+    //     //     //     lineStyle: {
+    //     //     //         color: testCampaignColor
+    //     //     //     }
+    //     //     // },
+    //     //     itemStyle: {
+    //     //         color: engageColor
+    //     //     },
+    //     //     lineStyle: {
+    //     //         color: engageColor
+    //     //     },
+    //     //     areaStyle: {
+    //     //         ...areaCommonStyle,
+    //     //         color: engageColor
+    //     //     },
+    //     //     data: [0, 4320, 2010, 7540, 6900, 1330, 5100, 3700, 5100]
+    //     // },
+    //     // {
+    //     //     name: 'View',
+    //     //     type: 'line',
+    //     //     smooth: true,
+    //     //     stack: 'View',
+    //     //     // markLine: {
+    //     //     //     symbol: 'circle',
+    //     //     //     symbolSize: 15,
+    //     //     //     label: { show: false, position: 'end' },
+    //     //     //     data: [{ xAxis: 7 }],
+    //     //     //     lineStyle: {
+    //     //     //         color: testCampaignColor
+    //     //     //     }
+    //     //     // },
+    //     //     itemStyle: {
+    //     //         color: viewColor
+    //     //     },
+    //     //     lineStyle: {
+    //     //         color: viewColor
+    //     //     },
+    //     //     areaStyle: {
+    //     //         ...areaCommonStyle,
+    //     //         color: viewColor
+    //     //     },
+    //     //     data: [0, 1820, 2910, 2340, 2900, 1330, 4100, 3300, 5000]
+    //     // },
+    //     // {
+    //     //     name: 'Preview',
+    //     //     type: 'line',
+    //     //     smooth: true,
+    //     //     stack: 'Preview',
+    //     //     itemStyle: {
+    //     //         color: previewColor
+    //     //     },
+    //     //     lineStyle: {
+    //     //         color: previewColor
+    //     //     },
+    //     //     areaStyle: {
+    //     //         ...areaCommonStyle,
+    //     //         color: previewColor
+    //     //     },
+    //     //     data: [0, 1320, 1010, 134, 900, 2300, 2100, 2700, 3500]
+    //     // }
+    // ]
 };
 
 // option.visualMap.target.inRange.color = ['red', 'blue'];
