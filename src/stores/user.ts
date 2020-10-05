@@ -68,12 +68,49 @@ const inviteUser = createEffect({
     }
 });
 
+const sendSecurityCode = createEffect({
+    handler: async ({ values, setErrors }: InviteRequestProps) => {
+        try {
+            loadingEffects.updateLoading();
+            await API.user.inviteUser(values);
+            loadingEffects.updateLoading();
+        } catch {
+            loadingEffects.updateLoading();
+            setErrors({
+                organizationId: incorrectOrgIdMessage
+            });
+        }
+    }
+});
+
 const acceptInvitationAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: AcceptInviteRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            await API.user.acceptInvitation(values);
+            const data = await API.user.acceptInvitation(values);
             loadingEffects.updateLoading();
+
+            localStorage.setItem(userStorageName, JSON.stringify(data));
+            return data;
+        } catch {
+            loadingEffects.updateLoading();
+            setErrors({
+                inviteCode: wrongInviteCodeMessage
+            });
+            return {};
+        }
+    }
+});
+
+const resetPasswordAndLoadToken = createEffect({
+    handler: async ({ values, setErrors }: AcceptInviteRequestProps) => {
+        try {
+            loadingEffects.updateLoading();
+            const data = await API.user.acceptInvitation(values);
+            loadingEffects.updateLoading();
+
+            localStorage.setItem(userStorageName, JSON.stringify(data));
+            return data;
         } catch {
             loadingEffects.updateLoading();
             setErrors({
@@ -108,7 +145,8 @@ const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userS
             loadToken.doneData,
             createUserAndLoadToken.doneData,
             loadAdminToken.doneData,
-            acceptInvitationAndLoadToken.doneData
+            acceptInvitationAndLoadToken.doneData,
+            resetPasswordAndLoadToken.doneData
         ],
         (_, user) => user
     )
@@ -155,7 +193,15 @@ const auth = createStore<Auth>(
 //auth.watch(state => console.log(state));
 
 const userEvents = { logout, setAuth };
-const userEffects = { loadToken, createUserAndLoadToken, loadAdminToken, inviteUser, acceptInvitationAndLoadToken };
+const userEffects = {
+    loadToken,
+    createUserAndLoadToken,
+    loadAdminToken,
+    inviteUser,
+    acceptInvitationAndLoadToken,
+    resetPasswordAndLoadToken,
+    sendSecurityCode
+};
 const userStores = { user, auth };
 
 export { userEffects, userStores, userEvents };
