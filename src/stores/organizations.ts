@@ -9,16 +9,33 @@ const loading = createStore<boolean>(false)
     .on(updateLoading, state => !state)
     .on(setLoading, (_, newState) => newState);
 
-const getStatisticsById = createEffect({
+const getItemById = createEffect({
     handler: async (id: string) => {
         try {
             loadingEffects.updateLoading();
-            const data = await API.organizations.getStatisticsById({ organizationId: id });
+            const data = await API.organizations.getItemById({ organizationId: id });
             loadingEffects.updateLoading();
 
             return data;
         } catch {
             loadingEffects.updateLoading();
+            return {};
+        }
+    }
+});
+
+const item = createStore<WOM.OrganizationResponse>({}).on(getItemById.doneData, (_, newState) => newState);
+
+const getStatisticsById = createEffect({
+    handler: async (id: string) => {
+        try {
+            updateLoading();
+            const data = await API.organizations.getStatisticsById({ organizationId: id });
+            updateLoading();
+
+            return data;
+        } catch {
+            updateLoading();
             return {};
         }
     }
@@ -30,7 +47,7 @@ const statistics = createStore<WOM.OrganizationStatisticsResponse>({}).on(
 );
 
 const organizationsEvents = {};
-const organizationsEffects = { getStatisticsById };
-const organizationsStores = { statistics, loading };
+const organizationsEffects = { getStatisticsById, getItemById };
+const organizationsStores = { statistics, loading, item };
 
 export { organizationsEffects, organizationsStores, organizationsEvents };

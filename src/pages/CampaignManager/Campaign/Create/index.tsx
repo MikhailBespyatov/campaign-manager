@@ -1,21 +1,9 @@
-import womImg from 'assets/img/wom_logo.svg';
-import { AsideBlock } from 'components/common/blocks/AsideBlock';
-import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
-import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
-import { Budget } from 'components/common/features/Budget';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { NumberCounter } from 'components/common/inputs/NumberCounter';
-import { Search } from 'components/common/inputs/Search';
-import { Switch } from 'components/common/inputs/Switch';
-import { AddableTag } from 'components/common/tags/AddableTag';
 import { Span } from 'components/common/typography/Span';
-import { P } from 'components/common/typography/titles/P';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { CreateCampaignForm } from 'components/FormComponents/forms/CreateCampaignForm';
+import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import { formGrey2, primaryPadding, secondaryColor, secondaryPadding, tertiaryPadding } from 'constants/styles';
-import { asideBlockPadding } from 'pages/CampaignManager/Campaign/Create/constants';
+import { formGrey2, primaryPadding, secondaryColor, tertiaryPadding } from 'constants/styles';
 import React, { FC } from 'react';
 
 const BudgetSpan: FC = ({ children }) => (
@@ -74,7 +62,7 @@ export const Create = () => (
             <Column marginRight={tertiaryPadding}>
                 {/* <CustomImg height="410px" src={cardModalImg} width="258px" /> */}
                 <CreateCampaignCard marginBottom={primaryPadding} marginRight="0" />
-                <Row marginBottom={primaryPadding}>
+                {/* <Row marginBottom={primaryPadding}>
                     <AsideBlock title="Budget">
                         <ColumnBlockCell padding={asideBlockPadding}>
                             <Section noWrap marginBottom="0">
@@ -108,9 +96,10 @@ export const Create = () => (
                             </Column>
                         </ColumnBlockCell>
                     </AsideBlock>
-                </Row>
+                </Row> */}
             </Column>
             <Column>
+                <CreateCampaignForm />
                 {/* <Row marginBottom={primaryPadding}>
                     <Block title="Similar Campaigns">
                         <RowBlockCell padding={primaryPadding}>
@@ -123,7 +112,7 @@ export const Create = () => (
                         </RowBlockCell>
                     </Block>
                 </Row> */}
-                <Row marginBottom={primaryPadding}>
+                {/* <Row marginBottom={primaryPadding}>
                     <HighlightedTitleBlock title="Similar Campaigns">
                         <ColumnBlockCell>
                             <RowBlockCell padding={primaryPadding}>
@@ -203,7 +192,7 @@ export const Create = () => (
                             </RowBlockCell>
                         </ColumnBlockCell>
                     </HighlightedTitleBlock>
-                </Row>
+                </Row> */}
             </Column>
         </Section>
     </CampaignManagerLayout>

@@ -1,8 +1,7 @@
-import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -47,7 +46,7 @@ export const SignIn = () => {
                                 {loading ? <Loader /> : 'LOGIN'}
                             </Button>
                         </Form>
-                        <FormSignUpLink />
+                        {/* <FormSignUpLink /> */}
                     </Column>
                 )}
             </Formik>

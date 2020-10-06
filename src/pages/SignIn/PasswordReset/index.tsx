@@ -1,9 +1,8 @@
-import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -37,16 +36,17 @@ export const PasswordReset = () => {
                                     color={formGrey5}
                                     fontSize="16px"
                                     lineHeight="20px"
-                                    to={routes.signIn.requestCode}
+                                    to={routes.signIn.index}
                                 >
-                                    Or <HighlightSpan>send security code</HighlightSpan>
+                                    Enter as user
+                                    {/* Or <HighlightSpan>send security code</HighlightSpan> */}
                                 </InternalLink>
                             </MarginWrapper>
                             <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
                                 {loading ? <Loader /> : 'CHANGE PASSWORD'}
                             </Button>
                         </Form>
-                        <FormSignUpLink />
+                        {/* <FormSignUpLink /> */}
                     </Column>
                 )}
             </Formik>

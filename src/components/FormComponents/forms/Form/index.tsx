@@ -1,7 +1,7 @@
 import defaultLogo from 'assets/img/form_logo_1.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { logoDiameter } from 'components/FormComponents/Form/constants';
-import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/Form/style';
+import { logoDiameter } from 'components/FormComponents/forms/Form/constants';
+import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/forms/Form/styles';
 import { noop } from 'constants/global';
 import React, { FC } from 'react';
 import { Title, WithSrc } from 'types';

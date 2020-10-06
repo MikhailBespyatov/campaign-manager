@@ -46,6 +46,10 @@ export interface Disabled {
     disabled?: boolean;
 }
 
+export interface Touched {
+    touched?: boolean;
+}
+
 export interface DefaultValueString {
     defaultValue?: string;
 }

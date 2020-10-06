@@ -1,10 +1,12 @@
-import history from 'BrowserHistory';
-import { routes } from 'constants/routes';
 import { yupEmail } from 'constants/yupFields';
+import { SetErrorsSecurityCodeRequest } from 'pages/SignIn/PasswordReset/types';
+import { userEffects } from 'stores/user';
 import * as Yup from 'yup';
 
 export const linkMarginTop = '0';
 export const linkMarginBottom = '57px';
+
+interface Props extends WOM.OrganizationUserWantsForgottenPasswordRequest {}
 
 export const initialValues = { email: '' };
 
@@ -12,24 +14,11 @@ export const validationSchema = Yup.object().shape({
     email: yupEmail
 });
 
-// interface SetErrorsFormikProps {
-//     setErrors: (
-//         errors: FormikErrors<{
-//             email?: string;
-//             password?: string;
-//         }>
-//     ) => void;
-// }
+interface SetErrorsFormikProps extends SetErrorsSecurityCodeRequest {}
 
-// export const onSubmit = (values: AuthUserRequest, { setErrors }: SetErrorsFormikProps) => {
-//     const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-//         setErrors({
-//             email: authDenyReason,
-//             password: authDenyReason
-//         });
-//         unwatch();
-//     });
-//     userEffects.loadToken(values);
-// };
-
-export const onSubmit = () => history.push(routes.signIn.password);
+export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) => {
+    userEffects.sendSecurityCode({
+        values: values,
+        setErrors: setErrors
+    });
+};
