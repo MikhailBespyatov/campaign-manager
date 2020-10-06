@@ -2,6 +2,7 @@ import history from 'BrowserHistory';
 import { CardModal } from 'components/modals/CardModal';
 import { routes } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
+import { useStore } from 'effector-react';
 import { CreateOrganization } from 'pages/Admin/CreateOrganization';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
@@ -24,62 +25,76 @@ import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
 import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
 import { UserAdmin } from 'pages/UserAdmin';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { AdminRoute } from 'routes/AdminRoute';
 import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
+import { themeEvents, themeStores } from 'stores/theme';
+import { ThemeProvider } from 'styled-components';
 
-const App = () => (
-    <>
-        <GlobalStyle />
-        <CardModal />
-        <Router history={history}>
-            <Switch>
-                <PublicRoute exact component={Test} path={routes.test} />
+const App = () => {
+    const theme = useStore(themeStores.theme);
 
-                <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} />
-                <PublicRoute
-                    exact
-                    component={AcceptInvite}
-                    path={[routes.signUp.acceptInvite, routes.signUp.acceptOrgInvite]}
-                />
-                <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
-                <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
-                <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
+    useEffect(() => {
+        themeEvents.setTheme();
+    }, []);
 
-                <PublicRoute exact component={SignIn} path={routes.signIn.index} />
-                <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} />
-                {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
-                <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
-                <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
-                <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <CardModal />
+            <Router history={history}>
+                <Switch>
+                    <PublicRoute exact component={Test} path={routes.test} />
 
-                <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} />
-                <UserAdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
+                    <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} />
+                    <PublicRoute
+                        exact
+                        component={AcceptInvite}
+                        path={[routes.signUp.acceptInvite, routes.signUp.acceptOrgInvite]}
+                    />
+                    <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
+                    <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
+                    <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                <CampaignManagerRoute exact component={CampaignManager} path={routes.campaignManager.index} />
-                <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
-                <CampaignManagerRoute exact component={Discover} path={routes.campaignManager.discover.index} />
-                <CampaignManagerRoute
-                    exact
-                    component={DiscoverDetails}
-                    path={routes.campaignManager.discover.details}
-                />
-                <CampaignManagerRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
-                <CampaignManagerRoute
-                    exact
-                    component={CampaignDetails}
-                    path={routes.campaignManager.campaign.details}
-                />
-                <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} />
-                <CampaignManagerRoute exact component={CreateCampaign} path={routes.campaignManager.campaign.create} />
+                    <PublicRoute exact component={SignIn} path={routes.signIn.index} />
+                    <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} />
+                    {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
+                    <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
+                    <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
+                    <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} />
 
-                <Redirect to={routes.signIn.index} />
-            </Switch>
-        </Router>
-    </>
-);
+                    <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} />
+                    <UserAdminRoute exact component={UserAdmin} path={routes.userAdmin.index} />
+
+                    <CampaignManagerRoute exact component={CampaignManager} path={routes.campaignManager.index} />
+                    <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} />
+                    <CampaignManagerRoute exact component={Discover} path={routes.campaignManager.discover.index} />
+                    <CampaignManagerRoute
+                        exact
+                        component={DiscoverDetails}
+                        path={routes.campaignManager.discover.details}
+                    />
+                    <CampaignManagerRoute exact component={Campaign} path={routes.campaignManager.campaign.index} />
+                    <CampaignManagerRoute
+                        exact
+                        component={CampaignDetails}
+                        path={routes.campaignManager.campaign.details}
+                    />
+                    <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} />
+                    <CampaignManagerRoute
+                        exact
+                        component={CreateCampaign}
+                        path={routes.campaignManager.campaign.create}
+                    />
+
+                    <Redirect to={routes.signIn.index} />
+                </Switch>
+            </Router>
+        </ThemeProvider>
+    );
+};
 
 export default App;

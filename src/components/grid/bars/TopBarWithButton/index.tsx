@@ -6,7 +6,7 @@ import {
     spanFontWeight,
     spanLineHeight
 } from 'components/grid/bars/TopBarWithButton/constants';
-import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/style';
+import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/styles';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { routes, routesArray } from 'constants/routes';
