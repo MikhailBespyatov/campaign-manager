@@ -8,15 +8,18 @@ import { Pagination } from 'components/Layouts/Pagination';
 import { defaultLimit, defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
 import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { loadingStores } from 'stores/loading';
 
 export const Discover = () => {
-    const { items } = useStore(campaignContentStores.items);
+    const { items, totalRecords } = useStore(campaignContentStores.items);
     const loading = useStore(loadingStores.initialLoading);
 
-    const onTagsFilterChange: onTagsFilterChangeType = (checked, values) =>
+    const [currentPage, setCurrentPage] = useState(defaultPage);
+
+    const onTagsFilterChange: onTagsFilterChangeType = (checked, values) => {
+        setCurrentPage(defaultPage);
         checked
             ? campaignContentEvents.updateAndRemoveValues({
                   removeValues: ['tagsAll'],
@@ -34,6 +37,15 @@ export const Discover = () => {
                       limit: defaultLimit
                   }
               });
+    };
+
+    const onPaginationChange = (current: number) => {
+        setCurrentPage(current);
+        campaignContentEvents.updateValues({
+            pageIndex: current,
+            limit: defaultLimit
+        });
+    };
 
     useEffect(() => {
         campaignContentEvents.setDefaultValues();
@@ -53,7 +65,15 @@ export const Discover = () => {
                         : noContentMessage}
                 </Section>
             )}
-            <Section justifyCenter>{!loading && <Pagination />}</Section>
+            <Section justifyCenter>
+                {!loading && (
+                    <Pagination
+                        currentIndex={currentPage + 1}
+                        totalItems={totalRecords !== -1 ? totalRecords : 0}
+                        onChange={onPaginationChange}
+                    />
+                )}
+            </Section>
         </CampaignManagerLayout>
     );
 };
