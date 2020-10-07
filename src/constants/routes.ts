@@ -1,13 +1,15 @@
-const signUpPrefix = '/register';
-const walletPrefix = '/create_wallet';
-const signInPrefix = '/login';
-const adidasPrefix = '/adidas';
-const passwordResetPrefix = '/password_reset';
+export const adidasGlobalPrefix = '/adidas';
 
-const campaignPrefix = '/campaign_manager';
-const userAdminPrefix = '/user_admin';
+const signUpPrefix = adidasGlobalPrefix + '/register';
+const walletPrefix = adidasGlobalPrefix + '/create_wallet';
+const signInPrefix = adidasGlobalPrefix + '/login';
+const adidasPrefix = adidasGlobalPrefix + '/adidas';
+const passwordResetPrefix = adidasGlobalPrefix + '/password_reset';
 
-const adminPrefix = '/admin';
+const campaignPrefix = adidasGlobalPrefix + '/campaign_manager';
+const userAdminPrefix = adidasGlobalPrefix + '/user_admin';
+
+const adminPrefix = adidasGlobalPrefix + '/admin';
 
 export const routes = {
     test: '/components_test_page',

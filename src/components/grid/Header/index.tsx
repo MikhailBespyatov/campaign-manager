@@ -1,7 +1,6 @@
 import defaultAvatar from 'assets/img/avatar.svg';
-import headerLogoImg from 'assets/img/logo.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { headerAvatarDiameter, headerLogoHeight, headerLogoWidth } from 'components/grid/Header/constants';
+import { headerAvatarDiameter, headerLogoHeight } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { siteName } from 'constants/global';
@@ -9,10 +8,12 @@ import { noContentMessage } from 'constants/messages';
 import { padding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React from 'react';
+import { themeStores } from 'stores/theme';
 import { userEvents, userStores } from 'stores/user';
 
 export const Header = () => {
     const { user } = useStore(userStores.user);
+    const logoSrc = '../../' + useStore(themeStores.logoUrl);
 
     const username = user && user?.username;
     const imageUrl = user && user?.profile?.imageUrl;
@@ -22,7 +23,8 @@ export const Header = () => {
     return (
         <StyledHeader>
             <Row alignCenter marginBottom="0">
-                <CustomImg height={headerLogoHeight} src={headerLogoImg} width={headerLogoWidth} />
+                <CustomImg height={headerLogoHeight} src={logoSrc} />
+                {/* <LogoImg /> */}
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
             </Row>
             <Row alignCenter marginBottom="0">

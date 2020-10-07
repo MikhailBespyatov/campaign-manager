@@ -9,7 +9,6 @@ import {
 } from 'components/common/buttons/RoundedButton/constants';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import {
-    black,
     buttonActiveMixin,
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
@@ -23,7 +22,8 @@ export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     min-width: ${({ minWidth }) => (minWidth ? minWidth : buttonWidth)};
     height: ${({ height }) => (height ? height : buttonHeight)};
-    background: ${({ reverse, background }) => (reverse ? white : background ? background : black)};
+    background: ${({ reverse, background, theme: { primaryColor } }) =>
+        reverse ? white : background ? background : primaryColor};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
     color: ${white};

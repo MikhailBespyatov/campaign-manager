@@ -7,7 +7,7 @@ import {
     buttonWidth
 } from 'components/common/buttons/AddFieldButton/constants';
 import { ButtonProps } from 'components/common/buttons/AddFieldButton/types';
-import { blue, disableDefaultButtonStyleMixin, flexCenter, formGrey1, transitionTime } from 'constants/styles';
+import { disableDefaultButtonStyleMixin, flexCenter, formGrey1, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 
 export const Button = styled.button<ButtonProps>`
@@ -22,6 +22,6 @@ export const Button = styled.button<ButtonProps>`
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
     transition: ${transitionTime};
     :hover {
-        border-color: ${blue};
+        border-color: ${({ theme: { primaryColor } }) => primaryColor};
     }
 `;
