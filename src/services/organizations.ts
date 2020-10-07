@@ -5,3 +5,9 @@ export const getStatisticsById = (data: WOM.OrganizationStatisticsRequest) =>
         url: '/organization/get-statistics',
         data
     });
+
+export const getItemById = (data: WOM.GetOrganizationRequest) =>
+    axios<WOM.OrganizationResponse>({
+        url: '/organization/get',
+        data
+    });

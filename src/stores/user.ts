@@ -1,12 +1,16 @@
-import { InviteRequestProps } from 'components/FormComponents/userAdminForms/InviteForm/types';
-import { userStorageName } from 'constants/global';
+import history from 'BrowserHistory';
+import { InviteRequestProps } from 'components/FormComponents/forms/InviteForm/types';
+import { noop, userStorageName } from 'constants/global';
 import {
     errorDataMessage,
     incorrectOrgIdMessage,
     notEntryAllowedMessage,
     wrongInviteCodeMessage
 } from 'constants/messages';
+import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
+import { ResetPasswordRequestProps } from 'pages/SignIn/PasswordReset/RequestCode/types';
+import { SecurityCodeRequestProps } from 'pages/SignIn/PasswordReset/types';
 import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
@@ -63,16 +67,24 @@ const inviteUser = createEffect({
     }
 });
 
+const setEmail = createEvent<string>();
+
+const currentEmailForPasswordReset = createStore<string>('').on(setEmail, (_, newState) => newState);
+
 const sendSecurityCode = createEffect({
-    handler: async ({ values, setErrors }: InviteRequestProps) => {
+    handler: async ({ values, setErrors = noop }: SecurityCodeRequestProps) => {
         try {
+            setEmail(values.email);
             loadingEffects.updateLoading();
-            await API.user.inviteUser(values);
+            await API.user.sendSecurityCode(values);
             loadingEffects.updateLoading();
+
+            history.push(routes.signIn.requestCode);
         } catch {
+            setEmail('');
             loadingEffects.updateLoading();
             setErrors({
-                organizationId: incorrectOrgIdMessage
+                email: errorDataMessage
             });
         }
     }
@@ -98,18 +110,19 @@ const acceptInvitationAndLoadToken = createEffect({
 });
 
 const resetPasswordAndLoadToken = createEffect({
-    handler: async ({ values, setErrors }: AcceptInviteRequestProps) => {
+    handler: async ({ values, setErrors }: ResetPasswordRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            const data = await API.user.acceptInvitation(values);
+            const data = await API.user.resetPasswordAndLoadToken(values);
             loadingEffects.updateLoading();
 
+            setEmail('');
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
             loadingEffects.updateLoading();
             setErrors({
-                inviteCode: wrongInviteCodeMessage
+                confirmationToken: wrongInviteCodeMessage
             });
             return {};
         }
@@ -197,6 +210,6 @@ const userEffects = {
     resetPasswordAndLoadToken,
     sendSecurityCode
 };
-const userStores = { user, auth };
+const userStores = { user, auth, currentEmailForPasswordReset };
 
 export { userEffects, userStores, userEvents };

@@ -2,7 +2,7 @@ import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { Loader } from 'components/common/Loader';
 import { P } from 'components/common/typography/titles/P';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -38,7 +38,7 @@ export const CreateOrganization = () => {
                             <TextInput
                                 label="Administrator Email"
                                 name="administratorEmail"
-                                placeholder="Enter your its administrator email"
+                                placeholder="Enter its administrator email"
                                 type="email"
                             />
                             <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">

@@ -1,7 +1,7 @@
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { WomInput } from 'components/FormComponents/inputs/WomInput';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';

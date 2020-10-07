@@ -7,7 +7,7 @@ import {
     formPaddingBottom,
     formVerticalPadding,
     formWidth
-} from 'components/FormComponents/Form/constants';
+} from 'components/FormComponents/forms/Form/constants';
 import { formPrimaryColor, white } from 'constants/styles';
 import { flexCenter } from 'constants/styles/mixins';
 import styled from 'styled-components';

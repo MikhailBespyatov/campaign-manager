@@ -2,7 +2,7 @@ import womImg from 'assets/img/wom_logo.svg';
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { noop } from 'constants/global';

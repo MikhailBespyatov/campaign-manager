@@ -1,10 +1,18 @@
-import { Props, SetErrorsInviteRequest } from 'components/FormComponents/userAdminForms/InviteForm/types';
+import { Props, SetErrorsInviteRequest } from 'components/FormComponents/forms/InviteForm/types';
 import { yupDefault, yupEmail } from 'constants/yupFields';
 import { ChangeEvent } from 'react';
 import { userEffects } from 'stores/user';
 import * as Yup from 'yup';
 
-export const initialValues: Props = { email: '', organizationId: '', permission: '2' };
+export const permissionsValues = ['1', '2'];
+export const permissionsData = ['Member', 'Admin'];
+export const defaultPermissionsValue = 1;
+
+export const initialValues: Props = {
+    email: '',
+    organizationId: '',
+    permission: permissionsValues[defaultPermissionsValue]
+};
 
 export const validationSchema = Yup.object().shape({
     email: yupEmail,

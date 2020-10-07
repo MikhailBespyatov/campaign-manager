@@ -1,6 +1,24 @@
+import { CreateCampaignRequestProps } from 'components/FormComponents/forms/CreateCampaignForm/types';
+import { noop } from 'constants/global';
+import { existCampaignErrorMessage } from 'constants/messages';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+
+const upsertItem = createEffect({
+    handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
+        try {
+            loadingEffects.updateLoading();
+            await API.campaigns.upsertItem(values);
+            loadingEffects.updateLoading();
+        } catch {
+            loadingEffects.updateLoading();
+            setErrors({
+                title: existCampaignErrorMessage
+            });
+        }
+    }
+});
 
 const getItemById = createEffect({
     handler: async (id: string) => {
@@ -78,7 +96,7 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
 const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues };
-const campaignsEffects = { getItems, getItemById, getStatisticsItems };
+const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem };
 const campaignsStores = { items, item, statisticsItems };
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

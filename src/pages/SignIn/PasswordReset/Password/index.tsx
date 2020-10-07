@@ -1,7 +1,7 @@
 import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
 import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';

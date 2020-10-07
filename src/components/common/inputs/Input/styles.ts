@@ -45,3 +45,9 @@ export const TextInput = styled.input<InputProps>`
     line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : defaultLineHeight)};
     ${({ alignTextCenter }) => (alignTextCenter ? `text-align: center;` : ``)};
 `;
+
+export const HiddenInput = styled.input.attrs({ type: 'hidden' })`
+    outline: none;
+    border: none;
+    appearance: none;
+`;

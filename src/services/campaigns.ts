@@ -17,3 +17,9 @@ export const getStatisticsItems = (data: WOM.CampaignStatisticsQueryRequest) =>
         url: '/campaign/query-statistics',
         data
     });
+
+export const upsertItem = (data: WOM.CampaignUpsertRequest) =>
+    axios<WOM.CampaignDetailResponse>({
+        url: '/campaign/upsert',
+        data
+    });

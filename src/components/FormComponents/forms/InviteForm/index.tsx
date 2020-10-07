@@ -1,13 +1,17 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Loader } from 'components/common/Loader';
-import { UserAdminTextInput } from 'components/FormComponents/inputs/UserAdminTextInput';
 import {
+    defaultPermissionsValue,
     initialValues,
     onPermissionChange,
     onSubmit,
+    permissionsData,
+    permissionsValues,
     validationSchema
-} from 'components/FormComponents/userAdminForms/InviteForm/constants';
-import { FormWrapper } from 'components/FormComponents/userAdminForms/InviteForm/style';
+} from 'components/FormComponents/forms/InviteForm/constants';
+import { FormWrapper } from 'components/FormComponents/forms/InviteForm/styles';
+import { InviteUserSelect } from 'components/FormComponents/inputs/InviteUserSelect';
+import { UserAdminTextInput } from 'components/FormComponents/inputs/UserAdminTextInput';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
@@ -35,10 +39,17 @@ export const InviteForm = () => {
                         placeholder="Organization id"
                         width="300px"
                     />
-                    <UserAdminTextInput
+                    {/* <UserAdminTextInput
                         name="permission"
                         placeholder="Permission"
                         width="140px"
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
+                    /> */}
+                    <InviteUserSelect
+                        data={permissionsData}
+                        defaultActive={defaultPermissionsValue}
+                        name="permission"
+                        values={permissionsValues}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
                     />
                     <RoundedButton background={isValid && dirty ? blue : undefined} disabled={loading}>

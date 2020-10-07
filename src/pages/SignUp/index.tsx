@@ -1,7 +1,7 @@
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
 import { Button } from 'components/FormComponents/buttons/Button';
-import { Form } from 'components/FormComponents/Form';
+import { Form } from 'components/FormComponents/forms/Form';
 import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';

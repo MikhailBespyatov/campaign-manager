@@ -10,7 +10,7 @@ export const Main = styled.main<Background>`
     width: 100%;
     border-radius: ${mainBorderRadius};
     background: ${({ background }) => (background ? background : white)};
-    overflow: hidden;
+    //overflow: hidden;
 `;
 
 export const Wrapper = styled.div`
