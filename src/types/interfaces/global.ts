@@ -1,5 +1,9 @@
 import { noop } from 'types';
 
+export interface Dictionary<T> {
+    [Key: string]: T;
+}
+
 export interface Auth {
     access: number;
     authDenyReason?: string;

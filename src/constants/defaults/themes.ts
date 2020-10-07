@@ -1,4 +1,7 @@
+import adidasLogo from 'assets/img/adidas.svg';
+import womLogo from 'assets/img/logo.svg';
 import { blue, secondaryColor } from 'constants/styles';
+import { Dictionary } from 'types';
 
 export interface ThemeProps {
     logo: string;
@@ -6,11 +9,16 @@ export interface ThemeProps {
 }
 
 export const defaultTheme = {
-    logo: 'static/logo.svg',
+    logo: womLogo,
     primaryColor: blue
 };
 
 export const adidasTheme = {
-    logo: 'static/adidas.svg',
+    logo: adidasLogo,
     primaryColor: secondaryColor
+};
+
+export const themes: Dictionary<ThemeProps> = {
+    default: defaultTheme,
+    adidas: adidasTheme
 };

@@ -4,20 +4,22 @@ const signUpPrefix = adidasGlobalPrefix + '/register';
 const walletPrefix = adidasGlobalPrefix + '/create_wallet';
 const signInPrefix = adidasGlobalPrefix + '/login';
 const adidasPrefix = adidasGlobalPrefix + '/adidas';
-const passwordResetPrefix = adidasGlobalPrefix + '/password_reset';
 
 const campaignPrefix = adidasGlobalPrefix + '/campaign_manager';
 const userAdminPrefix = adidasGlobalPrefix + '/user_admin';
 
 const adminPrefix = adidasGlobalPrefix + '/admin';
 
+// * without global prefix
+const passwordResetPrefix = '/password_reset';
+
 export const routes = {
     test: '/components_test_page',
     home: `${campaignPrefix}/dashboard`,
     signUp: {
         index: signUpPrefix,
-        acceptInvite: '/accept-invite/:inviteCode',
-        acceptOrgInvite: '/invite-org/:inviteCode',
+        acceptInvite: adidasGlobalPrefix + '/accept-invite/:inviteCode',
+        acceptOrgInvite: adidasGlobalPrefix + '/invite-org/:inviteCode',
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
@@ -27,9 +29,9 @@ export const routes = {
         index: signInPrefix,
         admin: `${signInPrefix}/admin`,
         adidas: `${signInPrefix}${adidasPrefix}`,
-        passwordReset: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}`,
-        password: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/password`,
-        requestCode: `${signInPrefix}${adidasPrefix}${passwordResetPrefix}/security_code`
+        passwordReset: `${signInPrefix}${passwordResetPrefix}`,
+        password: `${signInPrefix}${passwordResetPrefix}/password`,
+        requestCode: `${signInPrefix}${passwordResetPrefix}/security_code`
     },
     userAdmin: {
         index: userAdminPrefix

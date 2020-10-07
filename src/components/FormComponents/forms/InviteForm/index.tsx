@@ -33,12 +33,12 @@ export const InviteForm = () => {
             {({ handleSubmit, isValid, dirty, setFieldValue }) => (
                 <FormWrapper onSubmit={handleSubmit}>
                     <UserAdminTextInput name="email" type="email" width="350px" />
-                    <UserAdminTextInput
+                    {/* <UserAdminTextInput
                         disabled={!!defaultOrganizationId}
                         name="organizationId"
                         placeholder="Organization id"
                         width="300px"
-                    />
+                    /> */}
                     {/* <UserAdminTextInput
                         name="permission"
                         placeholder="Permission"
