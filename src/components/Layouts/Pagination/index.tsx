@@ -22,6 +22,8 @@ interface Props {
 const SmallPager = ({ activeIndex, total, onChange }: Props) => (
     <>
         {pagination
+            // * first and last cells are rendered in parent element
+            // * so we need exclude them from enumeration (total - 2)
             .filter((_, i) => i < total - 2)
             .map((_, i) => (
                 <PaginationCell key={i.toString()} active={i + 2 === activeIndex} onClick={() => onChange(i + 2)}>
