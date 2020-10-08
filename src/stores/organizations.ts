@@ -9,6 +9,11 @@ const loading = createStore<boolean>(false)
     .on(updateLoading, state => !state)
     .on(setLoading, (_, newState) => newState);
 
+const setOrganizationId = createEvent<string>();
+
+const organizationId = createStore<string>('').on(setOrganizationId, (_, newState) => newState);
+organizationId.watch(state => console.log(state));
+
 const getItemById = createEffect({
     handler: async (id: string) => {
         try {
@@ -46,8 +51,8 @@ const statistics = createStore<WOM.OrganizationStatisticsResponse>({}).on(
     (_, newState) => newState
 );
 
-const organizationsEvents = {};
+const organizationsEvents = { setOrganizationId };
 const organizationsEffects = { getStatisticsById, getItemById };
-const organizationsStores = { statistics, loading, item };
+const organizationsStores = { statistics, loading, item, organizationId };
 
 export { organizationsEffects, organizationsStores, organizationsEvents };

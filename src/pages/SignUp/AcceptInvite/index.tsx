@@ -1,12 +1,8 @@
-import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
@@ -47,7 +43,7 @@ export const AcceptInvite = () => {
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         />
-                        <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
+                        {/* <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
                             <Column>
                                 <Row>
                                     <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.index}>
@@ -58,7 +54,7 @@ export const AcceptInvite = () => {
                                     Enter as Admin
                                 </InternalLink>
                             </Column>
-                        </MarginWrapper>
+                        </MarginWrapper> */}
                         <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
                             {loading ? <Loader /> : 'ACCEPT INVITE'}
                         </Button>

@@ -1,3 +1,3 @@
-import { Background, Pointer } from 'types';
+import { Background, Pointer, ZIndex } from 'types';
 
-export interface ImgWrapperProps extends Pointer, Background {}
+export interface ImgWrapperProps extends Pointer, Background, ZIndex {}

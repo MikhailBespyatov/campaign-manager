@@ -29,12 +29,12 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products 
 
     const openCardModal = () => modalEvents.openCardModal(ID);
 
-    const handleDetail = () => history.push(routes.campaignManager.discover.index + '/' + ID);
+    const handleDetail = () => history.push(routes.campaignManager.discover.indexDetails + ID);
 
     return (
-        <Card>
-            <Description>
-                <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} onClick={openCardModal} />
+        <Card pointer>
+            <Description onClick={openCardModal}>
+                <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
                 <Row marginBottom="5px">
                     <Column marginRight={primaryPadding}>
                         <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>

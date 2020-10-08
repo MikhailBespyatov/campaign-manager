@@ -1,9 +1,10 @@
 import { Span } from 'components/common/typography/Span';
-import { percentageSpanColor } from 'components/common/typography/special/constants';
+import { percentageSpanColor, subPageSpanHeight } from 'components/common/typography/special/constants';
 import { SmallSpanProps } from 'components/common/typography/special/types';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { primaryColor, secondaryColor, white } from 'constants/styles';
 import React, { FC } from 'react';
+import { themeStores } from 'stores/theme';
 
 export const Subtitle: FC = ({ children }) => (
     <Span fontSize="18px" fontWeight="700" lineHeight="28px">
@@ -45,6 +46,12 @@ export const GraphicBlockSpan: FC = ({ children }) => (
 
 export const RatingSpan: FC = ({ children }) => (
     <Span color={white} fontSize="8px" lineHeight="12px">
+        {children}
+    </Span>
+);
+
+export const SubPageSpan: FC = ({ children }) => (
+    <Span color={themeStores.theme.getState().primaryColor} fontSize="11px" lineHeight={subPageSpanHeight}>
         {children}
     </Span>
 );

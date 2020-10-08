@@ -1,10 +1,10 @@
-import { secondaryColor, white } from 'constants/styles';
+import { primaryPadding, secondaryColor, white } from 'constants/styles';
 
 export const wrapperHeight = '96px';
 export const wrapperBorderRadius = '30px';
 export const wrapperBackground = white;
 export const wrapperHorizontalPadding = '34px';
-export const wrapperVerticalPadding = '10px';
+export const wrapperVerticalPadding = primaryPadding;
 
 export const itemOpacity = '0.4';
 export const itemHorizontalMargin = '16px';

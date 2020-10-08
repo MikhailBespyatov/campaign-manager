@@ -14,8 +14,9 @@ import { SecurityCodeRequestProps } from 'pages/SignIn/PasswordReset/types';
 import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import { organizationsEvents, organizationsStores } from 'stores/organizations';
 import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
-import { giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
+import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
@@ -67,6 +68,26 @@ const inviteUser = createEffect({
     }
 });
 
+const removeUserByEmail = createEffect({
+    handler: async (email: string) => {
+        try {
+            loadingEffects.updateLoading();
+            await API.user.inviteUser({
+                organizationId: organizationsStores.organizationId.getState(),
+                invitations: [
+                    {
+                        email: email,
+                        permission: 0
+                    }
+                ]
+            });
+            loadingEffects.updateLoading();
+        } catch {
+            loadingEffects.updateLoading();
+        }
+    }
+});
+
 const setEmail = createEvent<string>();
 
 const currentEmailForPasswordReset = createStore<string>('').on(setEmail, (_, newState) => newState);
@@ -76,7 +97,7 @@ const sendSecurityCode = createEffect({
         try {
             setEmail(values.email);
             loadingEffects.updateLoading();
-            await API.user.sendSecurityCode(values);
+            await API.user.sendSecurityCode({ ...values, organizationId: '5ddbdd2efd92595cf6d94dc1' });
             loadingEffects.updateLoading();
 
             history.push(routes.signIn.requestCode);
@@ -112,8 +133,12 @@ const acceptInvitationAndLoadToken = createEffect({
 const resetPasswordAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: ResetPasswordRequestProps) => {
         try {
+            console.log('ye');
             loadingEffects.updateLoading();
-            const data = await API.user.resetPasswordAndLoadToken(values);
+            const data = await API.user.resetPasswordAndLoadToken({
+                ...values,
+                organizationId: '5ddbdd2efd92595cf6d94dc1'
+            });
             loadingEffects.updateLoading();
 
             setEmail('');
@@ -164,7 +189,8 @@ const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userS
     })
     .on(setToken, (_, token) => token);
 
-user.watch(state =>
+user.watch(state => {
+    organizationsEvents.setOrganizationId(getOrganizationId());
     objectIsEmpty(state)
         ? setAuth({
               access: -1,
@@ -178,8 +204,8 @@ user.watch(state =>
         : setAuth({
               access: -1,
               authDenyReason: notEntryAllowedMessage
-          })
-);
+          });
+});
 
 const userStore = user.getState();
 const auth = createStore<Auth>(
@@ -208,7 +234,8 @@ const userEffects = {
     inviteUser,
     acceptInvitationAndLoadToken,
     resetPasswordAndLoadToken,
-    sendSecurityCode
+    sendSecurityCode,
+    removeUserByEmail
 };
 const userStores = { user, auth, currentEmailForPasswordReset };
 

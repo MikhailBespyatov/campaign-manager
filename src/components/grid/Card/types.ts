@@ -5,10 +5,11 @@ import {
     MarginBottom,
     MarginRight,
     MarginRightBottom,
+    Pointer,
     Sizes
 } from 'types';
 
-export interface CardProps extends Disabled, MarginRightBottom, Sizes {}
+export interface CardProps extends Disabled, MarginRightBottom, Sizes, Pointer {}
 
 export interface DescriptionCellProps {
     height?: string;

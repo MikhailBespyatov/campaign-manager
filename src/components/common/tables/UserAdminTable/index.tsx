@@ -1,10 +1,8 @@
 import companyImg from 'assets/img/adidas.svg';
 import deleteImg from 'assets/img/delete.svg';
 import arrowImg from 'assets/img/select_arrow_dark.svg';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { RoleSelect } from 'components/common/inputs/RoleSelect';
-import { testArray } from 'components/common/tables/CampaignTableOldVersion/constants';
+import { Loader } from 'components/common/Loader';
 import { Table } from 'components/common/tables/Table';
 import {
     arrowImgHeight,
@@ -12,7 +10,6 @@ import {
     companyImgBorderRadius,
     companyImgDiameter,
     deleteImgDiameter,
-    selectTestArray,
     tableMargin
 } from 'components/common/tables/UserAdminTable/constants';
 import {
@@ -22,9 +19,12 @@ import {
     TableRow
 } from 'components/common/tables/UserAdminTable/styles';
 import { Span } from 'components/common/typography/Span';
-import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import React, { FC, useState } from 'react';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
+import { userStores } from 'stores/user';
+import { userAdminEffects, userAdminStores } from 'stores/userAdmin';
+import { getTheme } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
     <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
@@ -38,54 +38,56 @@ const TableSpan: FC = ({ children }) => (
     </Span>
 );
 
-const LegendaryItem = () => {
-    const [checked, setChecked] = useState(false);
+const LegendaryItem = () => (
+    // const [checked, setChecked] = useState(false);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    // const onChange = (checked: boolean) => setChecked(checked);
 
-    return (
-        <LegendaryTableRow active={checked}>
-            <LegendaryTableColumn>
-                <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+    <LegendaryTableRow>
+        <LegendaryTableColumn>
+            <Row alignCenter noWrap marginBottom="0">
+                {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
-                    <Column marginRight={tableMargin}>
-                        <LegendaryTableSpan>Company Name</LegendaryTableSpan>
-                    </Column>
-                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
-                </Row>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
-                        <LegendaryTableSpan>Email</LegendaryTableSpan>
-                    </Column>
-                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
-                </Row>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
+                    </Column> */}
+                <Column marginRight={tableMargin}>
+                    <LegendaryTableSpan>Company Name</LegendaryTableSpan>
+                </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+            </Row>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <Row alignCenter noWrap marginBottom="0">
+                <Column marginRight={tableMargin}>
+                    <LegendaryTableSpan>Email</LegendaryTableSpan>
+                </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+            </Row>
+        </LegendaryTableColumn>
+        {/* <LegendaryTableColumn>
                 <LegendaryTableSpan>Role</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Actions</LegendaryTableSpan>
-            </LegendaryTableColumn>
-        </LegendaryTableRow>
-    );
-};
+            </LegendaryTableColumn> */}
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Actions</LegendaryTableSpan>
+        </LegendaryTableColumn>
+    </LegendaryTableRow>
+);
+const Item = ({ userId, email }: WOM.GetUserResponse) => {
+    const { user } = useStore(userStores.user);
+    const loading = useStore(userAdminStores.loading);
 
-const Item = () => {
-    const [checked, setChecked] = useState(false);
+    // const [checked, setChecked] = useState(false);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    // const onChange = (checked: boolean) => setChecked(checked);
+
+    const removeHandler = () => userAdminEffects.removeItemById(userId);
 
     return (
-        <TableRow active={checked}>
+        <TableRow>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+                    {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
+                    </Column> */}
                     <Column marginRight={tableMargin}>
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
@@ -94,33 +96,44 @@ const Item = () => {
                             width={companyImgDiameter}
                         />
                     </Column>
-                    <TableSpan>Company Name</TableSpan>
+                    <TableSpan>{getTheme()}</TableSpan>
                 </Row>
             </TableColumn>
             <TableColumn>
-                <TableSpan>SomeEmail@email.email</TableSpan>
+                <TableSpan>{email}</TableSpan>
             </TableColumn>
-            <TableColumn>
+            {/* <TableColumn>
                 <RoleSelect reverse={checked} values={selectTestArray} />
-            </TableColumn>
+            </TableColumn> */}
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+                    {/* <Column marginRight={tableMargin}>
                         <RoundedButton>RESET PASSWORD</RoundedButton>
-                    </Column>
-                    <CustomImg pointer height={deleteImgDiameter} src={deleteImg} width={deleteImgDiameter} />
+                    </Column> */}
+                    {user?.userId !== userId &&
+                        (loading ? (
+                            <Loader />
+                        ) : (
+                            <CustomImg
+                                pointer
+                                height={deleteImgDiameter}
+                                src={deleteImg}
+                                width={deleteImgDiameter}
+                                onClick={removeHandler}
+                            />
+                        ))}
                 </Row>
             </TableColumn>
         </TableRow>
     );
 };
 
-export const UserAdminTable = () => (
+export const UserAdminTable = ({ items }: WOM.UserQueryResponse) => (
     // <Table border={tableBorder} borderCollapse="collapse" borderRadius={tableRowBorderRadius}>
     <Table>
         <LegendaryItem />
-        {testArray.map(i => (
-            <Item key={i} />
+        {items?.map(i => (
+            <Item key={i.userId} {...i} />
         ))}
     </Table>
 );
