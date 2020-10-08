@@ -21,7 +21,6 @@ import { DropDownMenuTag } from 'components/common/tags/DropDownMenuTag';
 import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
-import { Pagination } from 'components/Layouts/Pagination';
 import React, { useState } from 'react';
 
 const disabled = true;
@@ -78,7 +77,7 @@ export const Test = () => {
                 <Space />
                 {/* <VideoCard /> */}
                 <Space />
-                <Pagination />
+                {/* <Pagination /> */}
                 <Space />
                 <CampaignTable />
                 <Space />
