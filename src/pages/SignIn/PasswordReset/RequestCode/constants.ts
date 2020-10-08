@@ -19,6 +19,7 @@ export const validationSchema = Yup.object().shape({
 interface SetErrorsFormikProps extends SetErrorsResetPasswordRequest {}
 
 export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) => {
+    console.log(values);
     userEffects.resetPasswordAndLoadToken({
         values: values,
         setErrors: setErrors

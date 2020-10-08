@@ -16,7 +16,7 @@ import { Active } from 'types';
 
 export const Wrapper = styled.div`
     ${flexStart};
-    align-items: center;
+    //align-items: center;
     width: 100%;
     height: ${wrapperHeight};
     border-top-left-radius: ${wrapperBorderRadius};

@@ -1,4 +1,6 @@
 import { Span } from 'components/common/typography/Span';
+import { SubPageSpan } from 'components/common/typography/special';
+import { subPageSpanHeight } from 'components/common/typography/special/constants';
 import {
     activeColor,
     itemOpacity,
@@ -7,7 +9,7 @@ import {
     spanLineHeight
 } from 'components/grid/bars/TopBarWithButton/constants';
 import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/styles';
-import { Column } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { routes, routesArray } from 'constants/routes';
 import { blue } from 'constants/styles';
@@ -31,8 +33,10 @@ export const TopBarWithButton = ({ buttons }: Props) => {
 
     return (
         <Wrapper>
-            {routesArray.map(({ path, name }) => {
+            {routesArray.map(({ path, name, subPages }) => {
                 const active = path === location.pathname;
+                const borderActive = -1 !== location.pathname.indexOf(path);
+                const subPage = subPages.filter(i => -1 !== location.pathname.indexOf(i.path));
 
                 return (
                     <StyledItem key={path} active={active} onClick={() => onClick(path)}>
@@ -46,24 +50,32 @@ export const TopBarWithButton = ({ buttons }: Props) => {
                             >
                                 {name}
                             </Span>
-                            {active && <StyledBorder />}
+                            {borderActive && <StyledBorder />}
+                            <Row height={subPageSpanHeight} marginTop="5px">
+                                <SubPageSpan>{subPage?.length ? subPage[0].name : ''}</SubPageSpan>
+                            </Row>
                         </Column>
                     </StyledItem>
                 );
             })}
             {access === 1 && (
-                <StyledItem onClick={onUsersClick}>
-                    <Column alignCenter>
-                        <Span
-                            color={blue}
-                            fontSize={spanFontSize}
-                            fontWeight={spanFontWeight}
-                            lineHeight={spanLineHeight}
-                        >
-                            Users
-                        </Span>
-                    </Column>
-                </StyledItem>
+                <>
+                    <StyledItem onClick={onUsersClick}>
+                        <Column alignCenter>
+                            <Span
+                                color={blue}
+                                fontSize={spanFontSize}
+                                fontWeight={spanFontWeight}
+                                lineHeight={spanLineHeight}
+                            >
+                                Users
+                            </Span>
+                        </Column>
+                    </StyledItem>
+                    <Row height={subPageSpanHeight} marginTop="5px">
+                        <SubPageSpan>{''}</SubPageSpan>
+                    </Row>
+                </>
             )}
             <MarginWrapper marginLeft="auto">{buttons}</MarginWrapper>
         </Wrapper>

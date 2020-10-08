@@ -3,7 +3,7 @@ import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
 import { routes } from 'constants/routes';
@@ -32,11 +32,11 @@ export const SignIn = () => {
                             />
                             <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
                                 <Column>
-                                    <Row>
+                                    {/* <Row>
                                         <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.admin}>
                                             Enter as Admin
                                         </InternalLink>
-                                    </Row>
+                                    </Row> */}
                                     <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.passwordReset}>
                                         Forgot password?
                                     </InternalLink>

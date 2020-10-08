@@ -36,6 +36,7 @@ export const Card = styled.div<CardProps>`
     border-radius: ${CardBorderRadius};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
+    ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
     overflow: hidden;
     ${flexCenter};
     flex-direction: column;

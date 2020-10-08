@@ -8,8 +8,8 @@ export const ImgWrapper = styled.div<ImgWrapperProps>`
     width: 100%;
     height: 100%;
     ${({ background }) => (background ? `background: ${background};` : ``)};
-    z-index: 1;
     ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
+    z-index: ${({ zIndex }) => (zIndex ? zIndex : '-1')};
 `;
 
 export const Img = styled.img`

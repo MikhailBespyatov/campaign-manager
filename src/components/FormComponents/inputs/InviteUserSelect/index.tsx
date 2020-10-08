@@ -11,17 +11,16 @@ import {
 } from 'components/FormComponents/inputs/InviteUserSelect/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/FormComponents/inputs/InviteUserSelect/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { noop } from 'constants/global';
 import { blue, errorColor, successColor } from 'constants/styles';
 import { useField } from 'formik';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Active, Name } from 'types';
 
 interface WrapperProps extends Name {
     values: string[];
     data: string[];
     defaultActive?: number;
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    //onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface Props extends Active {
@@ -42,8 +41,8 @@ const Item = ({ active, index, data, onClick }: Props) => (
     </SelectLi>
 );
 
-export const InviteUserSelect = ({ name, values, defaultActive = 0, data = values, onChange = noop }: WrapperProps) => {
-    const [field, { error, touched }] = useField(name);
+export const InviteUserSelect = ({ name, values, defaultActive = 0, data = values }: WrapperProps) => {
+    const [field, { error, touched }, { setValue }] = useField(name);
 
     const [isClosed, setIsClosed] = useState(true);
     const [selected, setSelected] = useState(values[defaultActive]);
@@ -65,6 +64,7 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
             }))
         );
         setSelected(values[index]);
+        setValue(values[index]);
         setSelectedData(data[index]);
         onClose();
     };
@@ -72,7 +72,7 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
     return (
         <Wrapper color={!touched ? blue : error ? errorColor : successColor}>
             <ItemSpan>{selectedData}</ItemSpan>
-            <HiddenInput {...field} value={selected} onChange={onChange} />
+            <HiddenInput {...field} value={selected} />
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
                 <CustomImg
                     pointer

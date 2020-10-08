@@ -106,7 +106,7 @@ const Item = ({ id, title, budget, engagement }: ItemProps) => {
 
     const onChange = (checked: boolean) => setChecked(checked);
 
-    const onMoreInfoClick = () => history.push(routes.campaignManager.campaign.index + '/' + id);
+    const onMoreInfoClick = () => history.push(routes.campaignManager.campaign.indexDetails + id);
 
     return (
         <TableRow active={checked}>

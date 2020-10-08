@@ -5,7 +5,11 @@ const walletPrefix = adidasGlobalPrefix + '/create_wallet';
 const signInPrefix = adidasGlobalPrefix + '/login';
 const adidasPrefix = adidasGlobalPrefix + '/adidas';
 
-const campaignPrefix = adidasGlobalPrefix + '/campaign_manager';
+const campaignManagerPrefix = adidasGlobalPrefix + '/campaign_manager';
+
+const campaignPrefix = campaignManagerPrefix + '/campaign';
+const discoverPrefix = campaignManagerPrefix + '/discover';
+
 const userAdminPrefix = adidasGlobalPrefix + '/user_admin';
 
 const adminPrefix = adidasGlobalPrefix + '/admin';
@@ -15,7 +19,7 @@ const passwordResetPrefix = '/password_reset';
 
 export const routes = {
     test: '/components_test_page',
-    home: `${campaignPrefix}/dashboard`,
+    home: `${campaignManagerPrefix}/dashboard`,
     signUp: {
         index: signUpPrefix,
         acceptInvite: adidasGlobalPrefix + '/accept-invite/:inviteCode',
@@ -42,17 +46,19 @@ export const routes = {
         //user: `${adminPrefix}/user`
     },
     campaignManager: {
-        index: campaignPrefix,
+        index: campaignManagerPrefix,
         dashboard: {
             index: `${campaignPrefix}/dashboard`
         },
         discover: {
-            index: `${campaignPrefix}/discover`,
-            details: `${campaignPrefix}/discover/:discoverId`
+            index: `${discoverPrefix}`,
+            indexDetails: `${discoverPrefix}/details/`,
+            details: `${discoverPrefix}/details/:discoverId`
         },
         campaign: {
-            index: `${campaignPrefix}/campaign`,
-            details: `${campaignPrefix}/campaign/:campaignId`,
+            index: `${campaignPrefix}`,
+            indexDetails: `${campaignPrefix}/details/`,
+            details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,
             edit: `${campaignPrefix}/edit_campaign/:campaignId`
         },
@@ -73,11 +79,16 @@ export const routesArray = [
     // },
     {
         path: routes.campaignManager.discover.index,
-        name: 'Discover'
+        name: 'Discover',
+        subPages: [{ path: routes.campaignManager.discover.indexDetails, name: 'details' }]
     },
     {
         path: routes.campaignManager.campaign.index,
-        name: 'Campaign'
+        name: 'Campaign',
+        subPages: [
+            { path: routes.campaignManager.campaign.create, name: 'create' },
+            { path: routes.campaignManager.campaign.indexDetails, name: 'details' }
+        ]
     }
     // ,{
     //     path: routes.campaignManager.overview.index,

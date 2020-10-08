@@ -11,7 +11,7 @@ import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/Password/constants';
+import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/RequestCode/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
 import { userEffects, userStores } from 'stores/user';
@@ -40,6 +40,7 @@ export const RequestCode = () => {
                                 label="Security Code"
                                 name="confirmationToken"
                                 placeholder="Type your security code"
+                                type="text"
                             />
                             <TextInput
                                 label="New Password"
