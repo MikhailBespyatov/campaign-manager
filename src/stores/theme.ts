@@ -1,19 +1,16 @@
-import { adidasTheme, defaultTheme, ThemeProps } from 'constants/defaults/themes';
-import { adidasGlobalPrefix } from 'constants/routes';
+import { defaultTheme, ThemeProps, themes } from 'constants/defaults';
 import { createEvent, createStore } from 'effector';
 import { getTheme } from 'utils/usefulFunctions';
 
 const setTheme = createEvent();
 
-const logoUrl = createStore<string>(defaultTheme.logo).on(setTheme, () =>
-    getTheme() === adidasGlobalPrefix ? adidasTheme.logo : defaultTheme.logo
-);
-const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, () =>
-    getTheme() === adidasGlobalPrefix ? adidasTheme : defaultTheme
-);
+// const logoUrl = createStore<string>(defaultTheme.logo).on(setTheme, () =>
+//     getTheme() === adidasGlobalPrefix ? adidasTheme.logo : defaultTheme.logo
+// );
+const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, () => themes[getTheme()]);
 
 const themeEvents = { setTheme };
 const themeEffects = {};
-const themeStores = { theme, logoUrl };
+const themeStores = { theme };
 
 export { themeEffects, themeStores, themeEvents };

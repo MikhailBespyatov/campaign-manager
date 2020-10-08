@@ -13,7 +13,7 @@ import { userEvents, userStores } from 'stores/user';
 
 export const Header = () => {
     const { user } = useStore(userStores.user);
-    const logoSrc = '../../' + useStore(themeStores.logoUrl);
+    const { logo } = useStore(themeStores.theme);
 
     const username = user && user?.username;
     const imageUrl = user && user?.profile?.imageUrl;
@@ -23,7 +23,7 @@ export const Header = () => {
     return (
         <StyledHeader>
             <Row alignCenter marginBottom="0">
-                <CustomImg height={headerLogoHeight} src={logoSrc} />
+                <CustomImg height={headerLogoHeight} src={logo} />
                 {/* <LogoImg /> */}
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
             </Row>

@@ -71,4 +71,4 @@ export const parseMonthDate: (date: Date) => string = date =>
           (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 
 export const getTheme = () =>
-    window.location.pathname.substring(0, window.location.pathname.substring(1).indexOf('/') + 1);
+    window.location.pathname.substring(0, window.location.pathname.substring(1).indexOf('/') + 1).substring(1);
