@@ -6,8 +6,9 @@ import { scrollBarWidth } from './sizes';
 export const GlobalStyle = createGlobalStyle`
   body, html {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
   }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, ${defaultFontFamily};

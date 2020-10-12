@@ -46,6 +46,10 @@ export interface MaxSizes {
     maxHeight?: string;
 }
 
+export interface Round {
+    round?: boolean;
+}
+
 export interface BorderRadiusProperties {
     borderRadius?: string;
     borderTopLeftRadius?: string;

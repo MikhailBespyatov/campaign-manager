@@ -12,11 +12,11 @@ import { P } from 'components/common/typography/titles/P';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import {
-    closeModalImgDiameter,
-    miniMarginBottom,
-    percentageSpanColor,
-    scoreTitleColor,
-    validatorsPadding
+  closeModalImgDiameter,
+  miniMarginBottom,
+  percentageSpanColor,
+  scoreTitleColor,
+  validatorsPadding
 } from 'components/modals/CardModal/constants';
 import { Wrapper } from 'components/modals/CardModal/styles';
 import { noContentMessage } from 'constants/messages';
@@ -57,6 +57,8 @@ const EngagementSpan: FC = ({ children }) => (
     </Span>
 );
 
+const body = document.getElementsByTagName('body')[0];
+
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
     const { uriPrimary, womQualityScore, engagement, products, userDetails, tags } = useStore(
@@ -80,7 +82,10 @@ export const CardModal = () => {
     };
 
     useEffect(() => {
-        visible && campaignContentEffects.getItemById(id);
+        if (visible) {
+            campaignContentEffects.getItemById(id);
+            body.style.overflow = 'hidden';
+        } else body.style.overflow = 'auto';
     }, [id, visible]);
 
     return (
