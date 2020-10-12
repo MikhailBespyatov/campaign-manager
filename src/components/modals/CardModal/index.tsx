@@ -12,11 +12,11 @@ import { P } from 'components/common/typography/titles/P';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import {
-  closeModalImgDiameter,
-  miniMarginBottom,
-  percentageSpanColor,
-  scoreTitleColor,
-  validatorsPadding
+    closeModalImgDiameter,
+    miniMarginBottom,
+    percentageSpanColor,
+    scoreTitleColor,
+    validatorsPadding
 } from 'components/modals/CardModal/constants';
 import { Wrapper } from 'components/modals/CardModal/styles';
 import { noContentMessage } from 'constants/messages';
