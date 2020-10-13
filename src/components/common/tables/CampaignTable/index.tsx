@@ -23,6 +23,7 @@ import { Table } from 'components/common/tables/Table';
 import { Span } from 'components/common/typography/Span';
 import { SmallSpan } from 'components/common/typography/special';
 import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import { noContentMessage } from 'constants/messages';
@@ -177,13 +178,9 @@ const Item = ({ id, title, budget, engagement }: ItemProps) => {
                     <Column marginRight="29px">
                         <CustomImg pointer height={deleteImgDiameter} src={deleteImg} width={deleteImgDiameter} />
                     </Column>
-                    <CustomImg
-                        pointer
-                        height={moreInfoImgHeight}
-                        src={moreInfoImg}
-                        width={moreInfoImgWidth}
-                        onClick={onMoreInfoClick}
-                    />
+                    <ClickableWrapper onClick={onMoreInfoClick}>
+                        <CustomImg pointer height={moreInfoImgHeight} src={moreInfoImg} width={moreInfoImgWidth} />
+                    </ClickableWrapper>
                 </Row>
             </TableColumn>
         </TableRow>

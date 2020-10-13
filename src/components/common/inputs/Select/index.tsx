@@ -1,15 +1,11 @@
 import arrowImg from 'assets/img/select_arrow.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import {
-    imgHeight,
-    imgWidth,
-    ulWrapperTop,
-    wrapperImgRight,
-    wrapperImgTop
-} from 'components/common/inputs/Select/constants';
+import { ulWrapperTop, wrapperImgRight, wrapperImgTop } from 'components/common/inputs/Select/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/Select/styles';
+import { imgHeight, imgWidth } from 'components/common/tags/ClosableTag/constants';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 import { Active, ItemRadioProperties, RadioProperties, Sizes } from 'types';
@@ -64,14 +60,9 @@ export const Select = ({
         <Wrapper {...styles}>
             <ItemSpan>{selected}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
-                <CustomImg
-                    pointer
-                    height={imgHeight}
-                    rotate={isClosed ? 180 : 0}
-                    src={arrowImg}
-                    width={imgWidth}
-                    onClick={onClose}
-                />
+                <ClickableWrapper onClick={onClose}>
+                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 180 : 0} src={arrowImg} width={imgWidth} />
+                </ClickableWrapper>
             </AbsoluteWrapper>
             <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%" zIndex="2">
                 <SelectUl>
