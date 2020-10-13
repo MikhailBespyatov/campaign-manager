@@ -9,8 +9,8 @@ export const wrapperHorizontalPadding = '15px';
 export const wrapperBackground = white;
 
 export const imgHeight = '5px';
-export const wrapperImgTop = `calc((${wrapperHeight} - ${imgHeight}) / 2)`;
-export const wrapperImgRight = '20px';
+export const wrapperImgTop = `2px`;
+export const wrapperImgRight = '0';
 export const imgWidth = '10px';
 
 export const ulWrapperTop = `calc(${wrapperHeight} + 5px)`;

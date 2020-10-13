@@ -57,6 +57,8 @@ const EngagementSpan: FC = ({ children }) => (
     </Span>
 );
 
+const body = document.getElementsByTagName('body')[0];
+
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
     const { uriPrimary, womQualityScore, engagement, products, userDetails, tags } = useStore(
@@ -80,7 +82,10 @@ export const CardModal = () => {
     };
 
     useEffect(() => {
-        visible && campaignContentEffects.getItemById(id);
+        if (visible) {
+            campaignContentEffects.getItemById(id);
+            body.style.overflow = 'hidden';
+        } else body.style.overflow = 'auto';
     }, [id, visible]);
 
     return (

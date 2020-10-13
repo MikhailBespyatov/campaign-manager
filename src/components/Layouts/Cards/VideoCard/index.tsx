@@ -7,6 +7,7 @@ import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
 import { P } from 'components/common/typography/titles/P';
+import { AbsoluteVideo } from 'components/common/Video';
 import { Card, CardRowFeatures, Description, FeatureCell } from 'components/grid/Card';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -14,27 +15,38 @@ import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/La
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
 import { primaryPadding, secondaryPadding, white } from 'constants/styles';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
 import { roundScore } from 'utils/usefulFunctions';
 
 interface Props extends WOM.ContentItemResponse {}
 
-export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products }: Props) => {
+export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products, streamDetails }: Props) => {
     const history = useHistory();
 
-    const ID = womContentId ? womContentId : '';
-    const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+    const ID = useMemo(() => (womContentId ? womContentId : ''), [womContentId]);
+    const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
+        products
+    ]);
 
     const openCardModal = () => modalEvents.openCardModal(ID);
+
+    const onVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
 
     const handleDetail = () => history.push(routes.campaignManager.discover.indexDetails + ID);
 
     return (
         <Card pointer>
             <Description onClick={openCardModal}>
-                <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
+                <AbsoluteVideo isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
+                {isVideoPlaying ? (
+                    <AbsoluteVideo controls isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
+                ) : (
+                    <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} zIndex="-1" />
+                )}
                 <Row marginBottom="5px">
                     <Column marginRight={primaryPadding}>
                         <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
@@ -83,8 +95,8 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products 
                 </MarginWrapper>
             </Description>
             <CardRowFeatures>
-                <FeatureCell disabled background={backgroundTheme1} color={colorTheme1} quantity={2}>
-                    Play Video
+                <FeatureCell background={backgroundTheme1} color={colorTheme1} quantity={2} onClick={onVideoPlay}>
+                    {isVideoPlaying ? 'Pause' : 'Play'} Video
                 </FeatureCell>
                 <FeatureCell quantity={2} onClick={handleDetail}>
                     Details here

@@ -11,6 +11,7 @@ import {
 } from 'components/FormComponents/inputs/InviteUserSelect/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/FormComponents/inputs/InviteUserSelect/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { blue, errorColor, successColor } from 'constants/styles';
 import { useField } from 'formik';
 import React, { FC, useState } from 'react';
@@ -74,14 +75,16 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
             <ItemSpan>{selectedData}</ItemSpan>
             <HiddenInput {...field} value={selected} />
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
-                <CustomImg
-                    pointer
-                    height={imgHeight}
-                    rotate={isClosed ? 180 : 0}
-                    src={arrowImg}
-                    width={imgWidth}
-                    onClick={onClose}
-                />
+                <ClickableWrapper onClick={onClose}>
+                    <CustomImg
+                        pointer
+                        height={imgHeight}
+                        rotate={isClosed ? 180 : 0}
+                        src={arrowImg}
+                        width={imgWidth}
+                        onClick={onClose}
+                    />
+                </ClickableWrapper>
             </AbsoluteWrapper>
             <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%" zIndex="2">
                 <SelectUl>

@@ -1,6 +1,5 @@
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
-import { Span } from 'components/common/typography/Span';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
@@ -12,14 +11,14 @@ import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/constants';
-import React, { FC } from 'react';
+import React from 'react';
 import { loadingStores } from 'stores/loading';
 
-const HighlightSpan: FC = ({ children }) => (
-    <Span fontSize="16px" lineHeight="20px">
-        {children}
-    </Span>
-);
+// const HighlightSpan: FC = ({ children }) => (
+//     <Span fontSize="16px" lineHeight="20px">
+//         {children}
+//     </Span>
+// );
 
 export const PasswordReset = () => {
     const loading = useStore(loadingStores.loading);
