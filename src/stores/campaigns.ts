@@ -5,6 +5,13 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 
+const addContentIds = createEvent<string[]>();
+const clearContentIds = createEvent();
+
+const contentIds = createStore<string[]>([])
+    .on(addContentIds, (state, newState) => [...state, ...newState])
+    .on(clearContentIds, () => []);
+
 const upsertItem = createEffect({
     handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
         try {
@@ -95,8 +102,8 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
-const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues };
+const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues, addContentIds, clearContentIds };
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem };
-const campaignsStores = { items, item, statisticsItems };
+const campaignsStores = { items, item, statisticsItems, contentIds };
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

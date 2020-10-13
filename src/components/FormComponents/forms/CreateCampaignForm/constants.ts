@@ -10,11 +10,18 @@ export const removeImgDiameter = buttonHeight;
 
 export const formWrapperWidth = '300px';
 
-export const initialValues: Props = { title: '', tags: [], utcToStart: '', utcToEnd: '', amount: '' };
+export const initialValues: Props = { title: '', tags: [], contentIds: [], utcToStart: '', utcToEnd: '', amount: '' };
 
 export const validationSchema = Yup.object().shape({
     title: yupDefault,
-    tags: yupDefaultArray,
+    tags: Yup.array().of(yupDefault),
+    contentIds: Yup.array()
+        .of(yupDefault)
+        .when('tags', {
+            is: val => val.length === 0,
+            then: yupDefaultArray,
+            otherwise: Yup.array().of(yupDefault)
+        }),
     utcToStart: yupDefault,
     utcToEnd: yupDefault,
     amount: yupDefault
@@ -47,6 +54,7 @@ export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) =>
             organizationId: getOrganizationId(),
             title: values.title,
             tags: values.tags,
+            contentIds: values.contentIds,
             schedule: {
                 utcToStart: values.utcToStart,
                 utcToEnd: values.utcToEnd

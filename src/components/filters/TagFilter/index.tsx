@@ -8,7 +8,7 @@ import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbo
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { secondaryPadding } from 'constants/styles';
-import React, { KeyboardEvent, useEffect, useState } from 'react';
+import React, { FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
 
 interface Props extends Title, DefaultChecked {
@@ -32,11 +32,17 @@ export const TagFilter = ({
     const removeValue = (value: string) => setValues(values.filter(i => i !== value));
 
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        // // @ts-ignore
         const value = (e.target as HTMLInputElement).value;
-        if (e.key === 'Enter' && !values.includes(value)) {
+        if (e.key === 'Enter' && value && !values.includes(value)) {
             addValue(value);
-            // // @ts-ignore
+            (e.target as HTMLInputElement).value = '';
+        }
+    };
+
+    const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+        const value = (e.target as HTMLInputElement).value;
+        if (value && !values.includes(value)) {
+            addValue(value);
             (e.target as HTMLInputElement).value = '';
         }
     };
@@ -73,7 +79,13 @@ export const TagFilter = ({
                         {i}
                     </ClosableTag>
                 ))}
-                <TextInput background={wrapperBackground} type="text" width="100%" onKeyDown={onKeyDown} />
+                <TextInput
+                    background={wrapperBackground}
+                    type="text"
+                    width="100%"
+                    onBlur={onBlur}
+                    onKeyDown={onKeyDown}
+                />
             </Wrapper>
         </Section>
     );
