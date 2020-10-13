@@ -1,22 +1,20 @@
-import { Span } from 'components/common/typography/Span';
 import { CreateCampaignForm } from 'components/FormComponents/forms/CreateCampaignForm';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import { formGrey2, primaryPadding, secondaryColor, tertiaryPadding } from 'constants/styles';
-import React, { FC } from 'react';
+import { formGrey2, tertiaryPadding } from 'constants/styles';
+import React from 'react';
 
-const BudgetSpan: FC = ({ children }) => (
-    <Span color={secondaryColor} fontSize="12px" lineHeight="20px" opacity={0.4}>
-        {children}
-    </Span>
-);
+// const BudgetSpan: FC = ({ children }) => (
+//     <Span color={secondaryColor} fontSize="12px" lineHeight="20px" opacity={0.4}>
+//         {children}
+//     </Span>
+// );
 
-const DarkBudgetSpan: FC = ({ children }) => (
-    <Span color={secondaryColor} fontSize="16px" lineHeight="24px">
-        {children}
-    </Span>
-);
+// const DarkBudgetSpan: FC = ({ children }) => (
+//     <Span color={secondaryColor} fontSize="16px" lineHeight="24px">
+//         {children}
+//     </Span>
+// );
 
 // const FilterSpan: FC = ({ children }) => (
 //     <Span color="#6B6B6B" fontSize="26px" lineHeight="32px">
@@ -61,7 +59,7 @@ export const Create = () => (
         <Section>
             <Column marginRight={tertiaryPadding}>
                 {/* <CustomImg height="410px" src={cardModalImg} width="258px" /> */}
-                <CreateCampaignCard marginBottom={primaryPadding} marginRight="0" />
+                {/* <CreateCampaignCard marginBottom={primaryPadding} marginRight="0" /> */}
                 {/* <Row marginBottom={primaryPadding}>
                     <AsideBlock title="Budget">
                         <ColumnBlockCell padding={asideBlockPadding}>

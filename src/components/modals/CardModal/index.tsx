@@ -25,6 +25,7 @@ import { avatarDiameter, primaryPadding, secondaryPadding, tertiaryPadding } fro
 import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
+import { campaignsEvents } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { roundScore } from 'utils/usefulFunctions';
@@ -76,6 +77,12 @@ export const CardModal = () => {
 
     const onDetailsClick = () => {
         history.push(routes.campaignManager.discover.details + '/' + id);
+        modalEvents.closeCardModal();
+    };
+
+    const onPromoteClick = () => {
+        history.push(routes.campaignManager.campaign.create);
+        campaignsEvents.addContentIds([id]);
         modalEvents.closeCardModal();
     };
 
@@ -372,9 +379,11 @@ export const CardModal = () => {
                         <ColumnBlockCell>
                             <Section justifyCenter marginBottom={tertiaryPadding}>
                                 {/* <Column marginRight="50px"> */}
-                                <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
+                                {/* <RoundedButton onClick={onDetailsClick}>Details</RoundedButton> */}
                                 {/* </Column> */}
-                                {/* <RoundedButton reverse>+&nbsp;PROMOTE</RoundedButton> */}
+                                <RoundedButton reverse onClick={onPromoteClick}>
+                                    +&nbsp;PROMOTE
+                                </RoundedButton>
                             </Section>
                         </ColumnBlockCell>
                     </>

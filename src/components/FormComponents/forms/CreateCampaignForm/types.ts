@@ -3,6 +3,7 @@ import { FormikErrors } from 'formik';
 export interface Props {
     title: string;
     tags: string[];
+    contentIds: string[];
     utcToStart: string;
     utcToEnd: string;
     amount: string;
@@ -13,6 +14,7 @@ export interface SetErrorsCreateCampaign {
         errors: FormikErrors<{
             title?: string;
             tags?: string;
+            contentIds?: string;
             utcToStart?: string;
             utcToEnd?: string;
             amount?: string;
