@@ -89,6 +89,11 @@ export const routesArray = [
             { path: routes.campaignManager.campaign.create, name: 'create' },
             { path: routes.campaignManager.campaign.indexDetails, name: 'details' }
         ]
+    },
+    {
+        path: routes.userAdmin.index,
+        name: 'Users',
+        proxy: [1]
     }
     // ,{
     //     path: routes.campaignManager.overview.index,

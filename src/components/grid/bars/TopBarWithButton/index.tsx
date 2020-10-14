@@ -11,8 +11,7 @@ import {
 import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/styles';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { routes, routesArray } from 'constants/routes';
-import { blue } from 'constants/styles';
+import { routesArray } from 'constants/routes';
 import { useStore } from 'effector-react';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
@@ -29,16 +28,16 @@ export const TopBarWithButton = ({ buttons }: Props) => {
 
     const onClick = (path: string) => history.push(path);
 
-    const onUsersClick = () => history.push(routes.userAdmin.index);
+    //const onUsersClick = () => history.push(routes.userAdmin.index);
 
     return (
         <Wrapper>
-            {routesArray.map(({ path, name, subPages }) => {
+            {routesArray.map(({ path, name, subPages, proxy }) => {
                 const active = path === location.pathname;
                 const borderActive = -1 !== location.pathname.indexOf(path);
-                const subPage = subPages.filter(i => -1 !== location.pathname.indexOf(i.path));
+                const subPage = subPages?.filter(i => -1 !== location.pathname.indexOf(i.path));
 
-                return (
+                return proxy && !proxy.includes(access) ? null : (
                     <StyledItem key={path} active={active} onClick={() => onClick(path)}>
                         <Column alignCenter>
                             <Span
@@ -58,7 +57,7 @@ export const TopBarWithButton = ({ buttons }: Props) => {
                     </StyledItem>
                 );
             })}
-            {access === 1 && (
+            {/* {access === 1 && (
                 <>
                     <StyledItem onClick={onUsersClick}>
                         <Column alignCenter>
@@ -76,7 +75,7 @@ export const TopBarWithButton = ({ buttons }: Props) => {
                         <SubPageSpan>{''}</SubPageSpan>
                     </Row>
                 </>
-            )}
+            )} */}
             <MarginWrapper marginLeft="auto">{buttons}</MarginWrapper>
         </Wrapper>
     );
