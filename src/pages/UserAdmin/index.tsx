@@ -3,7 +3,7 @@ import { UserAdminTable } from 'components/common/tables/UserAdminTable';
 import { Span } from 'components/common/typography/Span';
 import { InviteForm } from 'components/FormComponents/forms/InviteForm';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { UserAdminLayout } from 'components/Layouts/UserAdminLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect, useMemo } from 'react';
@@ -33,7 +33,7 @@ export const UserAdmin = () => {
     }, [adminIds, memberIds]);
 
     return (
-        <UserAdminLayout>
+        <CampaignManagerLayout>
             <Section noWrap marginBottom="25px">
                 <Column marginRight="111px">
                     <Row marginBottom={headersMarginBottom}>
@@ -70,6 +70,6 @@ export const UserAdmin = () => {
                 </Column>
             </Section>
             {initialLoading ? <Loader /> : <UserAdminTable {...items} />}
-        </UserAdminLayout>
+        </CampaignManagerLayout>
     );
 };
