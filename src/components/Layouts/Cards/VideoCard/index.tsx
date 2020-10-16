@@ -41,29 +41,28 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
     const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
         products
     ]);
-    const active = useMemo(() => (womContentId && contentIds?.includes(womContentId)) || false, [
-        womContentId,
-        contentIds
-    ]);
+    const active = useMemo(
+        () => (womContentId && contentIds.map(i => i.womContentId)?.includes(womContentId)) || false,
+        [womContentId, contentIds]
+    );
 
     const openCardModal = () => modalEvents.openCardModal(ID);
-
     const onVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
-
     const handleDetail = () => history.push(routes.campaignManager.discover.indexDetails + ID);
-
     const addIdHandler = () => {
         if (womContentId)
-            active ? campaignsEvents.removeContentById(womContentId) : campaignsEvents.pushContentId(womContentId);
+            active
+                ? campaignsEvents.removeContentById(womContentId)
+                : campaignsEvents.pushContentId({ womContentId, uriPrimary, womQualityScore, products });
     };
 
     return (
         <Card pointer active={active}>
-            <Description onClick={openCardModal}>
+            <Description>
                 <AbsoluteWrapper bottom={padding} right={padding} zIndex="5">
                     <CustomImg
                         height={addIdImgDiameter}
-                        rotate={active ? 0 : 45}
+                        rotate={active ? 45 : 0}
                         src={addIdImg}
                         width={addIdImgDiameter}
                         onClick={addIdHandler}
@@ -72,9 +71,14 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
                 {isVideoPlaying ? (
                     <AbsoluteVideo controls isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
                 ) : (
-                    <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} zIndex="-1" />
+                    <AbsoluteImg
+                        pointer
+                        src={uriPrimary ? uriPrimary : defaultImage}
+                        zIndex="0"
+                        onClick={openCardModal}
+                    />
                 )}
-                <Row marginBottom="5px">
+                <Row marginBottom="5px" zIndex="2">
                     <Column marginRight={primaryPadding}>
                         <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
                     </Column>
@@ -83,10 +87,10 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
                     </Column>
                     <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                 </Row>
-                <Row>
+                <Row zIndex="2">
                     <RatingSpan>??</RatingSpan>
                 </Row>
-                <MarginWrapper marginTop="auto">
+                <MarginWrapper marginTop="auto" zIndex="2">
                     <Column>
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>

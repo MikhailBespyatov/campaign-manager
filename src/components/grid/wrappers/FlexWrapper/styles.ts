@@ -16,7 +16,7 @@ export const Row = styled.div<RowProps>`
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${primaryPadding};`)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
-    //z-index: 1;
+    ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
 `;
 
 export const Column = styled.div<ColumnProps>`
@@ -30,7 +30,7 @@ export const Column = styled.div<ColumnProps>`
     ${({ marginLeft }) => (marginLeft ? `margin-left: ${marginLeft};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
-    //z-index: 1;
+    ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
 `;
 
 export const Section = styled.section<RowProps>`
@@ -45,5 +45,5 @@ export const Section = styled.section<RowProps>`
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${primaryPadding};`)};
-    //z-index: 1;
+    ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
 `;

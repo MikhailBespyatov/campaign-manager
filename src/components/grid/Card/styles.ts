@@ -10,6 +10,7 @@ import {
 import { CardProps, FeatureCellProps } from 'components/grid/Card/types';
 import {
     black,
+    blue,
     borderWidth,
     cardBackgroundColor,
     disableDefaultButtonStyleMixin,
@@ -19,7 +20,6 @@ import {
     flexStart,
     formTextStyleMixin,
     grey,
-    primaryColor,
     primaryPadding,
     transitionTime,
     white
@@ -35,7 +35,7 @@ export const Card = styled.div<CardProps>`
     width: ${({ width }) => (width ? width : cardWidth)};
     height: ${({ height }) => (height ? height : cardHeight)};
     border-radius: ${CardBorderRadius};
-    border: 2px solid ${({ active }) => (active ? primaryColor : white)};
+    border: 2px solid ${({ active }) => (active ? blue : white)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
@@ -74,6 +74,7 @@ export const Description = styled.div<Padding>`
     ${flexStart};
     justify-content: space-between;
     flex-direction: column;
+    z-index: 1;
 `;
 
 export const CardRowFeatures = styled.div`

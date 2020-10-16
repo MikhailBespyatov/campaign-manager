@@ -5,15 +5,17 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 
-const addContentIds = createEvent<string[]>();
-const pushContentId = createEvent<string>();
+const addContentIds = createEvent<WOM.ContentItemResponse[]>();
+const pushContentId = createEvent<WOM.ContentItemResponse>();
 const removeContentById = createEvent<string>();
 const clearContentIds = createEvent();
 
-const contentIds = createStore<string[]>([])
+const contentIds = createStore<WOM.ContentItemResponse[]>([])
     .on(addContentIds, (state, newState) => [...state, ...newState])
-    .on(pushContentId, (state, newState) => [...state, newState])
-    .on(removeContentById, (state, id) => state.filter(i => i !== id))
+    .on(pushContentId, (state, newState) =>
+        state.map(i => i.womContentId).includes(newState.womContentId) ? state : [...state, newState]
+    )
+    .on(removeContentById, (state, id) => state.filter(i => i.womContentId !== id))
     .on(clearContentIds, () => []);
 
 const upsertItem = createEffect({
@@ -22,6 +24,8 @@ const upsertItem = createEffect({
             loadingEffects.updateLoading();
             await API.campaigns.upsertItem(values);
             loadingEffects.updateLoading();
+
+            !values.organizationId && clearContentIds();
         } catch {
             loadingEffects.updateLoading();
             setErrors({
