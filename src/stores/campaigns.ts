@@ -6,10 +6,14 @@ import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 
 const addContentIds = createEvent<string[]>();
+const pushContentId = createEvent<string>();
+const removeContentById = createEvent<string>();
 const clearContentIds = createEvent();
 
 const contentIds = createStore<string[]>([])
     .on(addContentIds, (state, newState) => [...state, ...newState])
+    .on(pushContentId, (state, newState) => [...state, newState])
+    .on(removeContentById, (state, id) => state.filter(i => i !== id))
     .on(clearContentIds, () => []);
 
 const upsertItem = createEffect({
@@ -102,7 +106,14 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
-const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues, addContentIds, clearContentIds };
+const campaignsEvents = {
+    updateStatisticsValues,
+    updateAndRemoveStatisticsValues,
+    addContentIds,
+    clearContentIds,
+    pushContentId,
+    removeContentById
+};
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem };
 const campaignsStores = { items, item, statisticsItems, contentIds };
 

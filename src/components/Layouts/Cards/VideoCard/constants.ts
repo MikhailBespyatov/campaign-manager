@@ -13,3 +13,5 @@ export const productSpanMarginLeft = '11px';
 
 export const colorTheme1 = formGrey4;
 export const backgroundTheme1 = formGrey2;
+
+export const addIdImgDiameter = '40px';

@@ -3,20 +3,29 @@ import group1img from 'assets/img/group_1.svg';
 import group2img from 'assets/img/group_2.svg';
 import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
+import addIdImg from 'assets/img/increment.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
 import { P } from 'components/common/typography/titles/P';
 import { AbsoluteVideo } from 'components/common/Video';
 import { Card, CardRowFeatures, Description, FeatureCell } from 'components/grid/Card';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { backgroundTheme1, colorTheme1, productImgDiameter } from 'components/Layouts/Cards/VideoCard/constants';
+import {
+    addIdImgDiameter,
+    backgroundTheme1,
+    colorTheme1,
+    productImgDiameter
+} from 'components/Layouts/Cards/VideoCard/constants';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { primaryPadding, secondaryPadding, white } from 'constants/styles';
+import { padding, primaryPadding, secondaryPadding, white } from 'constants/styles';
+import { useStore } from 'effector-react';
 import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
+import { campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { modalEvents } from 'stores/modal';
 import { roundScore } from 'utils/usefulFunctions';
 
@@ -24,12 +33,17 @@ interface Props extends WOM.ContentItemResponse {}
 
 export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products, streamDetails }: Props) => {
     const history = useHistory();
+    const contentIds = useStore(campaignsStores.contentIds);
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
     const ID = useMemo(() => (womContentId ? womContentId : ''), [womContentId]);
     const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
         products
+    ]);
+    const active = useMemo(() => (womContentId && contentIds?.includes(womContentId)) || false, [
+        womContentId,
+        contentIds
     ]);
 
     const openCardModal = () => modalEvents.openCardModal(ID);
@@ -38,10 +52,23 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
 
     const handleDetail = () => history.push(routes.campaignManager.discover.indexDetails + ID);
 
+    const addIdHandler = () => {
+        if (womContentId)
+            active ? campaignsEvents.removeContentById(womContentId) : campaignsEvents.pushContentId(womContentId);
+    };
+
     return (
-        <Card pointer>
+        <Card pointer active={active}>
             <Description onClick={openCardModal}>
-                <AbsoluteVideo isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
+                <AbsoluteWrapper bottom={padding} right={padding} zIndex="5">
+                    <CustomImg
+                        height={addIdImgDiameter}
+                        rotate={active ? 0 : 45}
+                        src={addIdImg}
+                        width={addIdImgDiameter}
+                        onClick={addIdHandler}
+                    />
+                </AbsoluteWrapper>
                 {isVideoPlaying ? (
                     <AbsoluteVideo controls isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
                 ) : (

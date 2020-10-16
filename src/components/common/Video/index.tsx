@@ -1,7 +1,6 @@
 import { StyledVideo } from 'components/common/Video/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import Hls from 'hls.js';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 interface Props {
     src: string;
@@ -13,17 +12,17 @@ interface Props {
 export const Video = ({ src, poster, controls = false, isPlaying = false }: Props) => {
     const video = useRef<HTMLVideoElement>(null);
 
-    useEffect(() => {
-        // isPlaying && src ? video?.current?.play() : video?.current?.pause();
-        if (isPlaying && Hls.isSupported() && src && video.current) {
-            var hls = new Hls();
-            hls.loadSource(src);
-            hls.attachMedia(video.current);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                video?.current?.play();
-            });
-        } else video?.current?.pause();
-    }, [isPlaying, src]);
+    // useEffect(() => {
+    //     // isPlaying && src ? video?.current?.play() : video?.current?.pause();
+    //     if (isPlaying && Hls.isSupported() && src && video.current) {
+    //         var hls = new Hls();
+    //         hls.loadSource(src);
+    //         hls.attachMedia(video.current);
+    //         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    //             video?.current?.play();
+    //         });
+    //     } else video?.current?.pause();
+    // }, [isPlaying, src]);
 
     return <StyledVideo ref={video} controls={controls} poster={poster} preload="metadata" />;
 };

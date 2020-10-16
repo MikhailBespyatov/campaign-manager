@@ -19,6 +19,7 @@ import {
     flexStart,
     formTextStyleMixin,
     grey,
+    primaryColor,
     primaryPadding,
     transitionTime,
     white
@@ -34,6 +35,7 @@ export const Card = styled.div<CardProps>`
     width: ${({ width }) => (width ? width : cardWidth)};
     height: ${({ height }) => (height ? height : cardHeight)};
     border-radius: ${CardBorderRadius};
+    border: 2px solid ${({ active }) => (active ? primaryColor : white)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
