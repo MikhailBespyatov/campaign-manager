@@ -51,27 +51,29 @@ export const CreateCampaignForm = () => {
         >
             {({ values, handleSubmit, isValid, dirty, touched, setFieldValue }) => (
                 <>
-                    <Block title="Selected videos">
-                        <RowBlockCell padding={primaryPadding}>
-                            <Row marginBottom="0">
-                                <FieldArray name="contentIds">
-                                    {({ remove }) =>
-                                        values.contentIds.map((item, i) => (
-                                            <CreateCampaignMiniCard
-                                                key={item}
-                                                marginBottom="0"
-                                                {...initialContentIds[i]}
-                                                onRemove={() => {
-                                                    remove(i);
-                                                    campaignsEvents.removeContentById(item);
-                                                }}
-                                            />
-                                        ))
-                                    }
-                                </FieldArray>
-                            </Row>
-                        </RowBlockCell>
-                    </Block>
+                    {!!initialContentIds.length && (
+                        <Block title="Selected videos">
+                            <RowBlockCell padding={primaryPadding}>
+                                <Row marginBottom="0">
+                                    <FieldArray name="contentIds">
+                                        {({ remove }) =>
+                                            values.contentIds.map((item, i) => (
+                                                <CreateCampaignMiniCard
+                                                    key={item}
+                                                    marginBottom="0"
+                                                    {...initialContentIds[i]}
+                                                    onRemove={() => {
+                                                        remove(i);
+                                                        campaignsEvents.removeContentById(item);
+                                                    }}
+                                                />
+                                            ))
+                                        }
+                                    </FieldArray>
+                                </Row>
+                            </RowBlockCell>
+                        </Block>
+                    )}
                     <HighlightedTitleBlock title="Create Campaign">
                         <RowBlockCell padding={primaryPadding}>
                             <FormWrapper onSubmit={handleSubmit}>
