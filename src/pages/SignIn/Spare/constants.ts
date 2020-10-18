@@ -20,4 +20,4 @@ export const validationSchema = Yup.object().shape({
 //     ) => void;
 // }
 
-export const onSubmit = () => history.push(routes.signIn.adidas);
+export const onSubmit = () => history.push(routes.signIn.index);

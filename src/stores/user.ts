@@ -15,6 +15,7 @@ import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
+import { themeEvents } from 'stores/theme';
 import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
@@ -190,7 +191,11 @@ const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userS
     .on(setToken, (_, token) => token);
 
 user.watch(state => {
-    organizationsEvents.setOrganizationId(getOrganizationId());
+    if (!objectIsEmpty(state)) {
+        const organizationId = getOrganizationId();
+        organizationsEvents.setOrganizationId(organizationId);
+        themeEvents.setGlobalPrefix(organizationId === '5ddbdd2efd92595cf6d94dc1' ? 'adidas' : 'base');
+    }
     objectIsEmpty(state)
         ? setAuth({
               access: -1,

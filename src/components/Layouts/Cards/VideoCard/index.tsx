@@ -27,12 +27,14 @@ import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 import { campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { modalEvents } from 'stores/modal';
+import { themeStores } from 'stores/theme';
 import { roundScore } from 'utils/usefulFunctions';
 
 interface Props extends WOM.ContentItemResponse {}
 
 export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products, streamDetails }: Props) => {
     const history = useHistory();
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const contentIds = useStore(campaignsStores.contentIds);
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -48,7 +50,7 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
 
     const openCardModal = () => modalEvents.openCardModal(ID);
     const onVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
-    const handleDetail = () => history.push(routes.campaignManager.discover.indexDetails + ID);
+    const handleDetail = () => history.push(globalPrefixUrl + routes.campaignManager.discover.indexDetails + ID);
     const addIdHandler = () => {
         if (womContentId)
             active

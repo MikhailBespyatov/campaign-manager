@@ -53,11 +53,17 @@ export const allValuesAreTrue = (obj: object) => !Object.values(obj).includes(fa
 
 export const isExactValuesQuantity = (obj: object, quantity: number = 1) => Object.values(obj).length === quantity;
 
+export const retrieveOrganizationIdFromUser = (user: WOM.UserJwtTokenResponse) => {
+    const adminOf = user?.user?.organizationMembership?.adminOf;
+    const memberOf = user?.user?.organizationMembership?.memberOf;
+
+    return adminOf?.length ? adminOf[0] : memberOf?.length ? memberOf[0] : '';
+};
+
 export const getOrganizationId = () => {
     const user: WOM.UserJwtTokenResponse = JSON.parse(localStorage.getItem(userStorageName) || '{}');
-    const adminOf = user?.user?.organizationMembership?.adminOf;
 
-    return adminOf?.length ? adminOf[0] : '';
+    return retrieveOrganizationIdFromUser(user);
 };
 
 export const roundScore = (num: number, n = numbersAfterComma) => num.toFixed(n);

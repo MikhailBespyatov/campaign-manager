@@ -15,6 +15,7 @@ import { routesArray } from 'constants/routes';
 import { useStore } from 'effector-react';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 
 interface Props {
@@ -25,8 +26,9 @@ export const TopBarWithButton = ({ buttons }: Props) => {
     const location = useLocation();
     const history = useHistory();
     const { access } = useStore(userStores.auth);
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
-    const onClick = (path: string) => history.push(path);
+    const onClick = (path: string) => history.push(globalPrefixUrl + path);
 
     //const onUsersClick = () => history.push(routes.userAdmin.index);
 

@@ -20,5 +20,6 @@ export const adidasTheme = {
 
 export const themes: Dictionary<ThemeProps> = {
     default: defaultTheme,
+    base: defaultTheme,
     adidas: adidasTheme
 };
