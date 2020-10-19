@@ -50,7 +50,28 @@ export const CreateCampaignForm = () => {
             onSubmit={onSubmit}
         >
             {({ values, handleSubmit, isValid, dirty, touched, setFieldValue }) => (
-                <>
+                <Row>
+                    <HighlightedTitleBlock title="Create Campaign">
+                        <RowBlockCell padding={primaryPadding}>
+                            <FormWrapper onSubmit={handleSubmit}>
+                                <TextInput label="Campaign Name" name="title" placeholder="Enter campaign name" />
+                                <ErrorSpan touched={touched?.tags}>
+                                    {!values.contentIds.filter(i => i !== '').length && 'Selected videos are required'}
+                                </ErrorSpan>
+                                <DatePickerInput label="Start of campaign" name="utcToStart" />
+                                <DatePickerInput label="End of campaign" name="utcToEnd" />
+                                <TextInput
+                                    label="Budget amount"
+                                    name="amount"
+                                    placeholder="Enter amount of budget"
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
+                                />
+                                <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
+                                    {loading ? <Loader /> : 'CREATE CAMPAIGN'}
+                                </Button>
+                            </FormWrapper>
+                        </RowBlockCell>
+                    </HighlightedTitleBlock>
                     {!!initialContentIds.length && (
                         <Block title="Selected videos">
                             <RowBlockCell padding={primaryPadding}>
@@ -74,28 +95,7 @@ export const CreateCampaignForm = () => {
                             </RowBlockCell>
                         </Block>
                     )}
-                    <HighlightedTitleBlock title="Create Campaign">
-                        <RowBlockCell padding={primaryPadding}>
-                            <FormWrapper onSubmit={handleSubmit}>
-                                <TextInput label="Campaign Name" name="title" placeholder="Enter campaign name" />
-                                <ErrorSpan touched={touched?.tags}>
-                                    {!values.contentIds.filter(i => i !== '').length && 'Selected videos are required'}
-                                </ErrorSpan>
-                                <DatePickerInput label="Start of campaign" name="utcToStart" />
-                                <DatePickerInput label="End of campaign" name="utcToEnd" />
-                                <TextInput
-                                    label="Budget amount"
-                                    name="amount"
-                                    placeholder="Enter amount of budget"
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
-                                />
-                                <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                                    {loading ? <Loader /> : 'CREATE CAMPAIGN'}
-                                </Button>
-                            </FormWrapper>
-                        </RowBlockCell>
-                    </HighlightedTitleBlock>
-                </>
+                </Row>
             )}
         </Formik>
     );

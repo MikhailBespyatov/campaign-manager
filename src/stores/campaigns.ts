@@ -1,9 +1,12 @@
+import history from 'BrowserHistory';
 import { CreateCampaignRequestProps } from 'components/FormComponents/forms/CreateCampaignForm/types';
 import { noop } from 'constants/global';
 import { existCampaignErrorMessage } from 'constants/messages';
+import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 
 const addContentIds = createEvent<WOM.ContentItemResponse[]>();
 const pushContentId = createEvent<WOM.ContentItemResponse>();
@@ -22,10 +25,11 @@ const upsertItem = createEffect({
     handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            await API.campaigns.upsertItem(values);
+            const { id } = await API.campaigns.upsertItem(values);
             loadingEffects.updateLoading();
 
-            !values.organizationId && clearContentIds();
+            clearContentIds();
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.indexDetails + id);
         } catch {
             loadingEffects.updateLoading();
             setErrors({
