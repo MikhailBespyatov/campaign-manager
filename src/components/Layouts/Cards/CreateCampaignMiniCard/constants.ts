@@ -1,4 +1,4 @@
-import { formGrey2, formGrey4 } from 'constants/styles';
+import { formGrey2, formGrey4, padding } from 'constants/styles';
 
 export const cardWidth = '120px';
 export const cardHeight = '120px';
@@ -12,9 +12,13 @@ export const ratingSpanColor = 'white';
 
 export const productImgDiameter = '9px';
 
+export const cardProductWidth = `calc(${cardWidth} - 3 * ${padding} - ${productImgDiameter})`;
+
 export const productSpanFontSize = '18px';
 export const productSpanLineHeight = '29px';
 export const productSpanMarginLeft = '11px';
 
 export const colorTheme1 = formGrey4;
 export const backgroundTheme1 = formGrey2;
+
+export const addIdImgDiameter = '40px';

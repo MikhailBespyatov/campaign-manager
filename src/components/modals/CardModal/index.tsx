@@ -77,14 +77,14 @@ export const CardModal = () => {
 
     const onClose = () => modalEvents.closeCardModal();
 
-    const onDetailsClick = () => {
-        history.push(routes.campaignManager.discover.details + '/' + id);
-        modalEvents.closeCardModal();
-    };
+    // const onDetailsClick = () => {
+    //     history.push(routes.campaignManager.discover.details + '/' + id);
+    //     modalEvents.closeCardModal();
+    // };
 
     const onPromoteClick = () => {
         history.push(routes.campaignManager.campaign.create);
-        campaignsEvents.addContentIds([id]);
+        campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
         modalEvents.closeCardModal();
     };
 

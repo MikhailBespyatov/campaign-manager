@@ -8,7 +8,7 @@ import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbo
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { secondaryPadding } from 'constants/styles';
-import React, { FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
+import React, { FocusEvent, KeyboardEvent, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
 
 interface Props extends Title, DefaultChecked {
@@ -26,10 +26,22 @@ export const TagFilter = ({
     const [checked, setChecked] = useState(defaultChecked);
     const [values, setValues] = useState(tagsValues);
 
-    const onCheckboxChange = (checked: boolean) => setChecked(checked);
+    const onCheckboxChange = (checked: boolean) => {
+        setChecked(checked);
+        onChange(checked, values);
+    };
 
-    const addValue = (value: string) => setValues([...values, value]);
-    const removeValue = (value: string) => setValues(values.filter(i => i !== value));
+    const addValue = (value: string) => {
+        const newValues = [...values, value];
+        setValues(newValues);
+        onChange(checked, newValues);
+    };
+
+    const removeValue = (value: string) => {
+        const newValues = values.filter(i => i !== value);
+        setValues(newValues);
+        onChange(checked, newValues);
+    };
 
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         const value = (e.target as HTMLInputElement).value;
@@ -47,10 +59,10 @@ export const TagFilter = ({
         }
     };
 
-    useEffect(() => {
-        onChange(checked, values);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [checked, values]);
+    // useEffect(() => {
+    //     onChange(checked, values);
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [checked, values]);
 
     return (
         <Section alignCenter noWrap marginBottom="35px">

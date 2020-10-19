@@ -1,55 +1,55 @@
-export const adidasGlobalPrefix = '/adidas';
+export const globalPrefix = '';
+export const adidasPrefix = '/adidas';
 
-const signUpPrefix = adidasGlobalPrefix + '/register';
-const walletPrefix = adidasGlobalPrefix + '/create_wallet';
-const signInPrefix = adidasGlobalPrefix + '/login';
-const adidasPrefix = adidasGlobalPrefix + '/adidas';
+const signUpPrefix = '/register';
+const walletPrefix = '/create_wallet';
+const signInPrefix = '/login';
 
-const campaignManagerPrefix = adidasGlobalPrefix + '/campaign_manager';
+const campaignManagerPrefix = globalPrefix + '/campaign_manager';
 
 const campaignPrefix = campaignManagerPrefix + '/campaign';
 const discoverPrefix = campaignManagerPrefix + '/discover';
 
-const userAdminPrefix = adidasGlobalPrefix + '/user_admin';
+const userAdminPrefix = globalPrefix + '/user_admin';
 
-const adminPrefix = adidasGlobalPrefix + '/admin';
+const adminPrefix = '/admin';
 
 // * without global prefix
 const passwordResetPrefix = '/password_reset';
 
-export const routes = {
-    test: '/components_test_page',
-    home: `${campaignManagerPrefix}/dashboard`,
+export const staticRoutes = {
     signUp: {
         index: signUpPrefix,
-        acceptInvite: adidasGlobalPrefix + '/accept-invite/:inviteCode',
-        acceptOrgInvite: adidasGlobalPrefix + '/invite-org/:inviteCode',
+        acceptInvite: adidasPrefix + '/accept-invite/:inviteCode',
+        acceptOrgInvite: adidasPrefix + '/invite-org/:inviteCode',
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
         success: `${signUpPrefix}${walletPrefix}/success`
     },
     signIn: {
-        index: signInPrefix,
+        index: adidasPrefix + signInPrefix,
         admin: `${signInPrefix}/admin`,
-        adidas: `${signInPrefix}${adidasPrefix}`,
-        passwordReset: `${signInPrefix}${passwordResetPrefix}`,
+        passwordReset: `${adidasPrefix}${signInPrefix}${passwordResetPrefix}`,
         password: `${signInPrefix}${passwordResetPrefix}/password`,
-        requestCode: `${signInPrefix}${passwordResetPrefix}/security_code`
+        requestCode: `${adidasPrefix}${signInPrefix}${passwordResetPrefix}/security_code`
     },
+    admin: {
+        createOrganization: `${adminPrefix}/create_organization`
+    },
+    static: {
+        privacy: '/privacy_policy',
+        press: '/press'
+    }
+};
+
+export const dynamicRoutes = {
+    home: `${campaignManagerPrefix}`,
     userAdmin: {
         index: userAdminPrefix
     },
-    admin: {
-        //index: adminPrefix,
-        createOrganization: `${adminPrefix}/create_organization`
-        //user: `${adminPrefix}/user`
-    },
     campaignManager: {
         index: campaignManagerPrefix,
-        dashboard: {
-            index: `${campaignPrefix}/dashboard`
-        },
         discover: {
             index: `${discoverPrefix}`,
             indexDetails: `${discoverPrefix}/details/`,
@@ -61,22 +61,67 @@ export const routes = {
             details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,
             edit: `${campaignPrefix}/edit_campaign/:campaignId`
-        },
-        overview: {
-            index: `${campaignPrefix}/overview`
         }
-    },
-    static: {
-        privacy: '/privacy_policy',
-        press: '/press'
     }
 };
 
-export const routesArray = [
-    // {
-    //     path: routes.campaignManager.dashboard.index,
-    //     name: 'Dashboard'
+export const routes = {
+    ...staticRoutes,
+    ...dynamicRoutes
+    // test: '/components_test_page',
+    // home: `${campaignManagerPrefix}/dashboard`,
+    // signUp: {
+    //     index: signUpPrefix,
+    //     acceptInvite: globalPrefix + '/accept-invite/:inviteCode',
+    //     acceptOrgInvite: globalPrefix + '/invite-org/:inviteCode',
+    //     createAccount: signUpPrefix,
+    //     createWallet: `${signUpPrefix}${walletPrefix}`,
+    //     payment: `${signUpPrefix}${walletPrefix}/payment`,
+    //     success: `${signUpPrefix}${walletPrefix}/success`
     // },
+    // signIn: {
+    //     index: signInPrefix,
+    //     admin: `${signInPrefix}/admin`,
+    //     passwordReset: `${signInPrefix}${passwordResetPrefix}`,
+    //     password: `${signInPrefix}${passwordResetPrefix}/password`,
+    //     requestCode: `${signInPrefix}${passwordResetPrefix}/security_code`
+    // },
+    // userAdmin: {
+    //     index: userAdminPrefix
+    // },
+    // admin: {
+    //     //index: adminPrefix,
+    //     createOrganization: `${adminPrefix}/create_organization`
+    //     //user: `${adminPrefix}/user`
+    // },
+    // campaignManager: {
+    //     index: campaignManagerPrefix,
+    //     dashboard: {
+    //         index: `${campaignPrefix}/dashboard`
+    //     },
+    //     discover: {
+    //         index: `${discoverPrefix}`,
+    //         indexDetails: `${discoverPrefix}/details/`,
+    //         details: `${discoverPrefix}/details/:discoverId`
+    //     },
+    //     campaign: {
+    //         index: `${campaignPrefix}`,
+    //         indexDetails: `${campaignPrefix}/details/`,
+    //         details: `${campaignPrefix}/details/:campaignId`,
+    //         create: `${campaignPrefix}/create_campaign`,
+    //         edit: `${campaignPrefix}/edit_campaign/:campaignId`
+    //     },
+    //     overview: {
+    //         index: `${campaignPrefix}/overview`
+    //     }
+    // },
+    // static: {
+    //     privacy: '/privacy_policy',
+    //     press: '/press'
+    // }
+};
+
+export const routesArray = [
     {
         path: routes.campaignManager.discover.index,
         name: 'Discover',
@@ -95,8 +140,4 @@ export const routesArray = [
         name: 'Users',
         proxy: [1]
     }
-    // ,{
-    //     path: routes.campaignManager.overview.index,
-    //     name: 'Overview'
-    // }
 ];

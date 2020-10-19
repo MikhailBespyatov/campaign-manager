@@ -8,18 +8,18 @@ import { Pagination } from 'components/Layouts/Pagination';
 import { defaultLimit, defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
 import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
-import { loadingStores } from 'stores/loading';
 
 export const Discover = () => {
     const { items, totalRecords } = useStore(campaignContentStores.items);
-    const loading = useStore(loadingStores.initialLoading);
+    const { tagsAll, tagsAny, pageIndex } = useStore(campaignContentStores.values);
+    const loading = useStore(campaignContentStores.initialLoading);
 
-    const [currentPage, setCurrentPage] = useState(defaultPage);
+    //const [currentPage, setCurrentPage] = useState(defaultPage);
 
     const onTagsFilterChange: onTagsFilterChangeType = (checked, values) => {
-        setCurrentPage(defaultPage);
+        //setCurrentPage(defaultPage);
         checked
             ? campaignContentEvents.updateAndRemoveValues({
                   removeValues: ['tagsAll'],
@@ -40,20 +40,20 @@ export const Discover = () => {
     };
 
     const onPaginationChange = (current: number) => {
-        setCurrentPage(current);
+        //setCurrentPage(current);
         campaignContentEvents.updateValues({
             pageIndex: current,
             limit: defaultLimit
         });
     };
 
-    useEffect(() => {
-        campaignContentEvents.setDefaultValues();
-    }, []);
+    // useEffect(() => {
+    //     campaignContentEvents.setDefaultValues();
+    // }, []);
 
     return (
         <CampaignManagerLayout>
-            <TagFilter onChange={onTagsFilterChange} />
+            <TagFilter defaultChecked={!!tagsAll} tagsValues={tagsAll || tagsAny || []} onChange={onTagsFilterChange} />
             {loading ? (
                 <Section>
                     <Loader />
@@ -68,7 +68,7 @@ export const Discover = () => {
             <Section justifyCenter>
                 {!loading && (
                     <Pagination
-                        currentIndex={currentPage + 1}
+                        currentIndex={pageIndex + 1}
                         totalItems={totalRecords !== -1 ? totalRecords : 0}
                         onChange={onPaginationChange}
                     />

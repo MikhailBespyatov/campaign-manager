@@ -8,6 +8,7 @@ import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
+import { themeStores } from 'stores/theme';
 import { Background } from 'types';
 import { commaInserter } from 'utils/usefulFunctions';
 
@@ -16,17 +17,20 @@ interface Props extends Background {}
 export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const location = useLocation();
     const history = useHistory();
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const organizationId = useStore(organizationsStores.organizationId);
     const { amount, spend, spendPerDay, remaining, remainingDuration, campaignsRunning } = useStore(
         organizationsStores.statistics
     );
 
-    const createRoute = routes.campaignManager.campaign.create;
+    const createRoute = globalPrefixUrl + routes.campaignManager.campaign.create;
 
     const onClick = () => history.push(createRoute);
 
     useEffect(() => {
-        organizationsEffects.getStatisticsById('5ddbdd2efd92595cf6d94dc1');
-    }, []);
+        organizationId && console.log('www', organizationId);
+        organizationId && organizationsEffects.getStatisticsById(organizationId);
+    }, [organizationId]);
 
     return (
         <MainLayout

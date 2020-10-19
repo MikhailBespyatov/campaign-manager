@@ -1,4 +1,3 @@
-import companyImg from 'assets/img/adidas.svg';
 import deleteImg from 'assets/img/delete.svg';
 import arrowImg from 'assets/img/select_arrow_dark.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
@@ -22,9 +21,9 @@ import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
+import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import { userAdminEffects, userAdminStores } from 'stores/userAdmin';
-import { getTheme } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
     <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
@@ -72,6 +71,8 @@ const LegendaryItem = () => (
     </LegendaryTableRow>
 );
 const Item = ({ userId, email }: WOM.GetUserResponse) => {
+    const globalPrefix = useStore(themeStores.globalPrefix);
+    const { logo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
     const loading = useStore(userAdminStores.loading);
 
@@ -92,11 +93,11 @@ const Item = ({ userId, email }: WOM.GetUserResponse) => {
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
                             height={companyImgDiameter}
-                            src={companyImg}
+                            src={logo}
                             width={companyImgDiameter}
                         />
                     </Column>
-                    <TableSpan>{getTheme()}</TableSpan>
+                    <TableSpan>{globalPrefix}</TableSpan>
                 </Row>
             </TableColumn>
             <TableColumn>
@@ -128,7 +129,7 @@ const Item = ({ userId, email }: WOM.GetUserResponse) => {
     );
 };
 
-export const UserAdminTable = ({ items }: WOM.UserQueryResponse) => (
+export const UserAdminTable = ({ items }: WOM.OrganizationQueryUsersResponse) => (
     // <Table border={tableBorder} borderCollapse="collapse" borderRadius={tableRowBorderRadius}>
     <Table>
         <LegendaryItem />

@@ -2,9 +2,10 @@ import { AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import axios from './axios';
 
 export const authenticateUser = (data: AuthUserRequest) =>
-    axios<AuthUserResponse>(
+    axios<WOM.UserJwtTokenResponse>(
         {
             url: '/organization/user/authenticate',
+            //data
             data: { ...data, organizationId: '5ddbdd2efd92595cf6d94dc1' }
         },
         false
@@ -35,7 +36,7 @@ export const createUser = (data: RegisterUserRequest) =>
     );
 
 export const acceptInvitation = (data: WOM.OrganizationAcceptInviteRequest) =>
-    axios<AuthUserResponse>(
+    axios<WOM.UserJwtTokenResponse>(
         {
             url: '/organization/user/membership-accept-invite',
             data

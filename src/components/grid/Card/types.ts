@@ -1,5 +1,6 @@
 import {
     AbsoluteLocation,
+    Active,
     Disabled,
     FlexBooleanAlignment,
     MarginBottom,
@@ -9,7 +10,7 @@ import {
     Sizes
 } from 'types';
 
-export interface CardProps extends Disabled, MarginRightBottom, Sizes, Pointer {}
+export interface CardProps extends Disabled, MarginRightBottom, Sizes, Pointer, Active {}
 
 export interface DescriptionCellProps {
     height?: string;

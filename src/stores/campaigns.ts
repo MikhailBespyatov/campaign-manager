@@ -1,23 +1,35 @@
+import history from 'BrowserHistory';
 import { CreateCampaignRequestProps } from 'components/FormComponents/forms/CreateCampaignForm/types';
 import { noop } from 'constants/global';
 import { existCampaignErrorMessage } from 'constants/messages';
+import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 
-const addContentIds = createEvent<string[]>();
+const addContentIds = createEvent<WOM.ContentItemResponse[]>();
+const pushContentId = createEvent<WOM.ContentItemResponse>();
+const removeContentById = createEvent<string>();
 const clearContentIds = createEvent();
 
-const contentIds = createStore<string[]>([])
+const contentIds = createStore<WOM.ContentItemResponse[]>([])
     .on(addContentIds, (state, newState) => [...state, ...newState])
+    .on(pushContentId, (state, newState) =>
+        state.map(i => i.womContentId).includes(newState.womContentId) ? state : [...state, newState]
+    )
+    .on(removeContentById, (state, id) => state.filter(i => i.womContentId !== id))
     .on(clearContentIds, () => []);
 
 const upsertItem = createEffect({
     handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            await API.campaigns.upsertItem(values);
+            const { id } = await API.campaigns.upsertItem(values);
             loadingEffects.updateLoading();
+
+            clearContentIds();
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.indexDetails + id);
         } catch {
             loadingEffects.updateLoading();
             setErrors({
@@ -102,7 +114,14 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
-const campaignsEvents = { updateStatisticsValues, updateAndRemoveStatisticsValues, addContentIds, clearContentIds };
+const campaignsEvents = {
+    updateStatisticsValues,
+    updateAndRemoveStatisticsValues,
+    addContentIds,
+    clearContentIds,
+    pushContentId,
+    removeContentById
+};
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem };
 const campaignsStores = { items, item, statisticsItems, contentIds };
 

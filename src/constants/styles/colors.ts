@@ -34,3 +34,5 @@ export const reverseColor = mainBackground;
 
 export const disabledColor = grey2;
 export const untouchedColor = blue;
+
+export const esteeLauderColor = '#040a2b';

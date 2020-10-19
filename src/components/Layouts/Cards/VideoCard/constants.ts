@@ -7,6 +7,8 @@ export const ratingSpanColor = 'white';
 
 export const productImgDiameter = '18px';
 
+export const addIdImgDiameter = '40px';
+
 export const productSpanFontSize = '18px';
 export const productSpanLineHeight = '29px';
 export const productSpanMarginLeft = '11px';

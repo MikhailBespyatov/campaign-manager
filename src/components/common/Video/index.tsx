@@ -29,7 +29,7 @@ export const Video = ({ src, poster, controls = false, isPlaying = false }: Prop
 };
 
 export const AbsoluteVideo = ({ isPlaying, ...rest }: Props) => (
-    <AbsoluteWrapper height="100%" left="0" top="0" width="100%" zIndex={isPlaying ? '-1' : '-3'}>
+    <AbsoluteWrapper height="100%" left="0" top="0" width="100%" zIndex={isPlaying ? '1' : '-1'}>
         <Video {...rest} isPlaying={isPlaying} />
     </AbsoluteWrapper>
 );

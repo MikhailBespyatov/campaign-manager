@@ -20,7 +20,7 @@ export const Form: FC<Props> = ({
     src,
     subSubtitle
 }) => {
-    const { logo } = useStore(themeStores.theme);
+    const { logo } = useStore(themeStores.publicTheme);
 
     const logoSrc = src ? src : logo;
 

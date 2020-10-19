@@ -32,6 +32,7 @@ import { useStore } from 'effector-react';
 import React, { FC, useEffect, useState } from 'react';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 import { getOrganizationId } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
@@ -104,10 +105,11 @@ interface ItemProps extends WOM.CampaignDetailResponse {}
 
 const Item = ({ id, title, budget, engagement }: ItemProps) => {
     const [checked, setChecked] = useState(false);
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
     const onChange = (checked: boolean) => setChecked(checked);
 
-    const onMoreInfoClick = () => history.push(routes.campaignManager.campaign.indexDetails + id);
+    const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
         <TableRow active={checked}>

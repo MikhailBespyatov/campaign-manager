@@ -24,10 +24,29 @@ const getItemById = createEffect({
     }
 });
 
+const getOrganizationItemsById = createEffect({
+    handler: async (id: string) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const data = await API.users.getOrganizationItems(id);
+            loadingEffects.updateInitialLoading();
+
+            return data ? data : {};
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return {};
+        }
+    }
+});
+
 const item = createStore<WOM.GetUserResponse | {}>({}).on(getItemById.doneData, (_, newState) => newState);
+const items = createStore<WOM.OrganizationQueryUsersResponse>({}).on(
+    getOrganizationItemsById.doneData,
+    (_, newState) => newState
+);
 
 const usersEvents = {};
-const usersEffects = { getItemById };
-const usersStores = { item, loading };
+const usersEffects = { getItemById, getOrganizationItemsById };
+const usersStores = { item, items, loading };
 
 export { usersEffects, usersStores, usersEvents };

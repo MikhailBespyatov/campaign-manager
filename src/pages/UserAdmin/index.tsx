@@ -9,28 +9,25 @@ import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect, useMemo } from 'react';
 import { loadingStores } from 'stores/loading';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
-import { userAdminEffects, userAdminStores } from 'stores/userAdmin';
-import { getOrganizationId } from 'utils/usefulFunctions';
+import { usersEffects, usersStores } from 'stores/users';
 
 export const UserAdmin = () => {
+    const organizationId = useStore(organizationsStores.organizationId);
     const { adminIds, memberIds } = useStore(organizationsStores.item);
-    const items = useStore(userAdminStores.items);
+    const items = useStore(usersStores.items);
     const loading = useStore(loadingStores.loading);
     const initialLoading = useStore(loadingStores.initialLoading);
-
-    const organizationId = getOrganizationId();
 
     const admins = useMemo(() => adminIds?.length || 0, [adminIds]);
     const members = useMemo(() => memberIds?.length || 0, [memberIds]);
     const all = admins + members;
 
     useEffect(() => {
-        organizationsEffects.getItemById(organizationId);
+        if (organizationId) {
+            organizationsEffects.getItemById(organizationId);
+            usersEffects.getOrganizationItemsById(organizationId);
+        }
     }, [organizationId]);
-
-    useEffect(() => {
-        adminIds?.length && memberIds && userAdminEffects.getItemsByIds([...adminIds, ...memberIds]);
-    }, [adminIds, memberIds]);
 
     return (
         <CampaignManagerLayout>
