@@ -1740,6 +1740,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
+        organizationId: string;
         userId: string; // objectId
         /**
          * dateTime

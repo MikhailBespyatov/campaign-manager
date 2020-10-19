@@ -1,9 +1,15 @@
 import { defaultTheme, ThemeProps, themes } from 'constants/defaults';
 import { createEvent, createStore } from 'effector';
+import { getPublicTheme } from 'utils/usefulFunctions';
 
 // const logoUrl = createStore<string>(defaultTheme.logo).on(setTheme, () =>
 //     getTheme() === adidasGlobalPrefix ? adidasTheme.logo : defaultTheme.logo
 // );
+
+const injectPublicTheme = createEvent();
+
+const publicTheme = createStore<ThemeProps>(defaultTheme).on(injectPublicTheme, () => themes[getPublicTheme()]);
+
 const setTheme = createEvent<string>();
 
 const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, (_, themeName) =>
@@ -22,8 +28,8 @@ globalPrefix.watch(setGlobalPrefix, state => {
     setGlobalPrefixUrl(state ? '/' + state : '');
 });
 
-const themeEvents = { setTheme, setGlobalPrefix };
+const themeEvents = { setTheme, injectPublicTheme, setGlobalPrefix };
 const themeEffects = {};
-const themeStores = { theme, globalPrefix, globalPrefixUrl };
+const themeStores = { theme, publicTheme, globalPrefix, globalPrefixUrl };
 
 export { themeEffects, themeStores, themeEvents };

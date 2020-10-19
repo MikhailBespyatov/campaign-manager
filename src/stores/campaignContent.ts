@@ -72,10 +72,7 @@ const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues
     })
     .on(setDefaultValues, () => defaultCampaignContentValues);
 // values.watch(state => (isFirst ? (isFirst = false) : getItems(state)));
-values.watch(state => {
-    console.log(state);
-    getItems(state);
-});
+values.watch(state => getItems(state));
 
 const campaignContentEvents = { updateValues, updateAndRemoveValues, setDefaultValues };
 const campaignContentEffects = { getItems, getItemById };

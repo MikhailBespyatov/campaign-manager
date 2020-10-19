@@ -28,6 +28,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const onClick = () => history.push(createRoute);
 
     useEffect(() => {
+        organizationId && console.log('www', organizationId);
         organizationId && organizationsEffects.getStatisticsById(organizationId);
     }, [organizationId]);
 

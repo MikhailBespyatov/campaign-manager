@@ -16,7 +16,7 @@ import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
 import { themeEvents } from 'stores/theme';
-import { Auth, AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
+import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
 import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();
@@ -30,6 +30,7 @@ const loadToken = createEffect({
             loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
+            organizationsEvents.setOrganizationId(data?.user?.organizationId || '');
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -171,9 +172,9 @@ const createUserAndLoadToken = createEffect({
     }
 });
 
-const setToken = createEvent<AuthUserResponse>();
+const setToken = createEvent<WOM.UserJwtTokenResponse>();
 
-const user = createStore<AuthUserResponse>(JSON.parse(localStorage.getItem(userStorageName) || '{}'))
+const user = createStore<WOM.UserJwtTokenResponse>(JSON.parse(localStorage.getItem(userStorageName) || '{}'))
     .on(
         [
             loadToken.doneData,
@@ -194,7 +195,13 @@ user.watch(state => {
     if (!objectIsEmpty(state)) {
         const organizationId = getOrganizationId();
         organizationsEvents.setOrganizationId(organizationId);
-        themeEvents.setGlobalPrefix(organizationId === '5ddbdd2efd92595cf6d94dc1' ? 'adidas' : 'base');
+        themeEvents.setGlobalPrefix(
+            organizationId === '5ddbdd2efd92595cf6d94dc1'
+                ? 'adidas'
+                : organizationId === '5f8d93a65403c1f8e939ec70'
+                ? 'estee_lauder'
+                : 'base'
+        );
     }
     objectIsEmpty(state)
         ? setAuth({

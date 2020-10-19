@@ -5,3 +5,11 @@ export const getItemById = (data: WOM.GetUserRequest) =>
         url: '/user/get',
         data
     });
+
+export const getOrganizationItems = (id: string) =>
+    axios<WOM.OrganizationQueryUsersResponse>({
+        url: '/organization/user/query',
+        data: {
+            organizationId: id
+        }
+    });

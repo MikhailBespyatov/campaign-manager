@@ -25,5 +25,8 @@
     "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["WOM"]
+  "cSpell.words": [
+    "WOM",
+    "estee"
+  ]
 }

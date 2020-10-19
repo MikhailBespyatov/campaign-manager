@@ -18,19 +18,21 @@ import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
 import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
 import { UserAdmin } from 'pages/UserAdmin';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
-import { themeStores } from 'stores/theme';
+import { themeEvents, themeStores } from 'stores/theme';
 import { ThemeProvider } from 'styled-components';
 
 const App = () => {
     const theme = useStore(themeStores.theme);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
-    console.log(globalPrefixUrl);
+    useEffect(() => {
+        themeEvents.injectPublicTheme();
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>

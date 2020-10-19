@@ -11,3 +11,9 @@ export const getItemById = (data: WOM.GetOrganizationRequest) =>
         url: '/organization/get',
         data
     });
+
+// export const getUsersByOrganizationId = (data: WOM.OrganizationQueryUsersRequest) =>
+//     axios<WOM.OrganizationQueryUsersResponse>({
+//         url: '/organization/user/query',
+//         data
+//     });

@@ -3,10 +3,9 @@ interface RemoveValues {
 }
 
 declare namespace WOM {
-    export interface UserJwtTokenResponse {
-        token?: string | null;
-        user?: GetUserResponse;
-    }
+    // export interface GetUserResponse {
+    //     organizationId: string;
+    // }
 
     export interface ContentQueryRequest {
         limit: number;

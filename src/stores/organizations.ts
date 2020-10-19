@@ -12,7 +12,7 @@ const loading = createStore<boolean>(false)
 const setOrganizationId = createEvent<string>();
 
 const organizationId = createStore<string>('').on(setOrganizationId, (_, newState) => newState);
-organizationId.watch(state => console.log(state));
+organizationId.watch(state => console.log('new state: ', state));
 
 const getItemById = createEffect({
     handler: async (id: string) => {
