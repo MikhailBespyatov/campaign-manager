@@ -5,8 +5,8 @@ export const authenticateUser = (data: AuthUserRequest) =>
     axios<WOM.UserJwtTokenResponse>(
         {
             url: '/organization/user/authenticate',
-            //data
-            data: { ...data, organizationId: '5ddbdd2efd92595cf6d94dc1' }
+            data
+            // data: { ...data, organizationId: '5ddbdd2efd92595cf6d94dc1' }
         },
         false
     );

@@ -7,26 +7,33 @@ import { Dictionary } from 'types';
 export interface ThemeProps {
     logo: string;
     primaryColor: string;
+    organizationId: string;
 }
 
 export const defaultTheme = {
     logo: womLogo,
-    primaryColor: blue
+    primaryColor: blue,
+    organizationId: ''
 };
+
+export const companyNames = ['adidas', 'estee_lauder'];
+
+export const companyNameUrls = companyNames.map(i => '/' + i);
 
 export const adidasTheme = {
     logo: adidasLogo,
-    primaryColor: secondaryColor
+    primaryColor: secondaryColor,
+    organizationId: '5ddbdd2efd92595cf6d94dc1'
 };
 
 export const esteeLauderTheme = {
     logo: esteeLauderLogo,
-    primaryColor: esteeLauderColor
+    primaryColor: esteeLauderColor,
+    organizationId: '5f8d93a65403c1f8e939ec70'
 };
 
 export const themes: Dictionary<ThemeProps> = {
     default: defaultTheme,
-    base: defaultTheme,
     adidas: adidasTheme,
     estee_lauder: esteeLauderTheme
 };

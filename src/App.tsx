@@ -1,6 +1,7 @@
 import history from 'BrowserHistory';
 import { CardModal } from 'components/modals/CardModal';
-import { routes } from 'constants/routes';
+import { companyNameUrls } from 'constants/defaults';
+import { acceptInvitePath, acceptOrgInvitePath, routes, signInPath } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { CampaignManager } from 'pages/CampaignManager';
@@ -31,8 +32,10 @@ const App = () => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
     useEffect(() => {
-        themeEvents.injectPublicTheme();
+        themeEvents.injectGlobalPrefixPublic();
     }, []);
+
+    //console.log(companyNameUrls.map(i => i + signInPath));
 
     return (
         <ThemeProvider theme={theme}>
@@ -46,13 +49,16 @@ const App = () => {
                     <PublicRoute
                         exact
                         component={AcceptInvite}
-                        path={[routes.signUp.acceptInvite, routes.signUp.acceptOrgInvite]}
+                        path={[
+                            ...companyNameUrls.map(i => i + acceptInvitePath),
+                            ...companyNameUrls.map(i => i + acceptOrgInvitePath)
+                        ]}
                     />
                     <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                     <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                     <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                    <PublicRoute exact component={SignIn} path={routes.signIn.index} />
+                    <PublicRoute exact component={SignIn} path={[...companyNameUrls.map(i => i + signInPath)]} />
                     {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
                     {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
                     <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />

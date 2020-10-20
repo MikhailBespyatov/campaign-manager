@@ -13,6 +13,7 @@ import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 
 // const HighlightSpan: FC = ({ children }) => (
 //     <Span fontSize="16px" lineHeight="20px">
@@ -21,6 +22,7 @@ import { loadingStores } from 'stores/loading';
 // );
 
 export const PasswordReset = () => {
+    const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
     const loading = useStore(loadingStores.loading);
 
     return (
@@ -35,7 +37,7 @@ export const PasswordReset = () => {
                                     color={formGrey5}
                                     fontSize="16px"
                                     lineHeight="20px"
-                                    to={routes.signIn.index}
+                                    to={globalPrefixPublicUrl + routes.signIn.index}
                                 >
                                     Enter as user
                                     {/* Or <HighlightSpan>send security code</HighlightSpan> */}

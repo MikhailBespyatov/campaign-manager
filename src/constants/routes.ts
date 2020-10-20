@@ -20,19 +20,19 @@ const passwordResetPrefix = '/password_reset';
 export const staticRoutes = {
     signUp: {
         index: signUpPrefix,
-        acceptInvite: adidasPrefix + '/accept-invite/:inviteCode',
-        acceptOrgInvite: adidasPrefix + '/invite-org/:inviteCode',
+        acceptInvite: '/accept-invite/:inviteCode',
+        acceptOrgInvite: '/invite-org/:inviteCode',
         createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
         success: `${signUpPrefix}${walletPrefix}/success`
     },
     signIn: {
-        index: adidasPrefix + signInPrefix,
+        index: signInPrefix,
         admin: `${signInPrefix}/admin`,
-        passwordReset: `${adidasPrefix}${signInPrefix}${passwordResetPrefix}`,
-        password: `${signInPrefix}${passwordResetPrefix}/password`,
-        requestCode: `${adidasPrefix}${signInPrefix}${passwordResetPrefix}/security_code`
+        passwordReset: `${signInPrefix}${passwordResetPrefix}`,
+        password: `${passwordResetPrefix}/password`,
+        requestCode: `${signInPrefix}${passwordResetPrefix}/security_code`
     },
     admin: {
         createOrganization: `${adminPrefix}/create_organization`
@@ -120,6 +120,10 @@ export const routes = {
     //     press: '/press'
     // }
 };
+
+export const acceptOrgInvitePath = routes.signUp.acceptOrgInvite;
+export const acceptInvitePath = routes.signUp.acceptInvite;
+export const signInPath = routes.signIn.index;
 
 export const routesArray = [
     {
