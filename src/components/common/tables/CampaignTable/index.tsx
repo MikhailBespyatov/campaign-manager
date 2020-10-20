@@ -21,14 +21,13 @@ import {
 } from 'components/common/tables/CampaignTable/styles';
 import { Table } from 'components/common/tables/Table';
 import { Span } from 'components/common/typography/Span';
-import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { themeStores } from 'stores/theme';
@@ -46,25 +45,24 @@ const TableSpan: FC = ({ children }) => (
     </Span>
 );
 
-const LegendaryItem = () => {
-    const [checked, setChecked] = useState(false);
+const LegendaryItem = () => (
+    //const [checked, setChecked] = useState(false);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    //const onChange = (checked: boolean) => setChecked(checked);
 
-    return (
-        <LegendaryTableRow active={checked}>
-            <LegendaryTableColumn>
-                <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+    <LegendaryTableRow>
+        <LegendaryTableColumn>
+            <Row alignCenter noWrap marginBottom="0">
+                {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
-                    <Column marginRight={tableMargin}>
-                        <LegendaryTableSpan>Campaign Name</LegendaryTableSpan>
-                    </Column>
-                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
-                </Row>
-            </LegendaryTableColumn>
-            {/* <LegendaryTableColumn>
+                    </Column> */}
+                <Column marginRight={tableMargin}>
+                    <LegendaryTableSpan>Campaign Name</LegendaryTableSpan>
+                </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+            </Row>
+        </LegendaryTableColumn>
+        {/* <LegendaryTableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <LegendaryTableSpan>Product</LegendaryTableSpan>
@@ -72,53 +70,51 @@ const LegendaryItem = () => {
                     <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
                 </Row>
             </LegendaryTableColumn> */}
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Budget</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Spend</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Views</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Likes</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Saves</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Comments</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Shares</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan></LegendaryTableSpan>
-            </LegendaryTableColumn>
-        </LegendaryTableRow>
-    );
-};
-
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Budget</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Spend</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Views</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Likes</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Saves</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Comments</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Shares</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan></LegendaryTableSpan>
+        </LegendaryTableColumn>
+    </LegendaryTableRow>
+);
 interface ItemProps extends WOM.CampaignDetailResponse {}
 
 const Item = ({ id, title, budget, engagement }: ItemProps) => {
-    const [checked, setChecked] = useState(false);
+    //const [checked, setChecked] = useState(false);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    //const onChange = (checked: boolean) => setChecked(checked);
 
     const removeHandler = () => campaignsEffects.removeItemById(id || '');
 
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow active={checked}>
+        <TableRow>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+                    {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
+                    </Column> */}
                     <TableSpan>{title ? title : noContentMessage}</TableSpan>
                 </Row>
             </TableColumn>

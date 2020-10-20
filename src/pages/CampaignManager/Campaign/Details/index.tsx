@@ -227,11 +227,16 @@ export const Details = () => {
     return (
         <CampaignManagerLayout>
             <ContentWrapper>
-                <Section>
-                    {loading ? (
+                {loading ? (
+                    <Section>
                         <Loader />
-                    ) : (
-                        <>
+                    </Section>
+                ) : (
+                    <>
+                        <Section>
+                            <H1>Campaign Name: {title}</H1>
+                        </Section>
+                        <Section>
                             <BorderBlock>
                                 <Section>
                                     {utcToStart && utcToEnd && (
@@ -310,8 +315,6 @@ export const Details = () => {
                             </BorderBlock>
 
                             <Column>
-                                <H1>Campaign id: {campaignId}</H1>
-                                <H1>Campaign Name: {title}</H1>
                                 <Block title="Selected videos">
                                     <RowBlockCell padding={primaryPadding}>
                                         <Row marginBottom="0">
@@ -326,9 +329,10 @@ export const Details = () => {
                                     </RowBlockCell>
                                 </Block>
                             </Column>
-                        </>
-                    )}
-                </Section>
+                        </Section>
+                    </>
+                )}
+
                 {initialLoading ? (
                     <Loader />
                 ) : (
