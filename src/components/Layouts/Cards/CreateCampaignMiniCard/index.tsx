@@ -26,7 +26,7 @@ const RateSpan: FC = ({ children }) => (
 //const ProductSpan: FC = ({ children }) => <ProductSpanMini width={cardProductWidth}>{children}</ProductSpanMini>;
 
 interface Props extends MarginRightBottom, Sizes, WOM.ContentItemResponse {
-    onRemove: () => void;
+    onRemove?: () => void;
 }
 
 export const CreateCampaignMiniCard = ({
@@ -94,16 +94,18 @@ Props) => {
                     </MarginWrapper> */}
                 </Description>
             </Card>
-            <Row marginBottom="0" marginRight={primaryPadding}>
-                <CustomImg
-                    pointer
-                    height={addIdImgDiameter}
-                    rotate={45}
-                    src={addIdImg}
-                    width={addIdImgDiameter}
-                    onClick={onRemove}
-                />
-            </Row>
+            {onRemove && (
+                <Row marginBottom="0" marginRight={primaryPadding}>
+                    <CustomImg
+                        pointer
+                        height={addIdImgDiameter}
+                        rotate={45}
+                        src={addIdImg}
+                        width={addIdImgDiameter}
+                        onClick={onRemove}
+                    />
+                </Row>
+            )}
         </Column>
     );
 };

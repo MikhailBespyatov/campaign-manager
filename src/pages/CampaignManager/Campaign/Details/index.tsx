@@ -302,6 +302,19 @@ export const Details = () => {
                             <Column>
                                 <H1>Campaign id: {campaignId}</H1>
                                 <H1>Campaign Name: {title}</H1>
+                                {/* <Block title="Selected videos">
+                                    <RowBlockCell padding={primaryPadding}>
+                                        <Row marginBottom="0">
+                                            {contentIds?.map((item, i) => (
+                                                <CreateCampaignMiniCard
+                                                    key={item}
+                                                    marginBottom="0"
+                                                    {...initialContentIds[i]}
+                                                />
+                                            )) || noContentMessage}
+                                        </Row>
+                                    </RowBlockCell>
+                                </Block> */}
                             </Column>
                         </>
                     )}

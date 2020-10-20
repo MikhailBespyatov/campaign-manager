@@ -6,18 +6,18 @@ import { Loader } from 'components/common/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import {
     initialValues,
-    onCurrencyChange,
     onSubmit,
     validationSchema
 } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 import { FormWrapper } from 'components/FormComponents/forms/CreateCampaignForm/styles';
 import { ErrorSpan, TextInput } from 'components/FormComponents/inputs/TextInput';
+import { WomInput } from 'components/FormComponents/inputs/WomInput';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignMiniCard } from 'components/Layouts/Cards/CreateCampaignMiniCard';
 import { blue, primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { FieldArray, Formik } from 'formik';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 
@@ -49,7 +49,7 @@ export const CreateCampaignForm = () => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ values, handleSubmit, isValid, dirty, touched, setFieldValue }) => (
+            {({ values, handleSubmit, isValid, dirty, touched }) => (
                 <Row>
                     <HighlightedTitleBlock title="Create Campaign">
                         <RowBlockCell padding={primaryPadding}>
@@ -60,11 +60,11 @@ export const CreateCampaignForm = () => {
                                 </ErrorSpan>
                                 <DatePickerInput label="Start of campaign" name="utcToStart" />
                                 <DatePickerInput label="End of campaign" name="utcToEnd" />
-                                <TextInput
+                                <WomInput
                                     label="Budget amount"
                                     name="amount"
                                     placeholder="Enter amount of budget"
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
+                                    //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
                                 />
                                 <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
                                     {loading ? <Loader /> : 'CREATE CAMPAIGN'}
