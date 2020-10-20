@@ -34,7 +34,7 @@ export const WomInput = ({
 
     const defaultWom = Number(field.value);
 
-    const [currency, setCurrency] = useState(Number.isNaN(defaultWom) ? 0 : usdRate * defaultWom);
+    const [currency, setCurrency] = useState(Number.isNaN(defaultWom) ? 0 : (usdRate * defaultWom).toFixed(2));
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setValue, setCurrency);
 
@@ -42,7 +42,7 @@ export const WomInput = ({
         <Section justifyCenter>
             <Column marginRight="2px" width={'100%'}>
                 <RelativeWrapper>
-                    <AbsoluteWrapper right="0" top="12px">
+                    <AbsoluteWrapper right="-9px" top="12px">
                         <WomCurrencyImg height={womImgHeight} />
                     </AbsoluteWrapper>
                     <TextFieldStyled

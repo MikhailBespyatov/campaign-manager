@@ -28,8 +28,8 @@ const getTokenInfo = createEffect({
 });
 
 const tokenInfo = createStore<WOM.ExchangeRateResponse>({}).on(getTokenInfo.doneData, (_, newState) => newState);
-//@ts-ignore
-tokenInfo.watch(getTokenInfo.doneData, ({ womExchangeRates }) => setUsdRate(womExchangeRates[0].price));
+// @ts-ignore
+tokenInfo.watch(getTokenInfo.doneData, ({ womExchangeRates }) => setUsdRate(womExchangeRates[0].price.toFixed(4)));
 
 const walletEvents = {};
 const walletEffects = { getTokenInfo };

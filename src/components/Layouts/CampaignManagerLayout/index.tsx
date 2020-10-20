@@ -64,7 +64,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                 />
                 <Summary subtitle="Remaining Budget" title={remaining ? commaInserter(remaining.toString()) : '0'} />
                 <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} />
-                <SummaryWomImg title={`${usdRate ? usdRate : '0'} usd`} />
+                <SummaryWomImg title={`${usdRate ? usdRate : '0'}$`} />
             </Section>
             {children}
         </MainLayout>
