@@ -35,7 +35,7 @@ export const Card = styled.div<CardProps>`
     width: ${({ width }) => (width ? width : cardWidth)};
     height: ${({ height }) => (height ? height : cardHeight)};
     border-radius: ${CardBorderRadius};
-    border: 2px solid ${({ active }) => (active ? blue : white)};
+    border: 3px solid ${({ active }) => (active ? blue : white)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};

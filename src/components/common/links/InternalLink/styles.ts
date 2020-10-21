@@ -7,6 +7,7 @@ import {
     defaultLineHeight,
     defaultTextColor
 } from 'constants/defaults';
+import { secondaryPadding } from 'constants/styles';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -22,5 +23,10 @@ export const InternalLink = styled(Link)<SpanProps>`
     ${({ opacity }) => (opacity ? `opacity: ${opacity};` : ``)};
     ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
-    ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : ``)};
+    ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : `text-decoration: underline`)};
+    margin-right: ${secondaryPadding};
+    margin-bottom: ${secondaryPadding};
+    &:hover {
+        opacity: 0.6;
+    }
 `;

@@ -1,9 +1,10 @@
+import addIdImg from 'assets/img/add_video.svg';
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
 import group2img from 'assets/img/group_2.svg';
 import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
-import addIdImg from 'assets/img/increment.svg';
+import removeIdImg from 'assets/img/increment.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
@@ -62,13 +63,22 @@ export const VideoCard = ({ womContentId, uriPrimary, womQualityScore, products,
         <Card pointer active={active}>
             <Description>
                 <AbsoluteWrapper bottom={padding} right={padding} zIndex="5">
-                    <CustomImg
-                        height={addIdImgDiameter}
-                        rotate={active ? 45 : 0}
-                        src={addIdImg}
-                        width={addIdImgDiameter}
-                        onClick={addIdHandler}
-                    />
+                    {active ? (
+                        <CustomImg
+                            height={addIdImgDiameter}
+                            rotate={45}
+                            src={removeIdImg}
+                            width={addIdImgDiameter}
+                            onClick={addIdHandler}
+                        />
+                    ) : (
+                        <CustomImg
+                            height={addIdImgDiameter}
+                            src={addIdImg}
+                            width={addIdImgDiameter}
+                            onClick={addIdHandler}
+                        />
+                    )}
                 </AbsoluteWrapper>
                 {isVideoPlaying ? (
                     <AbsoluteVideo controls isPlaying={isVideoPlaying} src={streamDetails?.hlsUrl || ''} />
