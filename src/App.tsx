@@ -25,11 +25,19 @@ import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeEvents, themeStores } from 'stores/theme';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+const AppWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    background-color: ${({ theme: { background } }) => background};
+`;
 
 const App = () => {
     const theme = useStore(themeStores.theme);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
 
     useEffect(() => {
         themeEvents.injectGlobalPrefixPublic();
@@ -41,70 +49,73 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <CardModal />
-            <Router history={history}>
-                <Switch>
-                    {/* <PublicRoute exact component={Test} path={routes.test} /> */}
+            <AppWrapper>
+                <Router history={history}>
+                    <Switch>
+                        {/* <PublicRoute exact component={Test} path={routes.test} /> */}
 
-                    {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
-                    <PublicRoute
-                        exact
-                        component={AcceptInvite}
-                        path={[
-                            ...companyNameUrls.map(i => i + acceptInvitePath),
-                            ...companyNameUrls.map(i => i + acceptOrgInvitePath)
-                        ]}
-                    />
-                    <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
-                    <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
-                    <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
+                        {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
+                        <PublicRoute
+                            exact
+                            component={AcceptInvite}
+                            path={[
+                                ...companyNameUrls.map(i => i + acceptInvitePath),
+                                ...companyNameUrls.map(i => i + acceptOrgInvitePath)
+                            ]}
+                        />
+                        <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
+                        <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
+                        <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                    <PublicRoute exact component={SignIn} path={[...companyNameUrls.map(i => i + signInPath)]} />
-                    {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
-                    {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
-                    <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
-                    <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
-                    {/* <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} /> */}
+                        <PublicRoute exact component={SignIn} path={[...companyNameUrls.map(i => i + signInPath)]} />
+                        {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
+                        {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
+                        <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
+                        <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
+                        {/* <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} /> */}
 
-                    {/* <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} /> */}
+                        {/* <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} /> */}
 
-                    <UserAdminRoute exact component={UserAdmin} path={globalPrefixUrl + routes.userAdmin.index} />
+                        <UserAdminRoute exact component={UserAdmin} path={globalPrefixUrl + routes.userAdmin.index} />
 
-                    <CampaignManagerRoute
-                        exact
-                        component={CampaignManager}
-                        path={globalPrefixUrl + routes.campaignManager.index}
-                    />
-                    {/* <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} /> */}
-                    <CampaignManagerRoute
-                        exact
-                        component={Discover}
-                        path={globalPrefixUrl + routes.campaignManager.discover.index}
-                    />
-                    <CampaignManagerRoute
-                        exact
-                        component={DiscoverDetails}
-                        path={globalPrefixUrl + routes.campaignManager.discover.details}
-                    />
-                    <CampaignManagerRoute
-                        exact
-                        component={Campaign}
-                        path={globalPrefixUrl + routes.campaignManager.campaign.index}
-                    />
-                    <CampaignManagerRoute
-                        exact
-                        component={CampaignDetails}
-                        path={globalPrefixUrl + routes.campaignManager.campaign.details}
-                    />
-                    <CampaignManagerRoute
-                        exact
-                        component={CreateCampaign}
-                        path={globalPrefixUrl + routes.campaignManager.campaign.create}
-                    />
-                    {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
+                        <CampaignManagerRoute
+                            exact
+                            component={CampaignManager}
+                            path={globalPrefixUrl + routes.campaignManager.index}
+                        />
+                        {/* <CampaignManagerRoute exact component={Dashboard} path={routes.campaignManager.dashboard.index} /> */}
+                        <CampaignManagerRoute
+                            exact
+                            component={Discover}
+                            path={globalPrefixUrl + routes.campaignManager.discover.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={DiscoverDetails}
+                            path={globalPrefixUrl + routes.campaignManager.discover.details}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={Campaign}
+                            path={globalPrefixUrl + routes.campaignManager.campaign.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={CampaignDetails}
+                            path={globalPrefixUrl + routes.campaignManager.campaign.details}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={CreateCampaign}
+                            path={globalPrefixUrl + routes.campaignManager.campaign.create}
+                        />
+                        {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
 
-                    <Redirect to={routes.signIn.index} />
-                </Switch>
-            </Router>
+                        <Redirect to={globalPrefixPublicUrl + routes.signIn.index} />
+                        {/* </AppWrapper> */}
+                    </Switch>
+                </Router>
+            </AppWrapper>
         </ThemeProvider>
     );
 };
