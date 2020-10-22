@@ -10,6 +10,7 @@ import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create'
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Discover } from 'pages/CampaignManager/Discover';
 import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
+import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
 // import { Adidas as SignInAdidas } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
@@ -26,6 +27,7 @@ import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeEvents, themeStores } from 'stores/theme';
 import styled, { ThemeProvider } from 'styled-components';
+import { mergeElementsWithString } from 'utils/usefulFunctions';
 
 const AppWrapper = styled.div`
     position: relative;
@@ -37,7 +39,7 @@ const AppWrapper = styled.div`
 const App = () => {
     const theme = useStore(themeStores.theme);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
+    //const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
 
     useEffect(() => {
         themeEvents.injectGlobalPrefixPublic();
@@ -59,15 +61,19 @@ const App = () => {
                             exact
                             component={AcceptInvite}
                             path={[
-                                ...companyNameUrls.map(i => i + acceptInvitePath),
-                                ...companyNameUrls.map(i => i + acceptOrgInvitePath)
+                                ...mergeElementsWithString(companyNameUrls, acceptInvitePath),
+                                ...mergeElementsWithString(companyNameUrls, acceptOrgInvitePath)
                             ]}
                         />
                         <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                         <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                         <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                        <PublicRoute exact component={SignIn} path={[...companyNameUrls.map(i => i + signInPath)]} />
+                        <PublicRoute
+                            exact
+                            component={SignIn}
+                            path={[...mergeElementsWithString(companyNameUrls, signInPath)]}
+                        />
                         {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
                         {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
                         <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
@@ -110,8 +116,8 @@ const App = () => {
                             path={globalPrefixUrl + routes.campaignManager.campaign.create}
                         />
                         {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
-
-                        <Redirect to={globalPrefixPublicUrl + routes.signIn.index} />
+                        <PublicRoute component={Home} path={[routes.wrongPath]} />
+                        <Redirect to={routes.wrongPath} />
                         {/* </AppWrapper> */}
                     </Switch>
                 </Router>

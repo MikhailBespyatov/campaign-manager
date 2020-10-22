@@ -48,7 +48,7 @@ const LegendaryItem = () => (
                         <Checkbox onChange={onChange} />
                     </Column> */}
                 {/* <Column marginRight={tableMargin}> */}
-                <LegendaryTableSpan>Company Name</LegendaryTableSpan>
+                <LegendaryTableSpan>Company</LegendaryTableSpan>
                 {/* </Column>
                 <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} /> */}
             </Row>
@@ -73,8 +73,8 @@ const LegendaryItem = () => (
     </LegendaryTableRow>
 );
 const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
-    const globalPrefix = useStore(themeStores.globalPrefix);
-    const { logo } = useStore(themeStores.theme);
+    //const globalPrefix = useStore(themeStores.globalPrefix);
+    const { secondaryLogo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
     const loading = useStore(userAdminStores.loading);
 
@@ -95,11 +95,11 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
                             height={companyImgDiameter}
-                            src={logo}
-                            width={companyImgDiameter}
+                            src={secondaryLogo}
+                            //width={companyImgDiameter}
                         />
                     </Column>
-                    <TableSpan>{globalPrefix}</TableSpan>
+                    {/* <TableSpan>{globalPrefix}</TableSpan> */}
                 </Row>
             </TableColumn>
             <TableColumn>

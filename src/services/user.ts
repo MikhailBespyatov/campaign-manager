@@ -1,7 +1,7 @@
 import { AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
 import axios from './axios';
 
-export const authenticateUser = (data: AuthUserRequest) =>
+export const authenticateUser = (data: WOM.OrganizationUserAuthChallengeRequest) =>
     axios<WOM.UserJwtTokenResponse>(
         {
             url: '/organization/user/authenticate',

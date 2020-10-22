@@ -94,3 +94,5 @@ export const retrieveRoleAndConvert = (roles: string[]) => {
             return 'Member';
     }
 };
+
+export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);

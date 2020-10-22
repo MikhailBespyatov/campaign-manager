@@ -28,7 +28,6 @@ const loadToken = createEffect({
             loadingEffects.updateLoading();
             const data = await API.user.authenticateUser({
                 ...values,
-                //@ts-ignore
                 organizationId: themeStores.organizationIdForLogin.getState()
             });
             loadingEffects.updateLoading();

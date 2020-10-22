@@ -18,6 +18,7 @@ const adminPrefix = '/admin';
 const passwordResetPrefix = '/password_reset';
 
 export const staticRoutes = {
+    wrongPath: '/home',
     signUp: {
         index: signUpPrefix,
         acceptInvite: '/accept-invite/:inviteCode',

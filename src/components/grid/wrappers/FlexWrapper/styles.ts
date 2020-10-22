@@ -11,6 +11,7 @@ export const Row = styled.div<RowProps>`
     flex-direction: row;
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
     ${({ width }) => (width ? `width: ${width};` : ``)};
+    ${({ maxWidth }) => (maxWidth ? `max-width: ${maxWidth};` : ``)};
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ minHeight }) => (minHeight ? `min-height: ${minHeight};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};

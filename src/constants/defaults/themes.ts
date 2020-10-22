@@ -1,11 +1,13 @@
-import adidasLogo from 'assets/img/adidas_logo.svg';
-import esteeLauderLogo from 'assets/img/estee_lauder_logo.svg';
 import womLogo from 'assets/img/logo.svg';
+import adidasLogo from 'assets/organizations/logos/adidas_logo.svg';
+import adidasLogoSecondary from 'assets/organizations/logos/adidas_logo_secondary.svg';
+import esteeLauderLogo from 'assets/organizations/logos/estee_lauder_logo.svg';
 import { backgroundColor, blue, secondaryColor, white } from 'constants/styles';
 import { Dictionary } from 'types';
 
 export interface ThemeProps {
     logo: string;
+    secondaryLogo: string;
     primaryColor: string;
     organizationId: string;
     background: string;
@@ -14,6 +16,7 @@ export interface ThemeProps {
 
 export const defaultTheme = {
     logo: womLogo,
+    secondaryLogo: '',
     primaryColor: blue,
     background: backgroundColor,
     primaryTextColor: white,
@@ -26,6 +29,7 @@ export const companyNameUrls = companyNames.map(i => '/' + i);
 
 export const adidasTheme = {
     logo: adidasLogo,
+    secondaryLogo: adidasLogoSecondary,
     primaryColor: secondaryColor,
     background: backgroundColor,
     primaryTextColor: white,
@@ -34,6 +38,7 @@ export const adidasTheme = {
 
 export const esteeLauderTheme = {
     logo: esteeLauderLogo,
+    secondaryLogo: esteeLauderLogo,
     //primaryColor: esteeLauderColor,
     primaryTextColor: '#040a2b',
     primaryColor: '#fdefde',
