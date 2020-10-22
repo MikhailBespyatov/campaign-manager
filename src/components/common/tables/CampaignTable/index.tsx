@@ -21,15 +21,13 @@ import {
 } from 'components/common/tables/CampaignTable/styles';
 import { Table } from 'components/common/tables/Table';
 import { Span } from 'components/common/typography/Span';
-import { SmallSpan } from 'components/common/typography/special';
-import { BooleanCheckbox as Checkbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { themeStores } from 'stores/theme';
@@ -47,25 +45,24 @@ const TableSpan: FC = ({ children }) => (
     </Span>
 );
 
-const LegendaryItem = () => {
-    const [checked, setChecked] = useState(false);
+const LegendaryItem = () => (
+    //const [checked, setChecked] = useState(false);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    //const onChange = (checked: boolean) => setChecked(checked);
 
-    return (
-        <LegendaryTableRow active={checked}>
-            <LegendaryTableColumn>
-                <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+    <LegendaryTableRow>
+        <LegendaryTableColumn>
+            <Row alignCenter noWrap marginBottom="0">
+                {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
-                    <Column marginRight={tableMargin}>
-                        <LegendaryTableSpan>Campaign Name</LegendaryTableSpan>
-                    </Column>
-                    <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
-                </Row>
-            </LegendaryTableColumn>
-            {/* <LegendaryTableColumn>
+                    </Column> */}
+                <Column marginRight={tableMargin}>
+                    <LegendaryTableSpan>Campaign Name</LegendaryTableSpan>
+                </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+            </Row>
+        </LegendaryTableColumn>
+        {/* <LegendaryTableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight={tableMargin}>
                         <LegendaryTableSpan>Product</LegendaryTableSpan>
@@ -73,51 +70,51 @@ const LegendaryItem = () => {
                     <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
                 </Row>
             </LegendaryTableColumn> */}
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Budget</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Spend</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Preview</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>View</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Engage</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Click</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan>Buy</LegendaryTableSpan>
-            </LegendaryTableColumn>
-            <LegendaryTableColumn>
-                <LegendaryTableSpan></LegendaryTableSpan>
-            </LegendaryTableColumn>
-        </LegendaryTableRow>
-    );
-};
-
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Budget</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Spend</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Views</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Likes</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Saves</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Comments</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Shares</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan></LegendaryTableSpan>
+        </LegendaryTableColumn>
+    </LegendaryTableRow>
+);
 interface ItemProps extends WOM.CampaignDetailResponse {}
 
 const Item = ({ id, title, budget, engagement }: ItemProps) => {
-    const [checked, setChecked] = useState(false);
+    //const [checked, setChecked] = useState(false);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
-    const onChange = (checked: boolean) => setChecked(checked);
+    //const onChange = (checked: boolean) => setChecked(checked);
+
+    const removeHandler = () => campaignsEffects.removeItemById(id || '');
 
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow active={checked}>
+        <TableRow>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight={tableMargin}>
+                    {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
-                    </Column>
+                    </Column> */}
                     <TableSpan>{title ? title : noContentMessage}</TableSpan>
                 </Row>
             </TableColumn>
@@ -128,57 +125,79 @@ const Item = ({ id, title, budget, engagement }: ItemProps) => {
                 <TableSpan>{budget?.amount ? budget?.amount : noContentMessage}</TableSpan>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{budget?.spend ? budget?.spend : noContentMessage}</TableSpan>
+                <TableSpan>{budget?.spend ? budget?.spend : 0}</TableSpan>
             </TableColumn>
             <TableColumn>
-                <TableSpan>??</TableSpan>
-            </TableColumn>
-            <TableColumn>
-                <Column>
-                    <Row marginBottom="5px">
-                        <TableSpan>{engagement?.viewCount ? engagement.viewCount : 0}</TableSpan>
-                    </Row>
-                    <Row alignCenter noWrap marginBottom="0">
-                        <Column marginRight="5px">
-                            <SmallSpan>??</SmallSpan>
-                        </Column>
-                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
-                    </Row>
-                </Column>
-            </TableColumn>
-            <TableColumn>
-                <TableSpan>??</TableSpan>
+                <Row marginBottom="5px">
+                    <TableSpan>{engagement?.viewCount ? engagement.viewCount : 0}</TableSpan>
+                </Row>
             </TableColumn>
             <TableColumn>
                 <Column>
                     <Row marginBottom="5px">
-                        <TableSpan>{engagement?.clickCount ? engagement.clickCount : 0}</TableSpan>
+                        <TableSpan>{engagement?.likeCount ? engagement.likeCount : 0}</TableSpan>
                     </Row>
                     <Row alignCenter noWrap marginBottom="0">
-                        <Column marginRight="5px">
-                            <SmallSpan>{engagement?.clicksPercentage ? engagement.clicksPercentage : 0}%</SmallSpan>
-                        </Column>
-                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
+                        <PercentageGrowth
+                            type={engagement?.likesPercentage && engagement.likesPercentage > 0 ? 'success' : 'error'}
+                        >
+                            {engagement?.likesPercentage ? engagement.likesPercentage : 0}
+                        </PercentageGrowth>
                     </Row>
                 </Column>
             </TableColumn>
             <TableColumn>
                 <Column>
                     <Row marginBottom="5px">
-                        <TableSpan>{engagement?.buyCount ? engagement.buyCount : 0}</TableSpan>
+                        <TableSpan>{engagement?.saveCount ? engagement.saveCount : 0}</TableSpan>
                     </Row>
                     <Row alignCenter noWrap marginBottom="0">
-                        <Column marginRight="5px">
-                            <SmallSpan>{engagement?.buysPercentage ? engagement.buysPercentage : 0}%</SmallSpan>
-                        </Column>
-                        <PercentageGrowth type={'success'}>??</PercentageGrowth>
+                        <PercentageGrowth
+                            type={engagement?.likesPercentage && engagement.likesPercentage > 0 ? 'success' : 'error'}
+                        >
+                            {engagement?.savesPercentage ? engagement.savesPercentage : 0}
+                        </PercentageGrowth>
+                    </Row>
+                </Column>
+            </TableColumn>
+            <TableColumn>
+                <Column>
+                    <Row marginBottom="5px">
+                        <TableSpan>{engagement?.commentCount ? engagement.commentCount : 0}</TableSpan>
+                    </Row>
+                    <Row alignCenter noWrap marginBottom="0">
+                        <PercentageGrowth
+                            type={engagement?.likesPercentage && engagement.likesPercentage > 0 ? 'success' : 'error'}
+                        >
+                            {engagement?.commentsPercentage ? engagement.commentsPercentage : 0}
+                        </PercentageGrowth>
+                    </Row>
+                </Column>
+            </TableColumn>
+            <TableColumn>
+                <Column>
+                    <Row marginBottom="5px">
+                        <TableSpan>{engagement?.shareCount ? engagement.shareCount : 0}</TableSpan>
+                    </Row>
+                    <Row alignCenter noWrap marginBottom="0">
+                        <PercentageGrowth
+                            type={engagement?.likesPercentage && engagement.likesPercentage > 0 ? 'success' : 'error'}
+                        >
+                            {engagement?.sharesPercentage ? engagement.sharesPercentage : 0}
+                        </PercentageGrowth>
                     </Row>
                 </Column>
             </TableColumn>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     <Column marginRight="29px">
-                        <CustomImg pointer height={deleteImgDiameter} src={deleteImg} width={deleteImgDiameter} />
+                        <CustomImg
+                            pointer
+                            height={deleteImgDiameter}
+                            src={deleteImg}
+                            width={deleteImgDiameter}
+                            onClick={removeHandler}
+                        />
                     </Column>
                     <ClickableWrapper onClick={onMoreInfoClick}>
                         <CustomImg pointer height={moreInfoImgHeight} src={moreInfoImg} width={moreInfoImgWidth} />

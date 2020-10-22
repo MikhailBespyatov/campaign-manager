@@ -24,3 +24,4 @@ export const wrongInviteCodeMessage = 'Wrong invite code';
 
 // global
 export const noContentMessage = '...';
+export const noDataAvailableMessage = 'No available data for this filters';

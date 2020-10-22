@@ -7,7 +7,6 @@ import {
     materialTheme
 } from 'components/common/inputs/DatePicker/constants';
 import { HiddenInput } from 'components/common/inputs/Input';
-import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import 'date-fns';
@@ -64,7 +63,8 @@ export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = n
 interface InputPickerProps extends Name, Label, DefaultValueString {}
 
 export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOString() }: InputPickerProps) => {
-    const [field, { error, touched }, { setValue }] = useField(name);
+    // eslint-disable-next-line
+    const [field, _, { setValue }] = useField(name);
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date(defaultValue));
 
@@ -90,7 +90,7 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
                     />
                 </MuiPickersUtilsProvider>
             </ThemeProvider>
-            {error && <ErrorSpan touched={touched}>{error}</ErrorSpan>}
+            {/* {error && <ErrorSpan touched={touched}>{error}</ErrorSpan>} */}
         </Column>
     );
 };

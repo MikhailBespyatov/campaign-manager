@@ -14,9 +14,11 @@ import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/RequestCode/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 import { userEffects, userStores } from 'stores/user';
 
 export const RequestCode = () => {
+    const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
     const loading = useStore(loadingStores.loading);
     const email = useStore(userStores.currentEmailForPasswordReset);
 
@@ -56,7 +58,11 @@ export const RequestCode = () => {
                                             Send a new code ?
                                         </Span>
                                     </Row>
-                                    <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.index}>
+                                    <InternalLink
+                                        fontSize="16px"
+                                        lineHeight="20px"
+                                        to={globalPrefixPublicUrl + routes.signIn.index}
+                                    >
                                         Enter as User
                                     </InternalLink>
                                 </Column>

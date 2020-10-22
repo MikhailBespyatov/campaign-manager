@@ -5,23 +5,22 @@ import {
     badgeFontSize,
     badgeFontWeight,
     badgeHeight,
-    badgeHorizontalPadding,
-    badgeLineHeight,
-    badgeVerticalPadding
+    badgeHorizontalPadding
 } from 'components/common/Badge/constants';
-import { mainBackground } from 'constants/styles';
+import { flexCenter, mainBackground } from 'constants/styles';
 import styled from 'styled-components';
 import { MarginRightBottom } from 'types';
 
 export const Badge = styled.span<MarginRightBottom>`
+    ${flexCenter};
     height: ${badgeHeight};
     border: ${badgeBorderWidth} solid ${badgeBorderColor};
     border-radius: ${badgeBorderRadius};
     font-weight: ${badgeFontWeight};
     font-size: ${badgeFontSize};
-    line-height: ${badgeLineHeight};
+    line-height: ${badgeFontSize};
     color: ${mainBackground};
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     margin-right: ${({ marginRight }) => (marginRight ? marginRight : '0')};
-    padding: ${badgeVerticalPadding} ${badgeHorizontalPadding};
+    padding: 0 ${badgeHorizontalPadding};
 `;

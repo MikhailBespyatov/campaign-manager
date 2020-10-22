@@ -8,11 +8,9 @@ import {
 import { accessRoles, accessValues } from 'constants/roles';
 import { AuthUserResponse } from 'types';
 
-// give access a user as natural (-1 - no any access) number (the less number, the more rights user has)
-export const giveAccess: (user: AuthUserResponse) => number = user => {
-    const roles = user?.user?.roles;
+export const giveAccessByRoles = (roles: string[] | null | undefined) => {
     let access = -1;
-    if (roles && roles.length) {
+    if (roles?.length) {
         accessRoles.forEach(
             (role, i) =>
                 roles.includes(role) && (access > accessValues[i] || access === -1) && (access = accessValues[i])
@@ -20,6 +18,24 @@ export const giveAccess: (user: AuthUserResponse) => number = user => {
     }
 
     return access;
+};
+
+// give access a user as natural (-1 - no any access) number (the less number, the more rights user has)
+export const giveAccess: (user: AuthUserResponse) => number = user => {
+    const roles = user?.user?.roles;
+
+    return giveAccessByRoles(roles);
+};
+
+export const retrieveRoleAndConvert = (roles: string[]) => {
+    const access = giveAccessByRoles(roles);
+
+    switch (access) {
+        case 1:
+            return 'Admin';
+        default:
+            return 'Member';
+    }
 };
 
 // imitating async request
@@ -78,3 +94,5 @@ export const parseMonthDate: (date: Date) => string = date =>
 
 export const getPublicTheme = () =>
     window.location.pathname.substring(0, window.location.pathname.substring(1).indexOf('/') + 1).substring(1);
+
+export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);

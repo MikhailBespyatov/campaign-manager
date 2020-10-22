@@ -1,7 +1,7 @@
+import { womLogoDivider } from 'constants/styles';
+
 export const headerHorizontalMargin = '22px';
 export const headerVerticalMargin = '13px';
-
-const womLogoDivider = 0.46;
 
 export const headerLogoHeight = '52px';
 // export const headerLogoWidth = '80px';

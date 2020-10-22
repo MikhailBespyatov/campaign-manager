@@ -5,7 +5,10 @@ import {
     buttonHorizontalPadding,
     buttonVerticalPadding,
     buttonWidth,
-    hoverButtonColor
+    hoverButtonColor,
+    spanFontSize,
+    spanFontWeight,
+    spanLineHeight
 } from 'components/common/buttons/RoundedButton/constants';
 import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import {
@@ -17,6 +20,7 @@ import {
     white
 } from 'constants/styles';
 import styled from 'styled-components';
+import { Reverse } from 'types';
 
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
@@ -26,7 +30,8 @@ export const Button = styled.button<ButtonProps>`
         reverse ? white : background ? background : primaryColor};
     border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
     border-radius: ${buttonBorderRadius};
-    color: ${white};
+    color: red;
+    //${({ theme: { primaryTextColor } }) => primaryTextColor};
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
     transition: ${transitionTime};
@@ -40,4 +45,11 @@ export const Button = styled.button<ButtonProps>`
         ${buttonActiveMixin};
     }
     z-index: 2;
+`;
+
+export const InnerSpan = styled.span<Reverse>`
+    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
+    font-size: ${spanFontSize};
+    font-weight: ${spanFontWeight};
+    line-height: ${spanLineHeight};
 `;

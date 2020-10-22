@@ -47,8 +47,32 @@ const getItems = createEffect({
     }
 });
 
+const getSelectedVideos = createEffect({
+    handler: async (contentIds: string[]) => {
+        try {
+            updateInitialLoading();
+            const data = await API.campaignContent.getItems({
+                pageIndex: 0,
+                limit: 100,
+                byContentIds: contentIds
+            });
+            updateInitialLoading();
+
+            return data ? data : {};
+        } catch {
+            updateInitialLoading();
+            return {};
+        }
+    }
+});
+
 const item = createStore<WOM.ContentItemResponse>({}).on(getItemById.doneData, (_, newState) => newState);
 const items = createStore<WOM.ContentQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
+
+const campaignSelectedVideos = createStore<WOM.ContentQueryResponse>({}).on(
+    getSelectedVideos.doneData,
+    (_, newState) => newState
+);
 
 const updateValues = createEvent<WOM.ContentQueryRequest>();
 const updateAndRemoveValues = createEvent<WOM.UpdateAndRemoveCampaignContentValues>();
@@ -58,7 +82,9 @@ const setDefaultValues = createEvent();
 // after updating or removing some fields of the values,
 // watcher initiate getItems request due the new values
 // (old fields of values are not removed if they are not pointed as remove values in removeAndUpdateValues event)
-//let isFirst = true;
+// let isFirst = true;
+// !!! types incompatible
+// @ts-ignore
 const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues)
     .on(updateValues, (state, values: WOM.ContentQueryRequest) => ({ ...state, ...values }))
     .on(updateAndRemoveValues, (state, values: WOM.UpdateAndRemoveCampaignContentValues) => {
@@ -75,7 +101,7 @@ const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues
 values.watch(state => getItems(state));
 
 const campaignContentEvents = { updateValues, updateAndRemoveValues, setDefaultValues };
-const campaignContentEffects = { getItems, getItemById };
-const campaignContentStores = { items, item, values, initialLoading };
+const campaignContentEffects = { getItems, getItemById, getSelectedVideos };
+const campaignContentStores = { items, item, values, initialLoading, campaignSelectedVideos };
 
 export { campaignContentEffects, campaignContentStores, campaignContentEvents };

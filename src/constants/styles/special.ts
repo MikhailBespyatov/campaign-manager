@@ -13,3 +13,5 @@ export const hashTagPrefix = '#';
 
 export const primaryBorder = `1px solid ${formGrey3}`;
 export const secondaryBorder = `2px solid ${formGrey3}`;
+
+export const womLogoDivider = 0.46;

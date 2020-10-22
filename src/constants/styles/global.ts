@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import { defaultFontFamily } from '../defaults';
-import { backgroundColor } from './colors';
 import { scrollBarWidth } from './sizes';
 
 export const GlobalStyle = createGlobalStyle`
@@ -74,11 +73,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    position: relative;
-    background-color: #121217;
-    //background-color: ${backgroundColor};
+    //position: relative;
+    //background-color: #fdefde;
+    // #fdefde e9e6da
+    //background-color: #121217;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
   }
 
   .MuiFormControl-root {

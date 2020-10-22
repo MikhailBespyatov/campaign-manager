@@ -1,5 +1,6 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
+import { SummaryWomImg } from 'components/common/features/SummaryWomImg';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
@@ -9,6 +10,7 @@ import React, { FC, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
+import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
 import { commaInserter } from 'utils/usefulFunctions';
 
@@ -19,6 +21,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
+    const usdRate = useStore(walletStores.usdRate);
     const { amount, spend, spendPerDay, remaining, remainingDuration, campaignsRunning } = useStore(
         organizationsStores.statistics
     );
@@ -28,9 +31,12 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const onClick = () => history.push(createRoute);
 
     useEffect(() => {
-        organizationId && console.log('www', organizationId);
         organizationId && organizationsEffects.getStatisticsById(organizationId);
     }, [organizationId]);
+
+    useEffect(() => {
+        walletEffects.getTokenInfo();
+    }, []);
 
     return (
         <MainLayout
@@ -58,6 +64,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                 />
                 <Summary subtitle="Remaining Budget" title={remaining ? commaInserter(remaining.toString()) : '0'} />
                 <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} />
+                <SummaryWomImg title={`${usdRate ? usdRate : '0'}$`} />
             </Section>
             {children}
         </MainLayout>

@@ -1,23 +1,30 @@
-import footerBottomImg from 'assets/img/footer_bottom.svg';
-import footerLogoImg from 'assets/img/footer_logo.svg';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { Span } from 'components/common/typography/Span';
-import { footerLogoHeight, footerLogoWidth } from 'components/grid/Footer/constants';
-import { StyledFooter } from 'components/grid/Footer/style';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { WomLogoImg } from 'components/common/imageComponents/WomLogoImg';
+import { footerLogoHeight } from 'components/grid/Footer/constants';
+import { StyledFooter, StyledSpanBottom, StyledSpanTop } from 'components/grid/Footer/styles';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { white } from 'constants/styles';
 import React from 'react';
 
 export const Footer = () => (
     <StyledFooter>
         <Row marginBottom="28px">
-            <CustomImg height={footerLogoHeight} src={footerLogoImg} width={footerLogoWidth} />
+            <WomLogoImg height={footerLogoHeight} />
+            {/* <CustomImg height={footerLogoHeight} src={footerLogoImg} width={footerLogoWidth} /> */}
         </Row>
         <Row>
-            <Span color={white}>PRIVACY POLICY PRESS</Span>
+            <StyledSpanTop color={white}>PRIVACY POLICY PRESS</StyledSpanTop>
         </Row>
         <Row marginBottom="59px">
-            <CustomImg height="75px" src={footerBottomImg} width="927px" />
+            <Column alignCenter>
+                <StyledSpanBottom color={white}>&copy; WOM Token Ltd. All rights reserved</StyledSpanBottom>
+                <StyledSpanBottom color={white}>
+                    RISK DISCLAIMER: The information contained on this website is not investment advice. Investing in
+                    token sales is a high-risk endeavor and one for which
+                </StyledSpanBottom>
+                <StyledSpanBottom color={white}>
+                    we strongly advise you to consult with your registered investment advisor
+                </StyledSpanBottom>
+            </Column>
         </Row>
     </StyledFooter>
 );

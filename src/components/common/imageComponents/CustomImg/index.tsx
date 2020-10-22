@@ -1,4 +1,4 @@
-import { Img, ImgWrapper } from 'components/common/imageComponents/CustomImg/styles';
+import { Img } from 'components/common/imageComponents/CustomImg/styles';
 import { defaultImgAlt } from 'constants/defaults';
 import React, { MouseEvent } from 'react';
 import { BorderRadiusProperties, imgProperties, Pointer, Rotation, Sizes } from 'types';
@@ -8,7 +8,7 @@ interface Props extends Rotation, Pointer, Sizes, imgProperties, BorderRadiusPro
 }
 
 export const CustomImg = ({ src, alt = defaultImgAlt, ...rest }: Props) => (
-    <ImgWrapper {...rest}>
-        <Img alt={alt} src={src} />
-    </ImgWrapper>
+    // <ImgWrapper {...rest}>
+    <Img alt={alt} src={src} {...rest} />
+    // </ImgWrapper>
 );

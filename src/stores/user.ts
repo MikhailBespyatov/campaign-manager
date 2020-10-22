@@ -15,7 +15,7 @@ import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
-import { themeEvents } from 'stores/theme';
+import { themeEvents, themeStores } from 'stores/theme';
 import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
 import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
@@ -26,7 +26,10 @@ const loadToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
             loadingEffects.updateLoading();
-            const data = await API.user.authenticateUser(values);
+            const data = await API.user.authenticateUser({
+                ...values,
+                organizationId: themeStores.organizationIdForLogin.getState()
+            });
             loadingEffects.updateLoading();
 
             localStorage.setItem(userStorageName, JSON.stringify(data));
@@ -200,8 +203,9 @@ user.watch(state => {
                 ? 'adidas'
                 : organizationId === '5f8d93a65403c1f8e939ec70'
                 ? 'estee_lauder'
-                : 'base'
+                : 'adidas'
         );
+        themeEvents.injectGlobalPrefixPublic();
     }
     objectIsEmpty(state)
         ? setAuth({

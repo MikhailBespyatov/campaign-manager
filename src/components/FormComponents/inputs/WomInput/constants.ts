@@ -42,6 +42,6 @@ export const onCurrencyChange = (
     const wom = Number(value);
     if (Number.isInteger(wom) && wom >= 0) {
         setValue(commaInserter(value), true);
-        setCurrency(wom * womExchangeRate);
+        setCurrency(Number((wom * womExchangeRate).toFixed(2)));
     }
 };
