@@ -26,7 +26,7 @@ export const Form: FC<Props> = ({
 
     return (
         <Wrapper>
-            <CustomImg borderRadius="14px" height={logoDiameter} src={logoSrc} />
+            <CustomImg height={logoDiameter} src={logoSrc} />
             <H1Form>{title}</H1Form>
             <PForm>{subtitle}</PForm>
             {subSubtitle && <PForm>{subSubtitle}</PForm>}
