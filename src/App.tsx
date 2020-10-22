@@ -50,11 +50,23 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <CardModal />
             <AppWrapper>
+                {/* <PublicRoute exact component={Test} path={routes.test} /> */}
                 <Router history={history}>
+                    <CardModal />
                     <Switch>
+                        <PublicRoute exact component={Home} path={[routes.wrongPath]} />
                         {/* <PublicRoute exact component={Test} path={routes.test} /> */}
+
+                        {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
+                        <PublicRoute
+                            exact
+                            component={AcceptInvite}
+                            path={[routes.signUp.acceptInvite, routes.signUp.acceptOrgInvite]}
+                        />
+                        <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
+                        <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
+                        <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
                         {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
                         <PublicRoute
@@ -116,7 +128,6 @@ const App = () => {
                             path={globalPrefixUrl + routes.campaignManager.campaign.create}
                         />
                         {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
-                        <PublicRoute component={Home} path={[routes.wrongPath]} />
                         <Redirect to={routes.wrongPath} />
                         {/* </AppWrapper> */}
                     </Switch>
