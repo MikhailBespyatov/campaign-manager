@@ -7,6 +7,10 @@ declare namespace WOM {
     //     organizationId: string;
     // }
 
+    export interface ContentItemResponse {
+        inCampaignIds?: string[];
+    }
+
     export interface ContentQueryRequest {
         limit: number;
         pageIndex: number;

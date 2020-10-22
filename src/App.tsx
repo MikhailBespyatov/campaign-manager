@@ -37,8 +37,8 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <CardModal />
             <Router history={history}>
+                <CardModal />
                 <Switch>
                     {/* <PublicRoute exact component={Test} path={routes.test} /> */}
 
