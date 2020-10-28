@@ -115,18 +115,18 @@ declare namespace WOM {
         /**
          * string
          */
-        password: string;
+        confirmationToken: string;
         /**
          * string
          */
-        confirmationToken: string;
+        password: string;
     }
     /**
      * bridgeSystemBalanceResponse
      */
     export interface BridgeSystemBalanceResponse {
-        woMx?: /* systemBalanceResponse */ SystemBalanceResponse;
-        ethereum?: /* systemBalanceResponse */ SystemBalanceResponse;
+        womX?: /* systemBalanceResponse */ SystemBalanceResponse;
+        womERC20?: /* systemBalanceResponse */ SystemBalanceResponse;
         /**
          * string
          */
@@ -205,6 +205,11 @@ declare namespace WOM {
          */
         title?: string | null;
         /**
+         * boolean
+         * Determines the visibility of this campaign.
+         */
+        isHidden?: boolean;
+        /**
          * objectId
          * The id of the organization that owns this campaign.
          * example:
@@ -245,7 +250,7 @@ declare namespace WOM {
         deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
         womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
         settings?: /* campaignSettings */ CampaignSettings;
-        schedule?: /* campaignScheduleStatus */ CampaignScheduleStatus;
+        schedule?: /* campaignSchedule */ CampaignSchedule;
     }
     /**
      * campaignGetRequest
@@ -271,27 +276,6 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        utcToStart?: string; // date-time
-        /**
-         * dateTime
-         */
-        utcToEnd?: string; // date-time
-    }
-    /**
-     * campaignScheduleStatus
-     */
-    export interface CampaignScheduleStatus {
-        /**
-         * dateTime
-         */
-        utcToStart?: string; // date-time
-        /**
-         * dateTime
-         */
-        utcToEnd?: string; // date-time
-        /**
-         * dateTime
-         */
         utcCreated?: string; // date-time
         /**
          * dateTime
@@ -314,9 +298,25 @@ declare namespace WOM {
          */
         readonly remainingDuration?: number; // int64
         /**
+         * dateTime
+         */
+        utcToStart?: string; // date-time
+        /**
+         * dateTime
+         */
+        utcToEnd?: string; // date-time
+        /**
          * boolean
          */
-        readonly isActive?: boolean;
+        isEnabled?: boolean;
+        /**
+         * string
+         */
+        disabledReason?: string | null;
+        /**
+         * boolean
+         */
+        isActive?: boolean;
         /**
          * boolean
          */
@@ -352,10 +352,6 @@ declare namespace WOM {
      */
     export interface CampaignStatisticsQueryRequest {
         /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
          * objectId
          * The id of the campaign.
          * example:
@@ -381,11 +377,21 @@ declare namespace WOM {
          * The amount of historical comparison sets to generate
          */
         historicalSets?: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * campaignStatisticsQueryResponse
      */
     export interface CampaignStatisticsQueryResponse {
+        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
+        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        /**
+         * list1
+         */
+        readonly sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
         /**
          * int32
          */
@@ -394,17 +400,13 @@ declare namespace WOM {
          * int32
          */
         readonly returnedRecords?: number; // int32
-        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
-        /**
-         * list1
-         */
-        readonly sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
     }
     /**
      * campaignStatisticsQuerySetResponse
      */
     export interface CampaignStatisticsQuerySetResponse {
+        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
+        summary?: /* engagementStatistics */ EngagementStatistics;
         /**
          * int32
          */
@@ -417,8 +419,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* dailyAggregatedCampaignStatistics */ DailyAggregatedCampaignStatistics[] | null;
-        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        summary?: /* engagementStatistics */ EngagementStatistics;
     }
     /**
      * campaignUpsertRequest
@@ -444,6 +444,11 @@ declare namespace WOM {
          */
         title?: string | null;
         /**
+         * boolean
+         * Determines the visibility of this campaign.
+         */
+        isHidden?: boolean;
+        /**
          * tags
          * This campaign's tags
          */
@@ -462,18 +467,6 @@ declare namespace WOM {
      */
     export interface CampaignsQueryRequest {
         /**
-         * int32
-         */
-        limit: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
-        /**
          * objectId
          * example:
          * 000000000000000000000000
@@ -490,15 +483,40 @@ declare namespace WOM {
          */
         tagsAll?: string[] | null;
         /**
+         * nullable1
+         * Will only return campaigns that are currently active (or not).
+         */
+        isActive?: boolean | null;
+        /**
          * int32
          * If set the query will return statistics based on the period (in days) specified here.
          */
         returnStatisticsPeriod?: number; // int32
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * campaignsQueryResponse
      */
     export interface CampaignsQueryResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
         /**
          * int32
          */
@@ -511,14 +529,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* campaignDetailResponse */ CampaignDetailResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages?: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex?: number; // int32
     }
     /**
      * contentFlagInappropriateRequest
@@ -591,7 +601,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id?: string; // objectId
+        womContentId?: string; // objectId
         /**
          * dateTime
          */
@@ -739,21 +749,13 @@ declare namespace WOM {
         id?: string; // objectId
     }
     /**
+     * contentQueryPromoted
+     */
+    export interface ContentQueryPromoted {}
+    /**
      * contentQueryRequest
      */
     export interface ContentQueryRequest {
-        /**
-         * int32
-         */
-        limit: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
         /**
          * hashSet1
          * Query by a list of content ids.
@@ -880,11 +882,32 @@ declare namespace WOM {
          * Will order the results by 'validation timer' ascending.
          */
         orderByValidationTimer?: boolean;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * contentQueryResponse
      */
     export interface ContentQueryResponse {
+        request?: /* contentQueryRequest */ ContentQueryRequest;
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
         /**
          * int32
          */
@@ -897,24 +920,11 @@ declare namespace WOM {
          * list1
          */
         items?: /* contentItemResponse */ ContentItemResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages?: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex?: number; // int32
-        request?: /* contentQueryRequest */ ContentQueryRequest;
     }
     /**
      * contentStatisticsQueryRequest
      */
     export interface ContentStatisticsQueryRequest {
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
         /**
          * objectId
          * Search by the id of the content required.
@@ -947,11 +957,17 @@ declare namespace WOM {
          * 2020-01-01T00:00:00Z
          */
         dateTo?: string; // string
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * contentStatisticsQueryResponse
      */
     export interface ContentStatisticsQueryResponse {
+        request?: /* contentStatisticsQueryRequest */ ContentStatisticsQueryRequest;
+        totalsInPage?: /* engagementStatistics */ EngagementStatistics;
         /**
          * int32
          */
@@ -964,8 +980,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* statisticsDaily */ StatisticsDaily[] | null;
-        request?: /* contentStatisticsQueryRequest */ ContentStatisticsQueryRequest;
-        totalsInPage?: /* engagementStatistics */ EngagementStatistics;
     }
     /**
      * contentStreamUpdateRequest
@@ -1015,6 +1029,11 @@ declare namespace WOM {
         companyName?: string | null;
         /**
          * string
+         * The key that will be used publicly to represent this organization.
+         */
+        key?: string | null;
+        /**
+         * string
          * Supply an email for the initial administrator of this organization.
          */
         administratorEmail?: string | null;
@@ -1047,148 +1066,34 @@ declare namespace WOM {
      */
     export interface DailyAggregatedCampaignStatistics {
         /**
-         * int32
-         * The total number of views
-         */
-        viewCount?: number; // int32
-        /**
-         * int32
-         * Views that had a duration less than 25%
-         */
-        viewD1Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD1Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 25-49%
-         */
-        viewD2Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD2Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 50-74%
-         */
-        viewD3Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD3Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 75-100%
-         */
-        viewD4Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD4Percentage?: number; // double
-        /**
-         * int32
-         * The total number of likes
-         */
-        likeCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly likesPercentage?: number; // double
-        /**
-         * int32
-         * The total number of ratings by users (not authenticators)
-         */
-        ratingCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly ratingsPercentage?: number; // double
-        /**
-         * int32
-         * The total number of times this item was saved.
-         */
-        saveCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly savesPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item was shared.
-         */
-        shareCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly sharesPercentage?: number; // double
-        /**
-         * int32
-         * The amount of comments.
-         */
-        commentCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly commentsPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item received a click.
-         */
-        clickCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly clicksPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item received a buy event.
-         */
-        buyCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly buysPercentage?: number; // double
-        /**
-         * int32
-         * The total engagements of this item.
-         */
-        readonly total?: number; // int32
-        /**
-         * date
-         * The date (does not include a time component) of this statistics entry.
-         * example:
-         * 2020-01-01T00:00:00Z
-         */
-        dateUtc?: string; // string
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        authenticity?: number | null; // double
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        creativity?: number | null; // double
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        positivity?: number | null; // double
-        /**
          * objectId
          * The ID of the campaign
          * example:
          * 000000000000000000000000
          */
         campaignId?: string; // objectId
-    }
-    /**
-     * dailyAggregatedOrganizationStatistics
-     */
-    export interface DailyAggregatedOrganizationStatistics {
+        /**
+         * date
+         * The date (does not include a time component) of this statistics entry.
+         * example:
+         * 2020-01-01T00:00:00Z
+         */
+        dateUtc?: string; // string
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        authenticity?: number | null; // double
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        creativity?: number | null; // double
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        positivity?: number | null; // double
         /**
          * int32
          * The total number of views
@@ -1298,28 +1203,11 @@ declare namespace WOM {
          * The total engagements of this item.
          */
         readonly total?: number; // int32
-        /**
-         * date
-         * The date (does not include a time component) of this statistics entry.
-         * example:
-         * 2020-01-01T00:00:00Z
-         */
-        dateUtc?: string; // string
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        authenticity?: number | null; // double
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        creativity?: number | null; // double
-        /**
-         * nullable1
-         * The latest content level value, on this day, of this rating.
-         */
-        positivity?: number | null; // double
+    }
+    /**
+     * dailyAggregatedOrganizationStatistics
+     */
+    export interface DailyAggregatedOrganizationStatistics {
         /**
          * objectId
          * The ID of the organization
@@ -1327,6 +1215,137 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         organizationId?: string; // objectId
+        /**
+         * date
+         * The date (does not include a time component) of this statistics entry.
+         * example:
+         * 2020-01-01T00:00:00Z
+         */
+        dateUtc?: string; // string
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        authenticity?: number | null; // double
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        creativity?: number | null; // double
+        /**
+         * nullable1
+         * The latest content level value, on this day, of this rating.
+         */
+        positivity?: number | null; // double
+        /**
+         * int32
+         * The total number of views
+         */
+        viewCount?: number; // int32
+        /**
+         * int32
+         * Views that had a duration less than 25%
+         */
+        viewD1Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD1Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 25-49%
+         */
+        viewD2Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD2Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 50-74%
+         */
+        viewD3Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD3Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 75-100%
+         */
+        viewD4Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD4Percentage?: number; // double
+        /**
+         * int32
+         * The total number of likes
+         */
+        likeCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly likesPercentage?: number; // double
+        /**
+         * int32
+         * The total number of ratings by users (not authenticators)
+         */
+        ratingCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly ratingsPercentage?: number; // double
+        /**
+         * int32
+         * The total number of times this item was saved.
+         */
+        saveCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly savesPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item was shared.
+         */
+        shareCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly sharesPercentage?: number; // double
+        /**
+         * int32
+         * The amount of comments.
+         */
+        commentCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly commentsPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item received a click.
+         */
+        clickCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly clicksPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item received a buy event.
+         */
+        buyCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly buysPercentage?: number; // double
+        /**
+         * int32
+         * The total engagements of this item.
+         */
+        readonly total?: number; // int32
     }
     /**
      * emailValidity
@@ -1538,19 +1557,6 @@ declare namespace WOM {
      */
     export interface Error400BadRequest {
         /**
-         * string
-         */
-        readonly message?: string | null;
-        /**
-         * boolean
-         */
-        readonly isSuccess?: boolean;
-        loggingLevel?: /**
-         * logLevel
-         * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
-         */
-        LogLevel /* int32 */;
-        /**
          * dictionary2
          */
         errors?: {
@@ -1564,16 +1570,25 @@ declare namespace WOM {
          * string
          */
         traceId?: string | null;
+        /**
+         * boolean
+         */
+        readonly isSuccess?: boolean;
+        loggingLevel?: /**
+         * logLevel
+         * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
+         */
+        LogLevel /* int32 */;
+        /**
+         * string
+         */
+        readonly message?: string | null;
     }
     /**
      * error404NotFoundResponse
      */
     export interface Error404NotFoundResponse {
         /**
-         * string
-         */
-        readonly message?: string | null;
-        /**
          * boolean
          */
         readonly isSuccess?: boolean;
@@ -1582,16 +1597,16 @@ declare namespace WOM {
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
          */
         LogLevel /* int32 */;
+        /**
+         * string
+         */
+        readonly message?: string | null;
     }
     /**
      * error409ConflictResponse
      */
     export interface Error409ConflictResponse {
         /**
-         * string
-         */
-        readonly message?: string | null;
-        /**
          * boolean
          */
         readonly isSuccess?: boolean;
@@ -1600,6 +1615,10 @@ declare namespace WOM {
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
          */
         LogLevel /* int32 */;
+        /**
+         * string
+         */
+        readonly message?: string | null;
     }
     /**
      * exchangeRateItem
@@ -1684,6 +1703,12 @@ declare namespace WOM {
      */
     export interface GetNotificationsRequest {
         /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        lastId?: string; // objectId
+        /**
          * int32
          */
         limit: number; // int32
@@ -1691,12 +1716,6 @@ declare namespace WOM {
          * boolean
          */
         returnQueryCount?: boolean;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        lastId?: string; // objectId
     }
     /**
      * getOrganizationRequest
@@ -1730,6 +1749,10 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         userId?: string | null; // objectId
+        /**
+         * string
+         */
+        remoteUserId?: string | null;
     }
     /**
      * getUserResponse
@@ -1740,45 +1763,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        organizationId: string;
         userId: string; // objectId
-        /**
-         * dateTime
-         */
-        utcCreated?: string; // date-time
-        /**
-         * dateTime
-         */
-        utcUpdated?: string; // date-time
-        /**
-         * dateTime
-         */
-        utcLastAuthentication?: string; // date-time
-        /**
-         * roles
-         */
-        roles?: string /* string */[] | null;
-        /**
-         * string
-         */
-        email?: string | null;
-        /**
-         * string
-         */
-        mobileNumber?: string | null;
-        /**
-         * string
-         */
-        username?: string | null;
-        /**
-         * boolean
-         */
-        isAccountVerified?: boolean;
-        /**
-         * boolean
-         */
-        isEmailValidated?: boolean;
-        profile?: /* userProfileResponse */ UserProfileResponse;
         /**
          * objectId
          * WOM's id for this user.
@@ -1828,7 +1813,50 @@ declare namespace WOM {
          * If this user is allowed free stakes, the amount of stakes remaining.
          */
         freeStakesRemaining?: number; // int32
-        organizationMembership?: /* organizationMembership */ OrganizationMembership;
+        /**
+         * objectId
+         * If this user is a member of any organization.
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * dateTime
+         */
+        utcCreated?: string; // date-time
+        /**
+         * dateTime
+         */
+        utcUpdated?: string; // date-time
+        /**
+         * dateTime
+         */
+        utcLastAuthentication?: string; // date-time
+        /**
+         * roles
+         */
+        roles?: string /* string */[] | null;
+        /**
+         * string
+         */
+        email?: string | null;
+        /**
+         * string
+         */
+        mobileNumber?: string | null;
+        /**
+         * string
+         */
+        username?: string | null;
+        /**
+         * boolean
+         */
+        isAccountVerified?: boolean;
+        /**
+         * boolean
+         */
+        isEmailValidated?: boolean;
+        profile?: /* userProfileResponse */ UserProfileResponse;
     }
     /**
      * getValidationDetailRequest
@@ -1867,93 +1895,11 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly hoursSinceEpoch?: number; // int32
+        hoursSinceEpoch?: number; // int32
         /**
          * boolean
          */
         readonly isDefault?: boolean;
-    }
-    /**
-     * IQueryRequest
-     */
-    export interface IQueryRequest {
-        /**
-         * int32
-         */
-        limit?: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
-         * boolean
-         */
-        enableUnboundQueryCount?: boolean;
-    }
-    /**
-     * IRequestContext
-     */
-    export interface IRequestContext {
-        /**
-         * boolean
-         */
-        readonly isAuthenticated?: boolean;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        readonly userId?: string; // objectId
-        /**
-         * boolean
-         */
-        readonly isRemote?: boolean;
-        /**
-         * string
-         */
-        readonly remoteUserId?: string | null;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        readonly segmentId?: string; // objectId
-        /**
-         * string
-         */
-        readonly currentWebDomain?: string | null;
-        /**
-         * string
-         */
-        readonly authenticationToken?: string | null;
-        /**
-         * string
-         */
-        readonly issuer?: string | null;
-        clientApiVersion?: /* version */ Version;
-    }
-    /**
-     * IUserResponse
-     */
-    export interface IUserResponse {
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        userId?: string; // objectId
-        /**
-         * roles
-         */
-        roles?: string /* string */[] | null;
-        /**
-         * string
-         */
-        email?: string | null;
-        /**
-         * boolean
-         */
-        isAccountVerified?: boolean;
     }
     /**
      * logLevel
@@ -2011,7 +1957,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        readonly items?: /* notificationItemResponse */ NotificationItemResponse[] | null;
+        items?: /* notificationItemResponse */ NotificationItemResponse[] | null;
         /**
          * objectId
          * example:
@@ -2044,15 +1990,15 @@ declare namespace WOM {
      */
     export interface OrganizationAnalyzeEmailRequest {
         /**
-         * string
-         */
-        email: string;
-        /**
          * objectId
          * example:
          * 000000000000000000000000
          */
         organizationId?: string; // objectId
+        /**
+         * string
+         */
+        email: string;
     }
     /**
      * organizationAuthenticateWithTokenRequest
@@ -2063,19 +2009,48 @@ declare namespace WOM {
          */
         email: string;
         /**
-         * string
+         * objectId
+         * example:
+         * 000000000000000000000000
          */
-        password: string;
+        organizationId?: string; // objectId
         /**
          * string
          */
         confirmationToken: string;
+        /**
+         * string
+         */
+        password: string;
+    }
+    /**
+     * organizationIdentityRequest
+     */
+    export interface OrganizationIdentityRequest {
+        /**
+         * string
+         * The key for the organization, usually taken from the CM sub domain.
+         */
+        organizationKey?: string | null;
+    }
+    /**
+     * organizationIdentityResponse
+     */
+    export interface OrganizationIdentityResponse {
         /**
          * objectId
          * example:
          * 000000000000000000000000
          */
         organizationId?: string; // objectId
+        /**
+         * string
+         */
+        organizationTitle?: string | null;
+        /**
+         * boolean
+         */
+        hasTheme?: boolean;
     }
     /**
      * organizationInvitationItem
@@ -2090,19 +2065,6 @@ declare namespace WOM {
          * <br/><br/>Values:<br/>0 = None<br/>1 = Member<br/>2 = Admin
          */
         OrganizationPermission /* int32 */;
-    }
-    /**
-     * organizationMembership
-     */
-    export interface OrganizationMembership {
-        /**
-         * hashSet1
-         */
-        memberOf?: string /* objectId */[] | null;
-        /**
-         * hashSet1
-         */
-        adminOf?: string /* objectId */[] | null;
     }
     /**
      * organizationModifyUserRequest
@@ -2136,18 +2098,6 @@ declare namespace WOM {
      */
     export interface OrganizationQueryUsersRequest {
         /**
-         * int32
-         */
-        limit: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
-        /**
          * objectId
          * example:
          * 000000000000000000000000
@@ -2157,11 +2107,35 @@ declare namespace WOM {
          * string
          */
         textSearch?: string | null;
+        /**
+         * list1
+         */
+        userIds?: string /* objectId */[] | null;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * organizationQueryUsersResponse
      */
     export interface OrganizationQueryUsersResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
         /**
          * int32
          */
@@ -2174,14 +2148,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* getUserResponse */ GetUserResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages?: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex?: number; // int32
     }
     /**
      * organizationResponse
@@ -2199,6 +2165,11 @@ declare namespace WOM {
          * The title of this organization.
          */
         title?: string | null;
+        /**
+         * string
+         * The key that will used publicly to represent this organization.
+         */
+        key?: string | null;
         /**
          * tags
          * The mandatory tags of this organization.
@@ -2247,10 +2218,6 @@ declare namespace WOM {
      */
     export interface OrganizationStatisticsQueryRequest {
         /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
          * objectId
          * example:
          * 000000000000000000000000
@@ -2275,11 +2242,21 @@ declare namespace WOM {
          * The amount of historical comparison sets to generate
          */
         historicalSets?: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * organizationStatisticsQueryResponse
      */
     export interface OrganizationStatisticsQueryResponse {
+        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
+        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        /**
+         * list1
+         */
+        readonly sets?: /* organizationStatisticsQuerySetResponse */ OrganizationStatisticsQuerySetResponse[] | null;
         /**
          * int32
          */
@@ -2288,18 +2265,13 @@ declare namespace WOM {
          * int32
          */
         readonly returnedRecords?: number; // int32
-        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
-        /**
-         * list1
-         */
-        readonly sets?: /* organizationStatisticsQuerySetResponse */
-        OrganizationStatisticsQuerySetResponse[] | null;
     }
     /**
      * organizationStatisticsQuerySetResponse
      */
     export interface OrganizationStatisticsQuerySetResponse {
+        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
+        summary?: /* engagementStatistics */ EngagementStatistics;
         /**
          * int32
          */
@@ -2312,8 +2284,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* dailyAggregatedOrganizationStatistics */ DailyAggregatedOrganizationStatistics[] | null;
-        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        summary?: /* engagementStatistics */ EngagementStatistics;
     }
     /**
      * organizationStatisticsRequest
@@ -2331,6 +2301,10 @@ declare namespace WOM {
      * organizationStatisticsResponse
      */
     export interface OrganizationStatisticsResponse {
+        /**
+         * int32
+         */
+        campaignsRunning?: number; // int32
         /**
          * decimal
          * The amount of money allocated to this campaign.
@@ -2358,10 +2332,6 @@ declare namespace WOM {
          * 0
          */
         readonly remainingDuration?: number; // int64
-        /**
-         * int32
-         */
-        campaignsRunning?: number; // int32
     }
     /**
      * organizationTagsResponse
@@ -2381,15 +2351,15 @@ declare namespace WOM {
          */
         email: string;
         /**
-         * string
-         */
-        password: string;
-        /**
          * objectId
          * example:
          * 000000000000000000000000
          */
         organizationId?: string; // objectId
+        /**
+         * string
+         */
+        password: string;
     }
     /**
      * organizationUserWantsForgottenPasswordRequest
@@ -2420,6 +2390,184 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         organizationId?: string; // objectId
+    }
+    /**
+     * organizationsResponse
+     */
+    export interface OrganizationsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: /* organizationResponse */ OrganizationResponse[] | null;
+    }
+    /**
+     * performancePaymentsAudit
+     */
+    export interface PerformancePaymentsAudit {
+        /**
+         * date
+         * example:
+         * 2020-01-01T00:00:00Z
+         */
+        date?: string; // string
+        /**
+         * dateTime
+         */
+        readonly utcDate?: string; // date-time
+        /**
+         * dateTime
+         */
+        utcGenerated?: string; // date-time
+        /**
+         * boolean
+         */
+        isCompleted?: boolean;
+        /**
+         * decimal
+         */
+        womEmissionCalculated?: number; // double
+        /**
+         * decimal
+         */
+        womEmissionExpected?: number; // double
+        /**
+         * decimal
+         */
+        globalContentPoints?: number; // double
+        /**
+         * decimal
+         */
+        globalAuthenticationPoints?: number; // double
+        /**
+         * decimal
+         */
+        globalPoints?: number; // double
+        /**
+         * timeSpan
+         * example:
+         * 0
+         */
+        timingPerformance?: number; // int64
+        /**
+         * timeSpan
+         * example:
+         * 0
+         */
+        timingPayments?: number; // int64
+        /**
+         * list1
+         */
+        items?: /* performancePaymentsItem */ PerformancePaymentsItem[] | null;
+        /**
+         * string
+         */
+        readonly url?: string | null;
+    }
+    /**
+     * performancePaymentsItem
+     */
+    export interface PerformancePaymentsItem {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * string
+         */
+        title?: string | null;
+        /**
+         * tags
+         */
+        tags?: string /* string */[] | null;
+        /**
+         * decimal
+         */
+        womPayout?: number; // double
+        /**
+         * decimal
+         */
+        womPromotedPayout?: number; // double
+        /**
+         * decimal
+         */
+        authenticationPoints?: number; // double
+        /**
+         * decimal
+         */
+        contentPoints?: number; // double
+        /**
+         * decimal
+         */
+        totalPoints?: number; // double
+    }
+    /**
+     * performancePaymentsQueryRequest
+     */
+    export interface PerformancePaymentsQueryRequest {
+        /**
+         * dateTime
+         */
+        dateFrom?: string; // date-time
+        /**
+         * dateTime
+         */
+        dateTo?: string; // date-time
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * performancePaymentsQueryResponse
+     */
+    export interface PerformancePaymentsQueryResponse {
+        request?: /* performancePaymentsQueryRequest */ PerformancePaymentsQueryRequest;
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: /* performancePaymentsAudit */ PerformancePaymentsAudit[] | null;
     }
     /**
      * productResponse
@@ -2507,20 +2655,26 @@ declare namespace WOM {
         tags?: string /* string */[] | null;
     }
     /**
-     * responseTransform
+     * queryOrganizationRequest
      */
-    export interface ResponseTransform {
+    export interface QueryOrganizationRequest {
+        /**
+         * nullable1
+         * True if organizations should has a token wallet.
+         */
+        hasWallet?: boolean | null;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
         /**
          * boolean
          */
-        readonly isApplicable?: boolean;
-        version?: /* version */ Version;
-        clientVersion?: /* version */ Version;
-        mode?: /**
-         * transformMode
-         * <br/><br/>Values:<br/>0 = ForVersion<br/>1 = BeforeAndForVersion<br/>2 = BeforeVersion<br/>3 = AfterVersion<br/>4 = AfterAndForVersion
-         */
-        TransformMode /* int32 */;
+        returnQueryCount?: boolean;
     }
     /**
      * rewardConsumeRequest
@@ -2550,114 +2704,12 @@ declare namespace WOM {
      */
     export interface StatisticsDaily {
         /**
-         * int32
-         * The total number of views
+         * date
+         * The date (does not include a time component) of this statistics entry.
+         * example:
+         * 2020-01-01T00:00:00Z
          */
-        viewCount?: number; // int32
-        /**
-         * int32
-         * Views that had a duration less than 25%
-         */
-        viewD1Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD1Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 25-49%
-         */
-        viewD2Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD2Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 50-74%
-         */
-        viewD3Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD3Percentage?: number; // double
-        /**
-         * int32
-         * Views that had a duration inclusive 75-100%
-         */
-        viewD4Count?: number; // int32
-        /**
-         * decimal
-         */
-        readonly viewsD4Percentage?: number; // double
-        /**
-         * int32
-         * The total number of likes
-         */
-        likeCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly likesPercentage?: number; // double
-        /**
-         * int32
-         * The total number of ratings by users (not authenticators)
-         */
-        ratingCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly ratingsPercentage?: number; // double
-        /**
-         * int32
-         * The total number of times this item was saved.
-         */
-        saveCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly savesPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item was shared.
-         */
-        shareCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly sharesPercentage?: number; // double
-        /**
-         * int32
-         * The amount of comments.
-         */
-        commentCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly commentsPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item received a click.
-         */
-        clickCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly clicksPercentage?: number; // double
-        /**
-         * int32
-         * The amount of times this item received a buy event.
-         */
-        buyCount?: number; // int32
-        /**
-         * decimal
-         */
-        readonly buysPercentage?: number; // double
-        /**
-         * int32
-         * The total engagements of this item.
-         */
-        readonly total?: number; // int32
+        date?: string; // string
         /**
          * objectId
          * example:
@@ -2692,17 +2744,148 @@ declare namespace WOM {
          */
         positivity?: number | null; // double
         /**
-         * date
-         * The date (does not include a time component) of this statistics entry.
-         * example:
-         * 2020-01-01T00:00:00Z
+         * int32
+         * The total number of views
          */
-        date?: string; // string
+        viewCount?: number; // int32
+        /**
+         * int32
+         * Views that had a duration less than 25%
+         */
+        viewD1Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD1Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 25-49%
+         */
+        viewD2Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD2Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 50-74%
+         */
+        viewD3Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD3Percentage?: number; // double
+        /**
+         * int32
+         * Views that had a duration inclusive 75-100%
+         */
+        viewD4Count?: number; // int32
+        /**
+         * decimal
+         */
+        readonly viewsD4Percentage?: number; // double
+        /**
+         * int32
+         * The total number of likes
+         */
+        likeCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly likesPercentage?: number; // double
+        /**
+         * int32
+         * The total number of ratings by users (not authenticators)
+         */
+        ratingCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly ratingsPercentage?: number; // double
+        /**
+         * int32
+         * The total number of times this item was saved.
+         */
+        saveCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly savesPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item was shared.
+         */
+        shareCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly sharesPercentage?: number; // double
+        /**
+         * int32
+         * The amount of comments.
+         */
+        commentCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly commentsPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item received a click.
+         */
+        clickCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly clicksPercentage?: number; // double
+        /**
+         * int32
+         * The amount of times this item received a buy event.
+         */
+        buyCount?: number; // int32
+        /**
+         * decimal
+         */
+        readonly buysPercentage?: number; // double
+        /**
+         * int32
+         * The total engagements of this item.
+         */
+        readonly total?: number; // int32
     }
     /**
      * statisticsHourly
      */
     export interface StatisticsHourly {
+        hour?: /* hour */ Hour;
+        /**
+         * nullable1
+         */
+        authenticity?: number | null; // double
+        /**
+         * nullable1
+         */
+        creativity?: number | null; // double
+        /**
+         * nullable1
+         */
+        positivity?: number | null; // double
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        readonly id?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        womContentId?: string; // objectId
+        /**
+         * string
+         */
+        remoteContentId?: string | null;
         /**
          * int32
          * The total number of views
@@ -2812,35 +2995,6 @@ declare namespace WOM {
          * The total engagements of this item.
          */
         readonly total?: number; // int32
-        hour?: /* hour */ Hour;
-        /**
-         * nullable1
-         */
-        authenticity?: number | null; // double
-        /**
-         * nullable1
-         */
-        creativity?: number | null; // double
-        /**
-         * nullable1
-         */
-        positivity?: number | null; // double
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        readonly id?: string; // objectId
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        womContentId?: string; // objectId
-        /**
-         * string
-         */
-        remoteContentId?: string | null;
     }
     /**
      * statisticsHourlyUploadRequest
@@ -2962,14 +3116,44 @@ declare namespace WOM {
         transactionId?: string; // objectId
     }
     /**
-     * transactionNarrativeType
-     * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync
-     */
-    export type TransactionNarrativeType = 0 | 100 | 200 | 300 | 301 | 302 | 400 | 401 | 402 | 500 | 600 | 700 | 800; // int32
-    /**
      * transactionQueryRequest
      */
     export interface TransactionQueryRequest {
+        /**
+         * nullable1
+         * Administrators only: The user's unique identifier.
+         * When not specified the current caller's userid will be used.
+         * example:
+         * 000000000000000000000000
+         */
+        userId?: string | null; // objectId
+        /**
+         * nullable1
+         * The wallet to return transactions for.
+         * example:
+         * 000000000000000000000000
+         */
+        walletId?: string | null; // objectId
+        /**
+         * boolean
+         * Admin only, return all transactions.
+         */
+        returnAll?: boolean;
+        /**
+         * string
+         * The address to return transactions for.
+         */
+        address?: string | null;
+        status?: /**
+         * transactionStatus
+         * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
+         */
+        TransactionStatus /* int32 */;
+        type?: /* transactionType */ TransactionType /* int32 */;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
         /**
          * int32
          */
@@ -2978,28 +3162,19 @@ declare namespace WOM {
          * boolean
          */
         returnQueryCount?: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
-        /**
-         * nullable1
-         * The user's unique identifier, optional. If not specified the current caller's userid will be used.
-         * example:
-         * 000000000000000000000000
-         */
-        userId?: string | null; // objectId
-        status?: /**
-         * transactionStatus
-         * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
-         */
-        TransactionStatus /* int32 */;
-        type?: /* transactionType */ TransactionType /* int32 */;
     }
     /**
      * transactionQueryResponse
      */
     export interface TransactionQueryResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
         /**
          * int32
          */
@@ -3016,14 +3191,6 @@ declare namespace WOM {
          * Describes the current status of any transaction.
          */
         TransactionResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages?: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex?: number; // int32
     }
     /**
      * transactionQueueReportItemResponse
@@ -3073,6 +3240,16 @@ declare namespace WOM {
      * Describes the current status of any transaction.
      */
     export interface TransactionResponse {
+        type?: /**
+         * WOMNarrativeType
+         * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync<br/>900 = CampaignPayment<br/>1000 = PerformancePayment
+         */
+        WOMNarrativeType /* int32 */;
+        /**
+         * string
+         * Description
+         */
+        meta?: string | null;
         /**
          * objectId
          * The transaction hash
@@ -3107,19 +3284,14 @@ declare namespace WOM {
          * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
          */
         TransactionStatus /* int32 */;
-        type?: /**
-         * transactionNarrativeType
-         * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync
+        /**
+         * int32
          */
-        TransactionNarrativeType /* int32 */;
+        durationSeconds?: number; // int32
         /**
          * decimal
          */
         value?: number; // double
-        /**
-         * string
-         */
-        meta?: string | null;
     }
     /**
      * transactionStatus
@@ -3129,12 +3301,7 @@ declare namespace WOM {
     /**
      * transactionType
      */
-    export type TransactionType = 0 | 1 | 2 | 3; // int32
-    /**
-     * transformMode
-     * <br/><br/>Values:<br/>0 = ForVersion<br/>1 = BeforeAndForVersion<br/>2 = BeforeVersion<br/>3 = AfterVersion<br/>4 = AfterAndForVersion
-     */
-    export type TransformMode = 0 | 1 | 2 | 3 | 4; // int32
+    export type TransactionType = 0 | 1 | 2 | 3 | 4; // int32
     /**
      * updateOrganizationRequest
      */
@@ -3188,23 +3355,23 @@ declare namespace WOM {
         email: string;
         /**
          * string
-         */
-        password: string;
-        /**
-         * string
          * Username, must be unique
          */
         username: string;
+        /**
+         * string
+         */
+        password: string;
     }
     /**
      * userJwtTokenResponse
      */
     export interface UserJwtTokenResponse {
+        user?: /* getUserResponse */ GetUserResponse;
         /**
          * string
          */
         token?: string | null;
-        user?: /* getUserResponse */ GetUserResponse;
     }
     /**
      * userProfileResponse
@@ -3213,28 +3380,16 @@ declare namespace WOM {
         /**
          * string
          */
-        primaryLanguage?: string | null;
+        imageUrl?: string | null;
         /**
          * string
          */
-        imageUrl?: string | null;
+        primaryLanguage?: string | null;
     }
     /**
      * userQueryRequest
      */
     export interface UserQueryRequest {
-        /**
-         * int32
-         */
-        limit: number; // int32
-        /**
-         * boolean
-         */
-        returnQueryCount?: boolean;
-        /**
-         * int32
-         */
-        pageIndex: number; // int32
         /**
          * objectId
          * example:
@@ -3269,11 +3424,31 @@ declare namespace WOM {
          * roles
          */
         rolesAny?: string /* string */[] | null;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
     }
     /**
      * userQueryResponse
      */
     export interface UserQueryResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
         /**
          * int32
          */
@@ -3286,14 +3461,6 @@ declare namespace WOM {
          * list1
          */
         items?: /* getUserResponse */ GetUserResponse[] | null;
-        /**
-         * int32
-         */
-        totalPages?: number; // int32
-        /**
-         * int32
-         */
-        currentPageIndex?: number; // int32
     }
     /**
      * userRoleChangeRequest
@@ -3338,15 +3505,15 @@ declare namespace WOM {
         /**
          * string
          */
-        email?: string | null;
-        /**
-         * string
-         */
         firstName?: string | null;
         /**
          * string
          */
         lastName?: string | null;
+        /**
+         * string
+         */
+        email?: string | null;
     }
     /**
      * userValidationDetails
@@ -3358,18 +3525,28 @@ declare namespace WOM {
         payoutAddress?: string | null;
         /**
          * bigInteger
-         * Amount paid out so far.
+         * Amount paid out so far in WEI
          * example:
          * 100000000000000000000000
          */
         paidOutWei?: string; // string
         /**
          * bigInteger
-         * The content creator's initial WOM stake for this validation
+         * The content creator's initial WOM stake for this validation in WEI
          * example:
          * 100000000000000000000000
          */
         stakedWei?: string; // string
+        /**
+         * decimal
+         * Amount paid out so far
+         */
+        paidOut?: number; // double
+        /**
+         * decimal
+         * The content creator's initial WOM stake for this validation
+         */
+        staked?: number; // double
         /**
          * boolean
          * Is this user the content creator
@@ -3601,35 +3778,6 @@ declare namespace WOM {
         womStaked?: number; // double
     }
     /**
-     * version
-     */
-    export interface Version {
-        /**
-         * int32
-         */
-        readonly major?: number; // int32
-        /**
-         * int32
-         */
-        readonly minor?: number; // int32
-        /**
-         * int32
-         */
-        readonly build?: number; // int32
-        /**
-         * int32
-         */
-        readonly revision?: number; // int32
-        /**
-         * int16
-         */
-        readonly majorRevision?: number; // int32
-        /**
-         * int16
-         */
-        readonly minorRevision?: number; // int32
-    }
-    /**
      * videoAnalysisResponse
      */
     export interface VideoAnalysisResponse {
@@ -3645,9 +3793,34 @@ declare namespace WOM {
         size?: number; // int64
     }
     /**
+     * WOMNarrativeType
+     * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync<br/>900 = CampaignPayment<br/>1000 = PerformancePayment
+     */
+    export type WOMNarrativeType =
+        | 0
+        | 100
+        | 200
+        | 300
+        | 301
+        | 302
+        | 400
+        | 401
+        | 402
+        | 500
+        | 600
+        | 700
+        | 800
+        | 900
+        | 1000; // int32
+    /**
      * WOMQualityScore
      */
     export interface WOMQualityScore {
+        /**
+         * decimal
+         * The WOM quality score is the sum of the other ratings multiplied by individual weights.
+         */
+        quality?: number; // double
         /**
          * decimal
          * The WOM authenticity score as determined by the WOM validation process.
@@ -3663,11 +3836,6 @@ declare namespace WOM {
          * The WOM positivity score as determined by the WOM validation process.
          */
         positivity?: number; // double
-        /**
-         * decimal
-         * The WOM quality score is the sum of the other ratings multiplied by individual weights.
-         */
-        quality?: number; // double
     }
     /**
      * WOMScore
@@ -3857,6 +4025,19 @@ declare namespace Paths {
             }
         }
     }
+    namespace CatalogueQueryPromoted {
+        namespace Post {
+            export type RequestBody = /* contentQueryPromoted */ Components.Schemas.ContentQueryPromoted;
+            namespace Responses {
+                /**
+                 * contentQueryPromotedResponse
+                 */
+                export type $200 = string /* objectId */[];
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
     namespace CatalogueQueryStatistics {
         namespace Post {
             export type RequestBody = /* contentStatisticsQueryRequest */ Components.Schemas.ContentStatisticsQueryRequest;
@@ -3925,6 +4106,16 @@ declare namespace Paths {
             }
         }
     }
+    namespace OrganizationGetIdentity {
+        namespace Post {
+            export type RequestBody = /* organizationIdentityRequest */ Components.Schemas.OrganizationIdentityRequest;
+            namespace Responses {
+                export type $200 = /* organizationIdentityResponse */ Components.Schemas.OrganizationIdentityResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
     namespace OrganizationGetStatistics {
         namespace Post {
             export type RequestBody = /* organizationStatisticsRequest */ Components.Schemas.OrganizationStatisticsRequest;
@@ -3944,6 +4135,16 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace OrganizationQuery {
+        namespace Post {
+            export type RequestBody = /* queryOrganizationRequest */ Components.Schemas.QueryOrganizationRequest;
+            namespace Responses {
+                export type $200 = /* organizationsResponse */ Components.Schemas.OrganizationsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
             }
         }
     }
@@ -4063,68 +4264,11 @@ declare namespace Paths {
             }
         }
     }
-    namespace TestLoadtest {
-        namespace Get {
-            namespace Responses {
-                /**
-                 * string
-                 */
-                export type $200 = string;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-            }
-        }
-    }
-    namespace TestRebuildStatistics {
+    namespace PerformancePaymentsQuery {
         namespace Post {
+            export type RequestBody = /* performancePaymentsQueryRequest */ Components.Schemas.PerformancePaymentsQueryRequest;
             namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
-            }
-        }
-    }
-    namespace TestRefreshUser {
-        namespace Get {
-            namespace Parameters {
-                /**
-                 * string
-                 */
-                export type Userid = string | null;
-            }
-            export interface QueryParameters {
-                userid?: /* string */ Parameters.Userid;
-            }
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-            }
-        }
-    }
-    namespace TestRewrite {
-        namespace Get {
-            namespace Parameters {
-                /**
-                 * string
-                 */
-                export type Name = string | null;
-            }
-            export interface QueryParameters {
-                name?: /* string */ Parameters.Name;
-            }
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
-            }
-        }
-    }
-    namespace TestWalletCleanup {
-        namespace Post {
-            namespace Responses {
-                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $200 = /* performancePaymentsQueryResponse */ Components.Schemas.PerformancePaymentsQueryResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
@@ -4203,18 +4347,6 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
-            }
-        }
-    }
-    namespace UserRemoteReceiveMessage {
-        namespace Post {
-            namespace Responses {
-                /**
-                 * string
-                 */
-                export type $200 = string;
-                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
             }
         }
     }

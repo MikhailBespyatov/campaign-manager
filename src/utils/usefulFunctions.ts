@@ -1,11 +1,7 @@
 import { numbersAfterComma, userStorageName } from 'constants/global';
-import {
-    commaInserterRegExp,
-    removeRightSlashRegExp,
-    slashInserterRegExp,
-    spaceInserterRegExp
-} from 'constants/regExp';
+import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
+import { publicPrefix } from 'constants/routes';
 import { AuthUserResponse } from 'types';
 
 export const giveAccessByRoles = (roles: string[] | null | undefined) => {
@@ -45,8 +41,9 @@ export const wait = (ms: number) => new Promise(res => setTimeout(res, ms));
 export const commaInserter = (str: string) => str.match(commaInserterRegExp)?.join(',') || '';
 
 // insert space for every 4th number
-export const spaceInserter = (str: string) =>
-    str.split('').reverse().join('').match(spaceInserterRegExp)?.join(' ').split('').reverse().join('').trim() || '';
+// export const spaceInserter = (str: string) =>
+//     str.split('').reverse().join('').match(spaceInserterRegExp)?.join(' ').split('').reverse().join('').trim() || '';
+export const spaceInserter = (str: string) => String(str.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 '));
 
 // insert slash for every 2nd number
 export const slashInserter = (str: string) =>
@@ -93,6 +90,16 @@ export const parseMonthDate: (date: Date) => string = date =>
           (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 
 export const getPublicTheme = () =>
-    window.location.pathname.substring(0, window.location.pathname.substring(1).indexOf('/') + 1).substring(1);
+    window.location.pathname
+        .substring(publicPrefix.length)
+        .substring(0, window.location.pathname.substring(publicPrefix.length).indexOf('/'));
+// .substring(
+//     0,
+//     window.location.pathname
+//         .substring(publicPrefix.length - 1)
+//         //.substring(1)
+//         .indexOf('/') + 1
+// )
+// .substring(1);
 
 export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);

@@ -1,4 +1,4 @@
-import { routes } from 'constants/routes';
+import { parsePublicUrl, signInIndexTemplate } from 'constants/routes';
 import { useStore } from 'effector-react';
 // import { routes } from 'constants/routes';
 // import { useStore } from 'effector-react';
@@ -19,7 +19,7 @@ import { AccessRoute } from 'routes/AccessRoute';
 import { themeStores } from 'stores/theme';
 
 export const CampaignManagerRoute: FC<RouteProps> = props => {
-    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const { prefix } = useStore(themeStores.globalPrefix);
 
-    return <AccessRoute proxy={[1, 2]} {...props} redirectTo={globalPrefixUrl + routes.signIn.index} />;
+    return <AccessRoute proxy={[1, 2]} {...props} redirectTo={parsePublicUrl(prefix || '', signInIndexTemplate)} />;
 };

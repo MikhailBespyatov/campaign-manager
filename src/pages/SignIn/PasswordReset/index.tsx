@@ -6,7 +6,7 @@ import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { routes } from 'constants/routes';
+import { parsePublicUrl, signInIndexTemplate } from 'constants/routes';
 import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
@@ -22,7 +22,7 @@ import { themeStores } from 'stores/theme';
 // );
 
 export const PasswordReset = () => {
-    const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
+    const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
     const loading = useStore(loadingStores.loading);
 
     return (
@@ -37,7 +37,7 @@ export const PasswordReset = () => {
                                     color={formGrey5}
                                     fontSize="16px"
                                     lineHeight="20px"
-                                    to={globalPrefixPublicUrl + routes.signIn.index}
+                                    to={parsePublicUrl(globalPrefixPublic, signInIndexTemplate)}
                                 >
                                     Enter as user
                                     {/* Or <HighlightSpan>send security code</HighlightSpan> */}

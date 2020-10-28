@@ -12,7 +12,7 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
-import { commaInserter } from 'utils/usefulFunctions';
+import { commaInserter, spaceInserter } from 'utils/usefulFunctions';
 
 interface Props extends Background {}
 
@@ -56,15 +56,15 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                     subtitle="Campaigns Running"
                     title={campaignsRunning ? commaInserter(campaignsRunning.toString()) : '0'}
                 />
-                <Summary subtitle="Campaign Budget" title={amount ? commaInserter(amount.toString()) : '0'} />
+                <Summary subtitle="Campaign Budget" title={amount ? spaceInserter(amount.toString()) : '0'} />
                 <Summary subtitle="Campaign Spent" title={spend ? commaInserter(spend.toString()) : '0'} />
                 <Summary
                     subtitle="Campaign spend per day"
                     title={spendPerDay ? commaInserter(spendPerDay.toString()) : '0'}
                 />
-                <Summary subtitle="Remaining Budget" title={remaining ? commaInserter(remaining.toString()) : '0'} />
+                <Summary subtitle="Remaining Budget" title={remaining ? spaceInserter(remaining.toString()) : '0'} />
                 <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} />
-                <SummaryWomImg title={`${usdRate ? usdRate : '0'}$`} />
+                <SummaryWomImg title={`${usdRate ? usdRate : '0'} $`} />
             </Section>
             {children}
         </MainLayout>

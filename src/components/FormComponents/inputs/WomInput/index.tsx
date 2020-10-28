@@ -42,7 +42,7 @@ export const WomInput = ({
         <Section justifyCenter>
             <Column marginRight="2px" width={'100%'}>
                 <RelativeWrapper>
-                    <AbsoluteWrapper right="-9px" top="12px">
+                    <AbsoluteWrapper right="-9px" top="12px" zIndex="9">
                         <WomCurrencyImg height={womImgHeight} />
                     </AbsoluteWrapper>
                     <TextFieldStyled
@@ -60,7 +60,7 @@ export const WomInput = ({
                     <Column marginRight={secondaryPadding}>
                         <Badge>USD</Badge>
                     </Column>
-                    {currency}$
+                    {currency} $
                 </Row>
                 <Row>
                     <Column>

@@ -1,4 +1,3 @@
-import { Span } from 'components/common/typography/Span';
 import {
     headerHorizontalMargin,
     headerVerticalMargin,
@@ -24,7 +23,7 @@ export const StyledHeader = styled.header`
     padding: ${headerVerticalMargin} ${headerHorizontalMargin};
 `;
 
-export const StyledSpan1 = styled(Span)`
+export const StyledSpan1 = styled.span`
     ${formTextStyleMixin};
     color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-size: ${styledSpanFontSize1};
@@ -32,7 +31,7 @@ export const StyledSpan1 = styled(Span)`
     margin-left: ${styledSpanMarginLeft};
 `;
 
-export const StyledSpan2 = styled(Span)`
+export const StyledSpan2 = styled.span`
     ${formTextStyleMixin};
     color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-weight: ${styledSpanFontWeight2};
@@ -40,7 +39,7 @@ export const StyledSpan2 = styled(Span)`
     line-height: ${styledSpanLineHeight2};
 `;
 
-export const StyledSpan3 = styled(Span)`
+export const StyledSpan3 = styled.span`
     ${formTextStyleMixin};
     color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-weight: ${styledSpanFontWeight3};

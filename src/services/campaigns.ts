@@ -21,5 +21,11 @@ export const getStatisticsItems = (data: WOM.CampaignStatisticsQueryRequest) =>
 export const upsertItem = (data: WOM.CampaignUpsertRequest) =>
     axios<WOM.CampaignDetailResponse>({
         url: '/campaign/upsert',
-        data
+        data: {
+            ...data,
+            schedule: {
+                ...data.schedule,
+                isEnabled: true
+            }
+        }
     });

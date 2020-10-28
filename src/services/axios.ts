@@ -1,18 +1,30 @@
 import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
 import { baseURL } from 'constants/global';
-import { userStores } from 'stores/user';
+import { campaignContentEvents } from 'stores/campaignContent';
+import { userEvents, userStores } from 'stores/user';
 
-const yeayAxiosInstance = axios.create();
+const womAxiosInstance = axios.create();
 
-yeayAxiosInstance.defaults.baseURL = baseURL;
-yeayAxiosInstance.defaults.method = 'POST';
-yeayAxiosInstance.interceptors.response.use(
+womAxiosInstance.defaults.baseURL = baseURL;
+womAxiosInstance.defaults.method = 'POST';
+womAxiosInstance.interceptors.response.use(
     config => config.data,
-    config => Promise.reject(config.response.data)
+    config => {
+        const status = config.response.status;
+        if (status === 403 || status === 401) {
+            switch (window.location.pathname) {
+                default:
+                    campaignContentEvents.setIsFirstToTrue();
+            }
+            userEvents.logout();
+        }
+
+        Promise.reject(config.response.data);
+    }
 );
 
 export default <T = void>(config: AxiosRequestConfig, withToken = true) => {
-    const request: AxiosPromise<T> = yeayAxiosInstance({
+    const request: AxiosPromise<T> = womAxiosInstance({
         ...config,
         headers: withToken
             ? {
