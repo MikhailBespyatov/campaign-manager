@@ -164,22 +164,22 @@ declare namespace WOM {
          * decimal
          * The amount of money allocated to this campaign.
          */
-        amount?: number; // double
+        budgetTotal?: number; // double
         /**
          * decimal
          * The amount spent on this campaign so far.
          */
-        spend?: number; // double
+        budgetSpent?: number; // double
         /**
          * decimal
          * The amount being spent per day.
          */
-        spendPerDay?: number; // double
+        budgetPerDay?: number; // double
         /**
          * decimal
          * The remaining amount to be spent.
          */
-        readonly remaining?: number; // double
+        readonly budgetRemaining?: number; // double
         /**
          * timeSpan
          * The approximate amount of days left at this spending per day rate.
@@ -2309,22 +2309,22 @@ declare namespace WOM {
          * decimal
          * The amount of money allocated to this campaign.
          */
-        amount?: number; // double
+        budgetTotal?: number; // double
         /**
          * decimal
          * The amount spent on this campaign so far.
          */
-        spend?: number; // double
+        budgetSpent?: number; // double
         /**
          * decimal
          * The amount being spent per day.
          */
-        spendPerDay?: number; // double
+        budgetPerDay?: number; // double
         /**
          * decimal
          * The remaining amount to be spent.
          */
-        readonly remaining?: number; // double
+        readonly budgetRemaining?: number; // double
         /**
          * timeSpan
          * The approximate amount of days left at this spending per day rate.
@@ -3937,6 +3937,7 @@ declare namespace WOM {
         value?: number; // double
     }
 }
+
 declare namespace Paths {
     namespace CampaignGet {
         namespace Post {
@@ -4090,7 +4091,6 @@ declare namespace Paths {
             namespace Responses {
                 export type $200 = /* organizationResponse */ Components.Schemas.OrganizationResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
-                export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
             }
         }

@@ -22,7 +22,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
     const usdRate = useStore(walletStores.usdRate);
-    const { amount, spend, spendPerDay, remaining, remainingDuration, campaignsRunning } = useStore(
+    const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, remainingDuration, campaignsRunning } = useStore(
         organizationsStores.statistics
     );
 
@@ -56,13 +56,16 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                     subtitle="Campaigns Running"
                     title={campaignsRunning ? commaInserter(campaignsRunning.toString()) : '0'}
                 />
-                <Summary subtitle="Campaign Budget" title={amount ? spaceInserter(amount.toString()) : '0'} />
-                <Summary subtitle="Campaign Spent" title={spend ? commaInserter(spend.toString()) : '0'} />
+                <Summary subtitle="Campaign Budget" title={budgetTotal ? spaceInserter(budgetTotal.toString()) : '0'} />
+                <Summary subtitle="Campaign Spent" title={budgetSpent ? commaInserter(budgetSpent.toString()) : '0'} />
                 <Summary
-                    subtitle="Campaign spend per day"
-                    title={spendPerDay ? commaInserter(spendPerDay.toString()) : '0'}
+                    subtitle="Daily campaign cost"
+                    title={budgetPerDay ? commaInserter(budgetPerDay.toString()) : '0'}
                 />
-                <Summary subtitle="Remaining Budget" title={remaining ? spaceInserter(remaining.toString()) : '0'} />
+                <Summary
+                    subtitle="Remaining Budget"
+                    title={budgetRemaining ? spaceInserter(budgetRemaining.toString()) : '0'}
+                />
                 <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} />
                 <SummaryWomImg title={`${usdRate ? usdRate : '0'} $`} />
             </Section>

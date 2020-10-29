@@ -121,10 +121,10 @@ const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
                 <TableSpan>??</TableSpan>
             </TableColumn> */}
             <TableColumn>
-                <TableSpan>{budget?.amount ? budget?.amount : noContentMessage}</TableSpan>
+                <TableSpan>{budget?.budgetTotal ? budget?.budgetTotal : noContentMessage}</TableSpan>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{budget?.spend ? budget?.spend : 0}</TableSpan>
+                <TableSpan>{budget?.budgetSpent ? budget?.budgetSpent : 0}</TableSpan>
             </TableColumn>
             <TableColumn>
                 <Row marginBottom="5px">
