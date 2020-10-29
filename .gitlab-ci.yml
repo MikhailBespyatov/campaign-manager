@@ -9,8 +9,8 @@ cache:
 # Name the stages involved in the pipeline
 stages:
     - lint/build
-    - build
-    - deploy
+    - build/deploy-stage
+    - build/deploy-prod
 
 lint/build:
     stage: lint/build
@@ -20,33 +20,22 @@ lint/build:
         - yarn lint
         - echo "Linting successful"
         - echo "Building deploy package"
-        - yarn build
+        - yarn build:stage
         - echo "Build successful"
     only:
         - merge_requests
 
-build:
-    stage: build
-    script:
-        - echo "Building deploy package"
-        - yarn
-        - yarn build
-        - echo "Build successful"
-    artifacts:
-        expire_in: 1 hour
-        paths:
-            - build
-    only:
-        - master
-        - development
-
-deploy:
-    stage: deploy
+build/deploy-prod:
+    stage: build/deploy-prod
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
         - export SSHPASS=$SSH_PRIVATE_KEY
     script:
+        - echo "Building deploy package"
+        - yarn
+        - yarn build:prod
+        - echo "Build successful"
         - echo "Deploying to server"
         - echo > pk.txt "$SSH_PRIVATE_KEY" | tr -d '\r'
         - chmod 400 pk.txt
@@ -57,13 +46,17 @@ deploy:
         - master
     when: manual
 
-deploy_icwt:
-    stage: deploy
+build/deploy-stage:
+    stage: build/deploy-stage
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
         - export SSHPASS=$USER_PASS_ICWT
     script:
+        - echo "Building deploy package"
+        - yarn
+        - yarn build:stage
+        - echo "Build successful"
         - echo "Deploying to ICWT server"
         - sshpass -e scp -o stricthostkeychecking=no -r ./build/* $USER_ICWT@$HOST_ICWT:$TARGET_DIR_ON_HOST_ICWT
     only:

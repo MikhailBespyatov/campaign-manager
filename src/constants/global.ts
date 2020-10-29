@@ -1,5 +1,4 @@
-export const baseURL =
-    process.env.NODE_ENV === 'production' ? 'https://api-v1.womprotocol.io/' : 'https://wom-dev.xc.io/';
+export const baseURL = process.env.REACT_APP_API_URL as string;
 
 export const userStorageName = 'campaignManagerUser';
 

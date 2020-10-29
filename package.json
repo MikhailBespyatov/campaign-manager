@@ -23,6 +23,7 @@
         "echarts-for-react": "^2.0.16",
         "effector": "^21.2.0",
         "effector-react": "^21.0.4",
+        "env-cmd": "^10.1.0",
         "formik": "^2.1.5",
         "history": "^4.10.1",
         "hls.js": "^0.14.14",
@@ -38,8 +39,9 @@
         "yup": "^0.29.3"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "npx env-cmd -f ./.dev.env react-scripts start",
+        "build:stage": "npx env-cmd -f ./.stage.env react-scripts build",
+        "build:prod": "npx env-cmd -f ./.prod.env react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "update-packages": "ncu -u",
