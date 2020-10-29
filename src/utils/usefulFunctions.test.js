@@ -139,9 +139,9 @@ describe('spaceInserter', () => {
         expect(spaceInserter('1')).toBe('1');
         expect(spaceInserter('12')).toBe('12');
         expect(spaceInserter('123')).toBe('123');
-        expect(spaceInserter('1234')).toBe('1234');
-        expect(spaceInserter('1234234')).toBe('1234 234');
-        expect(spaceInserter('123423457')).toBe('1234 2345 7');
+        expect(spaceInserter('1234')).toBe('1 234');
+        expect(spaceInserter('1234234')).toBe('1 234 234');
+        expect(spaceInserter('123423457')).toBe('123 423 457');
     });
 });
 
@@ -226,7 +226,7 @@ describe('getPublicTheme', () => {
     it('should return theme', () => {
         windowSpy.mockImplementation(() => ({
             location: {
-                pathname: '/adidas/dddd'
+                pathname: '/public/adidas/dddd'
             }
         }));
 
@@ -234,7 +234,31 @@ describe('getPublicTheme', () => {
 
         windowSpy.mockImplementation(() => ({
             location: {
-                pathname: '/adidas'
+                pathname: '/public/adidas/'
+            }
+        }));
+
+        expect(getPublicTheme()).toEqual('adidas');
+
+        windowSpy.mockImplementation(() => ({
+            location: {
+                pathname: '/public/estee_lauder/'
+            }
+        }));
+
+        expect(getPublicTheme()).toEqual('estee_lauder');
+
+        windowSpy.mockImplementation(() => ({
+            location: {
+                pathname: '/public/estee_lauder'
+            }
+        }));
+
+        expect(getPublicTheme()).toEqual('');
+
+        windowSpy.mockImplementation(() => ({
+            location: {
+                pathname: '/public/'
             }
         }));
 

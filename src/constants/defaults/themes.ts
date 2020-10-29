@@ -9,14 +9,13 @@ export interface ThemeProps {
     logo: string;
     secondaryLogo: string;
     primaryColor: string;
-    organizationId: string;
     background: string;
     primaryTextColor: string;
 }
 
 export const defaultTheme = {
     logo: womLogo,
-    secondaryLogo: '',
+    secondaryLogo: womLogo,
     primaryColor: blue,
     background: backgroundColor,
     primaryTextColor: white,
@@ -32,8 +31,7 @@ export const adidasTheme = {
     secondaryLogo: adidasLogoSecondary,
     primaryColor: secondaryColor,
     background: backgroundColor,
-    primaryTextColor: white,
-    organizationId: '5ddbdd2efd92595cf6d94dc1'
+    primaryTextColor: white
 };
 
 export const esteeLauderTheme = {
@@ -42,8 +40,7 @@ export const esteeLauderTheme = {
     //primaryColor: esteeLauderColor,
     primaryTextColor: '#040a2b',
     primaryColor: '#fdefde',
-    background: '#fdefde', //| #fdefde
-    organizationId: '5f8d93a65403c1f8e939ec70'
+    background: '#fdefde' //| #fdefde
 };
 
 export const themes: Dictionary<ThemeProps> = {

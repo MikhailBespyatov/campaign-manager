@@ -26,12 +26,12 @@ const getTokenInfo = createEffect({
 //const tokenInfo = createStore<WOM.ExchangeRateResponse>({}).on(getTokenInfo.doneData, (_, newState) => newState);
 //tokenInfo.watch(getTokenInfo.doneData, ({ womExchangeRates }) => setUsdRate(womExchangeRates[0].price.toFixed(4)));
 
-//const setUsdRate = createEvent<number>();
+// const setUsdRate = createEvent<number>();
 
 const usdRate = createStore(0)
     //.on(setUsdRate, (_, newState) => newState)
     // @ts-ignore
-    .on(getTokenInfo.doneData, (_, { womExchangeRates }) => setUsdRate(womExchangeRates[0].price.toFixed(4)));
+    .on(getTokenInfo.doneData, (_, { womExchangeRates }) => womExchangeRates[0].price.toFixed(4));
 
 const walletEvents = {};
 const walletEffects = { getTokenInfo };

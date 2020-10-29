@@ -1,4 +1,4 @@
-import defaultAvatar from 'assets/img/avatar.svg';
+import defaultImg from 'assets/img/wom_logo.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { headerAvatarDiameter, headerLogoHeight } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
@@ -24,7 +24,6 @@ export const Header = () => {
         <StyledHeader>
             <Row alignCenter marginBottom="0">
                 <CustomImg height={headerLogoHeight} src={logo} />
-                {/* <LogoImg /> */}
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
             </Row>
             <Row alignCenter marginBottom="0">
@@ -36,7 +35,7 @@ export const Header = () => {
                 </Column>
                 <CustomImg
                     height={headerAvatarDiameter}
-                    src={imageUrl ? imageUrl : defaultAvatar}
+                    src={imageUrl ? imageUrl : defaultImg}
                     width={headerAvatarDiameter}
                 />
             </Row>

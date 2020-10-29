@@ -1,6 +1,5 @@
 import history from 'BrowserHistory';
 import { CardModal } from 'components/modals/CardModal';
-import { companyNameUrls } from 'constants/defaults';
 import { acceptInvitePath, acceptOrgInvitePath, routes, signInPath } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -12,9 +11,9 @@ import { Discover } from 'pages/CampaignManager/Discover';
 import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
-// import { Adidas as SignInAdidas } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
 import { RequestCode } from 'pages/SignIn/PasswordReset/RequestCode';
+import { CreateAccount } from 'pages/SignUp';
 import { AcceptInvite } from 'pages/SignUp/AcceptInvite';
 import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
@@ -26,8 +25,8 @@ import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeEvents, themeStores } from 'stores/theme';
+import { userStores } from 'stores/user';
 import styled, { ThemeProvider } from 'styled-components';
-import { mergeElementsWithString } from 'utils/usefulFunctions';
 
 const AppWrapper = styled.div`
     position: relative;
@@ -37,28 +36,32 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
+    const { access } = useStore(userStores.auth);
     const theme = useStore(themeStores.theme);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     //const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
 
     useEffect(() => {
-        themeEvents.injectGlobalPrefixPublic();
+        access === -1 && themeEvents.injectGlobalPrefixPublic();
+        //console.log('yes');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    //console.log(companyNameUrls.map(i => i + signInPath));
+    // useEffect(() => {
+    //     themeEvents.injectGlobalPrefixPublic();
+    // }, []);
 
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <AppWrapper>
-                {/* <PublicRoute exact component={Test} path={routes.test} /> */}
                 <Router history={history}>
                     <CardModal />
                     <Switch>
                         <PublicRoute exact component={Home} path={[routes.wrongPath]} />
                         {/* <PublicRoute exact component={Test} path={routes.test} /> */}
 
-                        {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
+                        <PublicRoute exact component={CreateAccount} path={routes.signUp.index} />
                         <PublicRoute
                             exact
                             component={AcceptInvite}
@@ -68,24 +71,20 @@ const App = () => {
                         <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                         <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                        {/* <PublicRoute exact component={CreateAccount} path={routes.signUp.createAccount} /> */}
                         <PublicRoute
                             exact
                             component={AcceptInvite}
-                            path={[
-                                ...mergeElementsWithString(companyNameUrls, acceptInvitePath),
-                                ...mergeElementsWithString(companyNameUrls, acceptOrgInvitePath)
-                            ]}
+                            // path={[
+                            //     ...mergeElementsWithString(companyNameUrls, acceptInvitePath),
+                            //     ...mergeElementsWithString(companyNameUrls, acceptOrgInvitePath)
+                            // ]}
+                            path={[acceptInvitePath, acceptOrgInvitePath]}
                         />
                         <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                         <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                         <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
 
-                        <PublicRoute
-                            exact
-                            component={SignIn}
-                            path={[...mergeElementsWithString(companyNameUrls, signInPath)]}
-                        />
+                        <PublicRoute exact component={SignIn} path={signInPath} />
                         {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
                         {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
                         <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
@@ -129,7 +128,6 @@ const App = () => {
                         />
                         {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
                         <Redirect to={routes.wrongPath} />
-                        {/* </AppWrapper> */}
                     </Switch>
                 </Router>
             </AppWrapper>

@@ -2,6 +2,7 @@ export const baseURL =
     process.env.NODE_ENV === 'production' ? 'https://api-v1.womprotocol.io/' : 'https://wom-dev.xc.io/';
 
 export const userStorageName = 'campaignManagerUser';
+export const themeStorageName = 'campaignManagerTheme';
 
 export const siteName = 'Campaign Manager';
 

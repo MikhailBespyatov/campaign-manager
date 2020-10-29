@@ -1,34 +1,25 @@
-import { yupCompanyName, yupEmail, yupPassword, yupUsername } from 'constants/yupFields';
-import { FormikErrors } from 'formik';
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { RegisterUserRequest } from 'types';
+import { yupCompanyName, yupEmail } from 'constants/yupFields';
+import { SetErrorsCreateOrganizationRequest } from 'pages/SignUp/types';
+import { organizationsEffects } from 'stores/organizations';
 import * as Yup from 'yup';
 
-export const initialValues = { email: '', password: '', companyName: '', username: '' };
+export const initialValues = { companyName: '', administratorEmail: '' };
 
 export const validationSchema = Yup.object().shape({
     companyName: yupCompanyName,
-    username: yupUsername,
-    email: yupEmail,
-    password: yupPassword
+    administratorEmail: yupEmail
 });
 
-interface SetErrorsFormikProps {
-    setErrors: (
-        errors: FormikErrors<{
-            email?: string;
-            password?: string;
-        }>
-    ) => void;
-}
+interface SetErrorsFormikProps extends SetErrorsCreateOrganizationRequest {}
 
-export const onSubmit = (values: RegisterUserRequest, { setErrors }: SetErrorsFormikProps) => {
-    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-        setErrors({
-            email: authDenyReason,
-            password: authDenyReason
-        });
-        unwatch();
+export const onSubmit = (values: WOM.CreateOrganizationRequest, { setErrors }: SetErrorsFormikProps) => {
+    organizationsEffects.createOrganization({
+        values: {
+            companyName: values?.companyName?.trim().replace(/ +/g, ' '),
+            key: values?.companyName?.trim().replace(/ +/g, '_'),
+            administratorEmail: values.administratorEmail,
+            mandatoryTags: values?.companyName ? [values.companyName] : []
+        },
+        setErrors: setErrors
     });
-    userEffects.createUserAndLoadToken(values);
 };

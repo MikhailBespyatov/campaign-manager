@@ -29,3 +29,11 @@ export interface imgProperties {
     src: string;
     alt?: string;
 }
+
+export interface TotalRecords {
+    totalRecords?: number;
+}
+
+export interface Loading {
+    loading?: boolean;
+}

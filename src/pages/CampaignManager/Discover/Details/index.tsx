@@ -1,4 +1,4 @@
-import defaultAvatar from 'assets/img/avatar.svg';
+import defaultImg from 'assets/img/wom_logo.svg';
 import { Block } from 'components/common/blocks/Block';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
@@ -60,14 +60,6 @@ export const Details = () => {
         <CampaignManagerLayout>
             {/* <Section alignCenter marginBottom="35px">
                 <TagFilter />
-            </Section> */}
-            {/* <Section marginBottom="0">
-                <Summary subtitle="Campaigns Running" title="25" />
-                <Summary subtitle="Campaign Budget" title="20,000" />
-                <Summary subtitle="Campaign Spent" title="12,000" />
-                <Summary subtitle="Campaign spend per day" title="1,000" />
-                <Summary subtitle="Remaining Budget" title="10,000" />
-                <Summary subtitle="Remaining Duration" title="12d" />
             </Section> */}
             <ContentWrapper>
                 <Section noWrap>
@@ -140,7 +132,7 @@ export const Details = () => {
                                                     </Column>
                                                     <CustomImg
                                                         height={avatarDiameter}
-                                                        src={imageUrl ? imageUrl : defaultAvatar}
+                                                        src={imageUrl ? imageUrl : defaultImg}
                                                         width={avatarDiameter}
                                                     />
                                                 </Row>

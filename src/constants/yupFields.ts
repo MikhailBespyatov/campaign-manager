@@ -4,17 +4,22 @@ import {
     exactLimitMessage,
     invalidEmailMessage,
     oneCapitalCharRequiredMessage,
+    onlySimpleCharactersAllowedMessage,
     passwordLengthMessage,
     requiredFieldMessage,
     requiredSetMessage
 } from 'constants/messages';
-import { atLeastOneNumberRequiredRegExp, oneCapitalCharRequiredRegExp } from 'constants/regExp';
+import {
+    atLeastOneNumberRequiredRegExp,
+    oneCapitalCharRequiredRegExp,
+    onlySimpleCharactersAllowedRegExp
+} from 'constants/regExp';
 import * as Yup from 'yup';
 
 export const yupDefault = Yup.string().required(requiredFieldMessage);
 export const yupDefaultArray = Yup.array().of(yupDefault).required(requiredSetMessage);
 
-export const yupCompanyName = yupDefault;
+export const yupCompanyName = yupDefault.matches(onlySimpleCharactersAllowedRegExp, onlySimpleCharactersAllowedMessage);
 export const yupUsername = yupDefault;
 export const yupEmail = Yup.string().email(invalidEmailMessage).required(requiredFieldMessage);
 export const yupEmailNoHint = yupDefault;

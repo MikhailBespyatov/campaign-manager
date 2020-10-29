@@ -98,18 +98,17 @@ const LegendaryItem = () => (
 );
 interface ItemProps extends WOM.CampaignDetailResponse {}
 
-const Item = ({ id, title, budget, engagement }: ItemProps) => {
+const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
     //const [checked, setChecked] = useState(false);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
     //const onChange = (checked: boolean) => setChecked(checked);
 
     const removeHandler = () => campaignsEffects.removeItemById(id || '');
-
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow>
+        <TableRow active={!schedule?.isActive || !schedule?.isEnabled}>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>
@@ -122,10 +121,10 @@ const Item = ({ id, title, budget, engagement }: ItemProps) => {
                 <TableSpan>??</TableSpan>
             </TableColumn> */}
             <TableColumn>
-                <TableSpan>{budget?.amount ? budget?.amount : noContentMessage}</TableSpan>
+                <TableSpan>{budget?.budgetTotal ? budget?.budgetTotal : noContentMessage}</TableSpan>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{budget?.spend ? budget?.spend : 0}</TableSpan>
+                <TableSpan>{budget?.budgetSpent ? budget?.budgetSpent : 0}</TableSpan>
             </TableColumn>
             <TableColumn>
                 <Row marginBottom="5px">
