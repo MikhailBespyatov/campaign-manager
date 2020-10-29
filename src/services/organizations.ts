@@ -18,6 +18,12 @@ export const getIdentity = (data: WOM.OrganizationIdentityRequest) =>
         data
     });
 
+export const createOrganization = (data: WOM.CreateOrganizationRequest) =>
+    axios<WOM.OrganizationResponse>({
+        url: '/organization/create',
+        data
+    });
+
 // export const getUsersByOrganizationId = (data: WOM.OrganizationQueryUsersRequest) =>
 //     axios<WOM.OrganizationQueryUsersResponse>({
 //         url: '/organization/user/query',

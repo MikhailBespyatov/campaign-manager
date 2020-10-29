@@ -31,9 +31,9 @@ export const staticRoutes = {
     wrongPath: '/home',
     signUp: {
         index: signUpPrefix,
+        createAccount: signUpPrefix,
         acceptInvite: `${publicPrefixUrl}${acceptInviteTemplate}`,
         acceptOrgInvite: `${publicPrefixUrl}${acceptOrgInviteTemplate}`,
-        createAccount: signUpPrefix,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
         success: `${signUpPrefix}${walletPrefix}/success`
