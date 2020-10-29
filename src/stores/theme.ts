@@ -2,6 +2,7 @@ import { companyNames, defaultTheme, ThemeProps, themes } from 'constants/defaul
 import { themeStorageName } from 'constants/global';
 import { createEvent, createStore } from 'effector';
 import { API } from 'services';
+import { organizationsStores } from 'stores/organizations';
 import { getPublicTheme } from 'utils/usefulFunctions';
 
 export interface GlobalPrefix {
@@ -39,7 +40,10 @@ globalPrefixPublic.watch(injectGlobalPrefixPublic, async state => {
         const { organizationId } = await API.organizations.getIdentity({ organizationKey: state });
         organizationId && setOrganizationIdForLogin(organizationId);
     } catch {}
-    // setGlobalPrefixPublicUrl(state ? '/' + state : '');
+});
+globalPrefixPublic.watch(setGlobalPublicPrefix, state => {
+    setTheme(state);
+    setOrganizationIdForLogin(organizationsStores.organizationId.getState());
 });
 
 const setGlobalPrefixUrl = createEvent<string>();

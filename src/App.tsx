@@ -42,7 +42,9 @@ const App = () => {
 
     useEffect(() => {
         access === -1 && themeEvents.injectGlobalPrefixPublic();
-    }, [access]);
+        //console.log('yes');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // useEffect(() => {
     //     themeEvents.injectGlobalPrefixPublic();

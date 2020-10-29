@@ -202,7 +202,7 @@ const user = createStore<WOM.UserJwtTokenResponse>(JSON.parse(localStorage.getIt
     .on(logout, () => {
         localStorage.removeItem(userStorageName);
         localStorage.removeItem(themeStorageName);
-        //themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState());
+        themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
         return {};
     })
     .on(setToken, (_, token) => token);
