@@ -10,7 +10,7 @@ interface Props extends RouteProps {
     redirectTo?: string;
 }
 
-export const AccessRoute: FC<Props> = ({ proxy, redirectTo = routes.home, ...props }) => {
+export const AccessRoute: FC<Props> = ({ proxy, redirectTo = routes.wrongPath, ...props }) => {
     const { access } = useStore(userStores.auth);
 
     //if (!Number.isInteger(proxy) || proxy < -1 || proxy > 9) return <Redirect to={routes.signIn.index} />;

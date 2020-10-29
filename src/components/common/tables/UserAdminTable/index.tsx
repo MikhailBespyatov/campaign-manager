@@ -1,11 +1,8 @@
 import deleteImg from 'assets/img/delete.svg';
-import arrowImg from 'assets/img/select_arrow_dark.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
 import { Table } from 'components/common/tables/Table';
 import {
-    arrowImgHeight,
-    arrowImgWidth,
     companyImgBorderRadius,
     companyImgDiameter,
     deleteImgDiameter,
@@ -19,11 +16,13 @@ import {
 } from 'components/common/tables/UserAdminTable/styles';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { noContentMessage } from 'constants/messages';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import { userAdminEffects, userAdminStores } from 'stores/userAdmin';
+import { retrieveRoleAndConvert } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
     <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
@@ -48,31 +47,34 @@ const LegendaryItem = () => (
                 {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column> */}
-                <Column marginRight={tableMargin}>
-                    <LegendaryTableSpan>Company Name</LegendaryTableSpan>
-                </Column>
-                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+                {/* <Column marginRight={tableMargin}> */}
+                <LegendaryTableSpan>Company</LegendaryTableSpan>
+                {/* </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} /> */}
             </Row>
         </LegendaryTableColumn>
         <LegendaryTableColumn>
             <Row alignCenter noWrap marginBottom="0">
-                <Column marginRight={tableMargin}>
-                    <LegendaryTableSpan>Email</LegendaryTableSpan>
-                </Column>
-                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} />
+                {/* <Column marginRight={tableMargin}> */}
+                <LegendaryTableSpan>Email</LegendaryTableSpan>
+                {/* </Column>
+                <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} /> */}
             </Row>
         </LegendaryTableColumn>
-        {/* <LegendaryTableColumn>
-                <LegendaryTableSpan>Role</LegendaryTableSpan>
-            </LegendaryTableColumn> */}
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Username</LegendaryTableSpan>
+        </LegendaryTableColumn>
+        <LegendaryTableColumn>
+            <LegendaryTableSpan>Role</LegendaryTableSpan>
+        </LegendaryTableColumn>
         <LegendaryTableColumn>
             <LegendaryTableSpan>Actions</LegendaryTableSpan>
         </LegendaryTableColumn>
     </LegendaryTableRow>
 );
-const Item = ({ userId, email }: WOM.GetUserResponse) => {
-    const globalPrefix = useStore(themeStores.globalPrefix);
-    const { logo } = useStore(themeStores.theme);
+const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
+    //const globalPrefix = useStore(themeStores.globalPrefix);
+    const { secondaryLogo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
     const loading = useStore(userAdminStores.loading);
 
@@ -93,15 +95,21 @@ const Item = ({ userId, email }: WOM.GetUserResponse) => {
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
                             height={companyImgDiameter}
-                            src={logo}
-                            width={companyImgDiameter}
+                            src={secondaryLogo}
+                            //width={companyImgDiameter}
                         />
                     </Column>
-                    <TableSpan>{globalPrefix}</TableSpan>
+                    {/* <TableSpan>{globalPrefix}</TableSpan> */}
                 </Row>
             </TableColumn>
             <TableColumn>
                 <TableSpan>{email}</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <TableSpan>{username || noContentMessage}</TableSpan>
+            </TableColumn>
+            <TableColumn>
+                <TableSpan>{retrieveRoleAndConvert(roles || [])}</TableSpan>
             </TableColumn>
             {/* <TableColumn>
                 <RoleSelect reverse={checked} values={selectTestArray} />

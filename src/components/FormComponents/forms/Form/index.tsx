@@ -20,13 +20,13 @@ export const Form: FC<Props> = ({
     src,
     subSubtitle
 }) => {
-    const { logo } = useStore(themeStores.publicTheme);
+    const { secondaryLogo } = useStore(themeStores.theme);
 
-    const logoSrc = src ? src : logo;
+    const logoSrc = src ? src : secondaryLogo;
 
     return (
         <Wrapper>
-            <CustomImg borderRadius="14px" height={logoDiameter} src={logoSrc} />
+            <CustomImg height={logoDiameter} src={logoSrc} />
             <H1Form>{title}</H1Form>
             <PForm>{subtitle}</PForm>
             {subSubtitle && <PForm>{subSubtitle}</PForm>}

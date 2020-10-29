@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';

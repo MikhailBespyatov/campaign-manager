@@ -7,9 +7,8 @@ declare namespace WOM {
     //     organizationId: string;
     // }
 
-    export interface ContentQueryRequest {
-        limit: number;
-        pageIndex: number;
+    export interface ContentItemResponse {
+        inCampaignIds?: string[];
     }
 
     export interface ContentItemResponse {
@@ -22,11 +21,17 @@ declare namespace WOM {
         password: string;
     }
 
+    export interface ContentQueryRequestValues extends Omit<ContentQueryRequest, 'pageIndex', 'limit'> {}
+
     export interface UpdateAndRemoveCampaignContentValues extends RemoveValues {
-        updateValues?: ContentQueryRequest;
+        updateValues?: ContentQueryRequestValues;
     }
 
     export interface UpdateAndRemoveCampaignStatisticsValues extends RemoveValues {
         updateValues?: CampaignStatisticsQueryRequest;
+    }
+
+    export interface CampaignScheduleStatus {
+        isEnabled?: boolean;
     }
 }

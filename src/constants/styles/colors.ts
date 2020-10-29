@@ -19,7 +19,7 @@ export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 
 export const blue = '#3333FF';
-export const backgroundColor = '#f0f2f5';
+export const backgroundColor = '#121217';
 
 export const infoColor = 'rgb(25, 118, 210)';
 export const successColor = '#4CD964'; //'rgb(67, 160, 71)';

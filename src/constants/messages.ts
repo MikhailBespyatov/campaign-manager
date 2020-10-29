@@ -9,8 +9,8 @@ export const oneCapitalCharRequiredMessage = 'At least one uppercase char requir
 export const atLeastOneNumberRequiredMessage = 'At least on number char required';
 
 export const incorrectOrgIdMessage = 'Incorrect organization id';
-
 export const existCampaignErrorMessage = 'This campaign name already exists';
+export const onlySimpleCharactersAllowedMessage = 'Allowed only 0-9 a-z A-Z';
 
 // export const passwordPatternMessage = 'The password must contain a digit and an uppercase character';
 // export const repeatPasswordMessage = 'Please, repeat your password';
@@ -24,3 +24,4 @@ export const wrongInviteCodeMessage = 'Wrong invite code';
 
 // global
 export const noContentMessage = '...';
+export const noDataAvailableMessage = 'No available data for this filters';

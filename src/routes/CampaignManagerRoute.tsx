@@ -1,4 +1,5 @@
-import { routes } from 'constants/routes';
+import { parsePublicUrl, signInIndexTemplate } from 'constants/routes';
+import { useStore } from 'effector-react';
 // import { routes } from 'constants/routes';
 // import { useStore } from 'effector-react';
 // import React, { FC } from 'react';
@@ -15,7 +16,10 @@ import { routes } from 'constants/routes';
 import React, { FC } from 'react';
 import { RouteProps } from 'react-router';
 import { AccessRoute } from 'routes/AccessRoute';
+import { themeStores } from 'stores/theme';
 
-export const CampaignManagerRoute: FC<RouteProps> = props => (
-    <AccessRoute proxy={[1, 2]} {...props} redirectTo={routes.signIn.index} />
-);
+export const CampaignManagerRoute: FC<RouteProps> = props => {
+    const { prefix } = useStore(themeStores.globalPrefix);
+
+    return <AccessRoute proxy={[1, 2]} {...props} redirectTo={parsePublicUrl(prefix || '', signInIndexTemplate)} />;
+};

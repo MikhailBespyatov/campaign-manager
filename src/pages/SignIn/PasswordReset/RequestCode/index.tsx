@@ -7,16 +7,18 @@ import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { routes } from 'constants/routes';
+import { parsePublicUrl, signInIndexTemplate } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/RequestCode/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 import { userEffects, userStores } from 'stores/user';
 
 export const RequestCode = () => {
+    const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
     const loading = useStore(loadingStores.loading);
     const email = useStore(userStores.currentEmailForPasswordReset);
 
@@ -56,7 +58,11 @@ export const RequestCode = () => {
                                             Send a new code ?
                                         </Span>
                                     </Row>
-                                    <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.index}>
+                                    <InternalLink
+                                        fontSize="16px"
+                                        lineHeight="20px"
+                                        to={parsePublicUrl(globalPrefixPublic, signInIndexTemplate)}
+                                    >
                                         Enter as User
                                     </InternalLink>
                                 </Column>

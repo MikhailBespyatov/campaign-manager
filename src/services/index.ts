@@ -5,6 +5,7 @@ import * as organizations from './organizations';
 import * as user from './user';
 import * as userAdmin from './userAdmin';
 import * as users from './users';
+import * as wallet from './wallet';
 
 export const API = {
     user,
@@ -13,5 +14,6 @@ export const API = {
     campaigns,
     organizations,
     admin,
-    userAdmin
+    userAdmin,
+    wallet
 };

@@ -1,13 +1,13 @@
 import history from 'BrowserHistory';
 import { InviteRequestProps } from 'components/FormComponents/forms/InviteForm/types';
-import { noop, userStorageName } from 'constants/global';
+import { noop, themeStorageName, userStorageName } from 'constants/global';
 import {
     errorDataMessage,
     incorrectOrgIdMessage,
     notEntryAllowedMessage,
     wrongInviteCodeMessage
 } from 'constants/messages';
-import { routes } from 'constants/routes';
+import { parsePublicUrl, requestCodeTemplate } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { ResetPasswordRequestProps } from 'pages/SignIn/PasswordReset/RequestCode/types';
 import { SecurityCodeRequestProps } from 'pages/SignIn/PasswordReset/types';
@@ -15,7 +15,7 @@ import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
-import { themeEvents } from 'stores/theme';
+import { themeEvents, themeStores } from 'stores/theme';
 import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
 import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
@@ -26,11 +26,17 @@ const loadToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
             loadingEffects.updateLoading();
-            const data = await API.user.authenticateUser(values);
+            const prefix = themeStores.globalPrefixPublic.getState();
+            const data = await API.user.authenticateUser({
+                ...values,
+                organizationId: themeStores.organizationIdForLogin.getState()
+            });
             loadingEffects.updateLoading();
 
+            themeEvents.setGlobalPrefix(prefix);
+            localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             localStorage.setItem(userStorageName, JSON.stringify(data));
-            organizationsEvents.setOrganizationId(data?.user?.organizationId || '');
+            //organizationsEvents.setOrganizationId(data?.user?.organizationId || '');
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -91,7 +97,6 @@ const removeUserByEmail = createEffect({
 });
 
 const setEmail = createEvent<string>();
-
 const currentEmailForPasswordReset = createStore<string>('').on(setEmail, (_, newState) => newState);
 
 const sendSecurityCode = createEffect({
@@ -99,10 +104,13 @@ const sendSecurityCode = createEffect({
         try {
             setEmail(values.email);
             loadingEffects.updateLoading();
-            await API.user.sendSecurityCode({ ...values, organizationId: '5ddbdd2efd92595cf6d94dc1' });
+            await API.user.sendSecurityCode({
+                ...values,
+                organizationId: themeStores.organizationIdForLogin.getState()
+            });
             loadingEffects.updateLoading();
 
-            history.push(routes.signIn.requestCode);
+            history.push(parsePublicUrl(themeStores.globalPrefixPublic.getState(), requestCodeTemplate));
         } catch {
             setEmail('');
             loadingEffects.updateLoading();
@@ -118,8 +126,12 @@ const acceptInvitationAndLoadToken = createEffect({
         try {
             loadingEffects.updateLoading();
             const data = await API.user.acceptInvitation(values);
+            const { title } = await API.organizations.getItemById({ organizationId: data?.user?.organizationId || '' });
             loadingEffects.updateLoading();
 
+            const prefix = title || '';
+            themeEvents.setGlobalPrefix(prefix);
+            localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
@@ -135,15 +147,17 @@ const acceptInvitationAndLoadToken = createEffect({
 const resetPasswordAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: ResetPasswordRequestProps) => {
         try {
-            console.log('ye');
             loadingEffects.updateLoading();
+            const prefix = themeStores.globalPrefixPublic.getState();
             const data = await API.user.resetPasswordAndLoadToken({
                 ...values,
-                organizationId: '5ddbdd2efd92595cf6d94dc1'
+                organizationId: themeStores.organizationIdForLogin.getState()
             });
             loadingEffects.updateLoading();
 
             setEmail('');
+            themeEvents.setGlobalPrefix(prefix);
+            localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
@@ -187,21 +201,18 @@ const user = createStore<WOM.UserJwtTokenResponse>(JSON.parse(localStorage.getIt
     )
     .on(logout, () => {
         localStorage.removeItem(userStorageName);
+        localStorage.removeItem(themeStorageName);
+        themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
         return {};
     })
     .on(setToken, (_, token) => token);
 
 user.watch(state => {
     if (!objectIsEmpty(state)) {
-        const organizationId = getOrganizationId();
-        organizationsEvents.setOrganizationId(organizationId);
-        themeEvents.setGlobalPrefix(
-            organizationId === '5ddbdd2efd92595cf6d94dc1'
-                ? 'adidas'
-                : organizationId === '5f8d93a65403c1f8e939ec70'
-                ? 'estee_lauder'
-                : 'base'
-        );
+        organizationsEvents.setOrganizationId(getOrganizationId());
+        // const { prefix }: { prefix?: string } = JSON.parse(localStorage.getItem(userStorageName) || '{}');
+        // themeEvents.setGlobalPrefix(prefix || '');
+        // themeEvents.injectGlobalPrefixPublic();
     }
     objectIsEmpty(state)
         ? setAuth({

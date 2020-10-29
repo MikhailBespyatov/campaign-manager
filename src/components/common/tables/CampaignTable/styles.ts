@@ -52,7 +52,7 @@ export const TableColumn = styled.td`
 `;
 
 export const TableRow = styled.tr<Active>`
-    ${({ active }) => (active ? `background: ${activeColor};` : ``)};
+    ${({ active }) => (active ? `background: ${activeColor}; opacity: 0.5;` : ``)};
     &:last-child {
         ${TableColumn} {
             &:first-child {

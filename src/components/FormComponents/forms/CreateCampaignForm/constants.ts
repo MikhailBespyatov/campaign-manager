@@ -60,7 +60,7 @@ export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) =>
                 utcToEnd: values.utcToEnd
             },
             budget: {
-                amount: Number(values.amount.replace(/,/g, ''))
+                budgetTotal: Number(values.amount.replace(/,/g, ''))
             },
             settings: {
                 watchOverride: false,

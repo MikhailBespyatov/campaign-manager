@@ -1,3 +1,5 @@
+import { Block } from 'components/common/blocks/Block';
+import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
@@ -7,10 +9,12 @@ import { Loader } from 'components/common/Loader';
 import { H1 } from 'components/common/typography/titles/H';
 import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
-import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { CreateCampaignMiniCard } from 'components/Layouts/Cards/CreateCampaignMiniCard';
 import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
+import { noContentMessage, noDataAvailableMessage } from 'constants/messages';
 import { primaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
@@ -28,6 +32,7 @@ import {
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
+import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 
@@ -38,7 +43,8 @@ interface ParamsProps {
 export const Details = () => {
     const { campaignId } = useParams<ParamsProps>();
     const { sets, deltaStatistics } = useStore(campaignsStores.statisticsItems);
-    const { title, schedule } = useStore(campaignsStores.item);
+    const { title, schedule, contentIds } = useStore(campaignsStores.item);
+    const campaignSelectedVideos = useStore(campaignContentStores.campaignSelectedVideos);
     const initialLoading = useStore(loadingStores.initialLoading);
     const loading = useStore(loadingStores.loading);
 
@@ -214,14 +220,23 @@ export const Details = () => {
         setSetsData(sets?.map(i => i?.items?.map(i => i.viewCount)));
     }, [sets]);
 
+    useEffect(() => {
+        contentIds?.length && campaignContentEffects.getSelectedVideos(contentIds);
+    }, [contentIds]);
+
     return (
         <CampaignManagerLayout>
             <ContentWrapper>
-                <Section>
-                    {loading ? (
+                {loading ? (
+                    <Section>
                         <Loader />
-                    ) : (
-                        <>
+                    </Section>
+                ) : (
+                    <>
+                        <Section>
+                            <H1>Campaign Name: {title}</H1>
+                        </Section>
+                        <Section>
                             <BorderBlock>
                                 <Section>
                                     {utcToStart && utcToEnd && (
@@ -300,12 +315,24 @@ export const Details = () => {
                             </BorderBlock>
 
                             <Column>
-                                <H1>Campaign id: {campaignId}</H1>
-                                <H1>Campaign Name: {title}</H1>
+                                <Block title="Selected videos">
+                                    <RowBlockCell padding={primaryPadding}>
+                                        <Row marginBottom="0">
+                                            {campaignSelectedVideos?.items?.map(item => (
+                                                <CreateCampaignMiniCard
+                                                    key={item.womContentId}
+                                                    marginBottom="0"
+                                                    {...item}
+                                                />
+                                            )) || noContentMessage}
+                                        </Row>
+                                    </RowBlockCell>
+                                </Block>
                             </Column>
-                        </>
-                    )}
-                </Section>
+                        </Section>
+                    </>
+                )}
+
                 {initialLoading ? (
                     <Loader />
                 ) : (
@@ -329,10 +356,14 @@ export const Details = () => {
                                 </Row> */}
                                 <Section alignCenter noWrap>
                                     {/* <Column marginRight="25px"> */}
-                                    <ReactEcharts
-                                        option={{ series: series, ...graphicOption, xAxis: xAxis }}
-                                        style={{ height: '516px', width: '100%' }}
-                                    />
+                                    {sets?.length && sets[0]?.items?.length ? (
+                                        <ReactEcharts
+                                            option={{ series: series, ...graphicOption, xAxis: xAxis }}
+                                            style={{ height: '516px', width: '100%' }}
+                                        />
+                                    ) : (
+                                        noDataAvailableMessage
+                                    )}
                                     {/* </Column> */}
                                 </Section>
                             </Column>

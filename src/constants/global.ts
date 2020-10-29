@@ -1,6 +1,7 @@
 export const baseURL = process.env.REACT_APP_API_URL as string;
 
 export const userStorageName = 'campaignManagerUser';
+export const themeStorageName = 'campaignManagerTheme';
 
 export const siteName = 'Campaign Manager';
 

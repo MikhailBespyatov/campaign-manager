@@ -1,4 +1,3 @@
-import { Span } from 'components/common/typography/Span';
 import {
     headerHorizontalMargin,
     headerVerticalMargin,
@@ -12,7 +11,7 @@ import {
     styledSpanLineHeight3,
     styledSpanMarginLeft
 } from 'components/grid/Header/constants';
-import { flexCenter, formTextStyleMixin, headerHeight } from 'constants/styles';
+import { flexCenter, formTextStyleMixin, headerHeight, white } from 'constants/styles';
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
@@ -24,22 +23,25 @@ export const StyledHeader = styled.header`
     padding: ${headerVerticalMargin} ${headerHorizontalMargin};
 `;
 
-export const StyledSpan1 = styled(Span)`
+export const StyledSpan1 = styled.span`
     ${formTextStyleMixin};
+    color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-size: ${styledSpanFontSize1};
     line-height: ${styledSpanLineHeight1};
     margin-left: ${styledSpanMarginLeft};
 `;
 
-export const StyledSpan2 = styled(Span)`
+export const StyledSpan2 = styled.span`
     ${formTextStyleMixin};
+    color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-weight: ${styledSpanFontWeight2};
     font-size: ${styledSpanFontSize2};
     line-height: ${styledSpanLineHeight2};
 `;
 
-export const StyledSpan3 = styled(Span)`
+export const StyledSpan3 = styled.span`
     ${formTextStyleMixin};
+    color: ${({ theme: { primaryTextColor } }) => primaryTextColor || white};
     font-weight: ${styledSpanFontWeight3};
     font-size: ${styledSpanFontSize3};
     line-height: ${styledSpanLineHeight3};

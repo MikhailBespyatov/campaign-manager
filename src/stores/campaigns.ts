@@ -6,7 +6,15 @@ import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
+
+const updateLoading = createEvent();
+const setLoading = createEvent<boolean>();
+
+const loading = createStore<boolean>(false)
+    .on(updateLoading, state => !state)
+    .on(setLoading, (_, newState) => newState);
 
 const addContentIds = createEvent<WOM.ContentItemResponse[]>();
 const pushContentId = createEvent<WOM.ContentItemResponse>();
@@ -35,6 +43,26 @@ const upsertItem = createEffect({
             setErrors({
                 title: existCampaignErrorMessage
             });
+        }
+    }
+});
+
+const itemRemoveEvent = createEvent<string>();
+const removeItemById = createEffect({
+    handler: async (id: string) => {
+        try {
+            updateLoading();
+            await API.campaigns.upsertItem({
+                id,
+                organizationId: organizationsStores.organizationId.getState(),
+                //@ts-ignore
+                isHidden: true
+            });
+            updateLoading();
+
+            itemRemoveEvent(id);
+        } catch {
+            updateLoading();
         }
     }
 });
@@ -85,7 +113,9 @@ const getStatisticsItems = createEffect({
 });
 
 const item = createStore<WOM.CampaignDetailResponse>({}).on(getItemById.doneData, (_, newState) => newState);
-const items = createStore<WOM.CampaignsQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
+const items = createStore<WOM.CampaignsQueryResponse>({})
+    .on(getItems.doneData, (_, newState) => newState)
+    .on(itemRemoveEvent, (state, id) => ({ ...state, items: state.items?.filter(i => i.id !== id) || [] }));
 const statisticsItems = createStore<WOM.CampaignStatisticsQueryResponse>({}).on(
     getStatisticsItems.doneData,
     (_, newState) => newState
@@ -122,7 +152,7 @@ const campaignsEvents = {
     pushContentId,
     removeContentById
 };
-const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem };
-const campaignsStores = { items, item, statisticsItems, contentIds };
+const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById };
+const campaignsStores = { items, item, statisticsItems, contentIds, loading };
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

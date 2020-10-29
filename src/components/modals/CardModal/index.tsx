@@ -1,15 +1,16 @@
-import defaultAvatar from 'assets/img/avatar.svg';
 import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
+import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
 import { P } from 'components/common/typography/titles/P';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import {
     closeModalImgDiameter,
@@ -21,13 +22,14 @@ import {
 import { Wrapper } from 'components/modals/CardModal/styles';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { avatarDiameter, primaryPadding, secondaryPadding, tertiaryPadding } from 'constants/styles';
+import { primaryPadding, secondaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEvents } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
+import { themeStores } from 'stores/theme';
 import { roundScore } from 'utils/usefulFunctions';
 
 interface SmallSpanProps {
@@ -62,14 +64,18 @@ const body = document.getElementsByTagName('body')[0];
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
-    const { uriPrimary, womQualityScore, engagement, products, userDetails, tags } = useStore(
+    const { uriPrimary, womQualityScore, engagement, products, tags, inCampaignIds } = useStore(
         campaignContentStores.item
     );
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const loading = useStore(loadingStores.loading);
 
-    const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
-    const username = userDetails && userDetails?.username;
-    const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
+    const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
+        products
+    ]);
+    const extraTags = productsItem.extraTags;
+    // const username = userDetails && userDetails?.username;
+    // const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
     // const tagBrand = productsItem !== 0 ? productsItem?.tagBrand : '';
     // const tagCategory = productsItem !== 0 ? productsItem?.tagCategory : '';
     // const tagSubCategory = productsItem !== 0 ? productsItem?.tagSubCategory : '';
@@ -77,10 +83,10 @@ export const CardModal = () => {
 
     const onClose = () => modalEvents.closeCardModal();
 
-    // const onDetailsClick = () => {
-    //     history.push(routes.campaignManager.discover.details + '/' + id);
-    //     modalEvents.closeCardModal();
-    // };
+    const onDetailsClick = () => {
+        history.push(routes.campaignManager.discover.details + '/' + id);
+        modalEvents.closeCardModal();
+    };
 
     const onPromoteClick = () => {
         history.push(routes.campaignManager.campaign.create);
@@ -160,7 +166,7 @@ export const CardModal = () => {
                                         <Row>
                                             <P>{productsItem?.item ? productsItem.item : noContentMessage}</P>
                                         </Row>
-                                        <Row marginBottom={miniMarginBottom}>
+                                        {/* <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Videos</SmallSpan>
                                         </Row>
                                         <Row>
@@ -178,7 +184,7 @@ export const CardModal = () => {
                                                 src={imageUrl ? imageUrl : defaultAvatar}
                                                 width={avatarDiameter}
                                             />
-                                        </Row>
+                                        </Row> */}
                                     </Column>
                                 </Row>
                             </RowBlockCell>
@@ -203,7 +209,7 @@ export const CardModal = () => {
                                 <Row>
                                     <Subtitle>Viewers</Subtitle>
                                 </Row>
-                                <Row marginBottom={miniMarginBottom}>
+                                {/* <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>Preview</SmallSpan>
                                 </Row>
                                 <Row>
@@ -213,9 +219,9 @@ export const CardModal = () => {
                                     <SmallSpan>View</SmallSpan>
                                 </Row>
                                 <Row alignCenter>
-                                    {/* <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan> */}
+                                    <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan>
                                     <P>??</P>
-                                </Row>
+                                </Row> */}
                                 <Row>
                                     <Column marginRight={primaryPadding}>
                                         <PercentageSpan>{'< 25%'}</PercentageSpan>
@@ -230,6 +236,11 @@ export const CardModal = () => {
                                         <EngagementSpan>{engagement?.viewsD4Percentage || 0}%</EngagementSpan>
                                     </Column>
                                 </Row>
+                                <Row justifyCenter marginTop="auto">
+                                    <RoundedButton reverse onClick={onPromoteClick}>
+                                        +&nbsp;PROMOTE
+                                    </RoundedButton>
+                                </Row>
                             </RowBlockCell>
                             <RowBlockCell padding={validatorsPadding}>
                                 <Row>
@@ -238,85 +249,75 @@ export const CardModal = () => {
                                 <Row>
                                     <Column marginRight={'50px'}>
                                         <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Like</SmallSpan>
+                                            <SmallSpan>Views</SmallSpan>
+                                        </Row>
+                                        <Row alignCenter marginBottom={secondaryPadding}>
+                                            <P>{engagement?.viewCount}</P>&nbsp;
+                                        </Row>
+                                        <Row marginBottom={miniMarginBottom}>
+                                            <SmallSpan>Likes</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
                                             <P>{engagement?.likeCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.likesPercentage || 0}%)</SmallSpan>
+                                            <PercentageGrowth
+                                                type={
+                                                    engagement?.likesPercentage && engagement.likesPercentage > 0
+                                                        ? 'success'
+                                                        : 'error'
+                                                }
+                                            >
+                                                {engagement?.likesPercentage || 0}
+                                            </PercentageGrowth>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Save</SmallSpan>
+                                            <SmallSpan>Saves</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
                                             <P>{engagement?.saveCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.savesPercentage || 0}%)</SmallSpan>
+                                            <PercentageGrowth
+                                                type={
+                                                    engagement?.savesPercentage && engagement.savesPercentage > 0
+                                                        ? 'success'
+                                                        : 'error'
+                                                }
+                                            >
+                                                {engagement?.savesPercentage || 0}
+                                            </PercentageGrowth>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Comment</SmallSpan>
+                                            <SmallSpan>Comments</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
                                             <P>{engagement?.commentCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>
-                                                ({engagement?.commentsPercentage || 0}%)
-                                            </SmallSpan>
+                                            <PercentageGrowth
+                                                type={
+                                                    engagement?.commentsPercentage && engagement.commentsPercentage > 0
+                                                        ? 'success'
+                                                        : 'error'
+                                                }
+                                            >
+                                                {engagement?.commentsPercentage || 0}
+                                            </PercentageGrowth>
                                         </Row>
                                         <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Rate</SmallSpan>
+                                            <SmallSpan>Shares</SmallSpan>
                                         </Row>
                                         <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.ratingCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.ratingsPercentage || 0}%)</SmallSpan>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Honesty</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            {/* <P>{engagement?.honestyCount || 0}</P>&nbsp;
-                                                    <SmallSpan opacity={0.5}>
-                                                        ({engagement?.honestyPercentage || 0}%)
-                                                    </SmallSpan> */}
-                                            <P>??</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>??</SmallSpan>
+                                            <P>{engagement?.shareCount}</P>&nbsp;
+                                            <PercentageGrowth
+                                                type={
+                                                    engagement?.sharesPercentage && engagement.sharesPercentage > 0
+                                                        ? 'success'
+                                                        : 'error'
+                                                }
+                                            >
+                                                {engagement?.sharesPercentage || 0}
+                                            </PercentageGrowth>
                                         </Row>
                                     </Column>
-                                    <Column>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Creativity</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            {/* <P>{engagement?.likeCount}</P>&nbsp;
-                                                    <SmallSpan opacity={0.5}>
-                                                        ({engagement?.likesPercentage || 0}%)
-                                                    </SmallSpan> */}
-                                            <P>??</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>??</SmallSpan>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Positivity</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            {/* <P>{engagement?.likeCount}</P>&nbsp;
-                                                    <SmallSpan opacity={0.5}>
-                                                        ({engagement?.likesPercentage || 0}%)
-                                                    </SmallSpan> */}
-                                            <P>??</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>??</SmallSpan>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Click</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.clickCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.clicksPercentage || 0}%)</SmallSpan>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Buy</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.buyCount}</P>&nbsp;
-                                            <SmallSpan opacity={0.5}>({engagement?.buysPercentage || 0}%)</SmallSpan>
-                                        </Row>
-                                    </Column>
+                                </Row>
+                                <Row justifyCenter marginTop="auto">
+                                    <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
                                 </Row>
                             </RowBlockCell>
                         </ColumnBlockCell>
@@ -326,70 +327,39 @@ export const CardModal = () => {
                                     <Subtitle>Additional details</Subtitle>
                                 </Row>
                                 <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>Category</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>Sub-category</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>Item</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                            </RowBlockCell>
-                            <RowBlockCell removeBorder padding={validatorsPadding}>
-                                <Row marginBottom="40px">
-                                    <Subtitle>&nbsp;</Subtitle>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
                                     <SmallSpan>In-use</SmallSpan>
                                 </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>In-promotion</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>Available</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
+                                <Row maxWidth="420px">
+                                    {inCampaignIds?.map(i => (
+                                        <InternalLink
+                                            key={i}
+                                            to={globalPrefixUrl + routes.campaignManager.campaign.indexDetails + i}
+                                        >
+                                            {i}
+                                        </InternalLink>
+                                    ))}
                                 </Row>
                             </RowBlockCell>
                             <RowBlockCell removeBorder padding={validatorsPadding}>
                                 <Row marginBottom="40px">
                                     <Subtitle>Hashtags</Subtitle>
                                 </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    {tags &&
-                                        tags.length &&
-                                        tags.map(i => <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>)}
-                                    {/* <ClosableTag closable>ADIDAS</ClosableTag>
-                                    <ClosableTag closable>SUPERSTAR</ClosableTag>
-                                    <ClosableTag closable>SPORTSHOE</ClosableTag> */}
+                                <Row marginBottom={miniMarginBottom} maxWidth="400px">
+                                    {tags?.map(i => (
+                                        <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
+                                    ))}
                                 </Row>
                             </RowBlockCell>
-                        </ColumnBlockCell>
-                        <ColumnBlockCell>
-                            <Section justifyCenter marginBottom={tertiaryPadding}>
-                                {/* <Column marginRight="50px"> */}
-                                {/* <RoundedButton onClick={onDetailsClick}>Details</RoundedButton> */}
-                                {/* </Column> */}
-                                <RoundedButton reverse onClick={onPromoteClick}>
-                                    +&nbsp;PROMOTE
-                                </RoundedButton>
-                            </Section>
+                            <RowBlockCell removeBorder padding={validatorsPadding}>
+                                <Row marginBottom="40px">
+                                    <Subtitle>Extra Hashtags</Subtitle>
+                                </Row>
+                                <Row marginBottom={miniMarginBottom}>
+                                    {extraTags?.map(i => (
+                                        <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
+                                    ))}
+                                </Row>
+                            </RowBlockCell>
                         </ColumnBlockCell>
                     </>
                 )}

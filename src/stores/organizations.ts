@@ -1,4 +1,6 @@
+import { errorDataMessage } from 'constants/messages';
 import { createEffect, createEvent, createStore } from 'effector';
+import { CreateOrganizationRequestProps } from 'pages/SignUp/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 
@@ -10,9 +12,23 @@ const loading = createStore<boolean>(false)
     .on(setLoading, (_, newState) => newState);
 
 const setOrganizationId = createEvent<string>();
+const organizationId = createStore('').on(setOrganizationId, (_, newState) => newState);
 
-const organizationId = createStore<string>('').on(setOrganizationId, (_, newState) => newState);
-organizationId.watch(state => console.log('new state: ', state));
+const createOrganization = createEffect({
+    handler: async ({ values, setErrors }: CreateOrganizationRequestProps) => {
+        try {
+            loadingEffects.updateLoading();
+            await API.organizations.createOrganization(values);
+            loadingEffects.updateLoading();
+        } catch {
+            loadingEffects.updateLoading();
+            setErrors({
+                companyName: errorDataMessage,
+                administratorEmail: errorDataMessage
+            });
+        }
+    }
+});
 
 const getItemById = createEffect({
     handler: async (id: string) => {
@@ -52,7 +68,7 @@ const statistics = createStore<WOM.OrganizationStatisticsResponse>({}).on(
 );
 
 const organizationsEvents = { setOrganizationId };
-const organizationsEffects = { getStatisticsById, getItemById };
+const organizationsEffects = { getStatisticsById, getItemById, createOrganization };
 const organizationsStores = { statistics, loading, item, organizationId };
 
 export { organizationsEffects, organizationsStores, organizationsEvents };

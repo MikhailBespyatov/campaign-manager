@@ -1,4 +1,4 @@
-import { formGrey1, formGrey2, tertiaryPadding } from 'constants/styles';
+import { formGrey2, formGrey3, tertiaryPadding } from 'constants/styles';
 
 export const legendarySpanFontSize = '27px';
 export const legendarySpanLineHeight = '32px';
@@ -28,7 +28,7 @@ export const tableBorder = `${tableRowBorderWidth} solid ${tableRowBorderColor}`
 
 export const tableColumnWidth = `calc(340px - 2 * ${legendaryTableRowHorizontalPadding})`;
 
-export const activeColor = formGrey1;
+export const activeColor = formGrey3;
 
 export const tableMargin = '15px';
 

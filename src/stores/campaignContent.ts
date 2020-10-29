@@ -1,7 +1,10 @@
-import { defaultCampaignContentValues } from 'constants/defaults/campaignContent';
+import axios, { CancelTokenSource } from 'axios';
+import { defaultCampaignContentValues } from 'constants/defaults';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+
+let cancelToken: CancelTokenSource | undefined;
 
 const updateInitialLoading = createEvent();
 const setInitialLoading = createEvent<boolean>();
@@ -35,8 +38,30 @@ const getItemById = createEffect({
 const getItems = createEffect({
     handler: async (values: WOM.ContentQueryRequest) => {
         try {
+            cancelToken && cancelToken.cancel();
+            cancelToken = axios.CancelToken.source();
+
             updateInitialLoading();
-            const data = await API.campaignContent.getItems(values);
+            const data = await API.campaignContent.getItems(values, cancelToken.token);
+            updateInitialLoading();
+
+            return data ? data : {};
+        } catch {
+            updateInitialLoading();
+            return {};
+        }
+    }
+});
+
+const getSelectedVideos = createEffect({
+    handler: async (contentIds: string[]) => {
+        try {
+            updateInitialLoading();
+            const data = await API.campaignContent.getItems({
+                pageIndex: 0,
+                limit: 100,
+                byContentIds: contentIds
+            });
             updateInitialLoading();
 
             return data ? data : {};
@@ -50,7 +75,18 @@ const getItems = createEffect({
 const item = createStore<WOM.ContentItemResponse>({}).on(getItemById.doneData, (_, newState) => newState);
 const items = createStore<WOM.ContentQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
 
-const updateValues = createEvent<WOM.ContentQueryRequest>();
+const campaignSelectedVideos = createStore<WOM.ContentQueryResponse>({}).on(
+    getSelectedVideos.doneData,
+    (_, newState) => newState
+);
+
+const updateIsFirst = createEvent();
+const setIsFirstToTrue = createEvent();
+const isFirst = createStore<boolean>(true)
+    .on(updateIsFirst, state => !state)
+    .on(setIsFirstToTrue, () => true);
+
+const updateValues = createEvent<WOM.ContentQueryRequestValues>();
 const updateAndRemoveValues = createEvent<WOM.UpdateAndRemoveCampaignContentValues>();
 const setDefaultValues = createEvent();
 
@@ -58,9 +94,8 @@ const setDefaultValues = createEvent();
 // after updating or removing some fields of the values,
 // watcher initiate getItems request due the new values
 // (old fields of values are not removed if they are not pointed as remove values in removeAndUpdateValues event)
-//let isFirst = true;
 const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues)
-    .on(updateValues, (state, values: WOM.ContentQueryRequest) => ({ ...state, ...values }))
+    .on(updateValues, (state, values: WOM.ContentQueryRequestValues) => ({ ...state, ...values }))
     .on(updateAndRemoveValues, (state, values: WOM.UpdateAndRemoveCampaignContentValues) => {
         let formerState = state;
         values.removeValues.forEach(
@@ -71,11 +106,18 @@ const values = createStore<WOM.ContentQueryRequest>(defaultCampaignContentValues
         return { ...formerState, ...values.updateValues };
     })
     .on(setDefaultValues, () => defaultCampaignContentValues);
-// values.watch(state => (isFirst ? (isFirst = false) : getItems(state)));
-values.watch(state => getItems(state));
+values.watch(updateValues, state => getItems(state));
+values.watch(updateAndRemoveValues, state => getItems(state));
+values.watch(setDefaultValues, state => getItems(state));
 
-const campaignContentEvents = { updateValues, updateAndRemoveValues, setDefaultValues };
-const campaignContentEffects = { getItems, getItemById };
-const campaignContentStores = { items, item, values, initialLoading };
+const campaignContentEvents = {
+    updateValues,
+    updateAndRemoveValues,
+    setDefaultValues,
+    updateIsFirst,
+    setIsFirstToTrue
+};
+const campaignContentEffects = { getItems, getItemById, getSelectedVideos };
+const campaignContentStores = { items, item, values, initialLoading, campaignSelectedVideos, isFirst };
 
 export { campaignContentEffects, campaignContentStores, campaignContentEvents };

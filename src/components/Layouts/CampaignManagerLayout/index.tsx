@@ -1,5 +1,6 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Summary } from 'components/common/features/Summary';
+import { SummaryWomImg } from 'components/common/features/SummaryWomImg';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
@@ -9,8 +10,9 @@ import React, { FC, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
+import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
-import { commaInserter } from 'utils/usefulFunctions';
+import { commaInserter, spaceInserter } from 'utils/usefulFunctions';
 
 interface Props extends Background {}
 
@@ -19,7 +21,8 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
-    const { amount, spend, spendPerDay, remaining, remainingDuration, campaignsRunning } = useStore(
+    const usdRate = useStore(walletStores.usdRate);
+    const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, remainingDuration, campaignsRunning } = useStore(
         organizationsStores.statistics
     );
 
@@ -28,9 +31,12 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const onClick = () => history.push(createRoute);
 
     useEffect(() => {
-        organizationId && console.log('www', organizationId);
         organizationId && organizationsEffects.getStatisticsById(organizationId);
     }, [organizationId]);
+
+    useEffect(() => {
+        walletEffects.getTokenInfo();
+    }, []);
 
     return (
         <MainLayout
@@ -50,14 +56,18 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                     subtitle="Campaigns Running"
                     title={campaignsRunning ? commaInserter(campaignsRunning.toString()) : '0'}
                 />
-                <Summary subtitle="Campaign Budget" title={amount ? commaInserter(amount.toString()) : '0'} />
-                <Summary subtitle="Campaign Spent" title={spend ? commaInserter(spend.toString()) : '0'} />
+                <Summary subtitle="Campaign Budget" title={budgetTotal ? spaceInserter(budgetTotal.toString()) : '0'} />
+                <Summary subtitle="Campaign Spent" title={budgetSpent ? commaInserter(budgetSpent.toString()) : '0'} />
                 <Summary
-                    subtitle="Campaign spend per day"
-                    title={spendPerDay ? commaInserter(spendPerDay.toString()) : '0'}
+                    subtitle="Daily campaign cost"
+                    title={budgetPerDay ? commaInserter(budgetPerDay.toString()) : '0'}
                 />
-                <Summary subtitle="Remaining Budget" title={remaining ? commaInserter(remaining.toString()) : '0'} />
+                <Summary
+                    subtitle="Remaining Budget"
+                    title={budgetRemaining ? spaceInserter(budgetRemaining.toString()) : '0'}
+                />
                 <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} />
+                <SummaryWomImg title={`${usdRate ? usdRate : '0'} $`} />
             </Section>
             {children}
         </MainLayout>
