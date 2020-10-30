@@ -17,7 +17,7 @@ import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
 import { themeEvents, themeStores } from 'stores/theme';
 import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
-import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
+import { getOrganizationId, getPublicTheme, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
@@ -125,11 +125,12 @@ const acceptInvitationAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: AcceptInviteRequestProps) => {
         try {
             loadingEffects.updateLoading();
+            const prefix = getPublicTheme() || '';
             const data = await API.user.acceptInvitation(values);
-            const { title } = await API.organizations.getItemById({ organizationId: data?.user?.organizationId || '' });
+            //const { title } = await API.organizations.getItemById({ organizationId: data?.user?.organizationId || '' });
             loadingEffects.updateLoading();
 
-            const prefix = title || '';
+            //const prefix = getPublicTheme() || '';
             themeEvents.setGlobalPrefix(prefix);
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             localStorage.setItem(userStorageName, JSON.stringify(data));
