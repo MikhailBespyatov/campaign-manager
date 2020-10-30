@@ -83,13 +83,13 @@ export const CardModal = () => {
 
     const onClose = () => modalEvents.closeCardModal();
 
-    const onDetailsClick = () => {
-        history.push(routes.campaignManager.discover.details + '/' + id);
-        modalEvents.closeCardModal();
-    };
+    // const onDetailsClick = () => {
+    //     history.push(routes.campaignManager.discover.details + '/' + id);
+    //     modalEvents.closeCardModal();
+    // };
 
     const onPromoteClick = () => {
-        history.push(routes.campaignManager.campaign.create);
+        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
         campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
         modalEvents.closeCardModal();
     };
@@ -316,9 +316,9 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Row>
-                                <Row justifyCenter marginTop="auto">
+                                {/* <Row justifyCenter marginTop="auto">
                                     <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
-                                </Row>
+                                </Row> */}
                             </RowBlockCell>
                         </ColumnBlockCell>
                         <ColumnBlockCell removeBorder>

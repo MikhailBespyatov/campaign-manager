@@ -9,6 +9,7 @@ import {
     mergeElementsWithString,
     objectIsEmpty,
     parseMonthDate,
+    removeLastNulls,
     retrieveRoleAndConvert,
     roundScore,
     slashInserter,
@@ -270,5 +271,16 @@ describe('mergeElementsWithString', () => {
     it('Test for month dates', () => {
         expect(mergeElementsWithString([], 'str')).toStrictEqual([]);
         expect(mergeElementsWithString(['1', '2'], '3')).toStrictEqual(['13', '23']);
+    });
+});
+
+describe('removeLastNulls', () => {
+    it('Test for numbers to remove nulls', () => {
+        expect(removeLastNulls(12)).toStrictEqual('12');
+        expect(removeLastNulls(0)).toStrictEqual('0');
+        expect(removeLastNulls(0.0)).toStrictEqual('0');
+        expect(removeLastNulls(1.0)).toStrictEqual('1');
+        expect(removeLastNulls(NaN)).toStrictEqual('0');
+        expect(removeLastNulls(1.022)).toStrictEqual('1.022');
     });
 });

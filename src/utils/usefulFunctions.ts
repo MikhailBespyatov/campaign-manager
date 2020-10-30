@@ -109,3 +109,12 @@ export const getPublicTheme = () =>
 // .substring(1);
 
 export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);
+
+export const removeLastNulls = (x: number) => {
+    if (Number.isNaN(x)) return '0';
+    let y = x.toString();
+    // @ts-ignore
+    while (y[y.length - 1] === 0 && !Number.isInteger(y)) y = y.slice(0, -1);
+
+    return y;
+};

@@ -9,7 +9,6 @@ import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Discover } from 'pages/CampaignManager/Discover';
-import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
@@ -102,11 +101,11 @@ const App = () => {
                             component={Discover}
                             path={globalPrefixUrl + routes.campaignManager.discover.index}
                         />
-                        <CampaignManagerRoute
+                        {/* <CampaignManagerRoute
                             exact
                             component={DiscoverDetails}
                             path={globalPrefixUrl + routes.campaignManager.discover.details}
-                        />
+                        /> */}
                         <CampaignManagerRoute
                             exact
                             component={Campaign}

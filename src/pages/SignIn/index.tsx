@@ -6,15 +6,17 @@ import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { routes } from 'constants/routes';
+import { parsePublicUrl, passwordResetTemplate } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/constants';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 
 export const SignIn = () => {
+    const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
     const loading = useStore(loadingStores.loading);
 
     return (
@@ -37,7 +39,11 @@ export const SignIn = () => {
                                             Enter as Admin
                                         </InternalLink>
                                     </Row> */}
-                                    <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.passwordReset}>
+                                    <InternalLink
+                                        fontSize="16px"
+                                        lineHeight="20px"
+                                        to={parsePublicUrl(globalPrefixPublic, passwordResetTemplate)}
+                                    >
                                         Forgot password?
                                     </InternalLink>
                                 </Column>

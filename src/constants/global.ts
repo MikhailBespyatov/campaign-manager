@@ -15,3 +15,5 @@ export const womExchangeRate = 0.30715;
 export const noop = () => {};
 
 export const numbersAfterComma = 1;
+
+export const numbersAfterDotWom = 4;

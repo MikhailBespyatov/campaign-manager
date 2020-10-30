@@ -1,4 +1,5 @@
 import { InternalLink } from 'components/common/links/InternalLink';
+import { InternalTextLink } from 'components/common/links/InternalTextLink';
 import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
 import { Button } from 'components/FormComponents/buttons/Button';
@@ -13,7 +14,7 @@ import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/constants';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { loadingStores } from 'stores/loading';
 
 const HighlightSpan: FC = ({ children }) => (
@@ -24,6 +25,10 @@ const HighlightSpan: FC = ({ children }) => (
 
 export const CreateAccount = () => {
     const loading = useStore(loadingStores.loading);
+
+    const [isConfirmed, setIsConfirmed] = useState(false);
+
+    const onConfirmedChange = () => setIsConfirmed(!isConfirmed);
 
     return (
         <AuthLayout>
@@ -57,17 +62,24 @@ export const CreateAccount = () => {
                         </MarginWrapper>
                         <Row alignCenter noWrap marginBottom="35px" marginTop="30px">
                             <Column marginRight="15px">
-                                <BooleanCheckbox />
+                                <BooleanCheckbox onChange={onConfirmedChange} />
                             </Column>
                             <Span color={formGrey5} fontSize="14px" fontWeight="500" lineHeight="17px">
-                                I acknowledge that I have read <HighlightSpan>Privacy Policy</HighlightSpan> and agree
-                                to the <HighlightSpan>Terms of Service</HighlightSpan>.
+                                I acknowledge that I have read{' '}
+                                <InternalTextLink href="https://womprotocol.io/privacy-policy/" target="_blank">
+                                    Privacy Policy
+                                </InternalTextLink>
+                                and agree to the
+                                <InternalTextLink href="https://womprotocol.io/terms-conditions/" target="_blank">
+                                    Terms of Service
+                                </InternalTextLink>
+                                .
                             </Span>
                         </Row>
                         <Button
                             // background={isExactValuesQuantity(touched) && objectIsEmpty(errors) ? blue : undefined}
                             background={isValid && dirty ? blue : undefined}
-                            disabled={loading}
+                            disabled={loading || !isConfirmed}
                         >
                             {loading ? <Loader /> : 'SIGN UP'}
                         </Button>

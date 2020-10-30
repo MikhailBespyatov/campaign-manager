@@ -7,7 +7,7 @@ export const wrapperBorderWidth = '1px';
 export const wrapperBorderColor = formGrey3;
 export const wrapperBackground = white;
 export const wrapperMargin = primaryPadding;
-export const wrapperHorizontalPadding = '10px';
+export const wrapperHorizontalPadding = '20px';
 
 export const titleFontWeight = '700';
 export const titleFontSize = '30px';
