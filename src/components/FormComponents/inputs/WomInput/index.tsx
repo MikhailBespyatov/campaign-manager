@@ -42,7 +42,7 @@ export const WomInput = ({
         <Section justifyCenter>
             <Column marginRight="2px" width={'100%'}>
                 <RelativeWrapper>
-                    <AbsoluteWrapper right="-9px" top="12px" zIndex="9">
+                    <AbsoluteWrapper right="6px" top="12px" zIndex="4">
                         <WomCurrencyImg height={womImgHeight} />
                     </AbsoluteWrapper>
                     <TextFieldStyled

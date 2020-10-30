@@ -46,7 +46,7 @@ Props) => {
 
     return (
         <Column alignCenter>
-            <Card height={cardHeight} marginBottom={marginBottom} marginRight={marginRight} width={cardWidth}>
+            <Card height={cardHeight} marginBottom={'0'} marginRight={marginRight} width={cardWidth}>
                 <Description padding={descriptionPadding} onClick={openCardModal}>
                     <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
                     <Row marginBottom="5px">
@@ -95,7 +95,7 @@ Props) => {
                 </Description>
             </Card>
             {onRemove && (
-                <Row marginBottom="0" marginRight={primaryPadding}>
+                <Row marginBottom="0" marginRight={primaryPadding} marginTop="12px">
                     <CustomImg
                         pointer
                         height={addIdImgDiameter}

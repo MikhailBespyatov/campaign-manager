@@ -17,7 +17,6 @@ const setTheme = createEvent<string>();
 const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, (_, themeName) =>
     companyNames.includes(themeName) ? themes[themeName] : themes['default']
 );
-theme.watch(state => console.log(state));
 
 // const injectPublicTheme = createEvent();
 // const setPublicTheme = createEvent<string>();
@@ -54,7 +53,6 @@ const globalPrefix = createStore<GlobalPrefix>(
     JSON.parse(localStorage.getItem(themeStorageName) || '{}')
 ).on(setGlobalPrefix, (_, prefix) => ({ prefix }));
 globalPrefix.watch(state => {
-    console.log(state);
     setTheme(state?.prefix || '');
     setGlobalPrefixUrl(state?.prefix ? '/' + state.prefix : '');
 });

@@ -98,7 +98,7 @@ const LegendaryItem = () => (
 );
 interface ItemProps extends WOM.CampaignDetailResponse {}
 
-const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
+const Item = ({ id, title, budget, engagement, isActive, isEnabled }: ItemProps) => {
     //const [checked, setChecked] = useState(false);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
@@ -108,7 +108,7 @@ const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow active={!schedule?.isActive || !schedule?.isEnabled}>
+        <TableRow active={!(isActive && isEnabled)}>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>

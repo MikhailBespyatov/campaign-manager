@@ -4,6 +4,12 @@ import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix } from 'constants/routes';
 import { AuthUserResponse } from 'types';
 
+export const retrieveWalletId = () => {
+    const user: WOM.UserJwtTokenResponse = JSON.parse(localStorage.getItem(userStorageName) || '{}');
+
+    return user?.user?.walletId || '';
+};
+
 export const giveAccessByRoles = (roles: string[] | null | undefined) => {
     let access = -1;
     if (roles?.length) {

@@ -18,7 +18,12 @@ export const TitleWrapper = styled.div`
     border-top-left-radius: ${primaryBorderRadius};
     border-top-right-radius: ${primaryBorderRadius};
     border: ${primaryBorder};
-    background: ${titleWrapperBackground};
+    // background: ${titleWrapperBackground};
+    background: ${({ theme: { background } }) => background};
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
     padding: ${titleWrapperVerticalPadding} ${titleWrapperHorizontalPadding};
     padding-bottom: 0;
 `;
