@@ -55,6 +55,6 @@ const removeItemById = createEffect({
 
 const userAdminEvents = {};
 const userAdminEffects = { removeItemById };
-const userAdminStores = {};
+const userAdminStores = { loading };
 
 export { userAdminEffects, userAdminStores, userAdminEvents };
