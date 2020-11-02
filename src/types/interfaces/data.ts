@@ -37,3 +37,7 @@ export interface TotalRecords {
 export interface Loading {
     loading?: boolean;
 }
+
+export interface Unselectable {
+    unselectable?: boolean;
+}

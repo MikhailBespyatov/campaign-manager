@@ -181,12 +181,13 @@ declare namespace WOM {
          */
         readonly budgetRemaining?: number; // double
         /**
-         * timeSpan
-         * The approximate amount of days left at this spending per day rate.
-         * example:
-         * 0
+         * dateTime
          */
-        readonly remainingDuration?: number; // int64
+        utcPaidUntil?: string; // date-time
+        /**
+         * boolean
+         */
+        readonly isCurrentlyPaid?: boolean;
     }
     /**
      * campaignDetailResponse
@@ -245,12 +246,24 @@ declare namespace WOM {
          * The IDs of the content items used for this campaign.
          */
         contentIds?: string /* objectId */[] | null;
-        budget?: /* campaignBudget */ CampaignBudget;
         engagement?: /* engagementStatistics */ EngagementStatistics;
         deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
         womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
         settings?: /* campaignSettings */ CampaignSettings;
+        budget?: /* campaignBudget */ CampaignBudget;
         schedule?: /* campaignSchedule */ CampaignSchedule;
+        /**
+         * boolean
+         */
+        isEnabled?: boolean;
+        /**
+         * string
+         */
+        disabledReason?: string | null;
+        /**
+         * boolean
+         */
+        isActive?: boolean;
     }
     /**
      * campaignGetRequest
@@ -286,18 +299,6 @@ declare namespace WOM {
          */
         utcEnded?: string; // date-time
         /**
-         * timeSpan
-         * example:
-         * 0
-         */
-        readonly duration?: number; // int64
-        /**
-         * timeSpan
-         * example:
-         * 0
-         */
-        readonly remainingDuration?: number; // int64
-        /**
          * dateTime
          */
         utcToStart?: string; // date-time
@@ -306,21 +307,25 @@ declare namespace WOM {
          */
         utcToEnd?: string; // date-time
         /**
-         * boolean
+         * int32
          */
-        isEnabled?: boolean;
+        readonly durationDays?: number; // int32
         /**
-         * string
+         * int32
          */
-        disabledReason?: string | null;
-        /**
-         * boolean
-         */
-        isActive?: boolean;
+        readonly remainingDays?: number; // int32
         /**
          * boolean
          */
-        hasStarted?: boolean;
+        readonly hasStarted?: boolean;
+        /**
+         * boolean
+         */
+        readonly hasEnded?: boolean;
+        /**
+         * boolean
+         */
+        readonly inDateWindow?: boolean;
     }
     /**
      * campaignSettings
@@ -2326,12 +2331,13 @@ declare namespace WOM {
          */
         readonly budgetRemaining?: number; // double
         /**
-         * timeSpan
-         * The approximate amount of days left at this spending per day rate.
-         * example:
-         * 0
+         * dateTime
          */
-        readonly remainingDuration?: number; // int64
+        utcPaidUntil?: string; // date-time
+        /**
+         * boolean
+         */
+        readonly isCurrentlyPaid?: boolean;
     }
     /**
      * organizationTagsResponse
@@ -3937,7 +3943,6 @@ declare namespace WOM {
         value?: number; // double
     }
 }
-
 declare namespace Paths {
     namespace CampaignGet {
         namespace Post {

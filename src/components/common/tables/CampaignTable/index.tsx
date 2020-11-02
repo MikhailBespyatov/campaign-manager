@@ -1,4 +1,3 @@
-import deleteImg from 'assets/img/delete.svg';
 import moreInfoImg from 'assets/img/ellipsis_line.svg';
 import arrowImg from 'assets/img/select_arrow_dark.svg';
 import history from 'BrowserHistory';
@@ -8,7 +7,6 @@ import { Loader } from 'components/common/Loader';
 import {
     arrowImgHeight,
     arrowImgWidth,
-    deleteImgDiameter,
     moreInfoImgHeight,
     moreInfoImgWidth,
     tableMargin
@@ -31,7 +29,7 @@ import React, { FC, useEffect } from 'react';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { themeStores } from 'stores/theme';
-import { getOrganizationId } from 'utils/usefulFunctions';
+import { currencyToStandardForm, getOrganizationId } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
     <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
@@ -98,17 +96,17 @@ const LegendaryItem = () => (
 );
 interface ItemProps extends WOM.CampaignDetailResponse {}
 
-const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
+const Item = ({ id, title, budget, engagement, isActive, isEnabled }: ItemProps) => {
     //const [checked, setChecked] = useState(false);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
     //const onChange = (checked: boolean) => setChecked(checked);
 
-    const removeHandler = () => campaignsEffects.removeItemById(id || '');
+    //const removeHandler = () => campaignsEffects.removeItemById(id || '');
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow active={!schedule?.isActive || !schedule?.isEnabled}>
+        <TableRow active={!(isActive && isEnabled)}>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>
@@ -121,10 +119,12 @@ const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
                 <TableSpan>??</TableSpan>
             </TableColumn> */}
             <TableColumn>
-                <TableSpan>{budget?.budgetTotal ? budget?.budgetTotal : noContentMessage}</TableSpan>
+                <TableSpan>
+                    {budget?.budgetTotal ? currencyToStandardForm(budget.budgetTotal) : noContentMessage}
+                </TableSpan>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{budget?.budgetSpent ? budget?.budgetSpent : 0}</TableSpan>
+                <TableSpan>{budget?.budgetSpent ? currencyToStandardForm(budget.budgetSpent) : 0}</TableSpan>
             </TableColumn>
             <TableColumn>
                 <Row marginBottom="5px">
@@ -189,7 +189,7 @@ const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
             </TableColumn>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
-                    <Column marginRight="29px">
+                    {/* <Column marginRight="29px">
                         <CustomImg
                             pointer
                             height={deleteImgDiameter}
@@ -197,7 +197,7 @@ const Item = ({ id, title, budget, engagement, schedule }: ItemProps) => {
                             width={deleteImgDiameter}
                             onClick={removeHandler}
                         />
-                    </Column>
+                    </Column> */}
                     <ClickableWrapper onClick={onMoreInfoClick}>
                         <CustomImg pointer height={moreInfoImgHeight} src={moreInfoImg} width={moreInfoImgWidth} />
                     </ClickableWrapper>

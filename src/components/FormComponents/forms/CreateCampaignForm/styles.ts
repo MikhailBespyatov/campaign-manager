@@ -1,9 +1,10 @@
 import { formWrapperWidth } from 'components/FormComponents/forms/CreateCampaignForm/constants';
-import { flexCenter } from 'constants/styles/mixins';
+import { flexStart } from 'constants/styles/mixins';
 import styled from 'styled-components';
 
 export const FormWrapper = styled.form`
-    width: ${formWrapperWidth};
-    ${flexCenter};
+    //width: ${formWrapperWidth};
+    ${flexStart};
+    //align-items: baseline;
     flex-direction: column;
 `;

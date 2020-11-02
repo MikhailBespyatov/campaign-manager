@@ -1,5 +1,6 @@
 import history from 'BrowserHistory';
 import { CardModal } from 'components/modals/CardModal';
+import { QexWidgetModal } from 'components/modals/QexWidgetModal';
 import { acceptInvitePath, acceptOrgInvitePath, routes, signInPath } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -8,7 +9,6 @@ import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Discover } from 'pages/CampaignManager/Discover';
-import { Details as DiscoverDetails } from 'pages/CampaignManager/Discover/Details';
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
@@ -57,10 +57,10 @@ const App = () => {
             <AppWrapper>
                 <Router history={history}>
                     <CardModal />
+                    <QexWidgetModal />
                     <Switch>
                         <PublicRoute exact component={Home} path={[routes.wrongPath]} />
                         {/* <PublicRoute exact component={Test} path={routes.test} /> */}
-
                         <PublicRoute exact component={CreateAccount} path={routes.signUp.index} />
                         <PublicRoute
                             exact
@@ -70,7 +70,6 @@ const App = () => {
                         <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                         <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                         <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
-
                         <PublicRoute
                             exact
                             component={AcceptInvite}
@@ -83,18 +82,14 @@ const App = () => {
                         <PublicRoute exact component={CreateWallet} path={routes.signUp.createWallet} />
                         <PublicRoute exact component={CreateWalletPayment} path={routes.signUp.payment} />
                         <PublicRoute exact component={CreateWalletSuccess} path={routes.signUp.success} />
-
                         <PublicRoute exact component={SignIn} path={signInPath} />
                         {/* <PublicRoute exact component={SignInAdmin} path={routes.signIn.admin} /> */}
                         {/* <PublicRoute exact component={SignInAdidas} path={routes.signIn.adidas} /> */}
                         <PublicRoute exact component={RequestCode} path={routes.signIn.requestCode} />
                         <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
                         {/* <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} /> */}
-
                         {/* <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} /> */}
-
                         <UserAdminRoute exact component={UserAdmin} path={globalPrefixUrl + routes.userAdmin.index} />
-
                         <CampaignManagerRoute
                             exact
                             component={CampaignManager}
@@ -106,11 +101,11 @@ const App = () => {
                             component={Discover}
                             path={globalPrefixUrl + routes.campaignManager.discover.index}
                         />
-                        <CampaignManagerRoute
+                        {/* <CampaignManagerRoute
                             exact
                             component={DiscoverDetails}
                             path={globalPrefixUrl + routes.campaignManager.discover.details}
-                        />
+                        /> */}
                         <CampaignManagerRoute
                             exact
                             component={Campaign}

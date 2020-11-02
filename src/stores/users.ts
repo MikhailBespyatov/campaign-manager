@@ -9,6 +9,8 @@ const loading = createStore<boolean>(false)
     .on(updateLoading, state => !state)
     .on(setLoading, (_, newState) => newState);
 
+const removeItemFromItemsById = createEvent<string>();
+
 const getItemById = createEffect({
     handler: async (id: string) => {
         try {
@@ -40,12 +42,13 @@ const getOrganizationItemsById = createEffect({
 });
 
 const item = createStore<WOM.GetUserResponse | {}>({}).on(getItemById.doneData, (_, newState) => newState);
-const items = createStore<WOM.OrganizationQueryUsersResponse>({}).on(
-    getOrganizationItemsById.doneData,
-    (_, newState) => newState
-);
+const items = createStore<WOM.OrganizationQueryUsersResponse>({})
+    .on(getOrganizationItemsById.doneData, (_, newState) => newState)
+    .on(removeItemFromItemsById, (state: WOM.OrganizationQueryUsersResponse, id: string) =>
+        id ? { ...state, items: state.items?.filter((item: WOM.GetUserResponse) => item.userId !== id) } : state
+    );
 
-const usersEvents = {};
+const usersEvents = { removeItemFromItemsById };
 const usersEffects = { getItemById, getOrganizationItemsById };
 const usersStores = { item, items, loading };
 

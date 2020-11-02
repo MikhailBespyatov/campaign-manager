@@ -5,3 +5,9 @@ export const getTokenInfo = (data: WOM.ExchangeRateRequest) =>
         url: '/wallet/getTokenInfo',
         data
     });
+
+export const getItem = (data: WOM.WalletGetRequest) =>
+    axios<WOM.WalletResponse>({
+        url: '/wallet/get',
+        data
+    });

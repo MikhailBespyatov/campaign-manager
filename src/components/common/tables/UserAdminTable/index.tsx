@@ -21,7 +21,8 @@ import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
-import { userAdminEffects, userAdminStores } from 'stores/userAdmin';
+import { userAdminEffects } from 'stores/userAdmin';
+import { usersStores } from 'stores/users';
 import { retrieveRoleAndConvert } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
@@ -76,7 +77,7 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
     //const globalPrefix = useStore(themeStores.globalPrefix);
     const { secondaryLogo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
-    const loading = useStore(userAdminStores.loading);
+    const loading = useStore(usersStores.loading);
 
     // const [checked, setChecked] = useState(false);
 

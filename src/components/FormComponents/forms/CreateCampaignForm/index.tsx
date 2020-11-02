@@ -1,4 +1,3 @@
-import { Block } from 'components/common/blocks/Block';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
 import { DatePickerInput } from 'components/common/inputs/DatePicker';
@@ -12,8 +11,9 @@ import {
 import { FormWrapper } from 'components/FormComponents/forms/CreateCampaignForm/styles';
 import { ErrorSpan, TextInput } from 'components/FormComponents/inputs/TextInput';
 import { WomInput } from 'components/FormComponents/inputs/WomInput';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignMiniCard } from 'components/Layouts/Cards/CreateCampaignMiniCard';
+import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { blue, primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { FieldArray, Formik } from 'formik';
@@ -36,13 +36,6 @@ export const CreateCampaignForm = () => {
     const initialContentIds = useStore(campaignsStores.contentIds);
     const loading = useStore(loadingStores.loading);
 
-    // useEffect(
-    //     () => () => {
-    //         campaignsEvents.clearContentIds();
-    //     },
-    //     []
-    // );
-
     return (
         <Formik
             initialValues={{ ...initialValues, contentIds: initialContentIds.map(i => i.womContentId || '') }}
@@ -50,51 +43,77 @@ export const CreateCampaignForm = () => {
             onSubmit={onSubmit}
         >
             {({ values, handleSubmit, isValid, dirty, touched }) => (
-                <Row>
-                    <HighlightedTitleBlock title="Create Campaign">
-                        <RowBlockCell padding={primaryPadding}>
-                            <FormWrapper onSubmit={handleSubmit}>
-                                <TextInput label="Campaign Name" name="title" placeholder="Enter campaign name" />
-                                <ErrorSpan touched={touched?.tags}>
-                                    {!values.contentIds.filter(i => i !== '').length && 'Selected videos are required'}
-                                </ErrorSpan>
-                                <DatePickerInput label="Start of campaign" name="utcToStart" />
-                                <DatePickerInput label="End of campaign" name="utcToEnd" />
-                                <WomInput
-                                    label="Budget amount"
-                                    name="amount"
-                                    placeholder="Enter amount of budget"
-                                    //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
-                                />
-                                <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                                    {loading ? <Loader /> : 'CREATE CAMPAIGN'}
-                                </Button>
-                            </FormWrapper>
-                        </RowBlockCell>
-                    </HighlightedTitleBlock>
-                    {!!initialContentIds.length && (
-                        <Block title="Selected videos">
+                <Row noWrap width="100%">
+                    {!!initialContentIds.length && <VideoCard unselectable {...initialContentIds[0]} />}
+                    <Column>
+                        {!!initialContentIds.length && (
+                            <HighlightedTitleBlock title="Selected videos" width="100%">
+                                <RowBlockCell padding={primaryPadding}>
+                                    <Row marginBottom="0">
+                                        <FieldArray name="contentIds">
+                                            {({ remove }) =>
+                                                values.contentIds.map((item, i) => (
+                                                    <CreateCampaignMiniCard
+                                                        key={item}
+                                                        marginBottom="0"
+                                                        {...initialContentIds[i]}
+                                                        onRemove={() => {
+                                                            remove(i);
+                                                            campaignsEvents.removeContentById(item);
+                                                        }}
+                                                    />
+                                                ))
+                                            }
+                                        </FieldArray>
+                                    </Row>
+                                </RowBlockCell>
+                            </HighlightedTitleBlock>
+                        )}
+                        <HighlightedTitleBlock title="Create Campaign" width="100%">
                             <RowBlockCell padding={primaryPadding}>
-                                <Row marginBottom="0">
-                                    <FieldArray name="contentIds">
-                                        {({ remove }) =>
-                                            values.contentIds.map((item, i) => (
-                                                <CreateCampaignMiniCard
-                                                    key={item}
-                                                    marginBottom="0"
-                                                    {...initialContentIds[i]}
-                                                    onRemove={() => {
-                                                        remove(i);
-                                                        campaignsEvents.removeContentById(item);
-                                                    }}
-                                                />
-                                            ))
-                                        }
-                                    </FieldArray>
-                                </Row>
+                                <FormWrapper onSubmit={handleSubmit}>
+                                    <Row marginBottom="0">
+                                        <Column marginRight={primaryPadding} width="320px">
+                                            <TextInput
+                                                label="Campaign Name"
+                                                name="title"
+                                                placeholder="Enter campaign name"
+                                            />
+                                            <Row marginBottom="0">
+                                                <Column marginRight={primaryPadding} width="150px">
+                                                    <DatePickerInput label="Start of campaign" name="utcToStart" />
+                                                </Column>
+                                                <Column marginRight={'0'} width="150px">
+                                                    <DatePickerInput label="End of campaign" name="utcToEnd" />
+                                                </Column>
+                                            </Row>
+                                        </Column>
+                                        <Column marginRight={primaryPadding} width="250px">
+                                            <WomInput
+                                                label="Budget amount"
+                                                name="amount"
+                                                placeholder="Enter amount of budget"
+                                                //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
+                                            />
+                                        </Column>
+                                    </Row>
+                                    <Row alignBaseline marginBottom="0">
+                                        <Column marginRight={primaryPadding}>
+                                            <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
+                                                {loading ? <Loader /> : 'CREATE CAMPAIGN'}
+                                            </Button>
+                                        </Column>
+                                        <Column marginRight={primaryPadding} width="200px">
+                                            <ErrorSpan touched={touched?.tags}>
+                                                {!values.contentIds.filter(i => i !== '').length &&
+                                                    'Selected videos are required'}
+                                            </ErrorSpan>
+                                        </Column>
+                                    </Row>
+                                </FormWrapper>
                             </RowBlockCell>
-                        </Block>
-                    )}
+                        </HighlightedTitleBlock>
+                    </Column>
                 </Row>
             )}
         </Formik>

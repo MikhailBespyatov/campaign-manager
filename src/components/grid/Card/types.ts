@@ -10,7 +10,9 @@ import {
     Sizes
 } from 'types';
 
-export interface CardProps extends Disabled, MarginRightBottom, Sizes, Pointer, Active {}
+export interface CardProps extends Disabled, MarginRightBottom, Sizes, Pointer, Active {
+    unselectableStyled?: boolean;
+}
 
 export interface DescriptionCellProps {
     height?: string;

@@ -1,15 +1,24 @@
-import { numbersAfterComma, userStorageName } from 'constants/global';
+import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix } from 'constants/routes';
 import { AuthUserResponse } from 'types';
 
+export const retrieveWalletId = () => {
+    const user: WOM.UserJwtTokenResponse = JSON.parse(localStorage.getItem(userStorageName) || '{}');
+
+    return user?.user?.walletId || '';
+};
+
 export const giveAccessByRoles = (roles: string[] | null | undefined) => {
     let access = -1;
     if (roles?.length) {
+        const lowerCaseRoles = roles.map(role => role.toLowerCase());
         accessRoles.forEach(
             (role, i) =>
-                roles.includes(role) && (access > accessValues[i] || access === -1) && (access = accessValues[i])
+                lowerCaseRoles.includes(role.toLowerCase()) &&
+                (access > accessValues[i] || access === -1) &&
+                (access = accessValues[i])
         );
     }
 
@@ -103,3 +112,15 @@ export const getPublicTheme = () =>
 // .substring(1);
 
 export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);
+
+export const removeLastNulls = (x: number) => {
+    if (Number.isNaN(x)) return '0';
+    let y = x.toString();
+    // @ts-ignore
+    while (y[y.length - 1] === 0 && !Number.isInteger(y)) y = y.slice(0, -1);
+
+    return y;
+};
+
+export const currencyToStandardForm = (x: number) =>
+    spaceInserter(removeLastNulls(Number(x.toFixed(numbersAfterDotWom))));

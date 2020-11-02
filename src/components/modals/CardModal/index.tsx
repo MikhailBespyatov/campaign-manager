@@ -1,4 +1,4 @@
-import closeModalImg from 'assets/img/close_modal.svg';
+import closeModalImg from 'assets/img/add_video.svg';
 import history from 'BrowserHistory';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
@@ -60,7 +60,7 @@ const EngagementSpan: FC = ({ children }) => (
     </Span>
 );
 
-const body = document.getElementsByTagName('body')[0];
+const body = document.body;
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
@@ -83,13 +83,13 @@ export const CardModal = () => {
 
     const onClose = () => modalEvents.closeCardModal();
 
-    const onDetailsClick = () => {
-        history.push(routes.campaignManager.discover.details + '/' + id);
-        modalEvents.closeCardModal();
-    };
+    // const onDetailsClick = () => {
+    //     history.push(routes.campaignManager.discover.details + '/' + id);
+    //     modalEvents.closeCardModal();
+    // };
 
     const onPromoteClick = () => {
-        history.push(routes.campaignManager.campaign.create);
+        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
         campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
         modalEvents.closeCardModal();
     };
@@ -108,6 +108,7 @@ export const CardModal = () => {
                     <CustomImg
                         pointer
                         height={closeModalImgDiameter}
+                        rotate={45}
                         src={closeModalImg}
                         width={closeModalImgDiameter}
                         onClick={onClose}
@@ -316,9 +317,9 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Row>
-                                <Row justifyCenter marginTop="auto">
+                                {/* <Row justifyCenter marginTop="auto">
                                     <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
-                                </Row>
+                                </Row> */}
                             </RowBlockCell>
                         </ColumnBlockCell>
                         <ColumnBlockCell removeBorder>

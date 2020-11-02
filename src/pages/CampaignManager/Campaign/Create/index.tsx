@@ -1,7 +1,7 @@
 import { CreateCampaignForm } from 'components/FormComponents/forms/CreateCampaignForm';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { formGrey2, tertiaryPadding } from 'constants/styles';
+import { formGrey2 } from 'constants/styles';
 import React from 'react';
 
 // const BudgetSpan: FC = ({ children }) => (
@@ -57,10 +57,10 @@ export const Create = () => (
             <Summary subtitle="Campaigns Running" title="20.000" />
         </Section> */}
         <Section>
-            <Column marginRight={tertiaryPadding}>
-                {/* <CustomImg height="410px" src={cardModalImg} width="258px" /> */}
-                {/* <CreateCampaignCard marginBottom={primaryPadding} marginRight="0" /> */}
-                {/* <Row marginBottom={primaryPadding}>
+            {/* <Column marginRight={tertiaryPadding}> */}
+            {/* <CustomImg height="410px" src={cardModalImg} width="258px" /> */}
+            {/* <CreateCampaignCard marginBottom={primaryPadding} marginRight="0" /> */}
+            {/* <Row marginBottom={primaryPadding}>
                     <AsideBlock title="Budget">
                         <ColumnBlockCell padding={asideBlockPadding}>
                             <Section noWrap marginBottom="0">
@@ -95,9 +95,10 @@ export const Create = () => (
                         </ColumnBlockCell>
                     </AsideBlock>
                 </Row> */}
-            </Column>
+            {/* </Column> */}
             <Column>
                 <CreateCampaignForm />
+
                 {/* <Row marginBottom={primaryPadding}>
                     <Block title="Similar Campaigns">
                         <RowBlockCell padding={primaryPadding}>

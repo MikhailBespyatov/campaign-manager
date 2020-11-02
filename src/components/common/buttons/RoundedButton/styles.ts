@@ -15,9 +15,7 @@ import {
     buttonActiveMixin,
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
-    reverseColor,
-    transitionTime,
-    white
+    transitionTime
 } from 'constants/styles';
 import styled from 'styled-components';
 import { Reverse } from 'types';
@@ -26,11 +24,10 @@ export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     min-width: ${({ minWidth }) => (minWidth ? minWidth : buttonWidth)};
     height: ${({ height }) => (height ? height : buttonHeight)};
-    background: ${({ reverse, background, theme: { primaryColor } }) =>
-        reverse ? white : background ? background : primaryColor};
-    border: ${buttonBorderWidth} solid ${({ reverse }) => (reverse ? reverseColor : 'none')};
+    background: ${({ reverse, background, theme: { primaryColor, primaryTextColor } }) =>
+        reverse ? primaryTextColor : background ? background : primaryColor};
+    border: ${buttonBorderWidth} solid ${({ reverse, theme: { primaryColor } }) => (reverse ? primaryColor : 'none')};
     border-radius: ${buttonBorderRadius};
-    color: red;
     //${({ theme: { primaryTextColor } }) => primaryTextColor};
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
@@ -48,7 +45,7 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 export const InnerSpan = styled.span<Reverse>`
-    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
+    color: ${({ theme: { primaryTextColor, primaryColor }, reverse }) => (reverse ? primaryColor : primaryTextColor)};
     font-size: ${spanFontSize};
     font-weight: ${spanFontWeight};
     line-height: ${spanLineHeight};
