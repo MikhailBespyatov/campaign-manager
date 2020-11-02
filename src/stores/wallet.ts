@@ -40,15 +40,9 @@ const getItemById = createEffect({
     }
 });
 
-export const walletBalance = createStore(0).on(
-    getItemById.doneData,
-    (_, wallet) => (wallet?.items?.length && wallet.items[0].balance) || 0
-);
+export const walletBalance = createStore(0).on(getItemById.doneData, (_, wallet) => wallet?.items?.[0]?.balance || 0);
 
-export const walletAddress = createStore('').on(
-    getItemById.doneData,
-    (_, wallet) => (wallet?.items?.length && wallet.items[0].address) || ''
-);
+export const walletAddress = createStore('').on(getItemById.doneData, (_, wallet) => wallet?.items?.[0]?.address || '');
 
 const usdRate = createStore(0)
     // @ts-ignore

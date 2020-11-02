@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import { modalEvents, modalStores } from 'stores/modal';
 import { walletStores } from 'stores/wallet';
 
-const body = document.getElementsByTagName('body')[0];
+const body = document.body;
 
 export const QexWidgetModal = () => {
     const { visible } = useStore(modalStores.qexWidgetModal);

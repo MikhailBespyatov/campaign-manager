@@ -14,14 +14,14 @@ import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/constants';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { loadingStores } from 'stores/loading';
 
-const HighlightSpan: FC = ({ children }) => (
-    <Span alignCenter fontSize="14px" fontWeight="500" lineHeight="17px" textDecoration="underline">
-        {children}
-    </Span>
-);
+// const HighlightSpan: FC = ({ children }) => (
+//     <Span alignCenter fontSize="14px" fontWeight="500" lineHeight="17px" textDecoration="underline">
+//         {children}
+//     </Span>
+// );
 
 export const CreateAccount = () => {
     const loading = useStore(loadingStores.loading);

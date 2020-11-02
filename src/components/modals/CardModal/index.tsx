@@ -60,7 +60,7 @@ const EngagementSpan: FC = ({ children }) => (
     </Span>
 );
 
-const body = document.getElementsByTagName('body')[0];
+const body = document.body;
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
