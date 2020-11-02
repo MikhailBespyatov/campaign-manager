@@ -16,7 +16,7 @@ export const onSubmit = (values: WOM.CreateOrganizationRequest, { setErrors }: S
     organizationsEffects.createOrganization({
         values: {
             companyName: values?.companyName?.trim().replace(/ +/g, ' '),
-            key: values?.companyName?.trim().replace(/ +/g, '_'),
+            key: values?.companyName?.trim().replace(/ +/g, '_').toLowerCase(),
             administratorEmail: values.administratorEmail,
             mandatoryTags: values?.companyName ? [values.companyName] : []
         },

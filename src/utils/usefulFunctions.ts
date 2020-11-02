@@ -1,4 +1,4 @@
-import { numbersAfterComma, userStorageName } from 'constants/global';
+import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix } from 'constants/routes';
@@ -13,9 +13,12 @@ export const retrieveWalletId = () => {
 export const giveAccessByRoles = (roles: string[] | null | undefined) => {
     let access = -1;
     if (roles?.length) {
+        const lowerCaseRoles = roles.map(role => role.toLowerCase());
         accessRoles.forEach(
             (role, i) =>
-                roles.includes(role) && (access > accessValues[i] || access === -1) && (access = accessValues[i])
+                lowerCaseRoles.includes(role.toLowerCase()) &&
+                (access > accessValues[i] || access === -1) &&
+                (access = accessValues[i])
         );
     }
 
@@ -118,3 +121,6 @@ export const removeLastNulls = (x: number) => {
 
     return y;
 };
+
+export const currencyToStandardForm = (x: number) =>
+    spaceInserter(removeLastNulls(Number(x.toFixed(numbersAfterDotWom))));

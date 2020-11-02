@@ -16,7 +16,7 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
-import { removeLastNulls, spaceInserter } from 'utils/usefulFunctions';
+import { currencyToStandardForm, removeLastNulls, spaceInserter } from 'utils/usefulFunctions';
 
 interface Props extends Background {}
 
@@ -75,35 +75,19 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                 />
                 <SummaryWomLogoImg
                     subtitle="Campaign Budget"
-                    title={
-                        budgetTotal
-                            ? spaceInserter(removeLastNulls(Number(budgetTotal.toFixed(numbersAfterDotWom))))
-                            : '0'
-                    }
+                    title={budgetTotal ? currencyToStandardForm(budgetTotal) : '0'}
                 />
                 <SummaryWomLogoImg
                     subtitle="Campaign Spent"
-                    title={
-                        budgetSpent
-                            ? spaceInserter(removeLastNulls(Number(budgetSpent.toFixed(numbersAfterDotWom))))
-                            : '0'
-                    }
+                    title={budgetSpent ? currencyToStandardForm(budgetSpent) : '0'}
                 />
                 <SummaryWomLogoImg
                     subtitle="Daily campaign cost"
-                    title={
-                        budgetPerDay
-                            ? spaceInserter(removeLastNulls(Number(budgetPerDay.toFixed(numbersAfterDotWom))))
-                            : '0'
-                    }
+                    title={budgetPerDay ? currencyToStandardForm(budgetPerDay) : '0'}
                 />
                 <SummaryWomLogoImg
                     subtitle="Remaining Budget"
-                    title={
-                        budgetRemaining
-                            ? spaceInserter(removeLastNulls(Number(budgetRemaining.toFixed(numbersAfterDotWom))))
-                            : '0'
-                    }
+                    title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}
                 />
                 {/* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> */}
                 <SummaryWomImg title={`${usdRate ? removeLastNulls(Number(usdRate)) : '0'} $`} />

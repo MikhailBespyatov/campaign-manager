@@ -13,3 +13,8 @@ export interface RegisterUserRequest extends AuthUserRequest {
 export interface Id {
     id: string;
 }
+
+export interface ManageRolesValues {
+    permission: WOM.OrganizationPermission;
+    userId: string;
+}

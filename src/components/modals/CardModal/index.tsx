@@ -1,4 +1,4 @@
-import closeModalImg from 'assets/img/close_modal.svg';
+import closeModalImg from 'assets/img/add_video.svg';
 import history from 'BrowserHistory';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
@@ -108,6 +108,7 @@ export const CardModal = () => {
                     <CustomImg
                         pointer
                         height={closeModalImgDiameter}
+                        rotate={45}
                         src={closeModalImg}
                         width={closeModalImgDiameter}
                         onClick={onClose}

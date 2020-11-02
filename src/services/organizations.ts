@@ -1,3 +1,5 @@
+import { organizationsStores } from 'stores/organizations';
+import { ManageRolesValues } from 'types';
 import axios from './axios';
 
 export const getStatisticsById = (data: WOM.OrganizationStatisticsRequest) =>
@@ -22,6 +24,15 @@ export const createOrganization = (data: WOM.CreateOrganizationRequest) =>
     axios<WOM.OrganizationResponse>({
         url: '/organization/create',
         data
+    });
+
+export const manageRoles = (data: ManageRolesValues) =>
+    axios<WOM.OrganizationResponse>({
+        url: '/organization/user/membership-modify',
+        data: {
+            ...data,
+            organizationId: organizationsStores.organizationId.getState()
+        }
     });
 
 // export const getUsersByOrganizationId = (data: WOM.OrganizationQueryUsersRequest) =>

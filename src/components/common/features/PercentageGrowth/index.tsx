@@ -14,7 +14,7 @@ interface Props extends ForcedColor {
 }
 
 export const PercentageGrowth: FC<Props> = ({ type, forcedColor = '', children }) => (
-    <Row alignBaseline noWrap marginBottom="0">
+    <Row alignCenter noWrap marginBottom="0">
         <CustomImg
             height={arrowImgHeight}
             rotate={type === 'error' ? 0 : 180}

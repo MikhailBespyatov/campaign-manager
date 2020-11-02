@@ -1,6 +1,7 @@
 import {
     allValuesAreTrue,
     commaInserter,
+    currencyToStandardForm,
     currencyToText,
     getPublicTheme,
     giveAccess,
@@ -282,5 +283,17 @@ describe('removeLastNulls', () => {
         expect(removeLastNulls(1.0)).toStrictEqual('1');
         expect(removeLastNulls(NaN)).toStrictEqual('0');
         expect(removeLastNulls(1.022)).toStrictEqual('1.022');
+    });
+});
+
+describe('currencyToStandardForm', () => {
+    it('Test for numbers bring a number to currency standard', () => {
+        expect(currencyToStandardForm(12)).toStrictEqual('12');
+        expect(currencyToStandardForm(0)).toStrictEqual('0');
+        expect(currencyToStandardForm(0.0)).toStrictEqual('0');
+        expect(currencyToStandardForm(1.0)).toStrictEqual('1');
+        expect(currencyToStandardForm(NaN)).toStrictEqual('0');
+        expect(currencyToStandardForm(1.022)).toStrictEqual('1.022');
+        expect(currencyToStandardForm(1111.022)).toStrictEqual('1 111.022');
     });
 });
