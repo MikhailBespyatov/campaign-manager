@@ -1,8 +1,11 @@
+import history from 'BrowserHistory';
 import { errorDataMessage } from 'constants/messages';
+import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { CreateOrganizationRequestProps } from 'pages/SignUp/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import Swal from 'sweetalert2';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -20,8 +23,16 @@ const createOrganization = createEffect({
             loadingEffects.updateLoading();
             await API.organizations.createOrganization(values);
             loadingEffects.updateLoading();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Thank you, for you creating an organization',
+                text: 'Please check your email - you will receive the email with instructions',
+                willClose: () => history.push(routes.wrongPath)
+            });
         } catch {
             loadingEffects.updateLoading();
+            Swal.fire('Error!', 'Something went wrong!', 'error');
             setErrors({
                 companyName: errorDataMessage,
                 administratorEmail: errorDataMessage

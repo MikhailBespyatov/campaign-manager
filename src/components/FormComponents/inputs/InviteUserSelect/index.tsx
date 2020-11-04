@@ -14,7 +14,7 @@ import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { blue, errorColor, successColor } from 'constants/styles';
 import { useField } from 'formik';
-import React, { FC, useState } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
 import { Active, Name } from 'types';
 
 interface WrapperProps extends Name {
@@ -56,6 +56,10 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
     );
 
     const onClose = () => setIsClosed(!isClosed);
+    const onClickClose = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+        e.preventDefault();
+        setIsClosed(!isClosed);
+    };
 
     const onClick = (index: number) => {
         setRadio(
@@ -75,15 +79,8 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
             <ItemSpan>{selectedData}</ItemSpan>
             <HiddenInput {...field} value={selected} />
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
-                <ClickableWrapper onClick={onClose}>
-                    <CustomImg
-                        pointer
-                        height={imgHeight}
-                        rotate={isClosed ? 180 : 0}
-                        src={arrowImg}
-                        width={imgWidth}
-                        onClick={onClose}
-                    />
+                <ClickableWrapper onClick={onClickClose}>
+                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 180 : 0} src={arrowImg} width={imgWidth} />
                 </ClickableWrapper>
             </AbsoluteWrapper>
             <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%" zIndex="2">

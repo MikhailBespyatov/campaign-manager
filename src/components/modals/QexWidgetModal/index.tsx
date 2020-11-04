@@ -1,6 +1,10 @@
-import { publicApiKey } from 'components/modals/QexWidgetModal/constants';
+import closeImg from 'assets/img/add_video.svg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
+import { publicApiKey, wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
 import { Modal, Wrapper } from 'components/modals/QexWidgetModal/styles';
-import { white } from 'constants/styles';
+import { tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { QexWidget, SETTLEMENT_METHOD, THEME } from 'liquid-qex-widget';
 import React, { useEffect } from 'react';
@@ -20,7 +24,17 @@ export const QexWidgetModal = () => {
     }, [visible]);
 
     return (
-        <Wrapper visible={visible} onClick={onClose}>
+        <Wrapper visible={visible}>
+            <AbsoluteWrapper right={tertiaryPadding} top={wrapperVerticalPadding} zIndex="5">
+                <CustomImg
+                    pointer
+                    height={addIdImgDiameter}
+                    rotate={45}
+                    src={closeImg}
+                    width={addIdImgDiameter}
+                    onClick={onClose}
+                />
+            </AbsoluteWrapper>
             <Modal>
                 <QexWidget
                     config={{

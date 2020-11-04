@@ -8,7 +8,7 @@ import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect, useMemo } from 'react';
 import { loadingStores } from 'stores/loading';
-import { organizationsEffects, organizationsStores } from 'stores/organizations';
+import { organizationsStores } from 'stores/organizations';
 import { usersEffects, usersStores } from 'stores/users';
 
 export const UserAdmin = () => {
@@ -24,7 +24,7 @@ export const UserAdmin = () => {
 
     useEffect(() => {
         if (organizationId) {
-            organizationsEffects.getItemById(organizationId);
+            //organizationsEffects.getItemById(organizationId);
             usersEffects.getOrganizationItemsById(organizationId);
         }
     }, [organizationId]);

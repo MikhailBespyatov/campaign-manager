@@ -16,6 +16,7 @@ import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
 import { themeEvents, themeStores } from 'stores/theme';
+import Swal from 'sweetalert2';
 import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
 import { getOrganizationId, getPublicTheme, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
@@ -67,8 +68,11 @@ const inviteUser = createEffect({
             loadingEffects.updateLoading();
             await API.user.inviteUser(values);
             loadingEffects.updateLoading();
+
+            Swal.fire('Success!', 'User was invited!', 'success');
         } catch {
             loadingEffects.updateLoading();
+            Swal.fire('Error!', 'Something went wrong!', 'error');
             setErrors({
                 organizationId: incorrectOrgIdMessage
             });

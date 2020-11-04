@@ -37,14 +37,18 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const onWomBuy = () => modalEvents.openQexWidgetModal();
 
     useEffect(() => {
-        organizationId && organizationsEffects.getStatisticsById(organizationId);
-    }, [organizationId]);
-
-    useEffect(() => {
         walletEffects.getTokenInfo();
     }, []);
 
     useEffect(() => {
+        if (organizationId) {
+            organizationsEffects.getStatisticsById(organizationId);
+            organizationsEffects.getItemById(organizationId);
+        }
+    }, [organizationId]);
+
+    useEffect(() => {
+        console.log(walletId);
         walletId && walletEffects.getItemById(walletId);
     }, [walletId]);
 
