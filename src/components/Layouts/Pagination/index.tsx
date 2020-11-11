@@ -1,7 +1,14 @@
 import leftArrowImg from 'assets/img/left_arrow.svg';
 import rightArrowImg from 'assets/img/right_arrow.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { arrowImgHeight, arrowImgWidth, pagination, paginationLimit } from 'components/Layouts/Pagination/constants';
+import { Select } from 'components/common/inputs/Select';
+import {
+    arrowImgHeight,
+    arrowImgWidth,
+    pagination,
+    paginationLimit,
+    sizeValues
+} from 'components/Layouts/Pagination/constants';
 import { Arrow, PaginationCell, PaginationWrapper, Wrapper } from 'components/Layouts/Pagination/styles';
 import { defaultLimit } from 'constants/defaults';
 import React, { useMemo } from 'react';
@@ -11,6 +18,7 @@ interface WrapperProps {
     totalItems?: number;
     defaultSize?: number;
     onChange: (current: number) => void;
+    onSizeChange: (current: number, size: number) => void;
 }
 
 interface Props {
@@ -65,13 +73,21 @@ const BigPager = ({ activeIndex, total, onChange }: Props) => (
     </>
 );
 
-export const Pagination = ({ currentIndex, onChange, totalItems = 0, defaultSize = defaultLimit }: WrapperProps) => {
+export const Pagination = ({
+    currentIndex,
+    onChange,
+    onSizeChange,
+    totalItems = 0,
+    defaultSize = defaultLimit
+}: WrapperProps) => {
     const total = useMemo(() => (totalItems === 0 ? 0 : Math.trunc((totalItems - 1) / defaultSize + 1)), [
         defaultSize,
         totalItems
     ]);
 
     const onIndexChange = (index: number) => onChange(index - 1);
+
+    const onSizeAndIndexChange = (size: string) => onSizeChange(0, Number(size));
 
     return (
         <>
@@ -102,6 +118,12 @@ export const Pagination = ({ currentIndex, onChange, totalItems = 0, defaultSize
                             <CustomImg height={arrowImgHeight} src={rightArrowImg} width={arrowImgWidth} />
                         </Arrow>
                     )}
+                    <Select
+                        defaultActive={defaultSize.toString()}
+                        values={sizeValues}
+                        width="100px"
+                        onChange={onSizeAndIndexChange}
+                    />
                 </Wrapper>
             )}
         </>
