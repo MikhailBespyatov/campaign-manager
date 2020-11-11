@@ -468,6 +468,23 @@ declare namespace WOM {
         settings?: /* campaignSettings */ CampaignSettings;
     }
     /**
+     * campaignsContentRequest
+     */
+    export interface CampaignsContentRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+    }
+    /**
      * campaignsQueryRequest
      */
     export interface CampaignsQueryRequest {
@@ -680,7 +697,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        facilitatorId?: string; // objectId
+        facilitatorUserId?: string; // objectId
         /**
          * nullable1
          * If requested in a query, this field shows if the requesting user has hidden this content for validation / authentication.
@@ -2423,9 +2440,34 @@ declare namespace WOM {
         items?: /* organizationResponse */ OrganizationResponse[] | null;
     }
     /**
-     * performancePaymentsAudit
+     * performancePaymentsGetRequest
      */
-    export interface PerformancePaymentsAudit {
+    export interface PerformancePaymentsGetRequest {
+        /**
+         * int32
+         */
+        year?: number; // int32
+        /**
+         * int32
+         */
+        month?: number; // int32
+        /**
+         * int32
+         */
+        day?: number; // int32
+        /**
+         * boolean
+         */
+        processPayments?: boolean;
+        /**
+         * boolean
+         */
+        reAnalyze?: boolean;
+    }
+    /**
+     * performancePaymentsGetResponse
+     */
+    export interface PerformancePaymentsGetResponse {
         /**
          * date
          * example:
@@ -2573,7 +2615,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* performancePaymentsAudit */ PerformancePaymentsAudit[] | null;
+        items?: /* performancePaymentsGetResponse */ PerformancePaymentsGetResponse[] | null;
     }
     /**
      * productResponse
@@ -3965,6 +4007,19 @@ declare namespace Paths {
             }
         }
     }
+    namespace CampaignQueryByContent {
+        namespace Post {
+            export type RequestBody = /* campaignsContentRequest */ Components.Schemas.CampaignsContentRequest;
+            namespace Responses {
+                /**
+                 * list1
+                 */
+                export type $200 = /* campaignDetailResponse */ Components.Schemas.CampaignDetailResponse[];
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
     namespace CampaignQueryStatistics {
         namespace Post {
             export type RequestBody = /* campaignStatisticsQueryRequest */ Components.Schemas.CampaignStatisticsQueryRequest;
@@ -4269,11 +4324,32 @@ declare namespace Paths {
             }
         }
     }
+    namespace PerformancePaymentsGet {
+        namespace Post {
+            export type RequestBody = /* performancePaymentsGetRequest */ Components.Schemas.PerformancePaymentsGetRequest;
+            namespace Responses {
+                export type $200 = /* performancePaymentsGetResponse */ Components.Schemas.PerformancePaymentsGetResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
     namespace PerformancePaymentsQuery {
         namespace Post {
             export type RequestBody = /* performancePaymentsQueryRequest */ Components.Schemas.PerformancePaymentsQueryRequest;
             namespace Responses {
                 export type $200 = /* performancePaymentsQueryResponse */ Components.Schemas.PerformancePaymentsQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace TestRebuildStatistics {
+        namespace Post {
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
