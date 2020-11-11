@@ -1,4 +1,4 @@
-import { formGrey2, formGrey4 } from 'constants/styles';
+import { formGrey2, formGrey4, primaryButtonDiameter } from 'constants/styles';
 
 export const cardWidth = '258px';
 export const cardHeight = '410px';
@@ -16,3 +16,6 @@ export const productSpanMarginLeft = '11px';
 
 export const colorTheme1 = formGrey4;
 export const backgroundTheme1 = formGrey2;
+
+export const playImgLeft = `calc(50% - ${primaryButtonDiameter} / 2)`;
+export const playImgTop = playImgLeft;

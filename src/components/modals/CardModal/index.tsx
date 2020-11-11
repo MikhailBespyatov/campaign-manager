@@ -64,7 +64,7 @@ const body = document.body;
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
-    const { uriPrimary, womQualityScore, engagement, products, tags, inCampaignIds } = useStore(
+    const { uriPrimary, womQualityScore, engagement, products, tags, inCampaignIds, streamDetails } = useStore(
         campaignContentStores.item
     );
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
@@ -129,6 +129,7 @@ export const CardModal = () => {
                                     <Column marginRight={primaryPadding}>
                                         <CreateCampaignCard
                                             products={products}
+                                            streamDetails={streamDetails}
                                             uriPrimary={uriPrimary}
                                             womQualityScore={womQualityScore}
                                         />
