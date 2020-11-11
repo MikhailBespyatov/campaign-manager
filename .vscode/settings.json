@@ -31,6 +31,8 @@
     "Unselectable",
     "WOM",
     "estee",
-    "sweetalert"
+    "formik",
+    "sweetalert",
+    "upsert"
   ]
 }

@@ -42,8 +42,9 @@ export const CreateCampaignForm = () => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ values, handleSubmit, isValid, dirty, touched }) => (
+            {({ values, handleSubmit, isValid, dirty, touched, status, setStatus }) => (
                 <Row noWrap width="100%">
+                    {console.log(status)}
                     {!!initialContentIds.length && <VideoCard unselectable {...initialContentIds[0]} />}
                     <Column>
                         {!!initialContentIds.length && (
@@ -93,13 +94,18 @@ export const CreateCampaignForm = () => {
                                                 label="Budget amount"
                                                 name="amount"
                                                 placeholder="Enter amount of budget"
+                                                setStatus={setStatus}
+                                                status={status}
                                                 //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
                                             />
                                         </Column>
                                     </Row>
                                     <Row alignBaseline marginBottom="0">
                                         <Column marginRight={primaryPadding}>
-                                            <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
+                                            <Button
+                                                background={isValid && dirty ? blue : undefined}
+                                                disabled={loading || status?.amount}
+                                            >
                                                 {loading ? <Loader /> : 'CREATE CAMPAIGN'}
                                             </Button>
                                         </Column>

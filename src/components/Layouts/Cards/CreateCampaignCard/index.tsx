@@ -1,7 +1,5 @@
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
-import group2img from 'assets/img/group_2.svg';
-import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
@@ -23,7 +21,14 @@ interface Props extends MarginRightBottom, Sizes, WOM.ContentItemResponse {
     // products?: any;
 }
 
-export const CreateCampaignCard = ({ uriPrimary, womQualityScore, products, marginRight, marginBottom }: Props) => {
+export const CreateCampaignCard = ({
+    uriPrimary,
+    womQualityScore,
+    products,
+    marginRight,
+    marginBottom,
+    engagement
+}: Props) => {
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
 
     return (
@@ -39,8 +44,8 @@ export const CreateCampaignCard = ({ uriPrimary, womQualityScore, products, marg
                     </Column>
                     <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                 </Row>
-                <Row>
-                    <RatingSpan>??</RatingSpan>
+                <Row zIndex="2">
+                    <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
                 </Row>
                 <MarginWrapper marginTop="auto">
                     <Column>
@@ -52,7 +57,7 @@ export const CreateCampaignCard = ({ uriPrimary, womQualityScore, products, marg
                                 {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
                             </ProductSpan>
                         </Row>
-                        <Row alignCenter marginBottom={'0'}>
+                        {/* <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
                             </Column>
@@ -67,7 +72,7 @@ export const CreateCampaignCard = ({ uriPrimary, womQualityScore, products, marg
                             <ProductSpan>
                                 {productsItem?.tagSubCategory ? productsItem.tagSubCategory : noContentMessage}
                             </ProductSpan>
-                        </Row>
+                        </Row> */}
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />

@@ -1,5 +1,6 @@
 import { womExchangeRate } from 'constants/global';
 import { ChangeEvent } from 'react';
+import { walletStores } from 'stores/wallet';
 import { commaInserter } from 'utils/usefulFunctions';
 
 export const wrapperWidth = '244px';
@@ -33,15 +34,23 @@ export const absoluteIconTop = `calc((${inputWrapperHeight} - ${iconDiameter}) /
 export const errorSpanHeight = '41px';
 export const errorSpanMarginBottom = '0';
 
+export const exceedWomError = 'You have not enough WOM';
+
 export const onCurrencyChange = (
     e: ChangeEvent<HTMLInputElement>,
     setValue: (value: any, shouldValidate?: boolean | undefined) => void,
-    setCurrency: (value: number) => void
+    setCurrency: (value: number) => void,
+    setTouched: (value: boolean, shouldValidate?: boolean | undefined) => void,
+    setStatus: (status?: any) => void
 ) => {
     const value = e.target.value.replace(/,/g, '');
     const wom = Number(value);
     if (Number.isInteger(wom) && wom >= 0) {
-        setValue(commaInserter(value), true);
+        setValue(commaInserter(value), false);
         setCurrency(Number((wom * womExchangeRate).toFixed(2)));
+        if (wom > walletStores.walletBalance.getState()) {
+            setStatus({ amount: exceedWomError });
+            setTouched(true, true);
+        } else setStatus({ amount: '' });
     }
 };

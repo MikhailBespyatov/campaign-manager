@@ -1,8 +1,6 @@
 import addIdImg from 'assets/img/add_video.svg';
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
-import group2img from 'assets/img/group_2.svg';
-import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
 import removeIdImg from 'assets/img/increment.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
@@ -37,6 +35,7 @@ export const VideoCard = ({
     womQualityScore,
     products,
     streamDetails,
+    engagement,
     unselectable
 }: Props) => {
     //const history = useHistory();
@@ -108,7 +107,7 @@ export const VideoCard = ({
                     <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                 </Row>
                 <Row zIndex="2">
-                    <RatingSpan>??</RatingSpan>
+                    <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
                 </Row>
                 <MarginWrapper marginTop="auto" zIndex="2">
                     <Column>
@@ -120,7 +119,7 @@ export const VideoCard = ({
                                 {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
                             </ProductSpan>
                         </Row>
-                        <Row alignCenter marginBottom={'0'}>
+                        {/* <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
                             </Column>
@@ -135,7 +134,7 @@ export const VideoCard = ({
                             <ProductSpan>
                                 {productsItem?.tagSubCategory ? productsItem.tagSubCategory : noContentMessage}
                             </ProductSpan>
-                        </Row>
+                        </Row> */}
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
