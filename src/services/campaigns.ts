@@ -29,3 +29,9 @@ export const upsertItem = (data: WOM.CampaignUpsertRequest) =>
             }
         }
     });
+
+export const getItemsByContentId = (data: WOM.CampaignsContentRequest) =>
+    axios<WOM.CampaignDetailResponse[]>({
+        url: '/campaign/query-by-content',
+        data
+    });

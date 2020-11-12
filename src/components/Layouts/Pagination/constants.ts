@@ -20,3 +20,5 @@ export const testArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 export const paginationLimit = 5;
 
 export const pagination = Array.from({ length: paginationLimit }, () => 1);
+
+export const sizeValues = ['10', '20', '50', '100'];

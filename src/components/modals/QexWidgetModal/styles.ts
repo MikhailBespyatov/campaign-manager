@@ -29,6 +29,8 @@ export const Wrapper = styled.div<Visibility>`
 `;
 
 export const Modal = styled.div`
+    ${flexCenter};
+    flex-direction: column;
     max-width: ${modalWidth};
     border-radius: ${modalBorderRadius};
     box-shadow: ${modalBoxShadow};

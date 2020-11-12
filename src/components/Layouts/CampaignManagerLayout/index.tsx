@@ -94,7 +94,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                     title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}
                 />
                 {/* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> */}
-                <SummaryWomImg title={`${usdRate ? removeLastNulls(Number(usdRate)) : '0'} $`} />
+                <SummaryWomImg title={`$ ${usdRate ? removeLastNulls(Number(usdRate)) : '0'}`} />
                 <SummaryWomLogoImg
                     subtitle="Organization balance"
                     title={removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))}

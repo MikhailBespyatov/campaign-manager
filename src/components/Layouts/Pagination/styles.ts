@@ -35,12 +35,13 @@ export const PaginationCell = styled.button<PaginationCellProps>`
 `;
 
 export const Arrow = styled(PaginationCell)<ArrowProps>`
+    margin-right: ${paginationWrapperHorizontalMargin};
     visibility: ${({ hide }) => (hide ? 'hidden' : 'visible')};
 `;
 
 export const PaginationWrapper = styled.div`
     ${flexStart};
     background-color: ${paginationCellBackground};
-    margin: 0 ${paginationWrapperHorizontalMargin};
+    margin-right: ${paginationWrapperHorizontalMargin};
     border-radius: ${paginationCellBorderRadius};
 `;

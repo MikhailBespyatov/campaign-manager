@@ -70,13 +70,13 @@ const removeItemById = createEffect({
 const getItemById = createEffect({
     handler: async (id: string) => {
         try {
-            loadingEffects.updateLoading();
+            updateLoading();
             const data = await API.campaigns.getItemById({ campaignId: id });
-            loadingEffects.updateLoading();
+            updateLoading();
 
             return data;
         } catch {
-            loadingEffects.updateLoading();
+            updateLoading();
             return {};
         }
     }
@@ -111,6 +111,29 @@ const getStatisticsItems = createEffect({
         }
     }
 });
+
+const getItemsInUseById = createEffect({
+    handler: async (id: string) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const data = await API.campaigns.getItemsByContentId({
+                contentId: id,
+                organizationId: organizationsStores.organizationId.getState()
+            });
+            loadingEffects.updateInitialLoading();
+
+            return data ? data : [];
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return [];
+        }
+    }
+});
+
+const itemsInUse = createStore<WOM.CampaignDetailResponse[]>([]).on(
+    getItemsInUseById.doneData,
+    (_, newState) => newState
+);
 
 const item = createStore<WOM.CampaignDetailResponse>({}).on(getItemById.doneData, (_, newState) => newState);
 const items = createStore<WOM.CampaignsQueryResponse>({})
@@ -152,7 +175,7 @@ const campaignsEvents = {
     pushContentId,
     removeContentById
 };
-const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById };
-const campaignsStores = { items, item, statisticsItems, contentIds, loading };
+const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById, getItemsInUseById };
+const campaignsStores = { items, item, statisticsItems, contentIds, loading, itemsInUse };
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

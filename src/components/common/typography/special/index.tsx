@@ -56,6 +56,12 @@ export const SubPageSpan: FC = ({ children }) => (
     </Span>
 );
 
+export const QexWidgetDisclaimerSpan: FC = ({ children }) => (
+    <Span color={white} lineHeight="20px">
+        {children}
+    </Span>
+);
+
 export * from './styles';
 
 // export const ProductSpan: FC = ({ children }) => (
