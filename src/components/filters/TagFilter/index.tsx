@@ -4,7 +4,6 @@ import { P } from 'components/common/typography/titles/P';
 import { filterMarginRight, wrapperBackground } from 'components/filters/TagFilter/constants';
 import { Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
-import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbox';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import { secondaryPadding } from 'constants/styles';
@@ -18,18 +17,18 @@ interface Props extends Title, DefaultChecked {
 
 export const TagFilter = ({
     title = 'Filter',
-    subtitle = 'by context',
+    //subtitle = 'by context',
     defaultChecked = false,
     tagsValues = [],
     onChange = noop
 }: Props) => {
-    const [checked, setChecked] = useState(defaultChecked);
+    const [checked] = useState(defaultChecked);
     const [values, setValues] = useState(tagsValues);
 
-    const onCheckboxChange = (checked: boolean) => {
-        setChecked(checked);
-        onChange(checked, values);
-    };
+    // const onCheckboxChange = (checked: boolean) => {
+    //     setChecked(checked);
+    //     onChange(checked, values);
+    // };
 
     const addValue = (value: string) => {
         const newValues = [...values, value];
@@ -70,14 +69,14 @@ export const TagFilter = ({
                 <Row noWrap marginBottom={secondaryPadding}>
                     <P opacity={0.4}>{title}</P>
                 </Row>
-                <Row noWrap marginBottom={secondaryPadding}>
+                {/* <Row noWrap marginBottom={secondaryPadding}>
                     <Column marginRight={secondaryPadding}>
                         <BooleanCheckbox onChange={onCheckboxChange} />
                     </Column>
                     <P noWrap opacity={0.4}>
                         {subtitle}
                     </P>
-                </Row>
+                </Row> */}
             </Column>
             <Wrapper>
                 {values.map(i => (

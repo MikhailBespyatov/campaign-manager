@@ -7,6 +7,7 @@ import { onCurrencyChange, womImgHeight } from 'components/FormComponents/inputs
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { noop } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
 import { formGrey5, secondaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -17,6 +18,8 @@ import { Disabled, Label, Placeholder, Type } from 'types';
 import { currencyToText } from 'utils/usefulFunctions';
 
 interface Props extends Disabled, Placeholder, Type, Label {
+    setStatus?: (status?: any) => void;
+    status?: any;
     name?: string;
 }
 
@@ -26,9 +29,11 @@ export const WomInput = ({
     label = 'WOM',
     disabled,
     type = 'text',
-    name = 'wom'
+    name = 'wom',
+    status,
+    setStatus = noop
 }: Props) => {
-    const [field, { error, touched }, { setValue }] = useField(name);
+    const [field, { error, touched }, { setValue, setTouched }] = useField(name);
     const classes = useStyles();
     const usdRate = useStore(walletStores.usdRate);
 
@@ -36,7 +41,8 @@ export const WomInput = ({
 
     const [currency, setCurrency] = useState(Number.isNaN(defaultWom) ? 0 : (usdRate * defaultWom).toFixed(2));
 
-    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setValue, setCurrency);
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+        onCurrencyChange(e, setValue, setCurrency, setTouched, setStatus);
 
     return (
         <Section justifyCenter>
@@ -46,7 +52,9 @@ export const WomInput = ({
                         <WomCurrencyImg height={womImgHeight} />
                     </AbsoluteWrapper>
                     <TextFieldStyled
-                        className={!touched ? classes.untouched : error ? classes.error : classes.success}
+                        className={
+                            !touched ? classes.untouched : error || status?.amount ? classes.error : classes.success
+                        }
                         {...field}
                         disabled={disabled}
                         label={label}
@@ -55,7 +63,9 @@ export const WomInput = ({
                         onChange={onInputChange}
                     />
                 </RelativeWrapper>
-                <ErrorSpan touched={touched}>{!touched ? requiredFieldMessage : error}</ErrorSpan>
+                <ErrorSpan touched={touched}>
+                    {!touched ? requiredFieldMessage : status?.amount || error || ''}
+                </ErrorSpan>
                 <Row alignCenter>
                     <Column marginRight={secondaryPadding}>
                         <Badge>USD</Badge>
