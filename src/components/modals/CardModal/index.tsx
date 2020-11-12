@@ -26,7 +26,7 @@ import { primaryPadding, secondaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
-import { campaignsEvents } from 'stores/campaigns';
+import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
@@ -64,11 +64,11 @@ const body = document.body;
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
-    const { uriPrimary, womQualityScore, engagement, products, tags, inCampaignIds } = useStore(
-        campaignContentStores.item
-    );
+    const { uriPrimary, womQualityScore, engagement, products, tags } = useStore(campaignContentStores.item);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const itemsInUse = useStore(campaignsStores.itemsInUse);
     const loading = useStore(loadingStores.loading);
+    const itemsInUseLoading = useStore(loadingStores.initialLoading);
 
     const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
         products
@@ -97,6 +97,7 @@ export const CardModal = () => {
     useEffect(() => {
         if (visible) {
             campaignContentEffects.getItemById(id);
+            campaignsEffects.getItemsInUseById(id);
             body.style.overflow = 'hidden';
         } else body.style.overflow = 'auto';
     }, [id, visible]);
@@ -332,14 +333,21 @@ export const CardModal = () => {
                                     <SmallSpan>In-use</SmallSpan>
                                 </Row>
                                 <Row maxWidth="420px">
-                                    {inCampaignIds?.map(i => (
-                                        <InternalLink
-                                            key={i}
-                                            to={globalPrefixUrl + routes.campaignManager.campaign.indexDetails + i}
-                                        >
-                                            {i}
-                                        </InternalLink>
-                                    ))}
+                                    {itemsInUseLoading ? (
+                                        <Loader />
+                                    ) : itemsInUse?.length ? (
+                                        itemsInUse.map(({ id, title }) => (
+                                            <InternalLink
+                                                key={id}
+                                                to={globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id}
+                                                onClick={onClose}
+                                            >
+                                                {title}
+                                            </InternalLink>
+                                        ))
+                                    ) : (
+                                        'No campaigns in use'
+                                    )}
                                 </Row>
                             </RowBlockCell>
                             <RowBlockCell removeBorder padding={validatorsPadding}>

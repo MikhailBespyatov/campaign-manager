@@ -48,6 +48,7 @@ export const onCurrencyChange = (
     if (Number.isInteger(wom) && wom >= 0) {
         setValue(commaInserter(value), false);
         setCurrency(Number((wom * womExchangeRate).toFixed(2)));
+        // * set status as error if you have not enough WOM
         if (wom > walletStores.walletBalance.getState()) {
             setStatus({ amount: exceedWomError });
             setTouched(true, true);

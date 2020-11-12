@@ -11,7 +11,7 @@ import { Loading, TotalRecords } from 'types';
 interface Props extends TotalRecords, Loading {}
 
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading }) => {
-    const { tagsAll, tagsAny, pageIndex } = useStore(campaignContentStores.values);
+    const { tagsAll, tagsAny, pageIndex, limit } = useStore(campaignContentStores.values);
     const isFirst = useStore(campaignContentStores.isFirst);
 
     const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
@@ -38,6 +38,12 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
             pageIndex: current
         });
 
+    const onSizeChange = (current: number, size: number) =>
+        updateValues({
+            pageIndex: current,
+            limit: size
+        });
+
     useEffect(() => {
         if (isFirst) {
             setDefaultValues();
@@ -54,8 +60,10 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                 {!loading && (
                     <Pagination
                         currentIndex={pageIndex + 1}
+                        defaultSize={limit}
                         totalItems={totalRecords !== -1 ? totalRecords : 0}
                         onChange={onPaginationChange}
+                        onSizeChange={onSizeChange}
                     />
                 )}
             </Section>

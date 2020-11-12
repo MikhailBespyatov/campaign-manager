@@ -34,7 +34,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
-import { loadingStores } from 'stores/loading';
 
 interface ParamsProps {
     campaignId?: string;
@@ -45,8 +44,8 @@ export const Details = () => {
     const { sets, deltaStatistics } = useStore(campaignsStores.statisticsItems);
     const { title, schedule, contentIds } = useStore(campaignsStores.item);
     const campaignSelectedVideos = useStore(campaignContentStores.campaignSelectedVideos);
-    const initialLoading = useStore(loadingStores.initialLoading);
-    const loading = useStore(loadingStores.loading);
+    const initialLoading = useStore(campaignContentStores.initialLoading);
+    const loading = useStore(campaignsStores.loading);
 
     let isFirstDatesLoaded = true;
 
@@ -201,7 +200,7 @@ export const Details = () => {
     }, [campaignId]);
 
     useEffect(() => {
-        utcToStart && utcToEnd && campaignId && console.log('ye');
+        // utcToStart && utcToEnd && campaignId && console.log('ye');
         utcToStart &&
             utcToEnd &&
             campaignId &&

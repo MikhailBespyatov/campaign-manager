@@ -104,6 +104,7 @@ export const CreateCampaignForm = () => {
                                         <Column marginRight={primaryPadding}>
                                             <Button
                                                 background={isValid && dirty ? blue : undefined}
+                                                // * disable button if there is a status as error
                                                 disabled={loading || status?.amount}
                                             >
                                                 {loading ? <Loader /> : 'CREATE CAMPAIGN'}
