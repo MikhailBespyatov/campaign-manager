@@ -1,17 +1,26 @@
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
 import group4img from 'assets/img/group_4.svg';
+import playImg from 'assets/img/play.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
 import { P } from 'components/common/typography/titles/P';
+import { AbsoluteVideo } from 'components/common/Video';
 import { Card, Description } from 'components/grid/Card';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { cardHeight, cardWidth, productImgDiameter } from 'components/Layouts/Cards/CreateCampaignCard/constants';
+import {
+    cardHeight,
+    cardWidth,
+    playImgLeft,
+    playImgTop,
+    productImgDiameter
+} from 'components/Layouts/Cards/CreateCampaignCard/constants';
 import { noContentMessage } from 'constants/messages';
-import { primaryPadding, secondaryPadding, white } from 'constants/styles';
-import React from 'react';
+import { primaryButtonDiameter, primaryPadding, secondaryPadding, white } from 'constants/styles';
+import React, { useState } from 'react';
 import { MarginRightBottom, Sizes } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
 
@@ -27,14 +36,35 @@ export const CreateCampaignCard = ({
     products,
     marginRight,
     marginBottom,
+    streamDetails,
     engagement
 }: Props) => {
+    const hlsUrl = streamDetails?.hlsUrl;
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
+
+    const [startLoading, setStartLoading] = useState(false);
+
+    const goLoading = () => setStartLoading(true);
 
     return (
         <Card height={cardHeight} marginBottom={marginBottom} marginRight={marginRight} width={cardWidth}>
             <Description>
-                <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
+                {startLoading ? (
+                    <AbsoluteVideo controls isPlaying src={hlsUrl || ''} />
+                ) : (
+                    <>
+                        <AbsoluteWrapper left={playImgLeft} top={playImgTop}>
+                            <CustomImg
+                                pointer
+                                height={primaryButtonDiameter}
+                                src={playImg}
+                                width={primaryButtonDiameter}
+                                onClick={goLoading}
+                            />
+                        </AbsoluteWrapper>
+                        <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
+                    </>
+                )}
                 <Row marginBottom="5px">
                     <Column marginRight={primaryPadding}>
                         <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>

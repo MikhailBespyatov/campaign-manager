@@ -64,7 +64,9 @@ const body = document.body;
 
 export const CardModal = () => {
     const { visible, id } = useStore(modalStores.cardModal);
-    const { uriPrimary, womQualityScore, engagement, products, tags } = useStore(campaignContentStores.item);
+    const { uriPrimary, womQualityScore, engagement, products, tags, streamDetails } = useStore(
+        campaignContentStores.item
+    );
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const itemsInUse = useStore(campaignsStores.itemsInUse);
     const loading = useStore(loadingStores.loading);
@@ -131,6 +133,7 @@ export const CardModal = () => {
                                         <CreateCampaignCard
                                             engagement={engagement}
                                             products={products}
+                                            streamDetails={streamDetails}
                                             uriPrimary={uriPrimary}
                                             womQualityScore={womQualityScore}
                                         />

@@ -8,6 +8,8 @@ export const blockHorizontalPadding = '35px';
 export const primaryBorderRadius = '20px';
 export const secondaryBorderRadius = '10px';
 
+export const primaryButtonDiameter = '40px';
+
 export const borderWidth = '1px';
 export const primaryBorderWidth = '1px';
 export const secondaryBorderWidth = '2px';
