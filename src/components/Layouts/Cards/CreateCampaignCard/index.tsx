@@ -1,7 +1,5 @@
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
-import group2img from 'assets/img/group_2.svg';
-import group3img from 'assets/img/group_3.svg';
 import group4img from 'assets/img/group_4.svg';
 import playImg from 'assets/img/play.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
@@ -38,10 +36,9 @@ export const CreateCampaignCard = ({
     products,
     marginRight,
     marginBottom,
-    streamDetails
+    streamDetails,
+    engagement
 }: Props) => {
-    //const video = useRef<HTMLVideoElement>(null);
-
     const hlsUrl = streamDetails?.hlsUrl;
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
 
@@ -77,8 +74,8 @@ export const CreateCampaignCard = ({
                     </Column>
                     <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                 </Row>
-                <Row>
-                    <RatingSpan>??</RatingSpan>
+                <Row zIndex="2">
+                    <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
                 </Row>
                 <MarginWrapper marginTop="auto">
                     <Column>
@@ -90,7 +87,7 @@ export const CreateCampaignCard = ({
                                 {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
                             </ProductSpan>
                         </Row>
-                        <Row alignCenter marginBottom={'0'}>
+                        {/* <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
                             </Column>
@@ -105,7 +102,7 @@ export const CreateCampaignCard = ({
                             <ProductSpan>
                                 {productsItem?.tagSubCategory ? productsItem.tagSubCategory : noContentMessage}
                             </ProductSpan>
-                        </Row>
+                        </Row> */}
                         <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />

@@ -75,7 +75,7 @@ export const CardModal = () => {
     const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
         products
     ]);
-    const extraTags = productsItem.extraTags;
+    //const extraTags = productsItem.extraTags;
     // const username = userDetails && userDetails?.username;
     // const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
     // const tagBrand = productsItem !== 0 ? productsItem?.tagBrand : '';
@@ -131,6 +131,7 @@ export const CardModal = () => {
                                 <Row marginBottom="0">
                                     <Column marginRight={primaryPadding}>
                                         <CreateCampaignCard
+                                            engagement={engagement}
                                             products={products}
                                             streamDetails={streamDetails}
                                             uriPrimary={uriPrimary}
@@ -145,7 +146,7 @@ export const CardModal = () => {
                                         <Row>
                                             <P>{productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}</P>
                                         </Row>
-                                        <Row marginBottom={miniMarginBottom}>
+                                        {/* <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Category</SmallSpan>
                                         </Row>
                                         <Row>
@@ -164,7 +165,7 @@ export const CardModal = () => {
                                                     ? productsItem.tagSubCategory
                                                     : noContentMessage}
                                             </P>
-                                        </Row>
+                                        </Row> */}
                                         <Row marginBottom={miniMarginBottom}>
                                             <SmallSpan>Item</SmallSpan>
                                         </Row>
@@ -362,7 +363,7 @@ export const CardModal = () => {
                                     ))}
                                 </Row>
                             </RowBlockCell>
-                            <RowBlockCell removeBorder padding={validatorsPadding}>
+                            {/* <RowBlockCell removeBorder padding={validatorsPadding}>
                                 <Row marginBottom="40px">
                                     <Subtitle>Extra Hashtags</Subtitle>
                                 </Row>
@@ -371,7 +372,7 @@ export const CardModal = () => {
                                         <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
                                     ))}
                                 </Row>
-                            </RowBlockCell>
+                            </RowBlockCell> */}
                         </ColumnBlockCell>
                     </>
                 )}
