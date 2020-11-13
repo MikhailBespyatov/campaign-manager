@@ -357,7 +357,7 @@ export const CardModal = () => {
                                 <Row marginBottom="40px">
                                     <Subtitle>Hashtags</Subtitle>
                                 </Row>
-                                <Row marginBottom={miniMarginBottom} maxWidth="400px">
+                                <Row marginBottom={miniMarginBottom}>
                                     {tags?.map(i => (
                                         <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
                                     ))}

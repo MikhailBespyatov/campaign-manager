@@ -53,6 +53,7 @@ export const TableColumn = styled.td`
 
 export const TableRow = styled.tr<Active>`
     ${({ active }) => (active ? `background: ${activeColor}; opacity: 0.5;` : ``)};
+    cursor: pointer;
     &:last-child {
         ${TableColumn} {
             &:first-child {
