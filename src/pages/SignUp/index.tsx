@@ -9,6 +9,7 @@ import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { privacyPolicyHref, termsOfServiceHref } from 'constants/links';
 import { routes } from 'constants/routes';
 import { blue, formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -66,11 +67,11 @@ export const CreateAccount = () => {
                             </Column>
                             <Span color={formGrey5} fontSize="14px" fontWeight="500" lineHeight="17px">
                                 I acknowledge that I have read{' '}
-                                <InternalTextLink href="https://womprotocol.io/privacy-policy/" target="_blank">
+                                <InternalTextLink href={privacyPolicyHref} target="_blank">
                                     Privacy Policy
                                 </InternalTextLink>
                                 and agree to the
-                                <InternalTextLink href="https://womprotocol.io/terms-conditions/" target="_blank">
+                                <InternalTextLink href={termsOfServiceHref} target="_blank">
                                     Terms of Service
                                 </InternalTextLink>
                                 .

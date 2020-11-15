@@ -32,6 +32,7 @@ export const Modal = styled.div`
     ${flexCenter};
     flex-direction: column;
     max-width: ${modalWidth};
+    height: 90%;
     border-radius: ${modalBorderRadius};
     box-shadow: ${modalBoxShadow};
     background: ${modalBackground};

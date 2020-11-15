@@ -1,16 +1,9 @@
-import moreInfoImg from 'assets/img/ellipsis_line.svg';
 import arrowImg from 'assets/img/select_arrow_dark.svg';
 import history from 'BrowserHistory';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
-import {
-    arrowImgHeight,
-    arrowImgWidth,
-    moreInfoImgHeight,
-    moreInfoImgWidth,
-    tableMargin
-} from 'components/common/tables/CampaignTable/constants';
+import { arrowImgHeight, arrowImgWidth, tableMargin } from 'components/common/tables/CampaignTable/constants';
 import {
     LegendaryTableColumn,
     LegendaryTableRow,
@@ -19,7 +12,6 @@ import {
 } from 'components/common/tables/CampaignTable/styles';
 import { Table } from 'components/common/tables/Table';
 import { Span } from 'components/common/typography/Span';
-import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import { noContentMessage } from 'constants/messages';
@@ -106,7 +98,7 @@ const Item = ({ id, title, budget, engagement, isActive, isEnabled }: ItemProps)
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
 
     return (
-        <TableRow active={!(isActive && isEnabled)}>
+        <TableRow active={!(isActive && isEnabled)} onClick={onMoreInfoClick}>
             <TableColumn>
                 <Row alignCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>
@@ -198,9 +190,9 @@ const Item = ({ id, title, budget, engagement, isActive, isEnabled }: ItemProps)
                             onClick={removeHandler}
                         />
                     </Column> */}
-                    <ClickableWrapper onClick={onMoreInfoClick}>
+                    {/* <ClickableWrapper onClick={onMoreInfoClick}>
                         <CustomImg pointer height={moreInfoImgHeight} src={moreInfoImg} width={moreInfoImgWidth} />
-                    </ClickableWrapper>
+                    </ClickableWrapper> */}
                 </Row>
             </TableColumn>
         </TableRow>
