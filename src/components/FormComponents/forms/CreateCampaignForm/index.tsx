@@ -44,7 +44,7 @@ export const CreateCampaignForm = () => {
         >
             {({ values, handleSubmit, isValid, dirty, touched, status, setStatus }) => (
                 <Row noWrap width="100%">
-                    {console.log(status)}
+                    {/* {console.log(status)} */}
                     {!!initialContentIds.length && <VideoCard unselectable {...initialContentIds[0]} />}
                     <Column>
                         {!!initialContentIds.length && (

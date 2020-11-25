@@ -49,8 +49,8 @@ export const Details = () => {
 
     let isFirstDatesLoaded = true;
 
-    // const utcStarted = schedule?.utcStarted || '';
-    // const utcEnded = schedule?.utcEnded || '';
+    // const utcToStart = schedule?.utcStarted || '';
+    // const utcToEnd = schedule?.utcEnded || '';
 
     const utcToStart = useMemo(() => schedule?.utcToStart || '', [schedule]);
     const utcToEnd = useMemo(() => schedule?.utcToEnd || '', [schedule]);

@@ -1,6 +1,6 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { Hr } from 'components/common/dividers/Hr';
-import { ColorPromptLine } from 'components/common/grpahicComponents/ColorPromptLine';
+import { ColorPromptLine } from 'components/common/graphicComponents/ColorPromptLine';
 import { BooleanCircleCheckbox } from 'components/common/inputs/BooleanCircleCheckbox';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { Select } from 'components/common/inputs/Select';

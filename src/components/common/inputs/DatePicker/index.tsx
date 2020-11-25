@@ -14,6 +14,8 @@ import { useField } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { DefaultValueString, Label, Name } from 'types';
 
+type dateType = Date | null;
+
 interface Props {
     defaultDateFrom: string;
     defaultDateTo: string;
@@ -21,16 +23,26 @@ interface Props {
 }
 
 export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = noop }: Props) => {
-    const [selectedDateFrom, setSelectedDateFrom] = useState<Date | null>(new Date(defaultDateFrom));
-    const [selectedDateTo, setSelectedDateTo] = useState<Date | null>(new Date(defaultDateTo));
+    const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
+    const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
 
-    const handleDateChangeFrom = (date: Date | null) => setSelectedDateFrom(date);
-    const handleDateChangeTo = (date: Date | null) => setSelectedDateTo(date);
+    const handleDateChangeFrom = (date: dateType) =>
+        onChange(date?.toISOString() || '', selectedDateTo?.toISOString() || '');
+    const handleDateChangeTo = (date: dateType) =>
+        onChange(selectedDateFrom?.toISOString() || '', date?.toISOString() || '');
+
+    // useEffect(() => {
+    //     onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
+    //     //setSelectedDateFrom(new Date(defaultDateFrom));
+    //     //setSelectedDateTo(new Date(defaultDateTo));
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [selectedDateFrom, selectedDateTo]);
 
     useEffect(() => {
-        onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
+        setSelectedDateFrom(new Date(defaultDateFrom));
+        setSelectedDateTo(new Date(defaultDateTo));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedDateFrom, selectedDateTo]);
+    }, [defaultDateFrom, defaultDateTo]);
 
     return (
         <ThemeProvider theme={materialTheme}>
@@ -66,9 +78,9 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
     // eslint-disable-next-line
     const [field, _, { setValue }] = useField(name);
 
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date(defaultValue));
+    const [selectedDate, setSelectedDate] = useState<dateType>(new Date(defaultValue));
 
-    const handleDateChange = (date: Date | null) => setSelectedDate(date);
+    const handleDateChange = (date: dateType) => setSelectedDate(date);
 
     useEffect(() => {
         setValue(selectedDate?.toISOString() || '');

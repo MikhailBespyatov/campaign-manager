@@ -9,6 +9,7 @@ import {
 } from 'constants/messages';
 import { parsePublicUrl, requestCodeTemplate } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
+import connectLocalStorage from 'effector-localstorage';
 import { ResetPasswordRequestProps } from 'pages/SignIn/PasswordReset/RequestCode/types';
 import { SecurityCodeRequestProps } from 'pages/SignIn/PasswordReset/types';
 import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
@@ -23,6 +24,8 @@ import { getOrganizationId, getPublicTheme, giveAccess, objectIsEmpty } from 'ut
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
 
+const counterLocalStorage = connectLocalStorage(userStorageName).onError(err => console.log(err));
+
 const loadToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
@@ -36,7 +39,7 @@ const loadToken = createEffect({
 
             themeEvents.setGlobalPrefix(prefix);
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
-            localStorage.setItem(userStorageName, JSON.stringify(data));
+            //localStorage.setItem(userStorageName, JSON.stringify(data));
             //organizationsEvents.setOrganizationId(data?.user?.organizationId || '');
             return data;
         } catch {
@@ -53,7 +56,7 @@ const loadAdminToken = createEffect({
             const data = await API.user.authenticateAdmin(values);
             loadingEffects.updateLoading();
 
-            localStorage.setItem(userStorageName, JSON.stringify(data));
+            //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -137,7 +140,7 @@ const acceptInvitationAndLoadToken = createEffect({
             //const prefix = getPublicTheme() || '';
             themeEvents.setGlobalPrefix(prefix);
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
-            localStorage.setItem(userStorageName, JSON.stringify(data));
+            //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -163,7 +166,7 @@ const resetPasswordAndLoadToken = createEffect({
             setEmail('');
             themeEvents.setGlobalPrefix(prefix);
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
-            localStorage.setItem(userStorageName, JSON.stringify(data));
+            //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -182,7 +185,7 @@ const createUserAndLoadToken = createEffect({
             const data = await API.user.createUser(values);
             loadingEffects.updateLoading();
 
-            localStorage.setItem(userStorageName, JSON.stringify(data));
+            //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch {
             loadingEffects.updateLoading();
@@ -193,7 +196,7 @@ const createUserAndLoadToken = createEffect({
 
 const setToken = createEvent<WOM.UserJwtTokenResponse>();
 
-const user = createStore<WOM.UserJwtTokenResponse>(JSON.parse(localStorage.getItem(userStorageName) || '{}'))
+const user = createStore<WOM.UserJwtTokenResponse>(counterLocalStorage.init(0))
     .on(
         [
             loadToken.doneData,
@@ -205,13 +208,14 @@ const user = createStore<WOM.UserJwtTokenResponse>(JSON.parse(localStorage.getIt
         (_, user) => user
     )
     .on(logout, () => {
-        localStorage.removeItem(userStorageName);
+        //localStorage.removeItem(userStorageName);
         localStorage.removeItem(themeStorageName);
         themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
         return {};
     })
     .on(setToken, (_, token) => token);
 
+user.watch(counterLocalStorage);
 user.watch(state => {
     if (!objectIsEmpty(state)) {
         organizationsEvents.setOrganizationId(getOrganizationId());

@@ -2,7 +2,7 @@ import defaultImg from 'assets/img/wom_logo.svg';
 import { Block } from 'components/common/blocks/Block';
 import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
-import { ColorPromptLine } from 'components/common/grpahicComponents/ColorPromptLine';
+import { ColorPromptLine } from 'components/common/graphicComponents/ColorPromptLine';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
