@@ -48,7 +48,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     }, [organizationId]);
 
     useEffect(() => {
-        console.log(walletId);
+        //console.log(walletId);
         walletId && walletEffects.getItemById(walletId);
     }, [walletId]);
 

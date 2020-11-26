@@ -119,6 +119,7 @@ export const Pagination = ({
                         </Arrow>
                     )}
                     <Select
+                        top
                         defaultActive={defaultSize.toString()}
                         values={sizeValues}
                         width="100px"

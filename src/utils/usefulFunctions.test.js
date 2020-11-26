@@ -1,3 +1,4 @@
+import { multiplyPixels, pixelsAddition, pixelsSubtraction } from 'utils/parsers';
 import {
     allValuesAreTrue,
     commaInserter,
@@ -295,5 +296,31 @@ describe('currencyToStandardForm', () => {
         expect(currencyToStandardForm(NaN)).toStrictEqual('0');
         expect(currencyToStandardForm(1.022)).toStrictEqual('1.022');
         expect(currencyToStandardForm(1111.022)).toStrictEqual('1 111.022');
+    });
+});
+
+describe('multiplyPixels', () => {
+    it('Test for multiplyPixels', () => {
+        expect(multiplyPixels('100ppx', 2)).toBe('0');
+        expect(multiplyPixels('100px', 2)).toBe('200px');
+        expect(multiplyPixels('100px', 3)).toBe('300px');
+    });
+});
+
+describe('pixelsAddition', () => {
+    it('Test for pixelsAddition', () => {
+        expect(pixelsAddition('100ppx', '0')).toBe('0');
+        expect(pixelsAddition('100ppx', '0px')).toBe('0');
+        expect(pixelsAddition('100px', '101px')).toBe('201px');
+        expect(pixelsAddition('19px', '20px')).toBe('39px');
+    });
+});
+
+describe('pixelsSubtraction', () => {
+    it('Test for pixelsSubtraction', () => {
+        expect(pixelsSubtraction('100ppx', '0')).toBe('0');
+        expect(pixelsSubtraction('100ppx', '0px')).toBe('0');
+        expect(pixelsSubtraction('200px', '101px')).toBe('99px');
+        expect(pixelsSubtraction('19px', '20px')).toBe('-1px');
     });
 });

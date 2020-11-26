@@ -11,7 +11,7 @@ export interface GlobalPrefix {
 
 const setOrganizationIdForLogin = createEvent<string>();
 const organizationIdForLogin = createStore('').on(setOrganizationIdForLogin, (_, newState) => newState);
-organizationIdForLogin.watch(state => console.log(state));
+//organizationIdForLogin.watch(state => console.log(state));
 
 const setTheme = createEvent<string>();
 const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, (_, themeName) =>
