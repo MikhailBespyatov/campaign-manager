@@ -142,7 +142,7 @@ const acceptInvitationAndLoadToken = createEffect({
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
-        } catch {
+        } catch (errors) {
             loadingEffects.updateLoading();
             setErrors({
                 inviteCode: wrongInviteCodeMessage

@@ -34,7 +34,7 @@ export const absoluteIconTop = `calc((${inputWrapperHeight} - ${iconDiameter}) /
 export const errorSpanHeight = '41px';
 export const errorSpanMarginBottom = '0';
 
-export const exceedWomError = 'You have not enough WOM';
+export const exceedWomError = 'Insufficient funds';
 
 export const onCurrencyChange = (
     e: ChangeEvent<HTMLInputElement>,

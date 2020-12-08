@@ -16,7 +16,7 @@ interface Props extends Title, DefaultChecked {
 }
 
 export const TagFilter = ({
-    title = 'Filter',
+    title = 'Search',
     //subtitle = 'by context',
     defaultChecked = false,
     tagsValues = [],

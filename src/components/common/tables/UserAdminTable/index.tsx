@@ -23,6 +23,7 @@ import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import { userAdminEffects } from 'stores/userAdmin';
 import { usersStores } from 'stores/users';
+import Swal from 'sweetalert2';
 import { retrieveRoleAndConvert } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
@@ -83,7 +84,26 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
 
     // const onChange = (checked: boolean) => setChecked(checked);
 
-    const removeHandler = () => userAdminEffects.removeItemById(userId);
+    const removeHandler = () =>
+        Swal.fire({
+            title: 'Are you sure you want to delete a user' + username,
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            showLoaderOnConfirm: true,
+            preConfirm: () =>
+                userAdminEffects.removeItemById(userId).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                }),
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then(result => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: `A user ${username} deleted`
+                });
+            }
+        });
 
     return (
         <TableRow>
