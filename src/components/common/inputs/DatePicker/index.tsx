@@ -26,11 +26,15 @@ export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = n
     const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
     const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
 
-    const handleDateChangeFrom = (date: dateType) =>
+    const handleDateChangeFrom = (date: dateType) => {
+        setSelectedDateFrom(date);
         onChange(date?.toISOString() || '', selectedDateTo?.toISOString() || '');
-    const handleDateChangeTo = (date: dateType) =>
+    };
+    const handleDateChangeTo = (date: dateType) => {
+        setSelectedDateTo(date);
         onChange(selectedDateFrom?.toISOString() || '', date?.toISOString() || '');
-
+        console.log(selectedDateFrom, date);
+    };
     // useEffect(() => {
     //     onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
     //     //setSelectedDateFrom(new Date(defaultDateFrom));

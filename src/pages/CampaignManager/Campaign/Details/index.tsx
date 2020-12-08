@@ -48,6 +48,7 @@ export const Details = () => {
     const loading = useStore(campaignsStores.loading);
 
     let isFirstDatesLoaded = true;
+    console.log(isFirstDatesLoaded);
 
     // const utcToStart = schedule?.utcStarted || '';
     // const utcToEnd = schedule?.utcEnded || '';
@@ -188,12 +189,10 @@ export const Details = () => {
     };
 
     const onDatesBetweenChange = (dateFrom: string, dateTo: string) =>
-        isFirstDatesLoaded
-            ? (isFirstDatesLoaded = false)
-            : campaignsEvents.updateStatisticsValues({
-                  dateFrom: dateFrom,
-                  dateTo: dateTo
-              });
+        campaignsEvents.updateStatisticsValues({
+            dateFrom: dateFrom,
+            dateTo: dateTo
+        });
 
     useEffect(() => {
         campaignId && campaignsEffects.getItemById(campaignId);

@@ -1,5 +1,10 @@
 import { blue, flexCenter } from 'constants/styles';
-import { externalLinkBorderRadius, externalLinkHeight, externalLinkWidth } from 'pages/Home/constants';
+import {
+    externalLinkBorderRadius,
+    externalLinkHeight,
+    externalLinkHorizontalPadding,
+    externalLinkWidth
+} from 'pages/Home/constants';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -11,8 +16,9 @@ export const Wrapper = styled.div`
 
 export const ExternalLink = styled.a`
     ${flexCenter};
-    width: ${externalLinkWidth};
+    //width: ${externalLinkWidth};
     height: ${externalLinkHeight};
     border-radius: ${externalLinkBorderRadius};
     background: ${blue};
+    padding: 0 ${externalLinkHorizontalPadding};
 `;

@@ -70,7 +70,7 @@ export const WomInput = ({
                     <Column marginRight={secondaryPadding}>
                         <Badge>USD</Badge>
                     </Column>
-                    {currency} $
+                    $ {currency}
                 </Row>
                 <Row>
                     <Column>

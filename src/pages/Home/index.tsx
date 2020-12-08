@@ -26,19 +26,19 @@ export const Home = () => {
             <Row marginBottom="52px" maxWidth="900px">
                 <Span color={white} fontSize="26px" fontWeight="500" lineHeight="42px">
                     This is the heart of WOM system, allowing you to use your brand champions to spread the
-                    World-of-Mouth recommendations
+                    word-of-mouth recommendations
                 </Span>
             </Row>
+
             <Row>
                 {/* <Column marginRight={primaryPadding}> */}
-                <ExternalLink href={learnMoreHref} target="_blank">
-                    <Span color={white} fontSize="14" lineHeight="14">
-                        LEARN MORE
-                    </Span>
-                </ExternalLink>
+                <RoundedButton onClick={goToRegistration}>SIGN UP</RoundedButton>
             </Row>
-            {/* </Column> */}
-            <RoundedButton onClick={goToRegistration}>SIGN UP</RoundedButton>
+            <ExternalLink href={learnMoreHref} target="_blank">
+                <Span color={white} fontSize="14px" lineHeight="14px">
+                    learn more
+                </Span>
+            </ExternalLink>
         </Wrapper>
     );
 };

@@ -32,9 +32,6 @@ export const Footer = () => (
                     high-risk endeavor and one for which we strongly advise you to consult with your registered
                     investment advisor.
                 </StyledSpanBottom>
-                <StyledSpanBottom color={white}>
-                    we strongly advise you to consult with your registered investment advisor
-                </StyledSpanBottom>
             </Column>
         </Row>
     </StyledFooter>

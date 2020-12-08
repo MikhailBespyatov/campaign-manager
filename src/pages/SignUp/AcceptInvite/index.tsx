@@ -35,11 +35,18 @@ export const AcceptInvite = () => {
                 {({ handleSubmit, isValid, dirty }) => (
                     <Form subtitle="Accept invite" title="Create an account" onSubmit={handleSubmit}>
                         <TextInput disabled label="Invite Code" name="inviteCode" placeholder="" />
-                        <TextInput label="Login" name="username" placeholder="Enter your account name" />
+                        <TextInput label="Email" name="username" placeholder="Enter your email address" />
                         <TextInput
-                            label="Password"
+                            label="Create password"
                             name="password"
                             placeholder="Type your password"
+                            type="password"
+                            untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
+                        />
+                        <TextInput
+                            label="Retype password"
+                            name="repeatPassword"
+                            placeholder="Retype your password"
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         />

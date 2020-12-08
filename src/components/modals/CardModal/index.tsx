@@ -130,13 +130,15 @@ export const CardModal = () => {
                             <RowBlockCell padding={primaryPadding}>
                                 <Row marginBottom="0">
                                     <Column marginRight={primaryPadding}>
-                                        <CreateCampaignCard
-                                            engagement={engagement}
-                                            products={products}
-                                            streamDetails={streamDetails}
-                                            uriPrimary={uriPrimary}
-                                            womQualityScore={womQualityScore}
-                                        />
+                                        {visible && (
+                                            <CreateCampaignCard
+                                                engagement={engagement}
+                                                products={products}
+                                                streamDetails={streamDetails}
+                                                uriPrimary={uriPrimary}
+                                                womQualityScore={womQualityScore}
+                                            />
+                                        )}
                                     </Column>
                                     <Column>
                                         <Row>

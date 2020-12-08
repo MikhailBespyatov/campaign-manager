@@ -28,6 +28,9 @@ export const yupPassword = Yup.string()
     .min(passwordMinimum, passwordLengthMessage(passwordMinimum))
     .matches(oneCapitalCharRequiredRegExp, oneCapitalCharRequiredMessage)
     .matches(atLeastOneNumberRequiredRegExp, atLeastOneNumberRequiredMessage);
+export const yupRepeatPassword = Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords do not match')
+    .required(requiredFieldMessage);
 export const yupPasswordNoHint = yupDefault;
 export const yupSecurityCode = yupDefault;
 
