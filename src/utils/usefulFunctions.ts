@@ -52,7 +52,11 @@ export const commaInserter = (str: string) => str.match(commaInserterRegExp)?.jo
 // insert space for every 4th number
 // export const spaceInserter = (str: string) =>
 //     str.split('').reverse().join('').match(spaceInserterRegExp)?.join(' ').split('').reverse().join('').trim() || '';
-export const spaceInserter = (str: string) => String(str.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 '));
+export const spaceInserter = (str: string) => {
+    const data = parseFloat(str).toLocaleString('ru-RU');
+    if (data === 'не число') return '';
+    else return data.toString().replace(',', '.');
+};
 
 // insert slash for every 2nd number
 export const slashInserter = (str: string) =>

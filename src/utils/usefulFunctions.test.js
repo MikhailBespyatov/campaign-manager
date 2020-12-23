@@ -142,9 +142,9 @@ describe('spaceInserter', () => {
         expect(spaceInserter('1')).toBe('1');
         expect(spaceInserter('12')).toBe('12');
         expect(spaceInserter('123')).toBe('123');
-        expect(spaceInserter('1234')).toBe('1 234');
-        expect(spaceInserter('1234234')).toBe('1 234 234');
-        expect(spaceInserter('123423457')).toBe('123 423 457');
+        expect(spaceInserter('1234')).toBe('1 234');
+        expect(spaceInserter('1234234')).toBe('1 234 234');
+        expect(spaceInserter('123423457')).toBe('123 423 457');
     });
 });
 
@@ -295,7 +295,7 @@ describe('currencyToStandardForm', () => {
         expect(currencyToStandardForm(1.0)).toStrictEqual('1');
         expect(currencyToStandardForm(NaN)).toStrictEqual('0');
         expect(currencyToStandardForm(1.022)).toStrictEqual('1.022');
-        expect(currencyToStandardForm(1111.022)).toStrictEqual('1 111.022');
+        expect(currencyToStandardForm(1111.022)).toStrictEqual('1 111.022');
     });
 });
 
