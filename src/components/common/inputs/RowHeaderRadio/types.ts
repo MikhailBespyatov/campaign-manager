@@ -1,6 +1,6 @@
-import { Active, infoType, Quantity } from 'types';
+import { Active, infoType } from 'types';
 
-export interface RadioProps extends Quantity, Active {}
+export interface RadioProps extends Active {}
 
 export type RowHeaderRadioType = {
     title: string;

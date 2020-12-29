@@ -1,19 +1,17 @@
-import DateFnsUtils from '@date-io/date-fns';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { ThemeProvider } from '@material-ui/styles';
-import {
-    defaultFormat,
-    defaultKeyboardButtonProps,
-    materialTheme
-} from 'components/common/inputs/DatePicker/constants';
 import { HiddenInput } from 'components/common/inputs/Input';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import 'date-fns';
 import { useField } from 'formik';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { DefaultValueString, Label, Name } from 'types';
-import { DataPickerWrapper, TextFieldForm } from 'components/common/inputs/DatePicker/styles';
+import React, { useEffect, useState } from 'react';
+import { DefaultValueString, Label, MarginBottom, Name, Sizes } from 'types';
+import {
+    DataPickerWrapper,
+    FakeBetweenDataPicker,
+    FakeDataPicker,
+    TextFieldBetweenForm,
+    TextFieldForm
+} from 'components/common/inputs/DatePicker/styles';
 import { Span } from 'components/common/typography/Span';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { requiredFieldMessage } from 'constants/messages';
@@ -22,19 +20,47 @@ import calendarImg from 'assets/img/calendar.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { getDate } from 'utils/usefulFunctions';
+import { BorderBlock } from 'components/common/blocks/BorderBlock';
+import { pickerMarginTop } from 'pages/CampaignManager/Campaign/Details/constants';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {
+    defaultFormat,
+    defaultKeyboardButtonProps,
+    materialTheme
+} from 'components/common/inputs/DatePicker/constants';
+import DateFnsUtils from '@date-io/date-fns';
+import { ThemeProvider } from 'styled-components';
+import { campaignsEvents } from 'stores/campaigns';
 
 type dateType = Date | null;
 
-interface Props {
+interface Props extends Sizes, MarginBottom {
     defaultDateFrom: string;
     defaultDateTo: string;
     onChange?: (dateFrom: string, dateTo: string) => void;
 }
 
-export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = noop }: Props) => {
+export const DatePickerBetween = ({
+    defaultDateFrom,
+    defaultDateTo,
+    width,
+    height,
+    marginBottom,
+    onChange = noop
+}: Props) => {
     const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
     const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
 
+    // const handleDateChangeFrom1 = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const date = new Date(e.currentTarget.value);
+    //     setSelectedDateFrom(date);
+    //     onChange(date?.toISOString() || '', selectedDateTo?.toISOString() || '');
+    // };
+    // const handleDateChangeTo1 = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const date = new Date(e.currentTarget.value);
+    //     setSelectedDateTo(date);
+    //     onChange(selectedDateFrom?.toISOString() || '', date?.toISOString() || '');
+    // };
     const handleDateChangeFrom = (date: dateType) => {
         setSelectedDateFrom(date);
         onChange(date?.toISOString() || '', selectedDateTo?.toISOString() || '');
@@ -42,7 +68,6 @@ export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = n
     const handleDateChangeTo = (date: dateType) => {
         setSelectedDateTo(date);
         onChange(selectedDateFrom?.toISOString() || '', date?.toISOString() || '');
-        console.log(selectedDateFrom, date);
     };
     // useEffect(() => {
     //     onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
@@ -58,30 +83,100 @@ export const DatePickerBetween = ({ defaultDateFrom, defaultDateTo, onChange = n
     }, [defaultDateFrom, defaultDateTo]);
 
     return (
-        <ThemeProvider theme={materialTheme}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                    KeyboardButtonProps={defaultKeyboardButtonProps}
-                    format={defaultFormat}
-                    label="Choose date from"
-                    margin="normal"
-                    maxDate={new Date(defaultDateTo)}
-                    minDate={new Date(defaultDateFrom)}
-                    value={selectedDateFrom}
-                    onChange={handleDateChangeFrom}
-                />
-                <KeyboardDatePicker
-                    KeyboardButtonProps={defaultKeyboardButtonProps}
-                    format={defaultFormat}
-                    label="Choose date to"
-                    margin="normal"
-                    maxDate={new Date(defaultDateTo)}
-                    minDate={selectedDateFrom}
-                    value={selectedDateTo}
-                    onChange={handleDateChangeTo}
-                />
-            </MuiPickersUtilsProvider>
-        </ThemeProvider>
+        <>
+            {/*<MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
+            {/*    <KeyboardDatePicker*/}
+            {/*        KeyboardButtonProps={defaultKeyboardButtonProps}*/}
+            {/*        format={defaultFormat}*/}
+            {/*        label="Choose date from"*/}
+            {/*        margin="normal"*/}
+            {/*        maxDate={new Date(defaultDateTo)}*/}
+            {/*        minDate={new Date(defaultDateFrom)}*/}
+            {/*        value={selectedDateFrom}*/}
+            {/*        onChange={handleDateChangeFrom}*/}
+            {/*    />*/}
+            {/*    <KeyboardDatePicker*/}
+            {/*        KeyboardButtonProps={defaultKeyboardButtonProps}*/}
+            {/*        format={defaultFormat}*/}
+            {/*        label="Choose date to"*/}
+            {/*        margin="normal"*/}
+            {/*        maxDate={new Date(defaultDateTo)}*/}
+            {/*        minDate={selectedDateFrom}*/}
+            {/*        value={selectedDateTo}*/}
+            {/*        onChange={handleDateChangeTo}*/}
+            {/*    />*/}
+            {/*</MuiPickersUtilsProvider>*/}
+            <BorderBlock height={height} width={width}>
+                <Column noWrap marginBottom={marginBottom}>
+                    <MarginWrapper marginBottom={pickerMarginTop}>
+                        <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+                            Choose Date From
+                        </Span>
+                    </MarginWrapper>
+                    <DataPickerWrapper>
+                        <TextFieldBetweenForm
+                            max={getDate(new Date(defaultDateTo))}
+                            min={getDate(new Date(defaultDateFrom))}
+                            type="date"
+                            value={getDate(selectedDateFrom) || ''}
+                            // onChange={handleDateChangeFrom1}
+                        />
+                        <FakeBetweenDataPicker>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    KeyboardButtonProps={defaultKeyboardButtonProps}
+                                    format={defaultFormat}
+                                    label="Choose date from"
+                                    margin="normal"
+                                    maxDate={new Date(defaultDateTo)}
+                                    minDate={new Date(defaultDateFrom)}
+                                    value={selectedDateFrom}
+                                    onChange={handleDateChangeFrom}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </FakeBetweenDataPicker>
+                        <AbsoluteWrapper right="0" top="0">
+                            <CustomImg pointer src={calendarImg} />
+                        </AbsoluteWrapper>
+                    </DataPickerWrapper>
+                </Column>
+            </BorderBlock>
+            <BorderBlock height={height} width={width}>
+                <Column noWrap marginBottom={marginBottom}>
+                    <MarginWrapper marginBottom={pickerMarginTop}>
+                        <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+                            Choose Date To
+                        </Span>
+                    </MarginWrapper>
+                    <DataPickerWrapper>
+                        <TextFieldBetweenForm
+                            max={getDate(new Date(defaultDateTo))}
+                            min={getDate(selectedDateFrom)}
+                            type="date"
+                            value={getDate(selectedDateTo) || ''}
+                            // onChange={handleDateChangeTo1}
+                        />
+                        <FakeBetweenDataPicker>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    KeyboardButtonProps={defaultKeyboardButtonProps}
+                                    format={defaultFormat}
+                                    label="Choose date to"
+                                    margin="normal"
+                                    maxDate={new Date(defaultDateTo)}
+                                    minDate={selectedDateFrom}
+                                    value={selectedDateTo}
+                                    onChange={handleDateChangeTo}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </FakeBetweenDataPicker>
+                        <AbsoluteWrapper right="0" top="0">
+                            <CustomImg pointer src={calendarImg} />
+                        </AbsoluteWrapper>
+                    </DataPickerWrapper>
+                </Column>
+            </BorderBlock>
+        </>
     );
 };
 
@@ -91,12 +186,14 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
     // eslint-disable-next-line
     const [field, _, { setValue }] = useField(name);
 
-    const [selectedDate, setSelectedDate] = useState<dateType>(new Date(defaultValue));
+    const [selectedDate, setSelectedDate] = useState<dateType>(new Date(field.value));
 
-    const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => setSelectedDate(new Date(e.currentTarget.value));
+    // const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => setSelectedDate(new Date(e.currentTarget.value));
+    const handleDateChange = (date: dateType) => setSelectedDate(date);
 
     useEffect(() => {
         setValue(selectedDate?.toISOString() || '');
+        campaignsEvents.setFieldCreateCampaignForm({ [field.name]: selectedDate?.toISOString() || '' });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedDate]);
 
@@ -108,20 +205,22 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
                     {label}
                 </Span>
             </MarginWrapper>
-            {/*<ThemeProvider theme={materialTheme}>*/}
-            {/*    <MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
-            {/*        <KeyboardDatePicker*/}
-            {/*            KeyboardButtonProps={defaultKeyboardButtonProps}*/}
-            {/*            format={defaultFormat}*/}
-            {/*            label={label}*/}
-            {/*            margin="normal"*/}
-            {/*            value={selectedDate}*/}
-            {/*            onChange={handleDateChange1}*/}
-            {/*        />*/}
-            {/*    </MuiPickersUtilsProvider>*/}
-            {/*</ThemeProvider>*/}
             <DataPickerWrapper>
-                <TextFieldForm type="date" value={getDate(selectedDate) || ''} onChange={handleDateChange} />
+                <TextFieldForm type="date" value={getDate(selectedDate) || ''} />
+                <FakeDataPicker>
+                    <ThemeProvider theme={materialTheme}>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                KeyboardButtonProps={defaultKeyboardButtonProps}
+                                format={defaultFormat}
+                                label={label}
+                                margin="normal"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </ThemeProvider>
+                </FakeDataPicker>
                 <AbsoluteWrapper right="28px" top="26px">
                     <CustomImg pointer src={calendarImg} />
                 </AbsoluteWrapper>

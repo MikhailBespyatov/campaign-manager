@@ -34,6 +34,8 @@ export const SearchInput = styled.input`
     width: 100%;
     margin-left: 110px;
     margin-right: 110px;
+    font-weight: 400;
+    font-size: 16px;
 `;
 
 export const SearchAbsoluteWrapper = styled.div<SearchAbsoluteWrapperProps>`

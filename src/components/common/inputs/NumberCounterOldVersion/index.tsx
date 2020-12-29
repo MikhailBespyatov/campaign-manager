@@ -59,7 +59,7 @@ export const NumberCounterOldVersion = ({
                 width={inputMinWidth}
                 onChange={inputChange}
             />
-            <CustomImg pointer height={imgHeight} src={incrementImg} width={imgWidth} onClick={increment} />
+            <CustomImg pointer height={imgHeight} rotate={45} src={incrementImg} width={imgWidth} onClick={increment} />
         </Wrapper>
     );
 };

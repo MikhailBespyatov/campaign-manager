@@ -21,7 +21,7 @@ export const Header = () => {
 
     return (
         <StyledHeader>
-            <Row alignCenter marginBottom="0">
+            <Row alignCenter noWrap marginBottom="0" width="500px">
                 <CustomImg height={headerLogoHeight} src={logo} />
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
             </Row>

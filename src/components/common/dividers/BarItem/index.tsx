@@ -27,7 +27,7 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }
         <StyledItem key={path} onClick={() => onClick(path)}>
             <Column alignCenter>
                 <Span
-                    color={active ? primaryColor : inactiveColor}
+                    color={active ? (!namePage ? primaryColor : inactiveColor) : inactiveColor}
                     fontSize={spanFontSize}
                     fontWeight={spanFontWeight}
                     lineHeight={spanLineHeight}
@@ -35,10 +35,12 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }
                 >
                     {children}
                 </Span>
+                {namePage && (
+                    <Row height={subPageSpanHeight} marginBottom="5px" marginTop="8px">
+                        <SubPageSpan>{namePage}</SubPageSpan>
+                    </Row>
+                )}
                 {active && <StyledBorder />}
-                <Row height={subPageSpanHeight} marginTop="5px">
-                    <SubPageSpan>{namePage}</SubPageSpan>
-                </Row>
             </Column>
         </StyledItem>
     );

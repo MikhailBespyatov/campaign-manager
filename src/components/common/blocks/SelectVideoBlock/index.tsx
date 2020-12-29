@@ -18,7 +18,7 @@ export const SelectVideoBlock: FC = () => (
                 </MarginWrapper>
                 <MarginWrapper marginLeft="43px" marginRight="43px">
                     <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, iusto?
+                        Select a video by clicking on the add icon as shown in the example
                     </Span>
                 </MarginWrapper>
             </Column>

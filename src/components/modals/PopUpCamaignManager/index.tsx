@@ -16,6 +16,8 @@ import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { campaignContentEvents } from 'stores/campaignContent';
 import { closeModalImgDiameter } from 'components/modals/PopUpCamaignManager/constants';
 import { NoopClick } from 'types';
+import { campaignsEvents } from 'stores/campaigns';
+import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 
 interface CloseImgPopUpProps extends NoopClick {}
 
@@ -30,6 +32,8 @@ export const PopUpCampaignManager = () => {
     const onClose = () => modalEvents.closePopUpCampaignManager();
     const handleCloseCreateCampaign = () => {
         campaignContentEvents.setVisibleCreateCampaign(false);
+        campaignsEvents.setFieldCreateCampaignForm(formValues);
+        campaignsEvents.clearContentIds();
         onClose();
     };
     return (
@@ -47,12 +51,12 @@ export const PopUpCampaignManager = () => {
                     <Column alignCenter height="300px">
                         <MarginWrapper marginBottom="17px" marginTop="50px">
                             <Span fontSize="24px" fontWeight="400" lineHeight="22px">
-                                Lorem ipsum dolor sit amet?
+                                Do you really want to discard the campaign creation?
                             </Span>
                         </MarginWrapper>
                         <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad architecto eius illum mollitia
-                            neque qui.
+                            If you want to discard the creation of the campaign - click YES, if you want to continue
+                            click NO
                         </Span>
                         <Row marginTop="56px">
                             <MarginWrapper marginRight="30px">

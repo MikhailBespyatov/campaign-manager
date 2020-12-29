@@ -50,27 +50,27 @@ export const GlobalStyle = createGlobalStyle`
   //   background: red;
   //   color: green;
   // }
-
-  ::-webkit-scrollbar-track
-  {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: rgba(157, 158, 159, 0.25);
-    border-radius:  23px;
-  }
-
-  ::-webkit-scrollbar
-  {
-    width: ${scrollBarWidth};
-    height: ${scrollBarWidth};
-    background: unset;//#F5F5F5;
-    //border-radius: 23px;
-  }
-
-  ::-webkit-scrollbar-thumb
-  {
-    background-color: #9D9E9F;
-    border-radius: 23px;
-  }
+  //
+  // ::-webkit-scrollbar-track
+  // {
+  //   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  //   background-color: rgba(157, 158, 159, 0.25);
+  //   border-radius:  23px;
+  // }
+  //
+  // ::-webkit-scrollbar
+  // {
+  //   width: ${scrollBarWidth};
+  //   height: ${scrollBarWidth};
+  //   background: unset;//#F5F5F5;
+  //   //border-radius: 23px;
+  // }
+  //
+  // ::-webkit-scrollbar-thumb
+  // {
+  //   background-color: #9D9E9F;
+  //   border-radius: 23px;
+  // }
 
   #root {
     //position: relative;

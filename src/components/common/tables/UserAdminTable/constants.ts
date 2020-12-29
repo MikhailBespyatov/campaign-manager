@@ -38,7 +38,7 @@ export const arrowImgHeight = '5px';
 export const companyImgBorderRadius = '10px';
 export const companyImgDiameter = '45px';
 
-export const deleteImgDiameter = '45px';
+export const deleteImgDiameter = '15px';
 
 export const testArray = [
     'Brand Retail',

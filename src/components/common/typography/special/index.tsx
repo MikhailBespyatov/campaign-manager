@@ -51,7 +51,12 @@ export const RatingSpan: FC = ({ children }) => (
 );
 
 export const SubPageSpan: FC = ({ children }) => (
-    <Span color={themeStores.theme.getState().primaryColor} fontSize="11px" lineHeight={subPageSpanHeight}>
+    <Span
+        color={themeStores.theme.getState().primaryColor}
+        fontSize="13px"
+        fontWeight="600"
+        lineHeight={subPageSpanHeight}
+    >
         {children}
     </Span>
 );

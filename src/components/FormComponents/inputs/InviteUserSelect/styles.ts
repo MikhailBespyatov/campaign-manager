@@ -7,9 +7,10 @@ import {
     wrapperBorderWidth,
     wrapperHeight,
     wrapperHorizontalPadding,
-    wrapperWidth
+    wrapperWidth,
+    wrapperMarginRight
 } from 'components/FormComponents/inputs/InviteUserSelect/constants';
-import { flexStart, primaryPadding } from 'constants/styles';
+import { flexStart } from 'constants/styles';
 import styled from 'styled-components';
 import { Active, Color } from 'types';
 
@@ -22,7 +23,7 @@ export const Wrapper = styled.div<Color>`
     border-radius: ${wrapperBorderRadius};
     border: ${wrapperBorderWidth} solid ${({ color }) => (color ? color : wrapperBorderColor)};
     background-color: ${wrapperBackground};
-    margin-right: ${primaryPadding};
+    margin-right: ${wrapperMarginRight};
     padding: 0 ${wrapperHorizontalPadding};
     z-index: 1;
 `;

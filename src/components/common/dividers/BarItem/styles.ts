@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Active } from 'types';
 import {
-    activeColor,
     itemHorizontalMargin,
     itemPaddingBottom,
     styledBorderHeight,
@@ -24,5 +23,5 @@ export const StyledBorder = styled.div`
     width: ${styledBorderWidth};
     height: ${styledBorderHeight};
     margin-top: ${styledBorderMarginTop};
-    background-color: ${activeColor};
+    background-color: ${({ theme: { primaryColor } }) => primaryColor};
 `;

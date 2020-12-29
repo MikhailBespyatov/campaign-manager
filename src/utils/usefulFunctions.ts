@@ -2,7 +2,7 @@ import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constant
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix } from 'constants/routes';
-import { AuthUserResponse } from 'types';
+import { AuthUserResponse, StatusType } from 'types';
 
 export const retrieveWalletId = () => {
     const user: WOM.UserJwtTokenResponse = JSON.parse(localStorage.getItem(userStorageName) || '{}');
@@ -133,3 +133,7 @@ export const getDate = (date: Date | null) => {
     if (!date) return;
     return date.toISOString().split('T')[0];
 };
+
+//TODO: status and test for status
+export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (item: WOM.CampaignDetailResponse) =>
+    item.isActive ? 'running' : item.title === 'test' ? 'paused' : 'expired';

@@ -1,4 +1,4 @@
-import closableTagImg from 'assets/img/close.svg';
+import closableTagImg from 'assets/img/close_modal.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     imgHeight,

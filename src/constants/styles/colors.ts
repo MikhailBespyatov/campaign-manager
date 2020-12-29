@@ -16,11 +16,16 @@ export const grey = '#d9d9d9';
 export const grey1 = '#4A4A4A';
 export const grey2 = '#D7D7D7';
 export const grey3 = '#F0F0F0';
+export const grey4 = '#979797';
+export const grey5 = '#c9c9c9';
+export const grey6 = '#d8d8d8';
 export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 
 export const blue = '#3333FF';
 export const backgroundColor = '#121217';
+
+export const red = '#FC4237';
 
 export const infoColor = 'rgb(25, 118, 210)';
 export const successColor = '#4CD964'; //'rgb(67, 160, 71)';

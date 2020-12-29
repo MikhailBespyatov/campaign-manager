@@ -76,7 +76,6 @@ export const VideoCard = ({
                         {active ? (
                             <CustomImg
                                 height={addIdImgDiameter}
-                                rotate={45}
                                 src={removeIdImg}
                                 width={addIdImgDiameter}
                                 onClick={addIdHandler}

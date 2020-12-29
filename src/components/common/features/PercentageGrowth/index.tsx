@@ -11,17 +11,21 @@ import { ForcedColor, infoType } from 'types';
 
 interface Props extends ForcedColor {
     type?: infoType;
+    isPlusStyle?: boolean;
 }
 
-export const PercentageGrowth: FC<Props> = ({ type, forcedColor = '', children }) => (
+export const PercentageGrowth: FC<Props> = ({ type, forcedColor, isPlusStyle, children }) => (
     <Row alignCenter noWrap marginBottom="0">
-        <CustomImg
-            height={arrowImgHeight}
-            rotate={type === 'error' ? 0 : 180}
-            src={forcedColor ? forcedArrowImg : type === 'error' ? bottomGrowImg : topGrowImg}
-            width={arrowImgWidth}
-        />
+        {!isPlusStyle && (
+            <CustomImg
+                height={arrowImgHeight}
+                rotate={type === 'error' ? 0 : 180}
+                src={forcedColor ? forcedArrowImg : type === 'error' ? bottomGrowImg : topGrowImg}
+                width={arrowImgWidth}
+            />
+        )}
         <TableSubSpan color={forcedColor ? forcedColor : type === 'error' ? errorColor : successColor}>
+            {isPlusStyle && type === 'error' ? '- ' : '+ '}
             {children}%
         </TableSubSpan>
     </Row>

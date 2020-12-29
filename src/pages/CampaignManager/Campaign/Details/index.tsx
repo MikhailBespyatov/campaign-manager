@@ -1,25 +1,20 @@
-import { Block } from 'components/common/blocks/Block';
-import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
-import { Select } from 'components/common/inputs/Select';
 import { Loader } from 'components/common/Loader';
-import { H1 } from 'components/common/typography/titles/H';
-import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { CreateCampaignMiniCard } from 'components/Layouts/Cards/CreateCampaignMiniCard';
 import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
-import { noContentMessage, noDataAvailableMessage } from 'constants/messages';
-import { primaryPadding } from 'constants/styles';
+import { noDataAvailableMessage } from 'constants/messages';
+import { grey4, primaryColor, primaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
 import {
     areaCommonStyle,
+    borderBlockWidth,
     colors,
     graphicOption,
     growSpread,
@@ -27,13 +22,20 @@ import {
     name2,
     name3,
     name4,
-    name5
+    name5,
+    pickerMarginTop
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
+import { Span } from 'components/common/typography/Span';
+import { CampaignStatusLayout } from 'components/Layouts/CampaignStatusLayout';
+import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
+import { CampaignItem } from 'components/common/features/CampaignItem';
+import { getCampaignStatus, getOrganizationId } from 'utils/usefulFunctions';
+import { HistoricalSetSelect } from 'components/common/inputs/HistoricalSetSelect';
 
 interface ParamsProps {
     campaignId?: string;
@@ -41,11 +43,20 @@ interface ParamsProps {
 
 export const Details = () => {
     const { campaignId } = useParams<ParamsProps>();
-    const { sets, deltaStatistics } = useStore(campaignsStores.statisticsItems);
-    const { title, schedule, contentIds } = useStore(campaignsStores.item);
+    const { sets } = useStore(campaignsStores.statisticsItems);
+    const { schedule, contentIds } = useStore(campaignsStores.item);
+    const item = useStore(campaignsStores.item);
+    const status = getCampaignStatus(item);
     const campaignSelectedVideos = useStore(campaignContentStores.campaignSelectedVideos);
     const initialLoading = useStore(campaignContentStores.initialLoading);
     const loading = useStore(campaignsStores.loading);
+    const uriPrimary = campaignSelectedVideos.items?.[0].uriPrimary || '';
+    const defaultOrganizationId = getOrganizationId();
+
+    useEffect(() => {
+        defaultOrganizationId &&
+            campaignsEffects.getItems({ organizationId: defaultOrganizationId, limit: 10, pageIndex: 0 });
+    }, [defaultOrganizationId]);
 
     // let isFirstDatesLoaded = true;
     //console.log(isFirstDatesLoaded);
@@ -70,29 +81,30 @@ export const Details = () => {
         {
             title: name2,
             quantity: summary?.likeCount?.toString() || '0',
-            inBrackets: `(${summary?.likesPercentage || 0}%)`,
-            ...growSpread(deltaStatistics?.likesDelta)
+            // inBrackets: `${summary?.likesPercentage || 0}%`,
+            ...growSpread(summary?.likesPercentage || 0)
             // growType: deltaStatistics?.likesDelta && deltaStatistics.likesDelta > 0 ? 'success' : 'error',
             // growNumber: deltaStatistics?.likesDelta ? deltaStatistics.likesDelta : 0
         },
         {
             title: name3,
             quantity: summary?.saveCount?.toString() || '0',
-            inBrackets: `(${summary?.savesPercentage || 0}%)`,
-            ...growSpread(deltaStatistics?.savesDelta)
+            // inBrackets: `${summary?.savesPercentage || 0}%`,
+            ...growSpread(summary?.savesPercentage || 0)
             // growType: deltaStatistics?.savesDelta && deltaStatistics.savesDelta > 0 ? 'success' : 'error',
             // growNumber: deltaStatistics?.savesDelta ? deltaStatistics.savesDelta : 0
         },
         {
             title: name4,
             quantity: summary?.commentCount?.toString() || '0',
-            inBrackets: `(${summary?.commentsPercentage || 0}%)`
+            // inBrackets: `${summary?.commentsPercentage || 0}%`,
+            ...growSpread(summary?.commentsPercentage || 0)
         },
         {
             title: name5,
             quantity: summary?.shareCount?.toString() || '0',
-            inBrackets: `(${summary?.sharesPercentage || 0}%)`,
-            ...growSpread(deltaStatistics?.sharesDelta)
+            // inBrackets: `${summary?.sharesPercentage || 0}%`,
+            ...growSpread(summary?.sharesPercentage || 0)
             // growType: deltaStatistics?.sharesDelta && deltaStatistics.sharesDelta > 0 ? 'success' : 'error',
             // growNumber: deltaStatistics?.sharesDelta ? deltaStatistics.sharesDelta : 0
         }
@@ -111,21 +123,42 @@ export const Details = () => {
             type: 'line',
             smooth: true,
             stack: 'Buy',
+            symbolSize: 10,
             label: {
                 normal: {
                     show: true,
-                    position: 'top'
+                    position: 'top',
+                    color: primaryColor,
+                    fontSize: 12,
+                    lineHeight: 16
                 }
             },
             itemStyle: {
-                color: colors[i]
+                color: colors[i],
+                borderWidth: 2
             },
             lineStyle: {
                 color: colors[i]
             },
             areaStyle: {
                 ...areaCommonStyle,
-                color: colors[i]
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                        {
+                            offset: 0.2,
+                            color: colors[i] // color at 0% position
+                        },
+                        {
+                            offset: 1,
+                            color: 'white' // color at 100% position
+                        }
+                    ]
+                }
             },
             data: setsData?.length ? setsData[i] : []
         })) || [];
@@ -134,10 +167,22 @@ export const Details = () => {
         {
             type: 'category',
             axisTick: { show: false },
+            axisLabel: { show: true, color: grey4 },
+            axisLine: { show: false },
             boundaryGap: false,
             data:
                 sets?.length && sets[0]?.items
-                    ? ['', ...sets[0].items.map(i => new Date(i?.dateUtc || '').getDate())]
+                    ? [
+                          '',
+                          ...sets[0].items.map(
+                              i =>
+                                  new Date(i?.dateUtc || '').getDate() +
+                                  ' ' +
+                                  new Date(i?.dateUtc || '').toLocaleDateString('en-US', {
+                                      month: 'short'
+                                  })
+                          )
+                      ]
                     : []
         }
     ];
@@ -224,39 +269,79 @@ export const Details = () => {
 
     return (
         <CampaignManagerLayout>
-            <ContentWrapper>
-                {loading ? (
-                    <Section>
-                        <Loader />
-                    </Section>
-                ) : (
-                    <>
-                        <Section>
-                            <H1>Campaign Name: {title}</H1>
-                        </Section>
-                        <Section>
-                            <BorderBlock>
+            <CampaignStatusLayout>
+                <BorderBlock
+                    removeBorderRadius
+                    marginBottom="0"
+                    marginRight="0"
+                    paddingBottom="26px"
+                    paddingRight="26px"
+                    width="100%"
+                >
+                    <MarginWrapper marginBottom="50px">
+                        <CampaignItem isDetailsPage backgroundImg={uriPrimary} status={status} {...item} />
+                    </MarginWrapper>
+                    <ContentWrapper>
+                        {loading ? (
+                            <Section>
+                                <Loader />
+                            </Section>
+                        ) : (
+                            <>
+                                <Column marginBottom={!!campaignSelectedVideos?.items?.length ? '43px' : '0'}>
+                                    <MarginWrapper marginBottom="26px">
+                                        <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+                                            {`(${campaignSelectedVideos?.items?.length || '0'}) Videos`}
+                                        </Span>
+                                    </MarginWrapper>
+                                    <Row marginBottom="0">
+                                        {/*{campaignSelectedVideos?.items?.map(item => (*/}
+                                        {/*    <CreateCampaignMiniCard*/}
+                                        {/*        key={item.womContentId}*/}
+                                        {/*        marginBottom="0"*/}
+                                        {/*        {...item}*/}
+                                        {/*    />*/}
+                                        {/*)) || <></>}*/}
+                                        {campaignSelectedVideos?.items?.map(({ womContentId, uriPrimary }) => (
+                                            <MarginWrapper key={womContentId} marginBottom="20px" marginRight="36px">
+                                                <SelectedVideoCard
+                                                    removeDeleteImg
+                                                    id={womContentId}
+                                                    uriPrimary={uriPrimary}
+                                                />
+                                            </MarginWrapper>
+                                        )) || null}
+                                    </Row>
+                                </Column>
                                 <Section>
                                     {utcToStart && utcToEnd && (
                                         <DatePickerBetween
                                             defaultDateFrom={utcToStart}
                                             defaultDateTo={utcToEnd}
+                                            height="100px"
+                                            marginBottom={primaryPadding}
+                                            width={borderBlockWidth}
                                             onChange={onDatesBetweenChange}
                                         />
                                     )}
-                                </Section>
-                                <Section alignCenter noWrap marginBottom={primaryPadding}>
-                                    <P noWrap>Historical Sets: </P>
-                                    <MarginWrapper marginLeft="auto">
-                                        <Select
-                                            defaultActive={historicalSetsDefault}
-                                            values={historicalSetsFilterValues}
-                                            width="80px"
-                                            onChange={onHistoricalSetsChange}
-                                        />
-                                    </MarginWrapper>
-                                </Section>
-                                {/* <Section alignCenter noWrap marginBottom={primaryPadding}>
+                                    <BorderBlock height="100px" width={borderBlockWidth}>
+                                        <Column noWrap marginBottom={primaryPadding}>
+                                            <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+                                                Historical Sets
+                                            </Span>
+                                            <MarginWrapper marginTop={pickerMarginTop}>
+                                                <HistoricalSetSelect
+                                                    withoutBorder
+                                                    defaultActive={historicalSetsDefault}
+                                                    paddingRight="20"
+                                                    values={historicalSetsFilterValues}
+                                                    width={borderBlockWidth}
+                                                    onChange={onHistoricalSetsChange}
+                                                />
+                                            </MarginWrapper>
+                                        </Column>
+                                    </BorderBlock>
+                                    {/* <Section alignCenter noWrap marginBottom={primaryPadding}>
                                             <Column marginRight="40px">
                                                 <P noWrap>Show us combined chart</P>
                                             </Column>
@@ -310,37 +395,25 @@ export const Details = () => {
                                                 </Row>
                                             </Column>
                                         </Section> */}
-                            </BorderBlock>
+                                </Section>
+                            </>
+                        )}
 
-                            <Column>
-                                <Block title="Selected videos">
-                                    <RowBlockCell padding={primaryPadding}>
-                                        <Row marginBottom="0">
-                                            {campaignSelectedVideos?.items?.map(item => (
-                                                <CreateCampaignMiniCard
-                                                    key={item.womContentId}
-                                                    marginBottom="0"
-                                                    {...item}
-                                                />
-                                            )) || noContentMessage}
-                                        </Row>
-                                    </RowBlockCell>
-                                </Block>
-                            </Column>
-                        </Section>
-                    </>
-                )}
-
-                {initialLoading ? (
-                    <Loader />
-                ) : (
-                    <>
-                        <Section marginBottom="0">
-                            <RowHeaderRadio values={radioArray} onChange={onChange} />
-                        </Section>
-                        <Wrapper>
-                            <Column width="100%">
-                                {/* <Row alignCenter marginBottom="0">
+                        {initialLoading ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                <MarginWrapper marginBottom="26px">
+                                    <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+                                        Overall Statistics
+                                    </Span>
+                                </MarginWrapper>
+                                <Section marginBottom="10px">
+                                    <RowHeaderRadio values={radioArray} onChange={onChange} />
+                                </Section>
+                                <Wrapper>
+                                    <Column width="100%">
+                                        {/* <Row alignCenter marginBottom="0">
                                     <ColorPromptLine background={previewColor} />
                                     <TableHeaderSpan>New Shoes</TableHeaderSpan>
                                     <ColorPromptLine background={viewColor} />
@@ -352,23 +425,25 @@ export const Details = () => {
                                     <ColorPromptLine background={buyColor} />
                                     <TableHeaderSpan>YEAY General</TableHeaderSpan>
                                 </Row> */}
-                                <Section alignCenter noWrap>
-                                    {/* <Column marginRight="25px"> */}
-                                    {sets?.length && sets[0]?.items?.length ? (
-                                        <ReactEcharts
-                                            option={{ series: series, ...graphicOption, xAxis: xAxis }}
-                                            style={{ height: '516px', width: '100%' }}
-                                        />
-                                    ) : (
-                                        noDataAvailableMessage
-                                    )}
-                                    {/* </Column> */}
-                                </Section>
-                            </Column>
-                        </Wrapper>
-                    </>
-                )}
-            </ContentWrapper>
+                                        <Section alignCenter noWrap>
+                                            {/* <Column marginRight="25px"> */}
+                                            {sets?.[0]?.items?.length ? (
+                                                <ReactEcharts
+                                                    option={{ series: series, ...graphicOption, xAxis: xAxis }}
+                                                    style={{ height: '516px', width: '100%' }}
+                                                />
+                                            ) : (
+                                                noDataAvailableMessage
+                                            )}
+                                            {/* </Column> */}
+                                        </Section>
+                                    </Column>
+                                </Wrapper>
+                            </>
+                        )}
+                    </ContentWrapper>
+                </BorderBlock>
+            </CampaignStatusLayout>
         </CampaignManagerLayout>
     );
 };

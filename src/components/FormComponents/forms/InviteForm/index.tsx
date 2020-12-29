@@ -1,4 +1,3 @@
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Loader } from 'components/common/Loader';
 import {
     defaultPermissionsValue,
@@ -11,15 +10,18 @@ import {
 import { FormWrapper } from 'components/FormComponents/forms/InviteForm/styles';
 import { InviteUserSelect } from 'components/FormComponents/inputs/InviteUserSelect';
 import { UserAdminTextInput } from 'components/FormComponents/inputs/UserAdminTextInput';
-import { blue } from 'constants/styles';
+import { white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
 import { getOrganizationId } from 'utils/usefulFunctions';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { themeStores } from 'stores/theme';
 
 export const InviteForm = () => {
     const loading = useStore(loadingStores.loading);
+    const { primaryColor } = useStore(themeStores.theme);
 
     const defaultOrganizationId = getOrganizationId();
 
@@ -29,9 +31,9 @@ export const InviteForm = () => {
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ handleSubmit, isValid, dirty }) => (
+            {({ handleSubmit }) => (
                 <FormWrapper onSubmit={handleSubmit}>
-                    <UserAdminTextInput name="email" type="email" width="350px" />
+                    <UserAdminTextInput name="email" type="email" width="504px" />
                     {/* <UserAdminTextInput
                         disabled={!!defaultOrganizationId}
                         name="organizationId"
@@ -51,9 +53,9 @@ export const InviteForm = () => {
                         values={permissionsValues}
                         // onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
                     />
-                    <RoundedButton background={isValid && dirty ? blue : undefined} disabled={loading}>
+                    <ManualRoundedButton reverse background={white} disabled={loading} mainColor={primaryColor}>
                         {loading ? <Loader /> : 'SEND INVITE'}
-                    </RoundedButton>
+                    </ManualRoundedButton>
                 </FormWrapper>
             )}
         </Formik>

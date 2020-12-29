@@ -11,5 +11,6 @@ export const VideoCard = styled.div<Background>`
     background-repeat: no-repeat;
     border-radius: 8px;
     background-size: cover;
+    cursor: pointer;
     ${({ background }) => background && `background-image: url(${background});`};
 `;

@@ -1,20 +1,13 @@
-import {
-    blockHorizontalPadding,
-    formGrey2,
-    formGrey3,
-    primaryBorderRadius,
-    secondaryColor,
-    white
-} from 'constants/styles';
+import { formGrey2, formGrey3, primaryBorderRadius, secondaryColor, white } from 'constants/styles';
 
 export const blockBorderRadius = primaryBorderRadius;
 export const blockBackground = white;
 
-export const titleWrapperHeight = '77px';
+export const titleWrapperHeight = '130px';
 export const titleWrapperBorderWidth = '1px';
 export const titleWrapperBorderColor = formGrey3;
 export const titleWrapperBackground = formGrey2; //'rgba(237, 237, 237, 0.3)';
-export const titleWrapperHorizontalPadding = blockHorizontalPadding;
+export const titleWrapperHorizontalPadding = '72px';
 export const titleWrapperVerticalPadding = '0';
 
 export const contentWrapperHorizontalPadding = '0';

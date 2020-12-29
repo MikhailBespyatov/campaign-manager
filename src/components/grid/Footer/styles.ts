@@ -16,12 +16,12 @@ export const StyledSpanTop = styled(Span)`
     line-height: 25px;
     font-weight: 600;
     text-transform: uppercase;
-    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
+    color: ${({ theme: { footerTextColor } }) => footerTextColor};
 `;
 
 export const StyledSpanBottom = styled(Span)`
     font-size: 12px;
     line-height: 25px;
     font-weight: 500;
-    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
+    color: ${({ theme: { footerTextColor } }) => footerTextColor};
 `;
