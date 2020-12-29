@@ -11,17 +11,19 @@ import {
 } from 'components/common/inputs/Select/constants';
 import { flexStart } from 'constants/styles';
 import styled from 'styled-components';
-import { Active, Sizes } from 'types';
+import { Active, IsWithoutBorder, PaddingRight, Sizes } from 'types';
 
-export const Wrapper = styled.div<Sizes>`
+interface WrapperProps extends Sizes, IsWithoutBorder, PaddingRight {}
+
+export const Wrapper = styled.div<WrapperProps>`
     position: relative;
     ${flexStart};
     align-items: center;
     min-width: ${({ width }) => (width ? width : wrapperWidth)};
     height: ${wrapperHeight};
     border-radius: ${wrapperBorderRadius};
-    border: ${wrapperBorderWidth} solid ${wrapperBorderColor};
-    padding: 0 ${wrapperHorizontalPadding};
+    ${({ withoutBorder }) => !withoutBorder && `border: ${wrapperBorderWidth} solid ${wrapperBorderColor}`};
+    padding: 0 ${({ paddingRight }) => paddingRight || wrapperHorizontalPadding};
     background-color: ${wrapperBackground};
     z-index: 1;
 `;

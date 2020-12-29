@@ -8,6 +8,8 @@ export const Row = styled.div<RowProps>`
     ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
     ${({ alignBaseline }) => (alignBaseline ? `align-items: baseline;` : '')};
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
+    ${({ justifyAround }) => (justifyAround ? `justify-content: space-around;` : '')};
+    ${({ justifyBetween }) => (justifyBetween ? `justify-content: space-between;` : '')};
     flex-direction: row;
     flex-wrap: ${({ noWrap }) => (noWrap ? 'nowrap' : 'wrap')};
     ${({ width }) => (width ? `width: ${width};` : ``)};

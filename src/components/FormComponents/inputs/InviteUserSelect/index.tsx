@@ -1,4 +1,4 @@
-import arrowImg from 'assets/img/select_arrow.svg';
+import arrowImg from 'assets/img/expandImg.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { HiddenInput } from 'components/common/inputs/Input';
 import { Span } from 'components/common/typography/Span';
@@ -12,10 +12,11 @@ import {
 import { SelectLi, SelectUl, Wrapper } from 'components/FormComponents/inputs/InviteUserSelect/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
-import { blue, errorColor, successColor } from 'constants/styles';
+import { errorColor } from 'constants/styles';
 import { useField } from 'formik';
 import React, { FC, MouseEvent, useState } from 'react';
 import { Active, Name } from 'types';
+import { wrapperBorderColor } from 'components/filters/TagFilter/constants';
 
 interface WrapperProps extends Name {
     values: string[];
@@ -75,12 +76,18 @@ export const InviteUserSelect = ({ name, values, defaultActive = 0, data = value
     };
 
     return (
-        <Wrapper color={!touched ? blue : error ? errorColor : successColor}>
+        <Wrapper color={!touched ? wrapperBorderColor : error ? errorColor : wrapperBorderColor}>
             <ItemSpan>{selectedData}</ItemSpan>
             <HiddenInput {...field} value={selected} />
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
                 <ClickableWrapper onClick={onClickClose}>
-                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 180 : 0} src={arrowImg} width={imgWidth} />
+                    <CustomImg
+                        pointer
+                        height={imgHeight}
+                        rotate={isClosed ? 90 : -90}
+                        src={arrowImg}
+                        width={imgWidth}
+                    />
                 </ClickableWrapper>
             </AbsoluteWrapper>
             <AbsoluteWrapper isClosed={isClosed} left="0" top={ulWrapperTop} width="100%" zIndex="2">

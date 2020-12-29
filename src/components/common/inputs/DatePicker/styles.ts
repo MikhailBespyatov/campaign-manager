@@ -30,6 +30,40 @@ export const TextFieldForm = styled.input`
     background: none;
     ::-webkit-calendar-picker-indicator {
         opacity: 0;
+        cursor: pointer;
+    }
+    z-index: 6;
+`;
+
+export const FakeDataPicker = styled.div`
+    position: absolute;
+    width: 50px;
+    top: -10px;
+    right: 22px;
+    z-index: 10;
+    opacity: 0;
+`;
+
+export const FakeBetweenDataPicker = styled.div`
+    position: absolute;
+    width: 50px;
+    top: -35px;
+    right: -6px;
+    z-index: 10;
+    opacity: 0;
+`;
+
+export const TextFieldBetweenForm = styled.input`
+    outline: none;
+    appearance: none;
+    width: 100%;
+    height: 22px;
+    ${formTextStyleMixin};
+    border: 0;
+    background: none;
+    ::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        cursor: pointer;
     }
     z-index: 6;
 `;

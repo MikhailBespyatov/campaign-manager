@@ -7,7 +7,7 @@ import {
     titleWrapperHorizontalPadding,
     titleWrapperVerticalPadding
 } from 'components/common/blocks/HighlightedTitleBlock/constants';
-import { flexCenter, primaryBorder, primaryBorderRadius } from 'constants/styles';
+import { black, flexCenter, primaryBorder, primaryBorderRadius, white } from 'constants/styles';
 import styled from 'styled-components';
 
 export const TitleWrapper = styled.div`
@@ -17,14 +17,15 @@ export const TitleWrapper = styled.div`
     height: ${titleWrapperHeight};
     border-top-left-radius: ${primaryBorderRadius};
     border-top-right-radius: ${primaryBorderRadius};
-    border: ${primaryBorder};
+    //border: ${primaryBorder};
     // background: ${titleWrapperBackground};
-    background: ${({ theme: { background } }) => background};
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 28px;
-    color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
+    background: ${white};
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: ${black};
     padding: ${titleWrapperVerticalPadding} ${titleWrapperHorizontalPadding};
+    padding-top: 20px;
     padding-bottom: 0;
 `;
 

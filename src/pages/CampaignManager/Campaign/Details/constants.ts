@@ -1,8 +1,13 @@
-import { formGrey2, secondaryBorder } from 'constants/styles';
+import { formGrey2, grey4, primaryPadding, secondaryBorder, primaryColor as primaryColorText } from 'constants/styles';
 import { infoType } from 'types';
+import { themeStores } from 'stores/theme';
 
 export const wrapperBorder = secondaryBorder;
 export const wrapperPadding = '40px 52px';
+export const borderBlockWidth = '300px';
+export const sectionWidth = parseInt(borderBlockWidth) - parseInt(primaryPadding) * 2 + 'px';
+
+export const pickerMarginTop = '15px';
 
 export const graphicBlockBorder = `2px solid ${formGrey2}`;
 
@@ -33,7 +38,7 @@ export const seriesTestData = [
 ];
 
 const graphicTextColor = '#C3CBD4';
-const labelBackground = '#6a7985';
+const labelBackground = 'white';
 
 export const name1 = 'View';
 export const name2 = 'Like';
@@ -46,7 +51,8 @@ export const name5 = 'Share';
 // export const engageColor = '#03A3D6';
 // export const clickColor = '#8BD317';
 // export const buyColor = '#FECF00';
-export const color1 = '#FF6B00';
+const { primaryColor } = themeStores.theme.getState();
+export const color1 = primaryColor;
 export const color2 = '#FC4237';
 export const color3 = '#03A3D6';
 export const color4 = '#8BD317';
@@ -54,17 +60,25 @@ export const color5 = '#FECF00';
 
 export const colors = [color1, color2, color3, color4, color5];
 
-export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 1)', shadowBlur: 3, opacity: 0.1 };
+export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 0.1)', shadowBlur: 3, opacity: 0.1 };
 
 export const graphicOption = {
+    backgroundColor: '#FBFBFB',
     textStyle: { color: graphicTextColor },
     tooltip: {
         trigger: 'axis',
+        backgroundColor: 'white',
+        textStyle: {
+            color: primaryColorText
+        },
         axisPointer: {
             type: 'cross',
             axis: 'auto',
+            lineStyle: { type: 'dashed', width: 1.5 },
+            crossStyle: { type: 'dashed', width: 1.5 },
             label: {
-                backgroundColor: labelBackground
+                backgroundColor: labelBackground,
+                color: primaryColorText
             }
         }
     },
@@ -103,9 +117,17 @@ export const graphicOption = {
     yAxis: [
         {
             type: 'value',
-            //splitLine: { show: false },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
             axisTick: { show: false },
-            axisLine: { show: false }
+            axisLine: {
+                show: false
+            },
+            axisLabel: { show: true, color: grey4 }
         }
     ]
     // series: [

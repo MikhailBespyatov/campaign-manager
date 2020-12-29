@@ -1,13 +1,16 @@
 import history from 'BrowserHistory';
-import { CreateCampaignRequestProps } from 'components/FormComponents/forms/CreateCampaignForm/types';
+import { CreateCampaignRequestProps, Props } from 'components/FormComponents/forms/CreateCampaignForm/types';
 import { noop } from 'constants/global';
 import { existCampaignErrorMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { createEffect, createEvent, createStore } from 'effector';
+import { createEffect, createEvent, createStore, forward } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
+import { getCampaignStatus } from 'utils/usefulFunctions';
+import { defaultCampaignStatusStore } from 'constants/defaults';
+import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -33,11 +36,11 @@ const upsertItem = createEffect({
     handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            const { id } = await API.campaigns.upsertItem(values);
+            await API.campaigns.upsertItem(values);
             loadingEffects.updateLoading();
 
             clearContentIds();
-            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.indexDetails + id);
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.running);
         } catch {
             loadingEffects.updateLoading();
             setErrors({
@@ -144,6 +147,23 @@ const statisticsItems = createStore<WOM.CampaignStatisticsQueryResponse>({}).on(
     (_, newState) => newState
 );
 
+const setCampaignStatusCount = createEvent<WOM.CampaignsQueryResponse>();
+const campaignStatusCount = createStore(defaultCampaignStatusStore).on(setCampaignStatusCount, (_, { items }) => {
+    const count = Object.assign({}, defaultCampaignStatusStore);
+    items?.forEach(item => (count[getCampaignStatus(item)] = count[getCampaignStatus(item)] + 1));
+    return count;
+});
+
+forward({
+    from: items,
+    to: setCampaignStatusCount
+});
+// campaignStatusCount.watch(items, (state, { items }) => {
+//     const count = Object.assign({}, state);
+//     items?.forEach(item => (count[getCampaignStatus(item)] = count[getCampaignStatus(item)] + 1));
+//     return count;
+// });
+
 const updateStatisticsValues = createEvent<WOM.CampaignStatisticsQueryRequest>();
 const updateAndRemoveStatisticsValues = createEvent<WOM.UpdateAndRemoveCampaignStatisticsValues>();
 //const setDefaultStatisticsValues = createEvent();
@@ -167,15 +187,36 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
+const setFieldCreateCampaignForm = createEvent<Partial<Props>>();
+const setContentIds = createEvent<WOM.ContentItemResponse[]>();
+const createCampaignForm = createStore<Props>(formValues)
+    .on(setContentIds, (state, contentIds) => ({ ...state, contentIds: contentIds.map(i => i.womContentId || '') }))
+    .on(setFieldCreateCampaignForm, (store, state) => ({
+        ...store,
+        ...state
+    }));
+
+forward({ from: contentIds, to: setContentIds });
+
 const campaignsEvents = {
     updateStatisticsValues,
     updateAndRemoveStatisticsValues,
     addContentIds,
     clearContentIds,
     pushContentId,
-    removeContentById
+    removeContentById,
+    setFieldCreateCampaignForm
 };
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById, getItemsInUseById };
-const campaignsStores = { items, item, statisticsItems, contentIds, loading, itemsInUse };
+const campaignsStores = {
+    items,
+    item,
+    statisticsItems,
+    contentIds,
+    loading,
+    itemsInUse,
+    campaignStatusCount,
+    createCampaignForm
+};
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

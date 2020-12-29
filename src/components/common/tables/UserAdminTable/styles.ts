@@ -26,12 +26,12 @@ export const LegendaryTableColumn = styled.td`
     border-bottom: ${tableRowBorderWidth} solid ${tableRowBorderColor};
     padding: ${legendaryTableRowVerticalPadding} ${legendaryTableRowHorizontalPadding};
     &:first-child {
-        border-top-left-radius: ${tableRowBorderRadius};
+        //border-top-left-radius: ${tableRowBorderRadius};
         border-left: ${tableRowBorderWidth} solid ${tableRowBorderColor};
         overflow: hidden;
     }
     &:last-child {
-        border-top-right-radius: ${tableRowBorderRadius};
+        //border-top-right-radius: ${tableRowBorderRadius};
         border-right: ${tableRowBorderWidth} solid ${tableRowBorderColor};
         overflow: hidden;
     }
@@ -56,12 +56,12 @@ export const TableRow = styled.tr<Active>`
     &:last-child {
         ${TableColumn} {
             &:first-child {
-                border-bottom-left-radius: ${tableRowBorderRadius};
+                //border-bottom-left-radius: ${tableRowBorderRadius};
                 border-left: ${tableRowBorderWidth} solid ${tableRowBorderColor};
                 overflow: hidden;
             }
             &:last-child {
-                border-bottom-right-radius: ${tableRowBorderRadius};
+                //border-bottom-right-radius: ${tableRowBorderRadius};
                 border-right: ${tableRowBorderWidth} solid ${tableRowBorderColor};
                 overflow: hidden;
             }

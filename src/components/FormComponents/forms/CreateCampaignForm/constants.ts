@@ -10,7 +10,14 @@ export const removeImgDiameter = buttonHeight;
 
 export const formWrapperWidth = '300px';
 
-export const initialValues: Props = { title: '', tags: [], contentIds: [], utcToStart: '', utcToEnd: '', amount: '' };
+export const formValues: Props = {
+    title: '',
+    tags: [],
+    contentIds: [],
+    utcToStart: new Date().toISOString(),
+    utcToEnd: new Date().toISOString(),
+    amount: ''
+};
 
 export const validationSchema = Yup.object().shape({
     title: yupDefault,

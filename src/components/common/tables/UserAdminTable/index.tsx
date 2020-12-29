@@ -1,4 +1,4 @@
-import deleteImg from 'assets/img/delete.svg';
+import deleteImg from 'assets/img/remove_action.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Loader } from 'components/common/Loader';
 import { Table } from 'components/common/tables/Table';
@@ -45,7 +45,7 @@ const LegendaryItem = () => (
 
     <LegendaryTableRow>
         <LegendaryTableColumn>
-            <Row alignCenter noWrap marginBottom="0">
+            <Row alignCenter justifyCenter noWrap marginBottom="0">
                 {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column> */}
@@ -56,7 +56,7 @@ const LegendaryItem = () => (
             </Row>
         </LegendaryTableColumn>
         <LegendaryTableColumn>
-            <Row alignCenter noWrap marginBottom="0">
+            <Row alignCenter justifyCenter noWrap marginBottom="0">
                 {/* <Column marginRight={tableMargin}> */}
                 <LegendaryTableSpan>Email</LegendaryTableSpan>
                 {/* </Column>
@@ -64,19 +64,25 @@ const LegendaryItem = () => (
             </Row>
         </LegendaryTableColumn>
         <LegendaryTableColumn>
-            <LegendaryTableSpan>Username</LegendaryTableSpan>
+            <Row alignCenter justifyCenter noWrap marginBottom="0">
+                <LegendaryTableSpan>Username</LegendaryTableSpan>
+            </Row>
         </LegendaryTableColumn>
         <LegendaryTableColumn>
-            <LegendaryTableSpan>Role</LegendaryTableSpan>
+            <Row alignCenter justifyCenter noWrap marginBottom="0">
+                <LegendaryTableSpan>Role</LegendaryTableSpan>
+            </Row>
         </LegendaryTableColumn>
         <LegendaryTableColumn>
-            <LegendaryTableSpan>Actions</LegendaryTableSpan>
+            <Row alignCenter justifyCenter noWrap marginBottom="0">
+                <LegendaryTableSpan>Actions</LegendaryTableSpan>
+            </Row>
         </LegendaryTableColumn>
     </LegendaryTableRow>
 );
 const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
     //const globalPrefix = useStore(themeStores.globalPrefix);
-    const { secondaryLogo } = useStore(themeStores.theme);
+    const { userTableLogo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
     const loading = useStore(usersStores.loading);
 
@@ -108,7 +114,7 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
     return (
         <TableRow>
             <TableColumn>
-                <Row alignCenter noWrap marginBottom="0">
+                <Row alignCenter justifyCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column> */}
@@ -116,7 +122,7 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
                             height={companyImgDiameter}
-                            src={secondaryLogo}
+                            src={userTableLogo}
                             //width={companyImgDiameter}
                         />
                     </Column>
@@ -124,19 +130,25 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
                 </Row>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{email}</TableSpan>
+                <Row alignCenter justifyCenter noWrap marginBottom="0">
+                    <TableSpan>{email}</TableSpan>
+                </Row>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{username || noContentMessage}</TableSpan>
+                <Row alignCenter justifyCenter noWrap marginBottom="0">
+                    <TableSpan>{username || noContentMessage}</TableSpan>
+                </Row>
             </TableColumn>
             <TableColumn>
-                <TableSpan>{retrieveRoleAndConvert(roles || [])}</TableSpan>
+                <Row alignCenter justifyCenter noWrap marginBottom="0">
+                    <TableSpan>{retrieveRoleAndConvert(roles || [])}</TableSpan>
+                </Row>
             </TableColumn>
             {/* <TableColumn>
                 <RoleSelect reverse={checked} values={selectTestArray} />
             </TableColumn> */}
             <TableColumn>
-                <Row alignCenter noWrap marginBottom="0">
+                <Row alignCenter justifyCenter noWrap marginBottom="0">
                     {/* <Column marginRight={tableMargin}>
                         <RoundedButton>RESET PASSWORD</RoundedButton>
                     </Column> */}

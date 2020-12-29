@@ -1,10 +1,6 @@
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { DatePickerInput } from 'components/common/inputs/DatePicker';
-import {
-    initialValues,
-    onSubmit,
-    validationSchema
-} from 'components/FormComponents/forms/CreateCampaignForm/constants';
+import { onSubmit, validationSchema } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 import { FormWrapper } from 'components/FormComponents/forms/CreateCampaignForm/styles';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { WomInput } from 'components/FormComponents/inputs/WomInput';
@@ -12,8 +8,8 @@ import { Column, FlexGrow, Row } from 'components/grid/wrappers/FlexWrapper';
 import { primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
-import React, { FC } from 'react';
-import { campaignsStores } from 'stores/campaigns';
+import React, { ChangeEvent, FC } from 'react';
+import { campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { SimpleButton } from 'components/common/buttons/SimpleButton';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -36,98 +32,115 @@ interface Props {
 }
 
 export const CreateCampaignForm: FC<Props> = ({ isFirstPage, onClick }) => {
-    const initialContentIds = useStore(campaignsStores.contentIds);
+    const initialValues = useStore(campaignsStores.createCampaignForm);
     // const loading = useStore(loadingStores.loading);
     // console.log(initialContentIds);
     const handleClickNext = () => onClick(false);
     const handleClickBack = () => onClick(true);
+    const onChangeCampaignName = (e: ChangeEvent<HTMLInputElement>) =>
+        campaignsEvents.setFieldCreateCampaignForm({ title: e.target.value });
+
+    // const { values, handleSubmit, isValid, dirty, touched, status, setStatus } = useFormik({
+    //     initialValues: { ...initialValues, contentIds: initialContentIds.map(i => i.womContentId || '') },
+    //     validationSchema,
+    //     onSubmit
+    // });
 
     return (
         <Formik
-            initialValues={{ ...initialValues, contentIds: initialContentIds.map(i => i.womContentId || '') }}
+            enableReinitialize
+            initialValues={{ ...initialValues }}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ values, handleSubmit, isValid, dirty, touched, status, setStatus }) => (
-                <Row noWrap height="100%" marginBottom="0" width="100%">
-                    <Column height="100%" width="100%">
-                        <RowBlockCell padding={primaryPadding}>
-                            <FormWrapper>
-                                {isFirstPage ? (
-                                    <Column marginRight={primaryPadding} width="100%">
-                                        <TextInput
-                                            required
-                                            label="Campaign Name"
-                                            name="title"
-                                            placeholder="Enter campaign name"
-                                        />
-                                        <Row marginBottom="0" width="100%">
-                                            <FlexGrow
-                                                flexBasis="50%"
-                                                flexGrow="1"
-                                                flexShrink="0"
-                                                marginRight={primaryPadding}
-                                            >
-                                                <DatePickerInput label="Start of campaign" name="utcToStart" />
-                                            </FlexGrow>
-                                            <FlexGrow flexBasis="50%" flexGrow="1" flexShrink="0" marginRight={'0'}>
-                                                <DatePickerInput label="End of campaign" name="utcToEnd" />
-                                            </FlexGrow>
-                                        </Row>
-                                    </Column>
-                                ) : (
-                                    <Column marginRight={primaryPadding} width="100%">
-                                        <MarginWrapper marginBottom="20px">
-                                            <Span fontSize="18px" fontWeight="600" lineHeight="22px">
-                                                Add Budget
-                                            </Span>
-                                        </MarginWrapper>
-                                        <WomInput
-                                            label="Budget amount"
-                                            name="amount"
-                                            placeholder="Enter amount of budget"
-                                            setStatus={setStatus}
-                                            status={status}
-                                            //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
-                                        />
-                                    </Column>
-                                )}
-                            </FormWrapper>
-                            <Column alignCenter marginBottom="0">
-                                {isFirstPage ? (
-                                    <Column>
-                                        <RoundedButton
-                                            disabled={!values?.title || !initialContentIds.length}
-                                            onClick={handleClickNext}
-                                        >
-                                            NEXT
-                                        </RoundedButton>
-                                    </Column>
-                                ) : (
-                                    <>
+            {({ values, handleSubmit, isValid, setStatus, status }) => {
+                const womBalanceValid = !status?.amount;
+                return (
+                    <Row noWrap height="100%" marginBottom="0" width="100%">
+                        {/*{console.log(values)}*/}
+                        <Column height="100%" width="100%">
+                            <RowBlockCell padding={primaryPadding}>
+                                <FormWrapper>
+                                    {isFirstPage ? (
+                                        <Column marginRight={primaryPadding} width="100%">
+                                            <TextInput
+                                                required
+                                                label="Campaign Name"
+                                                name="title"
+                                                placeholder="Enter campaign name"
+                                                onChange={onChangeCampaignName}
+                                            />
+                                            <Row marginBottom="0" width="100%">
+                                                <FlexGrow
+                                                    flexBasis="50%"
+                                                    flexGrow="1"
+                                                    flexShrink="0"
+                                                    marginRight={primaryPadding}
+                                                >
+                                                    <DatePickerInput label="Start of campaign" name="utcToStart" />
+                                                </FlexGrow>
+                                                <FlexGrow flexBasis="50%" flexGrow="1" flexShrink="0" marginRight={'0'}>
+                                                    <DatePickerInput label="End of campaign" name="utcToEnd" />
+                                                </FlexGrow>
+                                            </Row>
+                                        </Column>
+                                    ) : (
+                                        <Column marginRight={primaryPadding} width="100%">
+                                            <MarginWrapper marginBottom="20px">
+                                                <Span fontSize="18px" fontWeight="600" lineHeight="22px">
+                                                    Add Budget
+                                                </Span>
+                                            </MarginWrapper>
+                                            <WomInput
+                                                label="Budget amount"
+                                                name="amount"
+                                                placeholder="Enter amount of budget"
+                                                setStatus={setStatus}
+                                                status={status}
+                                                //onChange={(e: ChangeEvent<HTMLInputElement>) => onCurrencyChange(e, setFieldValue)}
+                                            />
+                                        </Column>
+                                    )}
+                                </FormWrapper>
+                                <Column alignCenter marginBottom="0">
+                                    {isFirstPage ? (
                                         <Column>
-                                            <RoundedButton disabled={!isValid || !dirty} onClick={() => handleSubmit()}>
-                                                START CAMPAIGN
+                                            <RoundedButton
+                                                disabled={!values?.title || !initialValues.contentIds.length}
+                                                onClick={handleClickNext}
+                                            >
+                                                NEXT
                                             </RoundedButton>
                                         </Column>
-                                        <Column>
-                                            <MarginWrapper marginTop="13px">
-                                                <SimpleButton
-                                                    backgroundColor={'white'}
-                                                    color={'#FC4237'}
-                                                    onClick={handleClickBack}
+                                    ) : (
+                                        <>
+                                            <Column>
+                                                <RoundedButton
+                                                    disabled={!isValid || !womBalanceValid}
+                                                    onClick={() => handleSubmit()}
                                                 >
-                                                    Cancel
-                                                </SimpleButton>
-                                            </MarginWrapper>
-                                        </Column>
-                                    </>
-                                )}
-                            </Column>
-                        </RowBlockCell>
-                    </Column>
-                </Row>
-            )}
+                                                    START CAMPAIGN
+                                                </RoundedButton>
+                                            </Column>
+                                            <Column>
+                                                <MarginWrapper marginTop="13px">
+                                                    <SimpleButton
+                                                        backgroundColor={'white'}
+                                                        color={'#FC4237'}
+                                                        onClick={handleClickBack}
+                                                    >
+                                                        Cancel
+                                                    </SimpleButton>
+                                                </MarginWrapper>
+                                            </Column>
+                                        </>
+                                    )}
+                                </Column>
+                            </RowBlockCell>
+                        </Column>
+                    </Row>
+                );
+            }}
         </Formik>
     );
 };

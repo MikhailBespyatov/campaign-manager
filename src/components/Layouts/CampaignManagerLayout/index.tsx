@@ -19,6 +19,7 @@ import { Background } from 'types';
 import { currencyToStandardForm, removeLastNulls, spaceInserter } from 'utils/usefulFunctions';
 import { DropDownBlock } from 'components/common/blocks/DropDownBlock';
 import { campaignContentEvents } from 'stores/campaignContent';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 interface Props extends Background {}
 
@@ -33,6 +34,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, campaignsRunning } = useStore(
         organizationsStores.statistics
     );
+    const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
 
     const createRoute = globalPrefixUrl + routes.campaignManager.discover.index;
     const goToCreateCampaign = () => {
@@ -69,7 +71,13 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                     buttons={
                         <Row marginBottom="0">
                             <Column marginRight={primaryPadding}>
-                                <RoundedButton onClick={onWomBuy}>BUY WOM</RoundedButton>
+                                <ManualRoundedButton
+                                    background={buyWOMButtonBackgroundColor}
+                                    mainColor={buyWOMButtonTextColor}
+                                    onClick={onWomBuy}
+                                >
+                                    BUY WOM
+                                </ManualRoundedButton>
                             </Column>
                             <RoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</RoundedButton>
                         </Row>

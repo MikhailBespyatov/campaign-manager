@@ -1,10 +1,11 @@
 import { TextInput } from 'components/common/inputs/Input';
 import { wrapperBackground } from 'components/FormComponents/inputs/UserAdminTextInput/constants';
 import { Wrapper } from 'components/FormComponents/inputs/UserAdminTextInput/styles';
-import { blue, disabledGrey, errorColor, successColor } from 'constants/styles';
+import { disabledGrey, errorColor } from 'constants/styles';
 import { useField } from 'formik';
 import React, { ChangeEvent } from 'react';
 import { Disabled, Label, Placeholder, Sizes, Type, UntouchedWarning } from 'types';
+import { wrapperBorderColor } from 'components/filters/TagFilter/constants';
 
 interface Props extends Disabled, Placeholder, Type, Label, UntouchedWarning, Sizes {
     name: string;
@@ -26,7 +27,10 @@ Props) => {
     const onInputChange = onChange || field.onChange;
 
     return (
-        <Wrapper color={disabled ? disabledGrey : !touched ? blue : error ? errorColor : successColor} width={width}>
+        <Wrapper
+            color={disabled ? disabledGrey : !touched ? wrapperBorderColor : error ? errorColor : wrapperBorderColor}
+            width={width}
+        >
             <TextInput
                 background={wrapperBackground}
                 {...field}

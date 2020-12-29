@@ -28,6 +28,7 @@ interface Props extends MarginRightBottom, Sizes, WOM.ContentItemResponse {
     // uriPrimary?: string;
     // womQualityScore?: WOM.WOMQualityScore;
     // products?: any;
+    isVideoDetailsModal?: boolean;
 }
 
 export const CreateCampaignCard = ({
@@ -37,6 +38,7 @@ export const CreateCampaignCard = ({
     marginRight,
     marginBottom,
     streamDetails,
+    isVideoDetailsModal,
     engagement
 }: Props) => {
     const hlsUrl = streamDetails?.hlsUrl;
@@ -65,29 +67,34 @@ export const CreateCampaignCard = ({
                         <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
                     </>
                 )}
-                <Row marginBottom="5px">
-                    <Column marginRight={primaryPadding}>
-                        <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
-                    </Column>
-                    <Column marginRight={primaryPadding}>
-                        <P color={white}>{roundScore(womQualityScore?.positivity || 0)}</P>
-                    </Column>
-                    <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
-                </Row>
-                <Row zIndex="2">
-                    <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
-                </Row>
-                <MarginWrapper marginTop="auto">
-                    <Column>
-                        <Row alignCenter marginBottom={'0'}>
-                            <Column marginRight={secondaryPadding}>
-                                <CustomImg height={productImgDiameter} src={group1img} width={productImgDiameter} />
+                {!isVideoDetailsModal && (
+                    <>
+                        <Row marginBottom="5px">
+                            <Column marginRight={primaryPadding}>
+                                <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
                             </Column>
-                            <ProductSpan>
-                                {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
-                            </ProductSpan>
+                            <Column marginRight={primaryPadding}>
+                                <P color={white}>{roundScore(womQualityScore?.positivity || 0)}</P>
+                            </Column>
+                            <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
                         </Row>
-                        {/* <Row alignCenter marginBottom={'0'}>
+                        <Row zIndex="2">
+                            <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
+                        </Row>
+                    </>
+                )}
+                {!isVideoDetailsModal && (
+                    <MarginWrapper marginTop="auto">
+                        <Column>
+                            <Row alignCenter marginBottom={'0'}>
+                                <Column marginRight={secondaryPadding}>
+                                    <CustomImg height={productImgDiameter} src={group1img} width={productImgDiameter} />
+                                </Column>
+                                <ProductSpan>
+                                    {productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
+                                </ProductSpan>
+                            </Row>
+                            {/* <Row alignCenter marginBottom={'0'}>
                             <Column marginRight={secondaryPadding}>
                                 <CustomImg height={productImgDiameter} src={group2img} width={productImgDiameter} />
                             </Column>
@@ -103,14 +110,15 @@ export const CreateCampaignCard = ({
                                 {productsItem?.tagSubCategory ? productsItem.tagSubCategory : noContentMessage}
                             </ProductSpan>
                         </Row> */}
-                        <Row alignCenter marginBottom={'0'}>
-                            <Column marginRight={secondaryPadding}>
-                                <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
-                            </Column>
-                            <ProductSpan>{productsItem?.item ? productsItem.item : noContentMessage}</ProductSpan>
-                        </Row>
-                    </Column>
-                </MarginWrapper>
+                            <Row alignCenter marginBottom={'0'}>
+                                <Column marginRight={secondaryPadding}>
+                                    <CustomImg height={productImgDiameter} src={group4img} width={productImgDiameter} />
+                                </Column>
+                                <ProductSpan>{productsItem?.item ? productsItem.item : noContentMessage}</ProductSpan>
+                            </Row>
+                        </Column>
+                    </MarginWrapper>
+                )}
             </Description>
         </Card>
     );

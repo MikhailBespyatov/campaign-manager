@@ -1,4 +1,4 @@
-import { noop } from 'types';
+import { noop, StatusType } from 'types';
 
 export interface Subtitle {
     subtitle?: string;
@@ -48,4 +48,24 @@ export interface AdditionalTitle {
 
 export interface Path {
     path: string;
+}
+
+export interface ActiveRootName {
+    activeRootName: string;
+}
+
+export interface ActiveRootStatus {
+    activeRootStatus: string;
+}
+
+export interface Status {
+    status: StatusType;
+}
+
+export interface IsExpiredBorder {
+    isExpiredBorder?: boolean;
+}
+
+export interface IsWithoutBorder {
+    withoutBorder?: boolean;
 }

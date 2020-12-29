@@ -35,7 +35,7 @@ export const Button = styled.button<ButtonProps>`
             : primaryColor};
     border: ${buttonBorderWidth} solid
         ${({ reverse, mainColor, theme: { primaryColor } }) => (reverse ? mainColor || primaryColor : 'none')};
-    border-radius: ${buttonBorderRadius};
+    border-radius: ${({ borderRadius }) => borderRadius || buttonBorderRadius};
     //${({ theme: { primaryTextColor }, mainColor }) => (mainColor ? mainColor : primaryTextColor)};
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
@@ -53,8 +53,8 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 export const InnerSpan = styled.span<InnerSpanProps>`
-    color: ${({ theme: { primaryTextColor, primaryColor }, reverse, mainColor }) =>
-        reverse ? (mainColor ? mainColor : primaryColor) : primaryTextColor};
+    color: ${({ theme: { secondaryTextColor, primaryColor }, reverse, mainColor }) =>
+        mainColor || (reverse ? primaryColor : secondaryTextColor)};
     font-size: ${spanFontSize};
     font-weight: ${spanFontWeight};
     line-height: ${spanLineHeight};

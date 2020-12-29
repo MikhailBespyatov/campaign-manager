@@ -18,6 +18,8 @@ export interface FlexBooleanAlignment extends NoWrap {
     alignBaseline?: boolean;
     justifyCenter?: boolean;
     justifyEnd?: boolean;
+    justifyAround?: boolean;
+    justifyBetween?: boolean;
 }
 
 export interface FlexAlignment {
@@ -56,6 +58,10 @@ export interface BorderRadiusProperties {
     borderTopRightRadius?: string;
     borderBottomLeftRadius?: string;
     borderBottomRightRadius?: string;
+}
+
+export interface RemoveBorderRadius {
+    removeBorderRadius?: boolean;
 }
 
 export interface RemoveBorder {
@@ -118,6 +124,10 @@ export interface MarginRight {
 
 export interface MarginBottom {
     marginBottom?: string;
+}
+
+export interface MarginTop {
+    marginTop?: string;
 }
 
 export interface MarginRightBottom extends MarginRight, MarginBottom {}

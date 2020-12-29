@@ -5,11 +5,13 @@ import {
     modalVerticalPadding,
     wrapperBackground,
     wrapperHorizontalPadding,
-    wrapperVerticalPadding
+    wrapperVerticalPadding,
+    titleBackgroundColor
 } from 'components/modals/CardModal/constants';
 import { flexStart, primaryPadding, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
+import { titleWrapperHorizontalPadding } from 'components/common/blocks/HighlightedTitleBlock/constants';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -32,4 +34,18 @@ export const Modal = styled.div`
     background: ${modalBackground};
     padding: ${modalVerticalPadding} ${modalHorizontalPadding};
     z-index: 10;
+`;
+
+export const VideoDetailsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding: 0 ${titleWrapperHorizontalPadding};
+`;
+
+export const TitleWrapper = styled.div`
+    width: 100%;
+    background-color: ${titleBackgroundColor};
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
 `;

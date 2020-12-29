@@ -68,6 +68,11 @@ export const dynamicRoutes = {
         },
         campaign: {
             index: `${campaignPrefix}`,
+            running: `${campaignPrefix}/running/`,
+            paused: `${campaignPrefix}/paused/`,
+            completed: `${campaignPrefix}/completed/`,
+            expired: `${campaignPrefix}/expired/`,
+            status: `${campaignPrefix}/:status(running|paused|completed|expired)/`,
             indexDetails: `${campaignPrefix}/details/`,
             details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,

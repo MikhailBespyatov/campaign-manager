@@ -8,11 +8,19 @@ import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { noop } from 'constants/global';
 import React, { FC, useState } from 'react';
-import { Active, AdditionalTitle, ItemRadioProperties, RadioProperties, Sizes } from 'types';
+import {
+    Active,
+    AdditionalTitle,
+    IsWithoutBorder,
+    ItemRadioProperties,
+    PaddingRight,
+    RadioProperties,
+    Sizes
+} from 'types';
 import { multiplyPixels, pixelsAddition } from 'utils/parsers';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
-interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle {
+interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle, IsWithoutBorder, PaddingRight {
     top?: boolean;
 }
 

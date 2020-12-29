@@ -1,63 +1,97 @@
-import closeModalImg from 'assets/img/add_video.svg';
+import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
-import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCell';
+import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { InternalLink } from 'components/common/links/InternalLink';
 import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
-import { P } from 'components/common/typography/titles/P';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import {
-    closeModalImgDiameter,
-    miniMarginBottom,
-    percentageSpanColor,
-    scoreTitleColor,
-    validatorsPadding
-} from 'components/modals/CardModal/constants';
-import { Wrapper } from 'components/modals/CardModal/styles';
+import { closeModalImgDiameter, miniMarginBottom, viewersMarginBottom } from 'components/modals/CardModal/constants';
+import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { primaryPadding, secondaryPadding } from 'constants/styles';
+import { grey4, primaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
-import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
+import { campaignContentEffects, campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
 import { roundScore } from 'utils/usefulFunctions';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 interface SmallSpanProps {
     opacity?: number;
 }
+const Title: FC = ({ children }) => (
+    <TitleWrapper>
+        <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+            {children}
+        </Span>
+    </TitleWrapper>
+);
 
 const Subtitle: FC = ({ children }) => (
-    <Span fontSize="18px" fontWeight="700" lineHeight="28px">
+    <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
         {children}
     </Span>
 );
 
-const SmallSpan: FC<SmallSpanProps> = ({ children, opacity }) => (
-    <Span fontSize="12px" lineHeight="20px" opacity={opacity ? opacity : 0.4}>
+const Item: FC = ({ children }) => (
+    <Span fontSize="18px" fontWeight="400" lineHeight="22px">
         {children}
     </Span>
 );
+
+interface ItemBlockProps {
+    title: string;
+    item?: string | number;
+    percentageGrowth?: JSX.Element;
+}
+const ItemBlock: FC<ItemBlockProps> = ({ title, item, percentageGrowth }) => (
+    <Column>
+        <MarginWrapper marginBottom="8px">
+            <Subtitle>{title}</Subtitle>
+        </MarginWrapper>
+        {percentageGrowth ? (
+            <Row alignCenter>
+                <MarginWrapper marginRight="10px">
+                    <Item>{item}</Item>
+                </MarginWrapper>
+                {percentageGrowth}
+            </Row>
+        ) : (
+            <Item>{item}</Item>
+        )}
+    </Column>
+);
+
+// const SmallSpan: FC<SmallSpanProps> = ({ children, opacity }) => (
+//     <Span fontSize="12px" lineHeight="20px" opacity={opacity ? opacity : 0.4}>
+//         {children}
+//     </Span>
+// );
 
 const PercentageSpan: FC = ({ children }) => (
-    <Span color={percentageSpanColor} fontSize="14px" lineHeight="22px">
-        {children}
-    </Span>
+    <MarginWrapper marginBottom={viewersMarginBottom}>
+        <Span fontSize="18px" fontWeight="400" lineHeight="22px">
+            {children}
+        </Span>
+    </MarginWrapper>
 );
 
 const EngagementSpan: FC = ({ children }) => (
-    <Span fontSize="14px" lineHeight="22px">
-        {children}
-    </Span>
+    <MarginWrapper marginBottom={viewersMarginBottom}>
+        <Span fontSize="18px" fontWeight="700" lineHeight="22px">
+            {children}
+        </Span>
+    </MarginWrapper>
 );
 
 const body = document.body;
@@ -71,6 +105,7 @@ export const CardModal = () => {
     const itemsInUse = useStore(campaignsStores.itemsInUse);
     const loading = useStore(loadingStores.loading);
     const itemsInUseLoading = useStore(loadingStores.initialLoading);
+    const { primaryColor } = useStore(themeStores.theme);
 
     const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
         products
@@ -91,7 +126,12 @@ export const CardModal = () => {
     // };
 
     const onPromoteClick = () => {
-        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
+        history.push(globalPrefixUrl + routes.campaignManager.discover.index);
+        campaignContentEvents.setVisibleCreateCampaign(true);
+        modalEvents.openPopUpCampaignManager({
+            visible: true,
+            popUp: 'info'
+        });
         campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
         modalEvents.closeCardModal();
     };
@@ -111,7 +151,6 @@ export const CardModal = () => {
                     <CustomImg
                         pointer
                         height={closeModalImgDiameter}
-                        rotate={45}
                         src={closeModalImg}
                         width={closeModalImgDiameter}
                         onClick={onClose}
@@ -126,256 +165,214 @@ export const CardModal = () => {
                     </RowBlockCell>
                 ) : (
                     <>
-                        <ColumnBlockCell>
-                            <RowBlockCell padding={primaryPadding}>
-                                <Row marginBottom="0">
-                                    <Column marginRight={primaryPadding}>
-                                        {visible && (
-                                            <CreateCampaignCard
-                                                engagement={engagement}
-                                                products={products}
-                                                streamDetails={streamDetails}
-                                                uriPrimary={uriPrimary}
-                                                womQualityScore={womQualityScore}
+                        <VideoDetailsWrapper>
+                            <Column alignCenter marginRight="35px" width="300px">
+                                {visible && (
+                                    <CreateCampaignCard
+                                        isVideoDetailsModal
+                                        engagement={engagement}
+                                        products={products}
+                                        streamDetails={streamDetails}
+                                        uriPrimary={uriPrimary}
+                                        womQualityScore={womQualityScore}
+                                    />
+                                )}
+                                <ManualRoundedButton
+                                    reverse
+                                    background={white}
+                                    mainColor={primaryColor}
+                                    onClick={onPromoteClick}
+                                >
+                                    PROMOTE
+                                </ManualRoundedButton>
+                            </Column>
+                            <Column width="65%">
+                                <Section>
+                                    <Title>Video Name</Title>
+                                    <Row>
+                                        <MarginWrapper marginRight="100px">
+                                            <ItemBlock
+                                                item={productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
+                                                title="Brand"
                                             />
-                                        )}
-                                    </Column>
-                                    <Column>
-                                        <Row>
-                                            <Subtitle>Video details</Subtitle>
-                                        </Row>
-                                        <SmallSpan>Brand</SmallSpan>
-                                        <Row>
-                                            <P>{productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}</P>
-                                        </Row>
-                                        {/* <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Category</SmallSpan>
-                                        </Row>
-                                        <Row>
-                                            <P>
-                                                {productsItem?.tagCategory
-                                                    ? productsItem.tagCategory
-                                                    : noContentMessage}
-                                            </P>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Sub-cat</SmallSpan>
-                                        </Row>
-                                        <Row>
-                                            <P>
-                                                {productsItem?.tagSubCategory
-                                                    ? productsItem.tagSubCategory
-                                                    : noContentMessage}
-                                            </P>
-                                        </Row> */}
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Item</SmallSpan>
-                                        </Row>
-                                        <Row>
-                                            <P>{productsItem?.item ? productsItem.item : noContentMessage}</P>
-                                        </Row>
-                                        {/* <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Videos</SmallSpan>
-                                        </Row>
-                                        <Row>
-                                            <P>??</P>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Creator</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter>
-                                            <Column marginRight={secondaryPadding}>
-                                                <P>{username ? username : noContentMessage}</P>
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <ItemBlock
+                                                item={productsItem?.item ? productsItem.item : noContentMessage}
+                                                title="Item"
+                                            />
+                                        </MarginWrapper>
+                                    </Row>
+                                </Section>
+                                <Section>
+                                    <Title>Engagement</Title>
+                                    <Row justifyBetween width="80%">
+                                        <MarginWrapper>
+                                            <ItemBlock item={engagement?.viewCount} title="Views" />
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <ItemBlock
+                                                item={engagement?.likeCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={
+                                                            engagement?.likesPercentage &&
+                                                            engagement.likesPercentage > 0
+                                                                ? 'success'
+                                                                : 'error'
+                                                        }
+                                                    >
+                                                        {engagement?.likesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Likes"
+                                            />
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <ItemBlock
+                                                item={engagement?.saveCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={
+                                                            engagement?.savesPercentage &&
+                                                            engagement.savesPercentage > 0
+                                                                ? 'success'
+                                                                : 'error'
+                                                        }
+                                                    >
+                                                        {engagement?.savesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Saves"
+                                            />
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <ItemBlock
+                                                item={engagement?.commentCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={
+                                                            engagement?.commentsPercentage &&
+                                                            engagement.commentsPercentage > 0
+                                                                ? 'success'
+                                                                : 'error'
+                                                        }
+                                                    >
+                                                        {engagement?.commentsPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Comments"
+                                            />
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <ItemBlock
+                                                item={engagement?.shareCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={
+                                                            engagement?.sharesPercentage &&
+                                                            engagement.sharesPercentage > 0
+                                                                ? 'success'
+                                                                : 'error'
+                                                        }
+                                                    >
+                                                        {engagement?.sharesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Shares"
+                                            />
+                                        </MarginWrapper>
+                                    </Row>
+                                </Section>
+                                <Section>
+                                    <Title>Validators</Title>
+                                    <Row>
+                                        <MarginWrapper marginRight="25px">
+                                            <ItemBlock
+                                                item={roundScore(womQualityScore?.authenticity || 0)}
+                                                title="H"
+                                            />
+                                        </MarginWrapper>
+                                        <MarginWrapper marginRight="25px">
+                                            <ItemBlock item={roundScore(womQualityScore?.creativity || 0)} title="C" />
+                                        </MarginWrapper>
+                                        <MarginWrapper marginRight="100px">
+                                            <ItemBlock item={roundScore(womQualityScore?.positivity || 0)} title="P" />
+                                        </MarginWrapper>
+                                        <MarginWrapper>
+                                            <Column>
+                                                <MarginWrapper marginBottom="8px">
+                                                    <Subtitle>Viewers</Subtitle>
+                                                </MarginWrapper>
+                                                <Row>
+                                                    <Column marginRight={primaryPadding}>
+                                                        <PercentageSpan>{'< 25%'}</PercentageSpan>
+                                                        <PercentageSpan>25% - 50%</PercentageSpan>
+                                                        <PercentageSpan>50% - 75%</PercentageSpan>
+                                                        <PercentageSpan>{'> 75%'}</PercentageSpan>
+                                                    </Column>
+                                                    <Column>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD1Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD2Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD3Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD4Percentage || 0}%
+                                                        </EngagementSpan>
+                                                    </Column>
+                                                </Row>
                                             </Column>
-                                            <CustomImg
-                                                height={avatarDiameter}
-                                                src={imageUrl ? imageUrl : defaultAvatar}
-                                                width={avatarDiameter}
-                                            />
-                                        </Row> */}
-                                    </Column>
-                                </Row>
-                            </RowBlockCell>
-                            <RowBlockCell padding={validatorsPadding}>
-                                <Row>
-                                    <Subtitle>Validators</Subtitle>
-                                </Row>
-                                <Row>
-                                    <Column marginRight={primaryPadding}>
-                                        <P color={scoreTitleColor}>H</P>
-                                        <P>{roundScore(womQualityScore?.authenticity || 0)}</P>
-                                    </Column>
-                                    <Column marginRight={primaryPadding}>
-                                        <P color={scoreTitleColor}>C</P>
-                                        <P>{roundScore(womQualityScore?.creativity || 0)}</P>
-                                    </Column>
-                                    <Column marginRight={'0'}>
-                                        <P color={scoreTitleColor}>P</P>
-                                        <P>{roundScore(womQualityScore?.positivity || 0)}</P>
-                                    </Column>
-                                </Row>
-                                <Row>
-                                    <Subtitle>Viewers</Subtitle>
-                                </Row>
-                                {/* <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>Preview</SmallSpan>
-                                </Row>
-                                <Row>
-                                    <P>??</P>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>View</SmallSpan>
-                                </Row>
-                                <Row alignCenter>
-                                    <P>1152</P>&nbsp;<SmallSpan opacity={0.5}>(96.0%)</SmallSpan>
-                                    <P>??</P>
-                                </Row> */}
-                                <Row>
-                                    <Column marginRight={primaryPadding}>
-                                        <PercentageSpan>{'< 25%'}</PercentageSpan>
-                                        <PercentageSpan>25% - 50%</PercentageSpan>
-                                        <PercentageSpan>50% - 75%</PercentageSpan>
-                                        <PercentageSpan>{'> 75%'}</PercentageSpan>
-                                    </Column>
+                                        </MarginWrapper>
+                                    </Row>
+                                </Section>
+                                <Section>
+                                    <Title>Hashtags</Title>
+                                    <Row marginBottom={miniMarginBottom}>
+                                        {tags?.map(i => (
+                                            <ClosableTag key={i}>{i}</ClosableTag>
+                                        ))}
+                                    </Row>
+                                </Section>
+                                <Section>
+                                    <Title>In-use</Title>
                                     <Column>
-                                        <EngagementSpan>{engagement?.viewsD1Percentage || 0}%</EngagementSpan>
-                                        <EngagementSpan>{engagement?.viewsD2Percentage || 0}%</EngagementSpan>
-                                        <EngagementSpan>{engagement?.viewsD3Percentage || 0}%</EngagementSpan>
-                                        <EngagementSpan>{engagement?.viewsD4Percentage || 0}%</EngagementSpan>
-                                    </Column>
-                                </Row>
-                                <Row justifyCenter marginTop="auto">
-                                    <RoundedButton reverse onClick={onPromoteClick}>
-                                        +&nbsp;PROMOTE
-                                    </RoundedButton>
-                                </Row>
-                            </RowBlockCell>
-                            <RowBlockCell padding={validatorsPadding}>
-                                <Row>
-                                    <Subtitle>Engagement</Subtitle>
-                                </Row>
-                                <Row>
-                                    <Column marginRight={'50px'}>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Views</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.viewCount}</P>&nbsp;
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Likes</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.likeCount}</P>&nbsp;
-                                            <PercentageGrowth
-                                                type={
-                                                    engagement?.likesPercentage && engagement.likesPercentage > 0
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                {engagement?.likesPercentage || 0}
-                                            </PercentageGrowth>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Saves</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.saveCount}</P>&nbsp;
-                                            <PercentageGrowth
-                                                type={
-                                                    engagement?.savesPercentage && engagement.savesPercentage > 0
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                {engagement?.savesPercentage || 0}
-                                            </PercentageGrowth>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Comments</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.commentCount}</P>&nbsp;
-                                            <PercentageGrowth
-                                                type={
-                                                    engagement?.commentsPercentage && engagement.commentsPercentage > 0
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                {engagement?.commentsPercentage || 0}
-                                            </PercentageGrowth>
-                                        </Row>
-                                        <Row marginBottom={miniMarginBottom}>
-                                            <SmallSpan>Shares</SmallSpan>
-                                        </Row>
-                                        <Row alignCenter marginBottom={secondaryPadding}>
-                                            <P>{engagement?.shareCount}</P>&nbsp;
-                                            <PercentageGrowth
-                                                type={
-                                                    engagement?.sharesPercentage && engagement.sharesPercentage > 0
-                                                        ? 'success'
-                                                        : 'error'
-                                                }
-                                            >
-                                                {engagement?.sharesPercentage || 0}
-                                            </PercentageGrowth>
+                                        <MarginWrapper marginBottom="8px">
+                                            <Subtitle>Another Campaign</Subtitle>
+                                        </MarginWrapper>
+                                        <Row maxWidth="420px">
+                                            {itemsInUseLoading ? (
+                                                <Loader />
+                                            ) : itemsInUse?.length ? (
+                                                itemsInUse.map(({ id, title }) => (
+                                                    <InternalLink
+                                                        key={id}
+                                                        to={
+                                                            globalPrefixUrl +
+                                                            routes.campaignManager.campaign.indexDetails +
+                                                            id
+                                                        }
+                                                        onClick={onClose}
+                                                    >
+                                                        {title}
+                                                    </InternalLink>
+                                                ))
+                                            ) : (
+                                                'No campaigns in use'
+                                            )}
                                         </Row>
                                     </Column>
-                                </Row>
-                                {/* <Row justifyCenter marginTop="auto">
-                                    <RoundedButton onClick={onDetailsClick}>Details</RoundedButton>
-                                </Row> */}
-                            </RowBlockCell>
-                        </ColumnBlockCell>
-                        <ColumnBlockCell removeBorder>
-                            <RowBlockCell removeBorder padding={validatorsPadding}>
-                                <Row marginBottom="40px">
-                                    <Subtitle>Additional details</Subtitle>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    <SmallSpan>In-use</SmallSpan>
-                                </Row>
-                                <Row maxWidth="420px">
-                                    {itemsInUseLoading ? (
-                                        <Loader />
-                                    ) : itemsInUse?.length ? (
-                                        itemsInUse.map(({ id, title }) => (
-                                            <InternalLink
-                                                key={id}
-                                                to={globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id}
-                                                onClick={onClose}
-                                            >
-                                                {title}
-                                            </InternalLink>
-                                        ))
-                                    ) : (
-                                        'No campaigns in use'
-                                    )}
-                                </Row>
-                            </RowBlockCell>
-                            <RowBlockCell removeBorder padding={validatorsPadding}>
-                                <Row marginBottom="40px">
-                                    <Subtitle>Hashtags</Subtitle>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    {tags?.map(i => (
-                                        <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
-                                    ))}
-                                </Row>
-                            </RowBlockCell>
-                            {/* <RowBlockCell removeBorder padding={validatorsPadding}>
-                                <Row marginBottom="40px">
-                                    <Subtitle>Extra Hashtags</Subtitle>
-                                </Row>
-                                <Row marginBottom={miniMarginBottom}>
-                                    {extraTags?.map(i => (
-                                        <ClosableTag key={i}>{i.toUpperCase()}</ClosableTag>
-                                    ))}
-                                </Row>
-                            </RowBlockCell> */}
-                        </ColumnBlockCell>
+                                </Section>
+                            </Column>
+                        </VideoDetailsWrapper>
                     </>
                 )}
             </HighlightedTitleBlock>
