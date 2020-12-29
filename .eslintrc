@@ -42,6 +42,7 @@
                 "react/jsx-key": ["error", { "checkFragmentShorthand": true }],
                 "react/jsx-no-target-blank": "error",
                 "react/jsx-no-undef": "error",
+                "jsx-a11y/accessible-emoji": "off",
                 "react/jsx-sort-props": [
                     "error",
                     {

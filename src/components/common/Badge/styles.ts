@@ -5,7 +5,8 @@ import {
     badgeFontSize,
     badgeFontWeight,
     badgeHeight,
-    badgeHorizontalPadding
+    badgeHorizontalPadding,
+    badgeWidth
 } from 'components/common/Badge/constants';
 import { flexCenter, mainBackground } from 'constants/styles';
 import styled from 'styled-components';
@@ -14,6 +15,7 @@ import { MarginRightBottom } from 'types';
 export const Badge = styled.span<MarginRightBottom>`
     ${flexCenter};
     height: ${badgeHeight};
+    width: ${badgeWidth};
     border: ${badgeBorderWidth} solid ${badgeBorderColor};
     border-radius: ${badgeBorderRadius};
     font-weight: ${badgeFontWeight};

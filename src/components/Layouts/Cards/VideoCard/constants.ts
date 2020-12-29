@@ -5,6 +5,10 @@ export const ratingSpanFontSize = '12px';
 export const ratingSpanLineHeight = '15px';
 export const ratingSpanColor = 'white';
 
+export const qualityScoreFontWeight = '700';
+export const qualityScoreFontSize = '18px';
+export const qualityScoreLineHeight = '23px';
+
 export const productImgDiameter = '18px';
 
 export const addIdImgDiameter = '40px';

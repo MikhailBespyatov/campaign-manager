@@ -1,15 +1,4 @@
-import { Span } from 'components/common/typography/Span';
-import { SubPageSpan } from 'components/common/typography/special';
-import { subPageSpanHeight } from 'components/common/typography/special/constants';
-import {
-    activeColor,
-    itemOpacity,
-    spanFontSize,
-    spanFontWeight,
-    spanLineHeight
-} from 'components/grid/bars/TopBarWithButton/constants';
-import { StyledBorder, StyledItem, Wrapper } from 'components/grid/bars/TopBarWithButton/styles';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Wrapper } from 'components/grid/bars/TopBarWithButton/styles';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { routesArray } from 'constants/routes';
 import { useStore } from 'effector-react';
@@ -17,6 +6,7 @@ import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
+import { BarItem } from 'components/common/dividers/BarItem';
 
 interface Props {
     buttons?: JSX.Element;
@@ -35,28 +25,30 @@ export const TopBarWithButton = ({ buttons }: Props) => {
     return (
         <Wrapper>
             {routesArray.map(({ path, name, subPages, proxy }) => {
-                const active = path === location.pathname;
-                const borderActive = -1 !== location.pathname.indexOf(path);
+                const active = -1 !== location.pathname.indexOf(path);
                 const subPage = subPages?.filter(i => -1 !== location.pathname.indexOf(i.path));
 
                 return proxy && !proxy.includes(access) ? null : (
-                    <StyledItem key={path} active={active} onClick={() => onClick(path)}>
-                        <Column alignCenter>
-                            <Span
-                                color={activeColor}
-                                fontSize={spanFontSize}
-                                fontWeight={spanFontWeight}
-                                lineHeight={spanLineHeight}
-                                opacity={!active ? Number(itemOpacity) : 1}
-                            >
-                                {name}
-                            </Span>
-                            {borderActive && <StyledBorder />}
-                            <Row height={subPageSpanHeight} marginTop="5px">
-                                <SubPageSpan>{subPage?.length ? subPage[0].name : ''}</SubPageSpan>
-                            </Row>
-                        </Column>
-                    </StyledItem>
+                    <BarItem key={name} active={active} namePage={subPage?.[0]?.name} path={path} onClick={onClick}>
+                        {name}
+                    </BarItem>
+                    // <StyledItem key={path} onClick={() => onClick(path)}>
+                    //     <Column alignCenter>
+                    //         <Span
+                    //             color={active ? primaryColor : inactiveColor}
+                    //             fontSize={spanFontSize}
+                    //             fontWeight={spanFontWeight}
+                    //             lineHeight={spanLineHeight}
+                    //             opacity={1}
+                    //         >
+                    //             {name}
+                    //         </Span>
+                    //         {active && <StyledBorder />}
+                    //         <Row height={subPageSpanHeight} marginTop="5px">
+                    //             <SubPageSpan>{subPage?.length ? subPage[0].name : ''}</SubPageSpan>
+                    //         </Row>
+                    //     </Column>
+                    // </StyledItem>
                 );
             })}
             {/* {access === 1 && (

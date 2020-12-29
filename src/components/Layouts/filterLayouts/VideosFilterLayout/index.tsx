@@ -56,7 +56,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
         <>
             <TagFilter defaultChecked={!!tagsAll} tagsValues={tagsAll || tagsAny || []} onChange={onTagsFilterChange} />
             {children}
-            <Section justifyCenter>
+            <Section justifyCenter marginBottom="75px">
                 {!loading && (
                     <Pagination
                         currentIndex={pageIndex + 1}

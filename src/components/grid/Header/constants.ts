@@ -11,12 +11,12 @@ export const styledSpanFontSize1 = '18px';
 export const styledSpanLineHeight1 = '22px';
 export const styledSpanMarginLeft = '40px';
 
-export const styledSpanFontWeight2 = '500';
+export const styledSpanFontWeight2 = '600';
 export const styledSpanFontSize2 = '14px';
-export const styledSpanLineHeight2 = '17px';
+export const styledSpanLineHeight2 = '22px';
 
 export const styledSpanFontWeight3 = '500';
-export const styledSpanFontSize3 = '11px';
-export const styledSpanLineHeight3 = '13px';
+export const styledSpanFontSize3 = '12px';
+export const styledSpanLineHeight3 = '20px';
 
 export const headerAvatarDiameter = '34px';

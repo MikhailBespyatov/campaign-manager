@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export const FormWrapper = styled.form`
     //width: ${formWrapperWidth};
+    width: 100%;
     ${flexStart};
     //align-items: baseline;
     flex-direction: column;

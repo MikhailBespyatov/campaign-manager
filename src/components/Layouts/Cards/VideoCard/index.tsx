@@ -6,7 +6,6 @@ import removeIdImg from 'assets/img/increment.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
-import { P } from 'components/common/typography/titles/P';
 import { AbsoluteVideo } from 'components/common/Video';
 import { Card, CardRowFeatures, Description, FeatureCell } from 'components/grid/Card';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
@@ -16,7 +15,10 @@ import {
     addIdImgDiameter,
     backgroundTheme1,
     colorTheme1,
-    productImgDiameter
+    productImgDiameter,
+    qualityScoreFontSize,
+    qualityScoreFontWeight,
+    qualityScoreLineHeight
 } from 'components/Layouts/Cards/VideoCard/constants';
 import { noContentMessage } from 'constants/messages';
 import { padding, primaryPadding, secondaryPadding, white } from 'constants/styles';
@@ -26,6 +28,8 @@ import { campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { modalEvents } from 'stores/modal';
 import { Unselectable } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
+import { Span } from 'components/common/typography/Span';
+import { Emoji } from 'components/common/typography/Emoji';
 
 interface Props extends WOM.ContentItemResponse, Unselectable {}
 
@@ -63,7 +67,7 @@ export const VideoCard = ({
                 ? campaignsEvents.removeContentById(womContentId)
                 : campaignsEvents.pushContentId({ womContentId, uriPrimary, womQualityScore, products });
     };
-
+    // TODO: setting up eslint for emoji
     return (
         <Card pointer active={active} unselectableStyled={unselectable}>
             <Description>
@@ -97,14 +101,39 @@ export const VideoCard = ({
                         onClick={openCardModal}
                     />
                 )}
-                <Row marginBottom="5px" zIndex="2">
+                <Row marginBottom="5px" marginTop="5px" zIndex="2">
                     <Column marginRight={primaryPadding}>
-                        <P color={white}>{roundScore(womQualityScore?.authenticity || 0)}</P>
+                        <Span
+                            color={white}
+                            fontSize={qualityScoreFontSize}
+                            fontWeight={qualityScoreFontWeight}
+                            lineHeight={qualityScoreLineHeight}
+                        >
+                            {/*eslint-disable-next-line */}
+                            <Emoji>😇 </Emoji>
+                            {roundScore(womQualityScore?.authenticity || 0)}
+                        </Span>
                     </Column>
                     <Column marginRight={primaryPadding}>
-                        <P color={white}>{roundScore(womQualityScore?.positivity || 0)}</P>
+                        <Span
+                            color={white}
+                            fontSize={qualityScoreFontSize}
+                            fontWeight={qualityScoreFontWeight}
+                            lineHeight={qualityScoreLineHeight}
+                        >
+                            {roundScore(womQualityScore?.positivity || 0)}
+                        </Span>
                     </Column>
-                    <P color={white}>{roundScore(womQualityScore?.creativity || 0)}</P>
+                    <Span
+                        color={white}
+                        fontSize={qualityScoreFontSize}
+                        fontWeight={qualityScoreFontWeight}
+                        lineHeight={qualityScoreLineHeight}
+                    >
+                        {/*eslint-disable-next-line */}
+                        <Emoji>🔥 </Emoji>
+                        {roundScore(womQualityScore?.creativity || 0)}
+                    </Span>
                 </Row>
                 <Row zIndex="2">
                     <RatingSpan>{`${engagement?.viewsD1Percentage}% ${engagement?.viewsD2Percentage}% ${engagement?.viewsD3Percentage}% ${engagement?.viewsD4Percentage}%`}</RatingSpan>
@@ -149,7 +178,7 @@ export const VideoCard = ({
                     {isVideoPlaying ? 'Pause' : 'Play'} Video
                 </FeatureCell>
                 <FeatureCell quantity={2} onClick={handleDetail}>
-                    Details here
+                    Get Details
                 </FeatureCell>
             </CardRowFeatures>
         </Card>

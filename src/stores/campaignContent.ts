@@ -3,6 +3,7 @@ import { defaultCampaignContentValues } from 'constants/defaults';
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
+import { initialToggleStore } from 'stores/initialie.toggle.store';
 
 let cancelToken: CancelTokenSource | undefined;
 
@@ -110,14 +111,25 @@ values.watch(updateValues, state => getItems(state));
 values.watch(updateAndRemoveValues, state => getItems(state));
 values.watch(setDefaultValues, state => getItems(state));
 
+const [visibleCreateCampaign, setVisibleCreateCampaign] = initialToggleStore();
+
 const campaignContentEvents = {
     updateValues,
     updateAndRemoveValues,
     setDefaultValues,
     updateIsFirst,
-    setIsFirstToTrue
+    setIsFirstToTrue,
+    setVisibleCreateCampaign
 };
 const campaignContentEffects = { getItems, getItemById, getSelectedVideos };
-const campaignContentStores = { items, item, values, initialLoading, campaignSelectedVideos, isFirst };
+const campaignContentStores = {
+    items,
+    item,
+    values,
+    initialLoading,
+    campaignSelectedVideos,
+    isFirst,
+    visibleCreateCampaign
+};
 
 export { campaignContentEffects, campaignContentStores, campaignContentEvents };

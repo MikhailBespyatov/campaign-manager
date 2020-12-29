@@ -1,4 +1,4 @@
-import arrowImg from 'assets/img/select_arrow.svg';
+import arrowImg from 'assets/icons/arrow-down-v2.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ulWrapperTop, wrapperHeight, wrapperImgRight, wrapperImgTop } from 'components/common/inputs/Select/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/Select/styles';
@@ -8,19 +8,31 @@ import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { noop } from 'constants/global';
 import React, { FC, useState } from 'react';
-import { Active, ItemRadioProperties, RadioProperties, Sizes } from 'types';
+import { Active, AdditionalTitle, ItemRadioProperties, RadioProperties, Sizes } from 'types';
 import { multiplyPixels, pixelsAddition } from 'utils/parsers';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
-interface WrapperProps extends RadioProperties, Sizes {
+interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle {
     top?: boolean;
 }
 
+interface ItemSpanProps extends AdditionalTitle {}
+
 interface Props extends Active, ItemRadioProperties {}
 
-const ItemSpan: FC = ({ children }) => (
-    <Span fontSize="18px" lineHeight="22px">
-        {children}
-    </Span>
+const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle }) => (
+    <>
+        <Span fontSize="16px" fontWeight="500" lineHeight="20px">
+            {children}
+        </Span>
+        {additionalTitle && (
+            <MarginWrapper marginLeft="5px">
+                <Span fontSize="13px" fontWeight="500" lineHeight="20px" opacity={0.5}>
+                    {additionalTitle}
+                </Span>
+            </MarginWrapper>
+        )}
+    </>
 );
 
 const Item = ({ active, value, data = value, onClick }: Props) => (
@@ -31,6 +43,7 @@ const Item = ({ active, value, data = value, onClick }: Props) => (
 
 export const Select = ({
     values,
+    additionalTitle,
     defaultActive = values[0],
     data = values,
     onChange = noop,
@@ -62,10 +75,10 @@ export const Select = ({
 
     return (
         <Wrapper {...styles}>
-            <ItemSpan>{selected}</ItemSpan>
+            <ItemSpan additionalTitle={additionalTitle}>{selected}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
                 <ClickableWrapper onClick={onClose}>
-                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 180 : 0} src={arrowImg} width={imgWidth} />
+                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 0 : 180} src={arrowImg} width={imgWidth} />
                 </ClickableWrapper>
             </AbsoluteWrapper>
             <AbsoluteWrapper

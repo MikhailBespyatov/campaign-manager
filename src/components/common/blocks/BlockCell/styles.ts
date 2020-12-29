@@ -7,7 +7,9 @@ interface Props extends Padding, RemoveBorder {}
 export const RowBlockCell = styled.div<Props>`
     display: flex;
     flex-direction: column;
-    //height: 100%;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
     border-right: ${primaryBorder};
     ${({ removeBorder }) => (removeBorder ? `border: none;` : ``)};
     ${({ padding }) => (padding ? `padding: ${padding};` : ``)};

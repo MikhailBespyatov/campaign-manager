@@ -6,12 +6,25 @@ import {
     arrowImgHeight,
     arrowImgWidth,
     pagination,
+    PaginationCellFontSize,
+    PaginationCellFontWeight,
+    paginationCellHeight,
+    PaginationCellLineHeight,
     paginationLimit,
     sizeValues
 } from 'components/Layouts/Pagination/constants';
-import { Arrow, PaginationCell, PaginationWrapper, Wrapper } from 'components/Layouts/Pagination/styles';
+import {
+    Arrow,
+    PaginationCell,
+    PaginationInput,
+    PaginationWrapper,
+    Wrapper
+} from 'components/Layouts/Pagination/styles';
 import { defaultLimit } from 'constants/defaults';
-import React, { useMemo } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useMemo, useState } from 'react';
+import { Span } from 'components/common/typography/Span';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface WrapperProps {
     currentIndex: number;
@@ -84,6 +97,21 @@ export const Pagination = ({
         defaultSize,
         totalItems
     ]);
+    const [value, setValue] = useState('');
+
+    const handlePageSet = (e: ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.currentTarget.value;
+        if (!isNaN(parseInt(inputValue[inputValue.length - 1])) || !inputValue) {
+            setValue(e.currentTarget.value);
+        }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            onChange(parseInt(value) - 1);
+            setValue('');
+        }
+    };
 
     const onIndexChange = (index: number) => onChange(index - 1);
 
@@ -120,11 +148,26 @@ export const Pagination = ({
                     )}
                     <Select
                         top
+                        additionalTitle={'/ Page'}
                         defaultActive={defaultSize.toString()}
                         values={sizeValues}
-                        width="100px"
+                        width="110px"
                         onChange={onSizeAndIndexChange}
                     />
+                    <MarginWrapper marginLeft="11px">
+                        <Row alignCenter height={paginationCellHeight} marginBottom="0">
+                            <Span
+                                fontSize={PaginationCellFontSize}
+                                fontWeight={PaginationCellFontWeight}
+                                lineHeight={PaginationCellLineHeight}
+                            >
+                                Go to
+                            </Span>
+                            <MarginWrapper marginLeft="8px">
+                                <PaginationInput value={value} onChange={handlePageSet} onKeyDown={handleKeyDown} />
+                            </MarginWrapper>
+                        </Row>
+                    </MarginWrapper>
                 </Wrapper>
             )}
         </>

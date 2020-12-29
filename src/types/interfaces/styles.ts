@@ -81,6 +81,10 @@ export interface Background {
     background?: string;
 }
 
+export interface BackgroundColor {
+    backgroundColor?: string;
+}
+
 export interface TextAlignment {
     alignTextCenter?: boolean;
 }
@@ -158,4 +162,20 @@ export interface Visibility {
 
 export interface ZIndex {
     zIndex?: string;
+}
+
+export interface MainColor {
+    mainColor?: string;
+}
+
+export interface FlexGrow {
+    flexGrow?: string;
+}
+
+export interface FlexShrink {
+    flexShrink?: string;
+}
+
+export interface FlexBasis {
+    flexBasis?: string;
 }

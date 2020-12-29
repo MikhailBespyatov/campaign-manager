@@ -1,7 +1,38 @@
 import { TextField } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { defaultFontFamily, defaultFontStyle, defaultFontWeight } from 'constants/defaults';
-import { errorColor, formGrey3, primaryColor, successColor, untouchedColor } from 'constants/styles';
+import {
+    errorColor,
+    formGrey3,
+    formTextStyleMixin,
+    primaryColor,
+    successColor,
+    untouchedColor
+} from 'constants/styles';
+import styled from 'styled-components';
+
+export const DataPickerWrapper = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
+export const TextFieldForm = styled.input`
+    outline: none;
+    appearance: none;
+    width: 100%;
+    height: 70px;
+    padding: 28px;
+    ${formTextStyleMixin};
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    background: none;
+    ::-webkit-calendar-picker-indicator {
+        opacity: 0;
+    }
+    z-index: 6;
+`;
 
 export const TextFieldStyled = withStyles({
     root: {

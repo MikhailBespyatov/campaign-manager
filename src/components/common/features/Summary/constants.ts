@@ -6,6 +6,7 @@ export const wrapperBorderRadius = '20px';
 export const wrapperBorderWidth = '1px';
 export const wrapperBorderColor = formGrey3;
 export const wrapperBackground = white;
+export const wrapperMarginBottom = '25px';
 export const wrapperMargin = primaryPadding;
 export const wrapperHorizontalPadding = '10px';
 

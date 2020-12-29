@@ -1,4 +1,4 @@
-import { Props } from 'components/grid/wrappers/UniversalWrapper/types';
+import { Props } from 'components/grid/wrappers/UniversalWrapperDeprecated/types';
 import styled from 'styled-components';
 
 export const UniversalWrapper = styled.div<Props>`

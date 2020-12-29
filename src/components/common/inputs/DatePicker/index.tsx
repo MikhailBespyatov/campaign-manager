@@ -11,8 +11,17 @@ import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
 import 'date-fns';
 import { useField } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { DefaultValueString, Label, Name } from 'types';
+import { DataPickerWrapper, TextFieldForm } from 'components/common/inputs/DatePicker/styles';
+import { Span } from 'components/common/typography/Span';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { requiredFieldMessage } from 'constants/messages';
+import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
+import calendarImg from 'assets/img/calendar.svg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { getDate } from 'utils/usefulFunctions';
 
 type dateType = Date | null;
 
@@ -84,7 +93,7 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
 
     const [selectedDate, setSelectedDate] = useState<dateType>(new Date(defaultValue));
 
-    const handleDateChange = (date: dateType) => setSelectedDate(date);
+    const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => setSelectedDate(new Date(e.currentTarget.value));
 
     useEffect(() => {
         setValue(selectedDate?.toISOString() || '');
@@ -94,18 +103,30 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
     return (
         <Column width="100%">
             <HiddenInput {...field} value={selectedDate?.toISOString() || ''} />
-            <ThemeProvider theme={materialTheme}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        KeyboardButtonProps={defaultKeyboardButtonProps}
-                        format={defaultFormat}
-                        label={label}
-                        margin="normal"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                    />
-                </MuiPickersUtilsProvider>
-            </ThemeProvider>
+            <MarginWrapper marginBottom="8px">
+                <Span fontSize="15px" fontWeight="400" lineHeight="19px">
+                    {label}
+                </Span>
+            </MarginWrapper>
+            {/*<ThemeProvider theme={materialTheme}>*/}
+            {/*    <MuiPickersUtilsProvider utils={DateFnsUtils}>*/}
+            {/*        <KeyboardDatePicker*/}
+            {/*            KeyboardButtonProps={defaultKeyboardButtonProps}*/}
+            {/*            format={defaultFormat}*/}
+            {/*            label={label}*/}
+            {/*            margin="normal"*/}
+            {/*            value={selectedDate}*/}
+            {/*            onChange={handleDateChange1}*/}
+            {/*        />*/}
+            {/*    </MuiPickersUtilsProvider>*/}
+            {/*</ThemeProvider>*/}
+            <DataPickerWrapper>
+                <TextFieldForm type="date" value={getDate(selectedDate) || ''} onChange={handleDateChange} />
+                <AbsoluteWrapper right="28px" top="26px">
+                    <CustomImg pointer src={calendarImg} />
+                </AbsoluteWrapper>
+            </DataPickerWrapper>
+            <ErrorSpan>{requiredFieldMessage}</ErrorSpan>
             {/* {error && <ErrorSpan touched={touched}>{error}</ErrorSpan>} */}
         </Column>
     );

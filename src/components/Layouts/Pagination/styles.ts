@@ -1,14 +1,18 @@
 import {
     paginationCellActiveBackground,
-    paginationCellActiveColor,
+    PaginationCellActiveFontWeight,
     paginationCellBackground,
     paginationCellBorderRadius,
     paginationCellColor,
     PaginationCellFontSize,
+    PaginationCellFontWeight,
     paginationCellHeight,
     PaginationCellLetterSpacing,
     PaginationCellLineHeight,
     paginationCellWidth,
+    paginationInputHeight,
+    paginationInputPadding,
+    paginationInputWidth,
     paginationWrapperHorizontalMargin
 } from 'components/Layouts/Pagination/constants';
 import { ArrowProps, PaginationCellProps } from 'components/Layouts/Pagination/types';
@@ -23,15 +27,16 @@ export const PaginationCell = styled.button<PaginationCellProps>`
     ${flexCenter};
     ${disableDefaultButtonStyleMixin};
     border-radius: ${paginationCellBorderRadius};
+    ${({ active }) => active && 'border: 1px solid #E4E4E4;'};
     width: ${paginationCellWidth};
     height: ${paginationCellHeight};
     background-color: ${({ active }) => (active ? paginationCellActiveBackground : paginationCellBackground)};
     ${formTextStyleMixin};
-    font-weight: normal;
+    font-weight: ${({ active }) => (active ? PaginationCellActiveFontWeight : PaginationCellFontWeight)};
     font-size: ${PaginationCellFontSize};
     line-height: ${PaginationCellLineHeight};
     letter-spacing: ${PaginationCellLetterSpacing};
-    color: ${({ active }) => (active ? paginationCellActiveColor : paginationCellColor)};
+    color: ${paginationCellColor};
 `;
 
 export const Arrow = styled(PaginationCell)<ArrowProps>`
@@ -41,7 +46,20 @@ export const Arrow = styled(PaginationCell)<ArrowProps>`
 
 export const PaginationWrapper = styled.div`
     ${flexStart};
-    background-color: ${paginationCellBackground};
     margin-right: ${paginationWrapperHorizontalMargin};
     border-radius: ${paginationCellBorderRadius};
+`;
+
+export const PaginationInput = styled.input`
+    outline: none;
+    appearance: none;
+    height: ${paginationInputHeight};
+    width: ${paginationInputWidth};
+    padding: 2px ${paginationInputPadding};
+    box-sizing: border-box;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-weight: ${PaginationCellFontWeight};
+    font-size: ${PaginationCellFontSize};
+    line-height: ${PaginationCellLineHeight};
 `;
