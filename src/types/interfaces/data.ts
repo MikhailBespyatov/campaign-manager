@@ -41,3 +41,11 @@ export interface Loading {
 export interface Unselectable {
     unselectable?: boolean;
 }
+
+export interface AdditionalTitle {
+    additionalTitle?: string;
+}
+
+export interface Path {
+    path: string;
+}

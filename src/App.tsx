@@ -6,7 +6,6 @@ import { GlobalStyle } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
-import { Create as CreateCampaign } from 'pages/CampaignManager/Campaign/Create';
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Discover } from 'pages/CampaignManager/Discover';
 import { Home } from 'pages/Home';
@@ -27,6 +26,7 @@ import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeEvents, themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import styled, { ThemeProvider } from 'styled-components';
+import { PopUpCampaignManager } from 'components/modals/PopUpCamaignManager';
 
 const AppWrapper = styled.div`
     position: relative;
@@ -58,6 +58,7 @@ const App = () => {
                 <Router history={history}>
                     <CardModal />
                     <QexWidgetModal />
+                    <PopUpCampaignManager />
                     <Switch>
                         <PublicRoute exact component={Home} path={[routes.wrongPath]} />
                         {/* <PublicRoute exact component={Test} path={routes.test} /> */}
@@ -116,11 +117,11 @@ const App = () => {
                             component={CampaignDetails}
                             path={globalPrefixUrl + routes.campaignManager.campaign.details}
                         />
-                        <CampaignManagerRoute
-                            exact
-                            component={CreateCampaign}
-                            path={globalPrefixUrl + routes.campaignManager.campaign.create}
-                        />
+                        {/*<CampaignManagerRoute*/}
+                        {/*    exact*/}
+                        {/*    component={CreateCampaign}*/}
+                        {/*    path={globalPrefixUrl + routes.campaignManager.campaign.create}*/}
+                        {/*/>*/}
                         {/* <CampaignManagerRoute exact component={Overview} path={routes.campaignManager.overview.index} /> */}
                         <Redirect to={routes.wrongPath} />
                     </Switch>

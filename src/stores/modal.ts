@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector';
-import { CardModal, QexWidgetModal } from 'types';
+import { CardModal, PopUpCampaignManager, QexWidgetModal } from 'types';
 
 const openCardModal = createEvent<string>();
 const closeCardModal = createEvent();
@@ -30,7 +30,41 @@ const qexWidgetModal = createStore<QexWidgetModal>({
         visible: false
     }));
 
-const modalEvents = { openCardModal, closeCardModal, openQexWidgetModal, closeQexWidgetModal };
-const modalStores = { cardModal, qexWidgetModal };
+const openPopUpCampaignManager = createEvent<PopUpCampaignManager>();
+const closePopUpCampaignManager = createEvent();
+
+const popUpCampaignManager = createStore<PopUpCampaignManager>({
+    visible: false,
+    popUp: 'info'
+})
+    .on(openPopUpCampaignManager, (popUpState, state) => {
+        if (state.popUp === 'info') {
+            const isSecondOpenPopUp = localStorage.getItem('isFirstOpenPopUp');
+            if (!isSecondOpenPopUp) {
+                localStorage.setItem('isFirstOpenPopUp', 'true');
+                return state;
+            } else {
+                return popUpState;
+            }
+        }
+
+        if (state.popUp === 'discard') {
+            return state;
+        }
+    })
+    .on(closePopUpCampaignManager, popUp => ({
+        ...popUp,
+        visible: false
+    }));
+
+const modalEvents = {
+    openCardModal,
+    closeCardModal,
+    openQexWidgetModal,
+    closeQexWidgetModal,
+    openPopUpCampaignManager,
+    closePopUpCampaignManager
+};
+const modalStores = { cardModal, qexWidgetModal, popUpCampaignManager };
 
 export { modalStores, modalEvents };

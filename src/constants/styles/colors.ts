@@ -10,6 +10,7 @@ export const formGrey2 = '#EDEDED';
 export const formGrey3 = '#D3D3D3';
 export const formGrey4 = '#6B6B6B';
 export const formGrey5 = 'rgba(15, 22, 66, 0.5)';
+export const formGrey6 = '#AAAAAA';
 
 export const grey = '#d9d9d9';
 export const grey1 = '#4A4A4A';

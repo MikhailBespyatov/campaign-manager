@@ -15,7 +15,8 @@ import {
     retrieveRoleAndConvert,
     roundScore,
     slashInserter,
-    spaceInserter
+    spaceInserter,
+    getDate
 } from 'utils/usefulFunctions';
 
 describe('giveAccessByRoles', () => {
@@ -322,5 +323,15 @@ describe('pixelsSubtraction', () => {
         expect(pixelsSubtraction('100ppx', '0px')).toBe('0');
         expect(pixelsSubtraction('200px', '101px')).toBe('99px');
         expect(pixelsSubtraction('19px', '20px')).toBe('-1px');
+    });
+});
+
+describe('getDate', () => {
+    it('Test for getDate', () => {
+        expect(getDate(new Date('2020-01-01'))).toBe('2020-01-01');
+        expect(getDate('')).toBe(undefined);
+        expect(getDate()).toBe(undefined);
+        expect(getDate(new Date('2021-11-25'))).toBe('2021-11-25');
+        expect(getDate(new Date('2021-02-02 13:38'))).toBe('2021-02-02');
     });
 });

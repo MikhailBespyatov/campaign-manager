@@ -10,18 +10,20 @@ import { routes } from 'constants/routes';
 import { primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
 import { currencyToStandardForm, removeLastNulls, spaceInserter } from 'utils/usefulFunctions';
+import { DropDownBlock } from 'components/common/blocks/DropDownBlock';
+import { campaignContentEvents } from 'stores/campaignContent';
 
 interface Props extends Background {}
 
 export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
-    const location = useLocation();
+    // const location = useLocation();
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
@@ -32,8 +34,15 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
         organizationsStores.statistics
     );
 
-    const createRoute = globalPrefixUrl + routes.campaignManager.campaign.create;
-    const goToCreateCampaign = () => history.push(createRoute);
+    const createRoute = globalPrefixUrl + routes.campaignManager.discover.index;
+    const goToCreateCampaign = () => {
+        history.push(createRoute);
+        campaignContentEvents.setVisibleCreateCampaign(true);
+        modalEvents.openPopUpCampaignManager({
+            visible: true,
+            popUp: 'info'
+        });
+    };
     const onWomBuy = () => modalEvents.openQexWidgetModal();
 
     useEffect(() => {
@@ -58,48 +67,47 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
             topBar={
                 <TopBarWithButton
                     buttons={
-                        location.pathname !== createRoute ? (
-                            <Row marginBottom="0">
-                                <Column marginRight={primaryPadding}>
-                                    <RoundedButton onClick={onWomBuy}>BUY WOM</RoundedButton>
-                                </Column>
-                                <RoundedButton onClick={goToCreateCampaign}>Create Campaign</RoundedButton>
-                            </Row>
-                        ) : (
-                            <RoundedButton onClick={onWomBuy}>BUY WOM</RoundedButton>
-                        )
+                        <Row marginBottom="0">
+                            <Column marginRight={primaryPadding}>
+                                <RoundedButton onClick={onWomBuy}>BUY WOM</RoundedButton>
+                            </Column>
+                            <RoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</RoundedButton>
+                        </Row>
                     }
                 />
             }
         >
-            <Section>
-                <Summary
-                    subtitle="Campaigns Running"
-                    title={campaignsRunning ? spaceInserter(campaignsRunning.toString()) : '0'}
-                />
-                <SummaryWomLogoImg
-                    subtitle="Campaign Budget"
-                    title={budgetTotal ? currencyToStandardForm(budgetTotal) : '0'}
-                />
-                <SummaryWomLogoImg
-                    subtitle="Campaign Spent"
-                    title={budgetSpent ? currencyToStandardForm(budgetSpent) : '0'}
-                />
-                <SummaryWomLogoImg
-                    subtitle="Daily campaign cost"
-                    title={budgetPerDay ? currencyToStandardForm(budgetPerDay) : '0'}
-                />
-                <SummaryWomLogoImg
-                    subtitle="Remaining Budget"
-                    title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}
-                />
-                {/* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> */}
-                <SummaryWomImg title={`$ ${usdRate ? removeLastNulls(Number(usdRate)) : '0'}`} />
-                <SummaryWomLogoImg
-                    subtitle="Organization balance"
-                    title={removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))}
-                />
-            </Section>
+            {' '}
+            <DropDownBlock title="Overall Budget">
+                <Section marginBottom={'0'}>
+                    <Summary
+                        subtitle="Campaigns Running"
+                        title={campaignsRunning ? spaceInserter(campaignsRunning.toString()) : '0'}
+                    />
+                    <Summary
+                        subtitle="Campaign Budget"
+                        title={budgetTotal ? currencyToStandardForm(budgetTotal) : '0'}
+                    />
+                    <Summary
+                        subtitle="Campaign Spent"
+                        title={budgetSpent ? currencyToStandardForm(budgetSpent) : '0'}
+                    />
+                    <Summary
+                        subtitle="Campaign Spend (Daily)"
+                        title={budgetPerDay ? currencyToStandardForm(budgetPerDay) : '0'}
+                    />
+                    <SummaryWomLogoImg
+                        subtitle="Remaining Budget"
+                        title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}
+                    />
+                    {/* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> */}
+                    <SummaryWomImg title={`$ ${usdRate ? removeLastNulls(Number(usdRate)) : '0'}`} />
+                    <Summary
+                        subtitle="Organization balance"
+                        title={removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))}
+                    />
+                </Section>
+            </DropDownBlock>
             {children}
         </MainLayout>
     );

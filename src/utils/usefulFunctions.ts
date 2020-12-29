@@ -128,3 +128,8 @@ export const removeLastNulls = (x: number) => {
 
 export const currencyToStandardForm = (x: number) =>
     spaceInserter(removeLastNulls(Number(x.toFixed(numbersAfterDotWom))));
+
+export const getDate = (date: Date | null) => {
+    if (!date) return;
+    return date.toISOString().split('T')[0];
+};

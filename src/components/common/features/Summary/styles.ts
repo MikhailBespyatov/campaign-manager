@@ -6,6 +6,7 @@ import {
     wrapperHeight,
     wrapperHorizontalPadding,
     wrapperMargin,
+    wrapperMarginBottom,
     wrapperWidth
 } from 'components/common/features/Summary/constants';
 import { flexCenter } from 'constants/styles';
@@ -21,6 +22,6 @@ export const Wrapper = styled.div<MarginRightBottom>`
     border: ${wrapperBorderWidth} solid ${wrapperBorderColor};
     background-color: ${wrapperBackground};
     padding: 0 ${wrapperHorizontalPadding};
-    margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : wrapperMargin)};
+    margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : wrapperMarginBottom)};
     margin-right: ${({ marginRight }) => (marginRight ? marginRight : wrapperMargin)};
 `;

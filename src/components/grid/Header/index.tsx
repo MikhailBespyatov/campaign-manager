@@ -1,6 +1,5 @@
-import defaultImg from 'assets/img/wom_logo.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { headerAvatarDiameter, headerLogoHeight } from 'components/grid/Header/constants';
+import { headerLogoHeight } from 'components/grid/Header/constants';
 import { StyledHeader, StyledSpan1, StyledSpan2, StyledSpan3 } from 'components/grid/Header/style';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { siteName } from 'constants/global';
@@ -16,7 +15,7 @@ export const Header = () => {
     const { logo } = useStore(themeStores.theme);
 
     const username = user && user?.username;
-    const imageUrl = user && user?.profile?.imageUrl;
+    // const imageUrl = user && user?.profile?.imageUrl;
 
     const onClick = () => userEvents.logout();
 
@@ -33,11 +32,11 @@ export const Header = () => {
                         Logout
                     </StyledSpan3>
                 </Column>
-                <CustomImg
-                    height={headerAvatarDiameter}
-                    src={imageUrl ? imageUrl : defaultImg}
-                    width={headerAvatarDiameter}
-                />
+                {/*<CustomImg*/}
+                {/*    height={headerAvatarDiameter}*/}
+                {/*    src={imageUrl ? imageUrl : defaultImg}*/}
+                {/*    width={headerAvatarDiameter}*/}
+                {/*/>*/}
             </Row>
         </StyledHeader>
     );

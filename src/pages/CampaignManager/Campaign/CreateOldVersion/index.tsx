@@ -1,4 +1,3 @@
-import { CreateCampaignForm } from 'components/FormComponents/forms/CreateCampaignForm';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { formGrey2 } from 'constants/styles';
@@ -97,7 +96,7 @@ export const Create = () => (
                 </Row> */}
             {/* </Column> */}
             <Column>
-                <CreateCampaignForm />
+                {/*<CreateCampaignForm />*/}
 
                 {/* <Row marginBottom={primaryPadding}>
                     <Block title="Similar Campaigns">

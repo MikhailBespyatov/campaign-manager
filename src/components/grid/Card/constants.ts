@@ -1,5 +1,5 @@
-export const cardWidth = '277px';
-export const cardHeight = '441px';
+export const cardWidth = '316px';
+export const cardHeight = '454px';
 
 export const verticalPadding = '14px';
 export const horizontalPadding = '22px';

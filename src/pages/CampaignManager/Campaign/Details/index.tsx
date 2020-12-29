@@ -47,8 +47,8 @@ export const Details = () => {
     const initialLoading = useStore(campaignContentStores.initialLoading);
     const loading = useStore(campaignsStores.loading);
 
-    let isFirstDatesLoaded = true;
-    console.log(isFirstDatesLoaded);
+    // let isFirstDatesLoaded = true;
+    //console.log(isFirstDatesLoaded);
 
     // const utcToStart = schedule?.utcStarted || '';
     // const utcToEnd = schedule?.utcEnded || '';

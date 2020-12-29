@@ -15,6 +15,7 @@ export const StyledSpanTop = styled(Span)`
     font-size: 16px;
     line-height: 25px;
     font-weight: 600;
+    text-transform: uppercase;
     color: ${({ theme: { primaryTextColor } }) => primaryTextColor};
 `;
 

@@ -1,4 +1,4 @@
-import { ColumnProps, RowProps } from 'components/grid/wrappers/FlexWrapper/types';
+import { ColumnProps, FlexGrowProps, RowProps } from 'components/grid/wrappers/FlexWrapper/types';
 import { flexStart, primaryPadding } from 'constants/styles';
 import styled from 'styled-components';
 
@@ -46,5 +46,22 @@ export const Section = styled.section<RowProps>`
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : `margin-bottom: ${primaryPadding};`)};
+    ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
+`;
+
+export const FlexGrow = styled.div<FlexGrowProps>`
+    ${flexStart};
+    ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
+    ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
+    flex-direction: column;
+    ${({ width }) => (width ? `width: ${width};` : ``)};
+    ${({ maxWidth }) => (maxWidth ? `max-width: ${maxWidth};` : ``)};
+    ${({ height }) => (height ? `height: ${height};` : ``)};
+    ${({ marginLeft }) => (marginLeft ? `margin-left: ${marginLeft};` : ``)};
+    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
+    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
+    ${({ flexGrow }) => (flexGrow ? `flex-grow: ${flexGrow};` : ``)};
+    ${({ flexShrink }) => (flexShrink ? `flex-shrink: ${flexShrink};` : ``)};
+    ${({ flexBasis }) => (flexBasis ? `flex-shrink: ${flexBasis};` : ``)};
     ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
 `;

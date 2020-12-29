@@ -1,6 +1,6 @@
 import { buttonHeight } from 'components/common/buttons/AddFieldButton/constants';
 import { Props, SetErrorsCreateCampaign } from 'components/FormComponents/forms/CreateCampaignForm/types';
-import { yupDefault, yupDefaultArray } from 'constants/yupFields';
+import { yupDefault } from 'constants/yupFields';
 import { ChangeEvent } from 'react';
 import { campaignsEffects } from 'stores/campaigns';
 import { commaInserter, getOrganizationId } from 'utils/usefulFunctions';
@@ -14,14 +14,14 @@ export const initialValues: Props = { title: '', tags: [], contentIds: [], utcTo
 
 export const validationSchema = Yup.object().shape({
     title: yupDefault,
-    tags: Yup.array().of(yupDefault),
-    contentIds: Yup.array()
-        .of(yupDefault)
-        .when('tags', {
-            is: val => val.length === 0,
-            then: yupDefaultArray,
-            otherwise: Yup.array().of(yupDefault)
-        }),
+    // tags: Yup.array().of(yupDefault),
+    contentIds: Yup.array().of(yupDefault),
+    // .of(yupDefault)
+    // .when('tags', {
+    //     is: val => val.length === 0,
+    //     then: yupDefaultArray,
+    //     otherwise: Yup.array().of(yupDefault)
+    // }),
     utcToStart: yupDefault,
     utcToEnd: yupDefault,
     amount: yupDefault

@@ -1,14 +1,31 @@
-import { TextInput } from 'components/common/inputs/Input';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
-import { P } from 'components/common/typography/titles/P';
-import { filterMarginRight, wrapperBackground } from 'components/filters/TagFilter/constants';
-import { Wrapper } from 'components/filters/TagFilter/styles';
+import {
+    closableTagMarginBottom,
+    enterImgDiameter,
+    enterImgMarginLeft,
+    enterImgMarginRight,
+    enterTitleFontSize,
+    enterTitleFontWeight,
+    enterTitleLineHeight,
+    searchImgDiameter,
+    searchImgMarginLeft,
+    searchImgMarginRight,
+    searchTitleFontSize,
+    searchTitleFontWeight,
+    searchTitleLineHeight
+} from 'components/filters/TagFilter/constants';
+import { SearchAbsoluteWrapper, SearchInput, TagFilterWrapper, Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { noop } from 'constants/global';
-import { secondaryPadding } from 'constants/styles';
+import { secondaryColor, secondaryPadding } from 'constants/styles';
 import React, { FocusEvent, KeyboardEvent, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
+import searchImg from 'assets/img/search_icon.svg';
+import enterImg from 'assets/img/enter_icon.svg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { Span } from 'components/common/typography/Span';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 
 interface Props extends Title, DefaultChecked {
     tagsValues?: string[];
@@ -64,40 +81,54 @@ export const TagFilter = ({
     // }, [checked, values]);
 
     return (
-        <Section alignCenter noWrap marginBottom="35px">
-            <Column marginRight={filterMarginRight}>
-                <Row noWrap marginBottom={secondaryPadding}>
-                    <P opacity={0.4}>{title}</P>
-                </Row>
-                {/* <Row noWrap marginBottom={secondaryPadding}>
-                    <Column marginRight={secondaryPadding}>
-                        <BooleanCheckbox onChange={onCheckboxChange} />
-                    </Column>
-                    <P noWrap opacity={0.4}>
-                        {subtitle}
-                    </P>
-                </Row> */}
-            </Column>
+        <TagFilterWrapper>
+            <SearchAbsoluteWrapper>
+                <MarginWrapper marginLeft={searchImgMarginLeft} marginRight={searchImgMarginRight}>
+                    <CustomImg height={searchImgDiameter} src={searchImg} width={searchImgDiameter} />
+                </MarginWrapper>
+                <MarginWrapper>
+                    <Span
+                        color={secondaryColor}
+                        fontSize={searchTitleFontSize}
+                        fontWeight={searchTitleFontWeight}
+                        lineHeight={searchTitleLineHeight}
+                    >
+                        {title}
+                    </Span>
+                </MarginWrapper>
+            </SearchAbsoluteWrapper>
+            <SearchAbsoluteWrapper right>
+                <MarginWrapper>
+                    <Span
+                        color={secondaryColor}
+                        fontSize={enterTitleFontSize}
+                        fontWeight={enterTitleFontWeight}
+                        lineHeight={enterTitleLineHeight}
+                        opacity={0.5}
+                    >
+                        Press enter
+                    </Span>
+                </MarginWrapper>
+                <MarginWrapper marginLeft={enterImgMarginLeft} marginRight={enterImgMarginRight}>
+                    <CustomImg height={enterImgDiameter} src={enterImg} width={enterImgDiameter} />
+                </MarginWrapper>
+            </SearchAbsoluteWrapper>
             <Wrapper>
+                <SearchInput type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
+            </Wrapper>
+            <Row>
                 {values.map(i => (
                     <ClosableTag
                         key={i}
                         closable
-                        marginBottom="0"
+                        marginBottom={closableTagMarginBottom}
                         marginRight={secondaryPadding}
                         onClose={() => removeValue(i)}
                     >
                         {i}
                     </ClosableTag>
                 ))}
-                <TextInput
-                    background={wrapperBackground}
-                    type="text"
-                    width="100%"
-                    onBlur={onBlur}
-                    onKeyDown={onKeyDown}
-                />
-            </Wrapper>
-        </Section>
+            </Row>
+        </TagFilterWrapper>
     );
 };

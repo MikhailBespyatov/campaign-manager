@@ -45,7 +45,7 @@ export const GraphicBlockSpan: FC = ({ children }) => (
 );
 
 export const RatingSpan: FC = ({ children }) => (
-    <Span color={white} fontSize="8px" lineHeight="12px">
+    <Span color={white} fontSize="12px" fontWeight="500" lineHeight="15px">
         {children}
     </Span>
 );

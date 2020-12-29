@@ -29,7 +29,7 @@ import {
     untouchedColor
 } from 'constants/styles';
 import styled from 'styled-components';
-import { WithError } from 'types';
+import { Padding, WithError } from 'types';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -82,6 +82,17 @@ export const ErrorSpan = styled.span`
     color: ${errorColor};
     margin-bottom: ${errorSpanMarginBottom};
     display: flex;
+`;
+
+export const TextFieldForm = styled.input<Padding>`
+    outline: none;
+    appearance: none;
+    width: 100%;
+    height: 70px;
+    padding-left: ${({ paddingLeft }) => paddingLeft || '28px'};
+    ${formTextStyleMixin};
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
 `;
 
 export const TextFieldStyled = withStyles({

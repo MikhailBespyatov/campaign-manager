@@ -10,7 +10,7 @@ import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { UniversalWrapper } from 'components/grid/wrappers/UniversalWrapper';
+import { UniversalWrapper } from 'components/grid/wrappers/UniversalWrapperDeprecated';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { primaryPadding, secondaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
@@ -29,7 +29,7 @@ import {
 import React from 'react';
 
 // const ColorPromptLine = ({ background }: Background) => (
-//     <UniversalWrapper background={background || black} height="2px" marginRight="10px" width="12px" />
+//     <UniversalWrapperDeprecated background={background || black} height="2px" marginRight="10px" width="12px" />
 // );
 
 export const Dashboard = () => (
@@ -113,7 +113,7 @@ export const Dashboard = () => (
                     </Row>
                     <Section alignCenter noWrap>
                         <ReactEcharts option={graphicOption} style={{ height: '516px', width: '755px' }} />
-                        {/* <UniversalWrapper
+                        {/* <UniversalWrapperDeprecated
                             border={graphicBlockBorder}
                             borderRadius={secondaryBorderRadius}
                             direction="column"
