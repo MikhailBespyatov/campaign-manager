@@ -5,6 +5,7 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import chooseVideo from 'assets/img/choose_video.svg';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { TextWrapper } from './styles';
 
 export const SelectVideoBlock: FC = () => (
     <>
@@ -17,9 +18,13 @@ export const SelectVideoBlock: FC = () => (
                     </Span>
                 </MarginWrapper>
                 <MarginWrapper marginLeft="43px" marginRight="43px">
-                    <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
-                        Select a video by clicking on the add icon as shown in the example
-                    </Span>
+                    <TextWrapper>
+                        <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
+                            Browse through quality WOM content about your brand and products to add to your campaign.
+                            These videos have already been authenticated by the community to bring you the most
+                            authentic and popular word-of-mouth recommendations..
+                        </Span>
+                    </TextWrapper>
                 </MarginWrapper>
             </Column>
         </AbsoluteWrapper>

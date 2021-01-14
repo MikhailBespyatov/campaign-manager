@@ -15,7 +15,7 @@ export const DateOfCampaignBlock: FC<Props> = ({ state, date, isExpiredBorder = 
     <DateOfCampaignWrapper isExpiredBorder={isExpiredBorder}>
         <MarginWrapper marginBottom="20px">
             <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                {state === 'start' ? 'Start Date of campaign' : 'End Date of campaign'}
+                {state === 'start' ? 'Start of campaign' : 'End of campaign'}
             </Span>
         </MarginWrapper>
         <Span color={isExpiredBorder ? red : primaryColor} fontSize="18px" fontWeight="400" lineHeight="22px">

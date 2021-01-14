@@ -289,50 +289,63 @@ export const CardModal = () => {
                                     </Row>
                                 </Section>
                                 <Section>
-                                    <Title>Validators</Title>
-                                    <Row>
-                                        <MarginWrapper marginRight="25px">
-                                            <ItemBlock
-                                                item={roundScore(womQualityScore?.authenticity || 0)}
-                                                title="H"
-                                            />
+                                    <Title>Authentication</Title>
+                                    <Column>
+                                        <MarginWrapper marginBottom="15px">
+                                            <Span fontSize="18px" fontWeight="400" lineHeight="22px">
+                                                Average WOM Authentication Score
+                                            </Span>
                                         </MarginWrapper>
-                                        <MarginWrapper marginRight="25px">
-                                            <ItemBlock item={roundScore(womQualityScore?.creativity || 0)} title="C" />
-                                        </MarginWrapper>
-                                        <MarginWrapper marginRight="100px">
-                                            <ItemBlock item={roundScore(womQualityScore?.positivity || 0)} title="P" />
-                                        </MarginWrapper>
-                                        <MarginWrapper>
-                                            <Column>
-                                                <MarginWrapper marginBottom="8px">
-                                                    <Subtitle>Viewers</Subtitle>
-                                                </MarginWrapper>
-                                                <Row>
-                                                    <Column marginRight={primaryPadding}>
-                                                        <PercentageSpan>{'< 25%'}</PercentageSpan>
-                                                        <PercentageSpan>25% - 50%</PercentageSpan>
-                                                        <PercentageSpan>50% - 75%</PercentageSpan>
-                                                        <PercentageSpan>{'> 75%'}</PercentageSpan>
-                                                    </Column>
-                                                    <Column>
-                                                        <EngagementSpan>
-                                                            {engagement?.viewsD1Percentage || 0}%
-                                                        </EngagementSpan>
-                                                        <EngagementSpan>
-                                                            {engagement?.viewsD2Percentage || 0}%
-                                                        </EngagementSpan>
-                                                        <EngagementSpan>
-                                                            {engagement?.viewsD3Percentage || 0}%
-                                                        </EngagementSpan>
-                                                        <EngagementSpan>
-                                                            {engagement?.viewsD4Percentage || 0}%
-                                                        </EngagementSpan>
-                                                    </Column>
-                                                </Row>
-                                            </Column>
-                                        </MarginWrapper>
-                                    </Row>
+                                        <Row>
+                                            <MarginWrapper marginRight="25px">
+                                                <ItemBlock
+                                                    item={roundScore(womQualityScore?.authenticity || 0)}
+                                                    title="Honesty"
+                                                />
+                                            </MarginWrapper>
+                                            <MarginWrapper marginRight="25px">
+                                                <ItemBlock
+                                                    item={roundScore(womQualityScore?.creativity || 0)}
+                                                    title="Creativity"
+                                                />
+                                            </MarginWrapper>
+                                            <MarginWrapper marginRight="100px">
+                                                <ItemBlock
+                                                    item={roundScore(womQualityScore?.positivity || 0)}
+                                                    title="Positivity"
+                                                />
+                                            </MarginWrapper>
+                                            <MarginWrapper>
+                                                <Column>
+                                                    <MarginWrapper marginBottom="8px">
+                                                        <Subtitle>Viewers</Subtitle>
+                                                    </MarginWrapper>
+                                                    <Row>
+                                                        <Column marginRight={primaryPadding}>
+                                                            <PercentageSpan>{'< 25%'}</PercentageSpan>
+                                                            <PercentageSpan>25% - 50%</PercentageSpan>
+                                                            <PercentageSpan>50% - 75%</PercentageSpan>
+                                                            <PercentageSpan>{'> 75%'}</PercentageSpan>
+                                                        </Column>
+                                                        <Column>
+                                                            <EngagementSpan>
+                                                                {engagement?.viewsD1Percentage || 0}%
+                                                            </EngagementSpan>
+                                                            <EngagementSpan>
+                                                                {engagement?.viewsD2Percentage || 0}%
+                                                            </EngagementSpan>
+                                                            <EngagementSpan>
+                                                                {engagement?.viewsD3Percentage || 0}%
+                                                            </EngagementSpan>
+                                                            <EngagementSpan>
+                                                                {engagement?.viewsD4Percentage || 0}%
+                                                            </EngagementSpan>
+                                                        </Column>
+                                                    </Row>
+                                                </Column>
+                                            </MarginWrapper>
+                                        </Row>
+                                    </Column>
                                 </Section>
                                 <Section>
                                     <Title>Hashtags</Title>
@@ -343,10 +356,10 @@ export const CardModal = () => {
                                     </Row>
                                 </Section>
                                 <Section>
-                                    <Title>In-use</Title>
+                                    <Title>Campaigns</Title>
                                     <Column>
                                         <MarginWrapper marginBottom="8px">
-                                            <Subtitle>Another Campaign</Subtitle>
+                                            <Subtitle>Other campaigns featuring this video</Subtitle>
                                         </MarginWrapper>
                                         <Row maxWidth="420px">
                                             {itemsInUseLoading ? (
