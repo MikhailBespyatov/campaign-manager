@@ -16,8 +16,10 @@ import {
     roundScore,
     slashInserter,
     spaceInserter,
-    getDate
+    getDate,
+    engagementStatusTypes
 } from 'utils/usefulFunctions';
+import { parseCampaignRoutes } from 'constants/routes';
 
 describe('giveAccessByRoles', () => {
     it('Test for returning access', () => {
@@ -333,5 +335,34 @@ describe('getDate', () => {
         expect(getDate()).toBe(undefined);
         expect(getDate(new Date('2021-11-25'))).toBe('2021-11-25');
         expect(getDate(new Date('2021-02-02 13:38'))).toBe('2021-02-02');
+    });
+});
+
+describe('engagementStatusTypes', () => {
+    it('Test for engagementStatusTypes', () => {
+        expect(engagementStatusTypes(0)).toBe('error');
+        expect(engagementStatusTypes(1)).toBe('success');
+        expect(engagementStatusTypes(345)).toBe('success');
+        expect(engagementStatusTypes(-1)).toBe('error');
+        expect(engagementStatusTypes(-1.1)).toBe('error');
+        expect(engagementStatusTypes(34.32)).toBe('success');
+        expect(engagementStatusTypes()).toBe('error');
+        expect(engagementStatusTypes(undefined)).toBe('error');
+    });
+});
+
+describe('parseCampaignRoutes', () => {
+    it('Test for parseCampaignRoutes', () => {
+        expect(parseCampaignRoutes(['1', '2'])).toEqual({
+            1: '/campaign_manager/campaign/1/',
+            2: '/campaign_manager/campaign/2/',
+            status: '/campaign_manager/campaign/:status(1|2)/'
+        });
+        expect(parseCampaignRoutes(['test', 'test2', 'test3'])).toEqual({
+            test: '/campaign_manager/campaign/test/',
+            test2: '/campaign_manager/campaign/test2/',
+            test3: '/campaign_manager/campaign/test3/',
+            status: '/campaign_manager/campaign/:status(test|test2|test3)/'
+        });
     });
 });

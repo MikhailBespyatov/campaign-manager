@@ -6,7 +6,7 @@ import {
     StyledCheckbox,
     Wrapper
 } from 'components/FormComponents/inputs/BooleanCheckbox/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { useState } from 'react';
 import { DefaultChecked, Disabled } from 'types';
 
@@ -18,7 +18,7 @@ interface Props extends DefaultChecked, Disabled {
 export const BooleanCheckbox = ({
     defaultChecked = false,
     disabled = false,
-    onChange = noop,
+    onChange = Noop,
     name = 'name'
 }: Props) => {
     const [checked, setChecked] = useState(defaultChecked);

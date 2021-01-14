@@ -4,6 +4,7 @@ import {
     SelectCampaignHorizontalMargin,
     selectVideoBackgroundColor
 } from 'components/common/blocks/CreateCampaignManager/constants';
+import { Background } from 'types';
 
 export const HeaderCreateCampaignManager = styled.div`
     background-color: ${headerBackground};
@@ -34,6 +35,14 @@ export const SelectVideoDescription = styled.div`
     position: relative;
     margin-right: ${SelectCampaignHorizontalMargin};
     background-color: ${selectVideoBackgroundColor};
+`;
+
+export const SelectedVideo = styled.div<Background>`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    ${({ background }) => (background ? `background: ${background};` : ``)};
 `;
 
 export const CreateCampaignBlock = styled.div`

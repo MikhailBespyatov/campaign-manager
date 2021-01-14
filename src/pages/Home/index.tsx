@@ -1,5 +1,4 @@
 import history from 'BrowserHistory';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { WomLogoImg } from 'components/common/imageComponents/WomLogoImg';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
@@ -9,6 +8,7 @@ import { white } from 'constants/styles';
 import { learnMoreHref } from 'pages/Home/constants';
 import { ExternalLink, Wrapper } from 'pages/Home/styles';
 import React from 'react';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 export const Home = () => {
     const goToRegistration = () => history.push(routes.signUp.index);
@@ -32,7 +32,7 @@ export const Home = () => {
 
             <Row>
                 {/* <Column marginRight={primaryPadding}> */}
-                <RoundedButton onClick={goToRegistration}>SIGN UP</RoundedButton>
+                <ManualRoundedButton onClick={goToRegistration}>SIGN UP</ManualRoundedButton>
             </Row>
             <ExternalLink href={learnMoreHref} target="_blank">
                 <Span color={white} fontSize="14px" lineHeight="14px">

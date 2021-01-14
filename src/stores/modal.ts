@@ -1,34 +1,45 @@
 import { createEvent, createStore } from 'effector';
-import { CardModal, PopUpCampaignManager, QexWidgetModal } from 'types';
+import { CardModal, PopUpCampaignManager } from 'types';
+import { initializeGenericStoreModal } from 'stores/initialize.store.modal';
+//
+// const openCardModal = createEvent<string>();
+// const closeCardModal = createEvent();
+// //
+// const cardModal = createStore<CardModal>({
+//     visible: false,
+//     id: ''
+// })
+//     .on(openCardModal, (_, id) => ({
+//         visible: true,
+//         id: id
+//     }))
+//     .on(closeCardModal, () => ({
+//         visible: false,
+//         id: ''
+//     }));
 
-const openCardModal = createEvent<string>();
-const closeCardModal = createEvent();
+const { modal: cardModal, closeModal: closeCardModal, openModal: openCardModal } = initializeGenericStoreModal<
+    CardModal
+>({ id: '' });
 
-const cardModal = createStore<CardModal>({
-    visible: false,
-    id: ''
-})
-    .on(openCardModal, (_, id) => ({
-        visible: true,
-        id: id
-    }))
-    .on(closeCardModal, () => ({
-        visible: false,
-        id: ''
-    }));
+// const openQexWidgetModal = createEvent();
+// const closeQexWidgetModal = createEvent();
+//
+// const qexWidgetModal = createStore<QexWidgetModal>({
+//     visible: false
+// })
+//     .on(openQexWidgetModal, () => ({
+//         visible: true
+//     }))
+//     .on(closeQexWidgetModal, () => ({
+//         visible: false
+//     }));
 
-const openQexWidgetModal = createEvent();
-const closeQexWidgetModal = createEvent();
-
-const qexWidgetModal = createStore<QexWidgetModal>({
-    visible: false
-})
-    .on(openQexWidgetModal, () => ({
-        visible: true
-    }))
-    .on(closeQexWidgetModal, () => ({
-        visible: false
-    }));
+const {
+    modal: qexWidgetModal,
+    closeModal: closeQexWidgetModal,
+    openModal: openQexWidgetModal
+} = initializeGenericStoreModal();
 
 const openPopUpCampaignManager = createEvent<PopUpCampaignManager>();
 const closePopUpCampaignManager = createEvent();

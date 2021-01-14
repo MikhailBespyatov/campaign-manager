@@ -1,5 +1,4 @@
 import { AddButton } from 'components/common/buttons/AddButton';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Hr } from 'components/common/dividers/Hr';
 import { Budget } from 'components/common/features/Budget';
 import { Summary } from 'components/common/features/Summary';
@@ -22,6 +21,7 @@ import { TopBar } from 'components/grid/bars/TopBar';
 import { Footer } from 'components/grid/Footer';
 import { Header } from 'components/grid/Header';
 import React, { useState } from 'react';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 const disabled = true;
 
@@ -51,9 +51,9 @@ export const Test = () => {
                     flexDirection: 'column'
                 }}
             >
-                <RoundedButton>normal</RoundedButton>
+                <ManualRoundedButton>normal</ManualRoundedButton>
                 <Space />
-                <RoundedButton disabled={disabled}>disabled</RoundedButton>
+                <ManualRoundedButton disabled={disabled}>disabled</ManualRoundedButton>
                 <Space />
                 <Checkbox value={'value'} onChange={onChange} />
                 <Space />

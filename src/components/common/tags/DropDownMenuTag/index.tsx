@@ -14,10 +14,10 @@ import { Wrapper } from 'components/common/tags/DropDownMenuTag/styles';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import React, { FC } from 'react';
-import { noop } from 'types';
+import { Noop } from 'types';
 
 interface Props {
-    onClick?: noop;
+    onClick?: Noop;
 }
 
 export const DropDownMenuTag: FC<Props> = ({ children, onClick }) => (

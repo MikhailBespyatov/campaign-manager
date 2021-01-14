@@ -1,10 +1,10 @@
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
-import React, { FC } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
 import { userStores } from 'stores/user';
 
-export const PrivateRoute: FC<RouteProps> = props => {
+export const PrivateRoute = (props: RouteProps) => {
     const { access } = useStore(userStores.auth);
 
     if (access !== -1) {

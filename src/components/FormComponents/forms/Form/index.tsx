@@ -1,7 +1,7 @@
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { logoDiameter } from 'components/FormComponents/forms/Form/constants';
 import { FormWrapper, H1Form, PForm, Wrapper } from 'components/FormComponents/forms/Form/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
@@ -16,7 +16,7 @@ export const Form: FC<Props> = ({
     children,
     title = 'Hello, please enter as User',
     subtitle = 'To discover & manage WOM Content',
-    onSubmit = noop,
+    onSubmit = Noop,
     src,
     subSubtitle
 }) => {

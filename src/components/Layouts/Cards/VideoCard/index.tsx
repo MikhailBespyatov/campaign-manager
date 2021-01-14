@@ -57,10 +57,10 @@ export const VideoCard = ({
         [womContentId, contentIds]
     );
 
-    const openCardModal = () => modalEvents.openCardModal(ID);
+    const openCardModal = () => modalEvents.openCardModal({ id: ID });
     const onVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
     // const handleDetail = () => history.push(globalPrefixUrl + routes.campaignManager.discover.indexDetails + ID);
-    const handleDetail = () => modalEvents.openCardModal(ID);
+    const handleDetail = () => modalEvents.openCardModal({ id: ID });
     const addIdHandler = () => {
         if (womContentId)
             active

@@ -16,7 +16,7 @@ interface Props {
 
 export const SelectedVideoCard: FC<Props> = ({ id = '', uriPrimary, removeDeleteImg = false }) => {
     const handlerRemove = () => campaignsEvents.removeContentById(id);
-    const openCardModal = () => modalEvents.openCardModal(id);
+    const openCardModal = () => modalEvents.openCardModal({ id });
 
     return (
         <SelectedVideoCardWrapper>

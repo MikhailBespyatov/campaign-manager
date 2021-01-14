@@ -1,8 +1,7 @@
 import { Modal, Wrapper } from 'components/modals/PopUpCamaignManager/styles';
 import { useStore } from 'effector-react';
-import React, { FC } from 'react';
+import React from 'react';
 import { modalEvents, modalStores } from 'stores/modal';
-import { UniversalWrapper } from 'components/grid/wrappers/UniversalWrapperDeprecated';
 import { SelectVideoBlock } from 'components/common/blocks/SelectVideoBlock';
 import closeModalImg from 'assets/img/close_modal.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
@@ -20,7 +19,7 @@ import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/c
 
 interface CloseImgPopUpProps extends NoopClick {}
 
-const CloseImgPopUp: FC<CloseImgPopUpProps> = ({ onClick }) => (
+const CloseImgPopUp = ({ onClick }: CloseImgPopUpProps) => (
     <AbsoluteWrapper right={closeModalImgDiameter} top={closeModalImgDiameter}>
         <CustomImg pointer src={closeModalImg} onClick={onClick} />
     </AbsoluteWrapper>
@@ -31,7 +30,7 @@ export const PopUpCampaignManager = () => {
     const onClose = () => modalEvents.closePopUpCampaignManager();
     const handleCloseCreateCampaign = () => {
         campaignContentEvents.setVisibleCreateCampaign(false);
-        campaignsEvents.setFieldCreateCampaignForm(formValues);
+        campaignsEvents.setFieldsCreateCampaignForm(formValues);
         campaignsEvents.clearContentIds();
         onClose();
     };
@@ -39,9 +38,9 @@ export const PopUpCampaignManager = () => {
         <Wrapper visible={visible}>
             {popUp === 'info' && (
                 <Modal backgroundColor="#F2F2F2">
-                    <UniversalWrapper height="600px">
+                    <Column height="600px">
                         <SelectVideoBlock />
-                    </UniversalWrapper>
+                    </Column>
                     <CloseImgPopUp onClick={onClose} />
                 </Modal>
             )}

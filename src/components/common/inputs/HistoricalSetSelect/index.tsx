@@ -11,7 +11,7 @@ import { imgHeight, imgWidth } from 'components/common/tags/ClosableTag/constant
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 import {
     Active,
@@ -63,7 +63,7 @@ export const HistoricalSetSelect = ({
     additionalTitle,
     defaultActive = values[0],
     data = values,
-    onChange = noop,
+    onChange = Noop,
     top,
     ...styles
 }: WrapperProps) => {

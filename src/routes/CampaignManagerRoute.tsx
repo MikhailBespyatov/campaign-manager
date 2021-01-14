@@ -13,12 +13,12 @@ import { useStore } from 'effector-react';
 //         return <Redirect to={props?.location?.pathname.slice(0, -1)} />;
 //     } else return <Redirect to={routes.home} />;
 // };
-import React, { FC } from 'react';
+import React from 'react';
 import { RouteProps } from 'react-router';
 import { AccessRoute } from 'routes/AccessRoute';
 import { themeStores } from 'stores/theme';
 
-export const CampaignManagerRoute: FC<RouteProps> = props => {
+export const CampaignManagerRoute = (props: RouteProps) => {
     const { prefix } = useStore(themeStores.globalPrefix);
 
     return <AccessRoute proxy={[1, 2]} {...props} redirectTo={parsePublicUrl(prefix || '', signInIndexTemplate)} />;

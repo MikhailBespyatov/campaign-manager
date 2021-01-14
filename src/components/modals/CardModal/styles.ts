@@ -40,6 +40,7 @@ export const VideoDetailsWrapper = styled.div`
     display: flex;
     flex-direction: row;
     padding: 0 ${titleWrapperHorizontalPadding};
+    margin-bottom: 40px;
 `;
 
 export const TitleWrapper = styled.div`

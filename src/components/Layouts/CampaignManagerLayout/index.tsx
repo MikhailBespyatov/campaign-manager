@@ -1,4 +1,3 @@
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
@@ -73,7 +72,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                                     BUY WOM
                                 </ManualRoundedButton>
                             </Column>
-                            <RoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</RoundedButton>
+                            <ManualRoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</ManualRoundedButton>
                         </Row>
                     }
                 />

@@ -21,7 +21,7 @@ import { InputWrapper, Wrapper } from 'components/common/inputs/LinkInput/styles
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { errorColor, successColor, white } from 'constants/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TextInput } from 'types';
@@ -31,7 +31,7 @@ interface Props extends TextInput {}
 export const LinkInput = ({
     error,
     defaultValue = '',
-    onChange = noop,
+    onChange = Noop,
     label,
     name,
     type = name,

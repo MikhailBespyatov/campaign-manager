@@ -1,7 +1,7 @@
 import { TextInput } from 'components/common/inputs/Input';
 import { wrapperBackground } from 'components/common/inputs/InviteInput/constants';
 import { Wrapper } from 'components/common/inputs/InviteInput/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { ChangeEvent } from 'react';
 import { Placeholder, TextInput as TextInputProps } from 'types';
 
@@ -10,7 +10,7 @@ interface Props extends TextInputProps, Placeholder {}
 export const InviteInput = ({
     //error,
     defaultValue = '',
-    onChange = noop,
+    onChange = Noop,
     placeholder = 'Enter Email address',
     name = 'email',
     type = 'email',

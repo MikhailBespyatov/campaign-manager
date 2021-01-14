@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
 import { CreateCampaignRequestProps, Props } from 'components/FormComponents/forms/CreateCampaignForm/types';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { existCampaignErrorMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore, forward } from 'effector';
@@ -33,7 +33,7 @@ const contentIds = createStore<WOM.ContentItemResponse[]>([])
     .on(clearContentIds, () => []);
 
 const upsertItem = createEffect({
-    handler: async ({ values, setErrors = noop }: CreateCampaignRequestProps) => {
+    handler: async ({ values, setErrors = Noop }: CreateCampaignRequestProps) => {
         try {
             loadingEffects.updateLoading();
             await API.campaigns.upsertItem(values);
@@ -187,13 +187,13 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 //.on(setDefaultValues, () => defaultCampaignContentValues);
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
-const setFieldCreateCampaignForm = createEvent<Partial<Props>>();
+const setFieldsCreateCampaignForm = createEvent<Partial<Props>>();
 const setContentIds = createEvent<WOM.ContentItemResponse[]>();
 const createCampaignForm = createStore<Props>(formValues)
     .on(setContentIds, (state, contentIds) => ({ ...state, contentIds: contentIds.map(i => i.womContentId || '') }))
-    .on(setFieldCreateCampaignForm, (store, state) => ({
+    .on(setFieldsCreateCampaignForm, (store, fields) => ({
         ...store,
-        ...state
+        ...fields
     }));
 
 forward({ from: contentIds, to: setContentIds });
@@ -205,7 +205,7 @@ const campaignsEvents = {
     clearContentIds,
     pushContentId,
     removeContentById,
-    setFieldCreateCampaignForm
+    setFieldsCreateCampaignForm
 };
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById, getItemsInUseById };
 const campaignsStores = {

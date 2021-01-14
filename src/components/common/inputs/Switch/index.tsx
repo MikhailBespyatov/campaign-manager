@@ -1,5 +1,5 @@
 import { Ball, Wrapper } from 'components/common/inputs/Switch/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     defaultState?: boolean;
 }
 
-export const Switch: FC<Props> = ({ onChange = noop, defaultState = false }) => {
+export const Switch: FC<Props> = ({ onChange = Noop, defaultState = false }) => {
     const [value, setValue] = useState(defaultState);
 
     const onClick = () => {

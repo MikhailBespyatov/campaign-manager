@@ -16,7 +16,7 @@ import {
 } from 'components/common/inputs/InputAddTag/constants';
 import { Wrapper } from 'components/common/inputs/InputAddTag/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { ChangeEvent, FC, useState } from 'react';
 import { Placeholder } from 'types';
 
@@ -25,7 +25,7 @@ interface Props extends Placeholder {
     defaultValue?: string;
 }
 
-export const InputAddTag: FC<Props> = ({ defaultValue = '', onClick = noop, placeholder = 'Enter tags' }) => {
+export const InputAddTag: FC<Props> = ({ defaultValue = '', onClick = Noop, placeholder = 'Enter tags' }) => {
     const [value, setValue] = useState(defaultValue);
 
     const inputChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);

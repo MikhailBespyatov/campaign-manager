@@ -1,4 +1,4 @@
-import { noop, StatusType } from 'types';
+import { Noop, StatusType } from 'types';
 
 export interface Subtitle {
     subtitle?: string;
@@ -14,7 +14,7 @@ export interface Title extends Subtitle {
 
 export interface Closable {
     closable?: boolean;
-    onClose?: noop;
+    onClose?: Noop;
 }
 
 export interface IsClosed {

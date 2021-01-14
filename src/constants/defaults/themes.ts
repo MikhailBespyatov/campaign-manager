@@ -4,22 +4,7 @@ import adidasLogoSecondary from 'assets/organizations/logos/adidas_logo_secondar
 import esteeLauderLogo from 'assets/organizations/logos/estee_lauder_logo.svg';
 import esteeLauderLogoSecondary from 'assets/organizations/logos/estee_lauder_logo_secondary.svg';
 import { backgroundColor, blue, primaryColor, secondaryColor, white } from 'constants/styles';
-import { Dictionary } from 'types';
-
-export interface ThemeProps {
-    logo: string;
-    secondaryLogo: string;
-    userTableLogo: string;
-    primaryColor: string;
-    background: string;
-    buyWOMButtonBackgroundColor: string;
-    buyWOMButtonTextColor: string;
-    statisticActiveTextColor: string;
-    statisticInactiveTextColor: string;
-    primaryTextColor: string;
-    secondaryTextColor: string;
-    footerTextColor: string;
-}
+import { Dictionary, ThemeProps } from 'types';
 
 export const defaultTheme = {
     logo: womLogo,
@@ -33,8 +18,8 @@ export const defaultTheme = {
     buyWOMButtonTextColor: white,
     statisticActiveTextColor: white,
     statisticInactiveTextColor: primaryColor,
-    footerTextColor: white,
-    organizationId: ''
+    footerTextColor: white
+    // organizationId: ''
 };
 
 export const companyNames = ['adidas', 'estee_lauder'];
@@ -60,7 +45,6 @@ export const esteeLauderTheme = {
     logo: esteeLauderLogoSecondary,
     secondaryLogo: esteeLauderLogo,
     userTableLogo: esteeLauderLogo,
-    //primaryColor: esteeLauderColor,
     primaryTextColor: white,
     secondaryTextColor: white,
     primaryColor: '#E79B61',

@@ -7,10 +7,10 @@ import { TableSubSpan } from 'components/common/typography/TableSubSpan';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { errorColor, successColor } from 'constants/styles';
 import React, { FC } from 'react';
-import { ForcedColor, infoType } from 'types';
+import { ForcedColor, InfoType } from 'types';
 
 interface Props extends ForcedColor {
-    type?: infoType;
+    type?: InfoType;
     isPlusStyle?: boolean;
 }
 

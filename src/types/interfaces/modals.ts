@@ -1,5 +1,4 @@
 export interface CardModal {
-    visible: boolean;
     id: string;
 }
 

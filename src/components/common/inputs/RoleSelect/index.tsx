@@ -11,7 +11,7 @@ import {
 import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/RoleSelect/styles';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 import { Active, ItemRadioProperties, RadioProperties, Reverse } from 'types';
 
@@ -35,7 +35,7 @@ export const RoleSelect: FC<WrapperProps> = ({
     values,
     defaultActive = values[0],
     data = values,
-    onChange = noop,
+    onChange = Noop,
     reverse
 }) => {
     const [isClosed, setIsClosed] = useState(true);

@@ -10,7 +10,6 @@ import { P } from 'components/common/typography/titles/P';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { UniversalWrapper } from 'components/grid/wrappers/UniversalWrapperDeprecated';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { primaryPadding, secondaryPadding } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
@@ -20,13 +19,12 @@ import {
     engageColor,
     graphicOption,
     previewColor,
-    tableUniversalWrapperBorder,
-    tableUniversalWrapperPadding,
     testHeaderRadioArray,
     testSelectArray,
     viewColor
 } from 'pages/CampaignManager/Dashboard/constants';
 import React from 'react';
+import { DashboardBorder } from './styles';
 
 // const ColorPromptLine = ({ background }: Background) => (
 //     <UniversalWrapperDeprecated background={background || black} height="2px" marginRight="10px" width="12px" />
@@ -38,12 +36,7 @@ export const Dashboard = () => (
             <Section marginBottom="0">
                 <RowHeaderRadio values={testHeaderRadioArray} />
             </Section>
-            <UniversalWrapper
-                border={tableUniversalWrapperBorder}
-                borderTop="none"
-                padding={tableUniversalWrapperPadding}
-                width="100%"
-            >
+            <DashboardBorder>
                 {/* <MarginWrapper margin="auto">
                     <Column justifyCenter>
                         <Section alignCenter noWrap>
@@ -179,7 +172,7 @@ export const Dashboard = () => (
                         </BorderBlock>
                     </Section>
                 </Column>
-            </UniversalWrapper>
+            </DashboardBorder>
         </ContentWrapper>
     </CampaignManagerLayout>
 );

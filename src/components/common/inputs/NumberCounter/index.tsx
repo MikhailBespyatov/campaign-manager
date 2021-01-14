@@ -14,23 +14,23 @@ import {
     inputMinWidth
 } from 'components/common/inputs/NumberCounter/constants';
 import { Wrapper } from 'components/common/inputs/NumberCounter/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { ChangeEvent, useState } from 'react';
-import { BorderRadiusProperties, NumberInput as INumberInput, numberOrEmptyString } from 'types';
+import { BorderRadiusProperties, NumberInput as INumberInput, NumberOrEmptyString } from 'types';
 
 interface Props extends INumberInput, BorderRadiusProperties {}
 
 export const NumberCounter = ({
     defaultValue = 0,
-    onChange = noop,
+    onChange = Noop,
     min = 0,
     max = 10,
     step = 1,
     ...borderRadiusProperties
 }: Props) => {
-    const [value, setValue] = useState<numberOrEmptyString>(defaultValue);
+    const [value, setValue] = useState<NumberOrEmptyString>(defaultValue);
 
-    const increment = () => setValue(value === '' ? 1 : value + 1);
+    const increment = () => setValue(Number(value) + 1);
     const decrement = () => setValue(value < 1 || value === '' ? 0 : value - 1);
 
     const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
