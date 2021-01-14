@@ -177,7 +177,7 @@ export const VideoCard = ({
                     {isVideoPlaying ? 'Pause' : 'Play'} Video
                 </FeatureCell>
                 <FeatureCell quantity={2} onClick={handleDetail}>
-                    Get Details
+                    View Stats
                 </FeatureCell>
             </CardRowFeatures>
         </Card>

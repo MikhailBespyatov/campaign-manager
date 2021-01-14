@@ -18,11 +18,11 @@ import {
     colors,
     graphicOption,
     growSpread,
-    name1,
-    name2,
-    name3,
-    name4,
-    name5,
+    engagementName1,
+    engagementName2,
+    engagementName3,
+    engagementName4,
+    engagementName5,
     pickerMarginTop
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
@@ -75,11 +75,11 @@ export const Details = () => {
 
     const radioArray: RowHeaderRadioType[] = [
         {
-            title: name1,
+            title: engagementName1,
             quantity: summary?.viewCount?.toString() || '0'
         },
         {
-            title: name2,
+            title: engagementName2,
             quantity: summary?.likeCount?.toString() || '0',
             // inBrackets: `${summary?.likesPercentage || 0}%`,
             ...growSpread(summary?.likesPercentage || 0)
@@ -87,7 +87,7 @@ export const Details = () => {
             // growNumber: deltaStatistics?.likesDelta ? deltaStatistics.likesDelta : 0
         },
         {
-            title: name3,
+            title: engagementName3,
             quantity: summary?.saveCount?.toString() || '0',
             // inBrackets: `${summary?.savesPercentage || 0}%`,
             ...growSpread(summary?.savesPercentage || 0)
@@ -95,13 +95,13 @@ export const Details = () => {
             // growNumber: deltaStatistics?.savesDelta ? deltaStatistics.savesDelta : 0
         },
         {
-            title: name4,
+            title: engagementName4,
             quantity: summary?.commentCount?.toString() || '0',
             // inBrackets: `${summary?.commentsPercentage || 0}%`,
             ...growSpread(summary?.commentsPercentage || 0)
         },
         {
-            title: name5,
+            title: engagementName5,
             quantity: summary?.shareCount?.toString() || '0',
             // inBrackets: `${summary?.sharesPercentage || 0}%`,
             ...growSpread(summary?.sharesPercentage || 0)
@@ -115,7 +115,7 @@ export const Details = () => {
     // const [yAxisData, setYAxisData] = useState(items.map(i => i.viewCount));
     // const [yAxisData1, setYAxisData1] = useState(items1.map(i => i.viewCount));
     // const [graphicColor, setGraphicColor] = useState(color1);
-    const [graphicName, setGraphicName] = useState(name1);
+    const [graphicName, setGraphicName] = useState(engagementName1);
 
     const series =
         sets?.map((_, i) => ({
@@ -190,25 +190,25 @@ export const Details = () => {
     const onChange = (active: string) => {
         setGraphicName(active);
         switch (active) {
-            case name1:
+            case engagementName1:
                 // setYAxisData(items.map(i => i.viewCount));
                 // setYAxisData1(items1.map(i => i.viewCount));
                 // setGraphicColor(color1);
                 setSetsData(sets?.map(i => i?.items?.map(i => i.viewCount)));
                 break;
-            case name2:
+            case engagementName2:
                 // setYAxisData(items.map(i => i.likeCount));
                 // setYAxisData1(items1.map(i => i.likeCount));
                 // setGraphicColor(color2);
                 setSetsData(sets?.map(i => i?.items?.map(i => i.likeCount)));
                 break;
-            case name3:
+            case engagementName3:
                 // setYAxisData(items.map(i => i.saveCount));
                 // setYAxisData1(items1.map(i => i.saveCount));
                 // setGraphicColor(color3);
                 setSetsData(sets?.map(i => i?.items?.map(i => i.saveCount)));
                 break;
-            case name4:
+            case engagementName4:
                 // setYAxisData(items.map(i => i.commentCount));
                 // setYAxisData1(items1.map(i => i.commentCount));
                 // setGraphicColor(color4);

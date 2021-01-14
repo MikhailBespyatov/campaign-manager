@@ -40,11 +40,11 @@ export const seriesTestData = [
 const graphicTextColor = '#C3CBD4';
 const labelBackground = 'white';
 
-export const name1 = 'View';
-export const name2 = 'Like';
-export const name3 = 'Save';
-export const name4 = 'Comment';
-export const name5 = 'Share';
+export const engagementName1 = 'Views';
+export const engagementName2 = 'Likes';
+export const engagementName3 = 'Saves';
+export const engagementName4 = 'Comments';
+export const engagementName5 = 'Shares';
 
 // export const previewColor = '#FF6B00';
 // export const viewColor = '#FC4237';
@@ -265,35 +265,35 @@ export const graphicOption = {
 
 // export const testHeaderRadioArray: RowHeaderRadioType[] = [
 //     {
-//         title: name1,
+//         title: engagementName1,
 //         quantity: '1m 23',
 //         inBrackets: '',
 //         growType: 'success',
 //         growNumber: 0
 //     },
 //     {
-//         title: name2,
+//         title: engagementName2,
 //         quantity: '100K',
 //         inBrackets: '(71.1%)',
 //         growType: 'success',
 //         growNumber: 0
 //     },
 //     {
-//         title: name3,
+//         title: engagementName3,
 //         quantity: '100K',
 //         inBrackets: '(71.1%)',
 //         growType: 'success',
 //         growNumber: 0
 //     },
 //     {
-//         title: name4,
+//         title: engagementName4,
 //         quantity: '100K',
 //         inBrackets: '(71.1%)',
 //         growType: 'success',
 //         growNumber: 0
 //     },
 //     {
-//         title: name5,
+//         title: engagementName5,
 //         quantity: '100K',
 //         inBrackets: '(71.1%)',
 //         growType: 'success',

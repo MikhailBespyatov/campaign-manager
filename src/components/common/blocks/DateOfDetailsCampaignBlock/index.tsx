@@ -14,7 +14,7 @@ export const DateOfDetailsCampaignBlock: FC<Props> = ({ state, date }) => (
     <Column>
         <MarginWrapper marginBottom="8px">
             <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
-                {state === 'start' ? 'Start Date of campaign' : 'End Date of campaign'}
+                {state === 'start' ? 'Start of campaign' : 'End of campaign'}
             </Span>
         </MarginWrapper>
         <Span fontSize="18px" fontWeight="400" lineHeight="22px">

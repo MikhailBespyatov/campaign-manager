@@ -1,11 +1,7 @@
 import { RoundedButton } from 'components/common/buttons/RoundedButton';
-import { Summary } from 'components/common/features/Summary';
-import { SummaryWomImg } from 'components/common/features/SummaryWomImg';
-import { SummaryWomLogoImg } from 'components/common/features/SummaryWomLogoImg';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MainLayout } from 'components/Layouts/MainLayout';
-import { numbersAfterDotWom } from 'constants/global';
 import { routes } from 'constants/routes';
 import { primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -14,10 +10,8 @@ import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
-import { walletEffects, walletStores } from 'stores/wallet';
+import { walletEffects } from 'stores/wallet';
 import { Background } from 'types';
-import { currencyToStandardForm, removeLastNulls, spaceInserter } from 'utils/usefulFunctions';
-import { DropDownBlock } from 'components/common/blocks/DropDownBlock';
 import { campaignContentEvents } from 'stores/campaignContent';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
@@ -29,11 +23,11 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
     const { walletId } = useStore(organizationsStores.item);
-    const usdRate = useStore(walletStores.usdRate);
-    const walletBalance = useStore(walletStores.walletBalance);
-    const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, campaignsRunning } = useStore(
-        organizationsStores.statistics
-    );
+    // const usdRate = useStore(walletStores.usdRate);
+    // const walletBalance = useStore(walletStores.walletBalance);
+    // const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, campaignsRunning } = useStore(
+    //     organizationsStores.statistics
+    // );
     const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
 
     const createRoute = globalPrefixUrl + routes.campaignManager.discover.index;
@@ -86,36 +80,36 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
             }
         >
             {' '}
-            <DropDownBlock title="Overall Budget">
-                <Section marginBottom={'0'}>
-                    <Summary
-                        subtitle="Campaigns Running"
-                        title={campaignsRunning ? spaceInserter(campaignsRunning.toString()) : '0'}
-                    />
-                    <Summary
-                        subtitle="Campaign Budget"
-                        title={budgetTotal ? currencyToStandardForm(budgetTotal) : '0'}
-                    />
-                    <Summary
-                        subtitle="Campaign Spent"
-                        title={budgetSpent ? currencyToStandardForm(budgetSpent) : '0'}
-                    />
-                    <Summary
-                        subtitle="Campaign Spend (Daily)"
-                        title={budgetPerDay ? currencyToStandardForm(budgetPerDay) : '0'}
-                    />
-                    <SummaryWomLogoImg
-                        subtitle="Remaining Budget"
-                        title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}
-                    />
-                    {/* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> */}
-                    <SummaryWomImg title={`$ ${usdRate ? removeLastNulls(Number(usdRate)) : '0'}`} />
-                    <Summary
-                        subtitle="Organization balance"
-                        title={removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))}
-                    />
-                </Section>
-            </DropDownBlock>
+            {/*<DropDownBlock title="Overall Budget">*/}
+            {/*    <Section marginBottom={'0'}>*/}
+            {/*        <Summary*/}
+            {/*            subtitle="Campaigns Running"*/}
+            {/*            title={campaignsRunning ? spaceInserter(campaignsRunning.toString()) : '0'}*/}
+            {/*        />*/}
+            {/*        <Summary*/}
+            {/*            subtitle="Campaign Budget"*/}
+            {/*            title={budgetTotal ? currencyToStandardForm(budgetTotal) : '0'}*/}
+            {/*        />*/}
+            {/*        <Summary*/}
+            {/*            subtitle="Campaign Spent"*/}
+            {/*            title={budgetSpent ? currencyToStandardForm(budgetSpent) : '0'}*/}
+            {/*        />*/}
+            {/*        <Summary*/}
+            {/*            subtitle="Campaign Spend (Daily)"*/}
+            {/*            title={budgetPerDay ? currencyToStandardForm(budgetPerDay) : '0'}*/}
+            {/*        />*/}
+            {/*        <SummaryWomLogoImg*/}
+            {/*            subtitle="Remaining Budget"*/}
+            {/*            title={budgetRemaining ? currencyToStandardForm(budgetRemaining) : '0'}*/}
+            {/*        />*/}
+            {/*        /!* <Summary subtitle="Remaining Duration" title={remainingDuration ? remainingDuration + 'd' : '0'} /> *!/*/}
+            {/*        <SummaryWomImg title={`$ ${usdRate ? removeLastNulls(Number(usdRate)) : '0'}`} />*/}
+            {/*        <Summary*/}
+            {/*            subtitle="Organization balance"*/}
+            {/*            title={removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))}*/}
+            {/*        />*/}
+            {/*    </Section>*/}
+            {/*</DropDownBlock>*/}
             {children}
         </MainLayout>
     );

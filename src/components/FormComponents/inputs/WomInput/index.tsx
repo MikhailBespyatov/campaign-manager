@@ -7,15 +7,15 @@ import { onCurrencyChange, womImgHeight } from 'components/FormComponents/inputs
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { noop, numbersAfterDotWom } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
-import { formGrey5, secondaryPadding } from 'constants/styles';
+import { formGrey5, primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useField } from 'formik';
 import React, { ChangeEvent, useState } from 'react';
 import { walletStores } from 'stores/wallet';
 import { Disabled, Label, Placeholder, Type } from 'types';
-import { currencyToText } from 'utils/usefulFunctions';
+import { currencyToText, removeLastNulls } from 'utils/usefulFunctions';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface Props extends Disabled, Placeholder, Type, Label {
@@ -37,6 +37,7 @@ export const WomInput = ({
     const [field, { touched }, { setValue, setTouched }] = useField(name);
     // const classes = useStyles();
     const usdRate = useStore(walletStores.usdRate);
+    const walletBalance = useStore(walletStores.walletBalance);
 
     const defaultWom = Number(field.value);
 
@@ -82,10 +83,10 @@ export const WomInput = ({
                 </RelativeWrapper>
                 <ErrorSpan>{requiredFieldMessage}</ErrorSpan>
                 <Row alignCenter>
-                    <Column marginRight={secondaryPadding}>
+                    <Column marginBottom={primaryPadding} marginRight="30px">
                         <Badge>USD</Badge>
                     </Column>
-                    <Column marginLeft="20px">
+                    <Column marginBottom={primaryPadding} marginRight="20px">
                         $ {currency}
                         <Span
                             color={formGrey5}
@@ -104,6 +105,30 @@ export const WomInput = ({
                             lineHeight="18px"
                         >
                             {currencyToText(usdRate)} = 1 WOM
+                        </Span>
+                    </Column>
+                    <Column marginBottom={primaryPadding}>
+                        Organization balance: {removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))} WOM
+                        <Span
+                            color={formGrey5}
+                            fontSize="12px"
+                            fontWeight="500"
+                            letterSpacing="0.141177px"
+                            lineHeight="18px"
+                        >
+                            Current Exchange Rate
+                        </Span>
+                        <Span
+                            color={formGrey5}
+                            fontSize="12px"
+                            fontWeight="500"
+                            letterSpacing="0.141177px"
+                            lineHeight="18px"
+                        >
+                            {currencyToText(
+                                Number((Number(walletBalance.toFixed(numbersAfterDotWom)) * usdRate).toFixed(2))
+                            )}{' '}
+                            = {removeLastNulls(Number(walletBalance.toFixed(numbersAfterDotWom)))} WOM
                         </Span>
                     </Column>
                 </Row>

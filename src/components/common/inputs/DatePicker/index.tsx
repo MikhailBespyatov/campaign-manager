@@ -110,7 +110,7 @@ export const DatePickerBetween = ({
                 <Column noWrap marginBottom={marginBottom}>
                     <MarginWrapper marginBottom={pickerMarginTop}>
                         <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                            Choose Date From
+                            Date From
                         </Span>
                     </MarginWrapper>
                     <DataPickerWrapper>
@@ -145,7 +145,7 @@ export const DatePickerBetween = ({
                 <Column noWrap marginBottom={marginBottom}>
                     <MarginWrapper marginBottom={pickerMarginTop}>
                         <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                            Choose Date To
+                            Date To
                         </Span>
                     </MarginWrapper>
                     <DataPickerWrapper>

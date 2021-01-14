@@ -45,7 +45,7 @@ export const CampaignItem: FC<Props> = ({
                     </MarginWrapper>
                     <MarginWrapper marginBottom="18px">
                         <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
-                            {`${contentIds?.length} videos, ${budget?.budgetTotal} WOM`}
+                            {`Content: ${contentIds?.length} videos, Budget: ${budget?.budgetTotal} WOM`}
                         </Span>
                     </MarginWrapper>
                     <Row marginBottom="60px">

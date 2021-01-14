@@ -12,7 +12,6 @@ import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { campaignContentEvents } from 'stores/campaignContent';
 import { closeModalImgDiameter } from 'components/modals/PopUpCamaignManager/constants';
 import { NoopClick } from 'types';
@@ -51,15 +50,19 @@ export const PopUpCampaignManager = () => {
                     <Column alignCenter height="300px">
                         <MarginWrapper marginBottom="17px" marginTop="50px">
                             <Span fontSize="24px" fontWeight="400" lineHeight="22px">
-                                Do you really want to discard the campaign creation?
+                                READY TO CREATE YOUR CAMPAIGN?
                             </Span>
                         </MarginWrapper>
                         <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
-                            If you want to discard the creation of the campaign - click YES, if you want to continue
-                            click NO
+                            Once you create your campaign you can set a budget, select more videos and get started.
                         </Span>
                         <Row marginTop="56px">
                             <MarginWrapper marginRight="30px">
+                                <ManualRoundedButton height="57px" onClick={onClose}>
+                                    CONTINUE
+                                </ManualRoundedButton>
+                            </MarginWrapper>
+                            <MarginWrapper>
                                 <ManualRoundedButton
                                     reverse
                                     background={white}
@@ -67,13 +70,8 @@ export const PopUpCampaignManager = () => {
                                     mainColor={'red'}
                                     onClick={handleCloseCreateCampaign}
                                 >
-                                    YES
+                                    CANCEL
                                 </ManualRoundedButton>
-                            </MarginWrapper>
-                            <MarginWrapper>
-                                <RoundedButton height="57px" onClick={onClose}>
-                                    NO
-                                </RoundedButton>
                             </MarginWrapper>
                         </Row>
                     </Column>
