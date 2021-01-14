@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
 import { InviteRequestProps } from 'components/FormComponents/forms/InviteForm/types';
-import { noop, themeStorageName, userStorageName } from 'constants/global';
+import { Noop, themeStorageName, userStorageName } from 'constants/global';
 import {
     errorDataMessage,
     incorrectOrgIdMessage,
@@ -107,7 +107,7 @@ const setEmail = createEvent<string>();
 const currentEmailForPasswordReset = createStore<string>('').on(setEmail, (_, newState) => newState);
 
 const sendSecurityCode = createEffect({
-    handler: async ({ values, setErrors = noop }: SecurityCodeRequestProps) => {
+    handler: async ({ values, setErrors = Noop }: SecurityCodeRequestProps) => {
         try {
             setEmail(values.email);
             loadingEffects.updateLoading();

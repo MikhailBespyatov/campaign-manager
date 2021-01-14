@@ -5,13 +5,13 @@ import {
     StyledCheckbox,
     Wrapper
 } from 'components/common/inputs/BooleanCircleCheckbox/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { useState } from 'react';
 import { BooleanCheckbox } from 'types';
 
 interface Props extends BooleanCheckbox {}
 
-export const BooleanCircleCheckbox = ({ defaultChecked = false, disabled = false, onChange = noop, name }: Props) => {
+export const BooleanCircleCheckbox = ({ defaultChecked = false, disabled = false, onChange = Noop, name }: Props) => {
     const [checked, setChecked] = useState(defaultChecked);
 
     const onCheckboxChange = () => {

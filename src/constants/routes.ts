@@ -1,3 +1,5 @@
+import { CampaignRoutesType } from 'types';
+
 export const globalPrefix = '';
 export const publicPrefix = '/public/';
 const publicPrefixUrl = `${publicPrefix}:prefix`;
@@ -54,6 +56,15 @@ export const staticRoutes = {
     }
 };
 
+export const campaignRoutes = { running: '', paused: '', completed: '', expired: '' };
+
+export const parseCampaignRoutes = (routesArray: string[]) => ({
+    ...(Object.fromEntries(routesArray.map(status => [status, `${campaignPrefix}/${status}/`])) as CampaignRoutesType),
+    ...{
+        status: `${campaignPrefix}/:status(${routesArray.join('|')})/`
+    }
+});
+
 export const dynamicRoutes = {
     home: `${campaignManagerPrefix}`,
     userAdmin: {
@@ -68,11 +79,12 @@ export const dynamicRoutes = {
         },
         campaign: {
             index: `${campaignPrefix}`,
-            running: `${campaignPrefix}/running/`,
-            paused: `${campaignPrefix}/paused/`,
-            completed: `${campaignPrefix}/completed/`,
-            expired: `${campaignPrefix}/expired/`,
-            status: `${campaignPrefix}/:status(running|paused|completed|expired)/`,
+            ...parseCampaignRoutes(Object.keys(campaignRoutes)),
+            // running: `${campaignPrefix}/running/`,
+            // paused: `${campaignPrefix}/paused/`,
+            // completed: `${campaignPrefix}/completed/`,
+            // expired: `${campaignPrefix}/expired/`,
+            // status: `${campaignPrefix}/:status(running|paused|completed|expired)/`,
             indexDetails: `${campaignPrefix}/details/`,
             details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,

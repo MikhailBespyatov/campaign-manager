@@ -31,16 +31,14 @@ export const DropDownBlock: FC<Props> = ({ children, title }) => {
         <Column>
             <Section alignCenter marginBottom={DropDownBlockMarginBottom}>
                 <Button onClick={handleClick}>
-                    <MarginWrapper>
-                        <Span
-                            color={spanFontColor}
-                            fontSize={spanFontSize}
-                            fontWeight={spanFontWeight}
-                            lineHeight={spanLineHeight}
-                        >
-                            {title}
-                        </Span>
-                    </MarginWrapper>
+                    <Span
+                        color={spanFontColor}
+                        fontSize={spanFontSize}
+                        fontWeight={spanFontWeight}
+                        lineHeight={spanLineHeight}
+                    >
+                        {title}
+                    </Span>
                     <MarginWrapper marginLeft={imgMarginLeft} marginRight={imgMarginRight}>
                         <CustomImg height={imgHeight} src={isOpen ? close : expand} width={imgHeight} />
                     </MarginWrapper>

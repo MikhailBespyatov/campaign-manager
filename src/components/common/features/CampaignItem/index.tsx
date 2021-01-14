@@ -72,13 +72,11 @@ export const CampaignItem: FC<Props> = ({
                                         state="start"
                                     />
                                 </MarginWrapper>
-                                <MarginWrapper>
-                                    <DateOfCampaignBlock
-                                        date={schedule?.utcToEnd || new Date().toISOString()}
-                                        isExpiredBorder={status === 'expired'}
-                                        state="end"
-                                    />
-                                </MarginWrapper>
+                                <DateOfCampaignBlock
+                                    date={schedule?.utcToEnd || new Date().toISOString()}
+                                    isExpiredBorder={status === 'expired'}
+                                    state="end"
+                                />
                             </>
                         )}
                     </Row>

@@ -1,5 +1,5 @@
 import { formGrey2, grey4, primaryPadding, secondaryBorder, primaryColor as primaryColorText } from 'constants/styles';
-import { infoType } from 'types';
+import { InfoType } from 'types';
 import { themeStores } from 'stores/theme';
 
 export const wrapperBorder = secondaryBorder;
@@ -13,7 +13,7 @@ export const graphicBlockBorder = `2px solid ${formGrey2}`;
 
 export const testSelectArray = ['1 day', '7 days', '14days', '21 days', '31 days'];
 
-export const growSpread: (value: undefined | number) => { growType?: infoType; growNumber?: number } = value =>
+export const growSpread: (value: undefined | number) => { growType?: InfoType; growNumber?: number } = value =>
     value !== undefined ? { growType: value > 0 ? 'success' : 'error', growNumber: value } : {};
 
 export const seriesTestData = [

@@ -1,7 +1,6 @@
-/* eslint-disable react/destructuring-assignment */
 import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
-import React, { FC } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
 import { userStores } from 'stores/user';
 
@@ -10,7 +9,7 @@ interface Props extends RouteProps {
     redirectTo?: string;
 }
 
-export const AccessRoute: FC<Props> = ({ proxy, redirectTo = routes.wrongPath, ...props }) => {
+export const AccessRoute = ({ proxy, redirectTo = routes.wrongPath, ...props }: Props) => {
     const { access } = useStore(userStores.auth);
 
     //if (!Number.isInteger(proxy) || proxy < -1 || proxy > 9) return <Redirect to={routes.signIn.index} />;

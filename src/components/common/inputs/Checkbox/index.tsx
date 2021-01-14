@@ -7,7 +7,7 @@ import {
     StyledCheckbox,
     Wrapper
 } from 'components/common/inputs/Checkbox/styles';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { useEffect, useState } from 'react';
 import { DefaultChecked, Disabled } from 'types';
 
@@ -20,7 +20,7 @@ interface Props extends DefaultChecked, Disabled {
 export const Checkbox = ({
     defaultChecked = false,
     disabled = false,
-    onChange = noop,
+    onChange = Noop,
     name = 'name',
     value
 }: Props) => {

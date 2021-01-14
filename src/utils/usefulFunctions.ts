@@ -137,3 +137,5 @@ export const getDate = (date: Date | null) => {
 //TODO: status and test for status
 export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (item: WOM.CampaignDetailResponse) =>
     item.isActive ? 'running' : item.title === 'test' ? 'paused' : 'expired';
+
+export const engagementStatusTypes = (parameter?: number) => (parameter && parameter > 0 ? 'success' : 'error');

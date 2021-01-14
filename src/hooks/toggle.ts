@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import { noop } from 'types';
+import { Noop } from 'types';
 
-export const useToggle = (initialState = false): [boolean, noop] => {
+export const useToggle = (initialState = false): [boolean, Noop] => {
     const [state, setState] = useState(initialState);
 
     return [state, useCallback(() => setState(state => !state), [])];

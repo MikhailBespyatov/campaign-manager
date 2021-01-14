@@ -22,7 +22,7 @@ import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campa
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
-import { roundScore } from 'utils/usefulFunctions';
+import { engagementStatusTypes, roundScore } from 'utils/usefulFunctions';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
@@ -54,7 +54,7 @@ interface ItemBlockProps {
     item?: string | number;
     percentageGrowth?: JSX.Element;
 }
-const ItemBlock: FC<ItemBlockProps> = ({ title, item, percentageGrowth }) => (
+const ItemBlock = ({ title, item, percentageGrowth }: ItemBlockProps) => (
     <Column>
         <MarginWrapper marginBottom="8px">
             <Subtitle>{title}</Subtitle>
@@ -97,7 +97,10 @@ const EngagementSpan: FC = ({ children }) => (
 const body = document.body;
 
 export const CardModal = () => {
-    const { visible, id } = useStore(modalStores.cardModal);
+    const {
+        visible,
+        state: { id }
+    } = useStore(modalStores.cardModal);
     const { uriPrimary, womQualityScore, engagement, products, tags, streamDetails } = useStore(
         campaignContentStores.item
     );
@@ -107,9 +110,7 @@ export const CardModal = () => {
     const itemsInUseLoading = useStore(loadingStores.initialLoading);
     const { primaryColor } = useStore(themeStores.theme);
 
-    const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
-        products
-    ]);
+    const productsItem = useMemo(() => products?.[0] || {}, [products]);
     //const extraTags = productsItem.extraTags;
     // const username = userDetails && userDetails?.username;
     // const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
@@ -187,108 +188,70 @@ export const CardModal = () => {
                                 </ManualRoundedButton>
                             </Column>
                             <Column width="65%">
-                                <Section>
+                                <Section marginBottom="80px">
                                     <Title>Video Name</Title>
                                     <Row>
                                         <MarginWrapper marginRight="100px">
-                                            <ItemBlock
-                                                item={productsItem?.tagBrand ? productsItem.tagBrand : noContentMessage}
-                                                title="Brand"
-                                            />
+                                            <ItemBlock item={productsItem.tagBrand || noContentMessage} title="Brand" />
                                         </MarginWrapper>
-                                        <MarginWrapper>
-                                            <ItemBlock
-                                                item={productsItem?.item ? productsItem.item : noContentMessage}
-                                                title="Item"
-                                            />
-                                        </MarginWrapper>
+                                        <ItemBlock item={productsItem.tagBrand || noContentMessage} title="Item" />
                                     </Row>
                                 </Section>
-                                <Section>
+                                <Section marginBottom="80px">
                                     <Title>Engagement</Title>
                                     <Row justifyBetween width="80%">
-                                        <MarginWrapper>
-                                            <ItemBlock item={engagement?.viewCount} title="Views" />
-                                        </MarginWrapper>
-                                        <MarginWrapper>
-                                            <ItemBlock
-                                                item={engagement?.likeCount}
-                                                percentageGrowth={
-                                                    <PercentageGrowth
-                                                        isPlusStyle
-                                                        type={
-                                                            engagement?.likesPercentage &&
-                                                            engagement.likesPercentage > 0
-                                                                ? 'success'
-                                                                : 'error'
-                                                        }
-                                                    >
-                                                        {engagement?.likesPercentage || 0}
-                                                    </PercentageGrowth>
-                                                }
-                                                title="Likes"
-                                            />
-                                        </MarginWrapper>
-                                        <MarginWrapper>
-                                            <ItemBlock
-                                                item={engagement?.saveCount}
-                                                percentageGrowth={
-                                                    <PercentageGrowth
-                                                        isPlusStyle
-                                                        type={
-                                                            engagement?.savesPercentage &&
-                                                            engagement.savesPercentage > 0
-                                                                ? 'success'
-                                                                : 'error'
-                                                        }
-                                                    >
-                                                        {engagement?.savesPercentage || 0}
-                                                    </PercentageGrowth>
-                                                }
-                                                title="Saves"
-                                            />
-                                        </MarginWrapper>
-                                        <MarginWrapper>
-                                            <ItemBlock
-                                                item={engagement?.commentCount}
-                                                percentageGrowth={
-                                                    <PercentageGrowth
-                                                        isPlusStyle
-                                                        type={
-                                                            engagement?.commentsPercentage &&
-                                                            engagement.commentsPercentage > 0
-                                                                ? 'success'
-                                                                : 'error'
-                                                        }
-                                                    >
-                                                        {engagement?.commentsPercentage || 0}
-                                                    </PercentageGrowth>
-                                                }
-                                                title="Comments"
-                                            />
-                                        </MarginWrapper>
-                                        <MarginWrapper>
-                                            <ItemBlock
-                                                item={engagement?.shareCount}
-                                                percentageGrowth={
-                                                    <PercentageGrowth
-                                                        isPlusStyle
-                                                        type={
-                                                            engagement?.sharesPercentage &&
-                                                            engagement.sharesPercentage > 0
-                                                                ? 'success'
-                                                                : 'error'
-                                                        }
-                                                    >
-                                                        {engagement?.sharesPercentage || 0}
-                                                    </PercentageGrowth>
-                                                }
-                                                title="Shares"
-                                            />
-                                        </MarginWrapper>
+                                        <ItemBlock item={engagement?.viewCount} title="Views" />
+                                        <ItemBlock
+                                            item={engagement?.likeCount}
+                                            percentageGrowth={
+                                                <PercentageGrowth
+                                                    isPlusStyle
+                                                    type={engagementStatusTypes(engagement?.likesPercentage)}
+                                                >
+                                                    {engagement?.likesPercentage || 0}
+                                                </PercentageGrowth>
+                                            }
+                                            title="Likes"
+                                        />
+                                        <ItemBlock
+                                            item={engagement?.saveCount}
+                                            percentageGrowth={
+                                                <PercentageGrowth
+                                                    isPlusStyle
+                                                    type={engagementStatusTypes(engagement?.savesPercentage)}
+                                                >
+                                                    {engagement?.savesPercentage || 0}
+                                                </PercentageGrowth>
+                                            }
+                                            title="Saves"
+                                        />
+                                        <ItemBlock
+                                            item={engagement?.commentCount}
+                                            percentageGrowth={
+                                                <PercentageGrowth
+                                                    isPlusStyle
+                                                    type={engagementStatusTypes(engagement?.commentsPercentage)}
+                                                >
+                                                    {engagement?.commentsPercentage || 0}
+                                                </PercentageGrowth>
+                                            }
+                                            title="Comments"
+                                        />
+                                        <ItemBlock
+                                            item={engagement?.shareCount}
+                                            percentageGrowth={
+                                                <PercentageGrowth
+                                                    isPlusStyle
+                                                    type={engagementStatusTypes(engagement?.sharesPercentage)}
+                                                >
+                                                    {engagement?.sharesPercentage || 0}
+                                                </PercentageGrowth>
+                                            }
+                                            title="Shares"
+                                        />
                                     </Row>
                                 </Section>
-                                <Section>
+                                <Section marginBottom="80px">
                                     <Title>Authentication</Title>
                                     <Column>
                                         <MarginWrapper marginBottom="15px">
@@ -347,7 +310,7 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Section>
-                                <Section>
+                                <Section marginBottom="80px">
                                     <Title>Hashtags</Title>
                                     <Row marginBottom={miniMarginBottom}>
                                         {tags?.map(i => (

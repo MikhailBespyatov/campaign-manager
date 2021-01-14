@@ -14,7 +14,7 @@ import {
 } from 'components/common/inputs/Search/constants';
 import { Wrapper } from 'components/common/inputs/Search/styles';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { ChangeEvent, useState } from 'react';
 import { DefaultValueString, Placeholder } from 'types';
 
@@ -22,7 +22,7 @@ interface Props extends Placeholder, DefaultValueString {
     onSearch?: (value: string) => void;
 }
 
-export const Search = ({ defaultValue = '', onSearch = noop, placeholder = 'Find Channels' }: Props) => {
+export const Search = ({ defaultValue = '', onSearch = Noop, placeholder = 'Find Channels' }: Props) => {
     const [value, setValue] = useState(defaultValue);
 
     const handleSearch = () => onSearch(value);

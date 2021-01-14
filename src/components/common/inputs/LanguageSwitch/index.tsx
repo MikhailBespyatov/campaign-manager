@@ -6,7 +6,7 @@ import {
 } from 'components/common/inputs/LanguageSwitch/constants';
 import { Ball, Wrapper } from 'components/common/inputs/LanguageSwitch/styles';
 import { Span } from 'components/common/typography/Span';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { white } from 'constants/styles';
 import React, { FC, useEffect, useState } from 'react';
 
@@ -15,7 +15,7 @@ interface Props {
     defaultState?: boolean;
 }
 
-export const LanguageSwitch: FC<Props> = ({ onChange = noop, children, defaultState = false }) => {
+export const LanguageSwitch: FC<Props> = ({ onChange = Noop, children, defaultState = false }) => {
     const [value, setValue] = useState(defaultState);
 
     const onClick = () => setValue(!value);

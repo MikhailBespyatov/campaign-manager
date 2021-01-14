@@ -1,6 +1,6 @@
 import { HiddenInput } from 'components/common/inputs/Input';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import 'date-fns';
 import { useField } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -46,7 +46,7 @@ export const DatePickerBetween = ({
     width,
     height,
     marginBottom,
-    onChange = noop
+    onChange = Noop
 }: Props) => {
     const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
     const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
@@ -193,7 +193,7 @@ export const DatePickerInput = ({ name, label, defaultValue = new Date().toISOSt
 
     useEffect(() => {
         setValue(selectedDate?.toISOString() || '');
-        campaignsEvents.setFieldCreateCampaignForm({ [field.name]: selectedDate?.toISOString() || '' });
+        campaignsEvents.setFieldsCreateCampaignForm({ [field.name]: selectedDate?.toISOString() || '' });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedDate]);
 

@@ -4,7 +4,7 @@ import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import React, { useState } from 'react';
 import { RadioProperties } from 'types';
 import { useStore } from 'effector-react';
@@ -14,7 +14,7 @@ interface Props extends Omit<RadioProperties, 'values'> {
     values: RowHeaderRadioType[];
 }
 
-export const RowHeaderRadio = ({ values, defaultActive = values[0].title, onChange = noop }: Props) => {
+export const RowHeaderRadio = ({ values, defaultActive = values[0].title, onChange = Noop }: Props) => {
     // const length = values.length;
     const [radio, setRadio] = useState(
         values.map(i => ({

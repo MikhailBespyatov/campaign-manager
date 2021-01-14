@@ -7,7 +7,7 @@ import { onCurrencyChange, womImgHeight } from 'components/FormComponents/inputs
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { noop, numbersAfterDotWom } from 'constants/global';
+import { Noop, numbersAfterDotWom } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
 import { formGrey5, primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -32,7 +32,7 @@ export const WomInput = ({
     type = 'text',
     name = 'wom',
     status,
-    setStatus = noop
+    setStatus = Noop
 }: Props) => {
     const [field, { touched }, { setValue, setTouched }] = useField(name);
     // const classes = useStyles();

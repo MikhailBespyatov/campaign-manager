@@ -1,4 +1,4 @@
-import { noop } from 'types';
+import { Noop } from 'types';
 
 export interface Dictionary<T> {
     [Key: string]: T;
@@ -14,7 +14,7 @@ export interface Active {
 }
 
 export interface NoopClick {
-    onClick?: noop;
+    onClick?: Noop;
 }
 
 export interface WithHashtag {

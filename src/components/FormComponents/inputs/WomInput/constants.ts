@@ -48,7 +48,7 @@ export const onCurrencyChange = (
     if (Number.isInteger(wom) && wom >= 0) {
         setValue(commaInserter(value), false);
         // console.log(commaInserter(value));
-        // campaignsEvents.setFieldCreateCampaignForm({ amount: commaInserter(value) });
+        // campaignsEvents.setFieldsCreateCampaignForm({ amount: commaInserter(value) });
         setCurrency(Number((wom * womExchangeRate).toFixed(2)));
         // * set status as error if you have not enough WOM
         if (wom > walletStores.walletBalance.getState()) {

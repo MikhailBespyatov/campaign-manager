@@ -42,7 +42,7 @@ Props) => {
     //     products
     // ]);
 
-    const openCardModal = () => modalEvents.openCardModal(womContentId || '');
+    const openCardModal = () => modalEvents.openCardModal({ id: womContentId || '' });
 
     return (
         <Column alignCenter>

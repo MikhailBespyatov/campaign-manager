@@ -10,10 +10,11 @@ import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import React, { ChangeEvent, FC } from 'react';
 import { campaignsEvents, campaignsStores } from 'stores/campaigns';
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { SimpleButton } from 'components/common/buttons/SimpleButton';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
+import { itemsCreateCampaign } from 'components/common/blocks/CreateCampaignManager/constants';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 export const labelFontSize = '16px';
 export const labelLineHeight = '20px';
@@ -27,18 +28,19 @@ export const labelMarginBottom = '5px';
 // );
 
 interface Props {
-    isFirstPage: boolean;
-    onClick: (state: boolean) => void;
+    activeSubPage: string;
+    onClick: (state: string) => void;
 }
 
-export const CreateCampaignForm: FC<Props> = ({ isFirstPage, onClick }) => {
+export const CreateCampaignForm: FC<Props> = ({ activeSubPage, onClick }) => {
     const initialValues = useStore(campaignsStores.createCampaignForm);
     // const loading = useStore(loadingStores.loading);
     // console.log(initialContentIds);
-    const handleClickNext = () => onClick(false);
-    const handleClickBack = () => onClick(true);
+    const isFirstSubPageActive = activeSubPage === itemsCreateCampaign[0].path;
+    const handleClickNext = () => onClick(itemsCreateCampaign[1].path);
+    const handleClickBack = () => onClick(itemsCreateCampaign[0].path);
     const onChangeCampaignName = (e: ChangeEvent<HTMLInputElement>) =>
-        campaignsEvents.setFieldCreateCampaignForm({ title: e.target.value });
+        campaignsEvents.setFieldsCreateCampaignForm({ title: e.target.value });
 
     // const { values, handleSubmit, isValid, dirty, touched, status, setStatus } = useFormik({
     //     initialValues: { ...initialValues, contentIds: initialContentIds.map(i => i.womContentId || '') },
@@ -61,7 +63,7 @@ export const CreateCampaignForm: FC<Props> = ({ isFirstPage, onClick }) => {
                         <Column height="100%" width="100%">
                             <RowBlockCell padding={primaryPadding}>
                                 <FormWrapper>
-                                    {isFirstPage ? (
+                                    {isFirstSubPageActive ? (
                                         <Column marginRight={primaryPadding} width="100%">
                                             <TextInput
                                                 required
@@ -103,24 +105,24 @@ export const CreateCampaignForm: FC<Props> = ({ isFirstPage, onClick }) => {
                                     )}
                                 </FormWrapper>
                                 <Column alignCenter marginBottom="0">
-                                    {isFirstPage ? (
+                                    {isFirstSubPageActive ? (
                                         <Column>
-                                            <RoundedButton
-                                                disabled={!values?.title || !initialValues.contentIds.length}
+                                            <ManualRoundedButton
+                                                disabled={!(values?.title && initialValues.contentIds.length)}
                                                 onClick={handleClickNext}
                                             >
                                                 NEXT
-                                            </RoundedButton>
+                                            </ManualRoundedButton>
                                         </Column>
                                     ) : (
                                         <>
                                             <Column>
-                                                <RoundedButton
-                                                    disabled={!isValid || !womBalanceValid}
+                                                <ManualRoundedButton
+                                                    disabled={!(isValid && womBalanceValid && Boolean(values.amount))}
                                                     onClick={() => handleSubmit()}
                                                 >
                                                     START CAMPAIGN
-                                                </RoundedButton>
+                                                </ManualRoundedButton>
                                             </Column>
                                             <Column>
                                                 <MarginWrapper marginTop="13px">

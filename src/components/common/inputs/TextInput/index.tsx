@@ -19,7 +19,7 @@ import { InputWrapper, Wrapper } from 'components/common/inputs/TextInput/styles
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { errorColor, successColor } from 'constants/styles';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TextInput as TextInputProps } from 'types';
@@ -29,7 +29,7 @@ interface Props extends TextInputProps {}
 export const TextInput = ({
     error,
     defaultValue = '',
-    onChange = noop,
+    onChange = Noop,
 
     label,
     name,

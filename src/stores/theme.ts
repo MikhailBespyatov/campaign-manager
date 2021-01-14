@@ -1,9 +1,10 @@
-import { companyNames, defaultTheme, ThemeProps, themes } from 'constants/defaults';
+import { companyNames, defaultTheme, themes } from 'constants/defaults';
 import { themeStorageName } from 'constants/global';
 import { createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { organizationsStores } from 'stores/organizations';
 import { getPublicTheme } from 'utils/usefulFunctions';
+import { ThemeProps } from 'types';
 
 export interface GlobalPrefix {
     prefix?: string;

@@ -2,7 +2,7 @@ import { itemActiveColor, spanFontSize, spanLineHeight } from 'components/common
 import { StyledItem } from 'components/common/inputs/RowRadio/style';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { noop } from 'constants/global';
+import { Noop } from 'constants/global';
 import { white } from 'constants/styles';
 import React, { useState } from 'react';
 import { Active, ItemRadioProperties, RadioProperties } from 'types';
@@ -19,7 +19,7 @@ const Item = ({ active, value, data = value, onClick }: Props) => (
     </StyledItem>
 );
 
-export const RowRadio = ({ values, defaultActive = values[0], data = values, onChange = noop }: WrapperProps) => {
+export const RowRadio = ({ values, defaultActive = values[0], data = values, onChange = Noop }: WrapperProps) => {
     const [radio, setRadio] = useState(
         values.map(i => ({
             value: i,

@@ -1,4 +1,3 @@
-import { RoundedButton } from 'components/common/buttons/RoundedButton';
 import { Span } from 'components/common/typography/Span';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { Wrapper } from 'components/Layouts/ResultLayouts/CampaignEmpty/styles';
@@ -7,6 +6,7 @@ import { useStore } from 'effector-react';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { themeStores } from 'stores/theme';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 export const CampaignEmpty = () => {
     const history = useHistory();
@@ -27,7 +27,7 @@ export const CampaignEmpty = () => {
                         It looks like you haven't created any Campaigns yet
                     </Span>
                 </Row>
-                <RoundedButton onClick={onClick}>Create Campaign</RoundedButton>
+                <ManualRoundedButton onClick={onClick}>Create Campaign</ManualRoundedButton>
             </Wrapper>
         </Section>
     );
