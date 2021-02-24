@@ -1,9 +1,9 @@
 import axios, { CancelTokenSource } from 'axios';
 import { defaultCampaignContentValues } from 'constants/defaults';
-import { createEffect, createEvent, createStore } from 'effector';
+import { combine, createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
-import { initialToggleStore } from 'stores/initialie.toggle.store';
+import { initialToggleStore } from 'stores/initialize/initialie.toggle.store';
 
 let cancelToken: CancelTokenSource | undefined;
 
@@ -46,7 +46,7 @@ const getItems = createEffect({
             const data = await API.campaignContent.getItems(values, cancelToken.token);
             updateInitialLoading();
 
-            return data ? data : {};
+            return data || {};
         } catch {
             updateInitialLoading();
             return {};
@@ -65,7 +65,7 @@ const getSelectedVideos = createEffect({
             });
             updateInitialLoading();
 
-            return data ? data : {};
+            return data || {};
         } catch {
             updateInitialLoading();
             return {};
@@ -75,6 +75,8 @@ const getSelectedVideos = createEffect({
 
 const item = createStore<WOM.ContentItemResponse>({}).on(getItemById.doneData, (_, newState) => newState);
 const items = createStore<WOM.ContentQueryResponse>({}).on(getItems.doneData, (_, newState) => newState);
+
+const combinedItems = combine(items, initialLoading);
 
 const campaignSelectedVideos = createStore<WOM.ContentQueryResponse>({}).on(
     getSelectedVideos.doneData,
@@ -129,7 +131,8 @@ const campaignContentStores = {
     initialLoading,
     campaignSelectedVideos,
     isFirst,
-    visibleCreateCampaign
+    visibleCreateCampaign,
+    combinedItems
 };
 
 export { campaignContentEffects, campaignContentStores, campaignContentEvents };

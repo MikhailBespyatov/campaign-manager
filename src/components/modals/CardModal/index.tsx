@@ -2,6 +2,7 @@ import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { InternalLink } from 'components/common/links/InternalLink';
@@ -9,6 +10,7 @@ import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import { closeModalImgDiameter, miniMarginBottom, viewersMarginBottom } from 'components/modals/CardModal/constants';
 import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
@@ -17,14 +19,12 @@ import { routes } from 'constants/routes';
 import { grey4, primaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
-import { campaignContentEffects, campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
+import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
 import { engagementStatusTypes, roundScore } from 'utils/usefulFunctions';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 interface SmallSpanProps {
     opacity?: number;
@@ -127,14 +127,9 @@ export const CardModal = () => {
     // };
 
     const onPromoteClick = () => {
-        history.push(globalPrefixUrl + routes.campaignManager.discover.index);
-        campaignContentEvents.setVisibleCreateCampaign(true);
-        modalEvents.openPopUpCampaignManager({
-            visible: true,
-            popUp: 'info'
-        });
         campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
         modalEvents.closeCardModal();
+        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
     };
 
     useEffect(() => {
@@ -256,7 +251,7 @@ export const CardModal = () => {
                                     <Column>
                                         <MarginWrapper marginBottom="15px">
                                             <Span fontSize="18px" fontWeight="400" lineHeight="22px">
-                                                Average WOM Authentication Score
+                                                Average Authentication Score
                                             </Span>
                                         </MarginWrapper>
                                         <Row>
@@ -281,7 +276,10 @@ export const CardModal = () => {
                                             <MarginWrapper>
                                                 <Column>
                                                     <MarginWrapper marginBottom="8px">
-                                                        <Subtitle>Viewers</Subtitle>
+                                                        <Subtitle>
+                                                            Average Percentage Viewed
+                                                            {/* Viewers */}
+                                                        </Subtitle>
                                                     </MarginWrapper>
                                                     <Row>
                                                         <Column marginRight={primaryPadding}>
@@ -319,7 +317,10 @@ export const CardModal = () => {
                                     </Row>
                                 </Section>
                                 <Section>
-                                    <Title>Campaigns</Title>
+                                    <Title>
+                                        Activity
+                                        {/* Campaigns */}
+                                    </Title>
                                     <Column>
                                         <MarginWrapper marginBottom="8px">
                                             <Subtitle>Other campaigns featuring this video</Subtitle>

@@ -44,3 +44,5 @@ export const materialTheme = createMuiTheme({
         }
     }
 });
+
+export const titleMarginBottom = '16px';

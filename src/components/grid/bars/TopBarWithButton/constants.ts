@@ -1,8 +1,8 @@
-import { primaryPadding, secondaryColor, white } from 'constants/styles';
+import { grey7, primaryPadding, secondaryColor } from 'constants/styles';
 
 export const wrapperHeight = '96px';
 export const wrapperBorderRadius = '30px';
-export const wrapperBackground = white;
+export const wrapperBackground = grey7;
 export const wrapperHorizontalPadding = '34px';
 export const wrapperVerticalPadding = primaryPadding;
 

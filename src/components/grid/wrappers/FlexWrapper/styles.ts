@@ -7,6 +7,7 @@ const Flex = styled.div<FlexProps>`
     ${({ widthMaxContent }) => (widthMaxContent ? 'width: max-content;' : '')};
     ${({ alignCenter }) => (alignCenter ? `align-items: center;` : '')};
     ${({ alignBaseline }) => (alignBaseline ? `align-items: baseline;` : '')};
+    ${({ alignEnd }) => (alignEnd ? `align-items: flex-end;` : '')};
     ${({ justifyCenter }) => (justifyCenter ? `justify-content: center;` : '')};
     ${({ justifyAround }) => (justifyAround ? `justify-content: space-around;` : '')};
     ${({ justifyBetween }) => (justifyBetween ? `justify-content: space-between;` : '')};
@@ -16,6 +17,7 @@ const Flex = styled.div<FlexProps>`
     ${({ maxWidth }) => (maxWidth ? `max-width: ${maxWidth};` : ``)};
     ${({ height }) => (height ? `height: ${height};` : ``)};
     ${({ minHeight }) => (minHeight ? `min-height: ${minHeight};` : ``)};
+    ${({ maxHeight }) => (maxHeight ? `max-height: ${maxHeight};` : ``)};
     ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop};` : ``)};
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
@@ -37,7 +39,7 @@ export const Section = styled(Row)`
 
 export const FlexGrow = styled(Flex)<FlexGrowProps>`
     flex-direction: column;
-    ${({ flexGrow }) => (flexGrow ? `flex-grow: ${flexGrow};` : ``)};
+    flex-grow: ${({ flexGrow }) => flexGrow || '1'};
     ${({ flexShrink }) => (flexShrink ? `flex-shrink: ${flexShrink};` : ``)};
-    ${({ flexBasis }) => (flexBasis ? `flex-shrink: ${flexBasis};` : ``)};
+    ${({ flexBasis }) => (flexBasis ? `flex-basis: ${flexBasis};` : ``)};
 `;

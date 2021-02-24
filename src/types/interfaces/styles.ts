@@ -16,6 +16,7 @@ export interface NoWrap {
 export interface FlexBooleanAlignment extends NoWrap {
     alignCenter?: boolean;
     alignBaseline?: boolean;
+    alignEnd?: boolean;
     justifyCenter?: boolean;
     justifyEnd?: boolean;
     justifyAround?: boolean;
@@ -85,6 +86,10 @@ export interface BoxShadow {
 
 export interface Background {
     background?: string;
+}
+
+export interface BackgroundImage {
+    backgroundImage?: string;
 }
 
 export interface BackgroundColor {
@@ -188,4 +193,8 @@ export interface FlexShrink {
 
 export interface FlexBasis {
     flexBasis?: string;
+}
+
+export interface BorderRadius {
+    borderRadius?: string;
 }

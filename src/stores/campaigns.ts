@@ -3,14 +3,16 @@ import { CreateCampaignRequestProps, Props } from 'components/FormComponents/for
 import { Noop } from 'constants/global';
 import { existCampaignErrorMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { createEffect, createEvent, createStore, forward } from 'effector';
+import { createEffect, createEvent, createStore, forward, sample } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 import { getCampaignStatus } from 'utils/usefulFunctions';
-import { defaultCampaignStatusStore } from 'constants/defaults';
+import { countCampaignDrafts, defaultCampaignStatus } from 'constants/defaults';
 import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/constants';
+import { forms } from 'stores/forms';
+import connectLocalStorage from 'effector-localstorage';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -92,7 +94,7 @@ const getItems = createEffect({
             const data = await API.campaigns.getItems(values);
             loadingEffects.updateInitialLoading();
 
-            return data ? data : {};
+            return data || {};
         } catch {
             loadingEffects.updateInitialLoading();
             return {};
@@ -107,7 +109,7 @@ const getStatisticsItems = createEffect({
             const data = await API.campaigns.getStatisticsItems(values);
             loadingEffects.updateInitialLoading();
 
-            return data ? data : {};
+            return data || {};
         } catch {
             loadingEffects.updateInitialLoading();
             return {};
@@ -125,7 +127,7 @@ const getItemsInUseById = createEffect({
             });
             loadingEffects.updateInitialLoading();
 
-            return data ? data : [];
+            return data || [];
         } catch {
             loadingEffects.updateInitialLoading();
             return [];
@@ -147,17 +149,6 @@ const statisticsItems = createStore<WOM.CampaignStatisticsQueryResponse>({}).on(
     (_, newState) => newState
 );
 
-const setCampaignStatusCount = createEvent<WOM.CampaignsQueryResponse>();
-const campaignStatusCount = createStore(defaultCampaignStatusStore).on(setCampaignStatusCount, (_, { items }) => {
-    const count = Object.assign({}, defaultCampaignStatusStore);
-    items?.forEach(item => (count[getCampaignStatus(item)] = count[getCampaignStatus(item)] + 1));
-    return count;
-});
-
-forward({
-    from: items,
-    to: setCampaignStatusCount
-});
 // campaignStatusCount.watch(items, (state, { items }) => {
 //     const count = Object.assign({}, state);
 //     items?.forEach(item => (count[getCampaignStatus(item)] = count[getCampaignStatus(item)] + 1));
@@ -196,7 +187,63 @@ const createCampaignForm = createStore<Props>(formValues)
         ...fields
     }));
 
-forward({ from: contentIds, to: setContentIds });
+const draftCampaignLocalStorage = connectLocalStorage('draftCampaign').onError(err => console.log(err));
+
+const defaultDraftCampaignValue = forms.createCampaignForm.$values.getState();
+type DraftCampaign = Partial<typeof defaultDraftCampaignValue>;
+
+const setDraftCampaign = createEvent<DraftCampaign>();
+const deleteDraftCampaign = createEvent<string>();
+const setDefaultDraftCampaign = createEvent();
+const draftCampaign = createStore<DraftCampaign[]>(draftCampaignLocalStorage.init([]))
+    .on(setDraftCampaign, (drafts, newDraft) => {
+        let newDrafts = [...drafts];
+
+        if (newDrafts.length >= countCampaignDrafts) newDrafts.splice(0, newDrafts.length - countCampaignDrafts);
+
+        newDrafts = [...newDrafts.filter(({ id }) => id !== newDraft.id), newDraft];
+
+        return newDrafts;
+    })
+    .on(setDefaultDraftCampaign, drafts => {
+        if (drafts.some(({ id }) => id === defaultDraftCampaignValue.id)) return drafts;
+
+        let newDrafts = [...drafts];
+
+        if (newDrafts.length >= countCampaignDrafts) newDrafts.splice(0, newDrafts.length + 1 - countCampaignDrafts);
+
+        return [...newDrafts, defaultDraftCampaignValue];
+    })
+    .on(deleteDraftCampaign, (drafts, id) => drafts.filter(draft => draft.id !== id));
+
+const setFormFromDraft = createEvent<string>();
+
+sample({
+    source: draftCampaign,
+    clock: setFormFromDraft,
+    fn: (drafts, id): DraftCampaign => drafts.find(draft => draft.id === id) || {},
+    target: forms.createCampaignForm.setForm
+});
+
+draftCampaign.watch(draftCampaignLocalStorage);
+forward({ from: forms.createCampaignForm.$values.updates, to: setDraftCampaign });
+
+// forward({ from: contentIds, to: setContentIds });
+forward({ from: contentIds, to: forms.createCampaignForm.fields.videos.set });
+
+const setCampaignStatusCount = createEvent<WOM.CampaignsQueryResponse>();
+const campaignStatusCount = createStore(defaultCampaignStatus)
+    .on(setCampaignStatusCount, (_, { items }) => {
+        const count = Object.assign({}, defaultCampaignStatus);
+        items?.forEach(item => (count[getCampaignStatus(item)] = count[getCampaignStatus(item)] + 1));
+        return { ...count, draft: draftCampaign.getState().length };
+    })
+    .on(deleteDraftCampaign, counts => ({ ...counts, draft: draftCampaign.getState().length }));
+
+forward({
+    from: items,
+    to: setCampaignStatusCount
+});
 
 const campaignsEvents = {
     updateStatisticsValues,
@@ -205,7 +252,10 @@ const campaignsEvents = {
     clearContentIds,
     pushContentId,
     removeContentById,
-    setFieldsCreateCampaignForm
+    setFieldsCreateCampaignForm,
+    setDefaultDraftCampaign,
+    setFormFromDraft,
+    deleteDraftCampaign
 };
 const campaignsEffects = { getItems, getItemById, getStatisticsItems, upsertItem, removeItemById, getItemsInUseById };
 const campaignsStores = {
@@ -216,7 +266,8 @@ const campaignsStores = {
     loading,
     itemsInUse,
     campaignStatusCount,
-    createCampaignForm
+    createCampaignForm,
+    draftCampaign
 };
 
 export { campaignsEffects, campaignsStores, campaignsEvents };

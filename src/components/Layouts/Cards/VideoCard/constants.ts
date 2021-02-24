@@ -6,12 +6,12 @@ export const ratingSpanLineHeight = '15px';
 export const ratingSpanColor = 'white';
 
 export const qualityScoreFontWeight = '700';
-export const qualityScoreFontSize = '18px';
-export const qualityScoreLineHeight = '23px';
+export const qualityScoreFontSize = '15px';
+export const qualityScoreLineHeight = '19px';
 
 export const productImgDiameter = '18px';
 
-export const addIdImgDiameter = '40px';
+export const addIdImgDiameter = '54px';
 
 export const productSpanFontSize = '18px';
 export const productSpanLineHeight = '29px';

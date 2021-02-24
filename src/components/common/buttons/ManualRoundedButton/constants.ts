@@ -4,7 +4,7 @@ export const buttonBorderWidth = '2px';
 export const buttonBorderRadius = '32px';
 export const buttonMarginBottom = '16px';
 export const buttonVerticalPadding = '5px';
-export const buttonHorizontalPadding = '50px';
+export const buttonHorizontalPadding = '23px';
 
 export const spanFontWeight = '700';
 export const spanFontSize = '14px';

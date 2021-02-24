@@ -14,11 +14,7 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         userId: string; // objectId
-        addressAccountType?: /**
-         * addressAccountType
-         * Representing the wallet types<br/><br/>Values:<br/>0 = None<br/>1 = WOM<br/>2 = RP
-         */
-        AddressAccountType /* int32 */;
+        addressAccountType?: AddressAccountType; // int32
     }
     /**
      * addressResponse
@@ -29,7 +25,7 @@ declare namespace WOM {
          * string
          * The name used to describe this address.
          */
-        name?: string | null;
+        name?: string;
         /**
          * dateTime
          * The utc date of this address's creation.
@@ -39,12 +35,12 @@ declare namespace WOM {
          * string
          * This address's account type.
          */
-        accountType?: string | null;
+        accountType?: string;
         /**
          * string
          * The unique address for this particular token account.
          */
-        address?: string | null;
+        address?: string;
         /**
          * boolean
          * Only true if this address has previously participated in a transaction.
@@ -98,11 +94,7 @@ declare namespace WOM {
      * analyzeEmailResponse
      */
     export interface AnalyzeEmailResponse {
-        result?: /**
-         * emailValidity
-         * <br/><br/>Values:<br/>0 = NotExists<br/>1 = InvalidFormat<br/>2 = SingleUseDomain<br/>3 = Exists
-         */
-        EmailValidity /* int32 */;
+        result?: EmailValidity; // int32
     }
     /**
      * authenticateWithTokenRequest
@@ -122,21 +114,120 @@ declare namespace WOM {
         password: string;
     }
     /**
-     * bridgeSystemBalanceResponse
+     * brandResponse
      */
-    export interface BridgeSystemBalanceResponse {
-        womX?: /* systemBalanceResponse */ SystemBalanceResponse;
-        womERC20?: /* systemBalanceResponse */ SystemBalanceResponse;
+    export interface BrandResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
         /**
          * string
          */
-        escrowAddress?: string | null;
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+    }
+    /**
+     * brandVoucherResponse
+     */
+    export interface BrandVoucherResponse {
+        /**
+         * string
+         */
+        brandName?: string;
+        /**
+         * string
+         */
+        countryName?: string;
+        /**
+         * string
+         */
+        currency?: string;
+        /**
+         * list1
+         */
+        denominations?: number /* double */[];
+        /**
+         * list1
+         */
+        foreignDenominations?: number /* double */[];
+        valueRestrictions?: VoucherValueRestrictions;
+        foreignValueRestrictions?: VoucherValueRestrictions;
+        /**
+         * int64
+         */
+        productId?: number; // int64
+        /**
+         * string
+         */
+        productImage?: string;
+        /**
+         * string
+         */
+        productDescription?: string;
+        /**
+         * string
+         */
+        howToUse?: string;
+        /**
+         * string
+         */
+        termsAndConditions?: string;
+        /**
+         * string
+         */
+        expiryAndValidity?: string;
+    }
+    /**
+     * brandsResponse
+     */
+    export interface BrandsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: BrandResponse[];
+    }
+    /**
+     * bridgeSystemBalanceResponse
+     */
+    export interface BridgeSystemBalanceResponse {
+        womX?: SystemBalanceResponse;
+        womERC20?: SystemBalanceResponse;
+        /**
+         * string
+         */
+        escrowAddress?: string;
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
         escrowEthBalanceWei?: string; // string
+        /**
+         * string
+         */
+        telemetry?: string;
         /**
          * decimal
          */
@@ -204,7 +295,7 @@ declare namespace WOM {
          * string
          * The user generated name of this campaign.
          */
-        title?: string | null;
+        title?: string;
         /**
          * boolean
          * Determines the visibility of this campaign.
@@ -245,13 +336,13 @@ declare namespace WOM {
          * hashSet1
          * The IDs of the content items used for this campaign.
          */
-        contentIds?: string /* objectId */[] | null;
-        engagement?: /* engagementStatistics */ EngagementStatistics;
-        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
-        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
-        settings?: /* campaignSettings */ CampaignSettings;
-        budget?: /* campaignBudget */ CampaignBudget;
-        schedule?: /* campaignSchedule */ CampaignSchedule;
+        contentIds?: string /* objectId */[];
+        engagement?: EngagementStatistics;
+        deltaStatistics?: EngagementStatisticsHistorical;
+        womQualityScore?: WOMQualityScore;
+        settings?: CampaignSettings;
+        budget?: CampaignBudget;
+        schedule?: CampaignSchedule;
         /**
          * boolean
          */
@@ -259,7 +350,7 @@ declare namespace WOM {
         /**
          * string
          */
-        disabledReason?: string | null;
+        disabledReason?: string;
         /**
          * boolean
          */
@@ -391,12 +482,12 @@ declare namespace WOM {
      * campaignStatisticsQueryResponse
      */
     export interface CampaignStatisticsQueryResponse {
-        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        request?: CampaignStatisticsQueryRequest;
+        deltaStatistics?: EngagementStatisticsHistorical;
         /**
          * list1
          */
-        readonly sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
+        readonly sets?: CampaignStatisticsQuerySetResponse[];
         /**
          * int32
          */
@@ -410,8 +501,8 @@ declare namespace WOM {
      * campaignStatisticsQuerySetResponse
      */
     export interface CampaignStatisticsQuerySetResponse {
-        request?: /* campaignStatisticsQueryRequest */ CampaignStatisticsQueryRequest;
-        summary?: /* engagementStatistics */ EngagementStatistics;
+        request?: CampaignStatisticsQueryRequest;
+        summary?: EngagementStatistics;
         /**
          * int32
          */
@@ -423,7 +514,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* dailyAggregatedCampaignStatistics */ DailyAggregatedCampaignStatistics[] | null;
+        items?: DailyAggregatedCampaignStatistics[];
     }
     /**
      * campaignUpsertRequest
@@ -435,7 +526,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        id?: string | null; // objectId
+        id?: string; // objectId
         /**
          * objectId
          * The unique identifier of the organization (this cannot be changed)
@@ -447,7 +538,7 @@ declare namespace WOM {
          * string
          * The user generated name of this campaign.
          */
-        title?: string | null;
+        title?: string;
         /**
          * boolean
          * Determines the visibility of this campaign.
@@ -457,15 +548,15 @@ declare namespace WOM {
          * tags
          * This campaign's tags
          */
-        tags?: string /* string */[] | null;
+        tags?: string /* string */[];
         /**
          * hashSet1
          * The IDs of the content items used for this campaign.
          */
-        contentIds?: string /* objectId */[] | null;
-        schedule?: /* campaignSchedule */ CampaignSchedule;
-        budget?: /* campaignBudget */ CampaignBudget;
-        settings?: /* campaignSettings */ CampaignSettings;
+        contentIds?: string /* objectId */[];
+        schedule?: CampaignSchedule;
+        budget?: CampaignBudget;
+        settings?: CampaignSettings;
     }
     /**
      * campaignsContentRequest
@@ -498,17 +589,17 @@ declare namespace WOM {
          * list1
          * Return documents that match any of these tags
          */
-        tagsAny?: string[] | null;
+        tagsAny?: string[];
         /**
          * list1
          * Return documents that contain all of these tags
          */
-        tagsAll?: string[] | null;
+        tagsAll?: string[];
         /**
          * nullable1
          * Will only return campaigns that are currently active (or not).
          */
-        isActive?: boolean | null;
+        isActive?: boolean;
         /**
          * int32
          * If set the query will return statistics based on the period (in days) specified here.
@@ -550,7 +641,253 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* campaignDetailResponse */ CampaignDetailResponse[] | null;
+        items?: CampaignDetailResponse[];
+    }
+    /**
+     * channelContentResponse
+     */
+    export interface ChannelContentResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        channelId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        productUrl?: string;
+        /**
+         * list1
+         */
+        audioLanguage?: string[];
+        streaming?: StreamingInfo;
+        engagement?: ContentEngagement;
+    }
+    /**
+     * channelContentsResponse
+     */
+    export interface ChannelContentsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ChannelContentResponse[];
+    }
+    /**
+     * channelResponse
+     */
+    export interface ChannelResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * string
+         */
+        publicId?: string;
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * boolean
+         */
+        isDisabled?: boolean;
+        /**
+         * boolean
+         */
+        isPrivate?: boolean;
+    }
+    /**
+     * channelViewerContentItemsResponse
+     */
+    export interface ChannelViewerContentItemsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ChannelContentResponse[];
+    }
+    /**
+     * channelsResponse
+     */
+    export interface ChannelsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ChannelResponse[];
+    }
+    /**
+     * contentDeleteRequest
+     */
+    export interface ContentDeleteRequest {
+        /**
+         * objectId
+         * Search by the id of the content required.
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * string
+         * Search by the remote id ('your' id) of this content.
+         * You must request with a token issued on the target remote network for a match to occur.
+         */
+        remoteContentId?: string;
+    }
+    /**
+     * contentEarningReportRequest
+     */
+    export interface ContentEarningReportRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        userId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * string
+         */
+        remoteContentId?: string;
+    }
+    /**
+     * contentEarningReportResponse
+     */
+    export interface ContentEarningReportResponse {
+        /**
+         * boolean
+         */
+        isCreator?: boolean;
+        /**
+         * boolean
+         */
+        isValidator?: boolean;
+        /**
+         * decimal
+         */
+        value?: number; // double
+        /**
+         * decimal
+         */
+        performanceValue?: number; // double
+        /**
+         * decimal
+         */
+        validatorValue?: number; // double
+    }
+    /**
+     * contentEngagement
+     */
+    export interface ContentEngagement {
+        /**
+         * int32
+         */
+        viewCount?: number; // int32
+        /**
+         * int32
+         */
+        likeCount?: number; // int32
+        /**
+         * int32
+         */
+        shareCount?: number; // int32
+        /**
+         * int32
+         */
+        commentCount?: number; // int32
+        /**
+         * int32
+         */
+        saveCount?: number; // int32
+        /**
+         * int32
+         */
+        clickCount?: number; // int32
+        /**
+         * int32
+         */
+        ratingCount?: number; // int32
+        /**
+         * int32
+         */
+        buyCount?: number; // int32
+        /**
+         * int32
+         */
+        readonly total?: number; // int32
     }
     /**
      * contentFlagInappropriateRequest
@@ -568,7 +905,7 @@ declare namespace WOM {
          * Remote id of the content to be flagged.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
     }
     /**
      * contentGetRequest
@@ -586,12 +923,12 @@ declare namespace WOM {
          * Search by the remote id ('your' id) of this content.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * string
          * Search by the primary Uri of this content.
          */
-        uriPrimary?: string | null;
+        uriPrimary?: string;
         /**
          * boolean
          * Enable the 'is document hidden by user' feature.
@@ -612,6 +949,10 @@ declare namespace WOM {
          * Enable the 'user details' feature, which returns more comprehensive information on the owner.
          */
         returnUserDetails?: boolean;
+        /**
+         * boolean
+         */
+        returnContentEarnings?: boolean;
     }
     /**
      * contentItemResponse
@@ -632,7 +973,7 @@ declare namespace WOM {
          * string
          * The id for this content on the remote network that created it.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * objectId
          * The UserId of this content's owner.
@@ -651,22 +992,22 @@ declare namespace WOM {
          * string
          * The title given to this content by the creator.
          */
-        title?: string | null;
+        title?: string;
         /**
          * list1
          * The first is the primary product of this content, followed by additional products if available.
          */
-        products?: /* productResponse */ ProductResponse[] | null;
+        products?: ProductResponseLegacy[];
         /**
          * hashSet1
          * The ids of campaigns this content is currently participating in.
          */
-        inCampaignIds?: string /* objectId */[] | null;
+        inCampaignIds?: string /* objectId */[];
         /**
          * hashSet1
          * The ids of campaigns this content is currently being promoted in.
          */
-        inCampaignPromotionIds?: string /* objectId */[] | null;
+        inCampaignPromotionIds?: string /* objectId */[];
         /**
          * boolean
          * True if this content is currently in use in any campaigns.
@@ -681,17 +1022,17 @@ declare namespace WOM {
          * tags
          * The tags associated with this content.
          */
-        tags?: string /* string */[] | null;
+        tags?: string /* string */[];
         /**
          * string
          * The primary Uri of the content on the originating network.
          */
-        uriPrimary?: string | null;
-        streamDetails?: /* streamDetails */ StreamDetails;
-        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
-        validationState?: /* validationStateResponse */ ValidationStateResponse;
-        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
-        engagement?: /* engagementStatistics */ EngagementStatistics;
+        uriPrimary?: string;
+        streamDetails?: StreamDetails;
+        videoAnalysis?: VideoAnalysisResponse;
+        validationState?: ValidationStateResponse;
+        womQualityScore?: WOMQualityScore;
+        engagement?: EngagementStatistics;
         /**
          * objectId
          * example:
@@ -702,14 +1043,23 @@ declare namespace WOM {
          * nullable1
          * If requested in a query, this field shows if the requesting user has hidden this content for validation / authentication.
          */
-        userValidatorHidden?: boolean | null;
+        userValidatorHidden?: boolean;
         /**
          * nullable1
          * If requested in a query, this field shows if the requesting user has marked this content as inappropriate.
          */
-        userFlagInappropriate?: boolean | null;
-        userValidationDetails?: /* userValidationDetails */ UserValidationDetails;
-        userDetails?: /* getUserResponse */ GetUserResponse;
+        userFlagInappropriate?: boolean;
+        /**
+         * boolean
+         * Has this content been deleted
+         */
+        isDeleted?: boolean;
+        userValidationDetails?: UserValidationDetails;
+        userDetails?: GetUserResponse;
+        /**
+         * nullable1
+         */
+        earningsValue?: number; // double
     }
     /**
      * contentPutRequest
@@ -719,45 +1069,45 @@ declare namespace WOM {
          * string
          * The remote id of this content, can be used to look up this content later.
          */
-        remoteId?: string | null;
+        remoteId?: string;
         /**
          * string
          * The title of this content.
          */
-        title?: string | null;
+        title?: string;
         /**
          * tags
          * The tags associated with this content.
          */
-        tags?: string /* string */[] | null;
+        tags?: string /* string */[];
         /**
          * string
          * The primary Uri of this content, as determined by the remote network sending it.
          */
-        uriPrimary?: string | null;
-        streamDetails?: /* streamDetails */ StreamDetails;
-        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
+        uriPrimary?: string;
+        streamDetails?: StreamDetails;
+        videoAnalysis?: VideoAnalysisResponse;
         /**
          * boolean
          * If true, allows to accept the video details at a later time.
          */
         isDelayedProcessing?: boolean;
-        primaryProduct?: /* productUpsertRequest */ ProductUpsertRequest;
+        primaryProduct?: ProductUpsertRequest;
         /**
          * list1
          * Optional list of secondary products.
          */
-        secondaryProducts?: /* productUpsertRequest */ ProductUpsertRequest[] | null;
+        secondaryProducts?: ProductUpsertRequest[];
         /**
          * string
          * The id of the facilitator on the calling network. Leave null if none specified.
          */
-        facilitatorUserId?: string | null;
+        facilitatorUserId?: string;
         /**
          * string
          * The id of the publisher organization/system/user.
          */
-        publisherId?: string | null;
+        publisherId?: string;
     }
     /**
      * contentPutResponse
@@ -782,42 +1132,35 @@ declare namespace WOM {
          * hashSet1
          * Query by a list of content ids.
          */
-        byContentIds?: string /* objectId */[] | null;
-        validationResult?: /**
-         * validationResult
-         * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
-         */
-        ValidationResult /* int32 */;
-        validationEndedReason?: /**
-         * validationEndedReason
-         * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
-         */
-        ValidationEndedReason /* int32 */;
-        validationStage?: /**
-         * validationStage
-         * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
-         */
-        ValidationStage /* int32 */;
+        byContentIds?: string /* objectId */[];
+        validationResult?: ValidationResult; // int32
+        validationEndedReason?: ValidationEndedReason; // int32
+        validationStage?: ValidationStage; // int32
         /**
          * nullable1
          * Filter by documents that are currently being validated.
          */
-        currentlyValidating?: boolean | null;
+        currentlyValidating?: boolean;
         /**
          * nullable1
          * Filter by reported state
          */
-        isReported?: boolean | null;
+        isReported?: boolean;
         /**
          * nullable1
          * Filter by live state
          */
-        isLive?: boolean | null;
+        isLive?: boolean;
+        /**
+         * nullable1
+         * If set, will return deleted videos
+         */
+        isDeleted?: boolean;
         /**
          * nullable1
          * Filter by whether this user participated during consensus.
          */
-        partOfConsensus?: boolean | null;
+        partOfConsensus?: boolean;
         /**
          * boolean
          * Implies: PartOfConsensus, returns validation documents that the user participated in, but did not get rewarded for or that are no longer live.
@@ -835,13 +1178,13 @@ declare namespace WOM {
          * Return only documents owned by this remote user Id.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        byRemoteUserId?: string | null;
+        byRemoteUserId?: string;
         /**
          * string
          * Return only documents owned by this remote Id.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        byRemoteId?: string | null;
+        byRemoteId?: string;
         /**
          * objectId
          * Return only documents from this segment.
@@ -853,32 +1196,32 @@ declare namespace WOM {
          * nullable1
          * Filter by documents that are single channel audio
          */
-        isSingleChannelAudio?: boolean | null;
+        isSingleChannelAudio?: boolean;
         /**
          * nullable1
          * Filter by documents that are unlimited length
          */
-        isUnlimitedLength?: boolean | null;
+        isUnlimitedLength?: boolean;
         /**
          * nullable1
          * Filter by documents that were filmed in portrait mode
          */
-        isPortraitAspect?: boolean | null;
+        isPortraitAspect?: boolean;
         /**
          * nullable1
          * Filter by documents with subtitles.
          */
-        hasSubtitles?: boolean | null;
+        hasSubtitles?: boolean;
         /**
          * tags
          * Return documents that match any of these tags
          */
-        tagsAny?: string /* string */[] | null;
+        tagsAny?: string /* string */[];
         /**
          * tags
          * Return documents that contain all of these tags
          */
-        tagsAll?: string /* string */[] | null;
+        tagsAll?: string /* string */[];
         /**
          * boolean
          * Enable the 'is document hidden by user' feature.
@@ -901,7 +1244,11 @@ declare namespace WOM {
         returnUserDetails?: boolean;
         /**
          * boolean
-         * Will order the results by 'validation timer' ascending.
+         * Will return this user's earnings for each content element
+         */
+        returnContentEarnings?: boolean;
+        /**
+         * boolean
          */
         orderByValidationTimer?: boolean;
         /**
@@ -921,7 +1268,7 @@ declare namespace WOM {
      * contentQueryResponse
      */
     export interface ContentQueryResponse {
-        request?: /* contentQueryRequest */ ContentQueryRequest;
+        request?: ContentQueryRequest;
         /**
          * int32
          */
@@ -941,7 +1288,28 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* contentItemResponse */ ContentItemResponse[] | null;
+        items?: ContentItemResponse[];
+    }
+    /**
+     * contentResponse
+     */
+    export interface ContentResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        productUrl?: string;
+        /**
+         * list1
+         */
+        audioLanguage?: string[];
+        streaming?: StreamingInfo;
+        engagement?: ContentEngagement;
     }
     /**
      * contentStatisticsQueryRequest
@@ -959,12 +1327,12 @@ declare namespace WOM {
          * Search by the remote id ('your' id) of this content.
          * You must request with a token issued on the target remote network for a match to occur.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * string
          * Search by the primary Uri of this content.
          */
-        uriPrimary?: string | null;
+        uriPrimary?: string;
         /**
          * date
          * Retrieve statistics starting with this date
@@ -988,8 +1356,8 @@ declare namespace WOM {
      * contentStatisticsQueryResponse
      */
     export interface ContentStatisticsQueryResponse {
-        request?: /* contentStatisticsQueryRequest */ ContentStatisticsQueryRequest;
-        totalsInPage?: /* engagementStatistics */ EngagementStatistics;
+        request?: ContentStatisticsQueryRequest;
+        totalsInPage?: EngagementStatistics;
         /**
          * int32
          */
@@ -1001,7 +1369,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* statisticsDaily */ StatisticsDaily[] | null;
+        items?: StatisticsDaily[];
     }
     /**
      * contentStreamUpdateRequest
@@ -1018,14 +1386,68 @@ declare namespace WOM {
          * string
          * The remote id of this content, can be used to look up this content later.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * string
          * The primary Uri of this content, as determined by the remote network sending it.
          */
-        uriPrimary?: string | null;
-        streamDetails?: /* streamDetails */ StreamDetails;
-        videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
+        uriPrimary?: string;
+        streamDetails?: StreamDetails;
+        videoAnalysis?: VideoAnalysisResponse;
+    }
+    /**
+     * createBrandRequest
+     */
+    export interface CreateBrandRequest {
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+    }
+    /**
+     * createChannelContentRequest
+     */
+    export interface CreateChannelContentRequest {
+        /**
+         * nullable1
+         * If calling user is an admin, they will be able to create a channel content on behalf of other organization.
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        channelId?: string; // objectId
+        /**
+         * string
+         */
+        affiliateLinkUrl?: string;
+    }
+    /**
+     * createChannelRequest
+     */
+    export interface CreateChannelRequest {
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * boolean
+         */
+        isPrivate?: boolean;
     }
     /**
      * createNetworkAdministratorRequest
@@ -1034,11 +1456,11 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteIssuer?: string | null;
+        remoteIssuer?: string;
         /**
          * string
          */
-        remoteId?: string | null;
+        remoteId?: string;
     }
     /**
      * createOrganizationRequest
@@ -1048,22 +1470,79 @@ declare namespace WOM {
          * string
          * The title of this organization.
          */
-        companyName?: string | null;
+        companyName?: string;
         /**
          * string
          * The key that will be used publicly to represent this organization.
          */
-        key?: string | null;
+        key?: string;
         /**
          * string
          * Supply an email for the initial administrator of this organization.
          */
-        administratorEmail?: string | null;
+        administratorEmail?: string;
         /**
          * tags
          * The mandatory tags of this organization.
          */
-        mandatoryTags?: string /* string */[] | null;
+        mandatoryTags?: string /* string */[];
+    }
+    /**
+     * createProductRequest
+     */
+    export interface CreateProductRequest {
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        brandId?: string; // objectId
+    }
+    /**
+     * createRemoteProductRequest
+     */
+    export interface CreateRemoteProductRequest {
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        brand?: string;
+        /**
+         * string
+         */
+        publicId?: string;
+        /**
+         * string
+         */
+        url?: string;
+        /**
+         * string
+         */
+        imageUrl?: string;
+    }
+    /**
+     * createVoucherTransactionRequest
+     */
+    export interface CreateVoucherTransactionRequest {
+        /**
+         * int64
+         */
+        productId?: number; // int64
+        /**
+         * int32
+         */
+        denomination?: number; // int32
     }
     /**
      * cryptoInformationResponse
@@ -1072,16 +1551,12 @@ declare namespace WOM {
         /**
          * list1
          */
-        addresses?: /**
-         * addressResponse
-         * A strongly typed entity representing the amount of tokens in a user's account.
-         */
-        AddressResponse[] | null;
-        bridgeBalanceReport?: /* bridgeSystemBalanceResponse */ BridgeSystemBalanceResponse;
+        addresses?: AddressResponse[];
+        bridgeBalanceReport?: BridgeSystemBalanceResponse;
         /**
          * transactionQueueReportResponse
          */
-        pendingBalanceReport?: /* transactionQueueReportItemResponse */ TransactionQueueReportItemResponse[] | null;
+        pendingBalanceReport?: TransactionQueueReportItemResponse[];
     }
     /**
      * dailyAggregatedCampaignStatistics
@@ -1105,17 +1580,17 @@ declare namespace WOM {
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity?: number | null; // double
+        authenticity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity?: number | null; // double
+        creativity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity?: number | null; // double
+        positivity?: number; // double
         /**
          * int32
          * The total number of views
@@ -1248,17 +1723,17 @@ declare namespace WOM {
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity?: number | null; // double
+        authenticity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity?: number | null; // double
+        creativity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity?: number | null; // double
+        positivity?: number; // double
         /**
          * int32
          * The total number of views
@@ -1370,6 +1845,61 @@ declare namespace WOM {
         readonly total?: number; // int32
     }
     /**
+     * deleteBrandRequest
+     */
+    export interface DeleteBrandRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * deleteChannelContentRequest
+     */
+    export interface DeleteChannelContentRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * deleteChannelRequest
+     */
+    export interface DeleteChannelRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * deleteProductRequest
+     */
+    export interface DeleteProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * deleteRemoteProductRequest
+     */
+    export interface DeleteRemoteProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
      * emailValidity
      * <br/><br/>Values:<br/>0 = NotExists<br/>1 = InvalidFormat<br/>2 = SingleUseDomain<br/>3 = Exists
      */
@@ -1381,19 +1911,25 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteId?: string | null;
+        remoteId?: string;
         /**
          * string
          */
-        remoteUsername?: string | null;
+        remoteUsername?: string;
         /**
          * string
          */
-        remoteValidatedEmail?: string | null;
+        remoteValidatedEmail?: string;
         /**
          * string
          */
-        remoteVerifiedMobileNumber?: string | null;
+        remoteVerifiedMobileNumber?: string;
+        /**
+         * cultureInfo
+         * example:
+         * en-GB
+         */
+        remoteLocale?: string; // string
     }
     /**
      * engagementStatistics
@@ -1583,28 +2119,24 @@ declare namespace WOM {
          */
         errors?: {
             [name: string]: string[];
-        } | null;
+        };
         /**
          * string
          */
-        title?: string | null;
+        title?: string;
         /**
          * string
          */
-        traceId?: string | null;
+        traceId?: string;
         /**
          * boolean
          */
         readonly isSuccess?: boolean;
-        loggingLevel?: /**
-         * logLevel
-         * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
-         */
-        LogLevel /* int32 */;
+        loggingLevel?: LogLevel; // int32
         /**
          * string
          */
-        readonly message?: string | null;
+        readonly message?: string;
     }
     /**
      * error404NotFoundResponse
@@ -1614,15 +2146,11 @@ declare namespace WOM {
          * boolean
          */
         readonly isSuccess?: boolean;
-        loggingLevel?: /**
-         * logLevel
-         * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
-         */
-        LogLevel /* int32 */;
+        loggingLevel?: LogLevel; // int32
         /**
          * string
          */
-        readonly message?: string | null;
+        readonly message?: string;
     }
     /**
      * error409ConflictResponse
@@ -1632,15 +2160,11 @@ declare namespace WOM {
          * boolean
          */
         readonly isSuccess?: boolean;
-        loggingLevel?: /**
-         * logLevel
-         * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
-         */
-        LogLevel /* int32 */;
+        loggingLevel?: LogLevel; // int32
         /**
          * string
          */
-        readonly message?: string | null;
+        readonly message?: string;
     }
     /**
      * exchangeRateItem
@@ -1649,7 +2173,7 @@ declare namespace WOM {
         /**
          * string
          */
-        assetName?: string | null;
+        assetName?: string;
         /**
          * decimal
          */
@@ -1666,7 +2190,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        rates?: /* exchangeRateItem */ ExchangeRateItem[] | null;
+        rates?: ExchangeRateItem[];
         /**
          * dateTime
          * The time at which this request to the token information external API was made.
@@ -1683,6 +2207,39 @@ declare namespace WOM {
         exists?: boolean;
     }
     /**
+     * getBrandRequest
+     */
+    export interface GetBrandRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * getChannelContentRequest
+     */
+    export interface GetChannelContentRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * getChannelRequest
+     */
+    export interface GetChannelRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
      * getCurrentAuthorizationsRequest
      */
     export interface GetCurrentAuthorizationsRequest {
@@ -1691,7 +2248,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId?: string | null; // objectId
+        userId?: string; // objectId
     }
     /**
      * getCurrentAuthorizationsResponse
@@ -1706,11 +2263,11 @@ declare namespace WOM {
         /**
          * roles
          */
-        roles?: string /* string */[] | null;
+        roles?: string /* string */[];
         /**
          * string
          */
-        email?: string | null;
+        email?: string;
         /**
          * boolean
          */
@@ -1762,6 +2319,32 @@ declare namespace WOM {
         organizationId: string; // objectId
     }
     /**
+     * getProductRequest
+     */
+    export interface GetProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+    }
+    /**
+     * getRemoteProductRequest
+     */
+    export interface GetRemoteProductRequest {
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        remoteId?: string;
+    }
+    /**
      * getUserRequest
      */
     export interface GetUserRequest {
@@ -1770,11 +2353,11 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId?: string | null; // objectId
+        userId?: string; // objectId
         /**
          * string
          */
-        remoteUserId?: string | null;
+        remoteUserId?: string;
     }
     /**
      * getUserResponse
@@ -1796,30 +2379,30 @@ declare namespace WOM {
         /**
          * string
          */
-        firstName?: string | null;
+        firstName?: string;
         /**
          * string
          */
-        lastName?: string | null;
+        lastName?: string;
         /**
          * string
          */
-        readonly fullName?: string | null;
+        readonly fullName?: string;
         /**
          * string
          * The user's remote id (not WOM userId) if it exists.
          */
-        remoteUserId?: string | null;
+        remoteUserId?: string;
         /**
          * string
          * The user's remote username if it exists.
          */
-        remoteUsername?: string | null;
+        remoteUsername?: string;
         /**
          * string
          * The remote issuer that created this user, if it exists.
          */
-        remoteIssuer?: string | null;
+        remoteIssuer?: string;
         /**
          * objectId
          * example:
@@ -1857,19 +2440,19 @@ declare namespace WOM {
         /**
          * roles
          */
-        roles?: string /* string */[] | null;
+        roles?: string /* string */[];
         /**
          * string
          */
-        email?: string | null;
+        email?: string;
         /**
          * string
          */
-        mobileNumber?: string | null;
+        mobileNumber?: string;
         /**
          * string
          */
-        username?: string | null;
+        username?: string;
         /**
          * boolean
          */
@@ -1878,7 +2461,7 @@ declare namespace WOM {
          * boolean
          */
         isEmailValidated?: boolean;
-        profile?: /* userProfileResponse */ UserProfileResponse;
+        profile?: UserProfileResponse;
     }
     /**
      * getValidationDetailRequest
@@ -1893,7 +2476,7 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
     }
     /**
      * getValidationStateRequest
@@ -1908,7 +2491,81 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
+    }
+    /**
+     * getVoucherBrandsRequest
+     */
+    export interface GetVoucherBrandsRequest {
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * getVoucherBrandsResponse
+     */
+    export interface GetVoucherBrandsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: BrandVoucherResponse[];
+    }
+    /**
+     * getVoucherCountriesRequest
+     */
+    export interface GetVoucherCountriesRequest {}
+    /**
+     * getVoucherCountriesResponse
+     */
+    export interface GetVoucherCountriesResponse {
+        /**
+         * list1
+         */
+        countries?: string[];
+        /**
+         * string
+         */
+        readonly message?: string;
+        /**
+         * boolean
+         */
+        isSuccess?: boolean;
+    }
+    /**
+     * getVoucherTransactionRequest
+     */
+    export interface GetVoucherTransactionRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        transactionId?: string; // objectId
     }
     /**
      * hour
@@ -1924,6 +2581,77 @@ declare namespace WOM {
         readonly isDefault?: boolean;
     }
     /**
+     * initializeWebRecorderRequest
+     */
+    export interface InitializeWebRecorderRequest {
+        /**
+         * string
+         */
+        organizationPublicId?: string;
+        remoteProduct?: RemoteProductDescription;
+    }
+    /**
+     * initializeWebRecorderResponse
+     */
+    export interface InitializeWebRecorderResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        productId?: string; // objectId
+        /**
+         * boolean
+         */
+        isCreatedNew?: boolean;
+    }
+    /**
+     * linkRemoteProductRequest
+     */
+    export interface LinkRemoteProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        remoteProductId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        productId?: string; // objectId
+        /**
+         * boolean
+         */
+        link?: boolean;
+    }
+    /**
+     * linkedProductResponse
+     */
+    export interface LinkedProductResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        brandId?: string; // objectId
+    }
+    /**
      * logLevel
      * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
      */
@@ -1935,7 +2663,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        readonly message?: string;
         /**
          * boolean
          */
@@ -1952,11 +2680,11 @@ declare namespace WOM {
         /**
          * string
          */
-        type?: string | null;
+        type?: string;
         /**
          * string
          */
-        receiverUserId?: string | null;
+        receiverUserId?: string;
         /**
          * objectId
          * example:
@@ -1970,7 +2698,13 @@ declare namespace WOM {
         /**
          * list1
          */
-        arguments?: string[] | null;
+        arguments?: string[];
+        /**
+         * dictionary2
+         */
+        keys?: {
+            [name: string]: string;
+        };
     }
     /**
      * notificationsResponse
@@ -1979,7 +2713,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* notificationItemResponse */ NotificationItemResponse[] | null;
+        items?: NotificationItemResponse[];
         /**
          * objectId
          * example:
@@ -2053,7 +2787,7 @@ declare namespace WOM {
          * string
          * The key for the organization, usually taken from the CM sub domain.
          */
-        organizationKey?: string | null;
+        organizationKey?: string;
     }
     /**
      * organizationIdentityResponse
@@ -2068,7 +2802,7 @@ declare namespace WOM {
         /**
          * string
          */
-        organizationTitle?: string | null;
+        organizationTitle?: string;
         /**
          * boolean
          */
@@ -2082,11 +2816,7 @@ declare namespace WOM {
          * string
          */
         email: string;
-        permission: /**
-         * organizationPermission
-         * <br/><br/>Values:<br/>0 = None<br/>1 = Member<br/>2 = Admin
-         */
-        OrganizationPermission /* int32 */;
+        permission: OrganizationPermission; // int32
     }
     /**
      * organizationModifyUserRequest
@@ -2104,11 +2834,7 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         userId: string; // objectId
-        permission: /**
-         * organizationPermission
-         * <br/><br/>Values:<br/>0 = None<br/>1 = Member<br/>2 = Admin
-         */
-        OrganizationPermission /* int32 */;
+        permission: OrganizationPermission; // int32
     }
     /**
      * organizationPermission
@@ -2128,11 +2854,11 @@ declare namespace WOM {
         /**
          * string
          */
-        textSearch?: string | null;
+        textSearch?: string;
         /**
          * list1
          */
-        userIds?: string /* objectId */[] | null;
+        userIds?: string /* objectId */[];
         /**
          * int32
          */
@@ -2169,7 +2895,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* getUserResponse */ GetUserResponse[] | null;
+        items?: GetUserResponse[];
     }
     /**
      * organizationResponse
@@ -2186,27 +2912,32 @@ declare namespace WOM {
          * string
          * The title of this organization.
          */
-        title?: string | null;
+        title?: string;
         /**
          * string
          * The key that will used publicly to represent this organization.
          */
-        key?: string | null;
+        key?: string;
+        /**
+         * string
+         * This field is a public merchant id. Instead of Key.
+         */
+        publicId?: string;
         /**
          * tags
          * The mandatory tags of this organization.
          */
-        mandatoryTags?: string /* string */[] | null;
+        mandatoryTags?: string /* string */[];
         /**
          * list1
          * The users (by id) that have admin rights over this organization.
          */
-        adminIds?: string /* objectId */[] | null;
+        adminIds?: string /* objectId */[];
         /**
          * list1
          * The users (by id) that are members of this organization.
          */
-        memberIds?: string /* objectId */[] | null;
+        memberIds?: string /* objectId */[];
         /**
          * objectId
          * If created, the identifier of this organization's wallet
@@ -2233,7 +2964,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        invitations: /* organizationInvitationItem */ OrganizationInvitationItem[];
+        invitations: OrganizationInvitationItem[];
     }
     /**
      * organizationStatisticsQueryRequest
@@ -2273,12 +3004,12 @@ declare namespace WOM {
      * organizationStatisticsQueryResponse
      */
     export interface OrganizationStatisticsQueryResponse {
-        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        deltaStatistics?: /* engagementStatisticsHistorical */ EngagementStatisticsHistorical;
+        request?: OrganizationStatisticsQueryRequest;
+        deltaStatistics?: EngagementStatisticsHistorical;
         /**
          * list1
          */
-        readonly sets?: /* organizationStatisticsQuerySetResponse */ OrganizationStatisticsQuerySetResponse[] | null;
+        readonly sets?: OrganizationStatisticsQuerySetResponse[];
         /**
          * int32
          */
@@ -2292,8 +3023,8 @@ declare namespace WOM {
      * organizationStatisticsQuerySetResponse
      */
     export interface OrganizationStatisticsQuerySetResponse {
-        request?: /* organizationStatisticsQueryRequest */ OrganizationStatisticsQueryRequest;
-        summary?: /* engagementStatistics */ EngagementStatistics;
+        request?: OrganizationStatisticsQueryRequest;
+        summary?: EngagementStatistics;
         /**
          * int32
          */
@@ -2305,7 +3036,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* dailyAggregatedOrganizationStatistics */ DailyAggregatedOrganizationStatistics[] | null;
+        items?: DailyAggregatedOrganizationStatistics[];
     }
     /**
      * organizationStatisticsRequest
@@ -2363,7 +3094,7 @@ declare namespace WOM {
         /**
          * tags
          */
-        discoveryTags?: string /* string */[] | null;
+        discoveryTags?: string /* string */[];
     }
     /**
      * organizationUserAuthChallengeRequest
@@ -2437,7 +3168,72 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* organizationResponse */ OrganizationResponse[] | null;
+        items?: OrganizationResponse[];
+    }
+    /**
+     * paymentType
+     * <br/><br/>Values:<br/>0 = None<br/>1 = Creator<br/>2 = Authenticator<br/>3 = Facilitator<br/>4 = Publisher<br/>5 = DisplayNetwork<br/>6 = Advertiser<br/>7 = Brand
+     */
+    export type PaymentType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7; // int32
+    /**
+     * performancePaymentsContentPaymentsItem
+     */
+    export interface PerformancePaymentsContentPaymentsItem {
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        address?: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        userId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        transactionId?: string; // objectId
+        type?: PaymentType; // int32
+        /**
+         * decimal
+         */
+        value?: number; // double
+    }
+    /**
+     * performancePaymentsContentPaymentsRequest
+     */
+    export interface PerformancePaymentsContentPaymentsRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        auditId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+    }
+    /**
+     * performancePaymentsContentPaymentsResponse
+     */
+    export interface PerformancePaymentsContentPaymentsResponse {
+        /**
+         * int32
+         */
+        paymentsCount?: number; // int32
+        /**
+         * list1
+         */
+        items?: PerformancePaymentsContentPaymentsItem[];
     }
     /**
      * performancePaymentsGetRequest
@@ -2468,6 +3264,12 @@ declare namespace WOM {
      * performancePaymentsGetResponse
      */
     export interface PerformancePaymentsGetResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        auditId?: string; // objectId
         /**
          * date
          * example:
@@ -2521,11 +3323,11 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* performancePaymentsItem */ PerformancePaymentsItem[] | null;
+        items?: PerformancePaymentsItem[];
         /**
          * string
          */
-        readonly url?: string | null;
+        readonly url?: string;
     }
     /**
      * performancePaymentsItem
@@ -2540,11 +3342,11 @@ declare namespace WOM {
         /**
          * string
          */
-        title?: string | null;
+        title?: string;
         /**
          * tags
          */
-        tags?: string /* string */[] | null;
+        tags?: string /* string */[];
         /**
          * decimal
          */
@@ -2595,7 +3397,7 @@ declare namespace WOM {
      * performancePaymentsQueryResponse
      */
     export interface PerformancePaymentsQueryResponse {
-        request?: /* performancePaymentsQueryRequest */ PerformancePaymentsQueryRequest;
+        request?: PerformancePaymentsQueryRequest;
         /**
          * int32
          */
@@ -2615,12 +3417,75 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* performancePaymentsGetResponse */ PerformancePaymentsGetResponse[] | null;
+        items?: PerformancePaymentsGetResponse[];
+    }
+    /**
+     * productInfo
+     */
+    export interface ProductInfo {
+        /**
+         * string
+         */
+        productImage?: string;
+        /**
+         * string
+         */
+        productDescription?: string;
+        /**
+         * string
+         */
+        howToUse?: string;
+        /**
+         * string
+         */
+        termsAndConditions?: string;
+        /**
+         * string
+         */
+        expiryAndValidity?: string;
+        /**
+         * string
+         */
+        brandName?: string;
+        /**
+         * string
+         */
+        countryName?: string;
     }
     /**
      * productResponse
      */
     export interface ProductResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        brandId?: string; // objectId
+        brand?: BrandResponse;
+        /**
+         * nullable1
+         */
+        hasRemoteProduct?: boolean;
+    }
+    /**
+     * productResponseLegacy
+     */
+    export interface ProductResponseLegacy {
         /**
          * objectId
          * The product's unique identifier
@@ -2632,12 +3497,12 @@ declare namespace WOM {
          * string
          * This product's brand name
          */
-        brandName?: string | null;
+        brandName?: string;
         /**
          * string
          * The item name of this product.
          */
-        item?: string | null;
+        item?: string;
         /**
          * tag
          * The tag that represents this product's brand.
@@ -2663,7 +3528,7 @@ declare namespace WOM {
          * tags
          * Extra tags, will not include other tags referenced here.
          */
-        extraTags?: string /* string */[] | null;
+        extraTags?: string /* string */[];
     }
     /**
      * productUpsertRequest
@@ -2672,45 +3537,69 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteId?: string | null;
+        remoteId?: string;
         /**
          * hashSet1
          */
-        upcCodes?: string[] | null;
+        upcCodes?: string[];
         /**
          * string
          */
-        brandName?: string | null;
+        brandName?: string;
         /**
          * string
          */
-        itemName?: string | null;
+        itemName?: string;
         /**
          * string
          */
-        primaryCategory?: string | null;
+        primaryCategory?: string;
         /**
          * hashSet1
          */
-        secondaryCategories?: string[] | null;
+        secondaryCategories?: string[];
         /**
          * string
          */
-        brandProductImageUrl?: string | null;
+        brandProductImageUrl?: string;
         /**
          * tags
          */
-        tags?: string /* string */[] | null;
+        tags?: string /* string */[];
     }
     /**
-     * queryOrganizationRequest
+     * productsResponse
      */
-    export interface QueryOrganizationRequest {
+    export interface ProductsResponse {
         /**
-         * nullable1
-         * True if organizations should has a token wallet.
+         * int32
          */
-        hasWallet?: boolean | null;
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ProductResponse[];
+    }
+    /**
+     * queryBrandsRequest
+     */
+    export interface QueryBrandsRequest {
+        /**
+         * list1
+         */
+        ids?: string /* objectId */[];
         /**
          * int32
          */
@@ -2723,6 +3612,355 @@ declare namespace WOM {
          * boolean
          */
         returnQueryCount?: boolean;
+    }
+    /**
+     * queryChannelContentsRequest
+     */
+    export interface QueryChannelContentsRequest {
+        /**
+         * nullable1
+         * If calling user is an admin, they will be able to create a channel content on behalf of other organization.
+         * example:
+         * 000000000000000000000000
+         */
+        channelId?: string; // objectId
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryChannelViewerContentRequest
+     */
+    export interface QueryChannelViewerContentRequest {
+        /**
+         * string
+         */
+        organizationPublicId?: string;
+        /**
+         * string
+         */
+        channelPublicId?: string;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryChannelsRequest
+     */
+    export interface QueryChannelsRequest {
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryOrganizationRequest
+     */
+    export interface QueryOrganizationRequest {
+        /**
+         * nullable1
+         * True if organizations should has a token wallet.
+         */
+        hasWallet?: boolean;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryProductViewerContentRequest
+     */
+    export interface QueryProductViewerContentRequest {
+        /**
+         * string
+         */
+        organizationPublicId?: string;
+        /**
+         * string
+         */
+        remoteProductId?: string;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryProductViewerContentResponse
+     */
+    export interface QueryProductViewerContentResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ContentResponse[];
+    }
+    /**
+     * queryProductsRequest
+     */
+    export interface QueryProductsRequest {
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        brandId?: string; // objectId
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryRemoteProductsRequest
+     */
+    export interface QueryRemoteProductsRequest {
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        productId?: string; // objectId
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryUnlinkedRemoteProductsRequest
+     */
+    export interface QueryUnlinkedRemoteProductsRequest {
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryVoucherTransactionRequest
+     */
+    export interface QueryVoucherTransactionRequest {
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * queryVoucherTransactionResponse
+     */
+    export interface QueryVoucherTransactionResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: VoucherTransactionResponse[];
+    }
+    /**
+     * remoteProductDescription
+     */
+    export interface RemoteProductDescription {
+        /**
+         * string
+         */
+        publicId?: string;
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        brand?: string;
+        /**
+         * string
+         */
+        url?: string;
+        /**
+         * string
+         */
+        imageUrl?: string;
+    }
+    /**
+     * remoteProductResponse
+     */
+    export interface RemoteProductResponse {
+        linkedProduct?: LinkedProductResponse;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        brand?: string;
+        /**
+         * string
+         */
+        publicId?: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * string
+         */
+        url?: string;
+        /**
+         * string
+         */
+        imageUrl?: string;
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        linkedProductId?: string; // objectId
+    }
+    /**
+     * remoteProductsResponse
+     */
+    export interface RemoteProductsResponse {
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: RemoteProductResponse[];
     }
     /**
      * rewardConsumeRequest
@@ -2775,22 +4013,22 @@ declare namespace WOM {
          * string
          * The ID of the content known to the remote network.
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        authenticity?: number | null; // double
+        authenticity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        creativity?: number | null; // double
+        creativity?: number; // double
         /**
          * nullable1
          * The latest content level value, on this day, of this rating.
          */
-        positivity?: number | null; // double
+        positivity?: number; // double
         /**
          * int32
          * The total number of views
@@ -2905,19 +4143,19 @@ declare namespace WOM {
      * statisticsHourly
      */
     export interface StatisticsHourly {
-        hour?: /* hour */ Hour;
+        hour?: Hour;
         /**
          * nullable1
          */
-        authenticity?: number | null; // double
+        authenticity?: number; // double
         /**
          * nullable1
          */
-        creativity?: number | null; // double
+        creativity?: number; // double
         /**
          * nullable1
          */
-        positivity?: number | null; // double
+        positivity?: number; // double
         /**
          * objectId
          * example:
@@ -2933,7 +4171,7 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * int32
          * The total number of views
@@ -3051,7 +4289,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* statisticsHourly */ StatisticsHourly[] | null;
+        items?: StatisticsHourly[];
     }
     /**
      * streamDetails
@@ -3060,11 +4298,11 @@ declare namespace WOM {
         /**
          * string
          */
-        screenGrabUrl?: string | null;
+        screenGrabUrl?: string;
         /**
          * string
          */
-        hlsUrl?: string | null;
+        hlsUrl?: string;
         /**
          * boolean
          */
@@ -3089,12 +4327,31 @@ declare namespace WOM {
          * list1
          * The languages available on this content.
          */
-        languageSpoken?: string[] | null;
+        languageSpoken?: string[];
         /**
          * list1
          * The subtitle languages available for this content.
          */
-        languageSubtitle?: string[] | null;
+        languageSubtitle?: string[];
+    }
+    /**
+     * streamingInfo
+     */
+    export interface StreamingInfo {
+        /**
+         * string
+         */
+        thumbnailUrl?: string;
+        /**
+         * string
+         */
+        hlsUrl?: string;
+        /**
+         * timeSpan
+         * example:
+         * 0
+         */
+        duration?: number; // int64
     }
     /**
      * systemBalanceResponse
@@ -3136,6 +4393,13 @@ declare namespace WOM {
      */
     export interface TransactionCreateRequest {
         /**
+         * nullable1
+         * Optional, set the transaction id for this transaction.
+         * example:
+         * 000000000000000000000000
+         */
+        setTransactionId?: string; // objectId
+        /**
          * decimal
          * The amount to transfer.
          */
@@ -3144,12 +4408,12 @@ declare namespace WOM {
          * string
          * The account in the source wallet. Either WOM or RP.
          */
-        addressFrom?: string | null;
+        addressFrom?: string;
         /**
          * string
          * The account in the destination wallet. Either WOM or RP.
          */
-        addressTo?: string | null;
+        addressTo?: string;
     }
     /**
      * transactionGetRequest
@@ -3174,14 +4438,14 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        userId?: string | null; // objectId
+        userId?: string; // objectId
         /**
          * nullable1
          * The wallet to return transactions for.
          * example:
          * 000000000000000000000000
          */
-        walletId?: string | null; // objectId
+        walletId?: string; // objectId
         /**
          * boolean
          * Admin only, return all transactions.
@@ -3191,13 +4455,9 @@ declare namespace WOM {
          * string
          * The address to return transactions for.
          */
-        address?: string | null;
-        status?: /**
-         * transactionStatus
-         * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
-         */
-        TransactionStatus /* int32 */;
-        type?: /* transactionType */ TransactionType /* int32 */;
+        address?: string;
+        status?: TransactionStatus; // int32
+        type?: TransactionType; // int32
         /**
          * int32
          */
@@ -3234,11 +4494,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /**
-         * transactionResponse
-         * Describes the current status of any transaction.
-         */
-        TransactionResponse[] | null;
+        items?: TransactionResponse[];
     }
     /**
      * transactionQueueReportItemResponse
@@ -3247,11 +4503,11 @@ declare namespace WOM {
         /**
          * string
          */
-        name?: string | null;
+        name?: string;
         /**
          * string
          */
-        address?: string | null;
+        address?: string;
         /**
          * bigInteger
          * example:
@@ -3288,16 +4544,12 @@ declare namespace WOM {
      * Describes the current status of any transaction.
      */
     export interface TransactionResponse {
-        type?: /**
-         * WOMNarrativeType
-         * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync<br/>900 = CampaignPayment<br/>1000 = PerformancePayment
-         */
-        WOMNarrativeType /* int32 */;
+        type?: WOMNarrativeType; // int32
         /**
          * string
          * Description
          */
-        meta?: string | null;
+        meta?: string;
         /**
          * objectId
          * The transaction hash
@@ -3308,7 +4560,7 @@ declare namespace WOM {
         /**
          * string
          */
-        ethereumTransactionHash?: string | null;
+        ethereumTransactionHash?: string;
         /**
          * dateTime
          */
@@ -3316,22 +4568,18 @@ declare namespace WOM {
         /**
          * string
          */
-        from?: string | null;
+        from?: string;
         /**
          * string
          */
-        to?: string | null;
+        to?: string;
         /**
          * bigInteger
          * example:
          * 100000000000000000000000
          */
         valueWei?: string; // string
-        status?: /**
-         * transactionStatus
-         * Enum representing the current state of a token transfer<br/><br/>Values:<br/>0 = None<br/>1 = InProgress<br/>2 = Success<br/>-1 = Failure
-         */
-        TransactionStatus /* int32 */;
+        status?: TransactionStatus; // int32
         /**
          * int32
          */
@@ -3350,6 +4598,82 @@ declare namespace WOM {
      * transactionType
      */
     export type TransactionType = 0 | 1 | 2 | 3 | 4; // int32
+    /**
+     * updateBrandRequest
+     */
+    export interface UpdateBrandRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+    }
+    /**
+     * updateChannelContentRequest
+     */
+    export interface UpdateChannelContentRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * nullable1
+         * If calling user is an admin, they will be able to create a channel content on behalf of other organization.
+         * example:
+         * 000000000000000000000000
+         */
+        organizationId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        channelId?: string; // objectId
+        /**
+         * string
+         */
+        affiliateLinkUrl?: string;
+    }
+    /**
+     * updateChannelRequest
+     */
+    export interface UpdateChannelRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * boolean
+         */
+        isPrivate?: boolean;
+        /**
+         * boolean
+         */
+        isDisabled?: boolean;
+    }
     /**
      * updateOrganizationRequest
      */
@@ -3372,13 +4696,106 @@ declare namespace WOM {
         mandatoryTags: string /* string */[];
     }
     /**
+     * updateProductRequest
+     */
+    export interface UpdateProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+        /**
+         * nullable1
+         * example:
+         * 000000000000000000000000
+         */
+        brandId?: string; // objectId
+    }
+    /**
+     * updateProductRequestLegacy
+     */
+    export interface UpdateProductRequestLegacy {
+        /**
+         * string
+         */
+        remoteId?: string;
+        /**
+         * hashSet1
+         */
+        upcCodes?: string[];
+        /**
+         * string
+         */
+        brandName?: string;
+        /**
+         * string
+         */
+        itemName?: string;
+        /**
+         * string
+         */
+        primaryCategory?: string;
+        /**
+         * hashSet1
+         */
+        secondaryCategories?: string[];
+        /**
+         * string
+         */
+        brandProductImageUrl?: string;
+        /**
+         * tags
+         */
+        tags?: string /* string */[];
+    }
+    /**
+     * updateRemoteProductRequest
+     */
+    export interface UpdateRemoteProductRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        brand?: string;
+        /**
+         * string
+         */
+        publicId?: string;
+        /**
+         * string
+         */
+        url?: string;
+        /**
+         * string
+         */
+        imageUrl?: string;
+    }
+    /**
      * uploadUserProfileImageCommonResponse
      */
     export interface UploadUserProfileImageCommonResponse {
         /**
          * string
          */
-        imageUrl?: string | null;
+        imageUrl?: string;
     }
     /**
      * userAuthChallengeRequest
@@ -3403,6 +4820,10 @@ declare namespace WOM {
         email: string;
         /**
          * string
+         */
+        locale?: string;
+        /**
+         * string
          * Username, must be unique
          */
         username: string;
@@ -3415,11 +4836,11 @@ declare namespace WOM {
      * userJwtTokenResponse
      */
     export interface UserJwtTokenResponse {
-        user?: /* getUserResponse */ GetUserResponse;
+        user?: GetUserResponse;
         /**
          * string
          */
-        token?: string | null;
+        token?: string;
     }
     /**
      * userProfileResponse
@@ -3428,11 +4849,11 @@ declare namespace WOM {
         /**
          * string
          */
-        imageUrl?: string | null;
+        imageUrl?: string;
         /**
          * string
          */
-        primaryLanguage?: string | null;
+        primaryLanguage?: string;
     }
     /**
      * userQueryRequest
@@ -3447,31 +4868,35 @@ declare namespace WOM {
         /**
          * list1
          */
-        userIds?: string /* objectId */[] | null;
+        userIds?: string /* objectId */[];
+        /**
+         * list1
+         */
+        walletIds?: string /* objectId */[];
         /**
          * string
          */
-        userName?: string | null;
+        userName?: string;
         /**
          * string
          */
-        email?: string | null;
+        email?: string;
         /**
          * string
          */
-        mobileNumber?: string | null;
+        mobileNumber?: string;
         /**
          * string
          */
-        textSearch?: string | null;
+        textSearch?: string;
         /**
          * roles
          */
-        rolesAll?: string /* string */[] | null;
+        rolesAll?: string /* string */[];
         /**
          * roles
          */
-        rolesAny?: string /* string */[] | null;
+        rolesAny?: string /* string */[];
         /**
          * int32
          */
@@ -3508,7 +4933,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        items?: /* getUserResponse */ GetUserResponse[] | null;
+        items?: GetUserResponse[];
     }
     /**
      * userRoleChangeRequest
@@ -3527,7 +4952,7 @@ declare namespace WOM {
         /**
          * string
          */
-        role?: string | null;
+        role?: string;
     }
     /**
      * userTokenRequest
@@ -3553,15 +4978,19 @@ declare namespace WOM {
         /**
          * string
          */
-        firstName?: string | null;
+        locale?: string;
         /**
          * string
          */
-        lastName?: string | null;
+        firstName?: string;
         /**
          * string
          */
-        email?: string | null;
+        lastName?: string;
+        /**
+         * string
+         */
+        email?: string;
     }
     /**
      * userValidationDetails
@@ -3570,7 +4999,7 @@ declare namespace WOM {
         /**
          * string
          */
-        payoutAddress?: string | null;
+        payoutAddress?: string;
         /**
          * bigInteger
          * Amount paid out so far in WEI
@@ -3600,7 +5029,7 @@ declare namespace WOM {
          * Is this user the content creator
          */
         isContentCreator?: boolean;
-        rating?: /* WOMScore */ WOMScore;
+        rating?: WOMScore;
     }
     /**
      * userWantsForgottenPasswordRequest
@@ -3627,7 +5056,7 @@ declare namespace WOM {
         /**
          * string
          */
-        username?: string | null;
+        username?: string;
     }
     /**
      * validateContentRequest
@@ -3698,7 +5127,7 @@ declare namespace WOM {
          * string
          * Submit for validation on behalf of this user. [Remote server only]
          */
-        remoteUserId?: string | null;
+        remoteUserId?: string;
         /**
          * boolean
          * If set, this validation sequence will require further steps.
@@ -3717,22 +5146,182 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        payoutWalletId?: string | null; // objectId
+        payoutWalletId?: string; // objectId
     }
     /**
      * validationDetailResponse
      */
     export interface ValidationDetailResponse {
-        validationState?: /* validationStateResponse */ ValidationStateResponse;
-        engagement?: /* engagementStatistics */ EngagementStatistics;
-        womQualityScore?: /* WOMQualityScore */ WOMQualityScore;
-        userValidationDetails?: /* userValidationDetails */ UserValidationDetails;
+        validationState?: ValidationStateResponse;
+        engagement?: EngagementStatistics;
+        womQualityScore?: WOMQualityScore;
+        userValidationDetails?: UserValidationDetails;
     }
     /**
      * validationEndedReason
      * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
      */
     export type ValidationEndedReason = 0 | 1 | 2 | 3; // int32
+    /**
+     * validationEntriesRequest
+     */
+    export interface ValidationEntriesRequest {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * string
+         */
+        remoteContentId?: string;
+        /**
+         * int32
+         */
+        pageIndex: number; // int32
+        /**
+         * int32
+         */
+        limit: number; // int32
+        /**
+         * boolean
+         */
+        returnQueryCount?: boolean;
+    }
+    /**
+     * validationEntriesResponse
+     */
+    export interface ValidationEntriesResponse {
+        request?: ValidationEntriesRequest;
+        /**
+         * int32
+         */
+        totalPages?: number; // int32
+        /**
+         * int32
+         */
+        currentPageIndex?: number; // int32
+        /**
+         * int32
+         */
+        totalRecords?: number; // int32
+        /**
+         * int32
+         */
+        readonly returnedRecords?: number; // int32
+        /**
+         * list1
+         */
+        items?: ValidationEntryResponse[];
+    }
+    /**
+     * validationEntryResponse
+     */
+    export interface ValidationEntryResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        contentId?: string; // objectId
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        userId?: string; // objectId
+        /**
+         * dateTime
+         */
+        utcCreated?: string; // date-time
+        /**
+         * string
+         */
+        validatorPayoutAddress?: string;
+        /**
+         * bigInteger
+         * example:
+         * 100000000000000000000000
+         */
+        womStakedWei?: string; // string
+        /**
+         * decimal
+         */
+        readonly womStaked?: number; // double
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        transactionId?: string; // objectId
+        /**
+         * decimal
+         */
+        creativity?: number; // double
+        /**
+         * decimal
+         */
+        authenticity?: number; // double
+        /**
+         * decimal
+         */
+        positivity?: number; // double
+        /**
+         * decimal
+         */
+        averageScore?: number; // double
+        /**
+         * decimal
+         */
+        qualityScore?: number; // double
+        /**
+         * boolean
+         */
+        isProcessed?: boolean;
+        /**
+         * boolean
+         */
+        isPartOfConsensus?: boolean;
+        /**
+         * boolean
+         */
+        isRewarded?: boolean;
+        /**
+         * boolean
+         */
+        isRefunded?: boolean;
+        /**
+         * decimal
+         */
+        payoutMultiplier?: number; // double
+        /**
+         * decimal
+         */
+        payoutPercentage?: number; // double
+        /**
+         * bigInteger
+         * example:
+         * 100000000000000000000000
+         */
+        payoutValueWei?: string; // string
+        /**
+         * decimal
+         */
+        readonly payoutValue?: number; // double
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        associatedTransactionId?: string; // objectId
+    }
     /**
      * validationReleaseHoldRequest
      */
@@ -3746,7 +5335,7 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * boolean
          */
@@ -3765,7 +5354,7 @@ declare namespace WOM {
         /**
          * string
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
     }
     /**
      * validationResult
@@ -3792,26 +5381,14 @@ declare namespace WOM {
          * string
          * Remote content id (if available).
          */
-        remoteContentId?: string | null;
+        remoteContentId?: string;
         /**
          * dateTime
          */
         utcValidateBy?: string; // date-time
-        currentStage?: /**
-         * validationStage
-         * <br/><br/>Values:<br/>0 = NotStarted<br/>1 = Processing<br/>2 = Ended<br/>3 = Held
-         */
-        ValidationStage /* int32 */;
-        validationResult?: /**
-         * validationResult
-         * <br/><br/>Values:<br/>0 = NotProcessed<br/>1 = AcceptedByConsensus<br/>-1 = RejectedByConsensus
-         */
-        ValidationResult /* int32 */;
-        endedReason?: /**
-         * validationEndedReason
-         * <br/><br/>Values:<br/>0 = None<br/>1 = CompletedNormally<br/>2 = ConsensusNotReached<br/>3 = TerminatedInHold
-         */
-        ValidationEndedReason /* int32 */;
+        currentStage?: ValidationStage; // int32
+        validationResult?: ValidationResult; // int32
+        endedReason?: ValidationEndedReason; // int32
         /**
          * bigInteger
          * The amount of WOM the creator staked to begin validation in WEI.
@@ -3841,8 +5418,96 @@ declare namespace WOM {
         size?: number; // int64
     }
     /**
+     * voucherData
+     */
+    export interface VoucherData {
+        /**
+         * string
+         */
+        code?: string;
+        /**
+         * string
+         */
+        url?: string;
+        /**
+         * string
+         */
+        pin?: string;
+        /**
+         * string
+         */
+        validityDate?: string;
+        /**
+         * int64
+         */
+        orderProductId?: number; // int64
+        /**
+         * string
+         */
+        faceValue?: string;
+        /**
+         * string
+         */
+        voucherCurrency?: string;
+    }
+    /**
+     * voucherPurchaseStatus
+     * <br/><br/>Values:<br/>0 = None<br/>100 = InProcess<br/>200 = Success<br/>-100 = Failure
+     */
+    export type VoucherPurchaseStatus = 0 | 100 | 200 | -100; // int32
+    /**
+     * voucherTransactionResponse
+     */
+    export interface VoucherTransactionResponse {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        transactionStatus?: VoucherPurchaseStatus; // int32
+        /**
+         * int32
+         */
+        denomination?: number; // int32
+        /**
+         * int64
+         */
+        productId?: number; // int64
+        /**
+         * decimal
+         */
+        priceInWom?: number; // double
+        /**
+         * dateTime
+         */
+        createdUtc?: string; // date-time
+        /**
+         * nullable1
+         */
+        updatedUtc?: string; // date-time
+        productInfo?: ProductInfo;
+        /**
+         * list1
+         */
+        giftCardData?: VoucherData[];
+    }
+    /**
+     * voucherValueRestrictions
+     */
+    export interface VoucherValueRestrictions {
+        /**
+         * decimal
+         */
+        maxVal?: number; // double
+        /**
+         * decimal
+         */
+        minVal?: number; // double
+    }
+    /**
      * WOMNarrativeType
-     * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync<br/>900 = CampaignPayment<br/>1000 = PerformancePayment
+     * <br/><br/>Values:<br/>0 = None<br/>100 = Deposit<br/>200 = Withdrawal<br/>300 = CreatorStake<br/>301 = CreatorReward<br/>302 = CreatorStakeRefund<br/>400 = ValidationStake<br/>401 = ValidationReward<br/>402 = ValidationStakeRefund<br/>500 = Exchange<br/>600 = UserTransfer<br/>700 = Reward<br/>800 = MigrationSync<br/>900 = CampaignPayment<br/>1000 = PerformancePayment<br/>2000 = GiftCardPayment<br/>2100 = GiftCardRefund
      */
     export type WOMNarrativeType =
         | 0
@@ -3859,7 +5524,9 @@ declare namespace WOM {
         | 700
         | 800
         | 900
-        | 1000; // int32
+        | 1000
+        | 2000
+        | 2100; // int32
     /**
      * WOMQualityScore
      */
@@ -3926,12 +5593,12 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        walletId?: string | null; // objectId
+        walletId?: string; // objectId
         /**
          * string
          * If specified the wallet for the given address will be displayed (Admin only)
          */
-        publicAddress?: string | null;
+        publicAddress?: string;
     }
     /**
      * walletResponse
@@ -3958,11 +5625,7 @@ declare namespace WOM {
          * list1
          * The addresses held in this wallet if available
          */
-        items?: /**
-         * addressResponse
-         * A strongly typed entity representing the amount of tokens in a user's account.
-         */
-        AddressResponse[] | null;
+        items?: AddressResponse[];
     }
     /**
      * withdrawalRequest
@@ -3972,12 +5635,12 @@ declare namespace WOM {
          * string
          * The source address, if not specified the calling user's primary account will be used.
          */
-        addressFrom?: string | null;
+        addressFrom?: string;
         /**
          * string
          * The destination address, must be a valid Ethereum WOM ERC20 destination.
          */
-        addressTo?: string | null;
+        addressTo?: string;
         /**
          * decimal
          * This value is denominated in ETHER (WOM), it is a decimal value where 10.5 WOM tokens should be written as 10.5

@@ -19,10 +19,20 @@ export const grey3 = '#F0F0F0';
 export const grey4 = '#979797';
 export const grey5 = '#c9c9c9';
 export const grey6 = '#d8d8d8';
+export const grey7 = '#F2F2F2';
+export const grey8 = '#e6e6e6';
+export const grey9 = '#8E8E8E';
+export const grey10 = '#c1c1c1';
+export const grey11 = '#f7f7f7';
 export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 
 export const blue = '#3333FF';
+export const blue2 = '#F7F7FC';
+export const blue3 = '#4850FF';
+export const blue4 = '#F6F6FF';
+export const blue5 = '#EBEBFA';
+
 export const backgroundColor = '#121217';
 
 export const red = '#FC4237';

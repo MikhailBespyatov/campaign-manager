@@ -1,5 +1,6 @@
 import { createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
+import { getDateFromString } from 'utils/usefulFunctions';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -44,12 +45,16 @@ export const walletBalance = createStore(0).on(getItemById.doneData, (_, wallet)
 
 export const walletAddress = createStore('').on(getItemById.doneData, (_, wallet) => wallet?.items?.[0]?.address || '');
 
+const walletCreated = createStore('').on(getItemById.doneData, (_, wallet) =>
+    getDateFromString(wallet?.items?.[0]?.utcCreated || '')
+);
+
 const usdRate = createStore(0)
     // @ts-ignore
     .on(getTokenInfo.doneData, (_, { womExchangeRates }) => womExchangeRates[0].price.toFixed(4));
 
 const walletEvents = {};
 const walletEffects = { getTokenInfo, getItemById };
-const walletStores = { usdRate, loading, balanceLoading, walletBalance, walletAddress };
+const walletStores = { usdRate, loading, balanceLoading, walletBalance, walletAddress, walletCreated };
 
 export { walletEffects, walletStores, walletEvents };

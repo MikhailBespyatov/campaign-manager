@@ -1,4 +1,5 @@
-import { Noop, StatusType } from 'types';
+import { AlignmentType, Noop, StatusType } from 'types';
+import React, { FC } from 'react';
 
 export interface Subtitle {
     subtitle?: string;
@@ -68,4 +69,45 @@ export interface IsExpiredBorder {
 
 export interface IsWithoutBorder {
     withoutBorder?: boolean;
+}
+
+export interface OnChangeBoolean {
+    onChange?: (checked: boolean) => void;
+}
+
+export interface DefaultValueBoolean {
+    defaultValue?: boolean;
+}
+
+export interface CreateCampaignStepsProps {}
+
+export interface ProgressBarItemInterface {
+    title: string;
+    component: FC<CreateCampaignStepsProps>;
+    isValidField: string;
+}
+
+export interface OnChangeSelect {
+    onChangeSelect: (active: string) => void;
+}
+
+export interface Bias {
+    bias: string;
+}
+
+export interface Alignment {
+    alignment?: AlignmentType[];
+}
+
+export interface DataTable extends Alignment {
+    cells: React.ReactNode[];
+    isCheckedRow?: boolean;
+}
+
+export interface ColumnAlignment {
+    columnAlignment?: AlignmentType;
+}
+
+export interface IsValid {
+    isValid?: boolean;
 }

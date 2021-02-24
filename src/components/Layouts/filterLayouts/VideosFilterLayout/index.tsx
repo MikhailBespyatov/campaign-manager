@@ -1,20 +1,28 @@
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
-import { Section } from 'components/grid/wrappers/FlexWrapper';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { Loading, TotalRecords } from 'types';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import {
+    videoSectionMarginBottom,
+    videoStepPadding
+} from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
+import { Span } from 'components/common/typography/Span';
+import { getTotalItems } from 'utils/usefulFunctions';
+
+const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
 interface Props extends TotalRecords, Loading {}
 
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading }) => {
-    const { tagsAll, tagsAny, pageIndex, limit } = useStore(campaignContentStores.values);
-    const isFirst = useStore(campaignContentStores.isFirst);
+    const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
 
-    const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
+    const isFirst = useStore(campaignContentStores.isFirst);
 
     const onTagsFilterChange: onTagsFilterChangeType = (checked, values) =>
         checked
@@ -54,18 +62,35 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
 
     return (
         <>
-            <TagFilter defaultChecked={!!tagsAll} tagsValues={tagsAll || tagsAny || []} onChange={onTagsFilterChange} />
-            {children}
-            <Section justifyCenter marginBottom="75px">
-                {!loading && (
-                    <Pagination
-                        currentIndex={pageIndex + 1}
-                        defaultSize={limit}
-                        totalItems={totalRecords !== -1 ? totalRecords : 0}
-                        onChange={onPaginationChange}
-                        onSizeChange={onSizeChange}
+            <Section marginBottom={videoSectionMarginBottom}>
+                <ContentWrapper padding={videoStepPadding} width="100%">
+                    <TagFilter
+                        defaultChecked={!!tagsAll}
+                        tagsValues={tagsAll || tagsAny || []}
+                        onChange={onTagsFilterChange}
                     />
-                )}
+                </ContentWrapper>
+            </Section>
+            <Section marginBottom={videoSectionMarginBottom}>
+                <ContentWrapper padding={videoStepPadding} width="100%">
+                    <Row marginBottom="16px">
+                        <Span fontSize="14px" fontWeight="600" lineHeight="17px">
+                            Videos
+                        </Span>
+                    </Row>
+                    {children}
+                    <Section justifyCenter marginBottom="75px">
+                        {!loading && (
+                            <Pagination
+                                currentIndex={pageIndex + 1}
+                                defaultSize={limit}
+                                totalItems={getTotalItems(totalRecords)}
+                                onChange={onPaginationChange}
+                                onSizeChange={onSizeChange}
+                            />
+                        )}
+                    </Section>
+                </ContentWrapper>
             </Section>
         </>
     );

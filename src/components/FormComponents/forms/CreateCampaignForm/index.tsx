@@ -15,6 +15,7 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
 import { itemsCreateCampaign } from 'components/common/blocks/CreateCampaignManager/constants';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
 export const labelFontSize = '16px';
 export const labelLineHeight = '20px';
@@ -41,6 +42,7 @@ export const CreateCampaignForm: FC<Props> = ({ activeSubPage, onClick }) => {
     const handleClickBack = () => onClick(itemsCreateCampaign[0].path);
     const onChangeCampaignName = (e: ChangeEvent<HTMLInputElement>) =>
         campaignsEvents.setFieldsCreateCampaignForm({ title: e.target.value });
+    const flexBasisDataPicker = getFlexBasisPercent(2);
 
     // const { values, handleSubmit, isValid, dirty, touched, status, setStatus } = useFormik({
     //     initialValues: { ...initialValues, contentIds: initialContentIds.map(i => i.womContentId || '') },
@@ -74,14 +76,13 @@ export const CreateCampaignForm: FC<Props> = ({ activeSubPage, onClick }) => {
                                             />
                                             <Row marginBottom="0" width="100%">
                                                 <FlexGrow
-                                                    flexBasis="50%"
-                                                    flexGrow="1"
+                                                    flexBasis={flexBasisDataPicker}
                                                     flexShrink="0"
                                                     marginRight={primaryPadding}
                                                 >
                                                     <DatePickerInput label="Start of campaign" name="utcToStart" />
                                                 </FlexGrow>
-                                                <FlexGrow flexBasis="50%" flexGrow="1" flexShrink="0" marginRight={'0'}>
+                                                <FlexGrow flexBasis={flexBasisDataPicker} flexShrink="0">
                                                     <DatePickerInput label="End of campaign" name="utcToEnd" />
                                                 </FlexGrow>
                                             </Row>

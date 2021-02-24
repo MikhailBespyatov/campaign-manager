@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import { loadingStores } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
 import { usersEffects, usersStores } from 'stores/users';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 
 export const UserAdmin = () => {
     const organizationId = useStore(organizationsStores.organizationId);
@@ -50,23 +51,29 @@ export const UserAdmin = () => {
             {/*    </Row> *!/*/}
             {/*    </Column>*/}
             {/*</Section>*/}
-            <Section noWrap marginBottom="40px">
-                <Column>
-                    <Row marginBottom={headersMarginBottom}>
-                        <Span fontSize="16px" lineHeight="20px">
-                            Invite new users
-                        </Span>
-                    </Row>
-                    <Row alignCenter marginBottom="0">
-                        <InviteForm />
-                        {/* <Column marginRight={headersMarginBottom}>
+            <Section noWrap marginBottom="8px">
+                <ContentWrapper padding="30px 24px" width="100%">
+                    <Column>
+                        <Row marginBottom={headersMarginBottom}>
+                            <Span fontSize="16px" lineHeight="20px">
+                                Invite new users
+                            </Span>
+                        </Row>
+                        <Row alignCenter marginBottom="0">
+                            <InviteForm />
+                            {/* <Column marginRight={headersMarginBottom}>
                         <InviteInput error="" label="" name="email" />
                     </Column>
                     <RoundedButton>SEND INVITE</RoundedButton> */}
-                    </Row>
-                </Column>
+                        </Row>
+                    </Column>
+                </ContentWrapper>
             </Section>
-            {initialLoading ? <Loader /> : <UserAdminTable {...items} />}
+            <Section noWrap>
+                <ContentWrapper padding="30px 24px" width="100%">
+                    {initialLoading ? <Loader /> : <UserAdminTable {...items} />}
+                </ContentWrapper>
+            </Section>
         </CampaignManagerLayout>
     );
 };

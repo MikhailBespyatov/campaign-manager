@@ -9,16 +9,13 @@ import {
     enterTitleLineHeight,
     searchImgDiameter,
     searchImgMarginLeft,
-    searchImgMarginRight,
-    searchTitleFontSize,
-    searchTitleFontWeight,
-    searchTitleLineHeight
+    searchImgMarginRight
 } from 'components/filters/TagFilter/constants';
-import { SearchAbsoluteWrapper, SearchInput, TagFilterWrapper, Wrapper } from 'components/filters/TagFilter/styles';
+import { SearchAbsoluteWrapper, SearchInput, Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { Noop } from 'constants/global';
 import { secondaryColor, secondaryPadding } from 'constants/styles';
-import React, { FocusEvent, KeyboardEvent, useState } from 'react';
+import React, { FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
 import searchImg from 'assets/img/search_icon.svg';
 import enterImg from 'assets/img/enter_icon.svg';
@@ -26,6 +23,7 @@ import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
 
 interface Props extends Title, DefaultChecked {
     tagsValues?: string[];
@@ -41,6 +39,8 @@ export const TagFilter = ({
 }: Props) => {
     const [checked] = useState(defaultChecked);
     const [values, setValues] = useState(tagsValues);
+
+    useEffect(() => setValues(tagsValues), [tagsValues]);
 
     // const onCheckboxChange = (checked: boolean) => {
     //     setChecked(checked);
@@ -81,19 +81,19 @@ export const TagFilter = ({
     // }, [checked, values]);
 
     return (
-        <TagFilterWrapper>
+        <RelativeWrapper>
             <SearchAbsoluteWrapper>
                 <MarginWrapper marginLeft={searchImgMarginLeft} marginRight={searchImgMarginRight}>
                     <CustomImg height={searchImgDiameter} src={searchImg} width={searchImgDiameter} />
                 </MarginWrapper>
-                <Span
-                    color={secondaryColor}
-                    fontSize={searchTitleFontSize}
-                    fontWeight={searchTitleFontWeight}
-                    lineHeight={searchTitleLineHeight}
-                >
-                    {title}
-                </Span>
+                {/*<Span*/}
+                {/*    color={secondaryColor}*/}
+                {/*    fontSize={searchTitleFontSize}*/}
+                {/*    fontWeight={searchTitleFontWeight}*/}
+                {/*    lineHeight={searchTitleLineHeight}*/}
+                {/*>*/}
+                {/*    {title}*/}
+                {/*</Span>*/}
             </SearchAbsoluteWrapper>
             <SearchAbsoluteWrapper right>
                 <Span
@@ -110,7 +110,7 @@ export const TagFilter = ({
                 </MarginWrapper>
             </SearchAbsoluteWrapper>
             <Wrapper>
-                <SearchInput type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
+                <SearchInput placeholder={title} type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
             </Wrapper>
             <Row>
                 {values.map(i => (
@@ -125,6 +125,6 @@ export const TagFilter = ({
                     </ClosableTag>
                 ))}
             </Row>
-        </TagFilterWrapper>
+        </RelativeWrapper>
     );
 };

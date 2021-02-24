@@ -5,11 +5,13 @@ import {
     errorColor,
     formGrey3,
     formTextStyleMixin,
+    grey4,
     primaryColor,
     successColor,
     untouchedColor
 } from 'constants/styles';
 import styled from 'styled-components';
+import { Span } from 'components/common/typography/Span';
 
 export const DataPickerWrapper = styled.div`
     position: relative;
@@ -149,3 +151,11 @@ export const useStyles = makeStyles(() => ({
         }
     }
 }));
+
+export const TitleSpan = styled(Span)`
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-transform: uppercase;
+    color: ${grey4};
+`;

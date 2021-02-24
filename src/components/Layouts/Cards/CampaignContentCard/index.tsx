@@ -219,7 +219,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                         <Column marginRight="0" maxWidth="300px">
                             <Row marginBottom="10px">
                                 <Span color="#0F1642" fontSize="30px" lineHeight="37px">
-                                    Validators
+                                    Authentication
+                                    {/* Validators */}
                                 </Span>
                             </Row>
                             <Row marginBottom="35px">
@@ -617,7 +618,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="13px">
                                 <Span color="#0F1642" fontSize="30px" lineHeight="37px">
-                                    In-use
+                                    Activity
+                                    {/* In-use */}
                                 </Span>
                             </Row>
                             <Row marginBottom="17px">

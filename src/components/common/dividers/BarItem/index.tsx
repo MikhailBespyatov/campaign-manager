@@ -18,9 +18,10 @@ interface Props extends Path {
     active?: boolean;
     namePage?: string;
     onClick: (path: string) => void;
+    withoutBorderLine?: boolean;
 }
 
-export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }) => {
+export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage, withoutBorderLine }) => {
     const { primaryColor } = useStore(themeStores.theme);
 
     return (
@@ -40,7 +41,7 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }
                         <SubPageSpan>{namePage}</SubPageSpan>
                     </Row>
                 )}
-                {active && <StyledBorder />}
+                {active && !withoutBorderLine && <StyledBorder />}
             </Column>
         </StyledItem>
     );

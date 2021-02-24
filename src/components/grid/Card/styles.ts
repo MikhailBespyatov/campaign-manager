@@ -27,6 +27,7 @@ import {
 } from 'constants/styles';
 import styled from 'styled-components';
 import { Padding } from 'types';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 export const Card = styled.div<CardProps>`
     ${({ disabled }) => (disabled ? `opacity: ${disabledOpacity}` : '')};
@@ -72,7 +73,7 @@ export const Description = styled.div<Padding>`
     position: relative;
     width: 100%;
     height: 100%;
-    padding: ${({ padding }) => (padding ? padding : `${verticalPadding} ${horizontalPadding}`)};
+    // padding: ${({ padding }) => (padding ? padding : `${verticalPadding} ${horizontalPadding}`)};
     ${flexStart};
     justify-content: space-between;
     flex-direction: column;
@@ -107,4 +108,13 @@ export const FeatureCell = styled.button<FeatureCellProps>`
     &:disabled {
         background-color: ${grey};
     }
+`;
+
+export const StatsCell = styled(AbsoluteWrapper)`
+    height: 59px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.2);
 `;

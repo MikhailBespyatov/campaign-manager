@@ -10,7 +10,8 @@ import {
     FakeBetweenDataPicker,
     FakeDataPicker,
     TextFieldBetweenForm,
-    TextFieldForm
+    TextFieldForm,
+    TitleSpan
 } from 'components/common/inputs/DatePicker/styles';
 import { Span } from 'components/common/typography/Span';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -26,7 +27,8 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import {
     defaultFormat,
     defaultKeyboardButtonProps,
-    materialTheme
+    materialTheme,
+    titleMarginBottom
 } from 'components/common/inputs/DatePicker/constants';
 import DateFnsUtils from '@date-io/date-fns';
 import { ThemeProvider } from 'styled-components';
@@ -38,6 +40,8 @@ interface Props extends Sizes, MarginBottom {
     defaultDateFrom: string;
     defaultDateTo: string;
     onChange?: (dateFrom: string, dateTo: string) => void;
+    titleType?: 'inner' | 'outer';
+    title?: [string, string];
 }
 
 export const DatePickerBetween = ({
@@ -46,10 +50,15 @@ export const DatePickerBetween = ({
     width,
     height,
     marginBottom,
-    onChange = Noop
+    onChange = Noop,
+    titleType = 'inner',
+    title = ['Date From', 'Date to']
 }: Props) => {
     const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
     const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
+
+    const [titleFrom, titleTo] = title;
+    const isInnerType = titleType === 'inner';
 
     // const handleDateChangeFrom1 = (e: ChangeEvent<HTMLInputElement>) => {
     //     const date = new Date(e.currentTarget.value);
@@ -106,76 +115,94 @@ export const DatePickerBetween = ({
             {/*        onChange={handleDateChangeTo}*/}
             {/*    />*/}
             {/*</MuiPickersUtilsProvider>*/}
-            <BorderBlock height={height} width={width}>
-                <Column noWrap marginBottom={marginBottom}>
-                    <MarginWrapper marginBottom={pickerMarginTop}>
-                        <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                            Date From
-                        </Span>
+            <Column>
+                {!isInnerType && (
+                    <MarginWrapper marginBottom={titleMarginBottom}>
+                        <TitleSpan>{titleFrom}</TitleSpan>
                     </MarginWrapper>
-                    <DataPickerWrapper>
-                        <TextFieldBetweenForm
-                            max={getDate(new Date(defaultDateTo))}
-                            min={getDate(new Date(defaultDateFrom))}
-                            type="date"
-                            value={getDate(selectedDateFrom) || ''}
-                            // onChange={handleDateChangeFrom1}
-                        />
-                        <FakeBetweenDataPicker>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDatePicker
-                                    KeyboardButtonProps={defaultKeyboardButtonProps}
-                                    format={defaultFormat}
-                                    label="Choose date from"
-                                    margin="normal"
-                                    maxDate={new Date(defaultDateTo)}
-                                    minDate={new Date(defaultDateFrom)}
-                                    value={selectedDateFrom}
-                                    onChange={handleDateChangeFrom}
-                                />
-                            </MuiPickersUtilsProvider>
-                        </FakeBetweenDataPicker>
-                        <AbsoluteWrapper right="0" top="0">
-                            <CustomImg pointer src={calendarImg} />
-                        </AbsoluteWrapper>
-                    </DataPickerWrapper>
-                </Column>
-            </BorderBlock>
-            <BorderBlock height={height} width={width}>
-                <Column noWrap marginBottom={marginBottom}>
-                    <MarginWrapper marginBottom={pickerMarginTop}>
-                        <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                            Date To
-                        </Span>
+                )}
+                <BorderBlock height={height} width={width}>
+                    <Column noWrap marginBottom={marginBottom}>
+                        {isInnerType && (
+                            <MarginWrapper marginBottom={pickerMarginTop}>
+                                <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+                                    {titleFrom}
+                                </Span>
+                            </MarginWrapper>
+                        )}
+                        <DataPickerWrapper>
+                            <TextFieldBetweenForm
+                                max={getDate(new Date(defaultDateTo))}
+                                min={getDate(new Date(defaultDateFrom))}
+                                type="date"
+                                value={getDate(selectedDateFrom) || ''}
+                                // onChange={handleDateChangeFrom1}
+                            />
+                            <FakeBetweenDataPicker>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        KeyboardButtonProps={defaultKeyboardButtonProps}
+                                        format={defaultFormat}
+                                        label="Choose date from"
+                                        margin="normal"
+                                        maxDate={new Date(defaultDateTo)}
+                                        minDate={new Date(defaultDateFrom)}
+                                        value={selectedDateFrom}
+                                        onChange={handleDateChangeFrom}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </FakeBetweenDataPicker>
+                            <AbsoluteWrapper right="0" top="0">
+                                <CustomImg pointer src={calendarImg} />
+                            </AbsoluteWrapper>
+                        </DataPickerWrapper>
+                    </Column>
+                </BorderBlock>
+            </Column>
+            <Column>
+                {!isInnerType && (
+                    <MarginWrapper marginBottom={titleMarginBottom}>
+                        <TitleSpan>{titleTo}</TitleSpan>
                     </MarginWrapper>
-                    <DataPickerWrapper>
-                        <TextFieldBetweenForm
-                            max={getDate(new Date(defaultDateTo))}
-                            min={getDate(selectedDateFrom)}
-                            type="date"
-                            value={getDate(selectedDateTo) || ''}
-                            // onChange={handleDateChangeTo1}
-                        />
-                        <FakeBetweenDataPicker>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDatePicker
-                                    KeyboardButtonProps={defaultKeyboardButtonProps}
-                                    format={defaultFormat}
-                                    label="Choose date to"
-                                    margin="normal"
-                                    maxDate={new Date(defaultDateTo)}
-                                    minDate={selectedDateFrom}
-                                    value={selectedDateTo}
-                                    onChange={handleDateChangeTo}
-                                />
-                            </MuiPickersUtilsProvider>
-                        </FakeBetweenDataPicker>
-                        <AbsoluteWrapper right="0" top="0">
-                            <CustomImg pointer src={calendarImg} />
-                        </AbsoluteWrapper>
-                    </DataPickerWrapper>
-                </Column>
-            </BorderBlock>
+                )}
+                <BorderBlock height={height} width={width}>
+                    <Column noWrap marginBottom={marginBottom}>
+                        {isInnerType && (
+                            <MarginWrapper marginBottom={pickerMarginTop}>
+                                <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+                                    {titleTo}
+                                </Span>
+                            </MarginWrapper>
+                        )}
+                        <DataPickerWrapper>
+                            <TextFieldBetweenForm
+                                max={getDate(new Date(defaultDateTo))}
+                                min={getDate(selectedDateFrom)}
+                                type="date"
+                                value={getDate(selectedDateTo) || ''}
+                                // onChange={handleDateChangeTo1}
+                            />
+                            <FakeBetweenDataPicker>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        KeyboardButtonProps={defaultKeyboardButtonProps}
+                                        format={defaultFormat}
+                                        label="Choose date to"
+                                        margin="normal"
+                                        maxDate={new Date(defaultDateTo)}
+                                        minDate={selectedDateFrom}
+                                        value={selectedDateTo}
+                                        onChange={handleDateChangeTo}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </FakeBetweenDataPicker>
+                            <AbsoluteWrapper right="0" top="0">
+                                <CustomImg pointer src={calendarImg} />
+                            </AbsoluteWrapper>
+                        </DataPickerWrapper>
+                    </Column>
+                </BorderBlock>
+            </Column>
         </>
     );
 };

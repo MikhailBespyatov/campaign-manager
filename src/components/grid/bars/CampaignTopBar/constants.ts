@@ -25,5 +25,10 @@ export const routesArray: RoutesArray[] = [
         name: 'Expired Campaigns',
         status: 'expired',
         path: routes.campaignManager.campaign.expired
+    },
+    {
+        name: 'Draft Campaigns',
+        status: 'draft',
+        path: routes.campaignManager.campaign.draft
     }
 ];

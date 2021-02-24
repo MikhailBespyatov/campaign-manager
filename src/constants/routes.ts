@@ -9,8 +9,15 @@ export const parsePublicUrl = (prefix = 'wom', urlTemplate: string) => publicPre
 // * with global prefix
 const campaignManagerPrefix = globalPrefix + '/campaign_manager';
 
-const campaignPrefix = campaignManagerPrefix + '/campaign';
+export const campaignPrefix = campaignManagerPrefix + '/campaign';
 const discoverPrefix = campaignManagerPrefix + '/discover';
+const channelsPrefix = campaignManagerPrefix + '/channels';
+const productsPrefix = campaignManagerPrefix + '/products';
+
+export const channelsEdit = channelsPrefix + '/edit_channels';
+export const productsEdit = productsPrefix + '/edit_products';
+
+export const product = productsPrefix + '/product';
 
 const userAdminPrefix = globalPrefix + '/user_admin';
 
@@ -56,7 +63,7 @@ export const staticRoutes = {
     }
 };
 
-export const campaignRoutes = { running: '', paused: '', completed: '', expired: '' };
+export const campaignRoutes = { running: '', paused: '', completed: '', expired: '', draft: '' };
 
 export const parseCampaignRoutes = (routesArray: string[]) => ({
     ...(Object.fromEntries(routesArray.map(status => [status, `${campaignPrefix}/${status}/`])) as CampaignRoutesType),
@@ -89,6 +96,17 @@ export const dynamicRoutes = {
             details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,
             edit: `${campaignPrefix}/edit_campaign/:campaignId`
+        },
+        channels: {
+            index: `${channelsPrefix}`,
+            create: `${channelsPrefix}/create_channels`,
+            edit: `${channelsEdit}/:channelId`
+        },
+        products: {
+            index: `${productsPrefix}`,
+            product: `${product}/:productId`,
+            create: `${productsPrefix}/create_products`,
+            edit: `${productsEdit}/:productId`
         }
     }
 };
@@ -114,6 +132,23 @@ export const routesArray = [
         subPages: [
             { path: routes.campaignManager.campaign.create, name: 'create' },
             { path: routes.campaignManager.campaign.indexDetails, name: 'details' }
+        ]
+    },
+    {
+        path: routes.campaignManager.channels.index,
+        name: 'Channels',
+        subPages: [
+            { path: routes.campaignManager.channels.create, name: 'create' },
+            { path: channelsEdit, name: 'edit' }
+        ]
+    },
+    {
+        path: routes.campaignManager.products.index,
+        name: 'Products',
+        subPages: [
+            { path: routes.campaignManager.products.create, name: 'create' },
+            { path: product, name: 'detail' },
+            { path: productsEdit, name: 'edit' }
         ]
     },
     {

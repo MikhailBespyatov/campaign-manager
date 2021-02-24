@@ -27,6 +27,17 @@ import { userStores } from 'stores/user';
 import styled, { ThemeProvider } from 'styled-components';
 import { PopUpCampaignManager } from 'components/modals/PopUpCamaignManager';
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
+import { Create } from 'pages/CampaignManager/Campaign/Create';
+import { Channels } from 'pages/CampaignManager/Channels';
+import { CreateChannel } from 'pages/CampaignManager/Channels/Create';
+import { EditChannel } from 'pages/CampaignManager/Channels/Edit';
+import { Products } from 'pages/CampaignManager/Products';
+import { EditProduct } from 'pages/CampaignManager/Products/Edit';
+import { CreateProduct } from 'pages/CampaignManager/Products/Create';
+import { Product } from 'pages/CampaignManager/Products/Product';
+import { WalletModal } from 'components/modals/WalletModal';
+import { CongratsModal } from 'components/modals/CongratsModal';
+import { AsyncModal } from 'components/modals/AsyncModal';
 
 const AppWrapper = styled.div`
     position: relative;
@@ -56,10 +67,16 @@ const App = () => {
             <GlobalStyle />
             <AppWrapper>
                 <Router history={history}>
+                    {/* * public modal */}
                     <CardModal />
                     <QexWidgetModal />
+                    <WalletModal />
                     <PopUpCampaignManager />
+                    <CongratsModal />
+                    <AsyncModal />
+
                     <Switch>
+                        {/* * public */}
                         <PublicRoute exact component={Home} path={[routes.wrongPath]} />
                         {/* <PublicRoute exact component={Test} path={routes.test} /> */}
                         <PublicRoute exact component={CreateAccount} path={routes.signUp.index} />
@@ -90,7 +107,6 @@ const App = () => {
                         <PublicRoute exact component={PasswordReset} path={routes.signIn.passwordReset} />
                         {/* <PublicRoute exact component={NewPasswordReset} path={routes.signIn.password} /> */}
                         {/* <AdminRoute exact component={CreateOrganization} path={routes.admin.createOrganization} /> */}
-                        <UserAdminRoute exact component={UserAdmin} path={globalPrefixUrl + routes.userAdmin.index} />
                         <CampaignManagerRoute
                             exact
                             component={CampaignManager}
@@ -101,6 +117,48 @@ const App = () => {
                             exact
                             component={Discover}
                             path={globalPrefixUrl + routes.campaignManager.discover.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={Create}
+                            path={globalPrefixUrl + routes.campaignManager.campaign.create}
+                        />
+
+                        <CampaignManagerRoute
+                            exact
+                            component={Channels}
+                            path={globalPrefixUrl + routes.campaignManager.channels.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={CreateChannel}
+                            path={globalPrefixUrl + routes.campaignManager.channels.create}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={EditChannel}
+                            path={globalPrefixUrl + routes.campaignManager.channels.edit}
+                        />
+
+                        <CampaignManagerRoute
+                            exact
+                            component={Products}
+                            path={globalPrefixUrl + routes.campaignManager.products.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={Product}
+                            path={globalPrefixUrl + routes.campaignManager.products.product}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={CreateProduct}
+                            path={globalPrefixUrl + routes.campaignManager.products.create}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={EditProduct}
+                            path={globalPrefixUrl + routes.campaignManager.products.edit}
                         />
                         {/* <CampaignManagerRoute
                             exact
@@ -127,6 +185,21 @@ const App = () => {
                             component={CampaignDetails}
                             path={globalPrefixUrl + routes.campaignManager.campaign.details}
                         />
+                        {/* <CampaignManagerRoute
+                            exact
+                            component={DiscoverDetails}
+                            path={globalPrefixUrl + routes.campaignManager.discover.details}
+                        /> */}
+                        {/*<CampaignManagerRoute*/}
+                        {/*    exact*/}
+                        {/*    component={Campaign}*/}
+                        {/*    path={globalPrefixUrl + routes.campaignManager.campaign.index}*/}
+                        {/*/>*/}
+
+                        {/* * admin */}
+                        <UserAdminRoute exact component={UserAdmin} path={globalPrefixUrl + routes.userAdmin.index} />
+
+                        {/* * error status */}
                         <Redirect to={routes.wrongPath} />
                     </Switch>
                 </Router>
