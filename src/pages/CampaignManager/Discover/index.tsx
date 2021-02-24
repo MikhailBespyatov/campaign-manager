@@ -7,16 +7,15 @@ import { useStore } from 'effector-react';
 import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
 import React from 'react';
 import { campaignContentStores } from 'stores/campaignContent';
-import { CreateCampaignManager } from 'components/common/blocks/CreateCampaignManager';
 
 export const Discover = () => {
     const { items, totalRecords } = useStore(campaignContentStores.items);
-    const visibleCreateCampaign = useStore(campaignContentStores.visibleCreateCampaign);
+    // const visibleCreateCampaign = useStore(campaignContentStores.visibleCreateCampaign);
     const loading = useStore(campaignContentStores.initialLoading);
 
     return (
         <CampaignManagerLayout>
-            {visibleCreateCampaign && <CreateCampaignManager />}
+            {/*{visibleCreateCampaign && <CreateCampaignManager />}*/}
             <VideosFilterLayout loading={loading} totalRecords={totalRecords}>
                 {loading ? (
                     <Section>

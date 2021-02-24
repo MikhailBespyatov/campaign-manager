@@ -33,7 +33,7 @@ const getOrganizationItemsById = createEffect({
             const data = await API.users.getOrganizationItems(id);
             loadingEffects.updateInitialLoading();
 
-            return data ? data : {};
+            return data || {};
         } catch {
             loadingEffects.updateInitialLoading();
             return {};

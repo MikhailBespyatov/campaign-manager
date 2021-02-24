@@ -1,7 +1,13 @@
-import { createEvent, createStore } from 'effector';
-import { CardModal, PopUpCampaignManager } from 'types';
-import { initializeGenericStoreModal } from 'stores/initialize.store.modal';
-//
+import { combine, createEvent, createStore } from 'effector';
+import { CardModal, Noop, PopUpCampaignManager, StrictTitle } from 'types';
+import { initializeGenericStoreModal } from 'stores/initialize/initialize.store.modal';
+
+export interface AsyncModal extends StrictTitle {
+    visible?: boolean;
+    content: string;
+    onOk?: Noop;
+}
+
 // const openCardModal = createEvent<string>();
 // const closeCardModal = createEvent();
 // //
@@ -41,6 +47,14 @@ const {
     openModal: openQexWidgetModal
 } = initializeGenericStoreModal();
 
+const {
+    modal: congratsModal,
+    closeModal: closeCongratsModal,
+    openModal: openCongratsModal
+} = initializeGenericStoreModal();
+
+const { modal: walletModal, closeModal: closeWalletModal, openModal: openWalletModal } = initializeGenericStoreModal();
+
 const openPopUpCampaignManager = createEvent<PopUpCampaignManager>();
 const closePopUpCampaignManager = createEvent();
 
@@ -68,14 +82,31 @@ const popUpCampaignManager = createStore<PopUpCampaignManager>({
         visible: false
     }));
 
+const initialAsyncModal: AsyncModal = { visible: false, title: '', content: '' };
+
+const openAsyncModal = createEvent<AsyncModal>();
+const closeAsyncModal = createEvent();
+
+const asyncModal = createStore<AsyncModal>(initialAsyncModal)
+    .on(openAsyncModal, (_, newState) => ({ ...newState, visible: true }))
+    .on(closeAsyncModal, () => initialAsyncModal);
+
+const asyncModalStore = combine(asyncModal);
+
 const modalEvents = {
     openCardModal,
     closeCardModal,
     openQexWidgetModal,
     closeQexWidgetModal,
     openPopUpCampaignManager,
-    closePopUpCampaignManager
+    closePopUpCampaignManager,
+    closeWalletModal,
+    openWalletModal,
+    closeCongratsModal,
+    openCongratsModal,
+    openAsyncModal,
+    closeAsyncModal
 };
-const modalStores = { cardModal, qexWidgetModal, popUpCampaignManager };
+const modalStores = { cardModal, qexWidgetModal, popUpCampaignManager, walletModal, congratsModal, asyncModalStore };
 
 export { modalStores, modalEvents };

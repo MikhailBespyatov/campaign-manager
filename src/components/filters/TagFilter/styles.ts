@@ -23,16 +23,12 @@ export const Wrapper = styled.div`
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
 `;
 
-export const TagFilterWrapper = styled.div`
-    position: relative;
-`;
-
 export const SearchInput = styled.input`
     outline: none;
     border: none;
     appearance: none;
     width: 100%;
-    margin-left: 110px;
+    margin-left: 50px;
     margin-right: 110px;
     font-weight: 400;
     font-size: 16px;

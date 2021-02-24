@@ -11,7 +11,6 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects } from 'stores/wallet';
 import { Background } from 'types';
-import { campaignContentEvents } from 'stores/campaignContent';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 interface Props extends Background {}
@@ -29,16 +28,9 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     // );
     const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
 
-    const createRoute = globalPrefixUrl + routes.campaignManager.discover.index;
-    const goToCreateCampaign = () => {
-        history.push(createRoute);
-        campaignContentEvents.setVisibleCreateCampaign(true);
-        modalEvents.openPopUpCampaignManager({
-            visible: true,
-            popUp: 'info'
-        });
-    };
+    const goToCreateCampaign = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
     const onWomBuy = () => modalEvents.openQexWidgetModal();
+    const onWalletOpen = () => modalEvents.openWalletModal();
 
     useEffect(() => {
         walletEffects.getTokenInfo();
@@ -63,6 +55,15 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                 <TopBarWithButton
                     buttons={
                         <Row marginBottom="0">
+                            <Column marginRight={primaryPadding}>
+                                <ManualRoundedButton
+                                    background={buyWOMButtonBackgroundColor}
+                                    mainColor={buyWOMButtonTextColor}
+                                    onClick={onWalletOpen}
+                                >
+                                    MY WALLET
+                                </ManualRoundedButton>
+                            </Column>
                             <Column marginRight={primaryPadding}>
                                 <ManualRoundedButton
                                     background={buyWOMButtonBackgroundColor}

@@ -1,6 +1,6 @@
 import { formGrey3 } from 'constants/styles';
 
-export const badgeHeight = '69px';
+export const badgeHeight = '48px';
 export const badgeWidth = '150px';
 export const badgeBorderWidth = '1px';
 export const badgeBorderColor = formGrey3;

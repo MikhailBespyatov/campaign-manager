@@ -5,8 +5,9 @@ import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { addIdImgDiameter, removeImgTop } from 'components/Layouts/Cards/SelectedVideoCard/constants';
 import removeIdImg from 'assets/img/increment.svg';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { campaignsEvents } from 'stores/campaigns';
 import { modalEvents } from 'stores/modal';
+import { useField } from 'effector-forms';
+import { forms } from 'stores/forms';
 
 interface Props {
     id?: string;
@@ -15,7 +16,9 @@ interface Props {
 }
 
 export const SelectedVideoCard: FC<Props> = ({ id = '', uriPrimary, removeDeleteImg = false }) => {
-    const handlerRemove = () => campaignsEvents.removeContentById(id);
+    const { value: contentIds, onChange } = useField(forms.createCampaignForm.fields.videos);
+
+    const handlerRemove = () => onChange(contentIds.filter(items => items.womContentId !== id));
     const openCardModal = () => modalEvents.openCardModal({ id });
 
     return (

@@ -16,3 +16,5 @@ export const Noop = () => {};
 export const numbersAfterComma = 1;
 
 export const numbersAfterDotWom = 4;
+
+export const nameProject = 'Campaign Manager';

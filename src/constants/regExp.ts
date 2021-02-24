@@ -7,3 +7,4 @@ export const oneCapitalCharRequiredRegExp = new RegExp(/[A-Z]/);
 export const atLeastOneNumberRequiredRegExp = new RegExp(/[0-9]/);
 
 export const onlySimpleCharactersAllowedRegExp = new RegExp(/^[0-9A-Za-z ]+$/);
+export const onlySymbolAndNumbersRegExp = new RegExp(/^[0-9A-Za-z]+$/);

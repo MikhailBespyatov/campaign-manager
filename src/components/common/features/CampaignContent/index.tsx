@@ -16,6 +16,7 @@ export const CampaignContent = () => {
     const { items } = useStore(campaignsStores.items);
     const statusRoute = useParams<Status>();
     const loading = useStore(loadingStores.initialLoading);
+    const draftCampaign = useStore(campaignsStores.draftCampaign);
 
     const defaultOrganizationId = getOrganizationId();
 
@@ -28,6 +29,33 @@ export const CampaignContent = () => {
         <Column width="100%">
             {loading ? (
                 <Loader />
+            ) : statusRoute.status === 'draft' ? (
+                draftCampaign.length ? (
+                    draftCampaign.map(({ id, budget, campaignName, videos }) => (
+                        <Section key={id} marginBottom="20px">
+                            <BorderBlock
+                                removeBorderRadius
+                                height="100%"
+                                marginBottom="0"
+                                marginRight="0"
+                                paddingBottom={itemHorizontalPadding}
+                                paddingRight={itemVerticalPadding}
+                                width="100%"
+                            >
+                                <CampaignItem
+                                    key={id}
+                                    budget={{ budgetTotal: budget } as WOM.CampaignBudget}
+                                    contentIds={videos as string[]}
+                                    id={id}
+                                    status={statusRoute.status}
+                                    title={campaignName}
+                                />
+                            </BorderBlock>
+                        </Section>
+                    ))
+                ) : (
+                    <CampaignEmpty />
+                )
             ) : items?.length ? (
                 <>
                     {items.map(item => {

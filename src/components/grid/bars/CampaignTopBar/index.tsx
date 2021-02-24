@@ -3,26 +3,23 @@ import React from 'react';
 import { routesArray } from './constants';
 import { StyledItem } from './styles';
 import { Span } from 'components/common/typography/Span';
-import { Status } from 'types';
-import { useStore } from 'effector-react';
-import { campaignsStores } from 'stores/campaigns';
-import { useHistory, useParams } from 'react-router';
-import { themeStores } from 'stores/theme';
+import { Status, StatusType } from 'types';
+import { defaultCampaignStatus } from 'constants/defaults';
 
-export const CampaignTopBar = () => {
-    const campaignStatusCount = useStore(campaignsStores.campaignStatusCount);
-    const statusRoute = useParams<Status>();
-    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    const history = useHistory();
+interface Props {
+    campaignStatusCount: typeof defaultCampaignStatus;
+    statusRoute: Status;
+    onClick: (status: StatusType) => void;
+    withoutStatus?: StatusType[];
+}
+
+export const CampaignTopBar = ({ campaignStatusCount, statusRoute, onClick, withoutStatus }: Props) => {
+    const viewRoutes = routesArray.filter(({ status }) => !withoutStatus?.includes(status));
 
     return (
         <Row>
-            {routesArray.map(({ name, status, path }) => (
-                <StyledItem
-                    key={name}
-                    active={statusRoute.status === status}
-                    onClick={() => history.push(globalPrefixUrl + path)}
-                >
+            {viewRoutes.map(({ name, status }) => (
+                <StyledItem key={name} active={statusRoute.status === status} onClick={() => onClick(status)}>
                     <Span
                         fontSize="16px"
                         fontWeight="600"

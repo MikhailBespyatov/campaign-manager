@@ -134,8 +134,21 @@ export const getDate = (date: Date | null) => {
     return date.toISOString().split('T')[0];
 };
 
+export const getDateFromString = (dateISOString?: string) => {
+    if (!dateISOString) return '';
+
+    //2021-01-09T13:57:15.832Z -> 2021-01-09
+    return dateISOString.split('T')[0];
+};
+
 //TODO: status and test for status
 export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (item: WOM.CampaignDetailResponse) =>
     item.isActive ? 'running' : item.title === 'test' ? 'paused' : 'expired';
 
 export const engagementStatusTypes = (parameter?: number) => (parameter && parameter > 0 ? 'success' : 'error');
+
+export const getStoriesTitle = (base: string) => base.split('/').slice(-3, -1).join('/');
+
+export const getFlexBasisPercent = (parts: number = 2) => (100 / Math.round(parts)).toFixed(2) + '%';
+
+export const getTotalItems = (totalRecords: number = -1) => (totalRecords !== -1 ? totalRecords : 0);

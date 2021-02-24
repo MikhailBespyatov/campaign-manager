@@ -57,6 +57,18 @@ export const buttonActiveMixin = css`
     background-blend-mode: darken;
 `;
 
+export const buttonBehaviorMixin = css`
+    :hover {
+        opacity: 0.7;
+    }
+    :disabled {
+        ${buttonDisabledMixin};
+    }
+    :active {
+        ${buttonActiveMixin};
+    }
+`;
+
 export const disableDefaultCheckboxStyleMixin = css`
     border: 0;
     clip: rect(0 0 0 0);

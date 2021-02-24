@@ -7,4 +7,6 @@ export const defaultCampaignContentValues: WOM.ContentQueryRequest = {
     validationResult: 1
 };
 
-export const defaultCampaignStatusStore = { running: 0, paused: 0, completed: 0, expired: 0 };
+export const defaultCampaignStatus = { running: 0, paused: 0, completed: 0, expired: 0, draft: 0 };
+
+export const countCampaignDrafts = 5;

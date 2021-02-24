@@ -2,6 +2,7 @@ import { passwordMinimum } from 'constants/global';
 import {
     atLeastOneNumberRequiredMessage,
     exactLimitMessage,
+    incorrectIdMessage,
     invalidEmailMessage,
     oneCapitalCharRequiredMessage,
     onlySimpleCharactersAllowedMessage,
@@ -12,14 +13,39 @@ import {
 import {
     atLeastOneNumberRequiredRegExp,
     oneCapitalCharRequiredRegExp,
-    onlySimpleCharactersAllowedRegExp
+    onlySimpleCharactersAllowedRegExp,
+    onlySymbolAndNumbersRegExp
 } from 'constants/regExp';
 import * as Yup from 'yup';
+import { Rule } from 'effector-forms';
+import urlRegex from 'url-regex';
+
+export function createRule<V, T = any>({ schema, name }: { schema: Yup.Schema<T>; name: string }): Rule<V> {
+    return {
+        name,
+        validator: (v: V) => {
+            try {
+                schema.validateSync(v);
+                return {
+                    isValid: true,
+                    value: v
+                };
+            } catch (err) {
+                return {
+                    isValid: false,
+                    value: v,
+                    errorText: err.message
+                };
+            }
+        }
+    };
+}
 
 export const yupDefault = Yup.string().required(requiredFieldMessage);
 export const yupDefaultArray = Yup.array().of(yupDefault).required(requiredSetMessage);
 
 export const yupCompanyName = yupDefault.matches(onlySimpleCharactersAllowedRegExp, onlySimpleCharactersAllowedMessage);
+export const yupId = yupDefault.min(4).matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
 export const yupUsername = yupDefault;
 export const yupEmail = Yup.string().email(invalidEmailMessage).required(requiredFieldMessage);
 export const yupEmailNoHint = yupDefault;
@@ -33,6 +59,7 @@ export const yupRepeatPassword = Yup.string()
     .required(requiredFieldMessage);
 export const yupPasswordNoHint = yupDefault;
 export const yupSecurityCode = yupDefault;
+export const yupUrl = Yup.string().matches(urlRegex(), 'Please enter website');
 
 export const yupWom = yupDefault;
 export const yupCardName = yupDefault;

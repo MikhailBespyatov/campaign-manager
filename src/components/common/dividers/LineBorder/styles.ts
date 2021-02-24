@@ -7,7 +7,7 @@ export const LineWrapper = styled.div`
 export const Line = styled.div`
     width: 100%;
     box-sizing: border-box;
-    display: inline-block;
+    //display: inline-block;
     height: 1px;
     vertical-align: middle;
     background-color: ${black};

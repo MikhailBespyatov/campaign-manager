@@ -17,7 +17,11 @@ import {
     slashInserter,
     spaceInserter,
     getDate,
-    engagementStatusTypes
+    engagementStatusTypes,
+    getStoriesTitle,
+    getFlexBasisPercent,
+    getTotalItems,
+    getDateFromString
 } from 'utils/usefulFunctions';
 import { parseCampaignRoutes } from 'constants/routes';
 
@@ -364,5 +368,46 @@ describe('parseCampaignRoutes', () => {
             test3: '/campaign_manager/campaign/test3/',
             status: '/campaign_manager/campaign/:status(test|test2|test3)/'
         });
+    });
+});
+
+describe('getStoriesTitle', () => {
+    it('Test for getStoriesTitle', () => {
+        expect(getStoriesTitle('src/test/folder/current/Select/')).toBe('current/Select');
+        expect(getStoriesTitle('src/test/folder')).toBe('src/test');
+        expect(getStoriesTitle('src/test')).toBe('src');
+    });
+});
+
+describe('getFlexBasisPercent', () => {
+    it('Test for getFlexBasisPercent', () => {
+        expect(getFlexBasisPercent(1)).toBe('100.00%');
+        expect(getFlexBasisPercent(2)).toBe('50.00%');
+        expect(getFlexBasisPercent(3)).toBe('33.33%');
+        expect(getFlexBasisPercent(7)).toBe('14.29%');
+        expect(getFlexBasisPercent()).toBe('50.00%');
+        expect(getFlexBasisPercent(3.2)).toBe('33.33%');
+        expect(getFlexBasisPercent(3.3)).toBe('33.33%');
+        expect(getFlexBasisPercent(3.7)).toBe('25.00%');
+    });
+});
+
+describe('getTotalItems', () => {
+    it('Test for getTotalItems', () => {
+        expect(getTotalItems(1)).toBe(1);
+        expect(getTotalItems(2)).toBe(2);
+        expect(getTotalItems(0)).toBe(0);
+        expect(getTotalItems(-1)).toBe(0);
+        expect(getTotalItems(undefined)).toBe(0);
+    });
+});
+
+describe('getDateFromString', () => {
+    it('Test for getDateFromString', () => {
+        expect(getDateFromString('2021-01-09T13:57:15.832Z')).toBe('2021-01-09');
+        expect(getDateFromString('')).toBe('');
+        expect(getDateFromString()).toBe('');
+        expect(getDateFromString('adadaasdasd')).toBe('adadaasdasd');
+        expect(getDateFromString('adadaTasdasd')).toBe('adada');
     });
 });

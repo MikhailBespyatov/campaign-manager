@@ -6,6 +6,8 @@ import * as user from './user';
 import * as userAdmin from './userAdmin';
 import * as users from './users';
 import * as wallet from './wallet';
+import * as products from './products';
+import * as channels from './channels';
 
 export const API = {
     user,
@@ -15,5 +17,7 @@ export const API = {
     organizations,
     admin,
     userAdmin,
-    wallet
+    wallet,
+    products,
+    channels
 };

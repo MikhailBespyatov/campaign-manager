@@ -1,23 +1,26 @@
-import React, { FC } from 'react';
-import { CampaignDetail, CampaignStatusBlock, ItemImgBlock } from './styles';
+import defaultImg from 'assets/img/search_icon.svg';
+import history from 'BrowserHistory';
+import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
+import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
+import { DateOfDetailsCampaignBlock } from 'components/common/blocks/DateOfDetailsCampaignBlock';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { SimpleButton } from 'components/common/buttons/SimpleButton';
+import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { Span } from 'components/common/typography/Span';
-import { grey4 } from 'constants/styles';
-import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
-import { Status } from 'types';
-import history from 'BrowserHistory';
 import { routes } from 'constants/routes';
+import { grey4, red, white } from 'constants/styles';
 import { useStore } from 'effector-react';
+import React, { FC } from 'react';
+import { campaignsEvents } from 'stores/campaigns';
 import { themeStores } from 'stores/theme';
-import defaultImg from 'assets/img/search_icon.svg';
-import { DateOfDetailsCampaignBlock } from 'components/common/blocks/DateOfDetailsCampaignBlock';
+import { Status } from 'types';
+import { CampaignDetail, CampaignStatusBlock, ItemImgBlock } from './styles';
 
 interface Props extends WOM.CampaignDetailResponse, Status {
     isDetailsPage?: boolean;
     backgroundImg?: string;
+    hideShowStatisticButton?: boolean;
 }
 
 export const CampaignItem: FC<Props> = ({
@@ -25,14 +28,22 @@ export const CampaignItem: FC<Props> = ({
     budget,
     isDetailsPage,
     backgroundImg,
-    id,
+    id = '',
     schedule,
     contentIds,
-    status
+    status,
+    hideShowStatisticButton
 }) => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const isDraftStatus = status === 'draft';
     // const { primaryColor } = useStore(themeStores.theme);
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
+    const onContinueClick = () => {
+        campaignsEvents.setFormFromDraft(id);
+        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
+    };
+    const onDeleteDraftClick = () => campaignsEvents.deleteDraftCampaign(id);
+
     return (
         <Row marginBottom="0">
             {isDetailsPage && <ItemImgBlock background={backgroundImg || defaultImg} />}
@@ -45,7 +56,7 @@ export const CampaignItem: FC<Props> = ({
                     </MarginWrapper>
                     <MarginWrapper marginBottom="18px">
                         <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
-                            {`Content: ${contentIds?.length} videos, Budget: ${budget?.budgetTotal} WOM`}
+                            {`Content: ${contentIds?.length} videos, Total Budget: ${budget?.budgetTotal} WOM`}
                         </Span>
                     </MarginWrapper>
                     <Row marginBottom="60px">
@@ -64,7 +75,7 @@ export const CampaignItem: FC<Props> = ({
                                     />
                                 </MarginWrapper>
                             </>
-                        ) : (
+                        ) : !isDraftStatus ? (
                             <>
                                 <MarginWrapper marginRight="40px">
                                     <DateOfCampaignBlock
@@ -78,7 +89,7 @@ export const CampaignItem: FC<Props> = ({
                                     state="end"
                                 />
                             </>
-                        )}
+                        ) : null}
                     </Row>
                     {/*    <Row marginBottom="0">*/}
                     {/*    {status === 'running' && (*/}
@@ -105,7 +116,29 @@ export const CampaignItem: FC<Props> = ({
 
                 <CampaignStatusBlock>
                     <CampaignStatus daysRemaining={schedule?.remainingDays} status={status} />
-                    {!isDetailsPage && (
+                    {isDetailsPage || hideShowStatisticButton ? null : isDraftStatus ? (
+                        <Row alignCenter>
+                            <MarginWrapper marginRight="20px">
+                                <SimpleButton
+                                    backgroundColor={white}
+                                    color={red}
+                                    height="38px"
+                                    width="167px"
+                                    onClick={onDeleteDraftClick}
+                                >
+                                    Delete
+                                </SimpleButton>
+                            </MarginWrapper>
+                            <ManualRoundedButton
+                                borderRadius="8px"
+                                height="38px"
+                                width="167px"
+                                onClick={onContinueClick}
+                            >
+                                CONTINUE
+                            </ManualRoundedButton>
+                        </Row>
+                    ) : (
                         <ManualRoundedButton borderRadius="8px" height="38px" width="167px" onClick={onMoreInfoClick}>
                             SHOW STATISTICS
                         </ManualRoundedButton>
