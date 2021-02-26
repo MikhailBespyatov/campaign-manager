@@ -1,6 +1,8 @@
 export const cardWidth = '281px';
 export const cardHeight = '389px';
 
+export const gridGap = '25px';
+
 export const verticalPadding = '14px';
 export const horizontalPadding = '22px';
 export const CardBorderRadius = '8px';

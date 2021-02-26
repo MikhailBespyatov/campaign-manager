@@ -8,6 +8,7 @@ import {
     verticalPadding
 } from 'components/grid/Card/constants';
 import { CardProps, FeatureCellProps } from 'components/grid/Card/types';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import {
     black,
     blue,
@@ -27,13 +28,12 @@ import {
 } from 'constants/styles';
 import styled from 'styled-components';
 import { Padding } from 'types';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 export const Card = styled.div<CardProps>`
     ${({ disabled }) => (disabled ? `opacity: ${disabledOpacity}` : '')};
     background-color: ${cardBackgroundColor};
-    margin-right: ${primaryPadding};
-    margin-bottom: ${primaryPadding};
+    //margin-right: ${primaryPadding};
+    //margin-bottom: ${primaryPadding};
     width: ${({ width }) => (width ? width : cardWidth)};
     height: ${({ height }) => (height ? height : cardHeight)};
     border-radius: ${CardBorderRadius};

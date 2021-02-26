@@ -33,9 +33,9 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
                     {!initialContentIds.length ? (
                         <Section alignCenter justifyCenter height="100%">
                             <NoVideoSpan>
+                                {' '}
                                 Click on the plus icons below to add videos to your channel. Selected videos will appear
                                 here.
-                                {/* Please click add icon on videos to add here */}
                             </NoVideoSpan>
                         </Section>
                     ) : (

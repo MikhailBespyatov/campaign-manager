@@ -5,6 +5,7 @@ import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilterLayout';
 import { useStore } from 'effector-react';
 import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
+import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 import React from 'react';
 import { campaignContentStores } from 'stores/campaignContent';
 
@@ -22,11 +23,11 @@ export const Discover = () => {
                         <Loader />
                     </Section>
                 ) : (
-                    <Section>
+                    <CardCatalogGrid>
                         {items?.length
                             ? items.map(item => <VideoCard key={item.womContentId} {...item} />)
                             : noContentMessage}
-                    </Section>
+                    </CardCatalogGrid>
                 )}
             </VideosFilterLayout>
         </CampaignManagerLayout>
