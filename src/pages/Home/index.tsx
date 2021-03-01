@@ -30,7 +30,7 @@ export const Home = () => {
                 </Span>
             </Row>
 
-            <Row>
+            <Row marginBottom="20px">
                 {/* <Column marginRight={primaryPadding}> */}
                 <ManualRoundedButton onClick={goToRegistration}>SIGN UP</ManualRoundedButton>
             </Row>
