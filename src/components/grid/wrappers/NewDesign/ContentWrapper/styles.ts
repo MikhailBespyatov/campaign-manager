@@ -17,4 +17,7 @@ export const ContentWrapper = styled.div<ContentWrapperProps>`
     ${({ padding }) => padding && `padding: ${padding}`};
     border-radius: ${({ borderRadius }) => borderRadius || contentWrapperBorderRadius};
     background-color: ${({ backgroundColor }) => backgroundColor || white};
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 `;

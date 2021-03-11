@@ -1,6 +1,6 @@
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
-import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Row, Section, FlexGrow } from 'components/grid/wrappers/FlexWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
@@ -71,8 +71,8 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                     />
                 </ContentWrapper>
             </Section>
-            <Section marginBottom={videoSectionMarginBottom}>
-                <ContentWrapper padding={videoStepPadding} width="100%">
+            <FlexGrow marginBottom={videoSectionMarginBottom}>
+                <ContentWrapper height="100%" padding={videoStepPadding} width="100%">
                     <Row marginBottom="16px">
                         <Span fontSize="14px" fontWeight="600" lineHeight="17px">
                             Videos
@@ -91,7 +91,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                         )}
                     </Section>
                 </ContentWrapper>
-            </Section>
+            </FlexGrow>
         </>
     );
 };
