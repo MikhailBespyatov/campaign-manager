@@ -26,7 +26,7 @@ const adminPrefix = '/admin';
 
 const signUpPrefix = '/register';
 const walletPrefix = '/create_wallet';
-const signInPrefix = '/login';
+export const signInPrefix = '/login';
 const passwordResetPrefix = '/password_reset';
 
 // * public urls templates
