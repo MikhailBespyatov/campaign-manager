@@ -20,3 +20,5 @@ export const styledSpanFontSize3 = '12px';
 export const styledSpanLineHeight3 = '20px';
 
 export const headerAvatarDiameter = '34px';
+
+export const headerCopyButtonDiameter = '25px';
