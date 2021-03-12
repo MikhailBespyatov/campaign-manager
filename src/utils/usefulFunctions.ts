@@ -1,7 +1,7 @@
 import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
-import { publicPrefix } from 'constants/routes';
+import { publicPrefix, signInPrefix } from 'constants/routes';
 import { AuthUserResponse, StatusType } from 'types';
 
 export const retrieveWalletId = () => {
@@ -105,7 +105,8 @@ export const parseMonthDate: (date: Date) => string = date =>
 export const getPublicTheme = () =>
     window.location.pathname
         .substring(publicPrefix.length)
-        .substring(0, window.location.pathname.substring(publicPrefix.length).indexOf('/'));
+        .substring(0, window.location.pathname.substring(publicPrefix.length).indexOf('/'))
+        .toLowerCase();
 // .substring(
 //     0,
 //     window.location.pathname
@@ -114,6 +115,12 @@ export const getPublicTheme = () =>
 //         .indexOf('/') + 1
 // )
 // .substring(1);
+
+export const isSignInPage = () =>
+    window.location.pathname.search(new RegExp(publicPrefix.substring(1) + '.*' + signInPrefix)) !== -1;
+
+export const isUnknownOrganization = (data: WOM.MessageResponseBase) =>
+    data.message === 'No organization with that key';
 
 export const mergeElementsWithString = (array: string[], str: string) => array.map(i => i + str);
 
