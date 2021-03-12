@@ -42,7 +42,9 @@ import { AsyncModal } from 'components/modals/AsyncModal';
 const AppWrapper = styled.div`
     position: relative;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: ${({ theme: { background } }) => background};
 `;
 

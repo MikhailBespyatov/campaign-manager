@@ -3,6 +3,7 @@ import { backgroundColor, flexCenter, footerHeight } from 'constants/styles';
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
+    bottom: 0;
     ${flexCenter};
     justify-content: flex-end;
     flex-direction: column;

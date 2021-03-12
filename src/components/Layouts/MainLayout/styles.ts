@@ -7,6 +7,7 @@ export const Main = styled.main<Background>`
     position: relative;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     width: 100%;
     border-radius: ${mainBorderRadius} ${mainBorderRadius} 0 0;
     background: ${({ background }) => (background ? background : grey7)};
@@ -17,6 +18,7 @@ export const Wrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     width: 100%;
     padding: ${mainVerticalPadding} ${mainHorizontalPadding};
 `;
