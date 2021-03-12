@@ -19,7 +19,7 @@ womAxiosInstance.interceptors.response.use(
             userEvents.logout();
         }
 
-        Promise.reject(config.response.data);
+        return Promise.reject(config.response);
     }
 );
 
