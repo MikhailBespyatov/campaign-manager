@@ -122,7 +122,7 @@ const productsEvents = {
     setIsFirstToTrue,
     resetItem
 };
-const productsEffects = { getItemById, getItems, createProduct, updateProduct, removeProduct };
+const productsEffects = { getItemById, getItems, createProduct, updateProduct, removeProduct, resetItem };
 const productsStores = { item, items, values, isFirst };
 
 export { productsEvents, productsEffects, productsStores };

@@ -11,21 +11,22 @@ import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
 import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
 import { productInputMarginBottom } from 'pages/CampaignManager/Products/ProductForm/constants';
-import { ImageInput } from 'components/common/inputs/ImageInput';
+import { ImageTextInput } from 'components/common/inputs/ImageTextInput';
 import { getFlexBasisPercent } from 'utils/usefulFunctions';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { red } from 'constants/styles';
 import { modalEvents } from 'stores/modal';
-import { productsEffects } from 'stores/products';
+import { productsEffects, productsStores } from 'stores/products';
 
-const { name, brand, publicId, url } = forms.productForm.fields;
+const { name, brand, publicId, url, imageUrl } = forms.productForm.fields;
 
 export interface ProductFormProps {}
 
 export const ProductForm = () => {
     const history = useHistory();
-    const { fields, reset } = useForm(forms.productForm);
+    const { reset } = useForm(forms.productForm);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+    const { imageUrl: imageUrlValue } = useStore(productsStores.item);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.products.create;
     const { productId } = useParams();
     const flexBasisInput = getFlexBasisPercent(2);
@@ -36,7 +37,7 @@ export const ProductForm = () => {
     //     fields.productCategory.onChange(e.target.value);
     // const onChangeProductId = (e: ChangeEvent<HTMLInputElement>) => fields.productId.onChange(e.target.value);
     // const onChangeProductURL = (e: ChangeEvent<HTMLInputElement>) => fields.productUrl.onChange(e.target.value);
-    const onChangeThumbnailImage = (url: string) => fields.imageUrl.onChange(url);
+    // const onChangeThumbnailImage = (url: string) => fields.imageUrl.onChange(url);
 
     const onClickRemoveButton = () => {
         productsEffects.removeProduct(productId);
@@ -55,8 +56,9 @@ export const ProductForm = () => {
 
     //Mock
     useEffect(() => {
-        isEditPage && productsEffects.getItemById(productId);
+        isEditPage ? productsEffects.getItemById(productId) : productsEffects.resetItem();
         reset();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -66,11 +68,11 @@ export const ProductForm = () => {
                 <TitleFormSpan>{isEditPage ? 'Edit' : 'Add'} product</TitleFormSpan>
             </Section>
             <Section marginBottom="42px">
-                <ImageInput
-                    description={`${isEditPage ? 'Edit' : 'Add'} product thumbnail image here`}
+                <ImageTextInput
+                    field={imageUrl}
                     label="Thumbnail Image"
-                    value={fields.imageUrl.value}
-                    onChange={onChangeThumbnailImage}
+                    placeholder="Set product thumbnail image here"
+                    src={imageUrlValue || ''}
                 />
             </Section>
             <Section marginBottom={productInputMarginBottom}>
