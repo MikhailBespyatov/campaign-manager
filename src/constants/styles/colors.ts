@@ -32,6 +32,7 @@ export const blue2 = '#F7F7FC';
 export const blue3 = '#4850FF';
 export const blue4 = '#F6F6FF';
 export const blue5 = '#EBEBFA';
+export const blue6 = '#F6FAFF';
 
 export const backgroundColor = '#121217';
 

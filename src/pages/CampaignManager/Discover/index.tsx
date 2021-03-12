@@ -4,10 +4,10 @@ import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout'
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilterLayout';
 import { useStore } from 'effector-react';
-import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
 import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 import React from 'react';
 import { campaignContentStores } from 'stores/campaignContent';
+import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
 
 export const Discover = () => {
     const { items, totalRecords } = useStore(campaignContentStores.items);
@@ -22,12 +22,16 @@ export const Discover = () => {
                     <Section>
                         <Loader />
                     </Section>
-                ) : (
+                ) : items?.length ? (
                     <CardCatalogGrid>
-                        {items?.length
-                            ? items.map(item => <VideoCard key={item.womContentId} {...item} />)
-                            : noContentMessage}
+                        {items.map(item => (
+                            <VideoCard key={item.womContentId} {...item} />
+                        ))}
                     </CardCatalogGrid>
+                ) : (
+                    <Section justifyCenter>
+                        <EmptySearchResult title="Sorry! No result found" />
+                    </Section>
                 )}
             </VideosFilterLayout>
         </CampaignManagerLayout>
