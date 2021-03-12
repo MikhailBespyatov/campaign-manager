@@ -1,13 +1,13 @@
 import { womLogoDivider } from 'constants/styles';
 
-export const headerHorizontalMargin = '22px';
-export const headerVerticalMargin = '13px';
+export const headerHorizontalMargin = '32px';
+export const headerVerticalMargin = '20px';
 
-export const headerLogoHeight = '52px';
+export const headerLogoHeight = '30px';
 // export const headerLogoWidth = '80px';
 export const headerLogoWidth = `calc(${headerLogoHeight} / ${womLogoDivider})`;
 
-export const styledSpanFontSize1 = '18px';
+export const styledSpanFontSize1 = '16px';
 export const styledSpanLineHeight1 = '22px';
 export const styledSpanMarginLeft = '40px';
 

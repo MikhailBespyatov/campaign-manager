@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import { Span } from 'components/common/typography/Span';
 import {
     inactiveColor,
     spanFontSize,
     spanFontWeight,
     spanLineHeight
 } from 'components/common/dividers/BarItem/constants';
-import { StyledBorder, StyledItem } from 'components/common/dividers/BarItem/styles';
-import { subPageSpanHeight } from 'components/common/typography/special/constants';
+import { StyledItem } from 'components/common/dividers/BarItem/styles';
+import { Span } from 'components/common/typography/Span';
 import { SubPageSpan } from 'components/common/typography/special';
+import { subPageSpanHeight } from 'components/common/typography/special/constants';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { useStore } from 'effector-react';
+import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
 import { Path } from 'types';
 
@@ -41,7 +41,7 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage, 
                         <SubPageSpan>{namePage}</SubPageSpan>
                     </Row>
                 )}
-                {active && !withoutBorderLine && <StyledBorder />}
+                {/* {active && !withoutBorderLine && <StyledBorder />} */}
             </Column>
         </StyledItem>
     );
