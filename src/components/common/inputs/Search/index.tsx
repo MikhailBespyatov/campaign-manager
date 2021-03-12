@@ -18,7 +18,7 @@ import { Noop } from 'constants/global';
 import React, { ChangeEvent, useState } from 'react';
 import { DefaultValueString, Placeholder } from 'types';
 
-interface Props extends Placeholder, DefaultValueString {
+export interface Props extends Placeholder, DefaultValueString {
     onSearch?: (value: string) => void;
 }
 

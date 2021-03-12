@@ -3,6 +3,7 @@ import { ButtonProps } from 'components/common/buttons/RoundedButton/types';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { padding } from 'constants/styles';
 import React, { FC } from 'react';
+import { ReactClick } from 'types/react';
 
 // const InnerSpan: FC<Reverse> = ({ children, reverse }) => (
 //     <Span alignCenter color={'#040a2b'} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
@@ -10,8 +11,7 @@ import React, { FC } from 'react';
 //     </Span>
 // );
 
-interface Props extends ButtonProps {
-    onClick?: ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+interface Props extends ButtonProps, ReactClick<HTMLButtonElement> {
     Img?: JSX.Element;
 }
 

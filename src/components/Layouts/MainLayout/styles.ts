@@ -1,5 +1,5 @@
-import { mainBorderRadius, mainHorizontalPadding, mainVerticalPadding } from 'components/Layouts/MainLayout/constants';
-import { grey7 } from 'constants/styles';
+import { mainBorderRadius, mainVerticalPadding } from 'components/Layouts/MainLayout/constants';
+import { grey7, pageHorizontalPadding } from 'constants/styles';
 import styled from 'styled-components';
 import { Background } from 'types';
 
@@ -20,5 +20,5 @@ export const Wrapper = styled.div`
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
-    padding: ${mainVerticalPadding} ${mainHorizontalPadding};
+    padding: 0 ${pageHorizontalPadding} ${mainVerticalPadding};
 `;

@@ -1,5 +1,8 @@
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { ContentText } from 'components/Layouts/CampaignManagerLayout/styles';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import { routes } from 'constants/routes';
 import { primaryPadding } from 'constants/styles';
@@ -11,7 +14,6 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects } from 'stores/wallet';
 import { Background } from 'types';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 interface Props extends Background {}
 
@@ -26,7 +28,7 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     // const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, campaignsRunning } = useStore(
     //     organizationsStores.statistics
     // );
-    const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
+    //const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
 
     const goToCreateCampaign = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
     const onWomBuy = () => modalEvents.openQexWidgetModal();
@@ -54,26 +56,20 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
             topBar={
                 <TopBarWithButton
                     buttons={
-                        <Row marginBottom="0">
-                            <Column marginRight={primaryPadding}>
-                                <ManualRoundedButton
-                                    background={buyWOMButtonBackgroundColor}
-                                    mainColor={buyWOMButtonTextColor}
-                                    onClick={onWalletOpen}
-                                >
-                                    MY WALLET
-                                </ManualRoundedButton>
+                        <Row alignCenter marginBottom="0">
+                            <Column marginLeft={primaryPadding} marginRight={primaryPadding}>
+                                <ClickableWrapper width="fit-content" onClick={onWalletOpen}>
+                                    <ContentText noWrap>MY WALLET</ContentText>
+                                </ClickableWrapper>
                             </Column>
-                            <Column marginRight={primaryPadding}>
-                                <ManualRoundedButton
-                                    background={buyWOMButtonBackgroundColor}
-                                    mainColor={buyWOMButtonTextColor}
-                                    onClick={onWomBuy}
-                                >
-                                    BUY WOM
-                                </ManualRoundedButton>
+                            <Column marginLeft={primaryPadding} marginRight={primaryPadding}>
+                                <ClickableWrapper width="fit-content" onClick={onWomBuy}>
+                                    <ContentText noWrap>BUY WOM</ContentText>
+                                </ClickableWrapper>
                             </Column>
-                            <ManualRoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</ManualRoundedButton>
+                            <Column marginLeft={primaryPadding}>
+                                <ManualRoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</ManualRoundedButton>
+                            </Column>
                         </Row>
                     }
                 />
