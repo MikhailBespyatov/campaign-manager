@@ -4,6 +4,9 @@ import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
 import { AuthUserResponse, StatusType } from 'types';
 
+// Triggered copy to clipboard
+export const triggerCopy: (text: string) => void = text => navigator.clipboard.writeText(text);
+
 export const retrieveWalletId = () => {
     const user: WOM.UserJwtTokenResponse = JSON.parse(localStorage.getItem(userStorageName) || '{}');
 

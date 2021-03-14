@@ -22,3 +22,7 @@ export const styledSpanLineHeight3 = '20px';
 export const headerAvatarDiameter = '34px';
 
 export const headerCopyButtonDiameter = '25px';
+
+export const copyMerchantIdMessage = 'Merchant ID copied';
+export const arrowDownWidth = '12px';
+export const arrowDownHeight = '9px';

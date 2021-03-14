@@ -11,6 +11,7 @@ import {
     styledSpanLineHeight3,
     styledSpanMarginLeft
 } from 'components/grid/Header/constants';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { flexCenter, formTextStyleMixin, headerHeight, white } from 'constants/styles';
 import styled from 'styled-components';
 
@@ -47,4 +48,12 @@ export const StyledSpan3 = styled.span`
     line-height: ${styledSpanLineHeight3};
     margin-left: auto;
     cursor: pointer;
+`;
+
+export const MerchantIdWrapper = styled(ContentWrapper)`
+    background-color: #272847;
+    padding: 8px 10px;
+    flex-direction: row;
+    border-radius: 48px;
+    margin-left: 10px;
 `;

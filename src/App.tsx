@@ -1,12 +1,26 @@
 import history from 'BrowserHistory';
+import { AsyncModal } from 'components/modals/AsyncModal';
 import { CardModal } from 'components/modals/CardModal';
+import { CongratsModal } from 'components/modals/CongratsModal';
+import { NotificationModal } from 'components/modals/Notification';
+import { PopUpCampaignManager } from 'components/modals/PopUpCamaignManager';
 import { QexWidgetModal } from 'components/modals/QexWidgetModal';
+import { WalletModal } from 'components/modals/WalletModal';
 import { acceptInvitePath, acceptOrgInvitePath, routes, signInPath } from 'constants/routes';
 import { GlobalStyle } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { CampaignManager } from 'pages/CampaignManager';
 import { Campaign } from 'pages/CampaignManager/Campaign';
+import { Create } from 'pages/CampaignManager/Campaign/Create';
+import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
+import { Channels } from 'pages/CampaignManager/Channels';
+import { CreateChannel } from 'pages/CampaignManager/Channels/Create';
+import { EditChannel } from 'pages/CampaignManager/Channels/Edit';
 import { Discover } from 'pages/CampaignManager/Discover';
+import { Products } from 'pages/CampaignManager/Products';
+import { CreateProduct } from 'pages/CampaignManager/Products/Create';
+import { EditProduct } from 'pages/CampaignManager/Products/Edit';
+import { Product } from 'pages/CampaignManager/Products/Product';
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
 import { PasswordReset } from 'pages/SignIn/PasswordReset';
@@ -25,19 +39,6 @@ import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeEvents, themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import styled, { ThemeProvider } from 'styled-components';
-import { PopUpCampaignManager } from 'components/modals/PopUpCamaignManager';
-import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
-import { Create } from 'pages/CampaignManager/Campaign/Create';
-import { Channels } from 'pages/CampaignManager/Channels';
-import { CreateChannel } from 'pages/CampaignManager/Channels/Create';
-import { EditChannel } from 'pages/CampaignManager/Channels/Edit';
-import { Products } from 'pages/CampaignManager/Products';
-import { EditProduct } from 'pages/CampaignManager/Products/Edit';
-import { CreateProduct } from 'pages/CampaignManager/Products/Create';
-import { Product } from 'pages/CampaignManager/Products/Product';
-import { WalletModal } from 'components/modals/WalletModal';
-import { CongratsModal } from 'components/modals/CongratsModal';
-import { AsyncModal } from 'components/modals/AsyncModal';
 
 const AppWrapper = styled.div`
     position: relative;
@@ -67,7 +68,9 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
+
             <AppWrapper>
+                <NotificationModal />
                 <Router history={history}>
                     {/* * public modal */}
                     <CardModal />
