@@ -43,7 +43,7 @@ const Item = ({ active, index, data, onClick }: Props) => (
     </SelectLi>
 );
 
-export const InviteUserSelect = ({ name, values, defaultActive = 0, data = values }: WrapperProps) => {
+export const InviteUserSelect = ({ name = '', values, defaultActive = 0, data = values }: WrapperProps) => {
     const [field, { error, touched }, { setValue }] = useField(name);
 
     const [isClosed, setIsClosed] = useState(true);

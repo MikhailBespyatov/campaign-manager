@@ -111,3 +111,7 @@ export interface ColumnAlignment {
 export interface IsValid {
     isValid?: boolean;
 }
+
+export interface SelectorFilterType {
+    type?: 'select' | 'checkbox';
+}

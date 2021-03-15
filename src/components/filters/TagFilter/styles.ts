@@ -1,9 +1,9 @@
 import {
+    wrapperBackground,
     wrapperBorderColor,
     wrapperBorderRadius,
     wrapperHeight,
     wrapperHorizontalPadding,
-    wrapperMarginBottom,
     wrapperVerticalPadding,
     wrapperWidth
 } from 'components/filters/TagFilter/constants';
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
     flex-direction: row;
     height: ${wrapperHeight};
     border-radius: ${wrapperBorderRadius};
-    margin-bottom: ${wrapperMarginBottom};
+    background-color: ${wrapperBackground};
     border: 1px solid ${wrapperBorderColor};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
 `;
@@ -28,10 +28,11 @@ export const SearchInput = styled.input`
     border: none;
     appearance: none;
     width: 100%;
-    margin-left: 50px;
+    margin-left: 32px;
     margin-right: 110px;
     font-weight: 400;
     font-size: 16px;
+    background-color: ${wrapperBackground};
 `;
 
 export const SearchAbsoluteWrapper = styled.div<SearchAbsoluteWrapperProps>`

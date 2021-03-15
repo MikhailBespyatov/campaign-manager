@@ -2,11 +2,10 @@ import {
     ballBackground,
     ballDiameter,
     ballPosition,
-    checkboxActiveBorder,
+    checkboxBorder,
     checkboxBorderRadius,
     checkboxDiameter,
-    checkboxFocusShadow,
-    checkboxInactiveBorder
+    checkboxFocusShadow
 } from 'components/common/inputs/BooleanCircleCheckbox/constants';
 import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/types';
 import {
@@ -46,7 +45,7 @@ export const StyledCheckbox = styled.div<CheckboxProps>`
     height: ${checkboxDiameter};
     //background: ${({ checked }) => (checked ? blue : white)};
     border-radius: ${checkboxBorderRadius};
-    border: ${({ checked }) => (checked ? checkboxActiveBorder : checkboxInactiveBorder)};
+    border: ${checkboxBorder};
     transition: ${transitionTime};
     cursor: pointer;
     ${({ disabled }) =>
