@@ -27,7 +27,7 @@ export interface UntouchedWarning {
 }
 
 export interface Name {
-    name: string;
+    name?: string;
 }
 
 export interface Type {

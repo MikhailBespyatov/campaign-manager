@@ -9,7 +9,8 @@ import {
     enterTitleLineHeight,
     searchImgDiameter,
     searchImgMarginLeft,
-    searchImgMarginRight
+    searchImgMarginRight,
+    wrapperMarginBottom
 } from 'components/filters/TagFilter/constants';
 import { SearchAbsoluteWrapper, SearchInput, Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
@@ -24,6 +25,31 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
+
+interface TagsFilterBlockProps {
+    values: string[];
+    removeValue: (value: string) => void;
+}
+
+export const TagsFilterBlock = ({ values, removeValue }: TagsFilterBlockProps) => {
+    if (!!values?.length) {
+        return (
+            <Row marginTop={wrapperMarginBottom}>
+                {values.map(i => (
+                    <ClosableTag
+                        key={i}
+                        closable
+                        marginBottom={closableTagMarginBottom}
+                        marginRight={secondaryPadding}
+                        onClose={() => removeValue(i)}
+                    >
+                        {i}
+                    </ClosableTag>
+                ))}
+            </Row>
+        );
+    } else return null;
+};
 
 interface Props extends Title, DefaultChecked {
     tagsValues?: string[];
@@ -112,19 +138,7 @@ export const TagFilter = ({
             <Wrapper>
                 <SearchInput placeholder={title} type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
             </Wrapper>
-            <Row>
-                {values.map(i => (
-                    <ClosableTag
-                        key={i}
-                        closable
-                        marginBottom={closableTagMarginBottom}
-                        marginRight={secondaryPadding}
-                        onClose={() => removeValue(i)}
-                    >
-                        {i}
-                    </ClosableTag>
-                ))}
-            </Row>
+            <TagsFilterBlock removeValue={removeValue} values={values} />
         </RelativeWrapper>
     );
 };

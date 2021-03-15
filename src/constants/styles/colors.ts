@@ -24,6 +24,9 @@ export const grey8 = '#e6e6e6';
 export const grey9 = '#8E8E8E';
 export const grey10 = '#c1c1c1';
 export const grey11 = '#f7f7f7';
+export const grey12 = '#fafafa';
+export const grey13 = '#ebebeb';
+export const grey14 = '#eeeeee';
 export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 

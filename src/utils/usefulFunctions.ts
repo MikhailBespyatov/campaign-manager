@@ -162,3 +162,19 @@ export const getStoriesTitle = (base: string) => base.split('/').slice(-3, -1).j
 export const getFlexBasisPercent = (parts: number = 2) => (100 / Math.round(parts)).toFixed(2) + '%';
 
 export const getTotalItems = (totalRecords: number = -1) => (totalRecords !== -1 ? totalRecords : 0);
+
+//TODO: add tests
+export const findElementInChildrenList = (targetElement: Element, searchElement: EventTarget | null) => {
+    let isInParentBlock = false;
+    const checkChildrenRef = (el: Element) => {
+        if (el.childElementCount === 0) return;
+        else
+            el.childNodes.forEach((el: any) => {
+                if (searchElement === el) isInParentBlock = true;
+                checkChildrenRef(el);
+            });
+    };
+
+    checkChildrenRef(targetElement);
+    return isInParentBlock;
+};

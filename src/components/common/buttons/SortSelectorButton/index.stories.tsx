@@ -29,7 +29,7 @@ export default {
     ]
 } as Meta;
 
-const Template: Story<Props> = args => <SortSelectorButton {...args} />;
+const Template: Story<Props> = args => <SortSelectorButton {...args}>Test</SortSelectorButton>;
 
 export const SortSelector = Template.bind({});
 SortSelector.args = {};
