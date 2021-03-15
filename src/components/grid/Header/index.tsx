@@ -9,8 +9,8 @@ import {
     headerLogoHeight
 } from 'components/grid/Header/constants';
 import { MerchantIdWrapper, StyledHeader, StyledSpan1, StyledSpan2 } from 'components/grid/Header/style';
-import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { LogOutPopover } from 'components/modals/LogOutPopover';
 import { siteName } from 'constants/global';
 import { noContentMessage } from 'constants/messages';
 import { grey10, padding, white } from 'constants/styles';
@@ -31,8 +31,6 @@ export const Header = () => {
     //MOCK
     const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
 
-    // const onClick = () => userEvents.logout();
-
     return (
         <StyledHeader>
             <Row alignCenter noWrap marginBottom="0" width="500px">
@@ -41,17 +39,19 @@ export const Header = () => {
             </Row>
             <Row alignCenter marginBottom="0">
                 <Column alignEnd marginRight={padding}>
-                    <Row alignCenter marginBottom="6px">
-                        <StyledSpan2 color={white}>{username ? username : noContentMessage}</StyledSpan2>
-                        <ClickableWrapper height="22px">
-                            <CustomImg
-                                alt="Arrow down"
-                                height={arrowDownHeight}
-                                src={arrowDown}
-                                width={arrowDownWidth}
-                            />
-                        </ClickableWrapper>
-                    </Row>
+                    <LogOutPopover>
+                        <Row alignCenter marginBottom="6px">
+                            <StyledSpan2 color={white}>{username ? username : noContentMessage}</StyledSpan2>
+                            <MarginWrapper margin="6px 10px">
+                                <CustomImg
+                                    alt="Arrow down"
+                                    height={arrowDownHeight}
+                                    src={arrowDown}
+                                    width={arrowDownWidth}
+                                />
+                            </MarginWrapper>
+                        </Row>
+                    </LogOutPopover>
                     <Row alignCenter>
                         <Span color={grey10}>Merchant ID:</Span>
                         <MerchantIdWrapper>
