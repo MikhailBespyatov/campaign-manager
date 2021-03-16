@@ -1092,12 +1092,12 @@ declare namespace WOM {
          * If true, allows to accept the video details at a later time.
          */
         isDelayedProcessing?: boolean;
-        primaryProduct?: ProductUpsertRequest;
         /**
-         * list1
-         * Optional list of secondary products.
+         * objectId
+         * example:
+         * 000000000000000000000000
          */
-        secondaryProducts?: ProductUpsertRequest[];
+        primaryProductId?: string; // objectId
         /**
          * string
          * The id of the facilitator on the calling network. Leave null if none specified.
@@ -2426,6 +2426,16 @@ declare namespace WOM {
          */
         organizationId?: string; // objectId
         /**
+         * string
+         * Title of the organization.
+         */
+        organizationTitle?: string;
+        /**
+         * string
+         * Unique key of the organization.
+         */
+        organizationKey?: string;
+        /**
          * dateTime
          */
         utcCreated?: string; // date-time
@@ -2765,12 +2775,6 @@ declare namespace WOM {
          */
         email: string;
         /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId?: string; // objectId
-        /**
          * string
          */
         confirmationToken: string;
@@ -3105,12 +3109,6 @@ declare namespace WOM {
          */
         email: string;
         /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId?: string; // objectId
-        /**
          * string
          */
         password: string;
@@ -3123,12 +3121,6 @@ declare namespace WOM {
          * string
          */
         email: string;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId?: string; // objectId
     }
     /**
      * organizationUserWantsValidationLinkEmailRequest
@@ -3138,12 +3130,6 @@ declare namespace WOM {
          * string
          */
         email: string;
-        /**
-         * objectId
-         * example:
-         * 000000000000000000000000
-         */
-        organizationId?: string; // objectId
     }
     /**
      * organizationsResponse
@@ -3529,43 +3515,6 @@ declare namespace WOM {
          * Extra tags, will not include other tags referenced here.
          */
         extraTags?: string /* string */[];
-    }
-    /**
-     * productUpsertRequest
-     */
-    export interface ProductUpsertRequest {
-        /**
-         * string
-         */
-        remoteId?: string;
-        /**
-         * hashSet1
-         */
-        upcCodes?: string[];
-        /**
-         * string
-         */
-        brandName?: string;
-        /**
-         * string
-         */
-        itemName?: string;
-        /**
-         * string
-         */
-        primaryCategory?: string;
-        /**
-         * hashSet1
-         */
-        secondaryCategories?: string[];
-        /**
-         * string
-         */
-        brandProductImageUrl?: string;
-        /**
-         * tags
-         */
-        tags?: string /* string */[];
     }
     /**
      * productsResponse

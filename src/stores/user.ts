@@ -7,7 +7,7 @@ import {
     notEntryAllowedMessage,
     wrongInviteCodeMessage
 } from 'constants/messages';
-import { parsePublicUrl, requestCodeTemplate } from 'constants/routes';
+import { requestCodePath } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import connectLocalStorage from 'effector-localstorage';
 import { ResetPasswordRequestProps } from 'pages/SignIn/PasswordReset/RequestCode/types';
@@ -16,10 +16,10 @@ import { AcceptInviteRequestProps } from 'pages/SignUp/AcceptInvite/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsEvents, organizationsStores } from 'stores/organizations';
-import { themeEvents, themeStores } from 'stores/theme';
+import { themeEvents } from 'stores/theme';
 import Swal from 'sweetalert2';
 import { Auth, AuthUserRequest, RegisterUserRequest } from 'types';
-import { getOrganizationId, getPublicTheme, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
+import { getOrganizationId, giveAccess, objectIsEmpty } from 'utils/usefulFunctions';
 
 const logout = createEvent();
 const setAuth = createEvent<Auth>();
@@ -30,11 +30,12 @@ const loadToken = createEffect({
     handler: async (values: AuthUserRequest) => {
         try {
             loadingEffects.updateLoading();
-            const prefix = themeStores.globalPrefixPublic.getState();
+
             const data = await API.user.authenticateUser({
-                ...values,
-                organizationId: themeStores.organizationIdForLogin.getState()
+                ...values
+                // organizationId: themeStores.organizationIdForLogin.getState()
             });
+            const prefix = data.user?.organizationTitle || '';
             loadingEffects.updateLoading();
 
             themeEvents.setGlobalPrefix(prefix);
@@ -111,13 +112,13 @@ const sendSecurityCode = createEffect({
         try {
             setEmail(values.email);
             loadingEffects.updateLoading();
-            await API.user.sendSecurityCode({
-                ...values,
-                organizationId: themeStores.organizationIdForLogin.getState()
+            const { isSuccess } = await API.user.sendSecurityCode({
+                ...values
+                // organizationId: themeStores.organizationIdForLogin.getState()
             });
             loadingEffects.updateLoading();
 
-            history.push(parsePublicUrl(themeStores.globalPrefixPublic.getState(), requestCodeTemplate));
+            isSuccess && history.push(requestCodePath);
         } catch {
             setEmail('');
             loadingEffects.updateLoading();
@@ -132,8 +133,9 @@ const acceptInvitationAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: AcceptInviteRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            const prefix = getPublicTheme() || '';
+            // const prefix = getPublicTheme() || '';
             const data = await API.user.acceptInvitation(values);
+            const prefix = data.user?.organizationTitle || '';
             //const { title } = await API.organizations.getItemById({ organizationId: data?.user?.organizationId || '' });
             loadingEffects.updateLoading();
 
@@ -156,11 +158,11 @@ const resetPasswordAndLoadToken = createEffect({
     handler: async ({ values, setErrors }: ResetPasswordRequestProps) => {
         try {
             loadingEffects.updateLoading();
-            const prefix = themeStores.globalPrefixPublic.getState();
+
             const data = await API.user.resetPasswordAndLoadToken({
-                ...values,
-                organizationId: themeStores.organizationIdForLogin.getState()
+                ...values
             });
+            const prefix = data.user?.organizationTitle || '';
             loadingEffects.updateLoading();
 
             setEmail('');
@@ -210,7 +212,7 @@ const user = createStore<WOM.UserJwtTokenResponse>(counterLocalStorage.init(0))
     .on(logout, () => {
         //localStorage.removeItem(userStorageName);
         localStorage.removeItem(themeStorageName);
-        themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
+        // themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
         return {};
     })
     .on(setToken, (_, token) => token);

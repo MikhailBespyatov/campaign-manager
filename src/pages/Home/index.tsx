@@ -3,7 +3,7 @@ import { WomLogoImg } from 'components/common/imageComponents/WomLogoImg';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { siteName } from 'constants/global';
-import { routes } from 'constants/routes';
+import { routes, signInPath } from 'constants/routes';
 import { white } from 'constants/styles';
 import { learnMoreHref } from 'pages/Home/constants';
 import { ExternalLink, Wrapper } from 'pages/Home/styles';
@@ -12,6 +12,7 @@ import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButt
 
 export const Home = () => {
     const goToRegistration = () => history.push(routes.signUp.index);
+    const goToLogin = () => history.push(signInPath);
 
     return (
         <Wrapper>
@@ -30,6 +31,10 @@ export const Home = () => {
                 </Span>
             </Row>
 
+            <Row marginBottom="20px">
+                {/* <Column marginRight={primaryPadding}> */}
+                <ManualRoundedButton onClick={goToLogin}>SIGN IN</ManualRoundedButton>
+            </Row>
             <Row marginBottom="20px">
                 {/* <Column marginRight={primaryPadding}> */}
                 <ManualRoundedButton onClick={goToRegistration}>SIGN UP</ManualRoundedButton>
