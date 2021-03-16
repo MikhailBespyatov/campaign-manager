@@ -1,14 +1,30 @@
-import React, { useEffect } from 'react';
-import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { TagFilter } from 'components/filters/TagFilter';
+import editButtonIcon from 'assets/img/edit_icon.svg';
+import moreButtonIcon from 'assets/img/gray_arrow.svg';
+import defaultChannelImg from 'assets/img/wom_logo.svg';
+import { ImgButton } from 'components/common/buttons/ImgButton';
 import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
-import { useHistory } from 'react-router';
-import { useStore } from 'effector-react';
-import { themeStores } from 'stores/theme';
-import { product, productsEdit, routes } from 'constants/routes';
+import { CopyableField } from 'components/common/features/CopyableField';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Select } from 'components/common/inputs/Select';
+import { Table } from 'components/common/tables/NewDesign/Table';
+import { Loader } from 'components/dynamic/Loader';
+import { TagFilter } from 'components/filters/TagFilter';
+import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { OverflowAutoLayout } from 'components/Layouts';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { EmptyLayout } from 'components/Layouts/EmptyLayout';
+import { PaginationLayout } from 'components/Layouts/PaginationLayout';
+import { product, productsEdit, routes } from 'constants/routes';
+import { blue5 } from 'constants/styles';
+import { useStore } from 'effector-react';
+import {
+    channelLogoDiameter,
+    copyButtonIconDiameter
+} from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
+import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
+import { editButtonDiameter } from 'pages/CampaignManager/Channels/constants';
 import {
     emptyProductSubtitle,
     emptyProductTitle,
@@ -18,27 +34,11 @@ import {
     productsContentPadding,
     productsSelectorMock
 } from 'pages/CampaignManager/Products/constants';
-import { PaginationLayout } from 'components/Layouts/PaginationLayout';
-import { Table } from 'components/common/tables/NewDesign/Table';
-import { editButtonDiameter } from 'pages/CampaignManager/Channels/constants';
-import { DataTable } from 'types';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import {
-    channelLogoDiameter,
-    copyButtonIconDiameter
-} from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
-import defaultChannelImg from 'assets/img/wom_logo.svg';
-import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
-import { ImgButton } from 'components/common/buttons/ImgButton';
-import { blue5 } from 'constants/styles';
-import editButtonIcon from 'assets/img/edit_icon.svg';
-import moreButtonIcon from 'assets/img/gray_arrow.svg';
-import { EmptyLayout } from 'components/Layouts/EmptyLayout';
-import { CopyableField } from 'components/common/features/CopyableField';
-import { OverflowAutoLayout } from 'components/Layouts';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
-import { Loader } from 'components/common/blocks/Loader';
+import { themeStores } from 'stores/theme';
+import { DataTable } from 'types';
 
 const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
 

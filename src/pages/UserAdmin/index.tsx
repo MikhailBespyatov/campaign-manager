@@ -1,8 +1,9 @@
-import { Loader } from 'components/common/Loader';
 import { UserAdminTable } from 'components/common/tables/UserAdminTable';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { InviteForm } from 'components/FormComponents/forms/InviteForm';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
@@ -10,7 +11,6 @@ import React, { useEffect } from 'react';
 import { loadingStores } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
 import { usersEffects, usersStores } from 'stores/users';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 
 export const UserAdmin = () => {
     const organizationId = useStore(organizationsStores.organizationId);

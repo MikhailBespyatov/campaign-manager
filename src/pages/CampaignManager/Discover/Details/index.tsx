@@ -4,7 +4,6 @@ import { ColumnBlockCell, RowBlockCell } from 'components/common/blocks/BlockCel
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { ColorPromptLine } from 'components/common/graphicComponents/ColorPromptLine';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import {
     EngagementSpan,
@@ -14,6 +13,7 @@ import {
     TableHeaderSpan
 } from 'components/common/typography/special';
 import { P } from 'components/common/typography/titles/P';
+import { Loader } from 'components/dynamic/Loader';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';

@@ -1,8 +1,8 @@
 import successImg from 'assets/img/big_success.svg';
 import womLogo from 'assets/img/wom_logo.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';

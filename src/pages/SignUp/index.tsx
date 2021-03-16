@@ -1,7 +1,7 @@
 import { InternalLink } from 'components/common/links/InternalLink';
 import { InternalTextLink } from 'components/common/links/InternalTextLink';
-import { Loader } from 'components/common/Loader';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbox';

@@ -6,9 +6,9 @@ import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButt
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { InternalLink } from 'components/common/links/InternalLink';
-import { Loader } from 'components/common/Loader';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
