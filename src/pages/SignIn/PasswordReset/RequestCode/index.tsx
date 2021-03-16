@@ -7,22 +7,29 @@ import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { parsePublicUrl, signInIndexTemplate } from 'constants/routes';
+import { resetPasswordPath, signInPath } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/RequestCode/constants';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { loadingStores } from 'stores/loading';
-import { themeStores } from 'stores/theme';
 import { userEffects, userStores } from 'stores/user';
+import { useHistory } from 'react-router';
 
 export const RequestCode = () => {
-    const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
+    // const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
     const loading = useStore(loadingStores.loading);
     const email = useStore(userStores.currentEmailForPasswordReset);
+    const history = useHistory();
 
     const sendNewCodeHandler = () => userEffects.sendSecurityCode({ values: { email: email } });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        !email && history.push(resetPasswordPath);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <AuthLayout>
@@ -58,11 +65,7 @@ export const RequestCode = () => {
                                             Send a new code ?
                                         </Span>
                                     </Row>
-                                    <InternalLink
-                                        fontSize="16px"
-                                        lineHeight="20px"
-                                        to={parsePublicUrl(globalPrefixPublic, signInIndexTemplate)}
-                                    >
+                                    <InternalLink fontSize="16px" lineHeight="20px" to={signInPath}>
                                         Enter as User
                                     </InternalLink>
                                 </Column>

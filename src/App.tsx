@@ -31,13 +31,12 @@ import { CreateWallet } from 'pages/SignUp/CreateWallet';
 import { Payment as CreateWalletPayment } from 'pages/SignUp/CreateWallet/Payment';
 import { Success as CreateWalletSuccess } from 'pages/SignUp/CreateWallet/Success';
 import { UserAdmin } from 'pages/UserAdmin';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Redirect, Router, Switch } from 'react-router';
 import { CampaignManagerRoute } from 'routes/CampaignManagerRoute';
 import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
-import { themeEvents, themeStores } from 'stores/theme';
-import { userStores } from 'stores/user';
+import { themeStores } from 'stores/theme';
 import styled, { ThemeProvider } from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -50,16 +49,16 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
-    const { access } = useStore(userStores.auth);
+    // const { access } = useStore(userStores.auth);
     const theme = useStore(themeStores.theme);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     //const globalPrefixPublicUrl = useStore(themeStores.globalPrefixPublicUrl);
 
-    useEffect(() => {
-        access === -1 && themeEvents.injectGlobalPrefixPublic();
-        //console.log('yes');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     access === -1 && themeEvents.injectGlobalPrefixPublic();
+    //     //console.log('yes');
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     // useEffect(() => {
     //     themeEvents.injectGlobalPrefixPublic();

@@ -2,7 +2,8 @@ import { CampaignRoutesType } from 'types';
 
 export const globalPrefix = '';
 export const publicPrefix = '/public/';
-const publicPrefixUrl = `${publicPrefix}:prefix`;
+const publicPrefixUrl = `${publicPrefix}wom`;
+const publicDynamicPrefixUrl = `${publicPrefix}:prefix`;
 
 export const parsePublicUrl = (prefix = 'wom', urlTemplate: string) => publicPrefix + prefix + urlTemplate;
 
@@ -41,8 +42,8 @@ export const staticRoutes = {
     signUp: {
         index: signUpPrefix,
         createAccount: signUpPrefix,
-        acceptInvite: `${publicPrefixUrl}${acceptInviteTemplate}`,
-        acceptOrgInvite: `${publicPrefixUrl}${acceptOrgInviteTemplate}`,
+        acceptInvite: `${publicDynamicPrefixUrl}${acceptInviteTemplate}`,
+        acceptOrgInvite: `${publicDynamicPrefixUrl}${acceptOrgInviteTemplate}`,
         createWallet: `${signUpPrefix}${walletPrefix}`,
         payment: `${signUpPrefix}${walletPrefix}/payment`,
         success: `${signUpPrefix}${walletPrefix}/success`
@@ -119,6 +120,8 @@ export const routes = {
 export const acceptOrgInvitePath = routes.signUp.acceptOrgInvite;
 export const acceptInvitePath = routes.signUp.acceptInvite;
 export const signInPath = routes.signIn.index;
+export const resetPasswordPath = routes.signIn.passwordReset;
+export const requestCodePath = routes.signIn.requestCode;
 
 export const routesArray = [
     {

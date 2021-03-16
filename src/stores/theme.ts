@@ -1,23 +1,22 @@
 import { companyNames, defaultTheme, themes } from 'constants/defaults';
 import { themeStorageName } from 'constants/global';
 import { createEvent, createStore } from 'effector';
-import { API } from 'services';
-import { organizationsStores } from 'stores/organizations';
-import { getPublicTheme } from 'utils/usefulFunctions';
 import { ThemeProps } from 'types';
 
 export interface GlobalPrefix {
     prefix?: string;
 }
-
-const setOrganizationIdForLogin = createEvent<string>();
-const organizationIdForLogin = createStore('').on(setOrganizationIdForLogin, (_, newState) => newState);
+//
+// const setOrganizationIdForLogin = createEvent<string>();
+// const organizationIdForLogin = createStore('').on(setOrganizationIdForLogin, (_, newState) => newState);
 //organizationIdForLogin.watch(state => console.log(state));
 
 const setTheme = createEvent<string>();
 const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, (_, themeName) =>
     companyNames.includes(themeName) ? themes[themeName] : themes['default']
 );
+
+// organizationIdForLogin.watch(state => console.log(state));
 
 // const injectPublicTheme = createEvent();
 // const setPublicTheme = createEvent<string>();
@@ -29,22 +28,30 @@ const theme = createStore<ThemeProps>(defaultTheme).on(setTheme, (_, themeName) 
 // const setGlobalPrefixPublicUrl = createEvent<string>();
 // const globalPrefixPublicUrl = createStore<string>('').on(setGlobalPrefixPublicUrl, (_, newState) => newState);
 
-const injectGlobalPrefixPublic = createEvent();
-const setGlobalPublicPrefix = createEvent<string>();
-const globalPrefixPublic = createStore(getPublicTheme())
-    .on(injectGlobalPrefixPublic, () => getPublicTheme())
-    .on(setGlobalPublicPrefix, (_, newState) => newState);
-globalPrefixPublic.watch(injectGlobalPrefixPublic, async state => {
-    try {
-        setTheme(state);
-        const { organizationId } = await API.organizations.getIdentity({ organizationKey: state });
-        organizationId && setOrganizationIdForLogin(organizationId);
-    } catch {}
-});
-globalPrefixPublic.watch(setGlobalPublicPrefix, state => {
-    setTheme(state);
-    setOrganizationIdForLogin(organizationsStores.organizationId.getState());
-});
+// const injectGlobalPrefixPublic = createEvent();
+// const globalPrefixPublic = createStore(getPublicTheme())
+//     .on(injectGlobalPrefixPublic, () => getPublicTheme())
+//     .on(setGlobalPublicPrefix, (_, newState) => newState);
+// globalPrefixPublic.watch(injectGlobalPrefixPublic, async state => {
+//     try {
+//         setTheme(state);
+//         const { organizationId } = await API.organizations.getIdentity({ organizationKey: state });
+//         organizationId && setOrganizationIdForLogin(organizationId);
+//     } catch {}
+// });
+
+// const setGlobalPublicPrefix = createEvent<string>();
+// const globalPrefixPublic = restore(setGlobalPublicPrefix, '');
+//
+// forward({
+//     from: setGlobalPublicPrefix,
+//     to: setTheme
+// });
+
+// globalPrefixPublic.watch(setGlobalPublicPrefix, state => {
+//     setTheme(state);
+//     // setOrganizationIdForLogin(organizationsStores.organizationId.getState());
+// });
 
 const setGlobalPrefixUrl = createEvent<string>();
 const globalPrefixUrl = createStore<string>('').on(setGlobalPrefixUrl, (_, newState) => newState);
@@ -58,15 +65,15 @@ globalPrefix.watch(state => {
     setGlobalPrefixUrl(state?.prefix ? '/' + state.prefix : '');
 });
 
-const themeEvents = { setTheme, setGlobalPrefix, injectGlobalPrefixPublic, setGlobalPublicPrefix };
+const themeEvents = { setTheme, setGlobalPrefix };
 const themeEffects = {};
 const themeStores = {
     theme,
     // publicTheme,
     globalPrefix,
-    globalPrefixUrl,
-    organizationIdForLogin,
-    globalPrefixPublic
+    globalPrefixUrl
+    // organizationIdForLogin,
+    // globalPrefixPublic
     // globalPrefixPublicUrl
 };
 
