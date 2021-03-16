@@ -1,5 +1,5 @@
 import { FormSignUpLink } from 'components/common/links/FormSignUpLink';
-import { Loader } from 'components/common/Loader';
+import { Loader } from 'components/dynamic/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';

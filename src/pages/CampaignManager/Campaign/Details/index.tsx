@@ -1,12 +1,17 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
+import { CampaignItem } from 'components/common/features/CampaignItem';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
+import { HistoricalSetSelect } from 'components/common/inputs/HistoricalSetSelect';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
-import { Loader } from 'components/common/Loader';
+import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { CampaignStatusLayout } from 'components/Layouts/CampaignStatusLayout';
+import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
 import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
 import { noDataAvailableMessage } from 'constants/messages';
 import { grey4, primaryColor, primaryPadding } from 'constants/styles';
@@ -16,13 +21,13 @@ import {
     areaCommonStyle,
     borderBlockWidth,
     colors,
-    graphicOption,
-    growSpread,
     engagementName1,
     engagementName2,
     engagementName3,
     engagementName4,
     engagementName5,
+    graphicOption,
+    growSpread,
     pickerMarginTop
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
@@ -30,12 +35,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
 import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
-import { Span } from 'components/common/typography/Span';
-import { CampaignStatusLayout } from 'components/Layouts/CampaignStatusLayout';
-import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
-import { CampaignItem } from 'components/common/features/CampaignItem';
 import { getCampaignStatus, getOrganizationId } from 'utils/usefulFunctions';
-import { HistoricalSetSelect } from 'components/common/inputs/HistoricalSetSelect';
 
 interface ParamsProps {
     campaignId?: string;

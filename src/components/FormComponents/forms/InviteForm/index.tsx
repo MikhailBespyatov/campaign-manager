@@ -1,4 +1,5 @@
-import { Loader } from 'components/common/Loader';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { Loader } from 'components/dynamic/Loader';
 import {
     defaultPermissionsValue,
     initialValues,
@@ -15,9 +16,8 @@ import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { getOrganizationId } from 'utils/usefulFunctions';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { themeStores } from 'stores/theme';
+import { getOrganizationId } from 'utils/usefulFunctions';
 
 export const InviteForm = () => {
     const loading = useStore(loadingStores.loading);

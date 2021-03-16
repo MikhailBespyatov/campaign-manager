@@ -1,4 +1,4 @@
-import { Loader } from 'components/common/Loader';
+import { Loader } from 'components/dynamic/Loader';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';

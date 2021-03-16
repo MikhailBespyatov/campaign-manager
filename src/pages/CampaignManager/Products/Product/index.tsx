@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react';
-import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { ModifyingLayout } from 'components/Layouts/ModifyingLayout';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { productContentMarginBottom, productContentPadding } from './constants';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { ProductThumbnail } from '../styles';
 import WOMLogo from 'assets/img/wom_logo.svg';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
-import { useParams } from 'react-router';
-import { Loader } from 'components/common/Loader';
+import { Loader } from 'components/dynamic/Loader';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
-import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
 import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilterLayout';
+import { ModifyingLayout } from 'components/Layouts/ModifyingLayout';
+import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
+import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
-import { defaultPage } from 'constants/defaults';
+import { ProductThumbnail } from '../styles';
+import { productContentMarginBottom, productContentPadding } from './constants';
 
 export const Product = () => {
     const { productId } = useParams();

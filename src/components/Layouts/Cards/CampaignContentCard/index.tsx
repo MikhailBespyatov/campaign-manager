@@ -1,7 +1,7 @@
-import { Loader } from 'components/common/Loader';
 import { AddableTag } from 'components/common/tags/AddableTag';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { errorColor, successColor } from 'constants/styles';
 import { useStore } from 'effector-react';

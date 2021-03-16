@@ -1,6 +1,5 @@
 import deleteImg from 'assets/img/remove_action.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { Loader } from 'components/common/Loader';
 import { Table } from 'components/common/tables/Table';
 import {
     companyImgBorderRadius,
@@ -15,6 +14,7 @@ import {
     TableRow
 } from 'components/common/tables/UserAdminTable/styles';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { noContentMessage } from 'constants/messages';
 import { useStore } from 'effector-react';

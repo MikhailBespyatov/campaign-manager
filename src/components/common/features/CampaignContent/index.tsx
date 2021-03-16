@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { Status } from 'types';
+import { BorderBlock } from 'components/common/blocks/BorderBlock';
+import { CampaignItem } from 'components/common/features/CampaignItem';
+import { itemHorizontalPadding, itemVerticalPadding } from 'components/common/features/CampaignItem/constants';
+import { Loader } from 'components/dynamic/Loader';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
+import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
 import { useStore } from 'effector-react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router';
 import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
+import { Status } from 'types';
 import { getCampaignStatus, getOrganizationId } from 'utils/usefulFunctions';
-import { Loader } from 'components/common/Loader';
-import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
-import { CampaignItem } from 'components/common/features/CampaignItem';
-import { useParams } from 'react-router';
-import { BorderBlock } from 'components/common/blocks/BorderBlock';
-import { itemHorizontalPadding, itemVerticalPadding } from 'components/common/features/CampaignItem/constants';
 
 export const CampaignContent = () => {
     const { items } = useStore(campaignsStores.items);
@@ -28,7 +28,7 @@ export const CampaignContent = () => {
     return (
         <Column width="100%">
             {loading ? (
-                <Loader />
+                <Loader size="small" />
             ) : statusRoute.status === 'draft' ? (
                 draftCampaign.length ? (
                     draftCampaign.map(({ id, budget, campaignName, videos }) => (
