@@ -11,8 +11,6 @@ import { white } from 'constants/styles';
 import styled from 'styled-components';
 
 export const PopoverAbsoluteWrapper = styled(AbsoluteWrapper)`
-    top: 26px;
-    left: 100px;
     width: ${popoverWidth};
     height: ${popoverHeight};
     padding-right: 15px;
@@ -24,8 +22,6 @@ export const PopoverAbsoluteWrapper = styled(AbsoluteWrapper)`
 `;
 
 export const PopoverArrow = styled(AbsoluteWrapper)`
-    top: 21px;
-    left: 165px;
     width: ${popoverArrowDiameter};
     height: ${popoverArrowDiameter};
     z-index: 11;

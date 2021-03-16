@@ -21,7 +21,7 @@ export const Password = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
-                        <Form subtitle="Password Reset" onSubmit={handleSubmit}>
+                        <Form subtitle="Password Reset" title="Please enter your new password" onSubmit={handleSubmit}>
                             <TextInput
                                 label="New Password"
                                 name="password"

@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { BackgroundColor } from 'types';
-import { ellipsisMixin, white } from 'constants/styles';
 import { Span } from 'components/common/typography/Span';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { ellipsisMixin, white } from 'constants/styles';
+import styled from 'styled-components';
+import { BackgroundColor } from 'types';
 
 export const CopyableFieldWrapper = styled(ContentWrapper)<BackgroundColor>`
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
+    width: fit-content;
     align-items: center;
     justify-content: space-between;
     background-color: ${({ backgroundColor }) => backgroundColor || white};
