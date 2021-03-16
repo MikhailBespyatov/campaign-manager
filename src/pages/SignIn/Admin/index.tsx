@@ -34,7 +34,7 @@ export const Admin = () => {
                                 <Column>
                                     <Row>
                                         <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.index}>
-                                            Enter as User
+                                            Go back to Login page
                                         </InternalLink>
                                     </Row>
                                     <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.passwordReset}>

@@ -4,6 +4,7 @@ import { userEffects, userEvents, userStores } from 'stores/user';
 import { AuthUserRequest } from 'types';
 import * as Yup from 'yup';
 
+export const formTitle = 'Hello, please enter your email and password';
 export const linkMarginTop = '0';
 export const linkMarginBottom = '57px';
 

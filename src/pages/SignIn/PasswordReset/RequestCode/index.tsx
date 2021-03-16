@@ -13,9 +13,9 @@ import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/RequestCode/constants';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { loadingStores } from 'stores/loading';
 import { userEffects, userStores } from 'stores/user';
-import { useHistory } from 'react-router';
 
 export const RequestCode = () => {
     // const globalPrefixPublic = useStore(themeStores.globalPrefixPublic);
@@ -33,15 +33,12 @@ export const RequestCode = () => {
 
     return (
         <AuthLayout>
-            <Formik
-                initialValues={{ ...initialValues, email: email }}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-            >
+            <Formik initialValues={{ ...initialValues, email }} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
                         <Form
-                            subtitle="Enter the security code we sent you and your new password"
+                            subtitle="Password Reset"
+                            title="Enter the security code we sent you and your new password"
                             onSubmit={handleSubmit}
                         >
                             <TextInput disabled label="Email" name="email" placeholder="Type your email" />
@@ -66,7 +63,7 @@ export const RequestCode = () => {
                                         </Span>
                                     </Row>
                                     <InternalLink fontSize="16px" lineHeight="20px" to={signInPath}>
-                                        Enter as User
+                                        Go back to Login page
                                     </InternalLink>
                                 </Column>
                             </MarginWrapper>

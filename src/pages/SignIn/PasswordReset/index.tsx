@@ -28,11 +28,15 @@ export const PasswordReset = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
-                        <Form subtitle="Password Reset" onSubmit={handleSubmit}>
+                        <Form
+                            subtitle="Password Reset"
+                            title="Please enter your email to reset password"
+                            onSubmit={handleSubmit}
+                        >
                             <TextInput name="email" type="email" />
                             <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
                                 <InternalLink color={formGrey5} fontSize="16px" lineHeight="20px" to={signInPath}>
-                                    Enter as user
+                                    Go back to Login page
                                     {/* Or <HighlightSpan>send security code</HighlightSpan> */}
                                 </InternalLink>
                             </MarginWrapper>

@@ -1,11 +1,11 @@
 import history from 'BrowserHistory';
+import { asyncErrorMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { CreateOrganizationRequestProps } from 'pages/SignUp/types';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import Swal from 'sweetalert2';
-import { errorHandler } from 'utils/servises';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -30,23 +30,31 @@ const createOrganization = createEffect({
                 text: 'Please check your email - you will receive the email with instructions',
                 willClose: () => history.push(routes.wrongPath)
             });
-        } catch (ex) {
+        } catch ({ status, data }) {
             console.log('catch block');
             loadingEffects.updateLoading();
-            errorHandler(
-                [
-                    {
-                        status: 409,
-                        text: 'Organization name exists or is empty, you must supply a unique value.',
-                        callback: () => {
-                            setErrors({
-                                companyName: 'Organization already exists'
-                            });
-                        }
-                    }
-                ],
-                ex.status
-            );
+
+            const errorMessage = data?.message || asyncErrorMessage;
+
+            Swal.fire('Error!', errorMessage, 'error');
+            setErrors({
+                companyName: errorMessage
+            });
+
+            //errorHandler(
+            //     [
+            //         {
+            //             status: 409,
+            //             text: 'Organization name exists or is empty, you must supply a unique value.',
+            //             callback: () => {
+            //                 setErrors({
+            //                     companyName: 'Organization already exists'
+            //                 });
+            //             }
+            //         }
+            //     ],
+            //     status
+            // );
         }
     }
 });
