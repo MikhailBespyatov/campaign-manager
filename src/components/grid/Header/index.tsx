@@ -20,6 +20,7 @@ import { themeStores } from 'stores/theme';
 //import { userEvents, userStores } from 'stores/user';
 import { userStores } from 'stores/user';
 import { MarginWrapper } from '../wrappers/MarginWrapper';
+import { Version } from 'components/common/dividers/Version';
 
 export const Header = () => {
     const { user } = useStore(userStores.user);
@@ -33,6 +34,7 @@ export const Header = () => {
 
     return (
         <StyledHeader>
+            <Version />
             <Row alignCenter noWrap marginBottom="0" width="500px">
                 <CustomImg height={headerLogoHeight} src={logo} />
                 <StyledSpan1 color={white}>{siteName}</StyledSpan1>
