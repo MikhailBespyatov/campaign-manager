@@ -1,4 +1,4 @@
-import { blue, flexCenter } from 'constants/styles';
+import { blue, flexCenter, white } from 'constants/styles';
 import {
     externalLinkBorderRadius,
     externalLinkHeight,
@@ -18,7 +18,9 @@ export const ExternalLink = styled.a`
     ${flexCenter};
     //width: ${externalLinkWidth};
     height: ${externalLinkHeight};
-    border-radius: ${externalLinkBorderRadius};
-    background: ${blue};
+    /* border-radius: ${externalLinkBorderRadius};
+    background: ${blue}; */
     padding: 0 ${externalLinkHorizontalPadding};
+    text-decoration: underline;
+    color: ${white};
 `;

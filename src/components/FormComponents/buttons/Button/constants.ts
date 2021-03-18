@@ -1,10 +1,10 @@
 import { formGrey3 } from 'constants/styles';
 
 export const buttonWidth = '282px';
-export const buttonHeight = '57px';
+export const buttonHeight = '48px';
 export const buttonBorderRadius = '32px';
 export const buttonDefaultBackground = formGrey3;
-export const buttonFontWeight = 'bold';
+export const buttonFontWeight = '400';
 export const buttonFontSize = '14px';
 export const buttonLineHeight = '21px';
 export const buttonColor = 'rgba(0, 0, 0, 0.75)';

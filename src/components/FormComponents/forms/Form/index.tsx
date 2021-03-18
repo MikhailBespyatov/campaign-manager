@@ -15,7 +15,7 @@ interface Props extends Title, WithSrc {
 export const Form: FC<Props> = ({
     children,
     title = 'Please fill in the form',
-    subtitle = 'To discover & manage WOM Content',
+    subtitle,
     onSubmit = Noop,
     src,
     subSubtitle
@@ -27,8 +27,8 @@ export const Form: FC<Props> = ({
     return (
         <Wrapper>
             <CustomImg height={logoDiameter} src={logoSrc} />
-            <H1Form>{title}</H1Form>
-            <PForm>{subtitle}</PForm>
+            <H1Form marginBottom={(!subtitle && '30px') || ''}>{title}</H1Form>
+            {/* <PForm>{subtitle}</PForm> */}
             {subSubtitle && <PForm>{subSubtitle}</PForm>}
             <FormWrapper /*autoComplete="chrome-off"*/ onSubmit={onSubmit}>{children}</FormWrapper>
         </Wrapper>

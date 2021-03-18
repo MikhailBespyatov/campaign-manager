@@ -1,16 +1,11 @@
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { H1 } from 'components/common/typography/titles/H';
 import { P } from 'components/common/typography/titles/P';
-import {
-    formBorderRadius,
-    formHorizontalPadding,
-    formPaddingBottom,
-    formVerticalPadding,
-    formWidth
-} from 'components/FormComponents/forms/Form/constants';
+import { formBorderRadius, formHorizontalPadding, formWidth } from 'components/FormComponents/forms/Form/constants';
 import { formPrimaryColor, white } from 'constants/styles';
 import { flexCenter } from 'constants/styles/mixins';
 import styled from 'styled-components';
+import { MarginBottom } from 'types';
 
 export const Wrapper = styled.div`
     ${flexCenter};
@@ -20,8 +15,7 @@ export const Wrapper = styled.div`
     border-radius: ${formBorderRadius};
     background-color: ${white};
     margin: auto;
-    padding: ${formVerticalPadding} ${formHorizontalPadding};
-    padding-bottom: ${formPaddingBottom};
+    padding: 55px ${formHorizontalPadding} 38px;
     z-index: 2;
 `;
 
@@ -33,14 +27,15 @@ export const FormWrapper = styled.form`
 
 export const CustomImgForm = styled(CustomImg)``;
 
-export const H1Form = styled(H1)`
+export const H1Form = styled(H1)<MarginBottom>`
     font-weight: bold;
     font-size: 32px;
     line-height: 39px;
     color: ${formPrimaryColor};
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
+    margin-bottom: ${({ marginBottom }) => marginBottom || '20px'};
 `;
 
 export const PForm = styled(P)`

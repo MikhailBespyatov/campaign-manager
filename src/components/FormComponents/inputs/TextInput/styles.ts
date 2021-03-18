@@ -33,6 +33,7 @@ import { Padding, WithError } from 'types';
 
 export const Wrapper = styled.div`
     width: 100%;
+    margin-top: 55px;
 `;
 
 export const StyledInput = styled.input`
@@ -88,11 +89,12 @@ export const TextFieldForm = styled.input<Padding>`
     outline: none;
     appearance: none;
     width: 100%;
-    height: 70px;
-    padding-left: ${({ paddingLeft }) => paddingLeft || '28px'};
+    height: 30px;
+    padding-left: ${({ paddingLeft }) => paddingLeft || '0'};
     ${formTextStyleMixin};
-    border: 1px solid #c9c9c9;
-    border-radius: 8px;
+    border: none;
+    border-bottom: 2px solid #d3d3d3;
+    /*border-radius: 8px; */
 `;
 
 export const TextFieldStyled = withStyles({

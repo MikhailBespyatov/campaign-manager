@@ -1,4 +1,5 @@
 import history from 'BrowserHistory';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { WomLogoImg } from 'components/common/imageComponents/WomLogoImg';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
@@ -8,7 +9,6 @@ import { white } from 'constants/styles';
 import { learnMoreHref } from 'pages/Home/constants';
 import { ExternalLink, Wrapper } from 'pages/Home/styles';
 import React from 'react';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 export const Home = () => {
     const goToRegistration = () => history.push(routes.signUp.index);
@@ -16,32 +16,38 @@ export const Home = () => {
 
     return (
         <Wrapper>
-            <Row marginBottom="52px">
-                <WomLogoImg height="125px" />
+            <Row marginBottom="50px">
+                <WomLogoImg height="93px" />
             </Row>
-            <Row marginBottom="47px">
-                <Span color={white} fontSize="62px" fontWeight="700" lineHeight="62px">
+            <Row marginBottom="25px">
+                <Span color={white} fontSize="36px" fontWeight="600" lineHeight="44px">
                     {siteName}
                 </Span>
             </Row>
-            <Row marginBottom="52px" maxWidth="900px">
-                <Span color={white} fontSize="26px" fontWeight="500" lineHeight="42px">
-                    This is the heart of WOM system, allowing you to use your brand champions to spread the
-                    word-of-mouth recommendations
+            <Row marginBottom="134px" maxWidth="761px">
+                <Span alignCenter color={white} fontSize="20px" fontWeight="500" lineHeight="32px">
+                    Welcome to your complete toolkit for finding, tracking and rewarding word-of-mouth recommendations
+                    from real brand fans. Let’s get started.
+                    {/* This is the heart of WOM system, allowing you to use your brand champions to spread the
+                    word-of-mouth recommendations */}
                 </Span>
             </Row>
 
-            <Row marginBottom="20px">
+            <Row marginBottom="30px">
                 {/* <Column marginRight={primaryPadding}> */}
-                <ManualRoundedButton onClick={goToLogin}>SIGN IN</ManualRoundedButton>
+                <ManualRoundedButton minWidth="282px" onClick={goToLogin}>
+                    LOG IN
+                </ManualRoundedButton>
             </Row>
-            <Row marginBottom="20px">
+            <Row marginBottom="45px">
                 {/* <Column marginRight={primaryPadding}> */}
-                <ManualRoundedButton onClick={goToRegistration}>SIGN UP</ManualRoundedButton>
+                <ManualRoundedButton minWidth="282px" onClick={goToRegistration}>
+                    SIGN UP
+                </ManualRoundedButton>
             </Row>
             <ExternalLink href={learnMoreHref} target="_blank">
-                <Span color={white} fontSize="14px" lineHeight="14px">
-                    learn more
+                <Span color={white} fontSize="16px" fontWeight="400" lineHeight="14px">
+                    Learn More
                 </Span>
             </ExternalLink>
         </Wrapper>

@@ -1,9 +1,7 @@
 import { Span } from 'components/common/typography/Span';
-import { errorSpanHeight, errorSpanMarginBottom } from 'components/FormComponents/inputs/TextInput/constants';
+import { errorSpanMarginBottom } from 'components/FormComponents/inputs/TextInput/constants';
 import { TextFieldForm, Wrapper } from 'components/FormComponents/inputs/TextInput/styles';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { requiredFieldMessage } from 'constants/messages';
 import { errorColor, formGrey6 } from 'constants/styles';
 import { useField } from 'formik';
 import React, { ChangeEvent, FC } from 'react';
@@ -18,7 +16,7 @@ interface Props extends Disabled, Placeholder, Type, Label, UntouchedWarning {
 interface ErrorSpanProps extends Touched {}
 
 export const ErrorSpan: FC<ErrorSpanProps> = ({ children, touched }) => (
-    <Row marginBottom={errorSpanMarginBottom} marginTop="5px" minHeight={errorSpanHeight}>
+    <Row marginBottom={errorSpanMarginBottom} marginTop="5px" /*minHeight={errorSpanHeight}*/>
         <Span color={!touched ? formGrey6 : errorColor} fontSize="15px" fontWeight="400" lineHeight="18px">
             {children}
         </Span>
@@ -27,7 +25,7 @@ export const ErrorSpan: FC<ErrorSpanProps> = ({ children, touched }) => (
 
 export const TextInput = ({
     placeholder = 'Enter your email address',
-    label = 'Email',
+    label = 'EMAIL ADDRESS',
     disabled,
     type = 'text',
     name,
@@ -51,12 +49,12 @@ export const TextInput = ({
             {/*    type={type}*/}
             {/*    onChange={onInputChange}*/}
             {/*/>*/}
-            <MarginWrapper marginBottom="8px">
-                <Span fontSize="15px" fontWeight="400" lineHeight="19px">
-                    {label}
-                    {required && `*`}
-                </Span>
-            </MarginWrapper>
+            {/* <MarginWrapper marginBottom="8px"> */}
+            <Span fontSize="12px" fontWeight="500" lineHeight="15px">
+                {label}
+                {required && `*`}
+            </Span>
+            {/* </MarginWrapper> */}
             <TextFieldForm
                 disabled={disabled}
                 {...field}
@@ -65,7 +63,8 @@ export const TextInput = ({
                 type={type}
                 onChange={onInputChange}
             />
-            <ErrorSpan touched={touched}>{!touched ? untouchedWarning || requiredFieldMessage : error}</ErrorSpan>
+            <ErrorSpan touched={touched}>{(!touched && untouchedWarning) || error}</ErrorSpan>
+            {/* <ErrorSpan touched={touched}>{!touched ? untouchedWarning || requiredFieldMessage : error}</ErrorSpan> */}
         </Wrapper>
     );
 };

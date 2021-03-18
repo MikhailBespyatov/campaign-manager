@@ -19,5 +19,5 @@ export const iconDiameter = '10px';
 export const absoluteIconRight = `calc((${inputWrapperHeight} - ${iconDiameter}) / 2)`;
 export const absoluteIconTop = `calc((${inputWrapperHeight} - ${iconDiameter}) / 2)`;
 
-export const errorSpanHeight = '41px';
+export const errorSpanHeight = '55px';
 export const errorSpanMarginBottom = '0';

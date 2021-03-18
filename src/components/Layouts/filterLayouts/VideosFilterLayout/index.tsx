@@ -1,21 +1,19 @@
+import { Span } from 'components/common/typography/Span';
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
-import React, { FC, useEffect, useState } from 'react';
-import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
-import { Loading, TotalRecords } from 'types';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import {
     videoSectionMarginBottom,
     videoStepPadding
 } from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
-import { Span } from 'components/common/typography/Span';
+import React, { FC, useEffect } from 'react';
+import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
+import { Loading, TotalRecords } from 'types';
 import { getTotalItems } from 'utils/usefulFunctions';
-import { SelectorFilter } from 'components/common/inputs/SelectorFilter';
-import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
@@ -63,29 +61,29 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
     }, []);
 
     //Mock
-    const valuesLanguage = ['Russian', 'Chinese', 'Latin', 'Spanish', 'French'];
-    const [activeLanguage, setActiveLanguage] = useState<string[]>([]);
+    // const valuesLanguage = ['Russian', 'Chinese', 'Latin', 'Spanish', 'French'];
+    // const [activeLanguage, setActiveLanguage] = useState<string[]>([]);
 
-    const onChangeLanguage = (language: string) =>
-        activeLanguage.includes(language) ? setActiveLanguage([]) : setActiveLanguage([language]);
+    // const onChangeLanguage = (language: string) =>
+    //     activeLanguage.includes(language) ? setActiveLanguage([]) : setActiveLanguage([language]);
 
-    const valuesRegion = [
-        'North America',
-        'Africa',
-        'Eastern Europe',
-        'Asia',
-        'Western Europe',
-        'Oceania',
-        'Middle East',
-        'Unknown'
-    ];
+    // const valuesRegion = [
+    //     'North America',
+    //     'Africa',
+    //     'Eastern Europe',
+    //     'Asia',
+    //     'Western Europe',
+    //     'Oceania',
+    //     'Middle East',
+    //     'Unknown'
+    // ];
 
-    const [checkedRegion, setCheckedRegion] = useState<string[]>([]);
+    // const [checkedRegion, setCheckedRegion] = useState<string[]>([]);
 
-    const onChangeRegion = (region: string) =>
-        checkedRegion.includes(region)
-            ? setCheckedRegion(regions => regions.filter(item => item !== region))
-            : setCheckedRegion(regions => [...regions, region]);
+    // const onChangeRegion = (region: string) =>
+    //     checkedRegion.includes(region)
+    //         ? setCheckedRegion(regions => regions.filter(item => item !== region))
+    //         : setCheckedRegion(regions => [...regions, region]);
 
     return (
         <>
@@ -99,7 +97,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                                 onChange={onTagsFilterChange}
                             />
                         </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">
+                        {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">
                             <SelectorFilter
                                 checkedValues={activeLanguage}
                                 title="Language"
@@ -116,8 +114,8 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                                 view="columns"
                                 onChange={onChangeRegion}
                             />
-                        </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
+                        </FlexGrow> */}
+                        {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
                             <SortSelectorButton>Likes</SortSelectorButton>
                         </FlexGrow>
                         <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
@@ -125,7 +123,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                         </FlexGrow>
                         <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
                             <SortSelectorButton>Data Added</SortSelectorButton>
-                        </FlexGrow>
+                        </FlexGrow> */}
                     </Section>
                 </ContentWrapper>
             </Section>

@@ -24,8 +24,10 @@ export const InternalLink = styled(Link)<SpanProps>`
     ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
     ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : `text-decoration: underline`)};
-    margin-right: ${secondaryPadding};
-    margin-bottom: ${secondaryPadding};
+    margin-right: ${({ marginRight }) => marginRight || secondaryPadding};
+    margin-bottom: ${({ marginBottom }) => marginBottom || secondaryPadding};
+    margin-left: ${({ marginLeft }) => marginLeft || secondaryPadding};
+
     &:hover {
         opacity: 0.6;
     }
