@@ -1,6 +1,5 @@
 import {
     buttonBorderRadius,
-    buttonColor,
     buttonFontSize,
     buttonFontWeight,
     buttonHeight,
@@ -13,7 +12,8 @@ import {
     buttonActiveMixin,
     buttonDisabledMixin,
     disableDefaultButtonStyleMixin,
-    transitionTime
+    transitionTime,
+    white
 } from 'constants/styles';
 import styled from 'styled-components';
 import { Background } from 'types';
@@ -27,7 +27,7 @@ export const Button = styled.button<Background>`
     font-weight: ${buttonFontWeight};
     font-size: ${buttonFontSize};
     line-height: ${buttonLineHeight};
-    color: ${buttonColor};
+    color: ${white};
     text-transform: uppercase;
     margin-bottom: ${buttonMarginBottom};
     transition: ${transitionTime};
