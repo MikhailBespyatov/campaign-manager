@@ -23,4 +23,5 @@ export const Span = styled.span<SpanProps>`
     ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
     ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : ``)};
+    ${({ uppercase }) => uppercase && `text-transform: uppercase`};
 `;

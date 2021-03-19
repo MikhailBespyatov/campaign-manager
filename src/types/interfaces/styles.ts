@@ -117,6 +117,7 @@ export interface TextProperties extends NoWrap, Color, Opacity {
     letterSpacing?: string;
     alignCenter?: boolean;
     alignEnd?: boolean;
+    uppercase?: boolean;
 }
 
 export interface TextDecoration {

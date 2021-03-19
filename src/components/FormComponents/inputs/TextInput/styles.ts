@@ -29,11 +29,11 @@ import {
     untouchedColor
 } from 'constants/styles';
 import styled from 'styled-components';
-import { Padding, WithError } from 'types';
+import { MarginBottom, Padding, WithError } from 'types';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<MarginBottom>`
     width: 100%;
-    margin-top: 55px;
+    margin-bottom: ${({ marginBottom }) => marginBottom || errorSpanMarginBottom};
 `;
 
 export const StyledInput = styled.input`

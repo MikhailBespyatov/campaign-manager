@@ -34,3 +34,8 @@ export const onSubmit = (values: AuthUserRequest, { setErrors }: SetErrorsFormik
     });
     userEffects.loadToken(values);
 };
+
+export const untouchedWarningForEmail = 'This can only contain 0-9 a-z A-Z characters';
+
+export const untouchedWarningForPassword =
+    'Password should be 8 or more characters and include a capital letter and a number';

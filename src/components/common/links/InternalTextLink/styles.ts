@@ -23,8 +23,8 @@ export const InternalTextLink = styled.a<SpanProps>`
     ${({ alignCenter }) => (alignCenter ? 'text-align: center' : '')};
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
     ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : `text-decoration: underline`)};
-    margin-right: ${secondaryPadding};
-    margin-bottom: ${secondaryPadding};
+    margin-right: ${({ marginRight }) => marginRight || secondaryPadding};
+    margin-bottom: ${({ marginBottom }) => marginBottom || secondaryPadding};
     &:hover {
         opacity: 0.6;
     }

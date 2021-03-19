@@ -1,6 +1,7 @@
 import blackLoader from 'assets/img/loader_black.gif';
 import whiteLoader from 'assets/img/loader_white.gif';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
 import React from 'react';
 
 export interface LoaderProps {
@@ -10,7 +11,11 @@ export interface LoaderProps {
 
 export const Loader = ({ size = 'small', isWhite = false }: LoaderProps) => {
     const loaderSize = size === 'small' ? '15px' : size === 'middle' ? '30px' : '45px';
-    return <CustomImg alt="Loader" height={loaderSize} src={isWhite ? whiteLoader : blackLoader} width={loaderSize} />;
+    return (
+        <Section alignCenter justifyCenter>
+            <CustomImg alt="Loader" height={loaderSize} src={isWhite ? whiteLoader : blackLoader} width={loaderSize} />
+        </Section>
+    );
 };
 
 //<div>loading...</div>;
