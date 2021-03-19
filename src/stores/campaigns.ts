@@ -5,7 +5,6 @@ import { loadingEffects } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
 import { getCampaignStatus } from 'utils/usefulFunctions';
 import { countCampaignDrafts, defaultCampaignStatus } from 'constants/defaults';
-import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 import { forms } from 'stores/forms';
 import connectLocalStorage from 'effector-localstorage';
 import { createCampaignEvent } from './forms/createCampaignForm';
@@ -178,13 +177,13 @@ const statisticsValues = createStore<WOM.CampaignStatisticsQueryRequest>({})
 statisticsValues.watch(state => (isFirst ? (isFirst = false) : getStatisticsItems(state)));
 
 const setFieldsCreateCampaignForm = createEvent<Partial<Props>>();
-const setContentIds = createEvent<WOM.ContentItemResponse[]>();
-const createCampaignForm = createStore<Props>(formValues)
-    .on(setContentIds, (state, contentIds) => ({ ...state, contentIds: contentIds.map(i => i.womContentId || '') }))
-    .on(setFieldsCreateCampaignForm, (store, fields) => ({
-        ...store,
-        ...fields
-    }));
+// const setContentIds = createEvent<WOM.ContentItemResponse[]>();
+// const createCampaignForm = createStore<Props>(formValues)
+//     .on(setContentIds, (state, contentIds) => ({ ...state, contentIds: contentIds.map(i => i.womContentId || '') }))
+//     .on(setFieldsCreateCampaignForm, (store, fields) => ({
+//         ...store,
+//         ...fields
+//     }));
 
 const draftCampaignLocalStorage = connectLocalStorage('draftCampaign').onError(err => console.log(err));
 
@@ -214,7 +213,11 @@ const draftCampaign = createStore<DraftCampaign[]>(draftCampaignLocalStorage.ini
         return [...newDrafts, defaultDraftCampaignValue];
     })
     .on(deleteDraftCampaign, (drafts, id) => drafts.filter(draft => draft.id !== id))
-    .on(createCampaignEvent, (drafts, { id }) => drafts.filter(draft => draft.id !== id));
+    .on(createCampaignEvent, drafts => drafts.filter(draft => draft.id !== defaultDraftCampaignValue.id));
+
+draftCampaign.watch(draft => {
+    draft.forEach(({ campaignName, id = '' }) => !campaignName && deleteDraftCampaign(id));
+});
 
 const setFormFromDraft = createEvent<string>();
 
@@ -266,7 +269,7 @@ const campaignsStores = {
     loading,
     itemsInUse,
     campaignStatusCount,
-    createCampaignForm,
+    // createCampaignForm,
     draftCampaign
 };
 

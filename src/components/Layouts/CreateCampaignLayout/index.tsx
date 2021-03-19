@@ -17,10 +17,15 @@ export const CreateCampaignLayout: FC<Props> = ({ children }) => {
     //!!! because I can't resolve problem with get fields by key of string !!!
     // @ts-ignore
     const { isValid, isDirty } = useField(forms.createCampaignForm.fields[isValidField]);
-    const { submit } = useForm(forms.createCampaignForm);
+    const { submit, reset } = useForm(forms.createCampaignForm);
 
     const onChangeStep = (isForward: boolean) =>
         isForward ? createCampaignEvents.nextStep() : createCampaignEvents.previousStep();
+
+    const onCancel = () => {
+        reset();
+        createCampaignEvents.setStep(0);
+    };
 
     return (
         <>
@@ -32,6 +37,7 @@ export const CreateCampaignLayout: FC<Props> = ({ children }) => {
                         steps={createCampaignSteps.map(({ title }) => ({
                             title
                         }))}
+                        onCancel={onCancel}
                         onChange={onChangeStep}
                         onPublish={() => submit()}
                     />

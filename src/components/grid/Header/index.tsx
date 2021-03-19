@@ -21,16 +21,20 @@ import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import { MarginWrapper } from '../wrappers/MarginWrapper';
 import { Version } from 'components/common/dividers/Version';
+import { organizationsEffects, organizationsStores } from 'stores/organizations';
+import { Loader } from 'components/dynamic/Loader';
 
 export const Header = () => {
     const { user } = useStore(userStores.user);
     const { logo } = useStore(themeStores.theme);
+    const { publicId: organizationPublicId } = useStore(organizationsStores.item);
+    const loading = useStore(organizationsEffects.getItemById.pending);
 
     const username = user && user?.username;
     // const imageUrl = user && user?.profile?.imageUrl;
 
     //MOCK
-    const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
+    // const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
 
     return (
         <StyledHeader>
@@ -57,13 +61,19 @@ export const Header = () => {
                     <Row alignCenter>
                         <Span color={grey10}>Merchant ID:</Span>
                         <MerchantIdWrapper>
-                            <Span color={white} fontSize="12px">
-                                {organizationPublicId}
-                            </Span>
+                            {loading ? (
+                                <Loader />
+                            ) : (
+                                <>
+                                    <Span color={white} fontSize="12px">
+                                        {organizationPublicId}
+                                    </Span>
 
-                            <MarginWrapper marginLeft="10px">
-                                <CopyButton subject={organizationPublicId} success={copyMerchantIdMessage} />
-                            </MarginWrapper>
+                                    <MarginWrapper marginLeft="10px">
+                                        <CopyButton subject={organizationPublicId} success={copyMerchantIdMessage} />
+                                    </MarginWrapper>
+                                </>
+                            )}
                         </MerchantIdWrapper>
                     </Row>
                     {/* <StyledSpan3 color={white} onClick={onClick}>
