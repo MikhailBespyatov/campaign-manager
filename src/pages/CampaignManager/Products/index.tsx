@@ -34,15 +34,16 @@ import { useHistory } from 'react-router';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
+import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 
-const { setIsFirstToFalse, invokeGetProducts } = productsEvents;
+const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
 
 export const Products = () => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    const { items } = useStore(productsStores.items);
+    const { items, totalRecords } = useStore(productsStores.items);
     const isFirst = useStore(productsStores.isFirst);
-    // const { limit, pageIndex } = useStore(productsStores.values);
+    const { limit, pageIndex } = useStore(productsStores.values);
     const loading = useStore(productsEffects.getItems.pending);
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
@@ -51,10 +52,10 @@ export const Products = () => {
 
     //Mock
     // const products = productsMock;
-    const productViewerLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
+    // const productViewerLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
     // const products: typeof productsMock = [];
 
-    const dataTable: DataTable[] | undefined = items?.map(({ id = '', name, imageUrl, brand }) => ({
+    const dataTable: DataTable[] | undefined = items?.map(({ id = '', publicId = '', name, imageUrl, brand }) => ({
         cells: [
             <Row key={id} alignCenter>
                 <MarginWrapper marginLeft="8px" marginRight="17px">
@@ -68,7 +69,7 @@ export const Products = () => {
             </Row>,
             <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
             <Row key={id}>
-                <CopyableField subject={productViewerLink} />
+                <CopyableField subject={publicId} />
             </Row>,
             <Row key={id}>
                 <ImgButton
@@ -121,16 +122,16 @@ export const Products = () => {
     //     alignment: ['start', ...new Array(5).fill('center')]
     // }));
     //
-    // const onPaginationChange = (current: number) =>
-    //     updateValues({
-    //         pageIndex: current
-    //     });
-    //
-    // const onSizeChange = (current: number, size: number) =>
-    //     updateValues({
-    //         pageIndex: current,
-    //         limit: size
-    //     });
+    const onPaginationChange = (current: number) =>
+        updateValues({
+            pageIndex: current
+        });
+
+    const onSizeChange = (current: number, size: number) =>
+        updateValues({
+            pageIndex: current,
+            limit: size
+        });
 
     useEffect(() => {
         if (isFirst) {
@@ -170,17 +171,17 @@ export const Products = () => {
                             onClickAddButton={onClickAddButton}
                         />
                     ) : (
-                        // <PaginationLayout
-                        //     limit={limit}
-                        //     pageIndex={pageIndex}
-                        //     totalRecords={totalRecords}
-                        //     onPaginationChange={onPaginationChange}
-                        //     onSizeChange={onSizeChange}
-                        // >
-                        <OverflowAutoLayout>
-                            <Table columnSizes={[2, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
-                        </OverflowAutoLayout>
-                        // </PaginationLayout>
+                        <PaginationLayout
+                            limit={limit}
+                            pageIndex={pageIndex}
+                            totalRecords={totalRecords}
+                            onPaginationChange={onPaginationChange}
+                            onSizeChange={onSizeChange}
+                        >
+                            <OverflowAutoLayout>
+                                <Table columnSizes={[2, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
+                            </OverflowAutoLayout>
+                        </PaginationLayout>
                     )}
                 </ContentWrapper>
             </Section>

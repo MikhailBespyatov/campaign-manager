@@ -17,7 +17,6 @@ import {
     selectVideoBackgroundColor
 } from 'components/common/blocks/CreateCampaignManager/constants';
 import { BarItem } from 'components/common/dividers/BarItem';
-import { CreateCampaignForm } from 'components/FormComponents/forms/CreateCampaignForm';
 import { SelectVideoBlock } from 'components/common/blocks/SelectVideoBlock';
 import { modalEvents } from 'stores/modal';
 import { useStore } from 'effector-react';
@@ -107,7 +106,7 @@ export const CreateCampaignManager: FC = () => {
                                 })}
                             </CreateCampaignBlockHeader>
                         </MarginWrapper>
-                        <CreateCampaignForm activeSubPage={activeSubPage} onClick={setActiveSubPage} />
+                        {/*<CreateCampaignForm activeSubPage={activeSubPage} onClick={setActiveSubPage} />*/}
                     </CreateCampaignBlock>
                 </SelectCampaignBlock>
             </SelectCampaignWrapper>
