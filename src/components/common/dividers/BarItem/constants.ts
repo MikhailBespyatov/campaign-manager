@@ -13,3 +13,5 @@ export const inactiveColor = '#C3CBD4';
 export const styledBorderHeight = '2px';
 export const styledBorderWidth = '17px';
 export const styledBorderMarginTop = '11px';
+
+export const subPageTitleMarginTop = '-25px';

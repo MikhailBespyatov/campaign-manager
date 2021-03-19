@@ -1,11 +1,8 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
 import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
-import { ToggleButton } from 'components/common/buttons/ToggleButton';
-import { Span } from 'components/common/typography/Span/styles';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { inputHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
 import { useForm } from 'effector-forms';
 import { forms } from 'stores/forms';
@@ -24,7 +21,7 @@ const { id: channelIdField, name: channelName } = forms.channelForm.fields;
 export interface ChannelFormProps {}
 
 export const ChannelForm = () => {
-    const { fields, reset } = useForm(forms.channelForm);
+    const { reset } = useForm(forms.channelForm);
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.channels.create;
@@ -46,7 +43,7 @@ export const ChannelForm = () => {
         });
     };
 
-    const onChangePrivate = (e: ChangeEvent<HTMLInputElement>) => fields.isPrivate.onChange(e.target.checked);
+    // const onChangePrivate = (e: ChangeEvent<HTMLInputElement>) => fields.isPrivate.onChange(e.target.checked);
 
     //Mock
     useEffect(() => {
@@ -78,16 +75,16 @@ export const ChannelForm = () => {
                     <FormTextInput required field={channelName} label="Channel Name" />
                 </Section>
             )}
-            <Section>
-                <Row alignCenter>
-                    <MarginWrapper marginRight="19px">
-                        <ToggleButton value={fields.isPrivate.value} onChange={onChangePrivate} />
-                    </MarginWrapper>
-                    <Span fontSize="14px" fontWeight="600" lineHeight="17px">
-                        Make Channel Private
-                    </Span>
-                </Row>
-            </Section>
+            {/*<Section>*/}
+            {/*    <Row alignCenter>*/}
+            {/*        <MarginWrapper marginRight="19px">*/}
+            {/*            <ToggleButton value={fields.isPrivate.value} onChange={onChangePrivate} />*/}
+            {/*        </MarginWrapper>*/}
+            {/*        <Span fontSize="14px" fontWeight="600" lineHeight="17px">*/}
+            {/*            Make Channel Private*/}
+            {/*        </Span>*/}
+            {/*    </Row>*/}
+            {/*</Section>*/}
             {isEditPage && (
                 <Section marginTop="50px">
                     <ManualRoundedButton

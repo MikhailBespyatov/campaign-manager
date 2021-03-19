@@ -57,22 +57,19 @@ export const onCurrencyChange = (
 
 export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) =>
     campaignsEffects.upsertItem({
-        values: {
-            organizationId: getOrganizationId(),
-            title: values.title,
-            tags: values.tags,
-            contentIds: values.contentIds,
-            schedule: {
-                utcToStart: values.utcToStart,
-                utcToEnd: values.utcToEnd
-            },
-            budget: {
-                budgetTotal: Number(values.amount.replace(/,/g, ''))
-            },
-            settings: {
-                watchOverride: false,
-                mustWatch: false
-            }
+        organizationId: getOrganizationId(),
+        title: values.title,
+        tags: values.tags,
+        contentIds: values.contentIds,
+        schedule: {
+            utcToStart: values.utcToStart,
+            utcToEnd: values.utcToEnd
         },
-        setErrors: setErrors
+        budget: {
+            budgetTotal: Number(values.amount.replaceAll(',', ''))
+        },
+        settings: {
+            watchOverride: false,
+            mustWatch: false
+        }
     });

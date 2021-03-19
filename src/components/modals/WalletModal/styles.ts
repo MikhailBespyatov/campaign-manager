@@ -12,6 +12,7 @@ import {
     wrapperVerticalPadding
 } from 'components/modals/QexWidgetModal/constants';
 import { modalWidth } from './constants';
+import { Span } from 'components/common/typography/Span';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -53,7 +54,22 @@ export const WalletTitleSpan = styled.div`
 export const WalletSubtitleSpan = styled.div`
     font-style: normal;
     font-weight: normal;
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 17px;
     color: ${grey4};
+`;
+
+export const WalletBalanceSpan = styled.div`
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: white;
+`;
+
+export const CurrencySpan = styled(Span)`
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
 `;

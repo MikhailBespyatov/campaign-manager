@@ -1,8 +1,12 @@
 import { createForm } from 'effector-forms';
-import { createRule, yupCompanyName, yupDefault, yupUrl } from 'constants/yupFields';
-import { createEvent, forward, sample } from 'effector';
-import { channelForm } from 'stores/forms/channelForm';
-import { productsEffects } from 'stores/products';
+import { createRule, yupCompanyName, yupId, yupUrl } from 'constants/yupFields';
+import { createEffect, createEvent, createStore, forward } from 'effector';
+// import { productsEffects } from 'stores/products';
+import { loadingEffects } from 'stores/loading';
+import { API } from 'services';
+import history from 'BrowserHistory';
+import { themeStores } from 'stores/theme';
+import { routes } from 'constants/routes';
 
 export const productForm = createForm({
     fields: {
@@ -34,13 +38,13 @@ export const productForm = createForm({
             ]
         },
         publicId: {
-            init: ''
-            // rules: [
-            //     createRule<string>({
-            //         name: 'productCategory',
-            //         schema: yupDefault
-            //     })
-            // ]
+            init: '',
+            rules: [
+                createRule<string>({
+                    name: 'productId',
+                    schema: yupId
+                })
+            ]
         },
         url: {
             init: '',
@@ -56,7 +60,7 @@ export const productForm = createForm({
             rules: [
                 createRule<string>({
                     name: 'thumbnailImage',
-                    schema: yupDefault
+                    schema: yupUrl
                 })
             ]
         }
@@ -68,35 +72,61 @@ export const productForm = createForm({
 const editSubmit = createEvent();
 const addSubmit = createEvent();
 
+const isCreateProduct = createStore<boolean>(false)
+    .on(addSubmit, _ => true)
+    .on(editSubmit, _ => false);
+
+export const handleProduct = createEffect({
+    handler: async (values: WOM.CreateRemoteProductRequest) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const isCreate = isCreateProduct.getState();
+            const data = isCreate ? await API.products.createProduct(values) : await API.products.updateProduct(values);
+
+            loadingEffects.updateInitialLoading();
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.products.index);
+
+            return data || {};
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return {};
+        }
+    }
+});
+
 //form will submit by triggered events
 forward({ from: [addSubmit, editSubmit], to: productForm.submit });
 
-//using endpoint for submit
-sample({
-    source: productForm.$values,
-    clock: addSubmit,
-    target: productsEffects.createProduct,
-    fn: ({ name, brand, imageUrl, url, publicId }) => ({ name, brand, imageUrl, url, publicId })
-});
+forward({ from: productForm.formValidated, to: handleProduct });
+
+// productForm.submit.watch();
+// const submitForm = createEvent();
+//
+// forward({ from: productForm.formValidated, to: submitForm });
+// submitForm.watch(res => console.log(res, 'submitForm'));
 
 //using endpoint for submit
-sample({
-    source: productForm.$values,
-    clock: editSubmit,
-    target: productsEffects.updateProduct
-    // fn: values => ({ ...values })
-});
+// sample({
+//     source: productForm.formValidated,
+//     clock: addSubmit,
+//     target: productsEffects.createProduct,
+//     fn: ({ name, brand, imageUrl, url, publicId }) => ({ name, brand, imageUrl, url, publicId })
+// });
+
+// addSubmitEvent.watch(res => console.log(res, 'addSubmitEvent'));
+
+//using endpoint for submit
+// sample({
+//     source: productForm.formValidated,
+//     clock: editSubmit,
+//     target: productsEffects.updateProduct
+//     // fn: values => ({ ...values })
+// });
 
 //reset form
 forward({
-    from: [productsEffects.createProduct.doneData, productsEffects.updateProduct.doneData],
-    to: channelForm.resetValues
-});
-
-// Set form when get data from endpoint
-forward({
-    from: productsEffects.getItemById.doneData,
-    to: productForm.setForm
+    from: [handleProduct.doneData],
+    to: productForm.resetValues
 });
 
 export const productFormEvents = { editSubmit, addSubmit };

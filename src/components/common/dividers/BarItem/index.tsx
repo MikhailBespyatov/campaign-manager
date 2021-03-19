@@ -2,7 +2,8 @@ import {
     inactiveColor,
     spanFontSize,
     spanFontWeight,
-    spanLineHeight
+    spanLineHeight,
+    subPageTitleMarginTop
 } from 'components/common/dividers/BarItem/constants';
 import { StyledItem } from 'components/common/dividers/BarItem/styles';
 import { Span } from 'components/common/typography/Span';
@@ -13,6 +14,8 @@ import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
 import { Path } from 'types';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 interface Props extends Path {
     active?: boolean;
@@ -26,23 +29,27 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage, 
 
     return (
         <StyledItem key={path} onClick={() => onClick(path)}>
-            <Column alignCenter>
-                <Span
-                    color={active ? (!namePage ? primaryColor : inactiveColor) : inactiveColor}
-                    fontSize={spanFontSize}
-                    fontWeight={spanFontWeight}
-                    lineHeight={spanLineHeight}
-                    opacity={1}
-                >
-                    {children}
-                </Span>
-                {namePage && (
-                    <Row height={subPageSpanHeight} marginBottom="5px" marginTop="8px">
-                        <SubPageSpan>{namePage}</SubPageSpan>
-                    </Row>
-                )}
-                {/* {active && !withoutBorderLine && <StyledBorder />} */}
-            </Column>
+            <RelativeWrapper>
+                <Column alignCenter>
+                    <Span
+                        color={active && !namePage ? primaryColor : inactiveColor}
+                        fontSize={spanFontSize}
+                        fontWeight={spanFontWeight}
+                        lineHeight={spanLineHeight}
+                        // opacity={1}
+                    >
+                        {children}
+                    </Span>
+                    {namePage && (
+                        <AbsoluteWrapper bottom={subPageTitleMarginTop} left="0" width="100%">
+                            <Row justifyCenter height={subPageSpanHeight} marginBottom="5px">
+                                <SubPageSpan>{namePage}</SubPageSpan>
+                            </Row>
+                        </AbsoluteWrapper>
+                    )}
+                    {/* {active && !withoutBorderLine && <StyledBorder />} */}
+                </Column>
+            </RelativeWrapper>
         </StyledItem>
     );
 };

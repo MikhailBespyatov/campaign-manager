@@ -1,18 +1,15 @@
-import history from 'BrowserHistory';
-import { CreateCampaignRequestProps, Props } from 'components/FormComponents/forms/CreateCampaignForm/types';
-import { Noop } from 'constants/global';
-import { existCampaignErrorMessage } from 'constants/messages';
-import { routes } from 'constants/routes';
+import { Props } from 'components/FormComponents/forms/CreateCampaignForm/types';
 import { createEffect, createEvent, createStore, forward, sample } from 'effector';
 import { API } from 'services';
 import { loadingEffects } from 'stores/loading';
 import { organizationsStores } from 'stores/organizations';
-import { themeStores } from 'stores/theme';
 import { getCampaignStatus } from 'utils/usefulFunctions';
 import { countCampaignDrafts, defaultCampaignStatus } from 'constants/defaults';
 import { formValues } from 'components/FormComponents/forms/CreateCampaignForm/constants';
 import { forms } from 'stores/forms';
 import connectLocalStorage from 'effector-localstorage';
+import { createCampaignEvent } from './forms/createCampaignForm';
+import { modalEvents } from 'stores/modal';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -35,22 +32,24 @@ const contentIds = createStore<WOM.ContentItemResponse[]>([])
     .on(clearContentIds, () => []);
 
 const upsertItem = createEffect({
-    handler: async ({ values, setErrors = Noop }: CreateCampaignRequestProps) => {
+    handler: async (values: WOM.CampaignUpsertRequest) => {
         try {
             loadingEffects.updateLoading();
             await API.campaigns.upsertItem(values);
             loadingEffects.updateLoading();
 
             clearContentIds();
-            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.running);
+            modalEvents.openCongratsModal();
         } catch {
             loadingEffects.updateLoading();
-            setErrors({
-                title: existCampaignErrorMessage
-            });
+            // setErrors({
+            //     title: existCampaignErrorMessage
+            // });
         }
     }
 });
+
+forward({ from: createCampaignEvent, to: upsertItem });
 
 const itemRemoveEvent = createEvent<string>();
 const removeItemById = createEffect({
@@ -214,7 +213,8 @@ const draftCampaign = createStore<DraftCampaign[]>(draftCampaignLocalStorage.ini
 
         return [...newDrafts, defaultDraftCampaignValue];
     })
-    .on(deleteDraftCampaign, (drafts, id) => drafts.filter(draft => draft.id !== id));
+    .on(deleteDraftCampaign, (drafts, id) => drafts.filter(draft => draft.id !== id))
+    .on(createCampaignEvent, (drafts, { id }) => drafts.filter(draft => draft.id !== id));
 
 const setFormFromDraft = createEvent<string>();
 

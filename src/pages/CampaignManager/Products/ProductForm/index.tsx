@@ -69,6 +69,7 @@ export const ProductForm = () => {
             </Section>
             <Section marginBottom="42px">
                 <ImageTextInput
+                    required
                     field={imageUrl}
                     label="Thumbnail Image"
                     placeholder="Set product thumbnail image here"
@@ -98,7 +99,7 @@ export const ProductForm = () => {
                 </FlexGrow>
             </Section>
             <Section marginBottom={productInputMarginBottom}>
-                <FormTextInput field={publicId} label="Public ID" placeholder="Type public id here..." />
+                <FormTextInput required field={publicId} label="Public ID" placeholder="Type public id here..." />
                 {/*{isEditPage && (*/}
                 {/*    <FlexGrow flexBasis={flexBasisInput}>*/}
                 {/*        <ContentWrapper paddingLeft={inputHalfHorizontalMargin} width="100%">*/}

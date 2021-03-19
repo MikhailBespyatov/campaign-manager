@@ -10,13 +10,13 @@ import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilte
 import { ModifyingLayout } from 'components/Layouts/ModifyingLayout';
 import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
-import { noContentMessage } from 'pages/CampaignManager/Discover/constants';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
 import { ProductThumbnail } from '../styles';
 import { productContentMarginBottom, productContentPadding } from './constants';
+import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
 
 export const Product = () => {
     const { productId } = useParams();
@@ -78,9 +78,13 @@ export const Product = () => {
                         </Section>
                     ) : (
                         <Section>
-                            {items
-                                ? items.map(item => <VideoCard key={item.womContentId} {...item} />)
-                                : noContentMessage}
+                            {!!items?.length ? (
+                                items.map(item => <VideoCard key={item.womContentId} {...item} />)
+                            ) : (
+                                <Section justifyCenter>
+                                    <EmptySearchResult title="Sorry! No result found" />
+                                </Section>
+                            )}
                         </Section>
                     )}
                 </VideosFilterLayout>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { blue, formGrey6, primaryColor } from 'constants/styles';
 import { Padding } from 'types';
 import { Span } from 'components/common/typography/Span';
+import { inputHeight } from 'components/common/inputs/NewDesign/TextInput/constants';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -27,7 +28,7 @@ export const TextFieldForm = styled.input<Padding>`
     outline: none;
     appearance: none;
     width: 100%;
-    height: 48px;
+    height: ${inputHeight};
     padding-left: ${({ paddingLeft }) => paddingLeft || '28px'};
     font-style: normal;
     font-weight: normal;

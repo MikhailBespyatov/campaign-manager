@@ -12,13 +12,17 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { Span } from 'components/common/typography/Span';
 import { grey4 } from 'constants/styles';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-
-export interface CongratsModalProps {}
+import history from 'BrowserHistory';
+import { themeStores } from 'stores/theme';
+import { routes } from 'constants/routes';
 
 export const CongratsModal = () => {
     const { visible } = useStore(modalStores.congratsModal);
 
-    const onClose = () => modalEvents.closeCongratsModal();
+    const onClose = () => {
+        modalEvents.closeCongratsModal();
+        history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.campaign.running);
+    };
 
     useNonScrolledBackground(visible);
 
@@ -47,7 +51,7 @@ export const CongratsModal = () => {
                                 Camplaing is live
                             </Span>
                         </Row>
-                        <ManualRoundedButton height="48px" width="198px">
+                        <ManualRoundedButton height="48px" width="198px" onClick={onClose}>
                             DONE
                         </ManualRoundedButton>
                     </Column>

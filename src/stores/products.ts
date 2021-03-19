@@ -3,6 +3,10 @@ import { loadingEffects } from 'stores/loading';
 import { API } from 'services';
 import { defaultProductsValues } from 'constants/defaults/products';
 import { initializeIsFirstStore } from 'stores/initialize/initialize.isFirst.store';
+import history from 'BrowserHistory';
+import { themeStores } from 'stores/theme';
+import { routes } from 'constants/routes';
+import { handleProduct, productForm } from 'stores/forms/productForm';
 
 const getItemById = createEffect({
     handler: async (id: string) => {
@@ -34,27 +38,13 @@ const getItems = createEffect({
     }
 });
 
-const createProduct = createEffect({
-    handler: async (values: WOM.CreateRemoteProductRequest) => {
-        try {
-            loadingEffects.updateInitialLoading();
-            const data = await API.products.createProduct(values);
-            loadingEffects.updateInitialLoading();
-
-            return data || {};
-        } catch {
-            loadingEffects.updateInitialLoading();
-            return {};
-        }
-    }
-});
-
 const removeProduct = createEffect({
     handler: async (id: string) => {
         try {
             loadingEffects.updateInitialLoading();
             await API.products.deleteProductById({ id });
             loadingEffects.updateInitialLoading();
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.products.index);
 
             return id;
         } catch {
@@ -70,6 +60,7 @@ const updateProduct = createEffect({
             loadingEffects.updateInitialLoading();
             const data = await API.products.updateProduct(values);
             loadingEffects.updateInitialLoading();
+            history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.products.index);
 
             return data || {};
         } catch {
@@ -81,12 +72,18 @@ const updateProduct = createEffect({
 
 const resetItem = createEvent();
 
+// Set form when get data from endpoint
+forward({
+    from: getItemById.doneData,
+    to: productForm.setForm
+});
+
 const item = createStore<WOM.RemoteProductResponse>({})
     .on(getItemById.doneData, (_, newState) => newState)
     .on(resetItem, _ => ({}));
 const items = createStore<WOM.RemoteProductsResponse>({})
     .on(getItems.doneData, (_, newState) => newState)
-    .on(createProduct.doneData, (state, newState) => ({ ...state, items: [...(state?.items || []), newState] }))
+    .on(handleProduct.doneData, (state, newState) => ({ ...state, items: [...(state?.items || []), newState] }))
     .on(updateProduct.doneData, (state, newState) => ({
         ...state,
         items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
@@ -122,7 +119,14 @@ const productsEvents = {
     setIsFirstToTrue,
     resetItem
 };
-const productsEffects = { getItemById, getItems, createProduct, updateProduct, removeProduct, resetItem };
+const productsEffects = {
+    getItemById,
+    getItems,
+    // createProduct: handleProduct,
+    updateProduct,
+    removeProduct,
+    resetItem
+};
 const productsStores = { item, items, values, isFirst };
 
 export { productsEvents, productsEffects, productsStores };

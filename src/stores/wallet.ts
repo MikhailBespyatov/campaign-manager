@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore } from 'effector';
+import { combine, createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
 import { getDateFromString } from 'utils/usefulFunctions';
 
@@ -53,8 +53,14 @@ const usdRate = createStore(0)
     // @ts-ignore
     .on(getTokenInfo.doneData, (_, { womExchangeRates }) => womExchangeRates[0].price.toFixed(4));
 
+const eurRate = createStore(0)
+    // @ts-ignore
+    .on(getTokenInfo.doneData, (_, { womExchangeRates }) => womExchangeRates[1].price.toFixed(4));
+
+const rates = combine(usdRate, eurRate);
+
 const walletEvents = {};
 const walletEffects = { getTokenInfo, getItemById };
-const walletStores = { usdRate, loading, balanceLoading, walletBalance, walletAddress, walletCreated };
+const walletStores = { usdRate, eurRate, rates, loading, balanceLoading, walletBalance, walletAddress, walletCreated };
 
 export { walletEffects, walletStores, walletEvents };

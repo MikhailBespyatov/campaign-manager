@@ -74,7 +74,11 @@ export const slashInserter = (str: string) =>
         .join('')
         .replace(removeRightSlashRegExp, '') || '';
 
-export const currencyToText = (currency: number) => '$' + currency + ' USD';
+export const currencyToText = (currencyValue: number | string, currency: string[] = ['USD', '$']) =>
+    currency[1] + Number(currencyValue).toFixed(2) + ` ${currency[0]}`;
+
+export const totalCurrency = (walletBalance: number, rate: number) =>
+    Number.isNaN(walletBalance) ? 0 : (rate * walletBalance).toFixed(2);
 
 export const objectIsEmpty = (obj: object) => !Object.values(obj).length;
 
@@ -153,7 +157,7 @@ export const getDateFromString = (dateISOString?: string) => {
 
 //TODO: status and test for status
 export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (item: WOM.CampaignDetailResponse) =>
-    item.isActive ? 'running' : item.title === 'test' ? 'paused' : 'expired';
+    'running';
 
 export const engagementStatusTypes = (parameter?: number) => (parameter && parameter > 0 ? 'success' : 'error');
 
@@ -178,3 +182,10 @@ export const findElementInChildrenList = (targetElement: Element, searchElement:
     checkChildrenRef(targetElement);
     return isInParentBlock;
 };
+
+//TODO: Add test
+export const getDateAfterAndReturnISO = (afterDays = 1) =>
+    new Date(Date.now() + afterDays * 24 * 60 * 60 * 1000).toISOString();
+//TODO: Add test
+export const getDateBeforeAndReturnISO = (beforeDays = 1) =>
+    new Date(Date.now() - beforeDays * 24 * 60 * 60 * 1000).toISOString();

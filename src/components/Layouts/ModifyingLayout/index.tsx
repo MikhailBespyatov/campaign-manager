@@ -25,7 +25,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     const isEditPage = pathname.indexOf('edit') !== -1;
 
     const onClickBackButton = () => history.goBack();
-    const onClickAddButton = () => isValid && onClickAction();
+    const onClickAddButton = () => onClickAction();
 
     return (
         <>

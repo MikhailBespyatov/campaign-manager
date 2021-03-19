@@ -35,7 +35,7 @@ export const ProgressBarList = styled.ul`
     &:after {
         content: '';
         height: ${linePointItemHeight};
-        width: 200px;
+        width: 500px;
         display: block;
         position: absolute;
         background-color: ${inactivePointBackgroundColor};

@@ -53,7 +53,7 @@ export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPubl
                                 NEXT
                             </ManualRoundedButton>
                         ) : (
-                            <ManualRoundedButton height="29px" minWidth="97px" onClick={onPublish}>
+                            <ManualRoundedButton disabled={!isValid} height="29px" minWidth="97px" onClick={onPublish}>
                                 PUBLISH
                             </ManualRoundedButton>
                         )}
