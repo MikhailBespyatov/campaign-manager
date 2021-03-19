@@ -28,14 +28,12 @@ export const FormWrapper = styled.form`
 export const CustomImgForm = styled(CustomImg)``;
 
 export const H1Form = styled(H1)<MarginBottom>`
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 39px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 46px;
     color: ${formPrimaryColor};
     text-align: center;
-    margin-top: 20px;
-    /* margin-bottom: 5px; */
-    margin-bottom: ${({ marginBottom }) => marginBottom || '20px'};
+    margin: 20px 0px ${({ marginBottom }) => marginBottom || '5px'};
 `;
 
 export const PForm = styled(P)`

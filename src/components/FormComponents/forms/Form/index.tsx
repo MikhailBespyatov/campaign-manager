@@ -10,6 +10,9 @@ import { Title, WithSrc } from 'types';
 interface Props extends Title, WithSrc {
     onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
     subSubtitle?: string;
+    h1MarginBottom?: string;
+    customLogo?: string;
+    customLogoDiameter?: string;
 }
 
 export const Form: FC<Props> = ({
@@ -18,7 +21,10 @@ export const Form: FC<Props> = ({
     subtitle,
     onSubmit = Noop,
     src,
-    subSubtitle
+    // subSubtitle,
+    h1MarginBottom,
+    customLogoDiameter,
+    customLogo
 }) => {
     const { secondaryLogo } = useStore(themeStores.theme);
 
@@ -26,10 +32,10 @@ export const Form: FC<Props> = ({
 
     return (
         <Wrapper>
-            <CustomImg height={logoDiameter} src={logoSrc} />
-            <H1Form marginBottom={(!subtitle && '30px') || ''}>{title}</H1Form>
+            <CustomImg height={customLogoDiameter || logoDiameter} src={customLogo || logoSrc} />
+            <H1Form marginBottom={h1MarginBottom || (!subtitle && '85px') || ''}>{title}</H1Form>
             {/* <PForm>{subtitle}</PForm> */}
-            {subSubtitle && <PForm>{subSubtitle}</PForm>}
+            {subtitle && <PForm>{subtitle}</PForm>}
             <FormWrapper /*autoComplete="chrome-off"*/ onSubmit={onSubmit}>{children}</FormWrapper>
         </Wrapper>
     );

@@ -1,9 +1,10 @@
+import darkLogo from 'assets/img/logo_dark.svg';
 import { Loader } from 'components/dynamic/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { blue } from 'constants/styles';
+import { black, blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignUp/AcceptInvite/constants';
@@ -33,20 +34,40 @@ export const AcceptInvite = () => {
                 onSubmit={onSubmit}
             >
                 {({ handleSubmit, isValid, dirty }) => (
-                    <Form subtitle="Accept invite" title="Create an account" onSubmit={handleSubmit}>
-                        <TextInput disabled label="Invite Code" name="inviteCode" placeholder="" />
-                        <TextInput label="Email" name="username" placeholder="Enter your email address" />
+                    <Form
+                        customLogo={darkLogo}
+                        customLogoDiameter="60px"
+                        subtitle="Accept Invitation"
+                        title="Create Your Account"
+                        onSubmit={handleSubmit}
+                    >
                         <TextInput
-                            label="Create password"
+                            disabled
+                            label="INVITE CODE"
+                            marginBottom="5px"
+                            name="inviteCode"
+                            placeholder="Enter invitation code"
+                            untouchedWarning=" "
+                        />
+                        <TextInput
+                            label="EMAIL ADDRESS"
+                            marginBottom="5px"
+                            name="username"
+                            placeholder="Enter your email address"
+                            untouchedWarning=" "
+                        />
+                        <TextInput
+                            label="CREATE PASSWORD"
                             name="password"
-                            placeholder="Type your password"
+                            placeholder="Create your new password"
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         />
                         <TextInput
-                            label="Retype password"
+                            label="RETYPE PASSWORD"
+                            marginBottom="65px"
                             name="repeatPassword"
-                            placeholder="Retype your password"
+                            placeholder="Retype your new password"
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         />
@@ -62,8 +83,13 @@ export const AcceptInvite = () => {
                                 </InternalLink>
                             </Column>
                         </MarginWrapper> */}
-                        <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                            {loading ? <Loader /> : 'ACCEPT INVITE'}
+                        <Button
+                            background={isValid && dirty ? blue : undefined}
+                            color={black}
+                            disabled={loading}
+                            fontWeight="700"
+                        >
+                            {loading ? <Loader /> : 'ACCEPT INVITATION'}
                         </Button>
                     </Form>
                 )}

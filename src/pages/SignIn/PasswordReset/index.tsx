@@ -1,13 +1,13 @@
 import { InternalLink } from 'components/common/links/InternalLink';
+import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
-import { Column } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { signInPath } from 'constants/routes';
-import { blue, formGrey5 } from 'constants/styles';
+import { routes, signInPath } from 'constants/routes';
+import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import { initialValues, onSubmit, validationSchema } from 'pages/SignIn/PasswordReset/constants';
@@ -29,20 +29,54 @@ export const PasswordReset = () => {
                 {({ handleSubmit, isValid, dirty }) => (
                     <Column marginLeft="auto" marginRight="auto">
                         <Form
-                            subtitle="Password Reset"
+                            /* subtitle="Password Reset"*/
+                            h1MarginBottom="50px"
                             title="Please enter your email to reset password"
                             onSubmit={handleSubmit}
                         >
-                            <TextInput name="email" type="email" />
-                            <MarginWrapper marginBottom="32px" marginLeft="auto" marginTop="3px">
-                                <InternalLink color={formGrey5} fontSize="16px" lineHeight="20px" to={signInPath}>
+                            <TextInput marginBottom="70px" name="email" type="email" untouchedWarning=" " />
+                            {/* <Section justifyEnd>
+                                <InternalLink
+                                    color={formGrey5}
+                                    fontSize="16px"
+                                    lineHeight="20px"
+                                    marginBottom="85px"
+                                    marginRight="0px"
+                                    to={signInPath}
+                                >
                                     Go back to Login page
-                                    {/* Or <HighlightSpan>send security code</HighlightSpan> */}
+                                    <HighlightSpan>send security code</HighlightSpan> 
                                 </InternalLink>
-                            </MarginWrapper>
+                            </Section> */}
                             <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
-                                {loading ? <Loader /> : 'CHANGE PASSWORD'}
+                                {loading ? <Loader /> : 'SEND EMAIL'}
                             </Button>
+                            <Column alignCenter marginTop="35px" width="100%">
+                                <Section alignCenter justifyCenter marginBottom="15px">
+                                    <Span fontSize="12px">NEED AN ACCOUNT? </Span>
+                                    <InternalLink
+                                        color={blue}
+                                        fontSize="12px"
+                                        lineHeight="20px"
+                                        marginBottom="0px"
+                                        marginRight="0px"
+                                        to={routes.signUp.index}
+                                    >
+                                        SING UP HERE
+                                    </InternalLink>
+                                </Section>
+                                <InternalLink
+                                    fontSize="12px"
+                                    lineHeight="20px"
+                                    marginBottom="0px"
+                                    marginLeft="0px"
+                                    marginRight="0px"
+                                    textDecoration="none"
+                                    to={signInPath}
+                                >
+                                    BACK TO LOG IN
+                                </InternalLink>
+                            </Column>
                         </Form>
                         {/* <FormSignUpLink /> */}
                     </Column>
