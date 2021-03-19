@@ -11,10 +11,13 @@ import { buttonDiameter } from 'components/common/buttons/AddImageButton/constan
 
 export interface ImageTextInputProps extends FormTextInputProps, imgProperties {}
 
-export const ImageTextInput = ({ label, src, alt, ...props }: ImageTextInputProps) => (
+export const ImageTextInput = ({ label, src, alt, required, ...props }: ImageTextInputProps) => (
     <FlexGrow>
         <MarginWrapper marginBottom="22px">
-            <LabelNameSpan>{label}</LabelNameSpan>
+            <LabelNameSpan>
+                {label}
+                {required && '*'}
+            </LabelNameSpan>
         </MarginWrapper>
         <Section alignCenter>
             {src && (

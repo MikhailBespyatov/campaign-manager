@@ -5,17 +5,14 @@ import { ImgButton } from 'components/common/buttons/ImgButton';
 import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
 import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { Select } from 'components/common/inputs/Select';
 import { Table } from 'components/common/tables/NewDesign/Table';
 import { Loader } from 'components/dynamic/Loader';
-import { TagFilter } from 'components/filters/TagFilter';
-import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
-import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { product, productsEdit, routes } from 'constants/routes';
 import { blue5 } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -28,11 +25,9 @@ import { editButtonDiameter } from 'pages/CampaignManager/Channels/constants';
 import {
     emptyProductSubtitle,
     emptyProductTitle,
-    filtersMarginRight,
     moreButtonIconDiameter,
     productParameters,
-    productsContentPadding,
-    productsSelectorMock
+    productsContentPadding
 } from 'pages/CampaignManager/Products/constants';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -40,14 +35,14 @@ import { productsEffects, productsEvents, productsStores } from 'stores/products
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
 
-const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
+const { setIsFirstToFalse, invokeGetProducts } = productsEvents;
 
 export const Products = () => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    const { items, totalRecords } = useStore(productsStores.items);
+    const { items } = useStore(productsStores.items);
     const isFirst = useStore(productsStores.isFirst);
-    const { limit, pageIndex } = useStore(productsStores.values);
+    // const { limit, pageIndex } = useStore(productsStores.values);
     const loading = useStore(productsEffects.getItems.pending);
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
@@ -72,19 +67,24 @@ export const Products = () => {
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
             <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
-            <CopyableField key={id} copyData={productViewerLink} />,
-            <ImgButton
-                key={id}
-                backgroundColor={blue5}
-                height={editButtonDiameter}
-                width={editButtonDiameter}
-                onClick={onClickEditButton(id)}
-            >
-                <CustomImg height={copyButtonIconDiameter} src={editButtonIcon} width={copyButtonIconDiameter} />
-            </ImgButton>,
-            <ImgButton key={id} backgroundColor={blue5} height="39px" width="36px" onClick={onClickMoreButton(id)}>
-                <CustomImg height={moreButtonIconDiameter} src={moreButtonIcon} width={moreButtonIconDiameter} />
-            </ImgButton>
+            <Row key={id}>
+                <CopyableField subject={productViewerLink} />
+            </Row>,
+            <Row key={id}>
+                <ImgButton
+                    backgroundColor={blue5}
+                    height={editButtonDiameter}
+                    width={editButtonDiameter}
+                    onClick={onClickEditButton(id)}
+                >
+                    <CustomImg height={copyButtonIconDiameter} src={editButtonIcon} width={copyButtonIconDiameter} />
+                </ImgButton>
+            </Row>,
+            <Row key={id}>
+                <ImgButton backgroundColor={blue5} height="39px" width="36px" onClick={onClickMoreButton(id)}>
+                    <CustomImg height={moreButtonIconDiameter} src={moreButtonIcon} width={moreButtonIconDiameter} />
+                </ImgButton>
+            </Row>
         ],
         alignment: ['start', ...new Array(5).fill('center')]
     }));
@@ -120,17 +120,17 @@ export const Products = () => {
     //     ],
     //     alignment: ['start', ...new Array(5).fill('center')]
     // }));
-
-    const onPaginationChange = (current: number) =>
-        updateValues({
-            pageIndex: current
-        });
-
-    const onSizeChange = (current: number, size: number) =>
-        updateValues({
-            pageIndex: current,
-            limit: size
-        });
+    //
+    // const onPaginationChange = (current: number) =>
+    //     updateValues({
+    //         pageIndex: current
+    //     });
+    //
+    // const onSizeChange = (current: number, size: number) =>
+    //     updateValues({
+    //         pageIndex: current,
+    //         limit: size
+    //     });
 
     useEffect(() => {
         if (isFirst) {
@@ -144,19 +144,19 @@ export const Products = () => {
         <CampaignManagerLayout>
             <Section marginBottom="8px">
                 <ContentWrapper padding={productsContentPadding} width="100%">
-                    <Row noWrap>
-                        <FlexGrow marginRight={filtersMarginRight}>
-                            <TagFilter
-                                defaultChecked
-                                tagsValues={['test']}
-                                onChange={(checked: boolean, values: string[]) => {}}
-                            />
-                        </FlexGrow>
-                        <Row marginRight={filtersMarginRight}>
-                            <Select height="57px" values={productsSelectorMock} width="190px" />
-                        </Row>
+                    <Section justifyEnd noWrap>
+                        {/*<FlexGrow marginRight={filtersMarginRight}>*/}
+                        {/*    <TagFilter*/}
+                        {/*        defaultChecked*/}
+                        {/*        tagsValues={['test']}*/}
+                        {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
+                        {/*    />*/}
+                        {/*</FlexGrow>*/}
+                        {/*<Row marginRight={filtersMarginRight}>*/}
+                        {/*    <Select height="57px" values={productsSelectorMock} width="190px" />*/}
+                        {/*</Row>*/}
                         <AddButton onClick={onClickAddButton}>Add New</AddButton>
-                    </Row>
+                    </Section>
                 </ContentWrapper>
             </Section>
             <Section>
@@ -170,17 +170,17 @@ export const Products = () => {
                             onClickAddButton={onClickAddButton}
                         />
                     ) : (
-                        <PaginationLayout
-                            limit={limit}
-                            pageIndex={pageIndex}
-                            totalRecords={totalRecords}
-                            onPaginationChange={onPaginationChange}
-                            onSizeChange={onSizeChange}
-                        >
-                            <OverflowAutoLayout>
-                                <Table columnSizes={[2, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
-                            </OverflowAutoLayout>
-                        </PaginationLayout>
+                        // <PaginationLayout
+                        //     limit={limit}
+                        //     pageIndex={pageIndex}
+                        //     totalRecords={totalRecords}
+                        //     onPaginationChange={onPaginationChange}
+                        //     onSizeChange={onSizeChange}
+                        // >
+                        <OverflowAutoLayout>
+                            <Table columnSizes={[2, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
+                        </OverflowAutoLayout>
+                        // </PaginationLayout>
                     )}
                 </ContentWrapper>
             </Section>

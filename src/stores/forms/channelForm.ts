@@ -18,7 +18,7 @@ export const channelForm = createForm({
             init: ''
         },
         isPrivate: {
-            init: false
+            init: true
         }
     },
     validateOn: ['change', 'blur', 'submit']
@@ -36,7 +36,7 @@ sample({
     source: channelForm.$values,
     clock: addSubmit,
     target: channelsEffects.createChannel,
-    fn: ({ name }, _) => ({ name })
+    fn: ({ name, isPrivate }, _) => ({ name, isPrivate })
 });
 
 //using endpoint for submit

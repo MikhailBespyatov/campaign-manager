@@ -5,7 +5,7 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { createCampaignSteps } from 'pages/CampaignManager/Campaign/Create/constants';
 import { createCampaignEvents, createCampaignStores } from 'stores/createCampaignSteps';
 import { useStore } from 'effector-react';
-import { useField } from 'effector-forms';
+import { useField, useForm } from 'effector-forms';
 import { forms } from 'stores/forms';
 
 interface Props {}
@@ -17,6 +17,7 @@ export const CreateCampaignLayout: FC<Props> = ({ children }) => {
     //!!! because I can't resolve problem with get fields by key of string !!!
     // @ts-ignore
     const { isValid, isDirty } = useField(forms.createCampaignForm.fields[isValidField]);
+    const { submit } = useForm(forms.createCampaignForm);
 
     const onChangeStep = (isForward: boolean) =>
         isForward ? createCampaignEvents.nextStep() : createCampaignEvents.previousStep();
@@ -32,6 +33,7 @@ export const CreateCampaignLayout: FC<Props> = ({ children }) => {
                             title
                         }))}
                         onChange={onChangeStep}
+                        onPublish={() => submit()}
                     />
                 </ContentWrapper>
             </MarginWrapper>

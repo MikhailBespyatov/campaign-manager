@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
 import { modalEvents, modalStores } from 'stores/modal';
 import { walletStores } from 'stores/wallet';
-import { Modal, WalletSubtitleSpan, WalletTitleSpan, Wrapper } from './styles';
-import { tertiaryPadding, white } from 'constants/styles';
+import { Modal, WalletSubtitleSpan, WalletTitleSpan, Wrapper, WalletBalanceSpan, CurrencySpan } from './styles';
+import { blue7, tertiaryPadding, white } from 'constants/styles';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import closeImg from 'assets/img/add_video.svg';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { Column, FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, FlexGrow, Section, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CopyableField } from 'components/common/features/CopyableField';
 import QRCode from 'qrcode';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import { themeStores } from 'stores/theme';
+import WOMIcon from 'assets/img/wom-token-logo.png';
+import { totalCurrency } from 'utils/usefulFunctions';
 
 export const WalletModal = () => {
     const { visible } = useStore(modalStores.walletModal);
@@ -23,6 +25,11 @@ export const WalletModal = () => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const walletOwner = globalPrefixUrl.replaceAll('/', '');
     const [qrCodeImage, setQRCodeImage] = useState('');
+    const [usdRate, eurRate] = useStore(walletStores.rates);
+    const walletBalance = useStore(walletStores.walletBalance);
+
+    const USD = totalCurrency(walletBalance, usdRate);
+    const EUR = totalCurrency(walletBalance, eurRate);
 
     const onClose = () => modalEvents.closeWalletModal();
 
@@ -51,8 +58,39 @@ export const WalletModal = () => {
                 />
             </AbsoluteWrapper>
             <Modal>
-                <Section justifyCenter marginBottom="64px">
+                <Section justifyCenter marginBottom="27px">
                     <WalletTitleSpan>MY WALLET</WalletTitleSpan>
+                </Section>
+                <Section justifyCenter marginBottom="40px">
+                    <Column alignCenter justifyCenter>
+                        <MarginWrapper marginBottom="17px">
+                            <WalletSubtitleSpan>BALANCE</WalletSubtitleSpan>
+                        </MarginWrapper>
+                        <Row alignCenter marginBottom="17px">
+                            <MarginWrapper marginRight="12px">
+                                <CustomImg height="27px" src={WOMIcon} width="24px" />
+                            </MarginWrapper>
+                            <WalletBalanceSpan>{walletBalance}</WalletBalanceSpan>
+                        </Row>
+                        <Row>
+                            <Row justifyCenter marginRight="27px">
+                                <Row marginRight="3px">
+                                    <CurrencySpan color={blue7}>USD</CurrencySpan>
+                                </Row>
+                                <Row>
+                                    <CurrencySpan color={white}>{USD}</CurrencySpan>
+                                </Row>
+                            </Row>
+                            <Row>
+                                <Row marginRight="3px">
+                                    <CurrencySpan color={blue7}>EUR</CurrencySpan>
+                                </Row>
+                                <Row>
+                                    <CurrencySpan color={white}>{EUR}</CurrencySpan>
+                                </Row>
+                            </Row>
+                        </Row>
+                    </Column>
                 </Section>
                 <Section justifyAround marginBottom="70px">
                     <Column alignCenter>
@@ -81,7 +119,7 @@ export const WalletModal = () => {
                         <MarginWrapper marginBottom="24px">
                             <WalletTitleSpan>WALLET ADDRESS</WalletTitleSpan>
                         </MarginWrapper>
-                        <CopyableField backgroundColor="#576397" color={white} copyData={walletAddress} />
+                        <CopyableField backgroundColor="#576397" color={white} subject={walletAddress} />
                     </Column>
                 </FlexGrow>
             </Modal>

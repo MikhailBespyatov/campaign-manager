@@ -18,6 +18,8 @@ export const CampaignContent = () => {
     const loading = useStore(loadingStores.initialLoading);
     const draftCampaign = useStore(campaignsStores.draftCampaign);
 
+    const campaignData = items?.filter(campaign => getCampaignStatus(campaign) === statusRoute.status);
+
     const defaultOrganizationId = getOrganizationId();
 
     useEffect(() => {
@@ -56,28 +58,23 @@ export const CampaignContent = () => {
                 ) : (
                     <CampaignEmpty />
                 )
-            ) : items?.length ? (
+            ) : campaignData?.length ? (
                 <>
-                    {items.map(item => {
-                        const status = getCampaignStatus(item);
-                        if (statusRoute.status === status)
-                            return (
-                                <Section key={item.id} marginBottom="20px">
-                                    <BorderBlock
-                                        removeBorderRadius
-                                        height="100%"
-                                        marginBottom="0"
-                                        marginRight="0"
-                                        paddingBottom={itemHorizontalPadding}
-                                        paddingRight={itemVerticalPadding}
-                                        width="100%"
-                                    >
-                                        <CampaignItem key={item.id} status={status} {...item} />
-                                    </BorderBlock>
-                                </Section>
-                            );
-                        else return null;
-                    })}
+                    {campaignData.map(item => (
+                        <Section key={item.id} marginBottom="20px">
+                            <BorderBlock
+                                removeBorderRadius
+                                height="100%"
+                                marginBottom="0"
+                                marginRight="0"
+                                paddingBottom={itemHorizontalPadding}
+                                paddingRight={itemVerticalPadding}
+                                width="100%"
+                            >
+                                <CampaignItem key={item.id} status={statusRoute.status} {...item} />
+                            </BorderBlock>
+                        </Section>
+                    ))}
                 </>
             ) : (
                 <CampaignEmpty />

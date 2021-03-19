@@ -39,6 +39,8 @@ type dateType = Date | null;
 interface Props extends Sizes, MarginBottom {
     defaultDateFrom: string;
     defaultDateTo: string;
+    minDate?: string;
+    maxDate?: string;
     onChange?: (dateFrom: string, dateTo: string) => void;
     titleType?: 'inner' | 'outer';
     title?: [string, string];
@@ -49,6 +51,8 @@ export const DatePickerBetween = ({
     defaultDateTo,
     width,
     height,
+    maxDate,
+    minDate,
     marginBottom,
     onChange = Noop,
     titleType = 'inner',
@@ -75,8 +79,11 @@ export const DatePickerBetween = ({
         onChange(date?.toISOString() || '', selectedDateTo?.toISOString() || '');
     };
     const handleDateChangeTo = (date: dateType) => {
-        setSelectedDateTo(date);
-        onChange(selectedDateFrom?.toISOString() || '', date?.toISOString() || '');
+        const dateToSet = date;
+        //Because when the user sets the date, the date for toDate is selected less than for fromDate - in BE the difference is considered less than one day
+        dateToSet?.setMinutes(date ? date.getMinutes() + 1 : 1);
+        setSelectedDateTo(dateToSet);
+        onChange(selectedDateFrom?.toISOString() || '', dateToSet?.toISOString() || '');
     };
     // useEffect(() => {
     //     onChange(selectedDateFrom?.toISOString() || '', selectedDateTo?.toISOString() || '');
@@ -132,8 +139,8 @@ export const DatePickerBetween = ({
                         )}
                         <DataPickerWrapper>
                             <TextFieldBetweenForm
-                                max={getDate(new Date(defaultDateTo))}
-                                min={getDate(new Date(defaultDateFrom))}
+                                max={maxDate}
+                                min={minDate}
                                 type="date"
                                 value={getDate(selectedDateFrom) || ''}
                                 // onChange={handleDateChangeFrom1}
@@ -145,8 +152,8 @@ export const DatePickerBetween = ({
                                         format={defaultFormat}
                                         label="Choose date from"
                                         margin="normal"
-                                        maxDate={new Date(defaultDateTo)}
-                                        minDate={new Date(defaultDateFrom)}
+                                        maxDate={maxDate}
+                                        minDate={minDate}
                                         value={selectedDateFrom}
                                         onChange={handleDateChangeFrom}
                                     />
@@ -176,8 +183,8 @@ export const DatePickerBetween = ({
                         )}
                         <DataPickerWrapper>
                             <TextFieldBetweenForm
-                                max={getDate(new Date(defaultDateTo))}
-                                min={getDate(selectedDateFrom)}
+                                max={maxDate}
+                                min={minDate}
                                 type="date"
                                 value={getDate(selectedDateTo) || ''}
                                 // onChange={handleDateChangeTo1}
@@ -189,8 +196,8 @@ export const DatePickerBetween = ({
                                         format={defaultFormat}
                                         label="Choose date to"
                                         margin="normal"
-                                        maxDate={new Date(defaultDateTo)}
-                                        minDate={selectedDateFrom}
+                                        maxDate={maxDate}
+                                        minDate={minDate}
                                         value={selectedDateTo}
                                         onChange={handleDateChangeTo}
                                     />

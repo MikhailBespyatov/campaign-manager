@@ -6,11 +6,17 @@ import { useField } from 'effector-forms';
 import { forms } from 'stores/forms';
 
 export const Budget: FC<CreateCampaignStepsProps> = () => {
-    const { value, onChange } = useField(forms.createCampaignForm.fields.budget);
+    const { value, onChange, isValid } = useField(forms.createCampaignForm.fields.budget);
 
     return (
         <ContentWrapper padding="24px 106px 30px">
-            <WomInput label="Budget amount" value={value} onChange={onChange} />
+            <WomInput
+                errorText="Insufficient funds"
+                isValid={isValid}
+                label="Budget amount"
+                value={value}
+                onChange={onChange}
+            />
         </ContentWrapper>
     );
 };

@@ -1,1 +1,1 @@
-export const modalWidth = '700px';
+export const modalWidth = '800px';

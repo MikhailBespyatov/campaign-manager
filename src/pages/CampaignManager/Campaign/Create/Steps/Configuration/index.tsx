@@ -1,27 +1,16 @@
 import React, { FC } from 'react';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import {
-    Bias,
-    CreateCampaignStepsProps,
-    DefaultValueBoolean,
-    MaxSizes,
-    OnChangeBoolean,
-    OnChangeSelect,
-    Title
-} from 'types';
+import { CreateCampaignStepsProps, MaxSizes, Title } from 'types';
 import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import {
     CheckboxBlockWrapper,
     ConfigurationItemSubtitle,
     ConfigurationItemTitle,
-    ConfigurationItemWrapper,
-    Hashtag,
-    BiasTitle
+    ConfigurationItemWrapper
 } from './styles';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import {
     ageMock,
-    biasValues,
     configurationContentPadding,
     hashtagsMock,
     localeMock,
@@ -31,106 +20,101 @@ import { LineBorder } from 'components/common/dividers/LineBorder';
 import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
 import { Span } from 'components/common/typography/Span';
 import { grey4 } from 'constants/styles';
-import { Select } from 'components/common/inputs/Select';
-import { useField } from 'effector-forms';
-import { forms } from 'stores/forms';
-import { Noop } from 'constants/global';
-import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
-const BiasTitleLayout: FC = ({ children }) => (
-    <RelativeWrapper width="auto">
-        {children}
-        <AbsoluteWrapper left="40px" top="-45px">
-            <BiasTitle>Bias</BiasTitle>
-        </AbsoluteWrapper>
-    </RelativeWrapper>
-);
-
-interface BiasSelectProps extends Pick<Title, 'title'>, OnChangeSelect, Bias {
-    isTitleBiasSelect?: boolean;
-}
-
-const BiasSelect = ({ title, onChangeSelect, bias, isTitleBiasSelect }: BiasSelectProps) => (
-    <CheckboxBlockWrapper width="297px">
-        <Section alignCenter justifyBetween height="100%">
-            <Row>
-                <Span fontSize="14px" fontWeight="600" lineHeight="17px">
-                    {title}
-                </Span>
-            </Row>
-            {isTitleBiasSelect ? (
-                <BiasTitleLayout>
-                    <Select defaultActive={bias} values={biasValues} width="110px" onChange={onChangeSelect} />
-                </BiasTitleLayout>
-            ) : (
-                <Select defaultActive={bias} values={biasValues} width="110px" onChange={onChangeSelect} />
-            )}
-        </Section>
-    </CheckboxBlockWrapper>
-);
-
-interface HashtagCheckboxProps
-    extends DefaultValueBoolean,
-        OnChangeBoolean,
-        Pick<Title, 'subtitle'>,
-        OnChangeSelect,
-        Bias {
-    hashtag: string;
-    isTitleCheckbox?: boolean;
-}
-
-const HashtagCheckbox = ({
-    hashtag,
-    subtitle,
-    bias,
-    defaultValue,
-    onChange = Noop,
-    onChangeSelect,
-    isTitleCheckbox
-}: HashtagCheckboxProps) => {
-    const flexBasis = getFlexBasisPercent(3);
-
-    return (
-        <CheckboxBlockWrapper checked={defaultValue} width="100%">
-            <Section alignCenter justifyBetween height="100%">
-                <FlexGrow flexBasis={flexBasis}>
-                    <Hashtag onClick={() => onChange(!defaultValue)}>{hashtag}</Hashtag>
-                </FlexGrow>
-                <FlexGrow alignCenter flexBasis={flexBasis}>
-                    <Span color={grey4} fontSize="13px" fontWeight="400" lineHeight="16px">
-                        Viewers:
-                        <Span fontSize="13px" fontWeight="400" lineHeight="16px">
-                            {` ${subtitle}`}
-                        </Span>
-                    </Span>
-                </FlexGrow>
-                <FlexGrow alignEnd flexBasis={flexBasis}>
-                    {isTitleCheckbox ? (
-                        <BiasTitleLayout>
-                            <Select
-                                defaultActive={bias}
-                                disabled={!defaultValue}
-                                values={biasValues}
-                                width="110px"
-                                onChange={onChangeSelect}
-                            />
-                        </BiasTitleLayout>
-                    ) : (
-                        <Select
-                            defaultActive={bias}
-                            disabled={!defaultValue}
-                            values={biasValues}
-                            width="110px"
-                            onChange={onChangeSelect}
-                        />
-                    )}
-                </FlexGrow>
-            </Section>
-        </CheckboxBlockWrapper>
-    );
-};
+//Uncomment when Configuration page needed use
+//
+// const BiasTitleLayout: FC = ({ children }) => (
+//     <RelativeWrapper width="auto">
+//         {children}
+//         <AbsoluteWrapper left="40px" top="-45px">
+//             <BiasTitle>Bias</BiasTitle>
+//         </AbsoluteWrapper>
+//     </RelativeWrapper>
+// );
+//
+// interface BiasSelectProps extends Pick<Title, 'title'>, OnChangeSelect, Bias {
+//     isTitleBiasSelect?: boolean;
+// }
+//
+// const BiasSelect = ({ title, onChangeSelect, bias, isTitleBiasSelect }: BiasSelectProps) => (
+//     <CheckboxBlockWrapper width="297px">
+//         <Section alignCenter justifyBetween height="100%">
+//             <Row>
+//                 <Span fontSize="14px" fontWeight="600" lineHeight="17px">
+//                     {title}
+//                 </Span>
+//             </Row>
+//             {isTitleBiasSelect ? (
+//                 <BiasTitleLayout>
+//                     <Select defaultActive={bias} values={biasValues} width="110px" onChange={onChangeSelect} />
+//                 </BiasTitleLayout>
+//             ) : (
+//                 <Select defaultActive={bias} values={biasValues} width="110px" onChange={onChangeSelect} />
+//             )}
+//         </Section>
+//     </CheckboxBlockWrapper>
+// );
+//
+// interface HashtagCheckboxProps
+//     extends DefaultValueBoolean,
+//         OnChangeBoolean,
+//         Pick<Title, 'subtitle'>,
+//         OnChangeSelect,
+//         Bias {
+//     hashtag: string;
+//     isTitleCheckbox?: boolean;
+// }
+//
+// const HashtagCheckbox = ({
+//     hashtag,
+//     subtitle,
+//     bias,
+//     defaultValue,
+//     onChange = Noop,
+//     onChangeSelect,
+//     isTitleCheckbox
+// }: HashtagCheckboxProps) => {
+//     const flexBasis = getFlexBasisPercent(3);
+//
+//     return (
+//         <CheckboxBlockWrapper checked={defaultValue} width="100%">
+//             <Section alignCenter justifyBetween height="100%">
+//                 <FlexGrow flexBasis={flexBasis}>
+//                     <Hashtag onClick={() => onChange(!defaultValue)}>{hashtag}</Hashtag>
+//                 </FlexGrow>
+//                 <FlexGrow alignCenter flexBasis={flexBasis}>
+//                     <Span color={grey4} fontSize="13px" fontWeight="400" lineHeight="16px">
+//                         Viewers:
+//                         <Span fontSize="13px" fontWeight="400" lineHeight="16px">
+//                             {` ${subtitle}`}
+//                         </Span>
+//                     </Span>
+//                 </FlexGrow>
+//                 <FlexGrow alignEnd flexBasis={flexBasis}>
+//                     {isTitleCheckbox ? (
+//                         <BiasTitleLayout>
+//                             <Select
+//                                 defaultActive={bias}
+//                                 disabled={!defaultValue}
+//                                 values={biasValues}
+//                                 width="110px"
+//                                 onChange={onChangeSelect}
+//                             />
+//                         </BiasTitleLayout>
+//                     ) : (
+//                         <Select
+//                             defaultActive={bias}
+//                             disabled={!defaultValue}
+//                             values={biasValues}
+//                             width="110px"
+//                             onChange={onChangeSelect}
+//                         />
+//                     )}
+//                 </FlexGrow>
+//             </Section>
+//         </CheckboxBlockWrapper>
+//     );
+// };
 
 interface CheckboxBlockProps extends CheckboxProps, Title {}
 
@@ -199,28 +183,28 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const localeData = localeMock;
     const hashtagsData = hashtagsMock;
     const overridesData = overridesMock;
-    const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
-    const { value: localeValue, onChange: onChangeLocale } = useField(forms.createCampaignForm.fields.locale);
-    const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
-    const { value: overridesValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.overrides);
+    // const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
+    // const { value: localeValue, onChange: onChangeLocale } = useField(forms.createCampaignForm.fields.locale);
+    // const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
+    // const { value: overridesValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.overrides);
 
-    const onChangeAgeCheckbox = (index: number) => (checked: boolean) =>
-        checked ? onChangeAge([...ageValue, index]) : onChangeAge(ageValue.filter(item => item !== index));
-
-    const onChangeLocaleCheckbox = (index: number) => (checked: boolean) =>
-        checked ? onChangeLocale([...localeValue, index]) : onChangeLocale(localeValue.filter(item => item !== index));
-
-    const onChangeHashtagCheckbox = (hashtag: string) => (checked: boolean) => {
-        checked
-            ? onChangeHashtags([...hashtagsValue, { hashtag, bias: '2' }])
-            : onChangeHashtags(hashtagsValue.filter(item => item.hashtag !== hashtag));
-    };
-
-    const onChangeHashtagSelect = (hashtag: string) => (active: string) =>
-        onChangeHashtags([...hashtagsValue.filter(item => item.hashtag !== hashtag), { hashtag, bias: active }]);
-
-    const onChangeOverrideSelect = (form: string) => (active: string) =>
-        onChangeOverrides({ ...overridesValue, [form]: active });
+    // const onChangeAgeCheckbox = (index: number) => (checked: boolean) =>
+    //     checked ? onChangeAge([...ageValue, index]) : onChangeAge(ageValue.filter(item => item !== index));
+    //
+    // const onChangeLocaleCheckbox = (index: number) => (checked: boolean) =>
+    //     checked ? onChangeLocale([...localeValue, index]) : onChangeLocale(localeValue.filter(item => item !== index));
+    //
+    // const onChangeHashtagCheckbox = (hashtag: string) => (checked: boolean) => {
+    //     checked
+    //         ? onChangeHashtags([...hashtagsValue, { hashtag, bias: '2' }])
+    //         : onChangeHashtags(hashtagsValue.filter(item => item.hashtag !== hashtag));
+    // };
+    //
+    // const onChangeHashtagSelect = (hashtag: string) => (active: string) =>
+    //     onChangeHashtags([...hashtagsValue.filter(item => item.hashtag !== hashtag), { hashtag, bias: active }]);
+    //
+    // const onChangeOverrideSelect = (form: string) => (active: string) =>
+    //     onChangeOverrides({ ...overridesValue, [form]: active });
 
     return (
         <ContentWrapper padding={configurationContentPadding} width="100%">
@@ -229,10 +213,10 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 {ageData.map(({ range, viewers }, index) => (
                     <MarginWrapper key={range} marginBottom="16px">
                         <CheckboxBlock
-                            defaultValue={ageValue.includes(index)}
+                            // defaultValue={ageValue.includes(index)}
                             subtitle={viewers}
                             title={range}
-                            onChange={onChangeAgeCheckbox(index)}
+                            // onChange={onChangeAgeCheckbox(index)}
                         />
                     </MarginWrapper>
                 ))}
@@ -241,10 +225,10 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 {localeData.map(({ locale, viewers }, index) => (
                     <MarginWrapper key={locale} marginBottom="16px">
                         <CheckboxBlock
-                            defaultValue={localeValue.includes(index)}
+                            // defaultValue={localeValue.includes(index)}
                             subtitle={viewers}
                             title={locale}
-                            onChange={onChangeLocaleCheckbox(index)}
+                            // onChange={onChangeLocaleCheckbox(index)}
                         />
                     </MarginWrapper>
                 ))}
@@ -255,15 +239,15 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
             >
                 {hashtagsData.map(({ hashtag, viewers }, index) => (
                     <Section key={hashtag} marginBottom="8px">
-                        <HashtagCheckbox
-                            bias={hashtagsValue.find(item => item.hashtag === hashtag)?.bias || '2'}
-                            defaultValue={hashtagsValue.some(item => item.hashtag === hashtag)}
-                            hashtag={hashtag}
-                            isTitleCheckbox={index === 0}
-                            subtitle={viewers}
-                            onChange={onChangeHashtagCheckbox(hashtag)}
-                            onChangeSelect={onChangeHashtagSelect(hashtag)}
-                        />
+                        {/*<HashtagCheckbox*/}
+                        {/*    bias={hashtagsValue.find(item => item.hashtag === hashtag)?.bias || '2'}*/}
+                        {/*    defaultValue={hashtagsValue.some(item => item.hashtag === hashtag)}*/}
+                        {/*    hashtag={hashtag}*/}
+                        {/*    isTitleCheckbox={index === 0}*/}
+                        {/*    subtitle={viewers}*/}
+                        {/*    onChange={onChangeHashtagCheckbox(hashtag)}*/}
+                        {/*    onChangeSelect={onChangeHashtagSelect(hashtag)}*/}
+                        {/*/>*/}
                     </Section>
                 ))}
             </ConfigurationItem>
@@ -275,20 +259,20 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
             >
                 {overridesData.map(({ title, form }, index) => (
                     <MarginWrapper key={title} marginBottom="16px">
-                        <BiasSelect
-                            bias={overridesValue[form]}
-                            isTitleBiasSelect={index === 0}
-                            title={title}
-                            onChangeSelect={onChangeOverrideSelect(form)}
-                        />
+                        {/*<BiasSelect*/}
+                        {/*    bias={overridesValue[form]}*/}
+                        {/*    isTitleBiasSelect={index === 0}*/}
+                        {/*    title={title}*/}
+                        {/*    onChangeSelect={onChangeOverrideSelect(form)}*/}
+                        {/*/>*/}
                     </MarginWrapper>
                 ))}
                 <MarginWrapper>
-                    <CheckboxBlock
-                        defaultValue={overridesValue.mustWatch}
-                        title="Must watch"
-                        onChange={(checked: boolean) => onChangeOverrides({ ...overridesValue, mustWatch: checked })}
-                    />
+                    {/*<CheckboxBlock*/}
+                    {/*    defaultValue={overridesValue.mustWatch}*/}
+                    {/*    title="Must watch"*/}
+                    {/*    onChange={(checked: boolean) => onChangeOverrides({ ...overridesValue, mustWatch: checked })}*/}
+                    {/*/>*/}
                 </MarginWrapper>
             </ConfigurationItem>
         </ContentWrapper>
