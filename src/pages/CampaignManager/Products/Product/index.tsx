@@ -17,6 +17,7 @@ import { productsEffects, productsEvents, productsStores } from 'stores/products
 import { ProductThumbnail } from '../styles';
 import { productContentMarginBottom, productContentPadding } from './constants';
 import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
+import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 
 export const Product = () => {
     const { productId } = useParams();
@@ -77,7 +78,7 @@ export const Product = () => {
                             <Loader />
                         </Section>
                     ) : (
-                        <Section>
+                        <CardCatalogGrid>
                             {!!items?.length ? (
                                 items.map(item => <VideoCard key={item.womContentId} {...item} />)
                             ) : (
@@ -85,7 +86,7 @@ export const Product = () => {
                                     <EmptySearchResult title="Sorry! No result found" />
                                 </Section>
                             )}
-                        </Section>
+                        </CardCatalogGrid>
                     )}
                 </VideosFilterLayout>
             </ModifyingLayout>

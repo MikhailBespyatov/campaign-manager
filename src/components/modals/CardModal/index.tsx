@@ -193,58 +193,92 @@ export const CardModal = () => {
                                     </Row>
                                 </Section>
                                 <Section marginBottom="80px">
-                                    <Title>Engagement</Title>
-                                    <Row justifyBetween width="80%">
-                                        <ItemBlock item={engagement?.viewCount} title="Views" />
-                                        <ItemBlock
-                                            item={engagement?.likeCount}
-                                            percentageGrowth={
-                                                <PercentageGrowth
-                                                    isPlusStyle
-                                                    type={engagementStatusTypes(engagement?.likesPercentage)}
-                                                >
-                                                    {engagement?.likesPercentage || 0}
-                                                </PercentageGrowth>
-                                            }
-                                            title="Likes"
-                                        />
-                                        <ItemBlock
-                                            item={engagement?.saveCount}
-                                            percentageGrowth={
-                                                <PercentageGrowth
-                                                    isPlusStyle
-                                                    type={engagementStatusTypes(engagement?.savesPercentage)}
-                                                >
-                                                    {engagement?.savesPercentage || 0}
-                                                </PercentageGrowth>
-                                            }
-                                            title="Saves"
-                                        />
-                                        <ItemBlock
-                                            item={engagement?.commentCount}
-                                            percentageGrowth={
-                                                <PercentageGrowth
-                                                    isPlusStyle
-                                                    type={engagementStatusTypes(engagement?.commentsPercentage)}
-                                                >
-                                                    {engagement?.commentsPercentage || 0}
-                                                </PercentageGrowth>
-                                            }
-                                            title="Comments"
-                                        />
-                                        <ItemBlock
-                                            item={engagement?.shareCount}
-                                            percentageGrowth={
-                                                <PercentageGrowth
-                                                    isPlusStyle
-                                                    type={engagementStatusTypes(engagement?.sharesPercentage)}
-                                                >
-                                                    {engagement?.sharesPercentage || 0}
-                                                </PercentageGrowth>
-                                            }
-                                            title="Shares"
-                                        />
-                                    </Row>
+                                    <Column width="100%">
+                                        <Title>Engagement</Title>
+                                        <Row justifyBetween width="80%">
+                                            <ItemBlock item={engagement?.viewCount} title="Views" />
+                                            <ItemBlock
+                                                item={engagement?.likeCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={engagementStatusTypes(engagement?.likesPercentage)}
+                                                    >
+                                                        {engagement?.likesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Likes"
+                                            />
+                                            <ItemBlock
+                                                item={engagement?.saveCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={engagementStatusTypes(engagement?.savesPercentage)}
+                                                    >
+                                                        {engagement?.savesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Saves"
+                                            />
+                                            <ItemBlock
+                                                item={engagement?.commentCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={engagementStatusTypes(engagement?.commentsPercentage)}
+                                                    >
+                                                        {engagement?.commentsPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Comments"
+                                            />
+                                            <ItemBlock
+                                                item={engagement?.shareCount}
+                                                percentageGrowth={
+                                                    <PercentageGrowth
+                                                        isPlusStyle
+                                                        type={engagementStatusTypes(engagement?.sharesPercentage)}
+                                                    >
+                                                        {engagement?.sharesPercentage || 0}
+                                                    </PercentageGrowth>
+                                                }
+                                                title="Shares"
+                                            />
+                                        </Row>
+                                        <MarginWrapper marginTop="45px">
+                                            <Column>
+                                                <MarginWrapper marginBottom="8px">
+                                                    <Subtitle>
+                                                        Average Percentage Viewed
+                                                        {/* Viewers */}
+                                                    </Subtitle>
+                                                </MarginWrapper>
+                                                <Row>
+                                                    <Column marginRight={primaryPadding}>
+                                                        <PercentageSpan>{'< 25%'}</PercentageSpan>
+                                                        <PercentageSpan>25% - 50%</PercentageSpan>
+                                                        <PercentageSpan>50% - 75%</PercentageSpan>
+                                                        <PercentageSpan>{'> 75%'}</PercentageSpan>
+                                                    </Column>
+                                                    <Column>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD1Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD2Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD3Percentage || 0}%
+                                                        </EngagementSpan>
+                                                        <EngagementSpan>
+                                                            {engagement?.viewsD4Percentage || 0}%
+                                                        </EngagementSpan>
+                                                    </Column>
+                                                </Row>
+                                            </Column>
+                                        </MarginWrapper>
+                                    </Column>
                                 </Section>
                                 <Section marginBottom="80px">
                                     <Title>Authentication</Title>
@@ -272,38 +306,6 @@ export const CardModal = () => {
                                                     item={roundScore(womQualityScore?.positivity || 0)}
                                                     title="Positivity"
                                                 />
-                                            </MarginWrapper>
-                                            <MarginWrapper>
-                                                <Column>
-                                                    <MarginWrapper marginBottom="8px">
-                                                        <Subtitle>
-                                                            Average Percentage Viewed
-                                                            {/* Viewers */}
-                                                        </Subtitle>
-                                                    </MarginWrapper>
-                                                    <Row>
-                                                        <Column marginRight={primaryPadding}>
-                                                            <PercentageSpan>{'< 25%'}</PercentageSpan>
-                                                            <PercentageSpan>25% - 50%</PercentageSpan>
-                                                            <PercentageSpan>50% - 75%</PercentageSpan>
-                                                            <PercentageSpan>{'> 75%'}</PercentageSpan>
-                                                        </Column>
-                                                        <Column>
-                                                            <EngagementSpan>
-                                                                {engagement?.viewsD1Percentage || 0}%
-                                                            </EngagementSpan>
-                                                            <EngagementSpan>
-                                                                {engagement?.viewsD2Percentage || 0}%
-                                                            </EngagementSpan>
-                                                            <EngagementSpan>
-                                                                {engagement?.viewsD3Percentage || 0}%
-                                                            </EngagementSpan>
-                                                            <EngagementSpan>
-                                                                {engagement?.viewsD4Percentage || 0}%
-                                                            </EngagementSpan>
-                                                        </Column>
-                                                    </Row>
-                                                </Column>
                                             </MarginWrapper>
                                         </Row>
                                     </Column>
