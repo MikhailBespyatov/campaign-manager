@@ -135,7 +135,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                         </Span>
                     </Row>
                     {children}
-                    <Section justifyCenter marginBottom="75px">
+                    <Section justifyCenter marginBottom="20px" marginTop="57px">
                         {!loading && (
                             <Pagination
                                 currentIndex={pageIndex + 1}

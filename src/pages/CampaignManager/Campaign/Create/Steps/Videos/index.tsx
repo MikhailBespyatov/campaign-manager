@@ -19,6 +19,7 @@ import { NoVideoSpan, SelectedVideoWrapper } from './styles';
 import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
 import { organizationsStores } from 'stores/organizations';
 import { defaultPage } from 'constants/defaults';
+import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 
 export const Videos: FC<CreateCampaignStepsProps> = () => {
     const [{ items, totalRecords }, loading] = useStore(campaignContentStores.combinedItems);
@@ -71,9 +72,13 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
                         <Loader />
                     </Section>
                 ) : (
-                    <Section>
+                    <Section justifyCenter>
                         {unselectedVideos?.length ? (
-                            unselectedVideos.map(item => <VideoCard key={item.womContentId} {...item} />)
+                            <CardCatalogGrid>
+                                {unselectedVideos.map(item => (
+                                    <VideoCard key={item.womContentId} {...item} />
+                                ))}
+                            </CardCatalogGrid>
                         ) : (
                             <Section justifyCenter>
                                 <EmptySearchResult title="Sorry! No result found" />
