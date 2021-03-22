@@ -23,6 +23,10 @@ export interface FlexBooleanAlignment extends NoWrap {
     justifyBetween?: boolean;
 }
 
+export interface Center {
+    center?: boolean;
+}
+
 export interface FlexAlignment {
     align?: string;
     justify?: string;
@@ -198,4 +202,8 @@ export interface FlexBasis {
 
 export interface BorderRadius {
     borderRadius?: string;
+}
+
+export interface ZIndex {
+    zIndex?: string;
 }

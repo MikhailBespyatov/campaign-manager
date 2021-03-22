@@ -1,6 +1,7 @@
 import { AbsoluteWrapperProps } from 'components/grid/wrappers/AbsoluteWrapper/types';
 import { padding } from 'constants/styles';
 import styled from 'styled-components';
+import { ZIndex } from 'types';
 
 export const AbsoluteWrapper = styled.div<AbsoluteWrapperProps>`
     position: absolute;
@@ -10,4 +11,12 @@ export const AbsoluteWrapper = styled.div<AbsoluteWrapperProps>`
     ${({ height }) => (height ? `height: ${height}` : '')};
     display: ${({ isClosed }) => (isClosed ? 'none' : 'block')};
     ${({ zIndex }) => (zIndex ? `z-index: ${zIndex}` : '')};
+`;
+
+export const AbsoluteCenterAlignment = styled.div<ZIndex>`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    ${({ zIndex }) => zIndex && `z-index: ${zIndex}`};
 `;

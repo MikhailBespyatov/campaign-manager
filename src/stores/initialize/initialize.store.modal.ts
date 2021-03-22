@@ -1,3 +1,4 @@
+import { AlertModalProps } from 'components/modals/AlertModal';
 import { combine, createEvent, createStore } from 'effector';
 
 export const initializeGenericStoreModal = <T = void>(initialState: T = {} as T) => {
@@ -12,3 +13,9 @@ export const initializeGenericStoreModal = <T = void>(initialState: T = {} as T)
 
     return { modal, openModal, closeModal };
 };
+
+export const createAlertModal = initializeGenericStoreModal<AlertModalProps>({
+    title: '',
+    subTitle: '',
+    type: 'error'
+});

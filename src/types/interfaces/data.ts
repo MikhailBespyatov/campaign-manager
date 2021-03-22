@@ -1,5 +1,5 @@
-import { AlignmentType, Noop, StatusType } from 'types';
 import React, { FC } from 'react';
+import { AlignmentType, Noop, StatusType } from 'types';
 
 export interface Subtitle {
     subtitle?: string;
@@ -115,3 +115,5 @@ export interface IsValid {
 export interface SelectorFilterType {
     type?: 'select' | 'checkbox';
 }
+
+export type AlertMessageType = 'error' | 'success';

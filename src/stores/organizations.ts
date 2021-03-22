@@ -1,11 +1,9 @@
-import history from 'BrowserHistory';
 import { asyncErrorMessage } from 'constants/messages';
-import { routes } from 'constants/routes';
 import { createEffect, createEvent, createStore } from 'effector';
 import { CreateOrganizationRequestProps } from 'pages/SignUp/types';
 import { API } from 'services';
+import { createAlertModal } from 'stores/initialize/initialize.store.modal';
 import { loadingEffects } from 'stores/loading';
-import Swal from 'sweetalert2';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -24,11 +22,17 @@ const createOrganization = createEffect({
             await API.organizations.createOrganization(values);
             loadingEffects.updateLoading();
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Thank you, for you creating an organization',
-                text: 'Please check your email - you will receive the email with instructions',
-                willClose: () => history.push(routes.wrongPath)
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Thank you, for you creating an organization',
+            //     text: 'Please check your email - you will receive the email with instructions',
+            //     willClose: () => history.push(routes.wrongPath)
+            // });
+
+            createAlertModal.openModal({
+                title: 'Thank you for signing up.',
+                subTitle: 'Please check your email inbox for further instructions.',
+                type: 'success'
             });
         } catch ({ status, data }) {
             console.log('catch block');
@@ -36,10 +40,16 @@ const createOrganization = createEffect({
 
             const errorMessage = data?.message || asyncErrorMessage;
 
-            Swal.fire('Error!', errorMessage, 'error');
-            setErrors({
-                companyName: errorMessage
+            createAlertModal.openModal({
+                title: 'Error!',
+                subTitle: errorMessage,
+                type: 'error'
             });
+
+            // Swal.fire('Error!', errorMessage, 'error');
+            // setErrors({
+            //     companyName: errorMessage
+            // });
 
             //errorHandler(
             //     [

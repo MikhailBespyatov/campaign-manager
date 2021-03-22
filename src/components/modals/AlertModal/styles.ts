@@ -1,9 +1,10 @@
-import { State } from 'components/modals/AlertModal';
-import { blue, flexCenter, red } from 'constants/styles';
+import { blue, flexCenter, red, white } from 'constants/styles';
 import styled from 'styled-components';
-import { BackgroundColor } from 'types';
+import { AlertMessageType, BackgroundColor } from 'types';
 
-export interface ImageWrapperProps extends BackgroundColor, State {}
+export interface ImageWrapperProps extends BackgroundColor {
+    type: AlertMessageType;
+}
 
 export const ImageWrapper = styled.div<ImageWrapperProps>`
     height: 55px;
@@ -11,6 +12,14 @@ export const ImageWrapper = styled.div<ImageWrapperProps>`
     padding: 16px;
     border-radius: 50%;
     margin-bottom: 20px;
-    background-color: ${({ state }) => (state === 'error' ? red : blue)};
+    background-color: ${({ type }) => (type === 'error' ? red : blue)};
     ${flexCenter}
+`;
+
+export const ModalWrapper = styled.div`
+    border-radius: 20px;
+    height: 320px;
+    padding: 33px 80px 52px;
+    width: 580px;
+    background-color: ${white};
 `;
