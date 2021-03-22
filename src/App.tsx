@@ -1,4 +1,5 @@
 import history from 'BrowserHistory';
+import { AlertModal } from 'components/modals/AlertModal';
 import { AsyncModal } from 'components/modals/AsyncModal';
 import { CardModal } from 'components/modals/CardModal';
 import { CongratsModal } from 'components/modals/CongratsModal';
@@ -78,6 +79,7 @@ const App = () => {
                     <PopUpCampaignManager />
                     <CongratsModal />
                     <AsyncModal />
+                    <AlertModal />
 
                     <Switch>
                         {/* * public */}

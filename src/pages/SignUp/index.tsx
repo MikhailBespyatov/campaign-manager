@@ -32,7 +32,6 @@ export const CreateAccount = () => {
 
     return (
         <>
-            {/* <AlertModal /> */}
             <AuthLayout>
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                     {({ handleSubmit, isValid, dirty }) => (
