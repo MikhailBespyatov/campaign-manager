@@ -57,7 +57,7 @@ export const Products = () => {
 
     const dataTable: DataTable[] | undefined = items?.map(({ id = '', publicId = '', name, imageUrl, brand }) => ({
         cells: [
-            <Row key={id} alignCenter>
+            <Row key={id} alignCenter noWrap>
                 <MarginWrapper marginLeft="8px" marginRight="17px">
                     <CustomImg
                         height={channelLogoDiameter}
@@ -179,7 +179,7 @@ export const Products = () => {
                             onSizeChange={onSizeChange}
                         >
                             <OverflowAutoLayout>
-                                <Table columnSizes={[2, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
+                                <Table columnSizes={[3, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
                             </OverflowAutoLayout>
                         </PaginationLayout>
                     )}
