@@ -31,26 +31,28 @@ export const CreateAccount = () => {
     const onConfirmedChange = () => setIsConfirmed(!isConfirmed);
 
     return (
-        <AuthLayout>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                {({ handleSubmit, isValid, dirty }) => (
-                    <Form title="Sign Up for Your Free Account" onSubmit={handleSubmit}>
-                        <TextInput
-                            label="Company Name"
-                            name="companyName"
-                            placeholder="Enter your company name"
-                            untouchedWarning="This can only contain 0-9 a-z A-Z characters"
-                        />
-                        {/* <TextInput label="Full name" name="username" placeholder="Enter your account name" /> */}
-                        <TextInput name="administratorEmail" type="email" untouchedWarning=" " />
-                        {/* <TextInput
+        <>
+            {/* <AlertModal /> */}
+            <AuthLayout>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    {({ handleSubmit, isValid, dirty }) => (
+                        <Form title="Sign Up for Your Free Account" onSubmit={handleSubmit}>
+                            <TextInput
+                                label="Company Name"
+                                name="companyName"
+                                placeholder="Enter your company name"
+                                untouchedWarning="This can only contain 0-9 a-z A-Z characters"
+                            />
+                            {/* <TextInput label="Full name" name="username" placeholder="Enter your account name" /> */}
+                            <TextInput name="administratorEmail" type="email" untouchedWarning=" " />
+                            {/* <TextInput
                             label="Password"
                             name="password"
                             placeholder="Type your password"
                             type="password"
                             untouchedWarning="Password should be 8 or more characters and include a capital letter and a number"
                         /> */}
-                        {/* <MarginWrapper marginLeft="auto" marginTop="3px">
+                            {/* <MarginWrapper marginLeft="auto" marginTop="3px">
                             <Row>
                                 <InternalLink fontSize="16px" lineHeight="20px" to={routes.signIn.admin}>
                                     Enter as Admin
@@ -60,72 +62,73 @@ export const CreateAccount = () => {
                                 Back to home
                             </InternalLink>
                         </MarginWrapper> */}
-                        <Row alignCenter noWrap marginBottom="35px" marginTop="30px">
-                            <Column marginRight="15px">
-                                <BooleanCheckbox onChange={onConfirmedChange} />
-                            </Column>
-                            <Span uppercase fontSize="14px" fontWeight="500" lineHeight="17px">
-                                I acknowledge that I have read{' '}
-                                <InternalTextLink
-                                    color={blue}
-                                    href={privacyPolicyHref}
-                                    marginRight="0px"
-                                    target="_blank"
-                                >
-                                    Privacy Policy
-                                </InternalTextLink>
-                                and agree to the&nbsp;
-                                <InternalTextLink
-                                    color={blue}
-                                    href={termsOfServiceHref}
-                                    marginRight="0px"
-                                    target="_blank"
-                                >
-                                    Terms of Service
-                                </InternalTextLink>
-                                .
-                            </Span>
-                        </Row>
-                        <Button
-                            // background={isExactValuesQuantity(touched) && objectIsEmpty(errors) ? blue : undefined}
-                            background={isValid && dirty ? blue : undefined}
-                            disabled={loading || !isConfirmed}
-                        >
-                            {loading ? <Loader /> : 'SIGN UP'}
-                        </Button>
-                        <Column alignCenter marginTop="35px" width="100%">
-                            <Section alignCenter justifyCenter marginBottom="15px">
-                                <Span fontSize="12px">ALREADY HAVE AN ACCOUNT? </Span>
+                            <Row alignCenter noWrap marginBottom="35px" marginTop="30px">
+                                <Column marginRight="15px">
+                                    <BooleanCheckbox onChange={onConfirmedChange} />
+                                </Column>
+                                <Span uppercase fontSize="14px" fontWeight="500" lineHeight="16px">
+                                    I acknowledge that I have read&nbsp;
+                                    <InternalTextLink
+                                        color={blue}
+                                        href={privacyPolicyHref}
+                                        marginRight="0px"
+                                        target="_blank"
+                                    >
+                                        Privacy Policy
+                                    </InternalTextLink>
+                                    &nbsp;and agree to the&nbsp;
+                                    <InternalTextLink
+                                        color={blue}
+                                        href={termsOfServiceHref}
+                                        marginRight="0px"
+                                        target="_blank"
+                                    >
+                                        Terms of Service
+                                    </InternalTextLink>
+                                    .
+                                </Span>
+                            </Row>
+                            <Button
+                                // background={isExactValuesQuantity(touched) && objectIsEmpty(errors) ? blue : undefined}
+                                background={isValid && dirty ? blue : undefined}
+                                disabled={loading || !isConfirmed}
+                            >
+                                {loading ? <Loader /> : 'SIGN UP'}
+                            </Button>
+                            <Column alignCenter marginTop="35px" width="100%">
+                                <Section alignCenter justifyCenter marginBottom="15px">
+                                    <Span fontSize="12px">ALREADY HAVE AN ACCOUNT? </Span>
+                                    <InternalLink
+                                        color={blue}
+                                        fontSize="12px"
+                                        lineHeight="20px"
+                                        marginBottom="0px"
+                                        marginRight="0px"
+                                        to={signInPath}
+                                    >
+                                        LOG IN HERE
+                                    </InternalLink>
+                                </Section>
                                 <InternalLink
-                                    color={blue}
                                     fontSize="12px"
                                     lineHeight="20px"
                                     marginBottom="0px"
+                                    marginLeft="0px"
                                     marginRight="0px"
-                                    to={signInPath}
+                                    textDecoration="none"
+                                    to={routes.wrongPath}
                                 >
-                                    LOG IN HERE
+                                    BACK TO HOME
                                 </InternalLink>
-                            </Section>
-                            <InternalLink
-                                fontSize="12px"
-                                lineHeight="20px"
-                                marginBottom="0px"
-                                marginLeft="0px"
-                                marginRight="0px"
-                                textDecoration="none"
-                                to={routes.wrongPath}
-                            >
-                                BACK TO HOME
-                            </InternalLink>
-                        </Column>
-                        {/* <Span alignCenter color="#9EA1B3" fontSize="18px" fontWeight="500" lineHeight="22px">
+                            </Column>
+                            {/* <Span alignCenter color="#9EA1B3" fontSize="18px" fontWeight="500" lineHeight="22px">
                             By tapping "Sign Up & Accept", you acknowledge that you have read the Privacy Policy and
                             agree to the Terms of Service.
                         </Span> */}
-                    </Form>
-                )}
-            </Formik>
-        </AuthLayout>
+                        </Form>
+                    )}
+                </Formik>
+            </AuthLayout>
+        </>
     );
 };

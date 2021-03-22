@@ -27,7 +27,7 @@ const setAuth = createEvent<Auth>();
 const counterLocalStorage = connectLocalStorage(userStorageName).onError(err => console.log(err));
 
 const loadToken = createEffect({
-    handler: async (values: AuthUserRequest) => {
+    handler: async ({ values, setErrors = Noop }: AuthUserRequest) => {
         try {
             loadingEffects.updateLoading();
 
@@ -43,25 +43,34 @@ const loadToken = createEffect({
             //localStorage.setItem(userStorageName, JSON.stringify(data));
             //organizationsEvents.setOrganizationId(data?.user?.organizationId || '');
             return data;
-        } catch {
+        } catch ({ data }) {
             loadingEffects.updateLoading();
-            return {};
+
+            setErrors({
+                email: data?.message,
+                password: data?.message
+            });
+            // return {};
         }
     }
 });
 
 const loadAdminToken = createEffect({
-    handler: async (values: AuthUserRequest) => {
+    handler: async ({ values, setErrors = Noop }: AuthUserRequest) => {
         try {
             loadingEffects.updateLoading();
-            const data = await API.user.authenticateAdmin(values);
+            const data = await API.user.authenticateAdmin({ ...values });
             loadingEffects.updateLoading();
 
             //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
-        } catch {
+        } catch ({ data }) {
             loadingEffects.updateLoading();
-            return {};
+            setErrors({
+                email: data?.message,
+                password: data?.message
+            });
+            // return {};
         }
     }
 });
@@ -119,11 +128,12 @@ const sendSecurityCode = createEffect({
             loadingEffects.updateLoading();
 
             isSuccess && history.push(requestCodePath);
-        } catch {
+        } catch (ex) {
             setEmail('');
             loadingEffects.updateLoading();
             setErrors({
-                email: errorDataMessage
+                email: ex.data?.message
+                //email: errorDataMessage
             });
         }
     }
@@ -247,6 +257,7 @@ const auth = createStore<Auth>(
         ? {
               access: -1,
               authDenyReason: errorDataMessage
+              //authDenyReason: errorDataMessage
           }
         : giveAccess(userStore) !== -1
         ? {
