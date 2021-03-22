@@ -3,7 +3,7 @@ export const wrapperVerticalPadding = '90px';
 export const wrapperHorizontalPadding = '63px';
 
 export const modalWidth = '600px';
-export const modalBorderRadius = '20px 45px 45px 20px';
+export const modalBorderRadius = '45px';
 export const modalBoxShadow = '0 0 30px 0 rgba(0, 0, 0, .3)';
 export const modalBackground = '#051959';
 export const modalVerticalPadding = '36px';

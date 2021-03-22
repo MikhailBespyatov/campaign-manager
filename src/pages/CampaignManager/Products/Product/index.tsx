@@ -78,15 +78,20 @@ export const Product = () => {
                             <Loader />
                         </Section>
                     ) : (
-                        <CardCatalogGrid>
+                        <>
                             {!!items?.length ? (
-                                items.map(item => <VideoCard key={item.womContentId} {...item} />)
+                                <CardCatalogGrid>
+                                    {' '}
+                                    {items.map(item => (
+                                        <VideoCard key={item.womContentId} {...item} />
+                                    ))}
+                                </CardCatalogGrid>
                             ) : (
                                 <Section justifyCenter>
                                     <EmptySearchResult title="Sorry! No result found" />
                                 </Section>
                             )}
-                        </CardCatalogGrid>
+                        </>
                     )}
                 </VideosFilterLayout>
             </ModifyingLayout>
