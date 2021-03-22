@@ -1,4 +1,4 @@
-import { AuthUserRequest, AuthUserResponse, RegisterUserRequest } from 'types';
+import { AuthUserResponse, RegisterUserRequest } from 'types';
 import axios from './axios';
 
 export const authenticateUser = (data: WOM.OrganizationUserAuthChallengeRequest) =>
@@ -11,7 +11,7 @@ export const authenticateUser = (data: WOM.OrganizationUserAuthChallengeRequest)
         false
     );
 
-export const authenticateAdmin = (data: AuthUserRequest) =>
+export const authenticateAdmin = (data: WOM.OrganizationUserAuthChallengeRequest) =>
     axios<AuthUserResponse>(
         {
             url: '/validation-user/authenticate',

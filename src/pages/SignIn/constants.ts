@@ -1,7 +1,6 @@
 import { yupEmailNoHint, yupPasswordNoHint } from 'constants/yupFields';
-import { FormikErrors } from 'formik';
-import { userEffects, userEvents, userStores } from 'stores/user';
-import { AuthUserRequest } from 'types';
+import { userEffects } from 'stores/user';
+import { SetErrorsAuthUserRequest } from 'types';
 import * as Yup from 'yup';
 
 export const formTitle = 'Log In'; // 'Hello, please enter your email and password';
@@ -15,24 +14,24 @@ export const validationSchema = Yup.object().shape({
     password: yupPasswordNoHint
 });
 
-interface SetErrorsFormikProps {
-    setErrors: (
-        errors: FormikErrors<{
-            email?: string;
-            password?: string;
-        }>
-    ) => void;
-}
+interface SetErrorsFormikProps extends SetErrorsAuthUserRequest {}
 
-export const onSubmit = (values: AuthUserRequest, { setErrors }: SetErrorsFormikProps) => {
-    const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
-        setErrors({
-            email: authDenyReason,
-            password: authDenyReason
-        });
-        unwatch();
+interface Props extends WOM.OrganizationUserAuthChallengeRequest {}
+
+export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) => {
+    // const unwatch = userStores.auth.watch(userEvents.setAuth, ({ authDenyReason }) => {
+    //     setErrors({
+    //         email: authDenyReason,
+    //         password: authDenyReason
+    //     });
+    //     unwatch();
+    // });
+    // userEffects.loadToken(values);
+
+    userEffects.loadToken({
+        values,
+        setErrors
     });
-    userEffects.loadToken(values);
 };
 
 export const untouchedWarningForEmail = 'This can only contain 0-9 a-z A-Z characters';
