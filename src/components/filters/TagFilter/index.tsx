@@ -16,14 +16,14 @@ import { SearchAbsoluteWrapper, SearchInput, Wrapper } from 'components/filters/
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { Noop } from 'constants/global';
 import { secondaryColor, secondaryPadding } from 'constants/styles';
-import React, { FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
+import React, { FC, FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
 import searchImg from 'assets/img/search_icon.svg';
 import enterImg from 'assets/img/enter_icon.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
 
 interface TagsFilterBlockProps {
@@ -56,13 +56,14 @@ interface Props extends Title, DefaultChecked {
     onChange?: onTagsFilterChangeType;
 }
 
-export const TagFilter = ({
+export const TagFilter: FC<Props> = ({
     title = 'Search',
     //subtitle = 'by context',
     defaultChecked = false,
     tagsValues = [],
-    onChange = Noop
-}: Props) => {
+    onChange = Noop,
+    children
+}) => {
     const [checked] = useState(defaultChecked);
     const [values, setValues] = useState(tagsValues);
 
@@ -107,38 +108,45 @@ export const TagFilter = ({
     // }, [checked, values]);
 
     return (
-        <RelativeWrapper>
-            <SearchAbsoluteWrapper>
-                <MarginWrapper marginLeft={searchImgMarginLeft} marginRight={searchImgMarginRight}>
-                    <CustomImg height={searchImgDiameter} src={searchImg} width={searchImgDiameter} />
-                </MarginWrapper>
-                {/*<Span*/}
-                {/*    color={secondaryColor}*/}
-                {/*    fontSize={searchTitleFontSize}*/}
-                {/*    fontWeight={searchTitleFontWeight}*/}
-                {/*    lineHeight={searchTitleLineHeight}*/}
-                {/*>*/}
-                {/*    {title}*/}
-                {/*</Span>*/}
-            </SearchAbsoluteWrapper>
-            <SearchAbsoluteWrapper right>
-                <Span
-                    color={secondaryColor}
-                    fontSize={enterTitleFontSize}
-                    fontWeight={enterTitleFontWeight}
-                    lineHeight={enterTitleLineHeight}
-                    opacity={0.5}
-                >
-                    Press enter
-                </Span>
-                <MarginWrapper marginLeft={enterImgMarginLeft} marginRight={enterImgMarginRight}>
-                    <CustomImg height={enterImgDiameter} src={enterImg} width={enterImgDiameter} />
-                </MarginWrapper>
-            </SearchAbsoluteWrapper>
-            <Wrapper>
-                <SearchInput placeholder={title} type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
-            </Wrapper>
+        <Column width="100%">
+            <Section alignCenter noWrap>
+                <FlexGrow>
+                    <RelativeWrapper>
+                        <SearchAbsoluteWrapper>
+                            <MarginWrapper marginLeft={searchImgMarginLeft} marginRight={searchImgMarginRight}>
+                                <CustomImg height={searchImgDiameter} src={searchImg} width={searchImgDiameter} />
+                            </MarginWrapper>
+                            {/*<Span*/}
+                            {/*    color={secondaryColor}*/}
+                            {/*    fontSize={searchTitleFontSize}*/}
+                            {/*    fontWeight={searchTitleFontWeight}*/}
+                            {/*    lineHeight={searchTitleLineHeight}*/}
+                            {/*>*/}
+                            {/*    {title}*/}
+                            {/*</Span>*/}
+                        </SearchAbsoluteWrapper>
+                        <SearchAbsoluteWrapper right>
+                            <Span
+                                color={secondaryColor}
+                                fontSize={enterTitleFontSize}
+                                fontWeight={enterTitleFontWeight}
+                                lineHeight={enterTitleLineHeight}
+                                opacity={0.5}
+                            >
+                                Press enter
+                            </Span>
+                            <MarginWrapper marginLeft={enterImgMarginLeft} marginRight={enterImgMarginRight}>
+                                <CustomImg height={enterImgDiameter} src={enterImg} width={enterImgDiameter} />
+                            </MarginWrapper>
+                        </SearchAbsoluteWrapper>
+                        <Wrapper>
+                            <SearchInput placeholder={title} type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
+                        </Wrapper>
+                    </RelativeWrapper>
+                </FlexGrow>
+                {children}
+            </Section>
             <TagsFilterBlock removeValue={removeValue} values={values} />
-        </RelativeWrapper>
+        </Column>
     );
 };

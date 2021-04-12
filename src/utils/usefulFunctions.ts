@@ -2,7 +2,7 @@ import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constant
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
-import { AuthUserResponse, StatusType } from 'types';
+import { AuthUserResponse, SortType, StatusType } from 'types';
 
 // Triggered copy to clipboard
 export const triggerCopy: (text: string) => void = text => navigator.clipboard.writeText(text);
@@ -189,3 +189,8 @@ export const getDateAfterAndReturnISO = (afterDays = 1) =>
 //TODO: Add test
 export const getDateBeforeAndReturnISO = (beforeDays = 1) =>
     new Date(Date.now() - beforeDays * 24 * 60 * 60 * 1000).toISOString();
+
+export const toggleSortType = (state: SortType) =>
+    state === 'none' ? 'descending' : state === 'descending' ? 'ascending' : 'none';
+
+export const getOrderByDescState = (state: SortType) => (state === 'none' ? undefined : state === 'descending');

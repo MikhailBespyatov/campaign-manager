@@ -10,10 +10,13 @@ import {
     videoSectionMarginBottom,
     videoStepPadding
 } from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
-import { Loading, TotalRecords } from 'types';
-import { getTotalItems } from 'utils/usefulFunctions';
+import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
+import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
+import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
+import { ResetButton } from 'components/common/buttons/ResetButton';
+import { defaultSortsState } from './constants';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
@@ -22,6 +25,7 @@ interface Props extends TotalRecords, Loading {}
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading }) => {
     const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
 
+    const [sortsState, setSortsState] = useState(defaultSortsState);
     const isFirst = useStore(campaignContentStores.isFirst);
 
     const onTagsFilterChange: onTagsFilterChangeType = (checked, values) =>
@@ -51,6 +55,40 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
             pageIndex: current,
             limit: size
         });
+
+    const onSortFilterChange = (
+        state: SortType,
+        setSortState: (state: SortType) => void,
+        property: WOM.ContentOrderByProperty
+    ) => () => {
+        const sortState = toggleSortType(state);
+        /* When changed state of filter (for example Likes) need clear state for another filters */
+        /* Since we save the state of the filter until it is reset, we can reset all filters at once. */
+        setSortsState(defaultSortsState);
+        setSortState(sortState);
+        updateValues({
+            orderByDesc: getOrderByDescState(sortState),
+            orderByProperty: sortState === 'none' ? undefined : property
+        });
+    };
+
+    const onLikesChange = onSortFilterChange(
+        sortsState.likes,
+        state => setSortsState(sortsState => ({ ...sortsState, likes: state })),
+        FilterProperty.Likes
+    );
+    const onViewsChange = onSortFilterChange(
+        sortsState.views,
+        state => setSortsState(sortsState => ({ ...sortsState, views: state })),
+        FilterProperty.Views
+    );
+    const onDateAddedChange = onSortFilterChange(
+        sortsState.dateAdded,
+        state => setSortsState(sortsState => ({ ...sortsState, dateAdded: state })),
+        FilterProperty.DateAddedUtc
+    );
+
+    const onReset = () => setDefaultValues();
 
     useEffect(() => {
         if (isFirst) {
@@ -89,41 +127,49 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
         <>
             <Section marginBottom={videoSectionMarginBottom}>
                 <ContentWrapper padding={videoStepPadding} width="100%">
-                    <Section noWrap>
-                        <FlexGrow marginRight="16px">
-                            <TagFilter
-                                defaultChecked={!!tagsAll}
-                                tagsValues={tagsAll || tagsAny || []}
-                                onChange={onTagsFilterChange}
-                            />
-                        </FlexGrow>
-                        {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">
-                            <SelectorFilter
-                                checkedValues={activeLanguage}
-                                title="Language"
-                                values={valuesLanguage}
-                                onChange={onChangeLanguage}
-                            />
-                        </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px" width="150px">
-                            <SelectorFilter
-                                checkedValues={checkedRegion}
-                                title="Region"
-                                type="checkbox"
-                                values={valuesRegion}
-                                view="columns"
-                                onChange={onChangeRegion}
-                            />
-                        </FlexGrow> */}
-                        {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
-                            <SortSelectorButton>Likes</SortSelectorButton>
-                        </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
-                            <SortSelectorButton>Views</SortSelectorButton>
-                        </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
-                            <SortSelectorButton>Data Added</SortSelectorButton>
-                        </FlexGrow> */}
+                    <Section alignCenter noWrap>
+                        <TagFilter
+                            defaultChecked={!!tagsAll}
+                            tagsValues={tagsAll || tagsAny || []}
+                            onChange={onTagsFilterChange}
+                        >
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginLeft="16px" marginRight="43px">
+                                <SortSelectorButton state={sortsState.likes} onChange={onLikesChange}>
+                                    Likes
+                                </SortSelectorButton>
+                            </FlexGrow>
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
+                                <SortSelectorButton state={sortsState.views} onChange={onViewsChange}>
+                                    Views
+                                </SortSelectorButton>
+                            </FlexGrow>
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
+                                <SortSelectorButton state={sortsState.dateAdded} onChange={onDateAddedChange}>
+                                    Data Added
+                                </SortSelectorButton>
+                            </FlexGrow>
+                            <FlexGrow flexGrow="0" flexShrink="0">
+                                <ResetButton onClick={onReset}>Reset</ResetButton>
+                            </FlexGrow>
+                        </TagFilter>
+                        {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">*/}
+                        {/*    <SelectorFilter*/}
+                        {/*        checkedValues={activeLanguage}*/}
+                        {/*        title="Language"*/}
+                        {/*        values={valuesLanguage}*/}
+                        {/*        onChange={onChangeLanguage}*/}
+                        {/*    />*/}
+                        {/*</FlexGrow>*/}
+                        {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px" width="150px">*/}
+                        {/*    <SelectorFilter*/}
+                        {/*        checkedValues={checkedRegion}*/}
+                        {/*        title="Region"*/}
+                        {/*        type="checkbox"*/}
+                        {/*        values={valuesRegion}*/}
+                        {/*        view="columns"*/}
+                        {/*        onChange={onChangeRegion}*/}
+                        {/*    />*/}
+                        {/*</FlexGrow>*/}
                     </Section>
                 </ContentWrapper>
             </Section>
