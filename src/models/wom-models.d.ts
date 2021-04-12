@@ -188,6 +188,12 @@ declare namespace WOM {
      */
     export interface BrandsResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -482,6 +488,12 @@ declare namespace WOM {
      * campaignStatisticsQueryResponse
      */
     export interface CampaignStatisticsQueryResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: CampaignStatisticsQueryRequest;
         deltaStatistics?: EngagementStatisticsHistorical;
         /**
@@ -501,6 +513,12 @@ declare namespace WOM {
      * campaignStatisticsQuerySetResponse
      */
     export interface CampaignStatisticsQuerySetResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: CampaignStatisticsQueryRequest;
         summary?: EngagementStatistics;
         /**
@@ -623,6 +641,12 @@ declare namespace WOM {
      */
     export interface CampaignsQueryResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -680,6 +704,12 @@ declare namespace WOM {
      * channelContentsResponse
      */
     export interface ChannelContentsResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -739,6 +769,12 @@ declare namespace WOM {
      */
     export interface ChannelViewerContentItemsResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -763,6 +799,12 @@ declare namespace WOM {
      * channelsResponse
      */
     export interface ChannelsResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -930,6 +972,11 @@ declare namespace WOM {
          */
         uriPrimary?: string;
         /**
+         * nullable1
+         * If specified returns validation state for each content item.
+         */
+        returnValidationState?: boolean;
+        /**
          * boolean
          * Enable the 'is document hidden by user' feature.
          */
@@ -1062,6 +1109,11 @@ declare namespace WOM {
         earningsValue?: number; // double
     }
     /**
+     * contentOrderByProperty
+     * <br/><br/>Values:<br/>0 = Default<br/>1 = Likes<br/>2 = DateAddedUtc<br/>3 = Views<br/>4 = ViewD1Count<br/>5 = ViewD2Count<br/>6 = ViewD3Count<br/>7 = ViewD4Count<br/>8 = BuyCount<br/>9 = ClickCount<br/>10 = CommentCount<br/>11 = ShareCount<br/>12 = RatingCount<br/>13 = SaveCount<br/>14 = ValidationTimer
+     */
+    export type ContentOrderByProperty = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14; // int32
+    /**
      * contentPutRequest
      */
     export interface ContentPutRequest {
@@ -1133,6 +1185,11 @@ declare namespace WOM {
          * Query by a list of content ids.
          */
         byContentIds?: string /* objectId */[];
+        /**
+         * nullable1
+         * If specified returns validation state for each content item.
+         */
+        returnValidationState?: boolean;
         validationResult?: ValidationResult; // int32
         validationEndedReason?: ValidationEndedReason; // int32
         validationStage?: ValidationStage; // int32
@@ -1251,6 +1308,12 @@ declare namespace WOM {
          * boolean
          */
         orderByValidationTimer?: boolean;
+        orderByProperty?: ContentOrderByProperty; // int32
+        /**
+         * boolean
+         * Orders results by descending if set to true.
+         */
+        orderByDesc?: boolean;
         /**
          * int32
          */
@@ -1268,6 +1331,12 @@ declare namespace WOM {
      * contentQueryResponse
      */
     export interface ContentQueryResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: ContentQueryRequest;
         /**
          * int32
@@ -1356,6 +1425,12 @@ declare namespace WOM {
      * contentStatisticsQueryResponse
      */
     export interface ContentStatisticsQueryResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: ContentStatisticsQueryRequest;
         totalsInPage?: EngagementStatistics;
         /**
@@ -2525,6 +2600,12 @@ declare namespace WOM {
      */
     export interface GetVoucherBrandsResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -2881,6 +2962,12 @@ declare namespace WOM {
      */
     export interface OrganizationQueryUsersResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -3008,6 +3095,12 @@ declare namespace WOM {
      * organizationStatisticsQueryResponse
      */
     export interface OrganizationStatisticsQueryResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: OrganizationStatisticsQueryRequest;
         deltaStatistics?: EngagementStatisticsHistorical;
         /**
@@ -3027,6 +3120,12 @@ declare namespace WOM {
      * organizationStatisticsQuerySetResponse
      */
     export interface OrganizationStatisticsQuerySetResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: OrganizationStatisticsQueryRequest;
         summary?: EngagementStatistics;
         /**
@@ -3135,6 +3234,12 @@ declare namespace WOM {
      * organizationsResponse
      */
     export interface OrganizationsResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -3383,6 +3488,12 @@ declare namespace WOM {
      * performancePaymentsQueryResponse
      */
     export interface PerformancePaymentsQueryResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: PerformancePaymentsQueryRequest;
         /**
          * int32
@@ -3467,6 +3578,10 @@ declare namespace WOM {
          * nullable1
          */
         hasRemoteProduct?: boolean;
+        /**
+         * int32
+         */
+        primaryReferenceCount?: number; // int32
     }
     /**
      * productResponseLegacy
@@ -3520,6 +3635,12 @@ declare namespace WOM {
      * productsResponse
      */
     export interface ProductsResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -3680,6 +3801,12 @@ declare namespace WOM {
      */
     export interface QueryProductViewerContentResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -3710,6 +3837,30 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         brandId?: string; // objectId
+        /**
+         * string
+         */
+        name?: string;
+        /**
+         * string
+         */
+        brandName?: string;
+        /**
+         * nullable1
+         */
+        isBrandSet?: boolean;
+        /**
+         * nullable1
+         */
+        isReferenced?: boolean;
+        /**
+         * nullable1
+         */
+        sortByBrandAsc?: boolean;
+        /**
+         * nullable1
+         */
+        sortByNameAsc?: boolean;
         /**
          * int32
          */
@@ -3776,6 +3927,24 @@ declare namespace WOM {
         returnQueryCount?: boolean;
     }
     /**
+     * queryValidationStatesRequest
+     */
+    export interface QueryValidationStatesRequest {
+        /**
+         * list1
+         */
+        remoteContentIds?: string[];
+    }
+    /**
+     * queryValidationStatesResponse
+     */
+    export interface QueryValidationStatesResponse {
+        /**
+         * list1
+         */
+        readonly states?: ValidationStateResponse[];
+    }
+    /**
      * queryVoucherTransactionRequest
      */
     export interface QueryVoucherTransactionRequest {
@@ -3796,6 +3965,12 @@ declare namespace WOM {
      * queryVoucherTransactionResponse
      */
     export interface QueryVoucherTransactionResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -3890,6 +4065,12 @@ declare namespace WOM {
      * remoteProductsResponse
      */
     export interface RemoteProductsResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         /**
          * int32
          */
@@ -4425,6 +4606,12 @@ declare namespace WOM {
      */
     export interface TransactionQueryResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -4864,6 +5051,12 @@ declare namespace WOM {
      */
     export interface UserQueryResponse {
         /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
+        /**
          * int32
          */
         totalPages?: number; // int32
@@ -5142,6 +5335,12 @@ declare namespace WOM {
      * validationEntriesResponse
      */
     export interface ValidationEntriesResponse {
+        /**
+         * dictionary2
+         */
+        queryStatistics?: {
+            [name: string]: string;
+        };
         request?: ValidationEntriesRequest;
         /**
          * int32
