@@ -1,5 +1,5 @@
 # Using the node alpine image to build the React app
-image: node:alpine
+image: node:14-alpine
 
 # Cache node modules - speeds up future builds
 cache:
@@ -9,11 +9,14 @@ cache:
 # Name the stages involved in the pipeline
 stages:
     - lint/build
-    - build/deploy-stage
+    - build/deploy-stage-dev
     - build/deploy-prod
 
 lint/build:
     stage: lint/build
+    before_script:
+        - apk update
+        - apk add --no-cache python make g++
     script:
         - echo "Linting"
         - yarn
@@ -25,11 +28,33 @@ lint/build:
     only:
         - merge_requests
 
+build/deploy-stage-dev:
+    stage: build/deploy-stage-dev
+    variables:
+        SERVER: '$USER_DO@$HOST_DO'
+    before_script:
+        - apk update
+        - apk add --update --no-cache openssh sshpass
+        - apk add --no-cache python make g++
+        - export SSHPASS=$USER_PASS_DO
+    script:
+        - echo "Building dev version deploy package"
+        - yarn
+        - yarn build:stage
+        - echo "Build successful"
+        - echo "Deploying to DO (dev droplet) server"
+        - sshpass -e ssh -p 22 -oStrictHostKeyChecking=no -tt "$SERVER" 'rm -rf "$TARGET_DIR_ON_DO_FOR_DEV"/static'
+        - sshpass -e scp -P 22 -o stricthostkeychecking=no -r build/* "$SERVER":"$TARGET_DIR_ON_DO_FOR_DEV"
+        - echo "Deployed"
+    only:
+        - master
+
 build/deploy-prod:
     stage: build/deploy-prod
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
+        - apk add --no-cache python make g++
         - export SSHPASS=$SSH_PRIVATE_KEY
     script:
         - echo "Building deploy package"
@@ -45,19 +70,3 @@ build/deploy-prod:
     only:
         - master
     when: manual
-
-build/deploy-stage:
-    stage: build/deploy-stage
-    before_script:
-        - apk update
-        - apk add --update --no-cache openssh sshpass
-        - export SSHPASS=$USER_PASS_ICWT
-    script:
-        - echo "Building deploy package"
-        - yarn
-        - yarn build:stage
-        - echo "Build successful"
-        - echo "Deploying to ICWT server"
-        - sshpass -e scp -o stricthostkeychecking=no -r ./build/* $USER_ICWT@$HOST_ICWT:$TARGET_DIR_ON_HOST_ICWT
-    only:
-        - master
