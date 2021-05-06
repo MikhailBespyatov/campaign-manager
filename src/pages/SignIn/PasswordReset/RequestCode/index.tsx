@@ -105,7 +105,7 @@ export const RequestCode = () => {
                                         marginRight="0px"
                                         to={routes.signUp.index}
                                     >
-                                        SING UP HERE
+                                        SIGN UP HERE
                                     </InternalLink>
                                 </Section>
                                 <InternalLink

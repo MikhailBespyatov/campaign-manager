@@ -45,7 +45,7 @@ export const PasswordReset = () => {
                                     to={signInPath}
                                 >
                                     Go back to Login page
-                                    <HighlightSpan>send security code</HighlightSpan> 
+                                    <HighlightSpan>send security code</HighlightSpan>
                                 </InternalLink>
                             </Section> */}
                             <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
@@ -62,7 +62,7 @@ export const PasswordReset = () => {
                                         marginRight="0px"
                                         to={routes.signUp.index}
                                     >
-                                        SING UP HERE
+                                        SIGN UP HERE
                                     </InternalLink>
                                 </Section>
                                 <InternalLink
