@@ -6,8 +6,10 @@ import { Span } from 'components/common/typography/Span';
 import { FixedWrapper } from 'components/grid/wrappers/FixedWrapper';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ImageWrapper, ImageWrapperProps, ModalWrapper } from 'components/modals/AlertModal/styles';
+import { routes } from 'constants/routes';
 import { useStore } from 'effector-react';
 import React from 'react';
+import { useHistory } from 'react-router';
 import { createAlertModal } from 'stores/initialize/initialize.store.modal';
 //import { WithError } from 'types';
 
@@ -18,12 +20,17 @@ export interface AlertModalProps extends Pick<ImageWrapperProps, 'type'> {
 }
 
 export const AlertModal = () => {
+    const history = useHistory();
+
     const {
         visible,
         state: { type, title, subTitle }
     } = useStore(createAlertModal.modal);
 
-    const okHandler = () => createAlertModal.closeModal();
+    const okHandler = () => {
+        createAlertModal.closeModal();
+        history.push(routes.wrongPath);
+    };
 
     if (!visible) return null;
 

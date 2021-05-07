@@ -50,10 +50,10 @@ export const AcceptInvite = () => {
                             untouchedWarning=" "
                         />
                         <TextInput
-                            label="EMAIL ADDRESS"
+                            label="USER NAME"
                             marginBottom="5px"
                             name="username"
-                            placeholder="Enter your email address"
+                            placeholder="Enter your user name"
                             untouchedWarning=" "
                         />
                         <TextInput
