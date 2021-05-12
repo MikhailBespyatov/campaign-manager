@@ -1,13 +1,15 @@
-import styled from 'styled-components';
-import { Visibility } from 'types';
-import { flexCenter, primaryPadding, white } from 'constants/styles';
 import {
+    defaultBorderRadius,
     modalBoxShadow,
     modalHeight,
     modalWidth,
+    triangleHorizontalBorder,
     wrapperBackground,
     wrapperHorizontalPadding
 } from 'components/modals/CongratsModal/constants';
+import { blue, flexCenter, primaryPadding } from 'constants/styles';
+import styled from 'styled-components';
+import { Visibility } from 'types';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -28,12 +30,24 @@ export const Modal = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: ${modalWidth};
     min-height: ${modalHeight};
-    border-radius: 16px;
+    border-radius: ${defaultBorderRadius};
     box-shadow: ${modalBoxShadow};
-    background: ${white};
-    padding: 20px;
+    background: ${blue};
     margin: auto;
     z-index: 10;
+`;
+
+export const Triangle = styled.div`
+    position: relative;
+    top: 2px;
+    margin-top: 200px;
+    width: 0px;
+    height: 0px;
+    border-left: ${triangleHorizontalBorder};
+    border-right: ${triangleHorizontalBorder};
+    border-bottom: 50px solid white;
+    border-radius: ${defaultBorderRadius};
 `;

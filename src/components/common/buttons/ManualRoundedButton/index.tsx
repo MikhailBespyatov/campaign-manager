@@ -3,6 +3,7 @@ import { ButtonProps } from 'components/common/buttons/ManualRoundedButton/types
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { padding } from 'constants/styles';
 import React, { FC } from 'react';
+import { TextProperties } from 'types';
 import { ReactClick } from 'types/react';
 
 // const InnerSpan: FC<Reverse> = ({ children, reverse }) => (
@@ -11,19 +12,21 @@ import { ReactClick } from 'types/react';
 //     </Span>
 // );
 
-interface Props extends ButtonProps, ReactClick<HTMLButtonElement> {
+interface Props extends ButtonProps, ReactClick<HTMLButtonElement>, Pick<TextProperties, 'fontWeight'> {
     Img?: JSX.Element;
 }
 
-export const ManualRoundedButton: FC<Props> = ({ children, Img, reverse, mainColor, ...rest }) => (
+export const ManualRoundedButton: FC<Props> = ({ children, Img, reverse, mainColor, fontWeight, ...rest }) => (
     <Button {...rest} mainColor={mainColor} reverse={reverse}>
         {Img ? (
             <Row alignCenter justifyCenter marginBottom="0">
                 <Column marginRight={padding}>{Img}</Column>
-                <InnerSpan reverse={reverse}>{children}</InnerSpan>
+                <InnerSpan fontWeight={fontWeight} reverse={reverse}>
+                    {children}
+                </InnerSpan>
             </Row>
         ) : (
-            <InnerSpan mainColor={mainColor} reverse={reverse}>
+            <InnerSpan fontWeight={fontWeight} mainColor={mainColor} reverse={reverse}>
                 {children}
             </InnerSpan>
         )}
