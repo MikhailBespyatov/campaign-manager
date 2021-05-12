@@ -1,20 +1,28 @@
-import React from 'react';
-import { useStore } from 'effector-react';
-import { modalEvents, modalStores } from 'stores/modal';
-import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import closeImg from 'assets/icons/remove-icon.svg';
-import congratsLogo from 'assets/img/congrats_icon.svg';
-import { Modal, Wrapper } from './styles';
-import { addIdImgDiameter } from './constants';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { Span } from 'components/common/typography/Span';
-import { grey4 } from 'constants/styles';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import womLogo from 'assets/img/wom_logo_.svg';
 import history from 'BrowserHistory';
-import { themeStores } from 'stores/theme';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import {
+    closeIconDiameter,
+    imagesZIndex,
+    modalWidth,
+    womLogoHeight,
+    womLogoWidth
+} from 'components/modals/CongratsModal/constants';
 import { routes } from 'constants/routes';
+import { grey17, white } from 'constants/styles';
+import { useStore } from 'effector-react';
+import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
+import React from 'react';
+import { modalEvents, modalStores } from 'stores/modal';
+import { themeStores } from 'stores/theme';
+import { Modal, Triangle, Wrapper } from './styles';
 
 export const CongratsModal = () => {
     const { visible } = useStore(modalStores.congratsModal);
@@ -29,33 +37,46 @@ export const CongratsModal = () => {
     return (
         <Wrapper visible={visible}>
             <Modal>
-                <AbsoluteWrapper right="40px" top="30px" zIndex="5">
+                <AbsoluteWrapper right="0px" top="0px" width="100%" zIndex={imagesZIndex}>
+                    <Column alignCenter marginTop="40px">
+                        <CustomImg height={womLogoHeight} src={womLogo} width={womLogoWidth} />
+                        <MarginWrapper marginTop="15px">
+                            <Span alignCenter color={white} fontSize="16px" fontWeight="600" lineHeight="24px">
+                                Campaign Manager
+                            </Span>
+                        </MarginWrapper>
+                    </Column>
+                </AbsoluteWrapper>
+
+                <AbsoluteWrapper right="40px" top="30px" zIndex={imagesZIndex}>
                     <CustomImg
                         pointer
-                        height={addIdImgDiameter}
+                        height={closeIconDiameter}
                         src={closeImg}
-                        width={addIdImgDiameter}
+                        width={closeIconDiameter}
                         onClick={onClose}
                     />
                 </AbsoluteWrapper>
-                <Section justifyCenter height="100%">
-                    <Column alignCenter>
-                        <CustomImg height="200px" rotate={30} src={congratsLogo} />
-                        <Row marginBottom="15px" marginTop="20px">
-                            <Span alignCenter fontSize="18px" fontWeight="400" lineHeight="22px">
-                                CONGRATS!
-                            </Span>
-                        </Row>
-                        <Row marginBottom="14px">
-                            <Span alignCenter color={grey4} fontSize="14px" fontWeight="400" lineHeight="22px">
-                                Camplaing is live
-                            </Span>
-                        </Row>
-                        <ManualRoundedButton height="48px" width="198px" onClick={onClose}>
-                            DONE
-                        </ManualRoundedButton>
-                    </Column>
-                </Section>
+                <Triangle />
+                <ContentWrapper height="190px" padding="0px 20px" width={modalWidth}>
+                    <Section justifyCenter height="100%">
+                        <Column alignCenter>
+                            <Row marginBottom="15px" marginTop="10px">
+                                <Span alignCenter fontSize="24px" fontWeight="600">
+                                    CONGRATS!
+                                </Span>
+                            </Row>
+                            <Row marginBottom="50px">
+                                <Span alignCenter color={grey17} fontSize="17px" fontWeight="400">
+                                    Your campaign is now live
+                                </Span>
+                            </Row>
+                            <ManualRoundedButton fontWeight="700" height="48px" width="198px" onClick={onClose}>
+                                DONE
+                            </ManualRoundedButton>
+                        </Column>
+                    </Section>
+                </ContentWrapper>
             </Modal>
         </Wrapper>
     );

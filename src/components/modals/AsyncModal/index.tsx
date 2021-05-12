@@ -1,17 +1,17 @@
-import { Modal, Wrapper } from './styles';
+import closeImg from 'assets/icons/remove-icon.svg';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { closeIconDiameter } from 'components/modals/CongratsModal/constants';
+import { white } from 'constants/styles';
 import { useStore } from 'effector-react';
+import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import React from 'react';
 import { modalEvents, modalStores } from 'stores/modal';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { addIdImgDiameter } from 'components/modals/CongratsModal/constants';
-import closeImg from 'assets/icons/remove-icon.svg';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { Span } from 'components/common/typography/Span';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { white } from 'constants/styles';
+import { Modal, Wrapper } from './styles';
 
 export const AsyncModal = () => {
     const [{ visible, title, content, onOk }] = useStore(modalStores.asyncModalStore);
@@ -27,9 +27,9 @@ export const AsyncModal = () => {
                 <AbsoluteWrapper right="40px" top="30px" zIndex="5">
                     <CustomImg
                         pointer
-                        height={addIdImgDiameter}
+                        height={closeIconDiameter}
                         src={closeImg}
-                        width={addIdImgDiameter}
+                        width={closeIconDiameter}
                         onClick={onClose}
                     />
                 </AbsoluteWrapper>
