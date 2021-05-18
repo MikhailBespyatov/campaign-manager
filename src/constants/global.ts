@@ -1,7 +1,9 @@
-export const baseURL = process.env.REACT_APP_API_URL as string;
-export const appVersion = process.env.REACT_APP_VERSION as string;
+export const baseURL = import.meta.env.REACT_APP_API_URL;
+export const appVersion = import.meta.env.REACT_APP_VERSION;
 
-export const environment = process.env.REACT_APP_API_URL === 'https://wom-dev.xc.io/' ? 'DEV' : 'PROD';
+console.log('envs', baseURL, appVersion);
+
+export const environment = import.meta.env.REACT_APP_API_URL === 'https://wom-dev.xc.io/' ? 'DEV' : 'PROD';
 
 export const userStorageName = 'campaignManagerUser';
 export const themeStorageName = 'campaignManagerTheme';
