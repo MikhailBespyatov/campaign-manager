@@ -52,6 +52,8 @@
   "scripts": {
     "dev:vite": "vite",
     "build:vite": "tsc && vite build",
+    "build:vite:stage": "tsc && vite build --mode staging",
+    "build:vite:prod": "tsc && vite build --mode prod",
     "serve:vite": "vite preview",
     "start": "npx env-cmd -f ./.dev.env react-scripts start",
     "build:stage": "npx env-cmd -f ./.stage.env react-scripts build",
