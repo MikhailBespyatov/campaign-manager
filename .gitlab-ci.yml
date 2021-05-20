@@ -23,6 +23,9 @@ lint/build:
         - yarn lint
         - echo "Linting successful"
         - echo "Building deploy package"
+        # * react-scripts
+        # - yarn build:stage
+        # * vite
         - yarn build:vite:stage
         - echo "Build successful"
     only:
@@ -40,6 +43,9 @@ build/deploy-stage-dev:
     script:
         - echo "Building dev version deploy package"
         - yarn
+        # * react-scripts
+        # - yarn build:stage
+        # * vite
         - yarn build:vite:stage
         - echo "Build successful"
         - echo "Deploying to DO (dev droplet) server"
@@ -59,6 +65,9 @@ build/deploy-prod:
     script:
         - echo "Building deploy package"
         - yarn
+        # * react-scripts
+        # - yarn build:prod
+        # * vite
         - yarn build:vite:prod
         - echo "Build successful"
         - echo "Deploying to server"
