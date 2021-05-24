@@ -1,7 +1,14 @@
-export const baseURL = process.env.REACT_APP_API_URL as string;
-export const appVersion = process.env.REACT_APP_VERSION as string;
+// * react scripts
+// export const baseURL = process.env.REACT_APP_API_URL as string;
+// export const appVersion = process.env.REACT_APP_VERSION as string;
+// *
 
-export const environment = process.env.REACT_APP_API_URL === 'https://wom-dev.xc.io/' ? 'DEV' : 'PROD';
+// * vite
+export const baseURL = import.meta.env.VITE_REACT_APP_API_URL;
+export const appVersion = import.meta.env.VITE_REACT_APP_VERSION;
+// *
+
+export const environment = baseURL === 'https://wom-dev.xc.io/' ? 'DEV' : 'PROD';
 
 export const userStorageName = 'campaignManagerUser';
 export const themeStorageName = 'campaignManagerTheme';
