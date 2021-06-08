@@ -96,3 +96,7 @@ export interface BooleanCheckbox extends DefaultChecked, Disabled, Name, OnCheck
 export interface HTMLButtonType {
     type?: 'submit' | 'button' | 'reset' | undefined;
 }
+
+export interface OffAutoComplete {
+    offAutoComplete?: boolean;
+}

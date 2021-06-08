@@ -6,9 +6,9 @@ import { requiredFieldMessage } from 'constants/messages';
 import { errorColor, formGrey6 } from 'constants/styles';
 import { useField } from 'formik';
 import React, { ChangeEvent, FC } from 'react';
-import { Disabled, Label, MarginBottom, Placeholder, Touched, Type, UntouchedWarning } from 'types';
+import { Disabled, Label, MarginBottom, OffAutoComplete, Placeholder, Touched, Type, UntouchedWarning } from 'types';
 
-interface Props extends Disabled, Placeholder, Type, Label, UntouchedWarning, MarginBottom {
+interface Props extends Disabled, Placeholder, Type, Label, UntouchedWarning, MarginBottom, OffAutoComplete {
     name: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
@@ -33,12 +33,14 @@ export const TextInput = ({
     onChange,
     untouchedWarning,
     required,
-    marginBottom
+    marginBottom,
+    offAutoComplete
 }: Props) => {
     const [field, { error, touched }] = useField(name);
     // const classes = useStyles();
 
     const onInputChange = onChange || field.onChange;
+    const autoComplete = offAutoComplete ? (type === 'password' ? 'new-password' : 'off') : undefined;
 
     return (
         <Wrapper marginBottom={marginBottom}>
@@ -60,7 +62,7 @@ export const TextInput = ({
             <TextFieldForm
                 disabled={disabled}
                 {...field}
-                /*autoComplete="off"*/
+                autoComplete={autoComplete}
                 placeholder={placeholder}
                 type={type}
                 onChange={onInputChange}

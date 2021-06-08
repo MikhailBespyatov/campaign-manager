@@ -80,7 +80,6 @@ const App = () => {
                     <CongratsModal />
                     <AsyncModal />
                     <AlertModal />
-
                     <Switch>
                         {/* * public */}
                         <PublicRoute exact component={Home} path={[routes.wrongPath]} />
