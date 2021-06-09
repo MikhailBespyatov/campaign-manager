@@ -5,8 +5,8 @@ export const itemHorizontalMargin = '16px';
 export const itemPaddingBottom = '7px';
 
 export const spanFontWeight = '600';
-export const spanFontSize = '16px';
-export const spanLineHeight = '19.5px';
+export const spanFontSize = '14px';
+export const spanLineHeight = '17px';
 export const activeColor = secondaryColor;
 export const inactiveColor = '#C3CBD4';
 

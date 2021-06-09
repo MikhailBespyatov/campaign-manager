@@ -1,9 +1,9 @@
 import { grey7, secondaryColor } from 'constants/styles';
 
-export const wrapperHeight = '96px';
+export const wrapperHeight = '44px';
 export const wrapperBorderRadius = '30px';
 export const wrapperBackground = grey7;
-export const wrapperVerticalPadding = '16px';
+export const wrapperVerticalPadding = '12px';
 
 export const itemOpacity = '0.4';
 export const itemHorizontalMargin = '16px';
