@@ -5,7 +5,6 @@ import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { ContentText } from 'components/Layouts/CampaignManagerLayout/styles';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import { routes } from 'constants/routes';
-import { primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -14,6 +13,7 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects } from 'stores/wallet';
 import { Background } from 'types';
+import { topBarButtonMarginRight } from './constants';
 
 interface Props extends Background {}
 
@@ -57,18 +57,25 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                 <TopBarWithButton
                     buttons={
                         <Row alignCenter marginBottom="0">
-                            <Column marginLeft={primaryPadding} marginRight={primaryPadding}>
+                            <Column marginRight={topBarButtonMarginRight}>
                                 <ClickableWrapper width="fit-content" onClick={onWalletOpen}>
                                     <ContentText noWrap>MY WALLET</ContentText>
                                 </ClickableWrapper>
                             </Column>
-                            <Column marginLeft={primaryPadding} marginRight={primaryPadding}>
+                            <Column marginRight={topBarButtonMarginRight}>
                                 <ClickableWrapper width="fit-content" onClick={onWomBuy}>
                                     <ContentText noWrap>BUY WOM</ContentText>
                                 </ClickableWrapper>
                             </Column>
-                            <Column marginLeft={primaryPadding}>
-                                <ManualRoundedButton onClick={goToCreateCampaign}>CREATE CAMPAIGN</ManualRoundedButton>
+                            <Column>
+                                <ManualRoundedButton
+                                    height="44px"
+                                    minWidth="150px"
+                                    width="150px"
+                                    onClick={goToCreateCampaign}
+                                >
+                                    CREATE CAMPAIGN
+                                </ManualRoundedButton>
                             </Column>
                         </Row>
                     }

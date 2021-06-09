@@ -22,6 +22,7 @@ import styled from 'styled-components';
 export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     min-width: ${({ minWidth }) => (minWidth ? minWidth : buttonWidth)};
+    ${({ width }) => width && `width: ${width};`};
     height: ${({ height }) => (height ? height : buttonHeight)};
     background: ${({ reverse, background, mainColor, theme: { primaryColor, primaryTextColor } }) =>
         reverse && background
@@ -56,7 +57,6 @@ export const InnerSpan = styled.span<InnerSpanProps>`
     color: ${({ theme: { secondaryTextColor, primaryColor }, reverse, mainColor }) =>
         mainColor || (reverse ? primaryColor : secondaryTextColor)};
     font-size: ${spanFontSize};
-    font-weight: ${spanFontWeight};
     font-weight: ${({ fontWeight }) => fontWeight || spanFontWeight};
     line-height: ${spanLineHeight};
 `;
