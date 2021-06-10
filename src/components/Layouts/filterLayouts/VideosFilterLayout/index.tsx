@@ -1,7 +1,6 @@
-import { Span } from 'components/common/typography/Span';
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
-import { FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultPage } from 'constants/defaults';
@@ -126,24 +125,25 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
     return (
         <>
             <Section marginBottom={videoSectionMarginBottom}>
-                <ContentWrapper padding={videoStepPadding} width="100%">
-                    <Section alignCenter noWrap>
-                        <TagFilter
-                            defaultChecked={!!tagsAll}
-                            tagsValues={tagsAll || tagsAny || []}
-                            onChange={onTagsFilterChange}
-                        >
-                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginLeft="16px" marginRight="43px">
+                {/*<ContentWrapper padding={videoStepPadding} width="100%">*/}
+                <Section alignCenter noWrap>
+                    <TagFilter
+                        defaultChecked={!!tagsAll}
+                        tagsValues={tagsAll || tagsAny || []}
+                        onChange={onTagsFilterChange}
+                    >
+                        <FlexGrow alignCenter justifyEnd flexDirection="row">
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="32px">
                                 <SortSelectorButton state={sortsState.likes} onChange={onLikesChange}>
                                     Likes
                                 </SortSelectorButton>
                             </FlexGrow>
-                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="32px">
                                 <SortSelectorButton state={sortsState.views} onChange={onViewsChange}>
                                     Views
                                 </SortSelectorButton>
                             </FlexGrow>
-                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px">
+                            <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="32px">
                                 <SortSelectorButton state={sortsState.dateAdded} onChange={onDateAddedChange}>
                                     Data Added
                                 </SortSelectorButton>
@@ -151,35 +151,36 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                             <FlexGrow flexGrow="0" flexShrink="0">
                                 <ResetButton onClick={onReset}>Reset</ResetButton>
                             </FlexGrow>
-                        </TagFilter>
-                        {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">*/}
-                        {/*    <SelectorFilter*/}
-                        {/*        checkedValues={activeLanguage}*/}
-                        {/*        title="Language"*/}
-                        {/*        values={valuesLanguage}*/}
-                        {/*        onChange={onChangeLanguage}*/}
-                        {/*    />*/}
-                        {/*</FlexGrow>*/}
-                        {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px" width="150px">*/}
-                        {/*    <SelectorFilter*/}
-                        {/*        checkedValues={checkedRegion}*/}
-                        {/*        title="Region"*/}
-                        {/*        type="checkbox"*/}
-                        {/*        values={valuesRegion}*/}
-                        {/*        view="columns"*/}
-                        {/*        onChange={onChangeRegion}*/}
-                        {/*    />*/}
-                        {/*</FlexGrow>*/}
-                    </Section>
-                </ContentWrapper>
+                        </FlexGrow>
+                    </TagFilter>
+                    {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">*/}
+                    {/*    <SelectorFilter*/}
+                    {/*        checkedValues={activeLanguage}*/}
+                    {/*        title="Language"*/}
+                    {/*        values={valuesLanguage}*/}
+                    {/*        onChange={onChangeLanguage}*/}
+                    {/*    />*/}
+                    {/*</FlexGrow>*/}
+                    {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="43px" width="150px">*/}
+                    {/*    <SelectorFilter*/}
+                    {/*        checkedValues={checkedRegion}*/}
+                    {/*        title="Region"*/}
+                    {/*        type="checkbox"*/}
+                    {/*        values={valuesRegion}*/}
+                    {/*        view="columns"*/}
+                    {/*        onChange={onChangeRegion}*/}
+                    {/*    />*/}
+                    {/*</FlexGrow>*/}
+                </Section>
+                {/*</ContentWrapper>*/}
             </Section>
             <FlexGrow marginBottom={videoSectionMarginBottom}>
                 <ContentWrapper height="100%" padding={videoStepPadding} width="100%">
-                    <Row marginBottom="16px">
-                        <Span fontSize="14px" fontWeight="600" lineHeight="17px">
-                            Videos
-                        </Span>
-                    </Row>
+                    {/*<Row marginBottom="16px">*/}
+                    {/*    <Span fontSize="14px" fontWeight="600" lineHeight="17px">*/}
+                    {/*        Videos*/}
+                    {/*    </Span>*/}
+                    {/*</Row>*/}
                     {children}
                     <Section justifyCenter marginBottom="20px" marginTop="57px">
                         {!loading && (

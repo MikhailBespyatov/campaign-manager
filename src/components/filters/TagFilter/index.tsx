@@ -1,12 +1,6 @@
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import {
     closableTagMarginBottom,
-    enterImgDiameter,
-    enterImgMarginLeft,
-    enterImgMarginRight,
-    enterTitleFontSize,
-    enterTitleFontWeight,
-    enterTitleLineHeight,
     searchImgDiameter,
     searchImgMarginLeft,
     searchImgMarginRight,
@@ -15,14 +9,12 @@ import {
 import { SearchAbsoluteWrapper, SearchInput, Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { Noop } from 'constants/global';
-import { secondaryColor, secondaryPadding } from 'constants/styles';
+import { secondaryPadding } from 'constants/styles';
 import React, { FC, FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
 import searchImg from 'assets/img/search_icon.svg';
-import enterImg from 'assets/img/enter_icon.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { Span } from 'components/common/typography/Span';
 import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
 
@@ -39,6 +31,7 @@ export const TagsFilterBlock = ({ values, removeValue }: TagsFilterBlockProps) =
                     <ClosableTag
                         key={i}
                         closable
+                        backgroundColor="transparent"
                         marginBottom={closableTagMarginBottom}
                         marginRight={secondaryPadding}
                         onClose={() => removeValue(i)}
@@ -110,7 +103,7 @@ export const TagFilter: FC<Props> = ({
     return (
         <Column width="100%">
             <Section alignCenter noWrap>
-                <FlexGrow>
+                <FlexGrow flexBasis="33.3%" flexGrow="0" flexShrink="0">
                     <RelativeWrapper>
                         <SearchAbsoluteWrapper>
                             <MarginWrapper marginLeft={searchImgMarginLeft} marginRight={searchImgMarginRight}>
@@ -125,20 +118,20 @@ export const TagFilter: FC<Props> = ({
                             {/*    {title}*/}
                             {/*</Span>*/}
                         </SearchAbsoluteWrapper>
-                        <SearchAbsoluteWrapper right>
-                            <Span
-                                color={secondaryColor}
-                                fontSize={enterTitleFontSize}
-                                fontWeight={enterTitleFontWeight}
-                                lineHeight={enterTitleLineHeight}
-                                opacity={0.5}
-                            >
-                                Press enter
-                            </Span>
-                            <MarginWrapper marginLeft={enterImgMarginLeft} marginRight={enterImgMarginRight}>
-                                <CustomImg height={enterImgDiameter} src={enterImg} width={enterImgDiameter} />
-                            </MarginWrapper>
-                        </SearchAbsoluteWrapper>
+                        {/*<SearchAbsoluteWrapper right>*/}
+                        {/*    <Span*/}
+                        {/*        color={secondaryColor}*/}
+                        {/*        fontSize={enterTitleFontSize}*/}
+                        {/*        fontWeight={enterTitleFontWeight}*/}
+                        {/*        lineHeight={enterTitleLineHeight}*/}
+                        {/*        opacity={0.5}*/}
+                        {/*    >*/}
+                        {/*        Press enter*/}
+                        {/*    </Span>*/}
+                        {/*    <MarginWrapper marginLeft={enterImgMarginLeft} marginRight={enterImgMarginRight}>*/}
+                        {/*        <CustomImg height={enterImgDiameter} src={enterImg} width={enterImgDiameter} />*/}
+                        {/*    </MarginWrapper>*/}
+                        {/*</SearchAbsoluteWrapper>*/}
                         <Wrapper>
                             <SearchInput placeholder={title} type="text" onBlur={onBlur} onKeyDown={onKeyDown} />
                         </Wrapper>

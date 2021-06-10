@@ -28,10 +28,12 @@ export const SearchInput = styled.input`
     border: none;
     appearance: none;
     width: 100%;
-    margin-left: 32px;
-    margin-right: 110px;
+    margin-left: 20px;
+    //margin-right: 110px;
+    margin-right: 20px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
+    line-height: 16px;
     background-color: ${wrapperBackground};
 `;
 

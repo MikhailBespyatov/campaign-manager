@@ -51,7 +51,7 @@ export const StyledSpan3 = styled.span`
 `;
 
 export const MerchantIdWrapper = styled(ContentWrapper)`
-    background-color: #272847;
+    background-color: transparent;
     padding: 8px 10px;
     flex-direction: row;
     border-radius: 48px;

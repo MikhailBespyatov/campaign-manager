@@ -207,3 +207,7 @@ export interface BorderRadius {
 export interface ZIndex {
     zIndex?: string;
 }
+
+export interface FlexDirection {
+    flexDirection?: 'column' | 'row';
+}

@@ -1,13 +1,13 @@
-import { grey12, secondaryPadding } from 'constants/styles';
+import { grey12 } from 'constants/styles';
 
 export const filterNameWidth = '70px';
 export const filterMarginRight = '28px';
 
 export const wrapperWidth = `100%`;
-export const wrapperVerticalPadding = secondaryPadding;
+export const wrapperVerticalPadding = '8px';
 export const wrapperHeight = `32px`;
-export const wrapperBorderRadius = '32px';
-export const wrapperBorderColor = '#C6C6C6';
+export const wrapperBorderRadius = '8px';
+export const wrapperBorderColor = '#E5E5E5';
 export const wrapperBackground = grey12;
 export const wrapperMarginBottom = '16px';
 export const wrapperHorizontalPadding = wrapperVerticalPadding;
@@ -18,9 +18,9 @@ export const spanFontSize = '26px';
 export const spanLineHeight = '32px';
 export const spanColor = '#6B6B6B';
 
-export const searchImgDiameter = '15px';
-export const searchImgMarginLeft = '18px';
-export const searchImgMarginRight = '11px';
+export const searchImgDiameter = '13px';
+export const searchImgMarginLeft = '8px';
+export const searchImgMarginRight = '8px';
 
 export const enterImgDiameter = '11px';
 export const enterImgMarginLeft = '12px';

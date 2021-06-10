@@ -38,7 +38,7 @@ export const Section = styled(Row)`
 `;
 
 export const FlexGrow = styled(Flex)<FlexGrowProps>`
-    flex-direction: column;
+    flex-direction: ${({ flexDirection }) => flexDirection || 'column'};
     flex-grow: ${({ flexGrow }) => flexGrow || '1'};
     ${({ flexShrink }) => (flexShrink ? `flex-shrink: ${flexShrink};` : ``)};
     ${({ flexBasis }) => (flexBasis ? `flex-basis: ${flexBasis};` : ``)};
