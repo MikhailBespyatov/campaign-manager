@@ -9,11 +9,13 @@ import {
     wrapperHorizontalPadding,
     wrapperWidth
 } from 'components/common/inputs/Select/constants';
-import { flexStart } from 'constants/styles';
-import styled from 'styled-components';
+import { flexStart, hoverGrey } from 'constants/styles';
+import styled, { css } from 'styled-components';
 import { Active, Disabled, IsWithoutBorder, PaddingRight, Sizes } from 'types';
 
-interface WrapperProps extends Sizes, IsWithoutBorder, PaddingRight, Disabled {}
+interface WrapperProps extends Sizes, IsWithoutBorder, PaddingRight, Disabled {
+    isDarkStyle?: boolean;
+}
 
 export const Wrapper = styled.div<WrapperProps>`
     position: relative;
@@ -25,8 +27,16 @@ export const Wrapper = styled.div<WrapperProps>`
     ${({ withoutBorder }) => !withoutBorder && `border: ${wrapperBorderWidth} solid ${wrapperBorderColor}`};
     padding: 0 ${({ paddingRight }) => paddingRight || wrapperHorizontalPadding};
     background-color: ${wrapperBackground};
+    cursor: pointer;
     //z-index: 1;
     ${({ disabled }) => disabled && 'opacity: 0.5;'};
+    ${({ isDarkStyle }) =>
+        isDarkStyle &&
+        css`
+            border-radius: 4px;
+            border: 0;
+            background-color: ${hoverGrey};
+        `}
 `;
 
 export const SelectUl = styled.ul`

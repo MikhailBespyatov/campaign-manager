@@ -3,7 +3,7 @@ export const buttonHeight = '48px';
 export const buttonBorderWidth = '2px';
 export const buttonBorderRadius = '32px';
 export const buttonMarginBottom = '16px';
-export const buttonVerticalPadding = '5px';
+export const buttonVerticalPadding = '0';
 export const buttonHorizontalPadding = '16px';
 
 export const spanFontWeight = '400';

@@ -58,5 +58,5 @@ export const InnerSpan = styled.span<InnerSpanProps>`
         mainColor || (reverse ? primaryColor : secondaryTextColor)};
     font-size: ${spanFontSize};
     font-weight: ${({ fontWeight }) => fontWeight || spanFontWeight};
-    line-height: ${spanLineHeight};
+    line-height: ${({ lineHeight }) => lineHeight || spanLineHeight};
 `;

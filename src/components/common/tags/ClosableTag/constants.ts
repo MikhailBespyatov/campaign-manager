@@ -7,8 +7,8 @@ export const wrapperHorizontalPadding = '14px';
 export const wrapperVerticalPadding = '0';
 export const intermediatePadding = '12px';
 
-export const imgWidth = '20px';
-export const imgHeight = '20px';
+export const imgWidth = '10px';
+export const imgHeight = '15px';
 
 export const spanFontWeight = 'normal';
 export const spanFontSize = '14px';

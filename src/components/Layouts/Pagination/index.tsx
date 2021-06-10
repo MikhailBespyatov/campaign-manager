@@ -18,12 +18,13 @@ import {
     PaginationCell,
     PaginationInput,
     PaginationWrapper,
-    Wrapper
+    Wrapper,
+    PaginationBlockWrapper
 } from 'components/Layouts/Pagination/styles';
 import { defaultLimit } from 'constants/defaults';
 import React, { ChangeEvent, KeyboardEvent, useMemo, useState } from 'react';
 import { Span } from 'components/common/typography/Span';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { Row, FlexGrow } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface WrapperProps {
@@ -117,57 +118,85 @@ export const Pagination = ({
 
     const onSizeAndIndexChange = (size: string) => onSizeChange(0, Number(size));
 
+    const videosCountStart = (currentIndex - 1) * defaultSize + 1;
+    const videosCountsEnd = currentIndex * defaultSize;
+    const showingVideosText = `Showing ${videosCountStart} - ${
+        videosCountsEnd > totalItems ? totalItems : videosCountsEnd
+    } out of ${totalItems}`;
+
     return (
         <>
             {total !== 0 && (
                 <Wrapper>
-                    {currentIndex !== 1 && (
-                        <Arrow onClick={() => onIndexChange(currentIndex - 1)}>
-                            <CustomImg height={arrowImgHeight} src={leftArrowImg} width={arrowImgWidth} />
-                        </Arrow>
-                    )}
-                    <PaginationWrapper>
-                        <PaginationCell active={1 === currentIndex} onClick={() => onIndexChange(1)}>
-                            1
-                        </PaginationCell>
-                        {total - 2 <= paginationLimit ? (
-                            <SmallPager activeIndex={currentIndex} total={total} onChange={onIndexChange} />
-                        ) : (
-                            <BigPager activeIndex={currentIndex} total={total} onChange={onIndexChange} />
+                    <PaginationBlockWrapper flexBasis="20%" flexGrow="0" flexShrink="0">
+                        <Span
+                            fontSize={PaginationCellFontSize}
+                            fontWeight={PaginationCellFontWeight}
+                            lineHeight={PaginationCellLineHeight}
+                        >
+                            {showingVideosText}
+                        </Span>
+                    </PaginationBlockWrapper>
+                    <PaginationBlockWrapper justifyCenter flexBasis="60%" flexGrow="0" flexShrink="0">
+                        {currentIndex !== 1 && (
+                            <Arrow onClick={() => onIndexChange(currentIndex - 1)}>
+                                <CustomImg height={arrowImgHeight} src={leftArrowImg} width={arrowImgWidth} />
+                            </Arrow>
                         )}
-                        {total !== 1 && (
-                            <PaginationCell active={total === currentIndex} onClick={() => onIndexChange(total)}>
-                                {total}
+                        <PaginationWrapper>
+                            <PaginationCell active={1 === currentIndex} onClick={() => onIndexChange(1)}>
+                                1
                             </PaginationCell>
+                            {total - 2 <= paginationLimit ? (
+                                <SmallPager activeIndex={currentIndex} total={total} onChange={onIndexChange} />
+                            ) : (
+                                <BigPager activeIndex={currentIndex} total={total} onChange={onIndexChange} />
+                            )}
+                            {total !== 1 && (
+                                <PaginationCell active={total === currentIndex} onClick={() => onIndexChange(total)}>
+                                    {total}
+                                </PaginationCell>
+                            )}
+                        </PaginationWrapper>
+                        {currentIndex !== total && (
+                            <Arrow onClick={() => onIndexChange(currentIndex + 1)}>
+                                <CustomImg height={arrowImgHeight} src={rightArrowImg} width={arrowImgWidth} />
+                            </Arrow>
                         )}
-                    </PaginationWrapper>
-                    {currentIndex !== total && (
-                        <Arrow onClick={() => onIndexChange(currentIndex + 1)}>
-                            <CustomImg height={arrowImgHeight} src={rightArrowImg} width={arrowImgWidth} />
-                        </Arrow>
-                    )}
-                    <Select
-                        top
-                        additionalTitle={'/ Page'}
-                        defaultActive={defaultSize.toString()}
-                        values={sizeValues}
-                        width="110px"
-                        onChange={onSizeAndIndexChange}
-                    />
-                    <MarginWrapper marginLeft="11px">
-                        <Row alignCenter height={paginationCellHeight} marginBottom="0">
+                        <MarginWrapper marginLeft="20px">
+                            <Row alignCenter height={paginationCellHeight} marginBottom="0">
+                                <Span
+                                    fontSize={PaginationCellFontSize}
+                                    fontWeight={PaginationCellFontWeight}
+                                    lineHeight={PaginationCellLineHeight}
+                                >
+                                    Go to
+                                </Span>
+                                <MarginWrapper marginLeft="8px">
+                                    <PaginationInput value={value} onChange={handlePageSet} onKeyDown={handleKeyDown} />
+                                </MarginWrapper>
+                            </Row>
+                        </MarginWrapper>
+                    </PaginationBlockWrapper>
+                    <PaginationBlockWrapper alignCenter justifyEnd flexBasis="20%" flexGrow="0" flexShrink="0">
+                        <MarginWrapper marginRight="8px">
                             <Span
                                 fontSize={PaginationCellFontSize}
                                 fontWeight={PaginationCellFontWeight}
                                 lineHeight={PaginationCellLineHeight}
                             >
-                                Go to
+                                Show per Page
                             </Span>
-                            <MarginWrapper marginLeft="8px">
-                                <PaginationInput value={value} onChange={handlePageSet} onKeyDown={handleKeyDown} />
-                            </MarginWrapper>
-                        </Row>
-                    </MarginWrapper>
+                        </MarginWrapper>
+                        <Select
+                            isDarkStyle
+                            top
+                            defaultActive={defaultSize.toString()}
+                            values={sizeValues}
+                            width="65px"
+                            onChange={onSizeAndIndexChange}
+                        />
+                    </PaginationBlockWrapper>
                 </Wrapper>
             )}
         </>
