@@ -16,17 +16,17 @@ interface Props extends ButtonProps, ReactClick<HTMLButtonElement>, Pick<TextPro
     Img?: JSX.Element;
 }
 
-export const ManualRoundedButton: FC<Props> = ({ children, Img, reverse, mainColor, fontWeight, ...rest }) => (
-    <Button {...rest} mainColor={mainColor} reverse={reverse}>
+export const ManualRoundedButton: FC<Props> = ({ children, Img, reverse, mainColor, fontWeight, height, ...rest }) => (
+    <Button {...rest} height={height} mainColor={mainColor} reverse={reverse}>
         {Img ? (
             <Row alignCenter justifyCenter marginBottom="0">
                 <Column marginRight={padding}>{Img}</Column>
-                <InnerSpan fontWeight={fontWeight} reverse={reverse}>
+                <InnerSpan fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
                     {children}
                 </InnerSpan>
             </Row>
         ) : (
-            <InnerSpan fontWeight={fontWeight} mainColor={mainColor} reverse={reverse}>
+            <InnerSpan fontWeight={fontWeight} lineHeight={height} mainColor={mainColor} reverse={reverse}>
                 {children}
             </InnerSpan>
         )}

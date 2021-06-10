@@ -24,6 +24,7 @@ import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapp
 
 interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle, IsWithoutBorder, PaddingRight, Disabled {
     top?: boolean;
+    isDarkStyle?: boolean;
 }
 
 interface ItemSpanProps extends AdditionalTitle {}
@@ -32,7 +33,7 @@ interface Props extends Active, ItemRadioProperties {}
 
 const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle }) => (
     <>
-        <Span fontSize="16px" fontWeight="500" lineHeight="20px">
+        <Span fontSize="14px" fontWeight="500" lineHeight="17px">
             {children}
         </Span>
         {additionalTitle && (
@@ -60,6 +61,7 @@ export const Select = ({
     top,
     disabled,
     height = wrapperHeight,
+    isDarkStyle,
     ...styles
 }: WrapperProps) => {
     const [isClosed, setIsClosed] = useState(true);
@@ -92,10 +94,10 @@ export const Select = ({
         : parseInt(ulWrapperTop) + parseInt(height) / 2 + 'px';
 
     return (
-        <Wrapper disabled={disabled} height={height} {...styles}>
+        <Wrapper disabled={disabled} height={height} isDarkStyle={isDarkStyle} onClick={onClose} {...styles}>
             <ItemSpan additionalTitle={additionalTitle}>{selected}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={arrowTop}>
-                <ClickableWrapper onClick={onClose}>
+                <ClickableWrapper width="20px">
                     <CustomImg pointer height={imgHeight} rotate={isClosed ? 0 : 180} src={arrowImg} width={imgWidth} />
                 </ClickableWrapper>
             </AbsoluteWrapper>

@@ -4,4 +4,4 @@ export interface ButtonProps extends Reverse, MarginBottom, Sizes, MinSizes, Dis
     borderRadius?: string;
 }
 
-export interface InnerSpanProps extends Reverse, MainColor, Pick<TextProperties, 'fontWeight'> {}
+export interface InnerSpanProps extends Reverse, MainColor, Pick<TextProperties, 'fontWeight' | 'lineHeight'> {}

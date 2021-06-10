@@ -10,7 +10,7 @@ export const wrapperBackground = white;
 
 export const imgHeight = '5px';
 export const wrapperImgTop = `0px`;
-export const wrapperImgRight = '0';
+export const wrapperImgRight = '8px';
 export const imgWidth = '10px';
 
 export const ulWrapperTop = parseInt(wrapperHeight) + 5 + 'px';
