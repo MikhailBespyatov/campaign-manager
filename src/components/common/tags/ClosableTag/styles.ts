@@ -16,7 +16,7 @@ export const Wrapper = styled.div<WrapperProps>`
     height: ${wrapperHeight};
     border-radius: ${wrapperBorderRadius};
     background-color: ${({ backgroundColor }) => backgroundColor || grey6};
-    padding: ${wrapperVerticalPadding} 6px ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
+    padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : primaryPadding)};
     margin-right: ${({ marginRight }) => (marginRight ? marginRight : primaryPadding)};
     border: 1px solid #c6c7d1;

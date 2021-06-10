@@ -40,13 +40,13 @@ export const VideoDetailsWrapper = styled.div`
     display: flex;
     flex-direction: row;
     padding: 0 ${titleWrapperHorizontalPadding};
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 `;
 
 export const TitleWrapper = styled.div`
     width: 100%;
     background-color: ${titleBackgroundColor};
-    padding: 12px;
+    padding: 8px;
     border-radius: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
 `;
