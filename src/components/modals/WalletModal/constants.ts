@@ -1,1 +1,9 @@
-export const modalWidth = '800px';
+export const modalWidth = '600px';
+export const modalHeight = '555px';
+export const modalBorderRadius = '8px';
+export const modalVerticalPadding = '30px';
+export const modalHorizontalPadding = '40px';
+export const marginXSSize = '3px';
+export const marginSSize = '8px';
+export const marginMSize = '15px';
+export const qrCodeImageDiameter = '208px';

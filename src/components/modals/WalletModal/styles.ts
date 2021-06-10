@@ -1,9 +1,6 @@
-import styled from 'styled-components';
-import { Visibility } from 'types';
-import { flexCenter, grey4, primaryPadding, white } from 'constants/styles';
+import { Span } from 'components/common/typography/Span';
 import {
     modalBackground,
-    modalBorderRadius,
     modalBoxShadow,
     modalHorizontalPadding,
     modalVerticalPadding,
@@ -11,8 +8,10 @@ import {
     wrapperHorizontalPadding,
     wrapperVerticalPadding
 } from 'components/modals/QexWidgetModal/constants';
-import { modalWidth } from './constants';
-import { Span } from 'components/common/typography/Span';
+import { flexCenter, grey4, primaryPadding, white } from 'constants/styles';
+import styled from 'styled-components';
+import { Visibility } from 'types';
+import { modalBorderRadius, modalWidth } from './constants';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -32,8 +31,8 @@ export const Wrapper = styled.div<Visibility>`
 export const Modal = styled.div`
     display: flex;
     flex-direction: column;
+    align-content: center;
     max-width: ${modalWidth};
-    height: ${modalWidth};
     border-radius: ${modalBorderRadius};
     box-shadow: ${modalBoxShadow};
     background: ${modalBackground};
@@ -46,30 +45,32 @@ export const WalletTitleSpan = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 16px;
     letter-spacing: 1px;
     color: ${white};
 `;
 
 export const WalletSubtitleSpan = styled.div`
+    min-width: 160px;
+    text-align: center;
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
     color: ${grey4};
 `;
 
 export const WalletBalanceSpan = styled.div`
     font-style: normal;
     font-weight: 600;
-    font-size: 32px;
-    line-height: 39px;
+    font-size: 24px;
+    line-height: 26px;
     color: white;
 `;
 
 export const CurrencySpan = styled(Span)`
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
 `;
