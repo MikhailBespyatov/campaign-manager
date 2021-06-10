@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-import { buttonDisabledMixin, disableDefaultButtonStyleMixin, grey16 } from 'constants/styles';
+import { blue, buttonDisabledMixin, disableDefaultButtonStyleMixin } from 'constants/styles';
 
 export const ResetButton = styled.button`
     ${disableDefaultButtonStyleMixin};
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
-    text-decoration-line: underline;
-    color: ${grey16};
+    color: ${blue};
 
     :hover {
         opacity: 0.7;

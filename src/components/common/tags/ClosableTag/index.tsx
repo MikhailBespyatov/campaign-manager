@@ -6,22 +6,22 @@ import {
     intermediatePadding,
     spanFontSize,
     spanFontWeight,
-    spanLineHeight,
-    tagColor
+    tagColor,
+    wrapperHeight
 } from 'components/common/tags/ClosableTag/constants';
 import { Wrapper } from 'components/common/tags/ClosableTag/styles';
 import { Span } from 'components/common/typography/Span';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
 import { hashTagPrefix } from 'constants/styles';
 import React, { FC } from 'react';
-import { BorderRadiusProperties, Closable, MarginRightBottom, WithHashtag } from 'types';
+import { BackgroundColor, BorderRadiusProperties, Closable, MarginRightBottom, WithHashtag } from 'types';
 
-interface Props extends Closable, WithHashtag, MarginRightBottom, BorderRadiusProperties {}
+interface Props extends Closable, WithHashtag, MarginRightBottom, BorderRadiusProperties, BackgroundColor {}
 
 export const ClosableTag: FC<Props> = ({ children, onClose, closable, hashtag, ...rest }) => (
     <Wrapper {...rest}>
         <Column marginRight={closable ? intermediatePadding : '0'}>
-            <Span color={tagColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={spanLineHeight}>
+            <Span color={tagColor} fontSize={spanFontSize} fontWeight={spanFontWeight} lineHeight={wrapperHeight}>
                 {hashtag && hashTagPrefix}
                 {children}
             </Span>

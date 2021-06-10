@@ -1,8 +1,13 @@
 import arrowImg from 'assets/icons/arrow-down-v2.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { ulWrapperTop, wrapperHeight, wrapperImgRight } from 'components/common/inputs/Select/constants';
+import {
+    imgHeight,
+    imgWidth,
+    ulWrapperTop,
+    wrapperHeight,
+    wrapperImgRight
+} from 'components/common/inputs/Select/constants';
 import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/Select/styles';
-import { imgHeight, imgWidth } from 'components/common/tags/ClosableTag/constants';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
