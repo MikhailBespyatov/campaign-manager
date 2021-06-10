@@ -1,4 +1,3 @@
-import closeModalImg from 'assets/img/close_modal.svg';
 import history from 'BrowserHistory';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
@@ -12,11 +11,11 @@ import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import { closeModalImgDiameter, miniMarginBottom, viewersMarginBottom } from 'components/modals/CardModal/constants';
+import { viewersMarginBottom } from 'components/modals/CardModal/constants';
 import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { grey4, primaryPadding, white } from 'constants/styles';
+import { grey4, primaryPadding, tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -25,26 +24,30 @@ import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
 import { engagementStatusTypes, roundScore } from 'utils/usefulFunctions';
+import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
+import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
+import closeImg from 'assets/img/add_video.svg';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 interface SmallSpanProps {
     opacity?: number;
 }
 const Title: FC = ({ children }) => (
     <TitleWrapper>
-        <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+        <Span fontSize="12px" fontWeight="600" lineHeight="15px">
             {children}
         </Span>
     </TitleWrapper>
 );
 
 const Subtitle: FC = ({ children }) => (
-    <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
+    <Span color={grey4} fontSize="12px" fontWeight="400" lineHeight="15px">
         {children}
     </Span>
 );
 
 const Item: FC = ({ children }) => (
-    <Span fontSize="18px" fontWeight="400" lineHeight="22px">
+    <Span fontSize="14px" fontWeight="400" lineHeight="17px">
         {children}
     </Span>
 );
@@ -56,12 +59,12 @@ interface ItemBlockProps {
 }
 const ItemBlock = ({ title, item, percentageGrowth }: ItemBlockProps) => (
     <Column>
-        <MarginWrapper marginBottom="8px">
+        <MarginWrapper marginBottom="4px">
             <Subtitle>{title}</Subtitle>
         </MarginWrapper>
         {percentageGrowth ? (
             <Row alignCenter>
-                <MarginWrapper marginRight="10px">
+                <MarginWrapper marginRight="4px">
                     <Item>{item}</Item>
                 </MarginWrapper>
                 {percentageGrowth}
@@ -80,7 +83,7 @@ const ItemBlock = ({ title, item, percentageGrowth }: ItemBlockProps) => (
 
 const PercentageSpan: FC = ({ children }) => (
     <MarginWrapper marginBottom={viewersMarginBottom}>
-        <Span fontSize="18px" fontWeight="400" lineHeight="22px">
+        <Span fontSize="13px" fontWeight="400" lineHeight="16px">
             {children}
         </Span>
     </MarginWrapper>
@@ -88,7 +91,7 @@ const PercentageSpan: FC = ({ children }) => (
 
 const EngagementSpan: FC = ({ children }) => (
     <MarginWrapper marginBottom={viewersMarginBottom}>
-        <Span fontSize="18px" fontWeight="700" lineHeight="22px">
+        <Span fontSize="14px" fontWeight="700" lineHeight="17px">
             {children}
         </Span>
     </MarginWrapper>
@@ -142,19 +145,17 @@ export const CardModal = () => {
 
     return (
         <Wrapper visible={visible}>
-            <HighlightedTitleBlock
-                buttons={
-                    <CustomImg
-                        pointer
-                        height={closeModalImgDiameter}
-                        src={closeModalImg}
-                        width={closeModalImgDiameter}
-                        onClick={onClose}
-                    />
-                }
-                marginRight="0"
-                title="Video Name"
-            >
+            <AbsoluteWrapper right={tertiaryPadding} top={wrapperVerticalPadding} zIndex="5">
+                <CustomImg
+                    pointer
+                    height={addIdImgDiameter}
+                    rotate={45}
+                    src={closeImg}
+                    width={addIdImgDiameter}
+                    onClick={onClose}
+                />
+            </AbsoluteWrapper>
+            <HighlightedTitleBlock marginRight="0" title="Video Name">
                 {loading ? (
                     <RowBlockCell padding={primaryPadding}>
                         <Loader />
@@ -162,28 +163,35 @@ export const CardModal = () => {
                 ) : (
                     <>
                         <VideoDetailsWrapper>
-                            <Column alignCenter marginRight="35px" width="300px">
+                            <Column alignCenter marginRight="16px" width="160px">
                                 {visible && (
                                     <CreateCampaignCard
                                         isVideoDetailsModal
                                         engagement={engagement}
+                                        height="230px"
                                         products={products}
                                         streamDetails={streamDetails}
                                         uriPrimary={uriPrimary}
+                                        width="160px"
                                         womQualityScore={womQualityScore}
                                     />
                                 )}
-                                <ManualRoundedButton
-                                    reverse
-                                    background={white}
-                                    mainColor={primaryColor}
-                                    onClick={onPromoteClick}
-                                >
-                                    PROMOTE
-                                </ManualRoundedButton>
+                                <MarginWrapper marginTop="6px">
+                                    <ManualRoundedButton
+                                        reverse
+                                        background={white}
+                                        height="44px"
+                                        mainColor={primaryColor}
+                                        minWidth="95px"
+                                        width="95px"
+                                        onClick={onPromoteClick}
+                                    >
+                                        PROMOTE
+                                    </ManualRoundedButton>
+                                </MarginWrapper>
                             </Column>
-                            <Column width="65%">
-                                <Section marginBottom="80px">
+                            <Section>
+                                <Section marginBottom="16px">
                                     <Title>Video Name</Title>
                                     <Row>
                                         <MarginWrapper marginRight="100px">
@@ -192,7 +200,7 @@ export const CardModal = () => {
                                         <ItemBlock item={productsItem.tagBrand || noContentMessage} title="Item" />
                                     </Row>
                                 </Section>
-                                <Section marginBottom="80px">
+                                <Section>
                                     <Column width="100%">
                                         <Title>Engagement</Title>
                                         <Row justifyBetween width="80%">
@@ -246,7 +254,7 @@ export const CardModal = () => {
                                                 title="Shares"
                                             />
                                         </Row>
-                                        <MarginWrapper marginTop="45px">
+                                        <MarginWrapper marginTop="10px">
                                             <Column>
                                                 <MarginWrapper marginBottom="8px">
                                                     <Subtitle>
@@ -255,7 +263,7 @@ export const CardModal = () => {
                                                     </Subtitle>
                                                 </MarginWrapper>
                                                 <Row>
-                                                    <Column marginRight={primaryPadding}>
+                                                    <Column marginRight="53px">
                                                         <PercentageSpan>{'< 25%'}</PercentageSpan>
                                                         <PercentageSpan>25% - 50%</PercentageSpan>
                                                         <PercentageSpan>50% - 75%</PercentageSpan>
@@ -280,16 +288,14 @@ export const CardModal = () => {
                                         </MarginWrapper>
                                     </Column>
                                 </Section>
-                                <Section marginBottom="80px">
+                                <Section marginBottom="16px">
                                     <Title>Authentication</Title>
                                     <Column>
-                                        <MarginWrapper marginBottom="15px">
-                                            <Span fontSize="18px" fontWeight="400" lineHeight="22px">
-                                                Average Authentication Score
-                                            </Span>
+                                        <MarginWrapper marginBottom="4px">
+                                            <Subtitle>Average Authentication Score</Subtitle>
                                         </MarginWrapper>
                                         <Row>
-                                            <MarginWrapper marginRight="25px">
+                                            <MarginWrapper marginRight="16px">
                                                 <ItemBlock
                                                     item={roundScore(womQualityScore?.authenticity || 0)}
                                                     title="Honesty"
@@ -310,11 +316,18 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Section>
-                                <Section marginBottom="80px">
+                                <Section marginBottom="16px">
                                     <Title>Hashtags</Title>
-                                    <Row marginBottom={miniMarginBottom}>
+                                    <Row marginTop="8px">
                                         {tags?.map(i => (
-                                            <ClosableTag key={i}>{i}</ClosableTag>
+                                            <ClosableTag
+                                                key={i}
+                                                backgroundColor="transparent"
+                                                marginBottom="10px"
+                                                marginRight="8px"
+                                            >
+                                                {i}
+                                            </ClosableTag>
                                         ))}
                                     </Row>
                                 </Section>
@@ -350,7 +363,7 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Section>
-                            </Column>
+                            </Section>
                         </VideoDetailsWrapper>
                     </>
                 )}

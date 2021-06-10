@@ -39,7 +39,9 @@ export const CreateCampaignCard = ({
     marginBottom,
     streamDetails,
     isVideoDetailsModal,
-    engagement
+    engagement,
+    width,
+    height
 }: Props) => {
     const hlsUrl = streamDetails?.hlsUrl;
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
@@ -49,7 +51,12 @@ export const CreateCampaignCard = ({
     const goLoading = () => setStartLoading(true);
 
     return (
-        <Card height={cardHeight} marginBottom={marginBottom} marginRight={marginRight} width={cardWidth}>
+        <Card
+            height={height || cardHeight}
+            marginBottom={marginBottom}
+            marginRight={marginRight}
+            width={width || cardWidth}
+        >
             <Description>
                 {startLoading ? (
                     <AbsoluteVideo controls isPlaying src={hlsUrl || ''} />
