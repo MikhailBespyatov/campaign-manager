@@ -39,6 +39,7 @@ import { PublicRoute } from 'routes/PublicRoute';
 import { UserAdminRoute } from 'routes/UserAdminRoute';
 import { themeStores } from 'stores/theme';
 import styled, { ThemeProvider } from 'styled-components';
+import 'sweetalert2/src/sweetalert2.scss';
 
 const AppWrapper = styled.div`
     position: relative;
