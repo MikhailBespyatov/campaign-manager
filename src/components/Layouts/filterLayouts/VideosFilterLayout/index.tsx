@@ -1,3 +1,5 @@
+import { ResetButton } from 'components/common/buttons/ResetButton';
+import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
@@ -13,8 +15,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
 import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
-import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
-import { ResetButton } from 'components/common/buttons/ResetButton';
 import { defaultSortsState } from './constants';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
@@ -87,7 +87,10 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
         FilterProperty.DateAddedUtc
     );
 
-    const onReset = () => setDefaultValues();
+    const onReset = () => {
+        setSortsState(defaultSortsState);
+        setDefaultValues();
+    };
 
     useEffect(() => {
         if (isFirst) {
