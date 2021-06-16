@@ -1,12 +1,12 @@
-import { createEffect, createEvent, createStore, forward } from 'effector';
-import { loadingEffects } from 'stores/loading';
-import { API } from 'services';
-import { defaultProductsValues } from 'constants/defaults/products';
-import { initializeIsFirstStore } from 'stores/initialize/initialize.isFirst.store';
 import history from 'BrowserHistory';
-import { themeStores } from 'stores/theme';
+import { defaultProductsValues } from 'constants/defaults/products';
 import { routes } from 'constants/routes';
+import { createEffect, createEvent, createStore, forward } from 'effector';
+import { API } from 'services';
 import { handleProduct, productForm } from 'stores/forms/productForm';
+import { initializeIsFirstStore } from 'stores/initialize/initialize.isFirst.store';
+import { loadingEffects } from 'stores/loading';
+import { themeStores } from 'stores/theme';
 
 const getItemById = createEffect({
     handler: async (id: string) => {
@@ -83,7 +83,10 @@ const item = createStore<WOM.RemoteProductResponse>({})
     .on(resetItem, _ => ({}));
 const items = createStore<WOM.RemoteProductsResponse>({})
     .on(getItems.doneData, (_, newState) => newState)
-    .on(handleProduct.doneData, (state, newState) => ({ ...state, items: [...(state?.items || []), newState] }))
+    .on(handleProduct.doneData, (state, newState) => ({
+        ...state,
+        items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
+    }))
     .on(updateProduct.doneData, (state, newState) => ({
         ...state,
         items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
