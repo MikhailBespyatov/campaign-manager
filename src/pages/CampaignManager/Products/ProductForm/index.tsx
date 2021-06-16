@@ -1,26 +1,30 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'effector-forms';
-import { forms } from 'stores/forms';
-import { useStore } from 'effector-react';
-import { themeStores } from 'stores/theme';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { routes } from 'constants/routes';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { ImageTextInput } from 'components/common/inputs/ImageTextInput';
+import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
 import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
 import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
-import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
-import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
-import { productInputMarginBottom } from 'pages/CampaignManager/Products/ProductForm/constants';
-import { ImageTextInput } from 'components/common/inputs/ImageTextInput';
-import { getFlexBasisPercent } from 'utils/usefulFunctions';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { routes } from 'constants/routes';
 import { red } from 'constants/styles';
+import { useForm } from 'effector-forms';
+import { useStore } from 'effector-react';
+import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
+import { productInputMarginBottom } from 'pages/CampaignManager/Products/ProductForm/constants';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
 import { productsEffects, productsStores } from 'stores/products';
+import { themeStores } from 'stores/theme';
+import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
 const { name, brand, publicId, url, imageUrl } = forms.productForm.fields;
 
 export interface ProductFormProps {}
+
+interface ParamsProps {
+    productId: string;
+}
 
 export const ProductForm = () => {
     const history = useHistory();
@@ -28,7 +32,7 @@ export const ProductForm = () => {
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const { imageUrl: imageUrlValue } = useStore(productsStores.item);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.products.create;
-    const { productId } = useParams();
+    const { productId } = useParams<ParamsProps>();
     const flexBasisInput = getFlexBasisPercent(2);
 
     // const onChangeProductName = (e: ChangeEvent<HTMLInputElement>) => fields.productName.onChange(e.target.value);
