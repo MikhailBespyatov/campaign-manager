@@ -92,7 +92,7 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
 
     const removeHandler = () =>
         Swal.fire({
-            title: 'Are you sure you want to delete a user' + username,
+            title: 'Are you sure you want to delete a user ' + username,
             showCancelButton: true,
             confirmButtonText: 'Yes',
             showLoaderOnConfirm: true,
