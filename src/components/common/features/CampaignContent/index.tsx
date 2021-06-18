@@ -4,6 +4,7 @@ import { itemHorizontalPadding, itemVerticalPadding } from 'components/common/fe
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { CampaignEmpty } from 'components/Layouts/ResultLayouts/CampaignEmpty';
+import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
@@ -40,8 +41,8 @@ export const CampaignContent = () => {
                                 height="100%"
                                 marginBottom="0"
                                 marginRight="0"
-                                paddingBottom={itemHorizontalPadding}
-                                paddingRight={itemVerticalPadding}
+                                paddingBottom={itemVerticalPadding}
+                                paddingRight={itemHorizontalPadding}
                                 width="100%"
                             >
                                 <CampaignItem
@@ -61,14 +62,15 @@ export const CampaignContent = () => {
             ) : campaignData?.length ? (
                 <>
                     {campaignData.map(item => (
-                        <Section key={item.id} marginBottom="20px">
+                        <Section key={item.id} marginBottom={primaryMargin}>
                             <BorderBlock
                                 removeBorderRadius
+                                backgroundColor={white}
                                 height="100%"
                                 marginBottom="0"
                                 marginRight="0"
-                                paddingBottom={itemHorizontalPadding}
-                                paddingRight={itemVerticalPadding}
+                                paddingBottom={itemVerticalPadding}
+                                paddingRight={itemHorizontalPadding}
                                 width="100%"
                             >
                                 <CampaignItem key={item.id} status={statusRoute.status} {...item} />

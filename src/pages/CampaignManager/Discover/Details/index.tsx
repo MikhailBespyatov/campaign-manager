@@ -445,7 +445,7 @@ export const Details = () => {
     <Column>
         <Row alignCenter noWrap>
             <Column marginRight="6px">
-                <Span color="#0F1642" fontSize="25px" fontWeight="normal" lineHeight="30px">
+                <Span color={primaryColor} fontSize="25px" fontWeight="normal" lineHeight="30px">
                     Milestones
                 </Span>
             </Column>
@@ -469,11 +469,11 @@ export const Details = () => {
             />
         </Section>
         <Section alignCenter justifyCenter>
-            <Column marginRight="16px">
+            <Column marginRight={tertiaryMargin}>
                 <CustomImg height={ballDiameter} src={ballPreviewImg} width={ballDiameter} />
             </Column>
             <Column>
-                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                     Preview
                 </Span>
             </Column>
@@ -485,11 +485,11 @@ export const Details = () => {
             />
         </Section>
         <Section alignCenter justifyCenter>
-            <Column marginRight="16px">
+            <Column marginRight={tertiaryMargin}>
                 <CustomImg height={ballDiameter} src={ballViewImg} width={ballDiameter} />
             </Column>
             <Column>
-                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                     View
                 </Span>
             </Column>
@@ -501,11 +501,11 @@ export const Details = () => {
             />
         </Section>
         <Section alignCenter justifyCenter>
-            <Column marginRight="16px">
+            <Column marginRight={tertiaryMargin}>
                 <CustomImg height={ballDiameter} src={ballEngageImg} width={ballDiameter} />
             </Column>
             <Column>
-                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                     Engage
                 </Span>
             </Column>
@@ -517,11 +517,11 @@ export const Details = () => {
             />
         </Section>
         <Section alignCenter justifyCenter>
-            <Column marginRight="16px">
+            <Column marginRight={tertiaryMargin}>
                 <CustomImg height={ballDiameter} src={ballClickImg} width={ballDiameter} />
             </Column>
             <Column>
-                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                     Click
                 </Span>
             </Column>
@@ -533,11 +533,11 @@ export const Details = () => {
             />
         </Section>
         <Section alignCenter justifyCenter>
-            <Column marginRight="16px">
+            <Column marginRight={tertiaryMargin}>
                 <CustomImg height={ballDiameter} src={ballBuyImg} width={ballDiameter} />
             </Column>
             <Column>
-                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                     Buy
                 </Span>
             </Column>

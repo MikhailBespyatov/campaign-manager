@@ -1,10 +1,18 @@
+import { parseCampaignRoutes } from 'constants/routes';
 import { multiplyPixels, pixelsAddition, pixelsSubtraction } from 'utils/parsers';
 import {
     allValuesAreTrue,
     commaInserter,
     currencyToStandardForm,
     currencyToText,
+    engagementStatusTypes,
+    getDate,
+    getDateFromString,
+    getFlexBasisPercent,
+    getFormattedDate,
     getPublicTheme,
+    getStoriesTitle,
+    getTotalItems,
     giveAccess,
     giveAccessByRoles,
     isExactValuesQuantity,
@@ -15,15 +23,8 @@ import {
     retrieveRoleAndConvert,
     roundScore,
     slashInserter,
-    spaceInserter,
-    getDate,
-    engagementStatusTypes,
-    getStoriesTitle,
-    getFlexBasisPercent,
-    getTotalItems,
-    getDateFromString
+    spaceInserter
 } from 'utils/usefulFunctions';
-import { parseCampaignRoutes } from 'constants/routes';
 
 describe('giveAccessByRoles', () => {
     it('Test for returning access', () => {
@@ -340,6 +341,16 @@ describe('getDate', () => {
         // expect(getDate()).toBe(undefined);
         expect(getDate(new Date('2021-11-25'))).toBe('2021-11-25');
         expect(getDate(new Date('2021-02-02 13:38'))).toBe('2021-02-02');
+    });
+});
+
+describe('getFormattedDate', () => {
+    it('Test for getFormattedDate', () => {
+        expect(getFormattedDate(new Date('2020-01-01'))).toBe('01-01-2020');
+        expect(getFormattedDate(null)).toBe('');
+        expect(getFormattedDate()).toBe('');
+        expect(getFormattedDate(new Date('2021-11-31'))).toBe('31-11-2021');
+        expect(getFormattedDate(new Date('0001-00-00 13:38'))).toBe('00-00-0001');
     });
 });
 

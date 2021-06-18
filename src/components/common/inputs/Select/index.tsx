@@ -26,6 +26,7 @@ import {
 import { multiplyPixels, pixelsAddition } from 'utils/parsers';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapper/constants';
+import { defaultFontSize } from 'constants/defaults';
 
 interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle, IsWithoutBorder, PaddingRight, Disabled {
     top?: boolean;
@@ -38,7 +39,7 @@ interface Props extends Active, ItemRadioProperties {}
 
 const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle }) => (
     <>
-        <Span fontSize="14px" fontWeight="500" lineHeight="17px">
+        <Span fontSize={defaultFontSize} fontWeight="500" lineHeight="17px">
             {children}
         </Span>
         {additionalTitle && (

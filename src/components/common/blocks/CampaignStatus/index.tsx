@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { CampaignStatusWrapper, RemainingText, StatusText } from './styles';
-import { useStore } from 'effector-react';
-import { themeStores } from 'stores/theme';
-import { red } from 'constants/styles';
 import pauseImg from 'assets/img/paused.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { red } from 'constants/styles';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
+import { themeStores } from 'stores/theme';
 import { Status } from 'types';
+import { CampaignStatusWrapper, RemainingText, StatusText } from './styles';
 
 interface Props extends Status {
     daysRemaining?: number;
@@ -19,7 +19,7 @@ export const CampaignStatus: FC<Props> = ({ status, daysRemaining }) => {
 
     return (
         <CampaignStatusWrapper>
-            <Row alignCenter marginBottom="0">
+            <Row alignCenter marginBottom="10px">
                 {status === 'paused' && (
                     <MarginWrapper marginRight="8px">
                         <CustomImg src={pauseImg} />

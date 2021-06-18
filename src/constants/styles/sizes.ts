@@ -3,11 +3,16 @@ export const primaryPadding = '20px';
 export const secondaryPadding = '10px';
 export const tertiaryPadding = '30px';
 
+export const primaryMargin = '8px';
+export const secondaryMargin = '10px';
+export const tertiaryMargin = '16px';
+
 export const blockHorizontalPadding = '35px';
 export const pageHorizontalPadding = '40px';
 
 export const primaryBorderRadius = '20px';
 export const secondaryBorderRadius = '10px';
+export const tertiaryBorderRadius = '8px';
 
 export const primaryButtonDiameter = '40px';
 

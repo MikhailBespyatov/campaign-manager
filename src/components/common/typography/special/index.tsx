@@ -2,6 +2,7 @@ import { Span } from 'components/common/typography/Span';
 import { percentageSpanColor, subPageSpanHeight } from 'components/common/typography/special/constants';
 import { SmallSpanProps } from 'components/common/typography/special/types';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
 import { primaryColor, secondaryColor, white } from 'constants/styles';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
@@ -19,13 +20,13 @@ export const SmallSpan: FC<SmallSpanProps> = ({ children, opacity }) => (
 );
 
 export const PercentageSpan: FC = ({ children }) => (
-    <Span color={percentageSpanColor} fontSize="14px" lineHeight="22px">
+    <Span color={percentageSpanColor} fontSize={defaultFontSize} lineHeight="22px">
         {children}
     </Span>
 );
 
 export const EngagementSpan: FC = ({ children }) => (
-    <Span fontSize="14px" lineHeight="22px">
+    <Span fontSize={defaultFontSize} lineHeight="22px">
         {children}
     </Span>
 );
@@ -39,7 +40,7 @@ export const TableHeaderSpan: FC = ({ children }) => (
 );
 
 export const GraphicBlockSpan: FC = ({ children }) => (
-    <Span color={secondaryColor} fontSize="14px" lineHeight="22px">
+    <Span color={secondaryColor} fontSize={defaultFontSize} lineHeight="22px">
         {children}
     </Span>
 );
@@ -54,7 +55,7 @@ export const SubPageSpan: FC = ({ children }) => (
     <Span
         color={themeStores.theme.getState().primaryColor}
         fontSize="13px"
-        fontWeight="600"
+        fontWeight={defaultFontWeight}
         lineHeight={subPageSpanHeight}
     >
         {children}
@@ -70,7 +71,7 @@ export const QexWidgetDisclaimerSpan: FC = ({ children }) => (
 export * from './styles';
 
 // export const ProductSpan: FC = ({ children }) => (
-//     <Span noWrap color={white} fontSize="14px" lineHeight="29px">
+//     <Span noWrap color={white} fontSize={defaultFontSize} lineHeight="29px">
 //         {children}
 //     </Span>
 // );

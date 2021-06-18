@@ -13,7 +13,7 @@ import { useParams } from 'react-router';
 import { loadingStores } from 'stores/loading';
 
 // const HighlightSpan: FC = ({ children }) => (
-//     <Span alignCenter fontSize="14px" fontWeight="500" lineHeight="17px" textDecoration="underline">
+//     <Span alignCenter fontSize={defaultFontSize} fontWeight="500" lineHeight="17px" textDecoration="underline">
 //         {children}
 //     </Span>
 // );

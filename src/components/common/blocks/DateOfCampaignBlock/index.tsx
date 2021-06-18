@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
-import { DateOfCampaignWrapper } from './styles';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
-import { getDate } from 'utils/usefulFunctions';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
+import { primaryColor, primaryMargin, red } from 'constants/styles';
+import React, { FC } from 'react';
 import { IsExpiredBorder } from 'types';
-import { primaryColor, red } from 'constants/styles';
+//import { getDate } from 'utils/usefulFunctions';
+import { getFormattedDate } from 'utils/usefulFunctions';
+import { DateOfCampaignWrapper } from './styles';
 
 interface Props extends IsExpiredBorder {
     date: string;
@@ -13,13 +15,19 @@ interface Props extends IsExpiredBorder {
 
 export const DateOfCampaignBlock: FC<Props> = ({ state, date, isExpiredBorder = false }) => (
     <DateOfCampaignWrapper isExpiredBorder={isExpiredBorder}>
-        <MarginWrapper marginBottom="20px">
-            <Span fontSize="15px" fontWeight="400" lineHeight="18px">
+        <MarginWrapper marginBottom={primaryMargin}>
+            <Span fontSize="12px" fontWeight={defaultFontWeight} lineHeight="14px">
                 {state === 'start' ? 'Start of campaign' : 'End of campaign'}
             </Span>
         </MarginWrapper>
-        <Span color={isExpiredBorder ? red : primaryColor} fontSize="18px" fontWeight="400" lineHeight="22px">
-            {getDate(new Date(date))}
+        <Span
+            color={isExpiredBorder ? red : primaryColor}
+            fontSize={defaultFontSize}
+            fontWeight="400"
+            lineHeight="17px"
+        >
+            {/* {getDate(new Date(date))} */}
+            {getFormattedDate(new Date(date))}
         </Span>
     </DateOfCampaignWrapper>
 );

@@ -1,12 +1,10 @@
-import React from 'react';
-
 export const labelFontSize = '16px';
 export const labelLineHeight = '20px';
 export const labelFontWeight = '600';
 export const labelMarginBottom = '5px';
 
 // const LabelSpan: FC<Color> = ({ children, color }) => (
-//     <Span color={color} fontSize="16px" fontWeight="600" lineHeight="20px">
+//     <Span color={color} fontSize="16px" fontWeight={defaultFontWeight} lineHeight="20px">
 //         {children}
 //     </Span>
 // );
@@ -73,7 +71,7 @@ interface Props {
 //                                     ) : (
 //                                         <Column marginRight={primaryPadding} width="100%">
 //                                             <MarginWrapper marginBottom="20px">
-//                                                 <Span fontSize="18px" fontWeight="600" lineHeight="22px">
+//                                                 <Span fontSize="18px" fontWeight={defaultFontWeight} lineHeight="22px">
 //                                                     Add Budget
 //                                                 </Span>
 //                                             </MarginWrapper>

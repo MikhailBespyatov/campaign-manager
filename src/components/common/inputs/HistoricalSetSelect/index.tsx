@@ -11,7 +11,10 @@ import { imgHeight, imgWidth } from 'components/common/tags/ClosableTag/constant
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize } from 'constants/defaults';
 import { Noop } from 'constants/global';
+import { primaryColor, white } from 'constants/styles';
 import React, { FC, useState } from 'react';
 import {
     Active,
@@ -24,8 +27,6 @@ import {
     Sizes
 } from 'types';
 import { multiplyPixels, pixelsAddition } from 'utils/parsers';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { primaryColor, white } from 'constants/styles';
 
 interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle, IsWithoutBorder, PaddingRight {
     top?: boolean;
@@ -37,8 +38,8 @@ interface Props extends Active, ItemRadioProperties {}
 
 const ItemSpan: FC<ItemSpanProps> = ({ children, color, additionalTitle }) => (
     <>
-        <MarginWrapper marginLeft="20px">
-            <Span color={color} fontSize="16px" fontWeight="500" lineHeight="20px">
+        <MarginWrapper marginLeft="16px">
+            <Span color={color} fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
                 {children}
             </Span>
         </MarginWrapper>
@@ -94,7 +95,7 @@ export const HistoricalSetSelect = ({
         <Wrapper {...styles}>
             <ItemSpan additionalTitle={additionalTitle}>{selected}</ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={wrapperImgTop}>
-                <ClickableWrapper onClick={onClose}>
+                <ClickableWrapper height="22px" onClick={onClose}>
                     <CustomImg pointer height={imgHeight} rotate={isClosed ? 0 : 180} src={arrowImg} width={imgWidth} />
                 </ClickableWrapper>
             </AbsoluteWrapper>

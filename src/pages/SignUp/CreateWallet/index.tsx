@@ -5,6 +5,7 @@ import { Form } from 'components/FormComponents/forms/Form';
 import { WomInput } from 'components/FormComponents/inputs/WomInput';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -31,7 +32,11 @@ export const CreateWallet = () => {
                             {loading ? <Loader /> : 'PURCHASE NOW'}
                         </Button>
                         <Row marginTop="25px">
-                            <InternalLink fontSize="14px" lineHeight="21px" to={routes.campaignManager.index}>
+                            <InternalLink
+                                fontSize={defaultFontSize}
+                                lineHeight="21px"
+                                to={routes.campaignManager.index}
+                            >
                                 Buy WOM later
                             </InternalLink>
                         </Row>

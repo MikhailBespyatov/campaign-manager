@@ -1,10 +1,10 @@
+import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { defaultCampaignStatus, defaultFontWeight } from 'constants/defaults';
 import React from 'react';
+import { Status, StatusType } from 'types';
 import { routesArray } from './constants';
 import { StyledItem } from './styles';
-import { Span } from 'components/common/typography/Span';
-import { Status, StatusType } from 'types';
-import { defaultCampaignStatus } from 'constants/defaults';
 
 interface Props {
     campaignStatusCount: typeof defaultCampaignStatus;
@@ -21,9 +21,9 @@ export const CampaignTopBar = ({ campaignStatusCount, statusRoute, onClick, with
             {viewRoutes.map(({ name, status }) => (
                 <StyledItem key={name} active={statusRoute.status === status} onClick={() => onClick(status)}>
                     <Span
-                        fontSize="16px"
-                        fontWeight="600"
-                        lineHeight="20px"
+                        fontSize="12px"
+                        fontWeight={defaultFontWeight}
+                        lineHeight="14px"
                     >{`(${campaignStatusCount[status]}) ${name}`}</Span>
                 </StyledItem>
             ))}

@@ -1,31 +1,35 @@
-import React, { useEffect } from 'react';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
-import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
-import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
-import { inputHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
-import { useForm } from 'effector-forms';
-import { forms } from 'stores/forms';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { useStore } from 'effector-react';
-import { themeStores } from 'stores/theme';
-import { routes } from 'constants/routes';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { red } from 'constants/styles';
-import { getFlexBasisPercent } from 'utils/usefulFunctions';
+import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
+import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
+import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { routes } from 'constants/routes';
+import { lightPink, red, tertiaryBorderRadius } from 'constants/styles';
+import { useForm } from 'effector-forms';
+import { useStore } from 'effector-react';
+import { inputHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { channelsEffects } from 'stores/channels';
+import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
+import { themeStores } from 'stores/theme';
+import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
 const { id: channelIdField, name: channelName } = forms.channelForm.fields;
 
 export interface ChannelFormProps {}
+
+interface ParamsProps {
+    channelId: string;
+}
 
 export const ChannelForm = () => {
     const { reset } = useForm(forms.channelForm);
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.channels.create;
-    const { channelId } = useParams();
+    const { channelId } = useParams<ParamsProps>();
     const flexBasisInput = getFlexBasisPercent(2);
 
     const onClickRemoveButton = () => {
@@ -80,7 +84,7 @@ export const ChannelForm = () => {
             {/*        <MarginWrapper marginRight="19px">*/}
             {/*            <ToggleButton value={fields.isPrivate.value} onChange={onChangePrivate} />*/}
             {/*        </MarginWrapper>*/}
-            {/*        <Span fontSize="14px" fontWeight="600" lineHeight="17px">*/}
+            {/*        <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">*/}
             {/*            Make Channel Private*/}
             {/*        </Span>*/}
             {/*    </Row>*/}
@@ -88,9 +92,8 @@ export const ChannelForm = () => {
             {isEditPage && (
                 <Section marginTop="50px">
                     <ManualRoundedButton
-                        background="#FFEEEE"
-                        borderRadius="8px"
-                        height="48px"
+                        background={lightPink}
+                        borderRadius={tertiaryBorderRadius}
                         mainColor={red}
                         width="223px"
                         onClick={OnClickConfirmationModal}

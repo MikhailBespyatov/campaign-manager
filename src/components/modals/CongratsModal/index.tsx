@@ -15,6 +15,7 @@ import {
     womLogoHeight,
     womLogoWidth
 } from 'components/modals/CongratsModal/constants';
+import { defaultFontWeight } from 'constants/defaults';
 import { routes } from 'constants/routes';
 import { grey17, white } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -41,7 +42,13 @@ export const CongratsModal = () => {
                     <Column alignCenter marginTop="40px">
                         <CustomImg height={womLogoHeight} src={womLogo} width={womLogoWidth} />
                         <MarginWrapper marginTop="15px">
-                            <Span alignCenter color={white} fontSize="16px" fontWeight="600" lineHeight="24px">
+                            <Span
+                                alignCenter
+                                color={white}
+                                fontSize="16px"
+                                fontWeight={defaultFontWeight}
+                                lineHeight="24px"
+                            >
                                 Campaign Manager
                             </Span>
                         </MarginWrapper>
@@ -62,7 +69,7 @@ export const CongratsModal = () => {
                     <Section justifyCenter height="100%">
                         <Column alignCenter>
                             <Row marginBottom="15px" marginTop="10px">
-                                <Span alignCenter fontSize="24px" fontWeight="600">
+                                <Span alignCenter fontSize="24px" fontWeight={defaultFontWeight}>
                                     CONGRATS!
                                 </Span>
                             </Row>
@@ -71,7 +78,7 @@ export const CongratsModal = () => {
                                     Your campaign is now live
                                 </Span>
                             </Row>
-                            <ManualRoundedButton fontWeight="700" height="48px" width="198px" onClick={onClose}>
+                            <ManualRoundedButton fontWeight="700" width="198px" onClick={onClose}>
                                 DONE
                             </ManualRoundedButton>
                         </Column>

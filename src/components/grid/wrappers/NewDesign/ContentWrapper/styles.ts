@@ -1,9 +1,9 @@
-import { contentWrapperBorderRadius } from './constants';
 import { white } from 'constants/styles';
 import styled from 'styled-components';
-import { BackgroundColor, BorderRadius, MinSizes, Padding, Sizes } from 'types';
+import { BackgroundColor, BorderRadius, MarginBottom, MinSizes, Padding, Sizes } from 'types';
+import { contentWrapperBorderRadius } from './constants';
 
-export interface ContentWrapperProps extends Sizes, Padding, MinSizes, BackgroundColor, BorderRadius {}
+export interface ContentWrapperProps extends Sizes, Padding, MinSizes, BackgroundColor, BorderRadius, MarginBottom {}
 
 export const ContentWrapper = styled.div<ContentWrapperProps>`
     ${({ height }) => height && `height: ${height}`};
@@ -15,6 +15,7 @@ export const ContentWrapper = styled.div<ContentWrapperProps>`
     ${({ paddingTop }) => paddingTop && `padding-top: ${paddingTop}`};
     ${({ paddingBottom }) => paddingBottom && `padding-bottom: ${paddingBottom}`};
     ${({ padding }) => padding && `padding: ${padding}`};
+    ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`};
     border-radius: ${({ borderRadius }) => borderRadius || contentWrapperBorderRadius};
     background-color: ${({ backgroundColor }) => backgroundColor || white};
     display: flex;

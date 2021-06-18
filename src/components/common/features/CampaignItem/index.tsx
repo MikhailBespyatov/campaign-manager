@@ -1,4 +1,3 @@
-import defaultImg from 'assets/img/search_icon.svg';
 import history from 'BrowserHistory';
 import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
 import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
@@ -8,14 +7,26 @@ import { SimpleButton } from 'components/common/buttons/SimpleButton';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { grey4, red, white } from 'constants/styles';
+import { primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
 import { themeStores } from 'stores/theme';
 import { Status } from 'types';
-import { CampaignDetail, CampaignStatusBlock, ItemImgBlock } from './styles';
+import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, StyledSpan } from './styles';
+
+interface CampaignSubtitleProps {
+    videosQuantity?: number;
+    womAmount?: number;
+}
+
+export const CampaignSubtitleBlock: FC<CampaignSubtitleProps> = ({ videosQuantity, womAmount }) => (
+    <CampaignSubtitle>
+        Content <StyledSpan>{videosQuantity} videos,</StyledSpan> Total Budget <StyledSpan>{womAmount} WOM</StyledSpan>
+    </CampaignSubtitle>
+);
 
 interface Props extends WOM.CampaignDetailResponse, Status {
     isDetailsPage?: boolean;
@@ -27,7 +38,7 @@ export const CampaignItem: FC<Props> = ({
     title,
     budget,
     isDetailsPage,
-    backgroundImg,
+    //backgroundImg,
     id = '',
     schedule,
     contentIds,
@@ -46,29 +57,27 @@ export const CampaignItem: FC<Props> = ({
 
     return (
         <Row marginBottom="0">
-            {isDetailsPage && <ItemImgBlock background={backgroundImg || defaultImg} />}
-            <CampaignDetail marginRight={isDetailsPage ? '25px' : '0'}>
+            {/* {isDetailsPage && <ItemImgBlock background={backgroundImg || defaultImg} />} */}
+            <CampaignDetail>
                 <Column>
-                    <MarginWrapper marginBottom="8px">
-                        <Span fontSize="18px" fontWeight="400" lineHeight="22px">
+                    <MarginWrapper marginBottom="5px">
+                        <Span fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
                             {title}
                         </Span>
                     </MarginWrapper>
-                    <MarginWrapper marginBottom="18px">
-                        <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
-                            {`Content: ${contentIds?.length} videos, Total Budget: ${budget?.budgetTotal} WOM`}
-                        </Span>
+                    <MarginWrapper marginBottom={secondaryMargin}>
+                        <CampaignSubtitleBlock videosQuantity={contentIds?.length} womAmount={budget?.budgetTotal} />
                     </MarginWrapper>
-                    <Row marginBottom="60px">
+                    <Row marginBottom="4px">
                         {isDetailsPage ? (
                             <>
-                                <MarginWrapper marginRight="25px" marginTop="10px">
+                                <MarginWrapper marginRight="25px" marginTop={secondaryMargin}>
                                     <DateOfDetailsCampaignBlock
                                         date={schedule?.utcToStart || new Date().toISOString()}
                                         state="start"
                                     />
                                 </MarginWrapper>
-                                <MarginWrapper marginTop="10px">
+                                <MarginWrapper marginTop={secondaryMargin}>
                                     <DateOfDetailsCampaignBlock
                                         date={schedule?.utcToEnd || new Date().toISOString()}
                                         state="end"
@@ -77,7 +86,7 @@ export const CampaignItem: FC<Props> = ({
                             </>
                         ) : !isDraftStatus ? (
                             <>
-                                <MarginWrapper marginRight="40px">
+                                <MarginWrapper marginRight="20px">
                                     <DateOfCampaignBlock
                                         date={schedule?.utcToStart || new Date().toISOString()}
                                         state="start"
@@ -93,14 +102,14 @@ export const CampaignItem: FC<Props> = ({
                     </Row>
                     {/*    <Row marginBottom="0">*/}
                     {/*    {status === 'running' && (*/}
-                    {/*        <MarginWrapper marginRight="16px">*/}
+                    {/*        <MarginWrapper marginRight={tertiaryMargin}>*/}
                     {/*            <ManualRoundedButton reverse background={white} height="57px" mainColor={primaryColor}>*/}
                     {/*                PAUSE CAMPAIGN*/}
                     {/*            </ManualRoundedButton>*/}
                     {/*        </MarginWrapper>*/}
                     {/*    )}*/}
                     {/*    {status === 'paused' && (*/}
-                    {/*        <MarginWrapper marginRight="16px">*/}
+                    {/*        <MarginWrapper marginRight={tertiaryMargin}>*/}
                     {/*            <ManualRoundedButton reverse background={white} height="57px" mainColor={primaryColor}>*/}
                     {/*                RESUME CAMPAIGN*/}
                     {/*            </ManualRoundedButton>*/}
@@ -115,14 +124,16 @@ export const CampaignItem: FC<Props> = ({
                 </Column>
 
                 <CampaignStatusBlock>
-                    <CampaignStatus daysRemaining={schedule?.remainingDays} status={status} />
+                    <MarginWrapper marginBottom="30px">
+                        <CampaignStatus daysRemaining={schedule?.remainingDays} status={status} />
+                    </MarginWrapper>
                     {isDetailsPage || hideShowStatisticButton ? null : isDraftStatus ? (
                         <Row alignCenter>
                             <MarginWrapper marginRight="20px">
                                 <SimpleButton
                                     backgroundColor={white}
                                     color={red}
-                                    height="38px"
+                                    height={primaryButtonDiameter}
                                     width="167px"
                                     onClick={onDeleteDraftClick}
                                 >
@@ -130,8 +141,8 @@ export const CampaignItem: FC<Props> = ({
                                 </SimpleButton>
                             </MarginWrapper>
                             <ManualRoundedButton
-                                borderRadius="8px"
-                                height="38px"
+                                borderRadius={tertiaryBorderRadius}
+                                height={primaryButtonDiameter}
                                 width="167px"
                                 onClick={onContinueClick}
                             >
@@ -139,9 +150,41 @@ export const CampaignItem: FC<Props> = ({
                             </ManualRoundedButton>
                         </Row>
                     ) : (
-                        <ManualRoundedButton borderRadius="8px" height="38px" width="167px" onClick={onMoreInfoClick}>
-                            SHOW STATISTICS
-                        </ManualRoundedButton>
+                        <Row>
+                            {/* <MarginWrapper marginRight={secondaryMargin}>
+                                <ManualRoundedButton
+                                    background={lightPink}
+                                    borderRadius= {tertiaryBorderRadius}
+                                    fontWeight="700"
+                                    height={primaryButtonDiameter}
+                                    mainColor={red}
+                                    minWidth="148px"
+                                    onClick={Noop}
+                                >
+                                    REMOVE CAMPAIGN
+                                </ManualRoundedButton>
+                            </MarginWrapper>
+                            <MarginWrapper marginRight={secondaryMargin}>
+                                <ManualRoundedButton
+                                    borderRadius= {tertiaryBorderRadius}
+                                    fontWeight="700"
+                                    height={primaryButtonDiameter}
+                                    minWidth="65px"
+                                    onClick={Noop}
+                                >
+                                    EDIT
+                                </ManualRoundedButton>
+                            </MarginWrapper> */}
+                            <ManualRoundedButton
+                                borderRadius={tertiaryBorderRadius}
+                                fontWeight="700"
+                                height={primaryButtonDiameter}
+                                minWidth="148px"
+                                onClick={onMoreInfoClick}
+                            >
+                                SHOW STATISTICS
+                            </ManualRoundedButton>
+                        </Row>
                     )}
                 </CampaignStatusBlock>
             </CampaignDetail>

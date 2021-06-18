@@ -2,6 +2,7 @@ import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constant
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
+import format from 'date-fns/format';
 import { AuthUserResponse, SortType, StatusType } from 'types';
 
 // Triggered copy to clipboard
@@ -146,6 +147,11 @@ export const currencyToStandardForm = (x: number) =>
 export const getDate = (date: Date | null) => {
     if (!date) return;
     return date.toISOString().split('T')[0];
+};
+
+export const getFormattedDate = (date?: Date | null) => {
+    if (!date) return '';
+    return format(date, 'dd-MM-yyyy'); //16-01-2021
 };
 
 export const getDateFromString = (dateISOString?: string) => {

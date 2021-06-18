@@ -22,6 +22,7 @@ const Flex = styled.div<FlexProps>`
     ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
     ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
     ${({ marginLeft }) => (marginLeft ? `margin-left: ${marginLeft};` : ``)};
+    ${({ margin }) => margin && `margin: ${margin}`};
     ${({ zIndex }) => (zIndex !== undefined ? `z-index: ${zIndex};` : ``)};
 `;
 

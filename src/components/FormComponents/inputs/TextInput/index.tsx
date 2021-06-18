@@ -53,7 +53,7 @@ export const TextInput = ({
             {/*    type={type}*/}
             {/*    onChange={onInputChange}*/}
             {/*/>*/}
-            {/* <MarginWrapper marginBottom="8px"> */}
+            {/* <MarginWrapper marginBottom={primaryMargin}> */}
             <Span fontSize="12px" fontWeight="500" lineHeight="15px">
                 {label}
                 {required && `*`}

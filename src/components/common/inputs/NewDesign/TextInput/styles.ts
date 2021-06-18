@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { blue, formGrey6, primaryColor } from 'constants/styles';
+import { blue, formGrey6, primaryColor, tertiaryBorderRadius } from 'constants/styles';
 import { Padding } from 'types';
 import { Span } from 'components/common/typography/Span';
 import { inputHeight } from 'components/common/inputs/NewDesign/TextInput/constants';
@@ -36,7 +36,7 @@ export const TextFieldForm = styled.input<Padding>`
     line-height: 16px;
     color: ${primaryColor};
     border: 1px solid ${primaryColor};
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
 
     :focus-within {
         border: 1px solid ${blue};

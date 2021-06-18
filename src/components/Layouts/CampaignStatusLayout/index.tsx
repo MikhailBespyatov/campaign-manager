@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import { CampaignTopBar } from 'components/grid/bars/CampaignTopBar';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { CampaignTopBar } from 'components/grid/bars/CampaignTopBar';
-import { useStore } from 'effector-react';
-import { campaignsStores } from 'stores/campaigns';
-import { useHistory, useParams } from 'react-router';
-import { Status, StatusType } from 'types';
-import { themeStores } from 'stores/theme';
-import { campaignPrefix } from 'constants/routes';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { campaignPrefix } from 'constants/routes';
+import { useStore } from 'effector-react';
+import React, { FC } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { campaignsStores } from 'stores/campaigns';
+import { themeStores } from 'stores/theme';
+import { Status, StatusType } from 'types';
 
 export const CampaignStatusLayout: FC = ({ children }) => {
     const statusRoute = useParams<Status>();
@@ -20,9 +20,9 @@ export const CampaignStatusLayout: FC = ({ children }) => {
 
     return (
         <Section>
-            <ContentWrapper padding="30px 24px" width="100%">
+            <ContentWrapper backgroundColor="transparent" /*padding="30px 24px"*/ width="100%">
                 <Column width="100%">
-                    <MarginWrapper marginBottom="20px">
+                    <MarginWrapper /*marginBottom="20px"*/>
                         <CampaignTopBar
                             campaignStatusCount={campaignStatusCount}
                             statusRoute={statusRoute}

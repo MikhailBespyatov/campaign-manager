@@ -8,6 +8,7 @@ import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrappe
 import { imgProperties } from 'types';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { buttonDiameter } from 'components/common/buttons/AddImageButton/constants';
+import { tertiaryMargin } from 'constants/styles';
 
 export interface ImageTextInputProps extends FormTextInputProps, imgProperties {}
 
@@ -21,7 +22,7 @@ export const ImageTextInput = ({ label, src, alt, required, ...props }: ImageTex
         </MarginWrapper>
         <Section alignCenter>
             {src && (
-                <MarginWrapper marginRight="16px">
+                <MarginWrapper marginRight={tertiaryMargin}>
                     <PreviewWrapper>
                         <CustomImg alt={alt} height={buttonDiameter} src={src} width={buttonDiameter} />
                     </PreviewWrapper>

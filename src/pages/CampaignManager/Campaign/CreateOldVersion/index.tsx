@@ -22,25 +22,25 @@ import React from 'react';
 // );
 
 // const OptionSpan: FC = ({ children }) => (
-//     <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+//     <Span color={primaryColor} fontSize="24px" fontWeight="normal" lineHeight="29px">
 //         {children}
 //     </Span>
 // );
 
 // const TitleSpan: FC = ({ children }) => (
-//     <Span color="#0F1642" fontSize="50px" fontWeight="bold" lineHeight="61px">
+//     <Span color={primaryColor} fontSize="50px" fontWeight="bold" lineHeight="61px">
 //         {children}
 //     </Span>
 // );
 
 // const SubtitleSpan: FC = ({ children }) => (
-//     <Span color="#0F1642" fontSize="28px" fontWeight="normal" lineHeight="34px" opacity={0.5}>
+//     <Span color={primaryColor} fontSize="28px" fontWeight="normal" lineHeight="34px" opacity={0.5}>
 //         {children}
 //     </Span>
 // );
 
 // const NumberSpan: FC = ({ children }) => (
-//     <Span color="#0F1642" fontSize="45px" fontWeight="500" lineHeight="55px">
+//     <Span color={primaryColor} fontSize="45px" fontWeight="500" lineHeight="55px">
 //         {children}
 //     </Span>
 // );
@@ -206,10 +206,10 @@ export const Create = () => (
                         <CustomImg height={avatarDiameter} src={productImg} width={avatarDiameter} />
                     </Column>
                     <Column marginRight="0">
-                        <Span color="#0F1642" fontSize="28px" lineHeight="34px">
+                        <Span color={primaryColor} fontSize="28px" lineHeight="34px">
                             Niterunner
                         </Span>
-                        <Span color="#0F1642" fontSize="18px" fontWeight="500" lineHeight="22px" opacity={0.5}>
+                        <Span color={primaryColor} fontSize="18px" fontWeight="500" lineHeight="22px" opacity={0.5}>
                             New shoes
                         </Span>
                     </Column>
@@ -272,13 +272,13 @@ export const Create = () => (
                     </Column>
                 </Row>
                 <Row noWrap marginBottom="13px">
-                    <Span color="#0F1642" fontSize="30px" fontWeight="normal" lineHeight="37px">
+                    <Span color={primaryColor} fontSize="30px" fontWeight="normal" lineHeight="37px">
                         Similar campaigns
                     </Span>
                 </Row>
                 <Hr marginBottom="20px" />
                 <Row noWrap marginBottom="17px">
-                    <Span color="#0F1642" fontSize="35px" fontWeight="normal" lineHeight="43px">
+                    <Span color={primaryColor} fontSize="35px" fontWeight="normal" lineHeight="43px">
                         Options
                     </Span>
                 </Row>
@@ -287,7 +287,7 @@ export const Create = () => (
                 </Row>
                 <Hr marginBottom="20px" />
                 <Row noWrap marginBottom="17px">
-                    <Span color="#0F1642" fontSize="35px" fontWeight="normal" lineHeight="43px">
+                    <Span color={primaryColor} fontSize="35px" fontWeight="normal" lineHeight="43px">
                         Options
                     </Span>
                 </Row>
@@ -318,7 +318,7 @@ export const Create = () => (
                     </Column>
                 </Row>
                 <Row noWrap marginBottom="17px">
-                    <Span color="#0F1642" fontSize="35px" fontWeight="normal" lineHeight="43px">
+                    <Span color={primaryColor} fontSize="35px" fontWeight="normal" lineHeight="43px">
                         Hashtag
                     </Span>
                 </Row>

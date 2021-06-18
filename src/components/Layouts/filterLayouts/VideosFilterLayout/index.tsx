@@ -156,7 +156,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                             </FlexGrow>
                         </FlexGrow>
                     </TagFilter>
-                    {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="16px" width="120px">*/}
+                    {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight={tertiaryMargin} width="120px">*/}
                     {/*    <SelectorFilter*/}
                     {/*        checkedValues={activeLanguage}*/}
                     {/*        title="Language"*/}
@@ -179,8 +179,8 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
             </Section>
             <FlexGrow marginBottom={videoSectionMarginBottom}>
                 <ContentWrapper height="100%" padding={videoStepPadding} width="100%">
-                    {/*<Row marginBottom="16px">*/}
-                    {/*    <Span fontSize="14px" fontWeight="600" lineHeight="17px">*/}
+                    {/*<Row marginBottom={tertiaryMargin}>*/}
+                    {/*    <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">*/}
                     {/*        Videos*/}
                     {/*    </Span>*/}
                     {/*</Row>*/}

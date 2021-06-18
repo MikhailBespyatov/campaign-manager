@@ -9,7 +9,7 @@ import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { Noop, numbersAfterDotWom } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
-import { formGrey5, primaryPadding } from 'constants/styles';
+import { formGrey5, primaryMargin, primaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useField } from 'formik';
 import React, { ChangeEvent, useState } from 'react';
@@ -49,7 +49,7 @@ export const WomInput = ({
     return (
         <Section justifyCenter>
             <Column marginRight="2px" width={'100%'}>
-                <MarginWrapper marginBottom="8px">
+                <MarginWrapper marginBottom={primaryMargin}>
                     <Span fontSize="15px" fontWeight="400" lineHeight="19px">
                         {label}
                     </Span>
