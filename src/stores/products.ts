@@ -83,10 +83,16 @@ const item = createStore<WOM.RemoteProductResponse>({})
     .on(resetItem, _ => ({}));
 const items = createStore<WOM.RemoteProductsResponse>({})
     .on(getItems.doneData, (_, newState) => newState)
-    .on(handleProduct.doneData, (state, newState) => ({
-        ...state,
-        items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
-    }))
+    .on(handleProduct.doneData, (state, newState) => {
+        const isIdExists = state.items?.find(item => item.id === newState.id);
+
+        return isIdExists
+            ? {
+                  ...state,
+                  items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
+              }
+            : { ...state, items: [...(state?.items || []), newState] };
+    })
     .on(updateProduct.doneData, (state, newState) => ({
         ...state,
         items: [...(state?.items?.map(item => (item.id !== newState.id ? item : newState)) || [])]
