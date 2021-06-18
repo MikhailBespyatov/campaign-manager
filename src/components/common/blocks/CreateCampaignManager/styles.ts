@@ -1,15 +1,16 @@
-import styled from 'styled-components';
 import {
     headerBackground,
     SelectCampaignHorizontalMargin,
     selectVideoBackgroundColor
 } from 'components/common/blocks/CreateCampaignManager/constants';
+import { tertiaryBorderRadius } from 'constants/styles';
+import styled from 'styled-components';
 import { Background } from 'types';
 
 export const HeaderCreateCampaignManager = styled.div`
     background-color: ${headerBackground};
     height: 110px;
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
 `;
 
 export const HeaderCreateWrapper = styled.div`

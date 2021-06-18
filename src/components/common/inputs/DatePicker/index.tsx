@@ -1,10 +1,16 @@
-import { HiddenInput } from 'components/common/inputs/Input';
-import { Column } from 'components/grid/wrappers/FlexWrapper';
-import { Noop } from 'constants/global';
-import 'date-fns';
-import { useField } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { DefaultValueString, Label, MarginBottom, Name, Sizes } from 'types';
+import DateFnsUtils from '@date-io/date-fns';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import calendarImg from 'assets/img/calendar.svg';
+import { BorderBlock } from 'components/common/blocks/BorderBlock';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import {
+    defaultFormat,
+    defaultKeyboardButtonProps,
+    imagePositionRight,
+    imagePositionTop,
+    materialTheme,
+    titleMarginBottom
+} from 'components/common/inputs/DatePicker/constants';
 import {
     DataPickerWrapper,
     FakeBetweenDataPicker,
@@ -13,26 +19,26 @@ import {
     TextFieldForm,
     TitleSpan
 } from 'components/common/inputs/DatePicker/styles';
+import { HiddenInput } from 'components/common/inputs/Input';
 import { Span } from 'components/common/typography/Span';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { requiredFieldMessage } from 'constants/messages';
 import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
-import calendarImg from 'assets/img/calendar.svg';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { getDate } from 'utils/usefulFunctions';
-import { BorderBlock } from 'components/common/blocks/BorderBlock';
-import { pickerMarginTop } from 'pages/CampaignManager/Campaign/Details/constants';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Column } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { Noop } from 'constants/global';
+import { requiredFieldMessage } from 'constants/messages';
+import { primaryMargin } from 'constants/styles';
+import 'date-fns';
+import { useField } from 'formik';
 import {
-    defaultFormat,
-    defaultKeyboardButtonProps,
-    materialTheme,
-    titleMarginBottom
-} from 'components/common/inputs/DatePicker/constants';
-import DateFnsUtils from '@date-io/date-fns';
-import { ThemeProvider } from 'styled-components';
+    borderBlockHorizontalPadding,
+    borderBlockVerticalPadding
+} from 'pages/CampaignManager/Campaign/Details/constants';
+import React, { useEffect, useState } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
+import { ThemeProvider } from 'styled-components';
+import { DefaultValueString, Label, MarginBottom, Name, Sizes } from 'types';
+import { getDate } from 'utils/usefulFunctions';
 
 type dateType = Date | null;
 
@@ -128,16 +134,21 @@ export const DatePickerBetween = ({
                         <TitleSpan>{titleFrom}</TitleSpan>
                     </MarginWrapper>
                 )}
-                <BorderBlock height={height} width={width}>
+                <BorderBlock
+                    height={height}
+                    paddingBottom={borderBlockVerticalPadding}
+                    paddingRight={borderBlockHorizontalPadding}
+                    width={width}
+                >
                     <Column noWrap marginBottom={marginBottom}>
-                        {isInnerType && (
-                            <MarginWrapper marginBottom={pickerMarginTop}>
-                                <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                                    {titleFrom}
-                                </Span>
-                            </MarginWrapper>
-                        )}
                         <DataPickerWrapper>
+                            {isInnerType && (
+                                <MarginWrapper marginBottom="3px">
+                                    <Span fontSize="12px" fontWeight="400" lineHeight="15px">
+                                        {titleFrom}
+                                    </Span>
+                                </MarginWrapper>
+                            )}
                             <TextFieldBetweenForm
                                 max={maxDate}
                                 min={minDate}
@@ -159,8 +170,8 @@ export const DatePickerBetween = ({
                                     />
                                 </MuiPickersUtilsProvider>
                             </FakeBetweenDataPicker>
-                            <AbsoluteWrapper right="0" top="0">
-                                <CustomImg pointer src={calendarImg} />
+                            <AbsoluteWrapper right={imagePositionRight} top={imagePositionTop}>
+                                <CustomImg pointer src={calendarImg} width="25px" />
                             </AbsoluteWrapper>
                         </DataPickerWrapper>
                     </Column>
@@ -172,16 +183,21 @@ export const DatePickerBetween = ({
                         <TitleSpan>{titleTo}</TitleSpan>
                     </MarginWrapper>
                 )}
-                <BorderBlock height={height} width={width}>
+                <BorderBlock
+                    height={height}
+                    paddingBottom={borderBlockVerticalPadding}
+                    paddingRight={borderBlockHorizontalPadding}
+                    width={width}
+                >
                     <Column noWrap marginBottom={marginBottom}>
-                        {isInnerType && (
-                            <MarginWrapper marginBottom={pickerMarginTop}>
-                                <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                                    {titleTo}
-                                </Span>
-                            </MarginWrapper>
-                        )}
                         <DataPickerWrapper>
+                            {isInnerType && (
+                                <MarginWrapper marginBottom="3px">
+                                    <Span fontSize="12px" fontWeight="400" lineHeight="15px">
+                                        {titleTo}
+                                    </Span>
+                                </MarginWrapper>
+                            )}
                             <TextFieldBetweenForm
                                 max={maxDate}
                                 min={minDate}
@@ -203,7 +219,7 @@ export const DatePickerBetween = ({
                                     />
                                 </MuiPickersUtilsProvider>
                             </FakeBetweenDataPicker>
-                            <AbsoluteWrapper right="0" top="0">
+                            <AbsoluteWrapper right={imagePositionRight} top={imagePositionTop}>
                                 <CustomImg pointer src={calendarImg} />
                             </AbsoluteWrapper>
                         </DataPickerWrapper>
@@ -234,7 +250,7 @@ export const DatePickerInput = ({ name = '', label, defaultValue = new Date().to
     return (
         <Column width="100%">
             <HiddenInput {...field} value={selectedDate?.toISOString() || ''} />
-            <MarginWrapper marginBottom="8px">
+            <MarginWrapper marginBottom={primaryMargin}>
                 <Span fontSize="15px" fontWeight="400" lineHeight="19px">
                     {label}
                 </Span>

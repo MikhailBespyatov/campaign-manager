@@ -8,6 +8,7 @@ import { Label } from 'types';
 import { HiddenInput, PreviewWrapper, PreviewImage } from './styles';
 import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { tertiaryMargin } from 'constants/styles';
 
 export interface ImageInputProps extends Label {
     description?: string;
@@ -43,7 +44,7 @@ export const ImageInput = ({ label, description, value, onChange }: ImageInputPr
                 <LabelNameSpan>{label}</LabelNameSpan>
             </MarginWrapper>
             <Row alignCenter>
-                <MarginWrapper marginRight="16px">
+                <MarginWrapper marginRight={tertiaryMargin}>
                     <RelativeWrapper>
                         {file.url ? (
                             <PreviewWrapper>

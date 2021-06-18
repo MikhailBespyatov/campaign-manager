@@ -11,7 +11,7 @@ import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrappe
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { channelsEdit, routes } from 'constants/routes';
-import { blue5 } from 'constants/styles';
+import { blue5, primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { copyButtonIconDiameter } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
@@ -106,7 +106,7 @@ export const Channels = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section marginBottom="8px">
+            <Section marginBottom={primaryMargin}>
                 <ContentWrapper padding={channelsContentPadding} width="100%">
                     <Section justifyEnd noWrap>
                         {/*<FlexGrow marginRight="24px">*/}

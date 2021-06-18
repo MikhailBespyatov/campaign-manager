@@ -1,13 +1,14 @@
-import { formGrey2, grey4, primaryPadding, secondaryBorder, primaryColor as primaryColorText } from 'constants/styles';
-import { InfoType } from 'types';
+import { formGrey2, grey4, primaryColor as primaryColorText, primaryPadding, secondaryBorder } from 'constants/styles';
 import { themeStores } from 'stores/theme';
+import { InfoType } from 'types';
 
 export const wrapperBorder = secondaryBorder;
 export const wrapperPadding = '40px 52px';
 export const borderBlockWidth = '300px';
 export const sectionWidth = parseInt(borderBlockWidth) - parseInt(primaryPadding) * 2 + 'px';
-
-export const pickerMarginTop = '15px';
+export const dateBlockHeight = '60px';
+export const borderBlockHorizontalPadding = '16px';
+export const borderBlockVerticalPadding = '8px';
 
 export const graphicBlockBorder = `2px solid ${formGrey2}`;
 

@@ -1,22 +1,22 @@
-import React, { FC, useEffect } from 'react';
-import { CreateCampaignStepsProps, DataTable } from 'types';
+import { CopyableField } from 'components/common/features/CopyableField';
+import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
+import { Table } from 'components/common/tables/NewDesign/Table';
+import { Loader } from 'components/dynamic/Loader';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { OverflowAutoLayout } from 'components/Layouts';
+import { PaginationLayout } from 'components/Layouts/PaginationLayout';
+import { useField } from 'effector-forms';
+import { useStore } from 'effector-react';
 import {
     channelsPadding,
     publicChannelParameters
 } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { ChannelNameSpan, TitlePublicChannel } from './styles';
-import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { useField } from 'effector-forms';
-import { forms } from 'stores/forms';
-import { PaginationLayout } from 'components/Layouts/PaginationLayout';
-import { Table } from 'components/common/tables/NewDesign/Table';
-import { CopyableField } from 'components/common/features/CopyableField';
-import { OverflowAutoLayout } from 'components/Layouts';
+import React, { FC, useEffect } from 'react';
 import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
-import { useStore } from 'effector-react';
-import { Loader } from 'components/dynamic/Loader';
+import { forms } from 'stores/forms';
+import { CreateCampaignStepsProps, DataTable } from 'types';
+import { ChannelNameSpan, TitlePublicChannel } from './styles';
 
 interface ChannelTableProps {
     selectedPublicChannel?: string;
@@ -119,7 +119,7 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
     return (
         <>
             <ContentWrapper padding={channelsPadding}>
-                {/*<Row marginBottom="16px">*/}
+                {/*<Row marginBottom={tertiaryMargin}>*/}
                 {/*    {channelsItem.map(({ path }) => (*/}
                 {/*        <MarginWrapper key={path} marginRight={channelsItemMarginRight}>*/}
                 {/*            <BarItem*/}
@@ -138,7 +138,7 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
                 {/*{isPublicChannel ? (*/}
                 {/*    <PublicChannelRadio noWrap>*/}
                 {/*        {publicChannels.map(({ name }) => (*/}
-                {/*            <Section key={name} marginBottom="8px">*/}
+                {/*            <Section key={name} marginBottom={primaryMargin}>*/}
                 {/*                <Radio*/}
                 {/*                    defaultValue={name === selectedPublicChannel}*/}
                 {/*                    onChange={onChangePublicSelector(name)}*/}

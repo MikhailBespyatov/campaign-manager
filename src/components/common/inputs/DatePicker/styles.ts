@@ -1,6 +1,8 @@
 import { TextField } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { defaultFontFamily, defaultFontStyle, defaultFontWeight } from 'constants/defaults';
+import { dateInputHeight } from 'components/common/inputs/DatePicker/constants';
+import { Span } from 'components/common/typography/Span';
+import { defaultFontFamily, defaultFontSize, defaultFontStyle, defaultFontWeight } from 'constants/defaults';
 import {
     errorColor,
     formGrey3,
@@ -8,10 +10,10 @@ import {
     grey4,
     primaryColor,
     successColor,
+    tertiaryBorderRadius,
     untouchedColor
 } from 'constants/styles';
 import styled from 'styled-components';
-import { Span } from 'components/common/typography/Span';
 
 export const DataPickerWrapper = styled.div`
     position: relative;
@@ -28,7 +30,7 @@ export const TextFieldForm = styled.input`
     padding: 28px;
     ${formTextStyleMixin};
     border: 1px solid #c9c9c9;
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
     background: none;
     ::-webkit-calendar-picker-indicator {
         opacity: 0;
@@ -48,9 +50,9 @@ export const FakeDataPicker = styled.div`
 
 export const FakeBetweenDataPicker = styled.div`
     position: absolute;
-    width: 50px;
-    top: -35px;
-    right: -6px;
+    width: 60px;
+    top: -25px;
+    right: -15px;
     z-index: 10;
     opacity: 0;
 `;
@@ -59,10 +61,15 @@ export const TextFieldBetweenForm = styled.input`
     outline: none;
     appearance: none;
     width: 100%;
-    height: 22px;
-    ${formTextStyleMixin};
+    height: ${dateInputHeight};
+    font-style: ${defaultFontStyle};
+    font-weight: 400;
+    font-size: ${defaultFontSize};
+    line-height: 17px;
+
     border: 0;
     background: none;
+
     ::-webkit-calendar-picker-indicator {
         opacity: 0;
         cursor: pointer;

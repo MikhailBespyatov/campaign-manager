@@ -43,6 +43,8 @@ export const blue7 = '#5F6FB4';
 export const blue8 = '#6a75a3';
 export const blue9 = '#576397';
 
+export const lightPink = '#ffeeee';
+
 export const backgroundColor = secondaryColor; /* '#121217';*/
 
 export const red = '#FC4237';

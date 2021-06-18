@@ -1,14 +1,11 @@
-import React, { FC } from 'react';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { CreateCampaignStepsProps, MaxSizes, Title } from 'types';
+import { LineBorder } from 'components/common/dividers/LineBorder';
+import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
+import { Span } from 'components/common/typography/Span';
 import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import {
-    CheckboxBlockWrapper,
-    ConfigurationItemSubtitle,
-    ConfigurationItemTitle,
-    ConfigurationItemWrapper
-} from './styles';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
+import { grey4, primaryMargin, tertiaryMargin } from 'constants/styles';
 import {
     ageMock,
     configurationContentPadding,
@@ -16,10 +13,14 @@ import {
     localeMock,
     overridesMock
 } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
-import { LineBorder } from 'components/common/dividers/LineBorder';
-import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
-import { Span } from 'components/common/typography/Span';
-import { grey4 } from 'constants/styles';
+import React, { FC } from 'react';
+import { CreateCampaignStepsProps, MaxSizes, Title } from 'types';
+import {
+    CheckboxBlockWrapper,
+    ConfigurationItemSubtitle,
+    ConfigurationItemTitle,
+    ConfigurationItemWrapper
+} from './styles';
 
 //Uncomment when Configuration page needed use
 //
@@ -40,7 +41,7 @@ import { grey4 } from 'constants/styles';
 //     <CheckboxBlockWrapper width="297px">
 //         <Section alignCenter justifyBetween height="100%">
 //             <Row>
-//                 <Span fontSize="14px" fontWeight="600" lineHeight="17px">
+//                 <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">
 //                     {title}
 //                 </Span>
 //             </Row>
@@ -127,7 +128,7 @@ const CheckboxBlock = ({ title, subtitle, defaultValue, ...rest }: CheckboxBlock
             {subtitle ? (
                 <Column justifyBetween height="100%">
                     <Row>
-                        <Span fontSize="14px" fontWeight="600" lineHeight="17px">
+                        <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">
                             {title}
                         </Span>
                     </Row>
@@ -143,7 +144,7 @@ const CheckboxBlock = ({ title, subtitle, defaultValue, ...rest }: CheckboxBlock
             ) : (
                 <Column justifyCenter height="100%">
                     <Row>
-                        <Span fontSize="14px" fontWeight="600" lineHeight="17px">
+                        <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">
                             {title}
                         </Span>
                     </Row>
@@ -161,7 +162,7 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
     <>
         <ConfigurationItemWrapper maxHeight={maxHeight}>
             <FlexGrow flexBasis="40%" flexShrink="0">
-                <MarginWrapper marginBottom="8px">
+                <MarginWrapper marginBottom={primaryMargin}>
                     <ConfigurationItemTitle>{title}</ConfigurationItemTitle>
                 </MarginWrapper>
                 <ConfigurationItemSubtitle>{subtitle}</ConfigurationItemSubtitle>
@@ -211,7 +212,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
             <ConfigurationItem subtitle="This is a details lorem ipsum dolor ise" title="Demographics" />
             <ConfigurationItem maxHeight="250px" subtitle="This is a details lorem ipsum dolor ise" title="Age">
                 {ageData.map(({ range, viewers }, index) => (
-                    <MarginWrapper key={range} marginBottom="16px">
+                    <MarginWrapper key={range} marginBottom={tertiaryMargin}>
                         <CheckboxBlock
                             // defaultValue={ageValue.includes(index)}
                             subtitle={viewers}
@@ -223,7 +224,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
             </ConfigurationItem>
             <ConfigurationItem maxHeight="350px" subtitle="This is a details lorem ipsum dolor ise" title="Locale">
                 {localeData.map(({ locale, viewers }, index) => (
-                    <MarginWrapper key={locale} marginBottom="16px">
+                    <MarginWrapper key={locale} marginBottom={tertiaryMargin}>
                         <CheckboxBlock
                             // defaultValue={localeValue.includes(index)}
                             subtitle={viewers}
@@ -238,7 +239,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 title="Hashtags"
             >
                 {hashtagsData.map(({ hashtag, viewers }, index) => (
-                    <Section key={hashtag} marginBottom="8px">
+                    <Section key={hashtag} marginBottom={primaryMargin}>
                         {/*<HashtagCheckbox*/}
                         {/*    bias={hashtagsValue.find(item => item.hashtag === hashtag)?.bias || '2'}*/}
                         {/*    defaultValue={hashtagsValue.some(item => item.hashtag === hashtag)}*/}
@@ -258,7 +259,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 title="Overrides"
             >
                 {overridesData.map(({ title, form }, index) => (
-                    <MarginWrapper key={title} marginBottom="16px">
+                    <MarginWrapper key={title} marginBottom={tertiaryMargin}>
                         {/*<BiasSelect*/}
                         {/*    bias={overridesValue[form]}*/}
                         {/*    isTitleBiasSelect={index === 0}*/}

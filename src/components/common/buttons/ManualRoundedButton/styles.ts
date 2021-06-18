@@ -37,10 +37,11 @@ export const Button = styled.button<ButtonProps>`
     border: ${buttonBorderWidth} solid
         ${({ reverse, mainColor, theme: { primaryColor } }) => (reverse ? mainColor || primaryColor : 'none')};
     border-radius: ${({ borderRadius }) => borderRadius || buttonBorderRadius};
-    //${({ theme: { primaryTextColor }, mainColor }) => (mainColor ? mainColor : primaryTextColor)};
+    /* ${({ theme: { primaryTextColor }, mainColor }) => (mainColor ? mainColor : primaryTextColor)}; */
     margin-bottom: ${({ marginBottom }) => (marginBottom ? marginBottom : '0')};
     padding: ${buttonVerticalPadding} ${buttonHorizontalPadding};
     transition: ${transitionTime};
+
     :hover {
         background-color: ${hoverButtonColor};
     }

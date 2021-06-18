@@ -7,6 +7,7 @@ import { Button } from 'components/FormComponents/buttons/Button';
 import { Form } from 'components/FormComponents/forms/Form';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { defaultFontSize } from 'constants/defaults';
 import { blue } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { onSubmit, successImgDiameter, womImgHeight, womImgWidth } from 'pages/SignUp/CreateWallet/Success/constants';
@@ -32,7 +33,7 @@ export const Success = () => {
                     <CustomImg height={womImgHeight} src={womLogo} width={womImgWidth} />
                 </Row>
                 <Row marginBottom="45px">
-                    <Span fontSize="14px" fontWeight="500" letterSpacing="0.0950226px" lineHeight="17px">
+                    <Span fontSize={defaultFontSize} fontWeight="500" letterSpacing="0.0950226px" lineHeight="17px">
                         {currencyToText(171717)}
                     </Span>
                 </Row>

@@ -3,7 +3,8 @@ import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { errorColor, successColor } from 'constants/styles';
+import { defaultFontSize } from 'constants/defaults';
+import { errorColor, primaryColor, secondaryMargin, successColor } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -44,7 +45,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 <Column marginRight="26px">
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -55,7 +56,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -66,7 +67,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -77,7 +78,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -88,7 +89,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -99,7 +100,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
+                                            color={primaryColor}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -111,32 +112,32 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                                 <Column marginRight="0">
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Adidas
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Shoes
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Sport Shoes
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Superstar
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Milestone
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             10 (20)
                                         </Span>
                                     </Row>
@@ -146,19 +147,19 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 {/* <CustomImg height="591px" src={cardModalImg} width="372px" /> */}
                             </Row>
                             <Row marginBottom="28px">
-                                <Column marginRight="10px">
+                                <Column marginRight={secondaryMargin}>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Cat
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Sub-Cat
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" lineHeight="29px">
+                                        <Span color={primaryColor} fontSize="24px" lineHeight="29px">
                                             Item
                                         </Span>
                                     </Row>
@@ -166,8 +167,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 <Column marginRight="0">
                                     <Row alignCenter noWrap height="29px" marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -177,8 +178,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row alignCenter noWrap height="29px" marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -188,8 +189,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row alignCenter noWrap height="29px" marginBottom="15px">
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -217,8 +218,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                         </Column>
                         <Column marginRight="0" maxWidth="300px">
-                            <Row marginBottom="10px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                            <Row marginBottom={secondaryMargin}>
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     Authentication
                                     {/* Validators */}
                                 </Span>
@@ -234,8 +235,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     H 8.5 C 2.8 P 9.2
                                 </Span>
                             </Row>
-                            <Row marginBottom="10px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                            <Row marginBottom={secondaryMargin}>
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     Validators
                                 </Span>
                             </Row>
@@ -286,8 +287,8 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -299,7 +300,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="35px">
                                 <Column marginRight="35px">
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -310,7 +311,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             &#60;25%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -321,7 +322,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             25%-50%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -332,7 +333,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             50%-75%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -345,7 +346,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                 </Column>
                                 <Column marginRight="0">
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -355,7 +356,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             10%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -365,7 +366,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             20%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -375,7 +376,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                             30%
                                         </Span>
                                     </Row>
-                                    <Row noWrap marginBottom="10px">
+                                    <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
                                             color="rgba(15, 22, 66, 0.5)"
                                             fontSize="18px"
@@ -388,12 +389,12 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                             </Row>
                             <Row marginBottom="20px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     Engagements
                                 </Span>
                             </Row>
                             <Row marginBottom="42px">
-                                <Column marginRight="10px">
+                                <Column marginRight={secondaryMargin}>
                                     <Row noWrap marginBottom="15px">
                                         <Span
                                             color="rgba(15, 22, 66, 0.51)"
@@ -487,13 +488,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                                 <Column marginRight="0">
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             1022
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -502,13 +508,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -517,13 +528,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -532,13 +548,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -547,13 +568,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -562,13 +588,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -577,22 +608,37 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
-                                        <Span color={errorColor} fontSize="14px" fontWeight="normal" lineHeight="17px">
+                                        <Span
+                                            color={errorColor}
+                                            fontSize={defaultFontSize}
+                                            fontWeight="normal"
+                                            lineHeight="17px"
+                                        >
                                             &#160; -2.5
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
                                             color={successColor}
-                                            fontSize="14px"
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                         >
@@ -600,13 +646,18 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span color="#0F1642" fontSize="24px" fontWeight="normal" lineHeight="29px">
+                                        <Span
+                                            color={primaryColor}
+                                            fontSize="24px"
+                                            fontWeight="normal"
+                                            lineHeight="29px"
+                                        >
                                             122
                                         </Span>
 
                                         <Span
-                                            color="#0F1642"
-                                            fontSize="14px"
+                                            color={primaryColor}
+                                            fontSize={defaultFontSize}
                                             fontWeight="normal"
                                             lineHeight="17px"
                                             opacity={0.5}
@@ -617,7 +668,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                             </Row>
                             <Row marginBottom="13px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     Activity
                                     {/* In-use */}
                                 </Span>
@@ -634,7 +685,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Span>
                             </Row>
                             <Row marginBottom="13px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     In-promotion
                                 </Span>
                             </Row>
@@ -650,7 +701,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Span>
                             </Row>
                             <Row marginBottom="13px">
-                                <Span color="#0F1642" fontSize="30px" lineHeight="37px">
+                                <Span color={primaryColor} fontSize="30px" lineHeight="37px">
                                     Available
                                 </Span>
                             </Row>

@@ -1,16 +1,14 @@
-import {
-    tableRowFontSize,
-    tableRowLineHeight,
-    tableSpanColor
-} from 'components/common/typography/TableSubSpan/constants';
+import { tableSpanColor } from 'components/common/typography/TableSubSpan/constants';
 import { TableSpanProps } from 'components/common/typography/TableSubSpan/types';
-import { formTextStyleMixin } from 'constants/styles';
+import { defaultFontFamily, defaultFontSize, defaultFontStyle } from 'constants/defaults';
 import styled from 'styled-components';
 
 export const TableSubSpan = styled.span<TableSpanProps>`
-    ${formTextStyleMixin};
     ${({ legendary }) => (legendary ? 'font-weight: bold' : '')};
-    font-size: ${tableRowFontSize};
-    line-height: ${tableRowLineHeight};
+    font-family: ${defaultFontFamily};
+    font-style: ${defaultFontStyle};
+    font-weight: 400;
+    font-size: ${defaultFontSize};
+    line-height: 17px;
     color: ${({ color }) => (color ? color : tableSpanColor)};
 `;

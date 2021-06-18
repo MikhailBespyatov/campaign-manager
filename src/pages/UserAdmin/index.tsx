@@ -5,6 +5,7 @@ import { InviteForm } from 'components/FormComponents/forms/InviteForm';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect } from 'react';
@@ -51,7 +52,7 @@ export const UserAdmin = () => {
             {/*    </Row> *!/*/}
             {/*    </Column>*/}
             {/*</Section>*/}
-            <Section noWrap marginBottom="8px">
+            <Section noWrap marginBottom={primaryMargin}>
                 <ContentWrapper padding="30px 24px" width="100%">
                     <Column>
                         <Row marginBottom={headersMarginBottom}>

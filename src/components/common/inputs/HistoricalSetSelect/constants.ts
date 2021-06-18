@@ -1,7 +1,8 @@
+import { dateInputHeight } from 'components/common/inputs/DatePicker/constants';
 import { formGrey3, white } from 'constants/styles';
 
 export const wrapperWidth = '240px';
-export const wrapperHeight = '31px';
+export const wrapperHeight = dateInputHeight;
 export const wrapperBorderRadius = `4px`;
 export const wrapperBorderWidth = '1px';
 export const wrapperBorderColor = formGrey3;

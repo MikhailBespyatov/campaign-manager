@@ -5,7 +5,7 @@ import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
 import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { routes } from 'constants/routes';
-import { red } from 'constants/styles';
+import { lightPink, red, tertiaryBorderRadius } from 'constants/styles';
 import { useForm } from 'effector-forms';
 import { useStore } from 'effector-react';
 import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
@@ -123,9 +123,8 @@ export const ProductForm = () => {
             {isEditPage && (
                 <Section marginTop="50px">
                     <ManualRoundedButton
-                        background="#FFEEEE"
-                        borderRadius="8px"
-                        height="48px"
+                        background={lightPink}
+                        borderRadius={tertiaryBorderRadius}
                         mainColor={red}
                         width="223px"
                         onClick={OnClickConfirmationModal}

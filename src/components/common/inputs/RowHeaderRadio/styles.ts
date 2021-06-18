@@ -10,6 +10,7 @@ export const Radio = styled.div<RadioProps>`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border-radius: 16px;
+    /* border-radius: 16px; */
+    background-color: #f8f8fa;
     ${({ active, theme: { primaryColor } }) => active && `background-color: ${primaryColor}`}
 `;

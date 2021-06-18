@@ -3,6 +3,7 @@ import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButt
 import { WomLogoImg } from 'components/common/imageComponents/WomLogoImg';
 import { Span } from 'components/common/typography/Span';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { defaultFontWeight } from 'constants/defaults';
 import { siteName } from 'constants/global';
 import { routes, signInPath } from 'constants/routes';
 import { white } from 'constants/styles';
@@ -20,7 +21,7 @@ export const Home = () => {
                 <WomLogoImg height="93px" />
             </Row>
             <Row marginBottom="25px">
-                <Span color={white} fontSize="36px" fontWeight="600" lineHeight="44px">
+                <Span color={white} fontSize="36px" fontWeight={defaultFontWeight} lineHeight="44px">
                     {siteName}
                 </Span>
             </Row>

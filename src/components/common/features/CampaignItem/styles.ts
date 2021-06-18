@@ -1,10 +1,12 @@
-import styled from 'styled-components';
 import {
     itemHeight,
     itemHorizontalPadding,
     itemImgDiameter,
     itemVerticalPadding
 } from 'components/common/features/CampaignItem/constants';
+import { Span } from 'components/common/typography/Span';
+import { black, grey4, tertiaryBorderRadius } from 'constants/styles';
+import styled from 'styled-components';
 import { Background, MarginRight } from 'types';
 
 export const Item = styled.div`
@@ -21,7 +23,7 @@ export const ItemImgBlock = styled.div<Background>`
     background-repeat: no-repeat;
     background-color: black;
     ${({ background }) => background && `background-image: url(${background})`};
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
 `;
 
 export const CampaignDetail = styled.div<MarginRight>`
@@ -36,6 +38,22 @@ export const CampaignStatusBlock = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: flex-end;
+`;
+
+export const CampaignSubtitle = styled.p`
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    color: ${black};
+    padding: 0px;
+    margin: 0px;
+`;
+
+export const StyledSpan = styled(Span)`
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    color: ${grey4};
 `;

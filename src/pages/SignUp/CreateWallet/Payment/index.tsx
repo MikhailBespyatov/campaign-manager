@@ -14,8 +14,9 @@ import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbo
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { blue } from 'constants/styles';
+import { blue, secondaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import {
@@ -46,19 +47,19 @@ export const Payment = () => {
                         onSubmit={handleSubmit}
                     >
                         <Section justifyCenter marginBottom="37px">
-                            <Column marginRight="10px">
+                            <Column marginRight={secondaryMargin}>
                                 <CustomImg pointer height={cardHeight} src={visaImg} width={cardWidth} />
                             </Column>
-                            <Column marginRight="10px">
+                            <Column marginRight={secondaryMargin}>
                                 <CustomImg pointer height={cardHeight} src={mastercardImg} width={cardWidth} />
                             </Column>
-                            <Column marginRight="10px">
+                            <Column marginRight={secondaryMargin}>
                                 <CustomImg pointer height={cardHeight} src={amexImg} width={cardWidth} />
                             </Column>
-                            <Column marginRight="10px">
+                            <Column marginRight={secondaryMargin}>
                                 <CustomImg pointer height={cardHeight} src={discoverImg} width={cardWidth} />
                             </Column>
-                            <Column marginRight="10px">
+                            <Column marginRight={secondaryMargin}>
                                 <CustomImg pointer height={cardHeight} src={paypalImg} width={cardWidth} />
                             </Column>
                         </Section>
@@ -94,7 +95,7 @@ export const Payment = () => {
                             <Column marginRight="15px">
                                 <BooleanCheckbox />
                             </Column>
-                            <Span fontSize="14px" fontWeight="500" lineHeight="17px">
+                            <Span fontSize={defaultFontSize} fontWeight="500" lineHeight="17px">
                                 Save card for payment
                             </Span>
                         </Section>
@@ -102,7 +103,11 @@ export const Payment = () => {
                             {loading ? <Loader /> : 'PURCHASE NOW'}
                         </Button>
                         <Row marginTop="25px">
-                            <InternalLink fontSize="14px" lineHeight="21px" to={routes.campaignManager.index}>
+                            <InternalLink
+                                fontSize={defaultFontSize}
+                                lineHeight="21px"
+                                to={routes.campaignManager.index}
+                            >
                                 Buy WOM later
                             </InternalLink>
                         </Row>

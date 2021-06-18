@@ -9,6 +9,7 @@ import {
     wrapperWidth
 } from 'components/common/inputs/HistoricalSetSelect/constants';
 import { flexStart, formGrey3 } from 'constants/styles';
+import { borderBlockHorizontalPadding } from 'pages/CampaignManager/Campaign/Details/constants';
 import styled from 'styled-components';
 import { Active, IsWithoutBorder, PaddingRight, Sizes } from 'types';
 
@@ -20,13 +21,14 @@ export const Wrapper = styled.div<WrapperProps>`
     align-items: center;
     min-width: ${({ width }) => (width ? width : wrapperWidth)};
     height: ${wrapperHeight};
+
+    padding: 0 ${({ paddingRight }) => (paddingRight ? paddingRight : wrapperHorizontalPadding)};
+    margin-left: ${`-${borderBlockHorizontalPadding}`};
     border-right: 1px solid ${formGrey3};
     border-left: 1px solid ${formGrey3};
+    ${({ withoutBorder }) => withoutBorder && `border: none`};
     //border-radius: ${wrapperBorderRadius};
-    ${({ withoutBorder }) => !withoutBorder && `border: ${wrapperBorderWidth} solid ${wrapperBorderColor}`};
-    padding: 0 ${({ paddingRight }) => (paddingRight ? paddingRight : wrapperHorizontalPadding)};
-    margin-left: -21px;
-    background-color: ${wrapperBackground};
+    //background-color: ${wrapperBackground};
     z-index: 0;
 `;
 

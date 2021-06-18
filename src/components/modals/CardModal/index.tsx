@@ -1,3 +1,4 @@
+import closeImg from 'assets/img/add_video.svg';
 import history from 'BrowserHistory';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
@@ -8,14 +9,18 @@ import { InternalLink } from 'components/common/links/InternalLink';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
+import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import { viewersMarginBottom } from 'components/modals/CardModal/constants';
 import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
+import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { grey4, primaryPadding, tertiaryPadding, white } from 'constants/styles';
+import { grey4, primaryMargin, primaryPadding, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -24,17 +29,13 @@ import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
 import { engagementStatusTypes, roundScore } from 'utils/usefulFunctions';
-import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
-import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
-import closeImg from 'assets/img/add_video.svg';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 interface SmallSpanProps {
     opacity?: number;
 }
 const Title: FC = ({ children }) => (
     <TitleWrapper>
-        <Span fontSize="12px" fontWeight="600" lineHeight="15px">
+        <Span fontSize="12px" fontWeight={defaultFontWeight} lineHeight="15px">
             {children}
         </Span>
     </TitleWrapper>
@@ -47,7 +48,7 @@ const Subtitle: FC = ({ children }) => (
 );
 
 const Item: FC = ({ children }) => (
-    <Span fontSize="14px" fontWeight="400" lineHeight="17px">
+    <Span fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
         {children}
     </Span>
 );
@@ -91,7 +92,7 @@ const PercentageSpan: FC = ({ children }) => (
 
 const EngagementSpan: FC = ({ children }) => (
     <MarginWrapper marginBottom={viewersMarginBottom}>
-        <Span fontSize="14px" fontWeight="700" lineHeight="17px">
+        <Span fontSize={defaultFontSize} fontWeight="700" lineHeight="17px">
             {children}
         </Span>
     </MarginWrapper>
@@ -163,7 +164,7 @@ export const CardModal = () => {
                 ) : (
                     <>
                         <VideoDetailsWrapper>
-                            <Column alignCenter marginRight="16px" width="160px">
+                            <Column alignCenter marginRight={tertiaryMargin} width="160px">
                                 {visible && (
                                     <CreateCampaignCard
                                         isVideoDetailsModal
@@ -191,7 +192,7 @@ export const CardModal = () => {
                                 </MarginWrapper>
                             </Column>
                             <Section>
-                                <Section marginBottom="16px">
+                                <Section marginBottom={tertiaryMargin}>
                                     <Title>Video Name</Title>
                                     <Row>
                                         <MarginWrapper marginRight="100px">
@@ -256,7 +257,7 @@ export const CardModal = () => {
                                         </Row>
                                         <MarginWrapper marginTop="10px">
                                             <Column>
-                                                <MarginWrapper marginBottom="8px">
+                                                <MarginWrapper marginBottom={primaryMargin}>
                                                     <Subtitle>
                                                         Average Percentage Viewed
                                                         {/* Viewers */}
@@ -288,14 +289,14 @@ export const CardModal = () => {
                                         </MarginWrapper>
                                     </Column>
                                 </Section>
-                                <Section marginBottom="16px">
+                                <Section marginBottom={tertiaryMargin}>
                                     <Title>Authentication</Title>
                                     <Column>
                                         <MarginWrapper marginBottom="4px">
                                             <Subtitle>Average Authentication Score</Subtitle>
                                         </MarginWrapper>
                                         <Row>
-                                            <MarginWrapper marginRight="16px">
+                                            <MarginWrapper marginRight={tertiaryMargin}>
                                                 <ItemBlock
                                                     item={roundScore(womQualityScore?.authenticity || 0)}
                                                     title="Honesty"
@@ -316,7 +317,7 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Section>
-                                <Section marginBottom="16px">
+                                <Section marginBottom={tertiaryMargin}>
                                     <Title>Hashtags</Title>
                                     <Row marginTop="8px">
                                         {tags?.map(i => (
@@ -337,7 +338,7 @@ export const CardModal = () => {
                                         {/* Campaigns */}
                                     </Title>
                                     <Column>
-                                        <MarginWrapper marginBottom="8px">
+                                        <MarginWrapper marginBottom={primaryMargin}>
                                             <Subtitle>Other campaigns featuring this video</Subtitle>
                                         </MarginWrapper>
                                         <Row maxWidth="420px">

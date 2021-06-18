@@ -8,6 +8,7 @@ import { BooleanCheckbox } from 'components/FormComponents/inputs/BooleanCheckbo
 import { TextInput } from 'components/FormComponents/inputs/TextInput';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { defaultFontSize } from 'constants/defaults';
 import { privacyPolicyHref, termsOfServiceHref } from 'constants/links';
 import { routes, signInPath } from 'constants/routes';
 import { blue } from 'constants/styles';
@@ -18,7 +19,7 @@ import React, { useState } from 'react';
 import { loadingStores } from 'stores/loading';
 
 // const HighlightSpan: FC = ({ children }) => (
-//     <Span alignCenter fontSize="14px" fontWeight="500" lineHeight="17px" textDecoration="underline">
+//     <Span alignCenter fontSize={defaultFontSize} fontWeight="500" lineHeight="17px" textDecoration="underline">
 //         {children}
 //     </Span>
 // );
@@ -65,7 +66,7 @@ export const CreateAccount = () => {
                                 <Column marginRight="15px">
                                     <BooleanCheckbox onChange={onConfirmedChange} />
                                 </Column>
-                                <Span uppercase fontSize="14px" fontWeight="500" lineHeight="16px">
+                                <Span uppercase fontSize={defaultFontSize} fontWeight="500" lineHeight="16px">
                                     I acknowledge that I have read&nbsp;
                                     <InternalTextLink
                                         color={blue}

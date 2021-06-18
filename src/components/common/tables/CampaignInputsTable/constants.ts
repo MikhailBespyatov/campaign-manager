@@ -1,6 +1,8 @@
+import { primaryColor } from 'constants/styles';
+
 export const legendarySpanFontSize = '27px';
 export const legendarySpanLineHeight = '32px';
-export const legendarySpanColor = '#0F1642';
+export const legendarySpanColor = primaryColor;
 
 export const spanFontWeight = 'normal';
 export const spanFontSize = '28px';

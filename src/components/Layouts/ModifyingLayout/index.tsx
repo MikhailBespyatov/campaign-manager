@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { SimpleButton } from 'components/common/buttons/SimpleButton';
-import { primaryColor, white } from 'constants/styles';
+import { primaryColor, primaryMargin, white } from 'constants/styles';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { IsValid, Noop } from 'types';
 import { Noop as NoopClick } from 'constants/global';
@@ -29,7 +29,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
 
     return (
         <>
-            <Section marginBottom="8px">
+            <Section marginBottom={primaryMargin}>
                 <ContentWrapper padding="18px 40px" width="100%">
                     <Section justifyBetween>
                         <Row>

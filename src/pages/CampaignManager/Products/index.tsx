@@ -14,7 +14,7 @@ import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { product, productsEdit, routes } from 'constants/routes';
-import { blue5 } from 'constants/styles';
+import { blue5, primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
     channelLogoDiameter,
@@ -143,7 +143,7 @@ export const Products = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section marginBottom="8px">
+            <Section marginBottom={primaryMargin}>
                 <ContentWrapper padding={productsContentPadding} width="100%">
                     <Section justifyEnd noWrap>
                         {/*<FlexGrow marginRight={filtersMarginRight}>*/}

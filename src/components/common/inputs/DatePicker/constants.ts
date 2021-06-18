@@ -5,6 +5,10 @@ export const defaultKeyboardButtonProps = {
     'aria-label': 'change date'
 };
 
+export const imagePositionTop = '10px';
+export const imagePositionRight = '0px';
+export const dateInputHeight = '22px';
+
 export const defaultFormat = 'MM/dd/yyyy';
 
 export const materialTheme = createMuiTheme({

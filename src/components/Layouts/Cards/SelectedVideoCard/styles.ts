@@ -1,3 +1,4 @@
+import { tertiaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 import { Background } from 'types';
 
@@ -9,7 +10,7 @@ export const VideoCard = styled.div<Background>`
     width: 125px;
     height: 180px;
     background-repeat: no-repeat;
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
     background-size: cover;
     cursor: pointer;
     ${({ background }) => background && `background-image: url(${background});`};

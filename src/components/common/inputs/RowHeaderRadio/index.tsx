@@ -3,12 +3,15 @@ import { inactiveColor } from 'components/common/inputs/RowHeaderRadio/constants
 import { Radio } from 'components/common/inputs/RowHeaderRadio/styles';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Span } from 'components/common/typography/Span';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
 import { Noop } from 'constants/global';
-import React, { useState } from 'react';
-import { RadioProperties } from 'types';
+import { primaryMargin, secondaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
+import React, { useState } from 'react';
 import { themeStores } from 'stores/theme';
+import { RadioProperties } from 'types';
 
 interface Props extends Omit<RadioProperties, 'values'> {
     values: RowHeaderRadioType[];
@@ -35,56 +38,57 @@ export const RowHeaderRadio = ({ values, defaultActive = values[0].title, onChan
         onChange(value);
     };
     return (
-        <Row justifyAround marginBottom="0" width="100%">
+        <Section>
             {radio.map((item, i) => (
-                <Radio key={item.value} active={item.active} onClick={() => onClick(item.value)}>
-                    <Column alignCenter>
-                        <Row marginBottom="14px">
-                            <Span
-                                color={item.active ? statisticActiveTextColor : statisticInactiveTextColor}
-                                fontSize="48px"
-                                fontWeight="600"
-                                lineHeight="59px"
-                            >
-                                {values[i].quantity}
-                            </Span>
-                        </Row>
-                        <Row marginBottom="8px">
-                            <Span
-                                color={item.active ? statisticActiveTextColor : inactiveColor}
-                                fontSize="16px"
-                                fontWeight="400"
-                                lineHeight="19.5px"
-                            >
-                                {item.value}
-                            </Span>
-                        </Row>
-                        {/*<Row alignCenter marginBottom="10px">*/}
-                        {/*    {values[i].inBrackets && (*/}
-                        {/*        <Span*/}
-                        {/*            color={item.active ? primaryTextColor : inactiveColor}*/}
-                        {/*            fontSize="14px"*/}
-                        {/*            fontWeight="400"*/}
-                        {/*            lineHeight="16px"*/}
-                        {/*        >*/}
-                        {/*            &#160;{values[i].inBrackets}*/}
-                        {/*        </Span>*/}
-                        {/*    )}*/}
-                        {/*</Row>*/}
-                        <Row marginBottom="0">
-                            {values[i].growType && (
-                                <PercentageGrowth
-                                    isPlusStyle
-                                    // forcedColor={item.active ? primaryTextColor : inactiveColor}
-                                    type={values[i].growType}
+                <MarginWrapper key={item.value} marginBottom={secondaryMargin} marginRight={primaryMargin}>
+                    <Radio active={item.active} onClick={() => onClick(item.value)}>
+                        <Column alignCenter>
+                            <Row marginBottom="14px">
+                                <Span
+                                    color={item.active ? statisticActiveTextColor : statisticInactiveTextColor}
+                                    fontSize="24px"
+                                    fontWeight={defaultFontWeight}
                                 >
-                                    {values[i].growNumber}
-                                </PercentageGrowth>
-                            )}
-                        </Row>
-                    </Column>
-                </Radio>
+                                    {values[i].quantity}
+                                </Span>
+                            </Row>
+                            <Row marginBottom={secondaryMargin}>
+                                <Span
+                                    color={item.active ? statisticActiveTextColor : inactiveColor}
+                                    fontSize={defaultFontSize}
+                                    fontWeight="400"
+                                    lineHeight="19px"
+                                >
+                                    {item.value}
+                                </Span>
+                            </Row>
+                            {/*<Row alignCenter marginBottom="10px">*/}
+                            {/*    {values[i].inBrackets && (*/}
+                            {/*        <Span*/}
+                            {/*            color={item.active ? primaryTextColor : inactiveColor}*/}
+                            {/*            fontSize={defaultFontSize}*/}
+                            {/*            fontWeight="400"*/}
+                            {/*            lineHeight="16px"*/}
+                            {/*        >*/}
+                            {/*            &#160;{values[i].inBrackets}*/}
+                            {/*        </Span>*/}
+                            {/*    )}*/}
+                            {/*</Row>*/}
+                            <Row marginBottom="0">
+                                {values[i].growType && (
+                                    <PercentageGrowth
+                                        isPlusStyle
+                                        // forcedColor={item.active ? primaryTextColor : inactiveColor}
+                                        type={values[i].growType}
+                                    >
+                                        {values[i].growNumber}
+                                    </PercentageGrowth>
+                                )}
+                            </Row>
+                        </Column>
+                    </Radio>
+                </MarginWrapper>
             ))}
-        </Row>
+        </Section>
     );
 };

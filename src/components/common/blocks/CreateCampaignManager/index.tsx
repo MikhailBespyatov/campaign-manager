@@ -24,6 +24,7 @@ import { campaignsStores } from 'stores/campaigns';
 import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { defaultFontWeight } from 'constants/defaults';
 
 export const CreateCampaignManager: FC = () => {
     const [activeSubPage, setActiveSubPage] = useState(itemsCreateCampaign[0].path);
@@ -72,7 +73,7 @@ export const CreateCampaignManager: FC = () => {
                     ) : (
                         <SelectedVideo background={selectVideoBackgroundColor}>
                             <MarginWrapper marginTop="7px">
-                                <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+                                <Span fontSize="16px" fontWeight={defaultFontWeight} lineHeight="20px">
                                     {initialContentIds.length} Video Selected
                                 </Span>
                             </MarginWrapper>

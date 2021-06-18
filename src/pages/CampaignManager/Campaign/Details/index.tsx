@@ -6,29 +6,32 @@ import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
 import { RowHeaderRadioType } from 'components/common/inputs/RowHeaderRadio/types';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
-import { ContentWrapper } from 'components/grid/wrappers/ContentWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CampaignStatusLayout } from 'components/Layouts/CampaignStatusLayout';
 import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
+import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
 import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
 import { noDataAvailableMessage } from 'constants/messages';
-import { grey4, primaryColor, primaryPadding } from 'constants/styles';
+import { grey4, primaryColor, primaryMargin, tertiaryMargin } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
 import {
     areaCommonStyle,
+    borderBlockHorizontalPadding,
+    borderBlockVerticalPadding,
     borderBlockWidth,
     colors,
+    dateBlockHeight,
     engagementName1,
     engagementName2,
     engagementName3,
     engagementName4,
     engagementName5,
     graphicOption,
-    growSpread,
-    pickerMarginTop
+    growSpread
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -270,17 +273,37 @@ export const Details = () => {
     return (
         <CampaignManagerLayout>
             <CampaignStatusLayout>
-                <BorderBlock
-                    removeBorderRadius
-                    marginBottom="0"
-                    marginRight="0"
-                    paddingBottom="26px"
-                    paddingRight="26px"
-                    width="100%"
-                >
-                    <MarginWrapper marginBottom="50px">
+                <ContentWrapper marginBottom="45px" padding="16px 20px" width="100%">
+                    <MarginWrapper marginBottom={tertiaryMargin}>
                         <CampaignItem isDetailsPage backgroundImg={uriPrimary} status={status} {...item} />
                     </MarginWrapper>
+                    <Section marginBottom="20px">
+                        {/* <MarginWrapper marginRight={secondaryMargin}>
+                            <ManualRoundedButton
+                                borderRadius={tertiaryBorderRadius}
+                                fontWeight="700"
+                                height={primaryButtonDiameter}
+                                minWidth="148px"
+                                onClick={Noop}
+                            >
+                                EDIT CAMPAIGN
+                            </ManualRoundedButton>
+                        </MarginWrapper>
+                        <MarginWrapper marginRight={secondaryMargin}>
+                            <ManualRoundedButton
+                                background={lightPink}
+                                borderRadius={tertiaryBorderRadius}
+                                fontWeight="700"
+                                height={primaryButtonDiameter}
+                                mainColor={red}
+                                minWidth="148px"
+                                onClick={Noop}
+                            >
+                                REMOVE CAMPAIGN
+                            </ManualRoundedButton>
+                        </MarginWrapper> */}
+                    </Section>
+
                     <ContentWrapper>
                         {loading ? (
                             <Section>
@@ -288,9 +311,13 @@ export const Details = () => {
                             </Section>
                         ) : (
                             <>
-                                <Column marginBottom={!!campaignSelectedVideos?.items?.length ? '43px' : '0'}>
-                                    <MarginWrapper marginBottom="26px">
-                                        <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+                                <Column marginBottom={!!campaignSelectedVideos?.items?.length ? '5px' : '0'}>
+                                    <MarginWrapper marginBottom={primaryMargin}>
+                                        <Span
+                                            fontSize={defaultFontSize}
+                                            fontWeight={defaultFontWeight}
+                                            lineHeight="17px"
+                                        >
                                             {`(${campaignSelectedVideos?.items?.length || '0'}) Videos`}
                                         </Span>
                                     </MarginWrapper>
@@ -303,7 +330,11 @@ export const Details = () => {
                                         {/*    />*/}
                                         {/*)) || <></>}*/}
                                         {campaignSelectedVideos?.items?.map(({ womContentId, uriPrimary }) => (
-                                            <MarginWrapper key={womContentId} marginBottom="20px" marginRight="36px">
+                                            <MarginWrapper
+                                                key={womContentId}
+                                                marginBottom="20px"
+                                                marginRight={primaryMargin}
+                                            >
                                                 <SelectedVideoCard
                                                     removeDeleteImg
                                                     id={womContentId}
@@ -318,22 +349,27 @@ export const Details = () => {
                                         <DatePickerBetween
                                             defaultDateFrom={utcToStart}
                                             defaultDateTo={utcToEnd}
-                                            height="100px"
-                                            marginBottom={primaryPadding}
+                                            height={dateBlockHeight}
+                                            //marginBottom={primaryPadding}
                                             width={borderBlockWidth}
                                             onChange={onDatesBetweenChange}
                                         />
                                     )}
-                                    <BorderBlock height="100px" width={borderBlockWidth}>
-                                        <Column noWrap marginBottom={primaryPadding}>
-                                            <Span fontSize="15px" fontWeight="400" lineHeight="18px">
-                                                Historical Sets
+                                    <BorderBlock
+                                        height={dateBlockHeight}
+                                        paddingBottom={borderBlockVerticalPadding}
+                                        paddingRight={borderBlockHorizontalPadding}
+                                        width={borderBlockWidth}
+                                    >
+                                        <Column noWrap /*marginBottom={primaryPadding}*/>
+                                            <Span fontSize="12px" fontWeight="400" lineHeight="15px">
+                                                Compare Range
                                             </Span>
-                                            <MarginWrapper marginTop={pickerMarginTop}>
+                                            <MarginWrapper marginTop={primaryMargin}>
                                                 <HistoricalSetSelect
                                                     withoutBorder
                                                     defaultActive={historicalSetsDefault}
-                                                    paddingRight="20"
+                                                    paddingRight="0px"
                                                     values={historicalSetsFilterValues}
                                                     width={borderBlockWidth}
                                                     onChange={onHistoricalSetsChange}
@@ -403,14 +439,14 @@ export const Details = () => {
                             <Loader />
                         ) : (
                             <>
-                                <MarginWrapper marginBottom="26px">
-                                    <Span fontSize="16px" fontWeight="600" lineHeight="20px">
+                                <MarginWrapper marginBottom="13px">
+                                    <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">
                                         Overall Statistics
                                     </Span>
                                 </MarginWrapper>
-                                <Section marginBottom="10px">
-                                    <RowHeaderRadio values={radioArray} onChange={onChange} />
-                                </Section>
+
+                                <RowHeaderRadio values={radioArray} onChange={onChange} />
+
                                 <Wrapper>
                                     <Column width="100%">
                                         {/* <Row alignCenter marginBottom="0">
@@ -442,7 +478,7 @@ export const Details = () => {
                             </>
                         )}
                     </ContentWrapper>
-                </BorderBlock>
+                </ContentWrapper>
             </CampaignStatusLayout>
         </CampaignManagerLayout>
     );

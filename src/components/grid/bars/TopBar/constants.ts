@@ -1,4 +1,4 @@
-import { black } from 'constants/styles';
+import { black, primaryColor } from 'constants/styles';
 
 export const imgWidth = '65px';
 export const imgHeight = '75px';
@@ -15,7 +15,7 @@ export const itemPaddingBottom = '7px';
 export const spanFontWeight = 'normal';
 export const spanFontSize = '26px';
 export const spanLineHeight = '32px';
-export const defaultColor = '#0F1642';
+export const defaultColor = primaryColor;
 export const activeColor = black;
 
 export const StyledBorderWidth = '27px';

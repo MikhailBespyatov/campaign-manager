@@ -26,6 +26,7 @@ import {
     formTextStyleMixin,
     primaryColor,
     successColor,
+    tertiaryBorderRadius,
     untouchedColor
 } from 'constants/styles';
 import styled from 'styled-components';
@@ -94,7 +95,7 @@ export const TextFieldForm = styled.input<Padding>`
     ${formTextStyleMixin};
     border: none;
     border-bottom: 2px solid #d3d3d3;
-    /*border-radius: 8px; */
+    /*border-radius: ${tertiaryBorderRadius}; */
 `;
 
 export const TextFieldStyled = withStyles({

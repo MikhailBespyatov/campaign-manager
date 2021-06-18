@@ -7,6 +7,7 @@ import { createCampaignEvents, createCampaignStores } from 'stores/createCampaig
 import { useStore } from 'effector-react';
 import { useField, useForm } from 'effector-forms';
 import { forms } from 'stores/forms';
+import { primaryMargin } from 'constants/styles';
 
 interface Props {}
 
@@ -29,7 +30,7 @@ export const CreateCampaignLayout: FC<Props> = ({ children }) => {
 
     return (
         <>
-            <MarginWrapper marginBottom="8px">
+            <MarginWrapper marginBottom={primaryMargin}>
                 <ContentWrapper>
                     <ProgressBar
                         activeIndex={stepIndex}

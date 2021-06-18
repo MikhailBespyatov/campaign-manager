@@ -1,17 +1,17 @@
+import { titleWrapperHorizontalPadding } from 'components/common/blocks/HighlightedTitleBlock/constants';
 import {
     modalBackground,
     modalBorderRadius,
     modalHorizontalPadding,
     modalVerticalPadding,
+    titleBackgroundColor,
     wrapperBackground,
     wrapperHorizontalPadding,
-    wrapperVerticalPadding,
-    titleBackgroundColor
+    wrapperVerticalPadding
 } from 'components/modals/CardModal/constants';
-import { flexStart, primaryPadding, transitionTime } from 'constants/styles';
+import { flexStart, primaryPadding, tertiaryBorderRadius, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
-import { titleWrapperHorizontalPadding } from 'components/common/blocks/HighlightedTitleBlock/constants';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -47,6 +47,6 @@ export const TitleWrapper = styled.div`
     width: 100%;
     background-color: ${titleBackgroundColor};
     padding: 8px;
-    border-radius: 8px;
+    border-radius: ${tertiaryBorderRadius};
     margin-bottom: 4px;
 `;

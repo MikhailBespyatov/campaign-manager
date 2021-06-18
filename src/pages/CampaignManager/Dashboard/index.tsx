@@ -27,7 +27,7 @@ import React from 'react';
 import { DashboardBorder } from './styles';
 
 // const ColorPromptLine = ({ background }: Background) => (
-//     <UniversalWrapperDeprecated background={background || black} height="2px" marginRight="10px" width="12px" />
+//     <UniversalWrapperDeprecated background={background || black} height="2px" marginRight={secondaryMargin} width="12px" />
 // );
 
 export const Dashboard = () => (
@@ -40,51 +40,51 @@ export const Dashboard = () => (
                 {/* <MarginWrapper margin="auto">
                     <Column justifyCenter>
                         <Section alignCenter noWrap>
-                            <Column marginRight="16px">
+                            <Column marginRight={tertiaryMargin}>
                                 <CustomImg height={ballDiameter} src={ballPreviewImg} width={ballDiameter} />
                             </Column>
                             <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                                     Preview
                                 </Span>
                             </Column>
                         </Section>
                         <Section alignCenter noWrap>
-                            <Column marginRight="16px">
+                            <Column marginRight={tertiaryMargin}>
                                 <CustomImg height={ballDiameter} src={ballViewImg} width={ballDiameter} />
                             </Column>
                             <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                                     View
                                 </Span>
                             </Column>
                         </Section>
                         <Section alignCenter noWrap>
-                            <Column marginRight="16px">
+                            <Column marginRight={tertiaryMargin}>
                                 <CustomImg height={ballDiameter} src={ballEngageImg} width={ballDiameter} />
                             </Column>
                             <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                                     Engage
                                 </Span>
                             </Column>
                         </Section>
                         <Section alignCenter noWrap>
-                            <Column marginRight="16px">
+                            <Column marginRight={tertiaryMargin}>
                                 <CustomImg height={ballDiameter} src={ballClickImg} width={ballDiameter} />
                             </Column>
                             <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                                     Click
                                 </Span>
                             </Column>
                         </Section>
                         <Section alignCenter noWrap>
-                            <Column marginRight="16px">
+                            <Column marginRight={tertiaryMargin}>
                                 <CustomImg height={ballDiameter} src={ballBuyImg} width={ballDiameter} />
                             </Column>
                             <Column>
-                                <Span color="#0F1642" fontSize="22px" fontWeight="normal" lineHeight="27px">
+                                <Span color={primaryColor} fontSize="22px" fontWeight="normal" lineHeight="27px">
                                     Buy
                                 </Span>
                             </Column>

@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Span } from 'components/common/typography/Span';
-import { getDate } from 'utils/usefulFunctions';
 import { Column } from 'components/grid/wrappers/FlexWrapper';
-import { grey4 } from 'constants/styles';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize } from 'constants/defaults';
+import { grey4, primaryMargin } from 'constants/styles';
+import React, { FC } from 'react';
+//import { getDate } from 'utils/usefulFunctions';
+import { getFormattedDate } from 'utils/usefulFunctions';
 
 interface Props {
     date: string;
@@ -12,13 +14,14 @@ interface Props {
 
 export const DateOfDetailsCampaignBlock: FC<Props> = ({ state, date }) => (
     <Column>
-        <MarginWrapper marginBottom="8px">
-            <Span color={grey4} fontSize="16px" fontWeight="400" lineHeight="22px">
+        <MarginWrapper marginBottom={primaryMargin}>
+            <Span color={grey4} fontSize="13px" fontWeight="700" lineHeight="22px">
                 {state === 'start' ? 'Start of campaign' : 'End of campaign'}
             </Span>
         </MarginWrapper>
-        <Span fontSize="18px" fontWeight="400" lineHeight="22px">
-            {getDate(new Date(date))}
+        <Span fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
+            {/* {getDate(new Date(date))} */}
+            {getFormattedDate(new Date(date))}
         </Span>
     </Column>
 );
