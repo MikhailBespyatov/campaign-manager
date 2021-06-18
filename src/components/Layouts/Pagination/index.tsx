@@ -15,16 +15,16 @@ import {
 } from 'components/Layouts/Pagination/constants';
 import {
     Arrow,
+    PaginationBlockWrapper,
     PaginationCell,
     PaginationInput,
     PaginationWrapper,
-    Wrapper,
-    PaginationBlockWrapper
+    Wrapper
 } from 'components/Layouts/Pagination/styles';
 import { defaultLimit } from 'constants/defaults';
 import React, { ChangeEvent, KeyboardEvent, useMemo, useState } from 'react';
 import { Span } from 'components/common/typography/Span';
-import { Row, FlexGrow } from 'components/grid/wrappers/FlexWrapper';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface WrapperProps {
