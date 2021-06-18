@@ -24,9 +24,9 @@ lint/build:
         - echo "Linting successful"
         - echo "Building deploy package"
         # * react-scripts
-        # - yarn build:stage
+        - yarn build:stage
         # * vite
-        - yarn build:vite:stage
+        # - yarn build:vite:stage
         - echo "Build successful"
     only:
         - merge_requests
@@ -44,9 +44,9 @@ build/deploy-stage-dev:
         - echo "Building dev version deploy package"
         - yarn
         # * react-scripts
-        # - yarn build:stage
+        - yarn build:stage
         # * vite
-        - yarn build:vite:stage
+        #- yarn build:vite:stage
         - echo "Build successful"
         - echo "Deploying to DO (dev droplet) server"
         - sshpass -e ssh -p 22 -oStrictHostKeyChecking=no -tt "$SERVER" 'rm -rf "$TARGET_DIR_ON_DO_FOR_DEV"/static'
@@ -66,9 +66,9 @@ build/deploy-prod:
         - echo "Building deploy package"
         - yarn
         # * react-scripts
-        # - yarn build:prod
+        - yarn build:prod
         # * vite
-        - yarn build:vite:prod
+        #- yarn build:vite:prod
         - echo "Build successful"
         - echo "Deploying to server"
         - echo > pk.txt "$SSH_PRIVATE_KEY" | tr -d '\r'
