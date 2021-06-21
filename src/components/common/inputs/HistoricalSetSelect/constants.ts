@@ -11,7 +11,7 @@ export const wrapperBackground = white;
 
 export const imgHeight = '5px';
 export const wrapperImgTop = `0px`;
-export const wrapperImgRight = '20px';
+export const wrapperImgRight = '14px';
 export const imgWidth = '10px';
 
 export const ulWrapperTop = `calc(${wrapperHeight} + 5px)`;

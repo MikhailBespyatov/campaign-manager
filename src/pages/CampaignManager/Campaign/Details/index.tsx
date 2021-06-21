@@ -362,19 +362,20 @@ export const Details = () => {
                                         width={borderBlockWidth}
                                     >
                                         <Column noWrap /*marginBottom={primaryPadding}*/>
-                                            <Span fontSize="12px" fontWeight="400" lineHeight="15px">
-                                                Compare Range
-                                            </Span>
-                                            <MarginWrapper marginTop={primaryMargin}>
-                                                <HistoricalSetSelect
-                                                    withoutBorder
-                                                    defaultActive={historicalSetsDefault}
-                                                    paddingRight="0px"
-                                                    values={historicalSetsFilterValues}
-                                                    width={borderBlockWidth}
-                                                    onChange={onHistoricalSetsChange}
-                                                />
+                                            <MarginWrapper marginBottom="2px">
+                                                <Span fontSize="12px" fontWeight="400" lineHeight="15px">
+                                                    Compare Range
+                                                </Span>
                                             </MarginWrapper>
+
+                                            <HistoricalSetSelect
+                                                withoutBorder
+                                                defaultActive={historicalSetsDefault}
+                                                paddingRight="0px"
+                                                values={historicalSetsFilterValues}
+                                                width={borderBlockWidth}
+                                                onChange={onHistoricalSetsChange}
+                                            />
                                         </Column>
                                     </BorderBlock>
                                     {/* <Section alignCenter noWrap marginBottom={primaryPadding}>

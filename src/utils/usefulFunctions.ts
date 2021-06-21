@@ -151,6 +151,7 @@ export const getDate = (date: Date | null) => {
 
 export const getFormattedDate = (date?: Date | null) => {
     if (!date) return '';
+
     return format(date, 'dd-MM-yyyy'); //16-01-2021
 };
 

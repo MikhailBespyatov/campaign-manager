@@ -62,6 +62,7 @@ export const TextFieldBetweenForm = styled.input`
     appearance: none;
     width: 100%;
     height: ${dateInputHeight};
+    font-family: ${defaultFontFamily};
     font-style: ${defaultFontStyle};
     font-weight: 400;
     font-size: ${defaultFontSize};

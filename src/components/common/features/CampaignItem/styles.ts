@@ -49,11 +49,13 @@ export const CampaignSubtitle = styled.p`
     color: ${black};
     padding: 0px;
     margin: 0px;
+    letter-spacing: 1px;
 `;
 
 export const StyledSpan = styled(Span)`
     font-weight: 400;
     font-size: 13px;
     line-height: 22px;
+    letter-spacing: 1px;
     color: ${grey4};
 `;
