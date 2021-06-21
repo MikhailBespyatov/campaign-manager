@@ -15,7 +15,7 @@ interface Props {
 export const DateOfDetailsCampaignBlock: FC<Props> = ({ state, date }) => (
     <Column>
         <MarginWrapper marginBottom={primaryMargin}>
-            <Span color={grey4} fontSize="13px" fontWeight="700" lineHeight="22px">
+            <Span color={grey4} fontSize="13px" fontWeight="700" letterSpacing="1px" lineHeight="22px">
                 {state === 'start' ? 'Start of campaign' : 'End of campaign'}
             </Span>
         </MarginWrapper>

@@ -349,8 +349,7 @@ describe('getFormattedDate', () => {
         expect(getFormattedDate(new Date('2020-01-01'))).toBe('01-01-2020');
         expect(getFormattedDate(null)).toBe('');
         expect(getFormattedDate()).toBe('');
-        expect(getFormattedDate(new Date('2021-11-31'))).toBe('31-11-2021');
-        expect(getFormattedDate(new Date('0001-00-00 13:38'))).toBe('00-00-0001');
+        expect(getFormattedDate(new Date(2001, 0, 1, 15, 30, 55))).toBe('01-01-2001');
     });
 });
 
