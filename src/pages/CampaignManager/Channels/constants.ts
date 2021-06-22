@@ -1,6 +1,6 @@
-export const channelsContentPadding = '16px 54px';
+export const channelsContentPadding = '10px 40px';
 
-export const channelParameters = ['Channel Name', 'Channel Link', 'Private', 'Edit'];
+export const channelParameters = ['Channel Name', 'Embedded Link', 'Private', 'Edit'];
 
 export const editButtonDiameter = '49px';
 

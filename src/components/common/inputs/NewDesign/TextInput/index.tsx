@@ -1,9 +1,9 @@
-import React, { ChangeEvent } from 'react';
-import { Disabled, Label, Padding, Placeholder, Type } from 'types';
-import { ErrorSpan, LabelNameSpan, TextFieldForm, Wrapper } from './styles';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { useField } from 'effector-forms';
 import { Field } from 'effector-forms/dist/types';
+import React, { ChangeEvent } from 'react';
+import { Disabled, Label, Padding, Placeholder, Type } from 'types';
+import { ErrorSpan, LabelNameSpan, TextFieldForm, Wrapper } from './styles';
 
 export interface TextInputProps extends Disabled, Placeholder, Type, Label, Pick<Padding, 'paddingLeft'> {
     name: string;
@@ -26,7 +26,7 @@ export const TextInput = ({
     paddingLeft
 }: TextInputProps) => (
     <Wrapper>
-        <MarginWrapper marginBottom="9px">
+        <MarginWrapper marginBottom="10px">
             <LabelNameSpan>
                 {label}
                 {required && '*'}

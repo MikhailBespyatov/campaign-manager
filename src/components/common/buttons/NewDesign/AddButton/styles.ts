@@ -1,21 +1,21 @@
-import styled from 'styled-components';
+import { Span } from 'components/common/typography/Span';
 import {
     buttonBehaviorMixin,
     disableDefaultButtonStyleMixin,
     primaryColor,
     tertiaryBorderRadius
 } from 'constants/styles';
+import styled from 'styled-components';
 import { Sizes } from 'types';
-import { Span } from 'components/common/typography/Span';
 
 export const Button = styled.button<Sizes>`
     ${disableDefaultButtonStyleMixin};
-    min-width: 190px;
-    ${({ width }) => (width ? `width: ${width};` : ``)};
-    height: ${({ height }) => height || '57px'};
-    border: 1px solid #c6c6c6;
-    border-radius: ${tertiaryBorderRadius};
-    padding: 8px 20px 8px 25px;
+    min-width: 160px;
+    ${({ width }) => width && `width: ${width};`};
+    height: ${({ height }) => height || '36px'};
+    /* border: 1px solid #c6c6c6; */
+    /* border-radius: ${tertiaryBorderRadius}; */
+    /* padding: 2px; */
     ${buttonBehaviorMixin}
 `;
 

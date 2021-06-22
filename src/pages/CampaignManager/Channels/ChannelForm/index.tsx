@@ -1,22 +1,22 @@
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
 import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
+import { Span } from 'components/common/typography/Span';
+import { TableSubSpan } from 'components/common/typography/TableSubSpan';
 import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
-import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { lightPink, red, tertiaryBorderRadius } from 'constants/styles';
 import { useForm } from 'effector-forms';
 import { useStore } from 'effector-react';
 import { inputHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
 import React, { useEffect } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { channelsEffects } from 'stores/channels';
 import { forms } from 'stores/forms';
-import { modalEvents } from 'stores/modal';
 import { themeStores } from 'stores/theme';
-import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
-const { id: channelIdField, name: channelName } = forms.channelForm.fields;
+const { /*id: channelIdField,*/ name: channelName, isPrivate } = forms.channelForm.fields;
 
 export interface ChannelFormProps {}
 
@@ -26,28 +26,32 @@ interface ParamsProps {
 
 export const ChannelForm = () => {
     const { reset } = useForm(forms.channelForm);
-    const history = useHistory();
+    const isPrivateState = forms.channelForm.fields.isPrivate.$value;
+    //const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.channels.create;
     const { channelId } = useParams<ParamsProps>();
-    const flexBasisInput = getFlexBasisPercent(2);
 
-    const onClickRemoveButton = () => {
-        channelsEffects.removeChannel(channelId);
-        history.push(globalPrefixUrl + routes.campaignManager.channels.index);
-        modalEvents.closeAsyncModal();
-        reset();
-    };
+    //const flexBasisInput = getFlexBasisPercent(2);
 
-    const OnClickConfirmationModal = () => {
-        modalEvents.openAsyncModal({
-            title: 'Delete Channel',
-            content: 'Do you really want delete channel?',
-            onOk: onClickRemoveButton
-        });
-    };
+    // const onClickRemoveButton = () => {
+    //     channelsEffects.removeChannel(channelId);
+    //     history.push(globalPrefixUrl + routes.campaignManager.channels.index);
+    //     modalEvents.closeAsyncModal();
+    //     reset();
+    // };
 
-    // const onChangePrivate = (e: ChangeEvent<HTMLInputElement>) => fields.isPrivate.onChange(e.target.checked);
+    // const OnClickConfirmationModal = () => {
+    //     modalEvents.openAsyncModal({
+    //         title: 'Delete Channel',
+    //         content: 'Do you really want delete channel?',
+    //         onOk: onClickRemoveButton
+    //     });
+    // };
+
+    //console.log('isPrivateState', isPrivateState.getState());
+
+    const onChangePrivate = (isChecked: boolean) => isPrivate.onChange(isChecked);
 
     //Mock
     useEffect(() => {
@@ -57,26 +61,40 @@ export const ChannelForm = () => {
     }, []);
 
     return (
-        <ContentWrapper padding="40px 80px 75px" width="100%">
-            <Section marginBottom="40px">
-                <TitleFormSpan>{isEditPage ? 'Edit' : 'Add'} channel</TitleFormSpan>
+        // <Wrapper>
+        <>
+            <Section marginBottom="25px">
+                <TitleFormSpan>{isEditPage ? 'Edit' : 'Add New'} Channel</TitleFormSpan>
             </Section>
             {isEditPage ? (
-                <Section marginBottom="35px">
-                    <FlexGrow flexBasis={flexBasisInput}>
-                        <Section marginRight={inputHorizontalMargin}>
-                            <FormTextInput required field={channelName} label="Channel Name" />
-                        </Section>
-                    </FlexGrow>
-                    <FlexGrow flexBasis={flexBasisInput}>
-                        <Section marginLeft={inputHorizontalMargin}>
-                            <FormTextInput disabled field={channelIdField} label="Channel ID" />
-                        </Section>
-                    </FlexGrow>
-                </Section>
+                <>
+                    <Section marginBottom="22px" marginRight={inputHorizontalMargin}>
+                        <FormTextInput
+                            required
+                            field={channelName}
+                            label="Channel Name"
+                            placeholder="Type channel name here..."
+                        />
+                    </Section>
+                    <Section marginBottom="8px">
+                        <TableSubSpan>Channel ID</TableSubSpan>
+                    </Section>
+                    <Row marginBottom="25px">
+                        <TableSubSpan color="#73799C">{channelId}</TableSubSpan>
+                    </Row>
+
+                    {/* <Section marginBottom="30px">
+                        <FormTextInput disabled field={channelIdField} label="Channel ID" />
+                    </Section> */}
+                </>
             ) : (
-                <Section marginBottom="35px">
-                    <FormTextInput required field={channelName} label="Channel Name" />
+                <Section marginBottom="33px">
+                    <FormTextInput
+                        required
+                        field={channelName}
+                        label="Channel Name"
+                        placeholder="Type channel name here..."
+                    />
                 </Section>
             )}
             {/*<Section>*/}
@@ -89,7 +107,18 @@ export const ChannelForm = () => {
             {/*        </Span>*/}
             {/*    </Row>*/}
             {/*</Section>*/}
-            {isEditPage && (
+
+            <Section>
+                <Row alignCenter>
+                    <MarginWrapper marginRight="19px">
+                        <Checkbox defaultValue={isPrivateState.getState()} onChange={onChangePrivate} />
+                    </MarginWrapper>
+                    <Span fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
+                        Make Channel Private
+                    </Span>
+                </Row>
+            </Section>
+            {/* {isEditPage && (
                 <Section marginTop="50px">
                     <ManualRoundedButton
                         background={lightPink}
@@ -101,7 +130,8 @@ export const ChannelForm = () => {
                         REMOVE CHANNEL?
                     </ManualRoundedButton>
                 </Section>
-            )}
-        </ContentWrapper>
+            )} */}
+            {/* </Wrapper> */}
+        </>
     );
 };

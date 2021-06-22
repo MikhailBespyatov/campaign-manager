@@ -1,12 +1,11 @@
 import {
     wrapperBackground,
-    wrapperBorderRadius,
     wrapperHeight,
     wrapperHorizontalPadding,
     wrapperMinWidth,
     wrapperVerticalPadding
 } from 'components/common/inputs/Search/constants';
-import { flexCenter, primaryBorder } from 'constants/styles';
+import { flexCenter, primaryBorder, tertiaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 import { BorderRadiusProperties } from 'types';
 
@@ -15,7 +14,7 @@ export const Wrapper = styled.div<BorderRadiusProperties>`
     justify-content: space-around;
     min-width: ${wrapperMinWidth};
     height: ${wrapperHeight};
-    border-radius: ${wrapperBorderRadius};
+    border-radius: ${tertiaryBorderRadius};
     border: ${primaryBorder};
     background-color: ${wrapperBackground};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};

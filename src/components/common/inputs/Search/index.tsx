@@ -22,7 +22,7 @@ export interface Props extends Placeholder, DefaultValueString {
     onSearch?: (value: string) => void;
 }
 
-export const Search = ({ defaultValue = '', onSearch = Noop, placeholder = 'Find Channels' }: Props) => {
+export const Search = ({ defaultValue = '', onSearch = Noop, placeholder = 'Search' }: Props) => {
     const [value, setValue] = useState(defaultValue);
 
     const handleSearch = () => onSearch(value);
@@ -31,6 +31,9 @@ export const Search = ({ defaultValue = '', onSearch = Noop, placeholder = 'Find
 
     return (
         <Wrapper>
+            <MarginWrapper marginRight="6px">
+                <CustomImg pointer height={imgHeight} src={searchImg} width={imgWidth} onClick={handleSearch} />
+            </MarginWrapper>
             <TextInput
                 background={inputBackground}
                 color={inputColor}
@@ -43,9 +46,6 @@ export const Search = ({ defaultValue = '', onSearch = Noop, placeholder = 'Find
                 width={inputMinWidth}
                 onChange={inputChange}
             />
-            <MarginWrapper marginLeft="10px">
-                <CustomImg pointer height={imgHeight} src={searchImg} width={imgWidth} onClick={handleSearch} />
-            </MarginWrapper>
         </Wrapper>
     );
 };
