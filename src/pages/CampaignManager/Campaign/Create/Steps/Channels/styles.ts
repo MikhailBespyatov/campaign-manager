@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { publicChannelsPaddingLeft } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
-import { Span } from 'components/common/typography/Span';
-import { blue2, grey8 } from 'constants/styles';
 import { CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
+import { Span } from 'components/common/typography/Span';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { blue2, grey8 } from 'constants/styles';
+import { publicChannelsPaddingLeft } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
+import styled from 'styled-components';
 
 export const PublicChannelRadio = styled(Column)`
     width: 100%;
@@ -12,9 +12,7 @@ export const PublicChannelRadio = styled(Column)`
     padding-right: ${publicChannelsPaddingLeft};
 
     ${Section}:last-child {
-         {
-            margin-bottom: 0;
-        }
+        margin-bottom: 0;
     }
 `;
 
@@ -53,7 +51,7 @@ export const RowWrapper = styled(Section)<Pick<CheckboxProps, 'checked'>>`
 
 export const ChannelNameSpan = styled(Span)`
     font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
 `;

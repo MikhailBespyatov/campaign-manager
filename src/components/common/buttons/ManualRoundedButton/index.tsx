@@ -12,21 +12,36 @@ import { ReactClick } from 'types/react';
 //     </Span>
 // );
 
-interface Props extends ButtonProps, ReactClick<HTMLButtonElement>, Pick<TextProperties, 'fontWeight'> {
+interface Props extends ButtonProps, ReactClick<HTMLButtonElement>, Pick<TextProperties, 'fontWeight' | 'fontSize'> {
     Img?: JSX.Element;
 }
 
-export const ManualRoundedButton: FC<Props> = ({ children, Img, reverse, mainColor, fontWeight, height, ...rest }) => (
+export const ManualRoundedButton: FC<Props> = ({
+    children,
+    Img,
+    reverse,
+    mainColor,
+    fontWeight,
+    height,
+    fontSize,
+    ...rest
+}) => (
     <Button {...rest} height={height} mainColor={mainColor} reverse={reverse}>
         {Img ? (
             <Row alignCenter justifyCenter marginBottom="0">
                 <Column marginRight={padding}>{Img}</Column>
-                <InnerSpan fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
+                <InnerSpan fontSize={fontSize} fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
                     {children}
                 </InnerSpan>
             </Row>
         ) : (
-            <InnerSpan fontWeight={fontWeight} lineHeight={height} mainColor={mainColor} reverse={reverse}>
+            <InnerSpan
+                fontSize={fontSize}
+                fontWeight={fontWeight}
+                lineHeight={height}
+                mainColor={mainColor}
+                reverse={reverse}
+            >
                 {children}
             </InnerSpan>
         )}

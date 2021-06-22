@@ -1,17 +1,20 @@
 import editButtonIcon from 'assets/img/edit_icon.svg';
+// import defaultChannelImg from 'assets/img/wom_logo.svg';
+import defaultChannelImg from 'assets/img/sample_logo.png';
 import { ImgButton } from 'components/common/buttons/ImgButton';
 import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
-import { ToggleButton } from 'components/common/buttons/ToggleButton';
 import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
 import { Table } from 'components/common/tables/NewDesign/Table';
 import { Loader } from 'components/dynamic/Loader';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { channelsEdit, routes } from 'constants/routes';
-import { blue5, primaryMargin } from 'constants/styles';
+import { primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { copyButtonIconDiameter } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
@@ -39,18 +42,22 @@ export const Channels = () => {
     // const channels = channelsMock;
     const channelLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
 
-    const dataTable: DataTable[] | undefined = items?.map(({ name, id = '', isPrivate }) => ({
+    const dataTable: DataTable[] | undefined = items?.map(({ name, id = '', /*imageUrl,*/ isPrivate }) => ({
         cells: [
             <Row key={id} alignCenter>
+                <MarginWrapper marginLeft="8px" marginRight="16px">
+                    <CustomImg height="40px" src={/*imageUrl || */ defaultChannelImg} width="42px" />
+                </MarginWrapper>
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
             <Row key={id}>
                 <CopyableField subject={channelLink} />
             </Row>,
-            <ToggleButton key={id} disabled value={isPrivate} />,
+            // <ToggleButton key={id} disabled value={isPrivate} />,
+            <Checkbox key={id} disabled defaultValue={isPrivate} />,
             <Row key={id}>
                 <ImgButton
-                    backgroundColor={blue5}
+                    backgroundColor="transparent"
                     height={editButtonDiameter}
                     width={editButtonDiameter}
                     onClick={onClickEditButton(id)}
@@ -106,19 +113,21 @@ export const Channels = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section marginBottom={primaryMargin}>
-                <ContentWrapper padding={channelsContentPadding} width="100%">
-                    <Section justifyEnd noWrap>
-                        {/*<FlexGrow marginRight="24px">*/}
-                        {/*    <TagFilter*/}
-                        {/*        defaultChecked*/}
-                        {/*        tagsValues={}*/}
-                        {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
-                        {/*    />*/}
-                        {/*</FlexGrow>*/}
-                        <AddButton onClick={onClickAddButton}>Add Channel</AddButton>
-                    </Section>
-                </ContentWrapper>
+            <Section alignCenter noWrap marginBottom={primaryMargin}>
+                {/* <Section noWrap> */}
+                {/*<FlexGrow marginRight="24px">*/}
+                {/*    <TagFilter*/}
+                {/*        defaultChecked*/}
+                {/*        tagsValues={}*/}
+                {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
+                {/*    />*/}
+                {/*</FlexGrow>*/}
+
+                {/* <MarginWrapper marginRight="10px">
+                    <Search />
+                </MarginWrapper> */}
+                <AddButton onClick={onClickAddButton}>Add Channel</AddButton>
+                {/* </Section> */}
             </Section>
             <Section>
                 <ContentWrapper padding={channelsContentPadding} width="100%">

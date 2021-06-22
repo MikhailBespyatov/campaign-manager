@@ -5,6 +5,7 @@ import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { buttonHeight, textFontSize, textFontWeight, textLineHeight } from 'components/modals/AsyncModal/constants';
 import { closeIconDiameter } from 'components/modals/CongratsModal/constants';
 import { white } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -35,16 +36,27 @@ export const AsyncModal = () => {
                 </AbsoluteWrapper>
                 <Column alignCenter>
                     <MarginWrapper marginBottom="17px">
-                        <Span fontSize="24px" fontWeight="400" lineHeight="22px">
+                        <Span fontSize="24px" fontWeight={textFontWeight} lineHeight={textLineHeight}>
                             {title}
                         </Span>
                     </MarginWrapper>
-                    <Span alignCenter color="#979797" fontSize="16px" fontWeight="400" lineHeight="22px">
+                    <Span
+                        alignCenter
+                        color="#979797"
+                        fontSize={textFontSize}
+                        fontWeight={textFontWeight}
+                        lineHeight={textLineHeight}
+                    >
                         {content}
                     </Span>
                     <Row marginTop="56px">
                         <MarginWrapper marginRight="30px">
-                            <ManualRoundedButton height="57px" onClick={okHandler}>
+                            <ManualRoundedButton
+                                fontSize={textFontSize}
+                                fontWeight={textFontWeight}
+                                height={buttonHeight}
+                                onClick={okHandler}
+                            >
                                 Delete
                             </ManualRoundedButton>
                         </MarginWrapper>
@@ -52,11 +64,13 @@ export const AsyncModal = () => {
                             <ManualRoundedButton
                                 reverse
                                 background={white}
-                                height="57px"
+                                fontSize={textFontSize}
+                                fontWeight={textFontWeight}
+                                height={buttonHeight}
                                 mainColor={'red'}
                                 onClick={onClose}
                             >
-                                CANCEL
+                                Cancel
                             </ManualRoundedButton>
                         </MarginWrapper>
                     </Row>

@@ -57,7 +57,7 @@ export const Button = styled.button<ButtonProps>`
 export const InnerSpan = styled.span<InnerSpanProps>`
     color: ${({ theme: { secondaryTextColor, primaryColor }, reverse, mainColor }) =>
         mainColor || (reverse ? primaryColor : secondaryTextColor)};
-    font-size: ${spanFontSize};
+    font-size: ${({ fontSize }) => fontSize || spanFontSize};
     font-weight: ${({ fontWeight }) => fontWeight || spanFontWeight};
     line-height: ${({ lineHeight }) => lineHeight || spanLineHeight};
 `;

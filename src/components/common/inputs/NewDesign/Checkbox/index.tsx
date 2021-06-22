@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { HiddenCheckbox, Label, VisibleCheckbox, Wrapper } from './styles';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { checkMarkIconHeight, checkMarkIconWidth } from 'components/common/inputs/NewDesign/Checkbox/constants';
-import { DefaultValueBoolean, Disabled, OnChangeBoolean } from 'types';
-import { Noop } from 'constants/global';
-import checkmarkIcon from 'assets/img/checkmark_icon.svg';
+// import checkmarkIcon from 'assets/img/checkmark_icon.svg';
+import checkmarkIcon from 'assets/img/checkmark_icon_black.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { checkMarkIconHeight, checkMarkIconWidth } from 'components/common/inputs/NewDesign/Checkbox/constants';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { Noop } from 'constants/global';
 import { useToggle } from 'hooks/toggle';
+import React, { useEffect } from 'react';
+import { DefaultValueBoolean, Disabled, OnChangeBoolean } from 'types';
+import { HiddenCheckbox, Label, VisibleCheckbox, Wrapper } from './styles';
 
 export interface CheckboxProps extends DefaultValueBoolean, Disabled, OnChangeBoolean {
     name?: string;

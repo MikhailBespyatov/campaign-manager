@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const TitleFormSpan = styled.span`
     font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* letter-spacing: 1px; */
+    /* text-transform: uppercase; */
 `;
