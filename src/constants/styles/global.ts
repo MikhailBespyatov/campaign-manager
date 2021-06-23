@@ -10,9 +10,10 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, ${defaultFontFamily};
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    // font-family: -apple-system, BlinkMacSystemFont, ${defaultFontFamily};
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+    font-family: 'Montserrat', sans-serif;
   }
 
   * {
