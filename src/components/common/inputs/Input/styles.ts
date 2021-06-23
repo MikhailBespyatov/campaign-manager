@@ -34,16 +34,16 @@ export const TextInput = styled.input<InputProps>`
     outline: none;
     border: none;
     appearance: none;
-    ${({ width }) => (width ? `width: ${width};` : ``)};
-    ${({ minWidth }) => (minWidth ? `min-width: ${minWidth};` : ``)};
-    ${({ height }) => (height ? `height: ${height};` : ``)};
-    ${({ background }) => (background ? `background: ${background};` : ``)};
+    ${({ width }) => width && `width: ${width};`};
+    ${({ minWidth }) => minWidth && `min-width: ${minWidth};`};
+    ${({ height }) => height && `height: ${height};`};
+    ${({ background }) => background && `background: ${background};`};
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : defaultFontFamily)};
     font-style: ${({ fontStyle }) => (fontStyle ? fontStyle : defaultFontStyle)};
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : defaultFontWeight)};
     font-size: ${({ fontSize }) => (fontSize ? fontSize : defaultFontSize)};
     line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : defaultLineHeight)};
-    ${({ alignTextCenter }) => (alignTextCenter ? `text-align: center;` : ``)};
+    ${({ alignTextCenter }) => alignTextCenter && `text-align: center;`};
 `;
 
 export const HiddenInput = styled.input.attrs({ type: 'hidden' })`

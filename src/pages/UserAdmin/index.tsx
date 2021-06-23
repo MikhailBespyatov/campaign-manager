@@ -5,7 +5,6 @@ import { InviteForm } from 'components/FormComponents/forms/InviteForm';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect } from 'react';
@@ -52,26 +51,26 @@ export const UserAdmin = () => {
             {/*    </Row> *!/*/}
             {/*    </Column>*/}
             {/*</Section>*/}
-            <Section noWrap marginBottom={primaryMargin}>
-                <ContentWrapper padding="30px 24px" width="100%">
-                    <Column>
-                        <Row marginBottom={headersMarginBottom}>
-                            <Span fontSize="16px" lineHeight="20px">
-                                Invite new users
-                            </Span>
-                        </Row>
-                        <Row alignCenter marginBottom="0">
-                            <InviteForm />
-                            {/* <Column marginRight={headersMarginBottom}>
+            <Section noWrap marginBottom="40px">
+                {/* <ContentWrapper padding="30px 24px" width="100%"> */}
+                <Column>
+                    <Row marginBottom={headersMarginBottom}>
+                        <Span fontWeight="400" lineHeight="17px">
+                            Invite new users
+                        </Span>
+                    </Row>
+                    <Row alignCenter marginBottom="0">
+                        <InviteForm />
+                        {/* <Column marginRight={headersMarginBottom}>
                         <InviteInput error="" label="" name="email" />
                     </Column>
                     <RoundedButton>SEND INVITE</RoundedButton> */}
-                        </Row>
-                    </Column>
-                </ContentWrapper>
+                    </Row>
+                </Column>
+                {/* </ContentWrapper> */}
             </Section>
             <Section noWrap>
-                <ContentWrapper padding="30px 24px" width="100%">
+                <ContentWrapper borderRadius="0px" padding="10px 30px" width="100%">
                     {initialLoading ? <Loader /> : <UserAdminTable {...items} />}
                 </ContentWrapper>
             </Section>

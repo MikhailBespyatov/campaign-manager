@@ -1,5 +1,5 @@
 import { Span } from 'components/common/typography/Span';
-import { blue, formGrey3, formGrey6, primaryColor, tertiaryBorderRadius } from 'constants/styles';
+import { blue, formGrey3, formGrey5, formGrey6, primaryColor, tertiaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 import { Padding } from 'types';
 
@@ -12,7 +12,7 @@ export const LabelNameSpan = styled(Span)`
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: rgba(15, 22, 66, 0.5);
+    color: ${formGrey5};
 `;
 
 export const ErrorSpan = styled.span`

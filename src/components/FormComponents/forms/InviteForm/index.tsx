@@ -11,17 +11,17 @@ import {
 import { FormWrapper } from 'components/FormComponents/forms/InviteForm/styles';
 import { InviteUserSelect } from 'components/FormComponents/inputs/InviteUserSelect';
 import { UserAdminTextInput } from 'components/FormComponents/inputs/UserAdminTextInput';
-import { white } from 'constants/styles';
+import { primaryButtonDiameter } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { Formik } from 'formik';
 import React from 'react';
 import { loadingStores } from 'stores/loading';
-import { themeStores } from 'stores/theme';
+//import { themeStores } from 'stores/theme';
 import { getOrganizationId } from 'utils/usefulFunctions';
 
 export const InviteForm = () => {
     const loading = useStore(loadingStores.loading);
-    const { primaryColor } = useStore(themeStores.theme);
+    // const { primaryColor } = useStore(themeStores.theme);
 
     const defaultOrganizationId = getOrganizationId();
 
@@ -33,7 +33,7 @@ export const InviteForm = () => {
         >
             {({ handleSubmit }) => (
                 <FormWrapper onSubmit={handleSubmit}>
-                    <UserAdminTextInput name="email" type="email" width="504px" />
+                    <UserAdminTextInput name="email" type="email" width="307px" />
                     {/* <UserAdminTextInput
                         disabled={!!defaultOrganizationId}
                         name="organizationId"
@@ -53,8 +53,15 @@ export const InviteForm = () => {
                         values={permissionsValues}
                         // onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
                     />
-                    <ManualRoundedButton reverse background={white} disabled={loading} mainColor={primaryColor}>
-                        {loading ? <Loader /> : 'SEND INVITE'}
+                    <ManualRoundedButton
+                        borderRadius="4px"
+                        disabled={loading}
+                        fontSize="16px"
+                        fontWeight="400"
+                        height={primaryButtonDiameter}
+                        minWidth="65px"
+                    >
+                        {loading ? <Loader /> : 'Send Invite'}
                     </ManualRoundedButton>
                 </FormWrapper>
             )}
