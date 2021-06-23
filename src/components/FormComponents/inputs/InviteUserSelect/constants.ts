@@ -1,10 +1,10 @@
-import { formGrey3, white } from 'constants/styles';
 import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapper/constants';
+import { formGrey3, tertiaryBorderRadius, tertiaryMargin, white } from 'constants/styles';
 
 export const wrapperWidth = '150px';
-export const wrapperHeight = '69px';
-export const wrapperMarginRight = '32px';
-export const wrapperBorderRadius = `10px`;
+export const wrapperHeight = '40px';
+export const wrapperMarginRight = tertiaryMargin;
+export const wrapperBorderRadius = tertiaryBorderRadius;
 export const wrapperBorderWidth = '1px';
 export const wrapperBorderColor = formGrey3;
 export const wrapperHorizontalPadding = '25px';

@@ -3,14 +3,7 @@ import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Noop as NoopClick } from 'constants/global';
 import { routes } from 'constants/routes';
-import {
-    lightPink,
-    primaryButtonDiameter,
-    primaryColor,
-    primaryMargin,
-    red,
-    tertiaryBorderRadius
-} from 'constants/styles';
+import { lightPink, primaryButtonDiameter, primaryColor, primaryMargin, red } from 'constants/styles';
 import { useForm } from 'effector-forms';
 import { useStore } from 'effector-react';
 import { Wrapper } from 'pages/CampaignManager/Channels/ChannelForm/styles';
@@ -91,7 +84,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                         {!withoutAction && (
                             <MarginWrapper marginRight="15px">
                                 <ManualRoundedButton
-                                    borderRadius={tertiaryBorderRadius}
+                                    borderRadius="4px"
                                     disabled={!isValid}
                                     fontSize="16px"
                                     fontWeight="400"
@@ -108,7 +101,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                             <MarginWrapper marginRight="15px">
                                 <ManualRoundedButton
                                     background={lightPink}
-                                    borderRadius={tertiaryBorderRadius}
+                                    borderRadius="4px"
                                     fontSize="16px"
                                     fontWeight="400"
                                     height={primaryButtonDiameter}
@@ -124,7 +117,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
 
                         <ManualRoundedButton
                             background="transparent"
-                            borderRadius={tertiaryBorderRadius}
+                            borderRadius="4px"
                             fontSize="16px"
                             fontWeight="400"
                             height={primaryButtonDiameter}

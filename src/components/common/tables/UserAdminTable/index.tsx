@@ -1,12 +1,7 @@
 import deleteImg from 'assets/img/remove_action.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Table } from 'components/common/tables/Table';
-import {
-    companyImgBorderRadius,
-    companyImgDiameter,
-    deleteImgDiameter,
-    tableMargin
-} from 'components/common/tables/UserAdminTable/constants';
+import { deleteImgDiameter } from 'components/common/tables/UserAdminTable/constants';
 import {
     LegendaryTableColumn,
     LegendaryTableRow,
@@ -15,11 +10,11 @@ import {
 } from 'components/common/tables/UserAdminTable/styles';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { noContentMessage } from 'constants/messages';
+import { formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
-import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 import { userAdminEffects } from 'stores/userAdmin';
 import { usersStores } from 'stores/users';
@@ -27,13 +22,13 @@ import Swal from 'sweetalert2';
 import { retrieveRoleAndConvert } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
-    <Span fontSize="18px" fontWeight="bold" lineHeight="22px">
+    <Span color={formGrey5} fontSize="12px" fontWeight="400" lineHeight="15px">
         {children}
     </Span>
 );
 
 const TableSpan: FC = ({ children }) => (
-    <Span fontSize="18px" lineHeight="22px">
+    <Span fontWeight="400" lineHeight="17px">
         {children}
     </Span>
 );
@@ -44,19 +39,19 @@ const LegendaryItem = () => (
     // const onChange = (checked: boolean) => setChecked(checked);
 
     <LegendaryTableRow>
-        <LegendaryTableColumn>
-            <Row alignCenter justifyCenter noWrap marginBottom="0">
-                {/* <Column marginRight={tableMargin}>
+        {/* <LegendaryTableColumn> */}
+        {/* <Row alignCenter noWrap marginBottom="0"> */}
+        {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column> */}
-                {/* <Column marginRight={tableMargin}> */}
-                <LegendaryTableSpan>Company</LegendaryTableSpan>
-                {/* </Column>
+        {/* <Column marginRight={tableMargin}> */}
+        {/* <LegendaryTableSpan>Company</LegendaryTableSpan> */}
+        {/* </Column>
                 <CustomImg height={arrowImgHeight} src={arrowImg} width={arrowImgWidth} /> */}
-            </Row>
-        </LegendaryTableColumn>
+        {/* </Row> */}
+        {/* </LegendaryTableColumn> */}
         <LegendaryTableColumn>
-            <Row alignCenter justifyCenter noWrap marginBottom="0">
+            <Row alignCenter noWrap marginBottom="0">
                 {/* <Column marginRight={tableMargin}> */}
                 <LegendaryTableSpan>Email</LegendaryTableSpan>
                 {/* </Column>
@@ -82,7 +77,7 @@ const LegendaryItem = () => (
 );
 const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
     //const globalPrefix = useStore(themeStores.globalPrefix);
-    const { userTableLogo } = useStore(themeStores.theme);
+    // const { userTableLogo } = useStore(themeStores.theme);
     const { user } = useStore(userStores.user);
     const loading = useStore(usersStores.loading);
 
@@ -113,25 +108,26 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
 
     return (
         <TableRow>
-            <TableColumn>
-                <Row alignCenter justifyCenter noWrap marginBottom="0">
-                    {/* <Column marginRight={tableMargin}>
+            {/* <TableColumn>
+                <Row alignCenter noWrap marginBottom="0"> */}
+            {/* <Column marginRight={tableMargin}>
                         <Checkbox onChange={onChange} />
                     </Column> */}
-                    <Column marginRight={tableMargin}>
+            {/* <Column marginRight={tableMargin}>
                         <CustomImg
                             borderRadius={companyImgBorderRadius}
                             height={companyImgDiameter}
                             src={userTableLogo}
                             //width={companyImgDiameter}
                         />
-                    </Column>
-                    {/* <TableSpan>{globalPrefix}</TableSpan> */}
-                </Row>
-            </TableColumn>
+                    </Column> */}
+            {/* <TableSpan>{globalPrefix}</TableSpan> */}
+            {/* </Row>
+            </TableColumn> */}
             <TableColumn>
-                <Row alignCenter justifyCenter noWrap marginBottom="0">
+                <Row alignCenter noWrap marginBottom="0">
                     <TableSpan>{email}</TableSpan>
+                    <LegendaryTableSpan>&nbsp;&nbsp;{user?.userId === userId && ' (You)'}</LegendaryTableSpan>
                 </Row>
             </TableColumn>
             <TableColumn>

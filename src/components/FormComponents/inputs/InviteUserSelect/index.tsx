@@ -2,6 +2,7 @@ import arrowImg from 'assets/img/expandImg.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { HiddenInput } from 'components/common/inputs/Input';
 import { Span } from 'components/common/typography/Span';
+import { wrapperBorderColor } from 'components/filters/TagFilter/constants';
 import {
     imgHeight,
     imgWidth,
@@ -16,7 +17,6 @@ import { errorColor } from 'constants/styles';
 import { useField } from 'formik';
 import React, { FC, MouseEvent, useState } from 'react';
 import { Active, Name } from 'types';
-import { wrapperBorderColor } from 'components/filters/TagFilter/constants';
 
 interface WrapperProps extends Name {
     values: string[];
@@ -32,7 +32,7 @@ interface Props extends Active {
 }
 
 const ItemSpan: FC = ({ children }) => (
-    <Span fontSize="18px" lineHeight="22px">
+    <Span fontSize="12px" fontWeight="400" lineHeight="22px">
         {children}
     </Span>
 );

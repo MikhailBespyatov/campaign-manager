@@ -4,7 +4,7 @@ import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { defaultFontSize } from 'constants/defaults';
-import { errorColor, primaryColor, secondaryMargin, successColor } from 'constants/styles';
+import { errorColor, formGrey5, primaryColor, secondaryMargin, successColor } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -226,7 +226,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="35px">
                                 <Span
-                                    color="rgba(15, 22, 66, 0.5)"
+                                    color={formGrey5}
                                     fontSize="24px"
                                     fontWeight="normal"
                                     lineHeight="29px"
@@ -244,7 +244,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 <Column marginRight="35px">
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -255,7 +255,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom="15px">
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="24px"
                                             fontWeight="normal"
                                             lineHeight="29px"
@@ -267,22 +267,12 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                                 <Column marginRight="0">
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             1200
                                         </Span>
                                     </Row>
                                     <Row alignCenter noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             1152
                                         </Span>
 
@@ -302,7 +292,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 <Column marginRight="35px">
                                     <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="18px"
                                             fontWeight="normal"
                                             lineHeight="22px"
@@ -313,7 +303,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="18px"
                                             fontWeight="normal"
                                             lineHeight="22px"
@@ -324,7 +314,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="18px"
                                             fontWeight="normal"
                                             lineHeight="22px"
@@ -335,7 +325,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
                                         <Span
-                                            color="rgba(15, 22, 66, 0.5)"
+                                            color={formGrey5}
                                             fontSize="18px"
                                             fontWeight="normal"
                                             lineHeight="22px"
@@ -347,42 +337,22 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                                 </Column>
                                 <Column marginRight="0">
                                     <Row noWrap marginBottom={secondaryMargin}>
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="18px"
-                                            fontWeight="normal"
-                                            lineHeight="22px"
-                                        >
+                                        <Span color={formGrey5} fontSize="18px" fontWeight="normal" lineHeight="22px">
                                             10%
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="18px"
-                                            fontWeight="normal"
-                                            lineHeight="22px"
-                                        >
+                                        <Span color={formGrey5} fontSize="18px" fontWeight="normal" lineHeight="22px">
                                             20%
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="18px"
-                                            fontWeight="normal"
-                                            lineHeight="22px"
-                                        >
+                                        <Span color={formGrey5} fontSize="18px" fontWeight="normal" lineHeight="22px">
                                             30%
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom={secondaryMargin}>
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.5)"
-                                            fontSize="18px"
-                                            fontWeight="normal"
-                                            lineHeight="22px"
-                                        >
+                                        <Span color={formGrey5} fontSize="18px" fontWeight="normal" lineHeight="22px">
                                             40%
                                         </Span>
                                     </Row>
@@ -396,92 +366,47 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             <Row marginBottom="42px">
                                 <Column marginRight={secondaryMargin}>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Like
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Save
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Comment
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Rate
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Honestly
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Creativity
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Positivity
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Click
                                         </Span>
                                     </Row>
                                     <Row noWrap marginBottom="15px">
-                                        <Span
-                                            color="rgba(15, 22, 66, 0.51)"
-                                            fontSize="24px"
-                                            fontWeight="normal"
-                                            lineHeight="29px"
-                                        >
+                                        <Span color={formGrey5} fontSize="24px" fontWeight="normal" lineHeight="29px">
                                             Buy
                                         </Span>
                                     </Row>
@@ -675,7 +600,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="17px">
                                 <Span
-                                    color="rgba(15, 22, 66, 0.5)"
+                                    color={formGrey5}
                                     fontSize="24px"
                                     fontWeight="normal"
                                     lineHeight="29px"
@@ -691,7 +616,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="17px">
                                 <Span
-                                    color="rgba(15, 22, 66, 0.5)"
+                                    color={formGrey5}
                                     fontSize="24px"
                                     fontWeight="normal"
                                     lineHeight="29px"
@@ -707,7 +632,7 @@ export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
                             </Row>
                             <Row marginBottom="17px">
                                 <Span
-                                    color="rgba(15, 22, 66, 0.5)"
+                                    color={formGrey5}
                                     fontSize="24px"
                                     fontWeight="normal"
                                     lineHeight="29px"

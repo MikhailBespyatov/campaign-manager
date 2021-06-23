@@ -10,12 +10,12 @@ export const spanLineHeight = '34px';
 export const spanColor = '#9D9E9F';
 
 export const legendaryTableRowWidth = '100%';
-export const legendaryTableRowHeight = '85px';
-export const legendaryTableRowHorizontalPadding = '32px';
+export const legendaryTableRowHeight = '35px';
+export const legendaryTableRowHorizontalPadding = '10px';
 export const legendaryTableRowVerticalPadding = '0';
 
 export const tableRowWidth = legendaryTableRowWidth;
-export const tableRowHeight = legendaryTableRowHeight;
+export const tableRowHeight = '70px';
 export const tableRowHorizontalPadding = legendaryTableRowHorizontalPadding;
 export const tableRowVerticalPadding = legendaryTableRowHorizontalPadding;
 export const tableRowBottomPadding = legendaryTableRowHorizontalPadding;
@@ -26,7 +26,7 @@ export const tableBorderSpacing = '';
 
 export const tableBorder = `${tableRowBorderWidth} solid ${tableRowBorderColor}`;
 
-export const tableColumnWidth = `calc(340px - 2 * ${legendaryTableRowHorizontalPadding})`;
+export const tableColumnWidth = `calc(300px - 2 * ${legendaryTableRowHorizontalPadding})`;
 
 export const activeColor = formGrey1;
 
