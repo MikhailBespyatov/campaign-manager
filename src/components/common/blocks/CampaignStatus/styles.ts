@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Color } from 'types';
 
 export const StatusText = styled.span<Color>`
-    font-family: Montserrat;
+    //font-family: Montserrat;
     font-style: normal;
     font-weight: 700;
     font-size: 13px;
@@ -14,7 +14,7 @@ export const StatusText = styled.span<Color>`
 `;
 
 export const RemainingText = styled.span<Color>`
-    font-family: Montserrat;
+    //font-family: Montserrat;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
