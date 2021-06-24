@@ -3,16 +3,12 @@ import {
     cardHeight,
     cardWidth,
     featureCellFontSize,
-    featureCellLineHeight,
-    horizontalPadding,
-    verticalPadding
+    featureCellLineHeight
 } from 'components/grid/Card/constants';
 import { CardProps, FeatureCellProps } from 'components/grid/Card/types';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import {
     black,
-    blue,
-    borderWidth,
     cardBackgroundColor,
     disableDefaultButtonStyleMixin,
     disabledOpacity,
@@ -22,7 +18,6 @@ import {
     formTextStyleMixin,
     grey,
     primaryBorder,
-    primaryPadding,
     transitionTime,
     white
 } from 'constants/styles';
@@ -30,18 +25,15 @@ import styled from 'styled-components';
 import { Padding } from 'types';
 
 export const Card = styled.div<CardProps>`
-    ${({ disabled }) => (disabled ? `opacity: ${disabledOpacity}` : '')};
+    ${({ disabled }) => disabled && `opacity: ${disabledOpacity}`};
     background-color: ${cardBackgroundColor};
-    //margin-right: ${primaryPadding};
-    //margin-bottom: ${primaryPadding};
     width: ${({ width }) => (width ? width : cardWidth)};
     height: ${({ height }) => (height ? height : cardHeight)};
     border-radius: ${CardBorderRadius};
-    border: 3px solid ${({ active }) => (active ? blue : white)};
-    ${({ unselectableStyled }) => (unselectableStyled ? `border: ${primaryBorder};` : ``)};
-    ${({ marginBottom }) => (marginBottom ? `margin-bottom: ${marginBottom};` : ``)};
-    ${({ marginRight }) => (marginRight ? `margin-right: ${marginRight};` : ``)};
-    ${({ pointer }) => (pointer ? 'cursor: pointer;' : '')};
+    ${({ unselectableStyled }) => unselectableStyled && `border: ${primaryBorder};`};
+    ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`};
+    ${({ marginRight }) => marginRight && `margin-right: ${marginRight};`};
+    ${({ pointer }) => pointer && 'cursor: pointer;'};
     overflow: hidden;
     ${flexCenter};
     flex-direction: column;
@@ -73,7 +65,6 @@ export const Description = styled.div<Padding>`
     position: relative;
     width: 100%;
     height: 100%;
-    // padding: ${({ padding }) => (padding ? padding : `${verticalPadding} ${horizontalPadding}`)};
     ${flexStart};
     justify-content: space-between;
     flex-direction: column;
@@ -84,7 +75,6 @@ export const CardRowFeatures = styled.div`
     height: ${featureHeight};
     width: 100%;
     ${flexStart};
-    //border-top: ${borderWidth} solid ${grey};
     flex-direction: row;
     flex-wrap: wrap;
 `;
@@ -113,8 +103,9 @@ export const FeatureCell = styled.button<FeatureCellProps>`
 export const StatsCell = styled(AbsoluteWrapper)`
     height: 59px;
     width: 100%;
+    padding: 10px 10px 10px 20px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background: rgba(0, 0, 0, 0.2);
 `;

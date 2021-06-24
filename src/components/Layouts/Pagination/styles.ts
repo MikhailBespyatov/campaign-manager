@@ -1,17 +1,18 @@
+import { FlexGrow } from 'components/grid/wrappers/FlexWrapper';
 import {
     paginationCellActiveBackground,
     paginationCellActiveColor,
-    PaginationCellActiveFontSize,
-    PaginationCellActiveFontWeight,
-    PaginationCellActiveLineHeight,
+    paginationCellActiveFontSize,
+    paginationCellActiveFontWeight,
+    paginationCellActiveLineHeight,
     paginationCellBackground,
     paginationCellBorderRadius,
     paginationCellColor,
-    PaginationCellFontSize,
-    PaginationCellFontWeight,
+    paginationCellFontSize,
+    paginationCellFontWeight,
     paginationCellHeight,
-    PaginationCellLetterSpacing,
-    PaginationCellLineHeight,
+    paginationCellLetterSpacing,
+    paginationCellLineHeight,
     paginationCellWidth,
     paginationInputHeight,
     paginationInputPadding,
@@ -21,7 +22,6 @@ import {
 import { ArrowProps, PaginationCellProps } from 'components/Layouts/Pagination/types';
 import { disableDefaultButtonStyleMixin, flexCenter, flexStart, formTextStyleMixin } from 'constants/styles';
 import styled, { css } from 'styled-components';
-import { FlexGrow } from 'components/grid/wrappers/FlexWrapper';
 
 export const Wrapper = styled.div`
     ${flexStart};
@@ -37,19 +37,19 @@ export const PaginationCell = styled.button<PaginationCellProps>`
     height: ${paginationCellHeight};
     background-color: ${paginationCellBackground};
     ${formTextStyleMixin};
-    font-weight: ${PaginationCellFontWeight};
-    font-size: ${PaginationCellFontSize};
-    line-height: ${PaginationCellLineHeight};
-    letter-spacing: ${PaginationCellLetterSpacing};
+    font-weight: ${paginationCellFontWeight};
+    font-size: ${paginationCellFontSize};
+    line-height: ${paginationCellLineHeight};
+    letter-spacing: ${paginationCellLetterSpacing};
     color: ${paginationCellColor};
     ${({ active }) =>
         active &&
         css`
             border: 1px solid #e4e4e4;
             background-color: ${paginationCellActiveBackground};
-            font-weight: ${PaginationCellActiveFontWeight};
-            font-size: ${PaginationCellActiveFontSize};
-            line-height: ${PaginationCellActiveLineHeight};
+            font-weight: ${paginationCellActiveFontWeight};
+            font-size: ${paginationCellActiveFontSize};
+            line-height: ${paginationCellActiveLineHeight};
             color: ${paginationCellActiveColor};
         `};
 `;
@@ -73,9 +73,9 @@ export const PaginationInput = styled.input`
     box-sizing: border-box;
     border: 1px solid #d8d8d8;
     border-radius: 4px;
-    font-weight: ${PaginationCellFontWeight};
-    font-size: ${PaginationCellFontSize};
-    line-height: ${PaginationCellLineHeight};
+    font-weight: ${paginationCellFontWeight};
+    font-size: ${paginationCellFontSize};
+    line-height: ${paginationCellLineHeight};
 `;
 
 export const PaginationBlockWrapper = styled(FlexGrow)`

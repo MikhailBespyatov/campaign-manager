@@ -3,16 +3,17 @@ import { grey12 } from 'constants/styles';
 export const filterNameWidth = '70px';
 export const filterMarginRight = '28px';
 
-export const wrapperWidth = `100%`;
+export const wrapperWidth = '405px';
 export const wrapperVerticalPadding = '8px';
 export const wrapperHeight = `32px`;
 export const wrapperBorderRadius = '8px';
 export const wrapperBorderColor = '#E5E5E5';
 export const wrapperBackground = grey12;
-export const wrapperMarginBottom = '16px';
+export const wrapperMarginBottom = '4px';
+export const wrapperMarginTop = '8px';
 export const wrapperHorizontalPadding = wrapperVerticalPadding;
 
-export const closableTagMarginBottom = '10px';
+export const closableTagMarginBottom = '0px';
 
 export const spanFontSize = '26px';
 export const spanLineHeight = '32px';

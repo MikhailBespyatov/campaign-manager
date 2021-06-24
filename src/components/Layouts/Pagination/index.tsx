@@ -2,14 +2,14 @@ import leftArrowImg from 'assets/img/left_arrow.svg';
 import rightArrowImg from 'assets/img/right_arrow.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Select } from 'components/common/inputs/Select';
+import { Span } from 'components/common/typography/Span';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import {
     arrowImgHeight,
     arrowImgWidth,
     pagination,
-    PaginationCellFontSize,
-    PaginationCellFontWeight,
     paginationCellHeight,
-    PaginationCellLineHeight,
     paginationLimit,
     sizeValues
 } from 'components/Layouts/Pagination/constants';
@@ -23,9 +23,6 @@ import {
 } from 'components/Layouts/Pagination/styles';
 import { defaultLimit } from 'constants/defaults';
 import React, { ChangeEvent, KeyboardEvent, useMemo, useState } from 'react';
-import { Span } from 'components/common/typography/Span';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface WrapperProps {
     currentIndex: number;
@@ -129,11 +126,7 @@ export const Pagination = ({
             {total !== 0 && (
                 <Wrapper>
                     <PaginationBlockWrapper flexBasis="20%" flexGrow="0" flexShrink="0">
-                        <Span
-                            fontSize={PaginationCellFontSize}
-                            fontWeight={PaginationCellFontWeight}
-                            lineHeight={PaginationCellLineHeight}
-                        >
+                        <Span fontWeight="400" lineHeight="20px">
                             {showingVideosText}
                         </Span>
                     </PaginationBlockWrapper>
@@ -165,11 +158,7 @@ export const Pagination = ({
                         )}
                         <MarginWrapper marginLeft="20px">
                             <Row alignCenter height={paginationCellHeight} marginBottom="0">
-                                <Span
-                                    fontSize={PaginationCellFontSize}
-                                    fontWeight={PaginationCellFontWeight}
-                                    lineHeight={PaginationCellLineHeight}
-                                >
+                                <Span fontWeight="400" lineHeight="20px">
                                     Go to
                                 </Span>
                                 <MarginWrapper marginLeft="8px">
@@ -180,11 +169,7 @@ export const Pagination = ({
                     </PaginationBlockWrapper>
                     <PaginationBlockWrapper alignCenter justifyEnd flexBasis="20%" flexGrow="0" flexShrink="0">
                         <MarginWrapper marginRight="8px">
-                            <Span
-                                fontSize={PaginationCellFontSize}
-                                fontWeight={PaginationCellFontWeight}
-                                lineHeight={PaginationCellLineHeight}
-                            >
+                            <Span fontWeight="400" lineHeight="20px">
                                 Show per Page
                             </Span>
                         </MarginWrapper>

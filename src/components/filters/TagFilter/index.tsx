@@ -1,22 +1,22 @@
+import searchImg from 'assets/img/search_icon.svg';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import {
     closableTagMarginBottom,
     searchImgDiameter,
     searchImgMarginLeft,
     searchImgMarginRight,
-    wrapperMarginBottom
+    wrapperMarginTop
 } from 'components/filters/TagFilter/constants';
 import { SearchAbsoluteWrapper, SearchInput, Wrapper } from 'components/filters/TagFilter/styles';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
+import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
 import { Noop } from 'constants/global';
 import { secondaryPadding } from 'constants/styles';
 import React, { FC, FocusEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { DefaultChecked, Title } from 'types';
-import searchImg from 'assets/img/search_icon.svg';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper/styles';
 
 interface TagsFilterBlockProps {
     values: string[];
@@ -26,7 +26,7 @@ interface TagsFilterBlockProps {
 export const TagsFilterBlock = ({ values, removeValue }: TagsFilterBlockProps) => {
     if (!!values?.length) {
         return (
-            <Row marginTop={wrapperMarginBottom}>
+            <Row marginTop={wrapperMarginTop}>
                 {values.map(i => (
                     <ClosableTag
                         key={i}

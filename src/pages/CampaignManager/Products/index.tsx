@@ -13,6 +13,7 @@ import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrappe
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
+import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { product, productsEdit, routes } from 'constants/routes';
 import { blue5, primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -34,7 +35,6 @@ import { useHistory } from 'react-router';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
-import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 
 const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
 
@@ -143,22 +143,22 @@ export const Products = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section marginBottom={primaryMargin}>
-                <ContentWrapper padding={productsContentPadding} width="100%">
-                    <Section justifyEnd noWrap>
-                        {/*<FlexGrow marginRight={filtersMarginRight}>*/}
-                        {/*    <TagFilter*/}
-                        {/*        defaultChecked*/}
-                        {/*        tagsValues={['test']}*/}
-                        {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
-                        {/*    />*/}
-                        {/*</FlexGrow>*/}
-                        {/*<Row marginRight={filtersMarginRight}>*/}
-                        {/*    <Select height="57px" values={productsSelectorMock} width="190px" />*/}
-                        {/*</Row>*/}
-                        <AddButton onClick={onClickAddButton}>Add New</AddButton>
-                    </Section>
-                </ContentWrapper>
+            <Section alignCenter noWrap marginBottom={primaryMargin}>
+                {/*<FlexGrow marginRight={filtersMarginRight}>*/}
+                {/*    <TagFilter*/}
+                {/*        defaultChecked*/}
+                {/*        tagsValues={['test']}*/}
+                {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
+                {/*    />*/}
+                {/*</FlexGrow>*/}
+                {/*<Row marginRight={filtersMarginRight}>*/}
+                {/*    <Select height="57px" values={productsSelectorMock} width="190px" />*/}
+                {/*</Row>*/}
+
+                {/* <MarginWrapper marginRight="10px">
+                    <Search />
+                    </MarginWrapper> */}
+                <AddButton onClick={onClickAddButton}>Add Product</AddButton>
             </Section>
             <Section>
                 <ContentWrapper padding={productsContentPadding} width="100%">
