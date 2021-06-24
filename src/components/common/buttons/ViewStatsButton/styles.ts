@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { disableDefaultButtonStyleMixin } from 'constants/styles';
+import styled from 'styled-components';
 
 export const ViewStatsButton = styled.button`
     ${disableDefaultButtonStyleMixin};
@@ -10,7 +10,7 @@ export const ViewStatsButton = styled.button`
     line-height: 13px;
     text-transform: uppercase;
     color: #ffffff;
-    padding: 8px 16px;
+    padding: 9px 21px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 24px;
 `;

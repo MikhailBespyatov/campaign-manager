@@ -1,19 +1,16 @@
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { ImageTextInput } from 'components/common/inputs/ImageTextInput';
 import { FormTextInput } from 'components/common/inputs/NewDesign/TextInput';
 import { TitleFormSpan } from 'components/common/typography/TitleFormSpan';
 import { FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { routes } from 'constants/routes';
-import { lightPink, red, tertiaryBorderRadius } from 'constants/styles';
 import { useForm } from 'effector-forms';
 import { useStore } from 'effector-react';
 import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/ChannelForm/constants';
 import { productInputMarginBottom } from 'pages/CampaignManager/Products/ProductForm/constants';
 import React, { useEffect } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { forms } from 'stores/forms';
-import { modalEvents } from 'stores/modal';
 import { productsEffects, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { getFlexBasisPercent } from 'utils/usefulFunctions';
@@ -27,7 +24,6 @@ interface ParamsProps {
 }
 
 export const ProductForm = () => {
-    const history = useHistory();
     const { reset } = useForm(forms.productForm);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const { imageUrl: imageUrlValue } = useStore(productsStores.item);
@@ -43,21 +39,6 @@ export const ProductForm = () => {
     // const onChangeProductURL = (e: ChangeEvent<HTMLInputElement>) => fields.productUrl.onChange(e.target.value);
     // const onChangeThumbnailImage = (url: string) => fields.imageUrl.onChange(url);
 
-    const onClickRemoveButton = () => {
-        productsEffects.removeProduct(productId);
-        history.push(globalPrefixUrl + routes.campaignManager.products.index);
-        modalEvents.closeAsyncModal();
-        reset();
-    };
-
-    const OnClickConfirmationModal = () => {
-        modalEvents.openAsyncModal({
-            title: 'Delete Product',
-            content: 'Do you really want delete product?',
-            onOk: onClickRemoveButton
-        });
-    };
-
     //Mock
     useEffect(() => {
         isEditPage ? productsEffects.getItemById(productId) : productsEffects.resetItem();
@@ -67,7 +48,7 @@ export const ProductForm = () => {
     }, []);
 
     return (
-        <ContentWrapper padding="40px 80px 75px" width="100%">
+        <>
             <Section marginBottom="40px">
                 <TitleFormSpan>{isEditPage ? 'Edit' : 'Add'} product</TitleFormSpan>
             </Section>
@@ -120,19 +101,6 @@ export const ProductForm = () => {
             <Section>
                 <FormTextInput required field={url} label="Product URL" placeholder="Type product URL here..." />
             </Section>
-            {isEditPage && (
-                <Section marginTop="50px">
-                    <ManualRoundedButton
-                        background={lightPink}
-                        borderRadius={tertiaryBorderRadius}
-                        mainColor={red}
-                        width="223px"
-                        onClick={OnClickConfirmationModal}
-                    >
-                        REMOVE PRODUCT?
-                    </ManualRoundedButton>
-                </Section>
-            )}
-        </ContentWrapper>
+        </>
     );
 };

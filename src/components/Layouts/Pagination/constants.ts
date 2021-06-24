@@ -1,20 +1,22 @@
 import { wrapperHeight, wrapperHorizontalPadding } from 'components/common/inputs/Select/constants';
 import { blue } from 'constants/styles';
 
-export const paginationCellWidth = '38px';
-export const paginationCellHeight = '38px';
+export const paginationCellWidth = '34px';
+export const paginationCellHeight = '34px';
 export const paginationCellBorderRadius = '50%';
-export const paginationCellBackground = 'white';
-export const paginationCellActiveBackground = blue;
+export const paginationCellLetterSpacing = '0';
+
+export const paginationCellFontSize = '13px';
+export const paginationCellFontWeight = '600';
+export const paginationCellLineHeight = '16px';
 export const paginationCellColor = 'black';
+export const paginationCellBackground = 'white';
+
+export const paginationCellActiveFontSize = '14px';
+export const paginationCellActiveFontWeight = '700';
+export const paginationCellActiveLineHeight = '17px';
 export const paginationCellActiveColor = 'white';
-export const PaginationCellFontWeight = '600';
-export const PaginationCellActiveFontWeight = '700';
-export const PaginationCellFontSize = '13px';
-export const PaginationCellActiveFontSize = '14px';
-export const PaginationCellLineHeight = '16px';
-export const PaginationCellActiveLineHeight = '17px';
-export const PaginationCellLetterSpacing = '0';
+export const paginationCellActiveBackground = blue;
 
 export const paginationInputWidth = '62px';
 export const paginationInputHeight = wrapperHeight;

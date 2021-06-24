@@ -1,13 +1,13 @@
-import React from 'react';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { ModifyingLayout } from 'components/Layouts/ModifyingLayout';
-import { ChannelForm } from 'pages/CampaignManager/Channels/ChannelForm';
+import { routes } from 'constants/routes';
 import { useForm } from 'effector-forms';
+import { useStore } from 'effector-react';
+import { ChannelForm } from 'pages/CampaignManager/Channels/ChannelForm';
+import React from 'react';
+import { useHistory } from 'react-router';
 import { forms } from 'stores/forms';
 import { channelFormEvents } from 'stores/forms/channelForm';
-import { useHistory } from 'react-router';
-import { routes } from 'constants/routes';
-import { useStore } from 'effector-react';
 import { themeStores } from 'stores/theme';
 
 export const CreateChannel = () => {
@@ -22,7 +22,7 @@ export const CreateChannel = () => {
 
     return (
         <CampaignManagerLayout>
-            <ModifyingLayout isValid={eachValid} onClickAction={onSubmit}>
+            <ModifyingLayout isValid={eachValid} page="Channel" onClickAction={onSubmit}>
                 <ChannelForm />
             </ModifyingLayout>
         </CampaignManagerLayout>

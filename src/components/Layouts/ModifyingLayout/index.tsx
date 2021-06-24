@@ -12,27 +12,32 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import { channelsEffects } from 'stores/channels';
 import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
+import { productsEffects } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { IsValid, Noop } from 'types';
 
 interface ParamsProps {
     channelId: string;
+    productId: string;
 }
 
 export interface ModifyingLayoutProps extends IsValid {
     onClickAction?: Noop;
     withoutAction?: boolean;
+    page: 'Channel' | 'Product';
 }
 
 export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     isValid,
     withoutAction,
     onClickAction = NoopClick,
+    page,
     children
 }) => {
     const history = useHistory();
     const { pathname } = useLocation();
-    const { channelId } = useParams<ParamsProps>();
+    const { channelId, productId } = useParams<ParamsProps>();
+
     const { reset } = useForm(forms.channelForm);
     const isEditPage = pathname.indexOf('edit') !== -1;
 
@@ -41,19 +46,35 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     const onClickBackButton = () => history.goBack();
     const onClickAddButton = () => onClickAction();
 
-    const onClickRemoveButton = () => {
+    const onRemoveChannelButtonClick = () => {
         channelsEffects.removeChannel(channelId);
         history.push(globalPrefixUrl + routes.campaignManager.channels.index);
         modalEvents.closeAsyncModal();
         reset();
     };
+    const onRemoveProductButtonClick = () => {
+        productsEffects.removeProduct(productId);
+        history.push(globalPrefixUrl + routes.campaignManager.products.index);
+        modalEvents.closeAsyncModal();
+        reset();
+    };
 
     const OnClickConfirmationModal = () => {
-        modalEvents.openAsyncModal({
-            title: 'Delete Channel',
-            content: 'Do you really want to delete channel?',
-            onOk: onClickRemoveButton
-        });
+        if (page === 'Channel') {
+            modalEvents.openAsyncModal({
+                title: 'Delete Channel',
+                content: 'Do you really want to delete channel?',
+                onOk: onRemoveChannelButtonClick
+            });
+        }
+
+        if (page === 'Product') {
+            modalEvents.openAsyncModal({
+                title: 'Delete Product',
+                content: 'Do you really want delete product?',
+                onOk: onRemoveProductButtonClick
+            });
+        }
     };
 
     return (
@@ -93,7 +114,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                                     //width="136px"
                                     onClick={onClickAddButton}
                                 >
-                                    {isEditPage ? 'Save Channel' : 'Add Channel'}
+                                    {isEditPage ? `Save ${page}` : `Add ${page}`}
                                 </ManualRoundedButton>
                             </MarginWrapper>
                         )}
@@ -110,7 +131,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                                     // width="223px"
                                     onClick={OnClickConfirmationModal}
                                 >
-                                    Remove Channel
+                                    Remove {page}
                                 </ManualRoundedButton>
                             </MarginWrapper>
                         )}
