@@ -1,5 +1,5 @@
-import { titleWrapperHorizontalPadding } from 'components/common/blocks/HighlightedTitleBlock/constants';
 import {
+    cardPadding,
     modalBackground,
     modalBorderRadius,
     modalHorizontalPadding,
@@ -39,14 +39,13 @@ export const Modal = styled.div`
 export const VideoDetailsWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 0 ${titleWrapperHorizontalPadding};
-    margin-bottom: 10px;
+    padding: 0 ${cardPadding} 25px;
 `;
 
 export const TitleWrapper = styled.div`
     width: 100%;
     background-color: ${titleBackgroundColor};
-    padding: 8px;
+    padding: 6px;
     border-radius: ${tertiaryBorderRadius};
     margin-bottom: 4px;
 `;

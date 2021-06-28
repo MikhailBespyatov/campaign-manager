@@ -26,3 +26,6 @@ export const headerCopyButtonDiameter = '25px';
 export const copyMerchantIdMessage = 'Merchant ID copied';
 export const arrowDownWidth = '12px';
 export const arrowDownHeight = '9px';
+
+export const popoverText =
+    'This is your unique merchant ID. You will soon be able to copy this to use with various platforms. For now it can be used with Shopify.';

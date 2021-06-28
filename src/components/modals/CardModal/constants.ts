@@ -1,6 +1,7 @@
 import { white } from 'constants/styles';
 
 export const validatorsPadding = '20px 65px 20px 35px';
+export const cardPadding = '35px';
 
 export const scoreTitleColor = 'rgba(12, 13, 33, 0.4047)';
 export const percentageSpanColor = 'rgba(12, 13, 33, 0.4047)';
