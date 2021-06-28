@@ -7,8 +7,6 @@ export const titleWrapperHeight = '130px';
 export const titleWrapperBorderWidth = '1px';
 export const titleWrapperBorderColor = formGrey3;
 export const titleWrapperBackground = formGrey2; //'rgba(237, 237, 237, 0.3)';
-export const titleWrapperHorizontalPadding = '18px';
-export const titleWrapperVerticalPadding = '10px';
 
 export const contentWrapperHorizontalPadding = '0';
 export const contentWrapperVerticalPadding = '0';

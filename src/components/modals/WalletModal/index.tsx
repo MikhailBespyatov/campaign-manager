@@ -8,7 +8,7 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
 import { marginMSize, marginSSize, marginXSSize, qrCodeImageDiameter } from 'components/modals/WalletModal/constants';
-import { blue7, blue9, tertiaryPadding, white } from 'constants/styles';
+import { blue7, blue9, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import QRCode from 'qrcode';
@@ -59,22 +59,22 @@ export const WalletModal = () => {
                 />
             </AbsoluteWrapper>
             <Modal>
-                <Section justifyCenter marginBottom={marginMSize}>
+                <Section justifyCenter marginBottom={tertiaryMargin}>
                     <WalletTitleSpan>MY WALLET</WalletTitleSpan>
                 </Section>
-                <Section justifyCenter marginBottom="20px">
+                <Section justifyCenter marginBottom="24px">
                     <Column alignCenter justifyCenter>
                         <MarginWrapper marginBottom={marginSSize}>
                             <WalletSubtitleSpan>BALANCE</WalletSubtitleSpan>
                         </MarginWrapper>
                         <Row alignCenter marginBottom={marginSSize}>
                             <MarginWrapper marginRight="12px">
-                                <CustomImg height="19px" src={WOMIcon} width="17px" />
+                                <CustomImg height="20px" src={WOMIcon} width="19px" />
                             </MarginWrapper>
                             <WalletBalanceSpan>{walletBalance}</WalletBalanceSpan>
                         </Row>
                         <Row>
-                            <Row justifyCenter marginRight="27px">
+                            <Row justifyCenter marginRight="37px">
                                 <Row marginRight={marginXSSize}>
                                     <CurrencySpan color={blue7}>USD</CurrencySpan>
                                 </Row>
@@ -93,7 +93,7 @@ export const WalletModal = () => {
                         </Row>
                     </Column>
                 </Section>
-                <Section justifyCenter>
+                <Section justifyCenter marginBottom={tertiaryMargin}>
                     <Row justifyBetween width="450px">
                         <Column alignCenter>
                             <MarginWrapper marginBottom={marginSSize}>

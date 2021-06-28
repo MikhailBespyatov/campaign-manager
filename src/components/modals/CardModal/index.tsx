@@ -17,10 +17,10 @@ import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCar
 import { viewersMarginBottom } from 'components/modals/CardModal/constants';
 import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
-import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
+import { defaultFontSize } from 'constants/defaults';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { grey4, primaryMargin, primaryPadding, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
+import { blue, grey4, primaryMargin, primaryPadding, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
@@ -28,6 +28,7 @@ import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campa
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
+import { TextProperties } from 'types';
 import { engagementStatusTypes, roundScore } from 'utils/usefulFunctions';
 
 interface SmallSpanProps {
@@ -35,7 +36,7 @@ interface SmallSpanProps {
 }
 const Title: FC = ({ children }) => (
     <TitleWrapper>
-        <Span fontSize="12px" fontWeight={defaultFontWeight} lineHeight="15px">
+        <Span fontSize="12px" lineHeight="15px">
             {children}
         </Span>
     </TitleWrapper>
@@ -48,20 +49,22 @@ const Subtitle: FC = ({ children }) => (
 );
 
 const Item: FC = ({ children }) => (
-    <Span fontSize={defaultFontSize} fontWeight="400" lineHeight="17px">
+    <Span fontWeight="400" lineHeight="17px">
         {children}
     </Span>
 );
 
-interface ItemBlockProps {
+interface ItemBlockProps extends Pick<TextProperties, 'fontSize'> {
     title: string;
     item?: string | number;
     percentageGrowth?: JSX.Element;
 }
-const ItemBlock = ({ title, item, percentageGrowth }: ItemBlockProps) => (
+const ItemBlock = ({ title, item, percentageGrowth, fontSize }: ItemBlockProps) => (
     <Column>
         <MarginWrapper marginBottom="4px">
-            <Subtitle>{title}</Subtitle>
+            <Span fontSize={fontSize || '13px'} fontWeight="400" lineHeight="16px">
+                {title}
+            </Span>
         </MarginWrapper>
         {percentageGrowth ? (
             <Row alignCenter>
@@ -169,11 +172,11 @@ export const CardModal = () => {
                                     <CreateCampaignCard
                                         isVideoDetailsModal
                                         engagement={engagement}
-                                        height="230px"
+                                        height="220px"
                                         products={products}
                                         streamDetails={streamDetails}
                                         uriPrimary={uriPrimary}
-                                        width="160px"
+                                        width="155px"
                                         womQualityScore={womQualityScore}
                                     />
                                 )}
@@ -181,10 +184,12 @@ export const CardModal = () => {
                                     <ManualRoundedButton
                                         reverse
                                         background={white}
-                                        height="44px"
+                                        fontSize="12px"
+                                        fontWeight="600"
+                                        height="40px"
                                         mainColor={primaryColor}
-                                        minWidth="95px"
-                                        width="95px"
+                                        minWidth="100px"
+                                        width="100px"
                                         onClick={onPromoteClick}
                                     >
                                         PROMOTE
@@ -196,9 +201,17 @@ export const CardModal = () => {
                                     <Title>Video Name</Title>
                                     <Row>
                                         <MarginWrapper marginRight="100px">
-                                            <ItemBlock item={productsItem.tagBrand || noContentMessage} title="Brand" />
+                                            <ItemBlock
+                                                fontSize="12px"
+                                                item={productsItem.tagBrand || noContentMessage}
+                                                title="Brand"
+                                            />
                                         </MarginWrapper>
-                                        <ItemBlock item={productsItem.tagBrand || noContentMessage} title="Item" />
+                                        <ItemBlock
+                                            fontSize="12px"
+                                            item={productsItem.tagBrand || noContentMessage}
+                                            title="Item"
+                                        />
                                     </Row>
                                 </Section>
                                 <Section>
@@ -255,13 +268,10 @@ export const CardModal = () => {
                                                 title="Shares"
                                             />
                                         </Row>
-                                        <MarginWrapper marginTop="10px">
+                                        <MarginWrapper marginBottom={tertiaryMargin} marginTop="10px">
                                             <Column>
                                                 <MarginWrapper marginBottom={primaryMargin}>
-                                                    <Subtitle>
-                                                        Average Percentage Viewed
-                                                        {/* Viewers */}
-                                                    </Subtitle>
+                                                    <Subtitle>Average Percentage Viewed</Subtitle>
                                                 </MarginWrapper>
                                                 <Row>
                                                     <Column marginRight="53px">
@@ -317,7 +327,7 @@ export const CardModal = () => {
                                         </Row>
                                     </Column>
                                 </Section>
-                                <Section marginBottom={tertiaryMargin}>
+                                <Section marginBottom="6px">
                                     <Title>Hashtags</Title>
                                     <Row marginTop="8px">
                                         {tags?.map(i => (
@@ -333,13 +343,10 @@ export const CardModal = () => {
                                     </Row>
                                 </Section>
                                 <Section>
-                                    <Title>
-                                        Activity
-                                        {/* Campaigns */}
-                                    </Title>
+                                    <Title>Activity</Title>
                                     <Column>
                                         <MarginWrapper marginBottom={primaryMargin}>
-                                            <Subtitle>Other campaigns featuring this video</Subtitle>
+                                            <Subtitle>Current Campaigns</Subtitle>
                                         </MarginWrapper>
                                         <Row maxWidth="420px">
                                             {itemsInUseLoading ? (
@@ -348,6 +355,10 @@ export const CardModal = () => {
                                                 itemsInUse.map(({ id, title }) => (
                                                     <InternalLink
                                                         key={id}
+                                                        color={blue}
+                                                        fontSize="13px"
+                                                        fontWeight="400"
+                                                        marginLeft="0px"
                                                         to={
                                                             globalPrefixUrl +
                                                             routes.campaignManager.campaign.indexDetails +

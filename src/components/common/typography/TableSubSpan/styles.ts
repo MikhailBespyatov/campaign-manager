@@ -1,6 +1,6 @@
 import { tableSpanColor } from 'components/common/typography/TableSubSpan/constants';
 import { TableSpanProps } from 'components/common/typography/TableSubSpan/types';
-import { defaultFontFamily, defaultFontSize, defaultFontStyle } from 'constants/defaults';
+import { defaultFontFamily, defaultFontStyle } from 'constants/defaults';
 import styled from 'styled-components';
 
 export const TableSubSpan = styled.span<TableSpanProps>`
@@ -8,7 +8,7 @@ export const TableSubSpan = styled.span<TableSpanProps>`
     font-family: ${defaultFontFamily};
     font-style: ${defaultFontStyle};
     font-weight: 400;
-    font-size: ${defaultFontSize};
-    line-height: 17px;
+    font-size: 13px;
+    line-height: 15px;
     color: ${({ color }) => (color ? color : tableSpanColor)};
 `;

@@ -1,28 +1,30 @@
 import arrowDown from 'assets/icons/arrow_down_grey.svg';
 import { CopyButton } from 'components/common/buttons/CopyButton';
+import { Version } from 'components/common/dividers/Version';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
+import { Loader } from 'components/dynamic/Loader';
 import {
     arrowDownHeight,
     arrowDownWidth,
     copyMerchantIdMessage,
-    headerLogoHeight
+    headerLogoHeight,
+    popoverText
 } from 'components/grid/Header/constants';
 import { MerchantIdWrapper, StyledHeader, StyledSpan1, StyledSpan2 } from 'components/grid/Header/style';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { InfoPopover } from 'components/modals/InfoPopover';
 import { LogOutPopover } from 'components/modals/LogOutPopover';
 import { siteName } from 'constants/global';
 import { noContentMessage } from 'constants/messages';
 import { grey10, padding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React from 'react';
+import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 //import { userEvents, userStores } from 'stores/user';
 import { userStores } from 'stores/user';
 import { MarginWrapper } from '../wrappers/MarginWrapper';
-import { Version } from 'components/common/dividers/Version';
-import { organizationsEffects, organizationsStores } from 'stores/organizations';
-import { Loader } from 'components/dynamic/Loader';
 
 export const Header = () => {
     const { user } = useStore(userStores.user);
@@ -64,15 +66,20 @@ export const Header = () => {
                             {loading ? (
                                 <Loader />
                             ) : (
-                                <>
-                                    <Span color={white} fontSize="12px">
-                                        {organizationPublicId}
-                                    </Span>
+                                <InfoPopover popoverText={popoverText}>
+                                    <Row alignCenter noWrap>
+                                        <Span color={white} fontSize="12px">
+                                            {organizationPublicId}
+                                        </Span>
 
-                                    <MarginWrapper marginLeft="10px">
-                                        <CopyButton subject={organizationPublicId} success={copyMerchantIdMessage} />
-                                    </MarginWrapper>
-                                </>
+                                        <MarginWrapper marginLeft="10px">
+                                            <CopyButton
+                                                subject={organizationPublicId}
+                                                success={copyMerchantIdMessage}
+                                            />
+                                        </MarginWrapper>
+                                    </Row>
+                                </InfoPopover>
                             )}
                         </MerchantIdWrapper>
                     </Row>

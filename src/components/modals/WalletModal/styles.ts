@@ -44,8 +44,8 @@ export const Modal = styled.div`
 export const WalletTitleSpan = styled.div`
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 12px;
+    line-height: 15px;
     letter-spacing: 1px;
     color: ${white};
 `;
@@ -56,7 +56,7 @@ export const WalletSubtitleSpan = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 15px;
     color: ${grey4};
 `;
 
@@ -64,7 +64,7 @@ export const WalletBalanceSpan = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    line-height: 26px;
+    line-height: 29px;
     color: white;
 `;
 
@@ -72,5 +72,5 @@ export const CurrencySpan = styled(Span)`
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 15px;
 `;

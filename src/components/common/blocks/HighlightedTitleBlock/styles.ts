@@ -1,12 +1,10 @@
 import {
     blockBackground,
     contentWrapperHorizontalPadding,
-    contentWrapperVerticalPadding,
-    titleWrapperBackground,
-    titleWrapperHorizontalPadding,
-    titleWrapperVerticalPadding
+    contentWrapperVerticalPadding
 } from 'components/common/blocks/HighlightedTitleBlock/constants';
-import { black, flexCenter, primaryBorder, primaryBorderRadius, white } from 'constants/styles';
+import { cardPadding } from 'components/modals/CardModal/constants';
+import { flexCenter, primaryBorder, primaryBorderRadius, primaryColor, white } from 'constants/styles';
 import styled from 'styled-components';
 
 export const TitleWrapper = styled.div`
@@ -15,14 +13,13 @@ export const TitleWrapper = styled.div`
     width: 100%;
     border-top-left-radius: ${primaryBorderRadius};
     border-top-right-radius: ${primaryBorderRadius};
-    //border: ${primaryBorder};
-    // background: ${titleWrapperBackground};
+
     background: ${white};
     font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    color: ${black};
-    padding: ${titleWrapperVerticalPadding} ${titleWrapperHorizontalPadding};
+    font-size: 14px;
+    line-height: 17px;
+    color: ${primaryColor};
+    padding: ${cardPadding};
     padding-bottom: 10px;
 `;
 
