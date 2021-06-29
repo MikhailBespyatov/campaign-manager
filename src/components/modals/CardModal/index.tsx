@@ -60,7 +60,7 @@ interface ItemBlockProps extends Pick<TextProperties, 'fontSize'> {
     percentageGrowth?: JSX.Element;
 }
 const ItemBlock = ({ title, item, percentageGrowth, fontSize }: ItemBlockProps) => (
-    <Column>
+    <Column margin="0 5px">
         <MarginWrapper marginBottom="4px">
             <Span fontSize={fontSize || '13px'} fontWeight="400" lineHeight="16px">
                 {title}
@@ -224,7 +224,7 @@ export const CardModal = () => {
                                 <Section>
                                     <Column width="100%">
                                         <Title>Engagement</Title>
-                                        <Row justifyBetween width="80%">
+                                        <Section justifyBetween>
                                             <ItemBlock item={engagement?.viewCount} title="Views" />
                                             <ItemBlock
                                                 item={engagement?.likeCount}
@@ -274,7 +274,7 @@ export const CardModal = () => {
                                                 }
                                                 title="Shares"
                                             />
-                                        </Row>
+                                        </Section>
                                         <MarginWrapper marginBottom={tertiaryMargin} marginTop="10px">
                                             <Column>
                                                 <MarginWrapper marginBottom={primaryMargin}>

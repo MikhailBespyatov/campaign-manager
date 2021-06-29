@@ -1,7 +1,7 @@
 import { Img } from 'components/common/imageComponents/CustomImg/styles';
 import { CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox/index';
-import { backgroundColor, blue, flexCenter, grey2, grey9, transitionTime, white } from 'constants/styles';
-import styled from 'styled-components';
+import { blue, flexCenter, grey9, transitionTime, white } from 'constants/styles';
+import styled, { css } from 'styled-components';
 import { checkboxBorderRadius, checkboxDiameter } from './constants';
 
 export const Wrapper = styled.div`
@@ -33,14 +33,18 @@ export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 export const VisibleCheckbox = styled.div<Pick<CheckboxProps, 'disabled' | 'checked'>>`
     width: ${checkboxDiameter};
     height: ${checkboxDiameter};
-    /* background: ${({ checked }) => (checked ? blue : white)}; */
-    /* border: 2px solid ${({ checked }) => (checked ? blue : grey9)}; */
-    border: 2px solid ${grey9};
+    background: ${({ checked }) => (checked ? blue : white)};
+    border: 2px solid ${({ checked }) => (checked ? blue : grey9)};
     border-radius: ${checkboxBorderRadius};
     transition: ${transitionTime};
     cursor: pointer;
+
     ${({ disabled }) =>
-        disabled ? `background: '${backgroundColor}'; border-color: ${grey2}; cursor: not-allowed` : ``};
+        disabled &&
+        css`
+            cursor: not-allowed;
+        `};
+
     ${Img} {
         visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
     }

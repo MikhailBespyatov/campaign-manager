@@ -1,7 +1,7 @@
 import { Span } from 'components/common/typography/Span';
 import { blue, formGrey3, formGrey5, formGrey6, primaryColor, tertiaryBorderRadius } from 'constants/styles';
-import styled from 'styled-components';
-import { Padding } from 'types';
+import styled, { css } from 'styled-components';
+import { Disabled, Padding } from 'types';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -23,6 +23,10 @@ export const ErrorSpan = styled.span`
     color: ${formGrey6};
 `;
 
+export const inputTextColorMixin = css<Disabled>`
+    color: ${({ disabled }) => (disabled ? formGrey5 : primaryColor)};
+`;
+
 export const TextFieldForm = styled.input<Padding>`
     outline: none;
     appearance: none;
@@ -33,12 +37,12 @@ export const TextFieldForm = styled.input<Padding>`
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: ${primaryColor};
+    ${inputTextColorMixin};
     border: 1px solid ${formGrey3};
     border-radius: ${tertiaryBorderRadius};
 
     ::placeholder {
-        color: ${primaryColor};
+        ${inputTextColorMixin};
     }
 
     :focus-within {

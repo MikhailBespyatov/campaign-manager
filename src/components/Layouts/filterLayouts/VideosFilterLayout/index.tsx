@@ -1,11 +1,13 @@
 import { ResetButton } from 'components/common/buttons/ResetButton';
 import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
+import { Span } from 'components/common/typography/Span';
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { Column, FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultPage } from 'constants/defaults';
+import { secondaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
     videoSectionMarginBottom,
@@ -19,9 +21,11 @@ import { defaultSortsState } from './constants';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
-interface Props extends TotalRecords, Loading {}
+interface Props extends TotalRecords, Loading {
+    isSelectedProductPage?: boolean;
+}
 
-export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading }) => {
+export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading, isSelectedProductPage }) => {
     const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
 
     const [sortsState, setSortsState] = useState(defaultSortsState);
@@ -138,7 +142,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                         />
                     </Column>
 
-                    <FlexGrow alignCenter justifyEnd flexDirection="row">
+                    <FlexGrow alignCenter justifyEnd noWrap flexDirection="row">
                         {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight={tertiaryMargin} width="120px">
                             <SelectorFilter
                                 checkedValues={activeLanguage}
@@ -180,7 +184,15 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading 
                 </Section>
                 {/*</ContentWrapper>*/}
             </Section>
+
             <FlexGrow marginBottom={videoSectionMarginBottom}>
+                {isSelectedProductPage && (
+                    <Section marginBottom={secondaryMargin}>
+                        <Span fontSize="12px" lineHeight="15px">
+                            Videos Associated with This Product
+                        </Span>
+                    </Section>
+                )}
                 <ContentWrapper height="100%" padding={videoStepPadding} width="100%">
                     {/*<Row marginBottom={tertiaryMargin}>*/}
                     {/*    <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">*/}

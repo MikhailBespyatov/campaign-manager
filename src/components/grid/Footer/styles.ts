@@ -1,6 +1,6 @@
 import { Span } from 'components/common/typography/Span';
 import { defaultFontFamily, defaultFontStyle } from 'constants/defaults';
-import { backgroundColor, flexCenter, footerHeight } from 'constants/styles';
+import { flexCenter } from 'constants/styles';
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
@@ -9,14 +9,13 @@ export const StyledFooter = styled.footer`
     flex-direction: column;
     width: 100%;
     padding: 100px 80px 85px;
-    //height: ${footerHeight};
-    //background-color: ${backgroundColor};
 `;
 
 export const StyledSpanTop = styled(Span)`
     font-size: 16px;
     line-height: 25px;
     font-weight: 600;
+    text-align: center;
     text-transform: uppercase;
     color: ${({ theme: { footerTextColor } }) => footerTextColor};
 `;

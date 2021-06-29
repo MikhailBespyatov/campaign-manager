@@ -1,12 +1,12 @@
-import { createForm } from 'effector-forms';
-import { createRule, yupCompanyName, yupId, yupUrl } from 'constants/yupFields';
+import history from 'BrowserHistory';
+import { routes } from 'constants/routes';
+import { createRule, yupCategory, yupCompanyName, yupId, yupProductName, yupUrl } from 'constants/yupFields';
 import { createEffect, createEvent, createStore, forward } from 'effector';
+import { createForm } from 'effector-forms';
+import { API } from 'services';
 // import { productsEffects } from 'stores/products';
 import { loadingEffects } from 'stores/loading';
-import { API } from 'services';
-import history from 'BrowserHistory';
 import { themeStores } from 'stores/theme';
-import { routes } from 'constants/routes';
 
 export const productForm = createForm({
     fields: {
@@ -24,7 +24,7 @@ export const productForm = createForm({
             rules: [
                 createRule<string>({
                     name: 'productName',
-                    schema: yupCompanyName
+                    schema: yupProductName
                 })
             ]
         },
@@ -43,6 +43,16 @@ export const productForm = createForm({
                 createRule<string>({
                     name: 'productId',
                     schema: yupId
+                })
+            ]
+        },
+        category: {
+            /* //TODO:  change to empty string when end point is ready */
+            init: 'Cosmetics',
+            rules: [
+                createRule<string>({
+                    name: 'category',
+                    schema: yupCategory
                 })
             ]
         },

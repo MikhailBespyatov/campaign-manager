@@ -3,11 +3,12 @@ import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { VideoCard } from 'components/Layouts/Cards/VideoCard';
 import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
 import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilterLayout';
-import { defaultFontWeight, defaultPage } from 'constants/defaults';
+import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
 import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 import React, { useEffect } from 'react';
@@ -54,24 +55,27 @@ export const Product = () => {
     return (
         <CampaignManagerLayout>
             <Section marginBottom={productContentMarginBottom}>
-                <Row alignCenter>
-                    <MarginWrapper marginRight="17px">
-                        <ProductThumbnail backgroundImage={imageUrl || WOMLogo} />
-                    </MarginWrapper>
-                    <Column>
-                        <MarginWrapper marginBottom="10px">
-                            <Span fontSize="16px" fontWeight={defaultFontWeight} lineHeight="20px">
-                                {name}
-                            </Span>
+                <ContentWrapper borderRadius="0px" padding="15px 40px">
+                    <Row alignCenter>
+                        <MarginWrapper marginRight="17px">
+                            <ProductThumbnail backgroundImage={imageUrl || WOMLogo} />
                         </MarginWrapper>
-                        <Span fontSize="13px" fontWeight={defaultFontWeight} lineHeight="17px">
-                            {brand}
-                        </Span>
-                    </Column>
-                </Row>
+                        <Column>
+                            <MarginWrapper marginBottom="10px">
+                                <Span fontWeight="400" lineHeight="17px">
+                                    {name}
+                                </Span>
+                            </MarginWrapper>
+                            <Span fontWeight="400" lineHeight="17px">
+                                {brand}
+                            </Span>
+                        </Column>
+                    </Row>
+                </ContentWrapper>
             </Section>
             {/* <ModifyingLayout withoutAction padding="0px" width="100%"> */}
-            <VideosFilterLayout loading={loading} totalRecords={totalRecords}>
+
+            <VideosFilterLayout isSelectedProductPage loading={loading} totalRecords={totalRecords}>
                 {loading ? (
                     <Section>
                         <Loader />

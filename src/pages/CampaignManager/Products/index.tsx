@@ -15,7 +15,7 @@ import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout'
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { product, productsEdit, routes } from 'constants/routes';
-import { blue5, primaryMargin } from 'constants/styles';
+import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
     channelLogoDiameter,
@@ -26,7 +26,9 @@ import { editButtonDiameter } from 'pages/CampaignManager/Channels/constants';
 import {
     emptyProductSubtitle,
     emptyProductTitle,
-    moreButtonIconDiameter,
+    moreButtonIconHeight,
+    moreButtonIconWidth,
+    noProductsContentPadding,
     productParameters,
     productsContentPadding
 } from 'pages/CampaignManager/Products/constants';
@@ -45,6 +47,8 @@ export const Products = () => {
     const isFirst = useStore(productsStores.isFirst);
     const { limit, pageIndex } = useStore(productsStores.values);
     const loading = useStore(productsEffects.getItems.pending);
+    const contentWrapperPadding = items?.length ? productsContentPadding : noProductsContentPadding;
+    const contentWrapperBackground = items?.length ? white : 'transparent';
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + productsEdit + `/${id}`);
@@ -55,40 +59,47 @@ export const Products = () => {
     // const productViewerLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
     // const products: typeof productsMock = [];
 
-    const dataTable: DataTable[] | undefined = items?.map(({ id = '', publicId = '', name, imageUrl, brand }) => ({
-        cells: [
-            <Row key={id} alignCenter noWrap>
-                <MarginWrapper marginLeft="8px" marginRight="17px">
-                    <CustomImg
-                        height={channelLogoDiameter}
-                        src={imageUrl || defaultChannelImg}
-                        width={channelLogoDiameter}
-                    />
-                </MarginWrapper>
-                <ChannelNameSpan>{name}</ChannelNameSpan>
-            </Row>,
-            <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
-            <Row key={id}>
-                <CopyableField subject={publicId} />
-            </Row>,
-            <Row key={id}>
-                <ImgButton
-                    backgroundColor={blue5}
-                    height={editButtonDiameter}
-                    width={editButtonDiameter}
-                    onClick={onClickEditButton(id)}
-                >
-                    <CustomImg height={copyButtonIconDiameter} src={editButtonIcon} width={copyButtonIconDiameter} />
-                </ImgButton>
-            </Row>,
-            <Row key={id}>
-                <ImgButton backgroundColor={blue5} height="39px" width="36px" onClick={onClickMoreButton(id)}>
-                    <CustomImg height={moreButtonIconDiameter} src={moreButtonIcon} width={moreButtonIconDiameter} />
-                </ImgButton>
-            </Row>
-        ],
-        alignment: ['start', ...new Array(5).fill('center')]
-    }));
+    const dataTable: DataTable[] | undefined = items?.map(
+        ({ id = '', name, imageUrl /*, publicId = '', */ /*brand*/ }) => ({
+            cells: [
+                <Row key={id} alignCenter noWrap>
+                    <MarginWrapper marginLeft="8px" marginRight="17px">
+                        <CustomImg
+                            height={channelLogoDiameter}
+                            src={imageUrl || defaultChannelImg}
+                            width={channelLogoDiameter}
+                        />
+                    </MarginWrapper>
+                    <ChannelNameSpan>{name}</ChannelNameSpan>
+                </Row>,
+                // <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
+                // TODO change mock link to product viewer link
+                <Row key={id}>
+                    <CopyableField subject="https://something.yeay.com/?merchantid=22&channelid..." />
+                </Row>,
+                <Row key={id} alignCenter>
+                    <MarginWrapper marginRight="10px">
+                        <ImgButton
+                            backgroundColor="transparent"
+                            height={editButtonDiameter}
+                            width={editButtonDiameter}
+                            onClick={onClickEditButton(id)}
+                        >
+                            <CustomImg
+                                height={copyButtonIconDiameter}
+                                src={editButtonIcon}
+                                width={copyButtonIconDiameter}
+                            />
+                        </ImgButton>
+                    </MarginWrapper>
+                    <ImgButton backgroundColor="transparent" height="39px" width="36px" onClick={onClickMoreButton(id)}>
+                        <CustomImg height={moreButtonIconHeight} src={moreButtonIcon} width={moreButtonIconWidth} />
+                    </ImgButton>
+                </Row>
+            ],
+            alignment: ['start', ...new Array(2).fill('center')]
+        })
+    );
     //
     // const dataTable: DataTable[] = products.map(({ productName, channelName, productViewerLink }) => ({
     //     cells: [
@@ -161,7 +172,7 @@ export const Products = () => {
                 <AddButton onClick={onClickAddButton}>Add Product</AddButton>
             </Section>
             <Section>
-                <ContentWrapper padding={productsContentPadding} width="100%">
+                <ContentWrapper backgroundColor={contentWrapperBackground} padding={contentWrapperPadding} width="100%">
                     {loading ? (
                         <Loader />
                     ) : !items?.length ? (
@@ -179,7 +190,7 @@ export const Products = () => {
                             onSizeChange={onSizeChange}
                         >
                             <OverflowAutoLayout>
-                                <Table columnSizes={[3, 2, 5, 1, 1]} columns={productParameters} data={dataTable} />
+                                <Table columnSizes={[3, /*2,*/ 5, 1, 1]} columns={productParameters} data={dataTable} />
                             </OverflowAutoLayout>
                         </PaginationLayout>
                     )}

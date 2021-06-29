@@ -1,6 +1,7 @@
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { ModifyingLayout } from 'components/Layouts/ModifyingLayout';
 import { useForm } from 'effector-forms';
+import { productEditAddFormWidth } from 'pages/CampaignManager/Products/ProductForm/constants';
 import React from 'react';
 import { forms } from 'stores/forms';
 import { productFormEvents } from 'stores/forms/productForm';
@@ -16,7 +17,12 @@ export const CreateProduct = () => {
 
     return (
         <CampaignManagerLayout>
-            <ModifyingLayout isValid={eachValid} page="Product" onClickAction={onSubmit}>
+            <ModifyingLayout
+                isValid={eachValid}
+                page="Product"
+                width={productEditAddFormWidth}
+                onClickAction={onSubmit}
+            >
                 <ProductForm />
             </ModifyingLayout>
         </CampaignManagerLayout>

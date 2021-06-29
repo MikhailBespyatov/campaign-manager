@@ -6,13 +6,24 @@ import { SpanProps } from 'components/common/typography/Span/types';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import React, { FC } from 'react';
-import { Disabled, FlexBooleanAlignment, NoopClick, Sizes } from 'types';
+import {
+    BackgroundColor,
+    BorderProperties,
+    BorderRadius,
+    Disabled,
+    FlexBooleanAlignment,
+    NoopClick,
+    Sizes
+} from 'types';
 import { Button, ButtonSpan } from './styles';
 
 export interface AddButtonProps
     extends NoopClick,
         Disabled,
         Sizes,
+        BackgroundColor,
+        BorderRadius,
+        Pick<BorderProperties, 'border'>,
         Pick<SpanProps, 'fontWeight' | 'fontSize' | 'lineHeight'>,
         Pick<FlexBooleanAlignment, 'justifyCenter'> {
     type?: 'blue' | 'black';
