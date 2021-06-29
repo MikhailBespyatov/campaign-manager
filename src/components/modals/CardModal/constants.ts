@@ -21,3 +21,5 @@ export const viewersMarginBottom = '8px';
 export const closeModalImgDiameter = '30px';
 
 export const miniMarginBottom = '4px';
+
+export const mediaIpadWidth = 1050;

@@ -9,7 +9,7 @@ import {
     wrapperHorizontalPadding,
     wrapperVerticalPadding
 } from 'components/modals/CardModal/constants';
-import { flexStart, primaryPadding, tertiaryBorderRadius, transitionTime } from 'constants/styles';
+import { flexStart, lg_2, primaryPadding, tertiaryBorderRadius, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
 
@@ -40,6 +40,11 @@ export const VideoDetailsWrapper = styled.div`
     display: flex;
     flex-direction: row;
     padding: 0 ${cardPadding} 25px;
+    margin-bottom: 10px;
+
+    @media (max-width: ${lg_2}) {
+        flex-direction: column;
+    }
 `;
 
 export const TitleWrapper = styled.div`
