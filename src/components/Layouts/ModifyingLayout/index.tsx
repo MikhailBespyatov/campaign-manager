@@ -14,14 +14,14 @@ import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
 import { productsEffects } from 'stores/products';
 import { themeStores } from 'stores/theme';
-import { IsValid, Noop } from 'types';
+import { IsValid, Noop, Sizes } from 'types';
 
 interface ParamsProps {
     channelId: string;
     productId: string;
 }
 
-export interface ModifyingLayoutProps extends IsValid {
+export interface ModifyingLayoutProps extends IsValid, Pick<Sizes, 'width'> {
     onClickAction?: Noop;
     withoutAction?: boolean;
     page: 'Channel' | 'Product';
@@ -32,6 +32,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     withoutAction,
     onClickAction = NoopClick,
     page,
+    width,
     children
 }) => {
     const history = useHistory();
@@ -42,6 +43,8 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     const isEditPage = pathname.indexOf('edit') !== -1;
 
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
+
+    const buttonMarginTop = isEditPage ? '20px' : page === 'Product' ? '25px' : '50px';
 
     const onClickBackButton = () => history.goBack();
     const onClickAddButton = () => onClickAction();
@@ -80,7 +83,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
     return (
         <>
             <Section marginBottom={primaryMargin} marginTop="50px">
-                <Wrapper>
+                <Wrapper width={width}>
                     {/* <ContentWrapper padding="18px 40px" width="100%"> */}
                     {/* <Section justifyBetween>
                         <Row>
@@ -101,7 +104,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                     </Section> */}
                     <Section>{children}</Section>
 
-                    <Section alignCenter marginBottom="25px" marginTop={isEditPage ? '20px' : '50px'}>
+                    <Section alignCenter marginBottom="25px" marginTop={buttonMarginTop}>
                         {!withoutAction && (
                             <MarginWrapper marginRight="15px">
                                 <ManualRoundedButton

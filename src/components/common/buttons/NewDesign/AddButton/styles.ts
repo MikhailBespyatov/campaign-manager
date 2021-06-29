@@ -1,21 +1,18 @@
 import { Span } from 'components/common/typography/Span';
-import {
-    buttonBehaviorMixin,
-    disableDefaultButtonStyleMixin,
-    primaryColor,
-    tertiaryBorderRadius
-} from 'constants/styles';
+import { buttonBehaviorMixin, disableDefaultButtonStyleMixin, primaryColor } from 'constants/styles';
 import styled from 'styled-components';
-import { Sizes } from 'types';
+import { BackgroundColor, BorderProperties, BorderRadius, Sizes } from 'types';
 
-export const Button = styled.button<Sizes>`
+export interface ButtonProps extends Sizes, BorderRadius, Pick<BorderProperties, 'border'>, BackgroundColor {}
+
+export const Button = styled.button<ButtonProps>`
     ${disableDefaultButtonStyleMixin};
     min-width: 160px;
     ${({ width }) => width && `width: ${width};`};
     height: ${({ height }) => height || '36px'};
-    /* border: 1px solid #c6c6c6; */
-    /* border-radius: ${tertiaryBorderRadius}; */
-    /* padding: 2px; */
+    ${({ border }) => border && `border: ${border}`};
+    ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}`};
+    ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`};
     ${buttonBehaviorMixin}
 `;
 

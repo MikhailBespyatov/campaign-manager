@@ -1,3 +1,3 @@
-import { BackgroundColor, BorderRadiusProperties, MarginRightBottom } from 'types';
+import { BackgroundColor, BorderRadiusProperties, MarginRightBottom, MarginTop } from 'types';
 
-export interface WrapperProps extends MarginRightBottom, BorderRadiusProperties, BackgroundColor {}
+export interface WrapperProps extends MarginRightBottom, MarginTop, BorderRadiusProperties, BackgroundColor {}

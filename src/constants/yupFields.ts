@@ -16,9 +16,9 @@ import {
     onlySimpleCharactersAllowedRegExp,
     onlySymbolAndNumbersRegExp
 } from 'constants/regExp';
-import * as Yup from 'yup';
 import { Rule } from 'effector-forms';
 import urlRegex from 'url-regex';
+import * as Yup from 'yup';
 
 export function createRule<V, T = any>({ schema, name }: { schema: Yup.Schema<T>; name: string }): Rule<V> {
     return {
@@ -46,7 +46,9 @@ export const yupDefaultArray = Yup.array().of(yupDefault).required(requiredSetMe
 
 export const yupCompanyName = yupDefault.matches(onlySimpleCharactersAllowedRegExp, onlySimpleCharactersAllowedMessage);
 export const yupId = yupDefault.min(4).matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
+export const yupCategory = yupDefault.matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
 export const yupUsername = yupDefault;
+export const yupProductName = yupDefault;
 export const yupEmail = Yup.string().email(invalidEmailMessage).required(requiredFieldMessage);
 export const yupEmailNoHint = yupDefault;
 export const yupPassword = Yup.string()

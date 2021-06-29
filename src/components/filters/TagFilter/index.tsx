@@ -26,7 +26,7 @@ interface TagsFilterBlockProps {
 export const TagsFilterBlock = ({ values, removeValue }: TagsFilterBlockProps) => {
     if (!!values?.length) {
         return (
-            <Row marginTop={wrapperMarginTop}>
+            <Row /*marginTop={wrapperMarginTop}*/>
                 {values.map(i => (
                     <ClosableTag
                         key={i}
@@ -34,6 +34,7 @@ export const TagsFilterBlock = ({ values, removeValue }: TagsFilterBlockProps) =
                         backgroundColor="transparent"
                         marginBottom={closableTagMarginBottom}
                         marginRight={secondaryPadding}
+                        marginTop={wrapperMarginTop}
                         onClose={() => removeValue(i)}
                     >
                         {i}

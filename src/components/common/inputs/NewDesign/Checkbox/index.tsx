@@ -1,5 +1,4 @@
-// import checkmarkIcon from 'assets/img/checkmark_icon.svg';
-import checkmarkIcon from 'assets/img/checkmark_icon_black.svg';
+import checkmarkIcon from 'assets/img/checkmark_icon.svg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { checkMarkIconHeight, checkMarkIconWidth } from 'components/common/inputs/NewDesign/Checkbox/constants';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';

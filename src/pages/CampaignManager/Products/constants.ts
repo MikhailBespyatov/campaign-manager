@@ -1,14 +1,16 @@
 export const filtersMarginRight = '24px';
 export const productsContentPadding = '16px 54px';
+export const noProductsContentPadding = '175px 20px';
 
 export const copyButtonIconDiameter = '16px';
-export const moreButtonIconDiameter = '7px';
+export const moreButtonIconHeight = '15px';
+export const moreButtonIconWidth = '9px';
 
-export const emptyProductTitle = 'NO PRODUCT YET?';
+export const emptyProductTitle = 'Your Products';
 export const emptyProductSubtitle =
-    'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups';
+    'When you add a product you will automatically be shown all of the approved recommendations that have been previously recorded for the product';
 
-export const productParameters = ['Product Name', 'Brand', 'Product Viewer Link', 'Edit', 'More info'];
+export const productParameters = ['Product Name', /*'Brand',*/ 'Product Viewer Link', 'Actions' /*, 'More info'*/];
 
 //Mock
 export const productsSelectorMock = ['All products', 'Mock'];
