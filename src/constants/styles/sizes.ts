@@ -48,6 +48,7 @@ export const xs_1 = '479px';
 export const sm_1 = '575px';
 export const md_1 = '767px';
 export const lg_1 = '991px';
+export const lg_2 = '1100px';
 export const xl_1 = '1199px';
 export const xxl_1 = '1599px';
 

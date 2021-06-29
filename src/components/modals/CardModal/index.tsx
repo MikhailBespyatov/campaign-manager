@@ -14,7 +14,7 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
 import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
-import { viewersMarginBottom } from 'components/modals/CardModal/constants';
+import { mediaIpadWidth, viewersMarginBottom } from 'components/modals/CardModal/constants';
 import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
 import { defaultFontSize } from 'constants/defaults';
@@ -147,6 +147,8 @@ export const CardModal = () => {
         } else body.style.overflow = 'auto';
     }, [id, visible]);
 
+    const videoWidthMedia = window.innerWidth < mediaIpadWidth ? '100%' : '160px';
+
     return (
         <Wrapper visible={visible}>
             <AbsoluteWrapper right={tertiaryPadding} top={wrapperVerticalPadding} zIndex="5">
@@ -167,7 +169,12 @@ export const CardModal = () => {
                 ) : (
                     <>
                         <VideoDetailsWrapper>
-                            <Column alignCenter marginRight={tertiaryMargin} width="160px">
+                            <Column
+                                alignCenter
+                                marginBottom="20px"
+                                marginRight={tertiaryMargin}
+                                width={videoWidthMedia}
+                            >
                                 {visible && (
                                     <CreateCampaignCard
                                         isVideoDetailsModal
@@ -176,7 +183,7 @@ export const CardModal = () => {
                                         products={products}
                                         streamDetails={streamDetails}
                                         uriPrimary={uriPrimary}
-                                        width="155px"
+                                        width={videoWidthMedia}
                                         womQualityScore={womQualityScore}
                                     />
                                 )}
