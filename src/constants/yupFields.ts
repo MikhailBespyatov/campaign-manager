@@ -62,6 +62,7 @@ export const yupRepeatPassword = Yup.string()
 export const yupPasswordNoHint = yupDefault;
 export const yupSecurityCode = yupDefault;
 export const yupUrl = Yup.string().matches(urlRegex(), 'Please enter website');
+export const yupString = Yup.string();
 
 export const yupWom = yupDefault;
 export const yupCardName = yupDefault;
