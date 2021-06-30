@@ -10,11 +10,11 @@ import { inputHalfHorizontalMargin } from 'pages/CampaignManager/Channels/Channe
 import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { forms } from 'stores/forms';
-import { productsEffects } from 'stores/products';
+import { productsEffects, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
-const { name, brand, publicId, url, category /*, imageUrl */ } = forms.productForm.fields;
+const { name, brand, publicId, url, category /*imageUrl*/ } = forms.productForm.fields;
 
 export interface ProductFormProps {}
 
@@ -25,7 +25,7 @@ interface ParamsProps {
 export const ProductForm = () => {
     const { reset } = useForm(forms.productForm);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    //const { imageUrl: imageUrlValue } = useStore(productsStores.item);
+    const { imageUrl: imageUrlValue } = useStore(productsStores.item);
     const isEditPage = useLocation().pathname !== globalPrefixUrl + routes.campaignManager.products.create;
     const { productId } = useParams<ParamsProps>();
     const flexBasisInput = getFlexBasisPercent(2);
@@ -41,6 +41,8 @@ export const ProductForm = () => {
     //Mock
     useEffect(() => {
         isEditPage ? productsEffects.getItemById(productId) : productsEffects.resetItem();
+        isEditPage && imageUrlValue && forms.productForm.fields.imageUrl.set(imageUrlValue);
+
         reset();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,6 +53,7 @@ export const ProductForm = () => {
             <Section marginBottom="24px">
                 <TitleFormSpan>{isEditPage ? 'Edit' : 'Add New'} product</TitleFormSpan>
             </Section>
+
             {/* <Section marginBottom="42px">
                 <ImageTextInput
                     required
@@ -60,6 +63,7 @@ export const ProductForm = () => {
                     src={imageUrlValue || ''}
                 />
             </Section> */}
+
             <Section marginBottom={tertiaryMargin}>
                 <FlexGrow flexBasis={flexBasisInput}>
                     <ContentWrapper paddingRight={inputHalfHorizontalMargin} width="100%">

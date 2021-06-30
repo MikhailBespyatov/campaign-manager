@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
 import { routes } from 'constants/routes';
-import { createRule, yupCategory, yupCompanyName, yupId, yupProductName, yupUrl } from 'constants/yupFields';
+import { createRule, yupCategory, yupCompanyName, yupId, yupProductName, yupString, yupUrl } from 'constants/yupFields';
 import { createEffect, createEvent, createStore, forward } from 'effector';
 import { createForm } from 'effector-forms';
 import { API } from 'services';
@@ -70,7 +70,8 @@ export const productForm = createForm({
             rules: [
                 createRule<string>({
                     name: 'thumbnailImage',
-                    schema: yupUrl
+                    /* //TODO add validation back to yupUrl if necessary */
+                    schema: yupString
                 })
             ]
         }
