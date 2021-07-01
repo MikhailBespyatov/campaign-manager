@@ -1,13 +1,14 @@
-import { white } from 'constants/styles/colors';
-import styled from 'styled-components';
-import { Visibility } from 'types';
-import { flexCenter, primaryPadding } from 'constants/styles';
 import {
+    defaultBorderRadius,
     modalBoxShadow,
+    modalHeight,
     modalWidth,
     wrapperBackground,
     wrapperHorizontalPadding
-} from 'components/modals/CongratsModal/constants';
+} from 'components/modals/AsyncModal/constants';
+import { blue, flexCenter, primaryPadding } from 'constants/styles';
+import styled from 'styled-components';
+import { Visibility } from 'types';
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;
@@ -28,12 +29,12 @@ export const Modal = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: ${modalWidth};
-    min-height: 250px;
-    border-radius: 16px;
+    min-height: ${modalHeight};
+    border-radius: ${defaultBorderRadius};
     box-shadow: ${modalBoxShadow};
-    background: ${white};
-    padding: 60px;
+    background: ${blue};
     margin: auto;
     z-index: 10;
 `;

@@ -3,11 +3,20 @@ import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButt
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { buttonHeight, textFontSize, textFontWeight, textLineHeight } from 'components/modals/AsyncModal/constants';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import {
+    imagesZIndex,
+    modalWidth,
+    textFontSizeContent,
+    textFontSizeDefault,
+    textFontWeightBold,
+    textFontWeightRegular,
+    textLineHeight
+} from 'components/modals/AsyncModal/constants';
 import { closeIconDiameter } from 'components/modals/CongratsModal/constants';
-import { white } from 'constants/styles';
+import { black, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import React from 'react';
@@ -15,7 +24,7 @@ import { modalEvents, modalStores } from 'stores/modal';
 import { Modal, Wrapper } from './styles';
 
 export const AsyncModal = () => {
-    const [{ visible, title, content, onOk }] = useStore(modalStores.asyncModalStore);
+    const [{ visible, title, content, onOk, closeText, okText }] = useStore(modalStores.asyncModalStore);
 
     const okHandler = () => onOk && onOk();
     const onClose = () => modalEvents.closeAsyncModal();
@@ -25,7 +34,7 @@ export const AsyncModal = () => {
     return (
         <Wrapper visible={visible}>
             <Modal>
-                <AbsoluteWrapper right="40px" top="30px" zIndex="5">
+                <AbsoluteWrapper right="34px" top="20px" zIndex={imagesZIndex}>
                     <CustomImg
                         pointer
                         height={closeIconDiameter}
@@ -34,47 +43,58 @@ export const AsyncModal = () => {
                         onClick={onClose}
                     />
                 </AbsoluteWrapper>
-                <Column alignCenter>
-                    <MarginWrapper marginBottom="17px">
-                        <Span fontSize="24px" fontWeight={textFontWeight} lineHeight={textLineHeight}>
-                            {title}
-                        </Span>
-                    </MarginWrapper>
-                    <Span
-                        alignCenter
-                        color="#979797"
-                        fontSize={textFontSize}
-                        fontWeight={textFontWeight}
-                        lineHeight={textLineHeight}
-                    >
-                        {content}
-                    </Span>
-                    <Row marginTop="56px">
-                        <MarginWrapper marginRight="30px">
-                            <ManualRoundedButton
-                                fontSize={textFontSize}
-                                fontWeight={textFontWeight}
-                                height={buttonHeight}
-                                onClick={okHandler}
+                <ContentWrapper height="190px" justify="space-between" padding="16px 34px 22px 25px" width={modalWidth}>
+                    <Section>
+                        <Section>
+                            <Span
+                                fontSize={textFontSizeDefault}
+                                fontWeight={textFontWeightBold}
+                                lineHeight={textLineHeight}
                             >
-                                Delete
+                                {title}
+                            </Span>
+                        </Section>
+                        <Section marginTop="7px">
+                            <Span
+                                alignCenter
+                                color="#979797"
+                                fontSize={textFontSizeContent}
+                                fontWeight={textFontWeightRegular}
+                                lineHeight={textLineHeight}
+                            >
+                                {content}
+                            </Span>
+                        </Section>
+                    </Section>
+                    <Section justifyEnd>
+                        <MarginWrapper marginRight="35px">
+                            <ManualRoundedButton
+                                background={white}
+                                borderRadius="4px"
+                                fontSize={textFontSizeDefault}
+                                fontWeight={textFontWeightRegular}
+                                height="40px"
+                                mainColor={black}
+                                minWidth="60px"
+                                onClick={onClose}
+                            >
+                                {closeText}
                             </ManualRoundedButton>
                         </MarginWrapper>
                         <MarginWrapper>
                             <ManualRoundedButton
-                                reverse
-                                background={white}
-                                fontSize={textFontSize}
-                                fontWeight={textFontWeight}
-                                height={buttonHeight}
-                                mainColor={'red'}
-                                onClick={onClose}
+                                borderRadius="4px"
+                                fontSize={textFontSizeDefault}
+                                fontWeight={textFontWeightRegular}
+                                height="40px"
+                                minWidth="60px"
+                                onClick={okHandler}
                             >
-                                Cancel
+                                {okText}
                             </ManualRoundedButton>
                         </MarginWrapper>
-                    </Row>
-                </Column>
+                    </Section>
+                </ContentWrapper>
             </Modal>
         </Wrapper>
     );
