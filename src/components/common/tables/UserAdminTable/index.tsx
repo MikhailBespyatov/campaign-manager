@@ -15,10 +15,11 @@ import { noContentMessage } from 'constants/messages';
 import { formGrey5 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
+import { message } from 'stores/alerts';
+import { modalEvents } from 'stores/modal';
 import { userStores } from 'stores/user';
 import { userAdminEffects } from 'stores/userAdmin';
 import { usersStores } from 'stores/users';
-import Swal from 'sweetalert2';
 import { retrieveRoleAndConvert } from 'utils/usefulFunctions';
 
 const LegendaryTableSpan: FC = ({ children }) => (
@@ -86,23 +87,18 @@ const Item = ({ userId, email, roles, username }: WOM.GetUserResponse) => {
     // const onChange = (checked: boolean) => setChecked(checked);
 
     const removeHandler = () =>
-        Swal.fire({
+        modalEvents.openAsyncModal({
             title: 'Are you sure you want to delete a user ' + username,
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            showLoaderOnConfirm: true,
-            preConfirm: () =>
-                userAdminEffects.removeItemById(userId).catch(error => {
-                    Swal.showValidationMessage(`Request failed: ${error}`);
-                }),
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then(result => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: `A user ${username} deleted`
-                });
+            content: '',
+            closeText: 'No',
+            okText: 'Yes',
+            onOk: async () => {
+                try {
+                    await userAdminEffects.removeItemById(userId);
+                    await modalEvents.closeAsyncModal();
+                } catch (error) {
+                    message.error('An error occurred while deleting the user');
+                }
             }
         });
 

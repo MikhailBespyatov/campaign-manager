@@ -1,11 +1,13 @@
 import { combine, createEvent, createStore } from 'effector';
-import { CardModal, Noop, PopUpCampaignManager, StrictTitle } from 'types';
 import { initializeGenericStoreModal } from 'stores/initialize/initialize.store.modal';
+import { CardModal, Noop, PopUpCampaignManager, StrictTitle } from 'types';
 
 export interface AsyncModal extends StrictTitle {
     visible?: boolean;
     content: string;
     onOk?: Noop;
+    closeText?: string;
+    okText?: string;
 }
 
 // const openCardModal = createEvent<string>();
@@ -82,7 +84,7 @@ const popUpCampaignManager = createStore<PopUpCampaignManager>({
         visible: false
     }));
 
-const initialAsyncModal: AsyncModal = { visible: false, title: '', content: '' };
+const initialAsyncModal: AsyncModal = { visible: false, title: '', content: '', closeText: 'Cancel', okText: 'Submit' };
 
 const openAsyncModal = createEvent<AsyncModal>();
 const closeAsyncModal = createEvent();
@@ -107,6 +109,13 @@ const modalEvents = {
     openAsyncModal,
     closeAsyncModal
 };
-const modalStores = { cardModal, qexWidgetModal, popUpCampaignManager, walletModal, congratsModal, asyncModalStore };
+const modalStores = {
+    cardModal,
+    qexWidgetModal,
+    popUpCampaignManager,
+    walletModal,
+    congratsModal,
+    asyncModalStore
+};
 
 export { modalStores, modalEvents };
