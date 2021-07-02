@@ -5,12 +5,20 @@ import React, { ChangeEvent } from 'react';
 import { Disabled, Label, Padding, Placeholder, Type } from 'types';
 import { ErrorSpan, LabelNameSpan, TextFieldForm, Wrapper } from './styles';
 
-export interface TextInputProps extends Disabled, Placeholder, Type, Label, Pick<Padding, 'paddingLeft'> {
+export interface TextInputProps
+    extends Disabled,
+        Placeholder,
+        Type,
+        Label,
+        Pick<Padding, 'paddingLeft' | 'paddingRight'> {
     name: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
     errorText?: string;
     value?: string | number;
+    labelFontSize?: string;
+    labelLineHeight?: string;
+    labelUppercase?: boolean;
 }
 
 export const TextInput = ({
@@ -19,15 +27,19 @@ export const TextInput = ({
     name,
     onChange,
     placeholder,
+    labelFontSize,
+    labelLineHeight,
+    labelUppercase,
     required,
     type,
     errorText,
     value = '',
-    paddingLeft
+    paddingLeft,
+    paddingRight
 }: TextInputProps) => (
     <Wrapper>
-        <MarginWrapper marginBottom="10px">
-            <LabelNameSpan>
+        <MarginWrapper marginBottom="8px">
+            <LabelNameSpan fontSize={labelFontSize} lineHeight={labelLineHeight} uppercase={labelUppercase}>
                 {label}
                 {required && '*'}
             </LabelNameSpan>
@@ -36,6 +48,7 @@ export const TextInput = ({
             disabled={disabled}
             name={name}
             paddingLeft={paddingLeft}
+            paddingRight={paddingRight}
             placeholder={placeholder}
             type={type}
             value={value}

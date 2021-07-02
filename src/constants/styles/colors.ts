@@ -30,6 +30,7 @@ export const grey14 = '#eeeeee';
 export const grey15 = '#d3d3d3';
 export const grey16 = '#787878';
 export const grey17 = '#4e4e4e';
+export const grey18 = '#8383A0';
 export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 
@@ -46,6 +47,7 @@ export const blue9 = '#576397';
 export const lightPink = '#ffeeee';
 
 export const backgroundColor = secondaryColor; /* '#121217';*/
+export const popoverBackground = '#F4F5FD';
 
 export const red = '#FC4237';
 

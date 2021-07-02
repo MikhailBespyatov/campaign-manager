@@ -235,7 +235,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 ))}
             </ConfigurationItem>
             <ConfigurationItem
-                subtitle="List of all hashtags associaed with currentlz selected videos."
+                subtitle="List of all hashtags associated with current selected videos."
                 title="Hashtags"
             >
                 {hashtagsData.map(({ hashtag, viewers }, index) => (

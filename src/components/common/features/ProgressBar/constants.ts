@@ -20,5 +20,7 @@ export const inactivePointBackgroundColor = '#EAEAEA';
 export const activePointBackgroundColor = '#bbbbd0';
 
 export const progressBarHeight = parseInt(pointItemTop) + parseInt(donePointItemDiameter) + 'px';
-export const progressBarVerticalPadding = '25px';
-export const progressBarHorizontalPadding = '40px';
+export const progressBarVerticalPadding = '12px';
+export const progressBarHorizontalPadding = '20px';
+
+export const arrowDiameter = '11px';

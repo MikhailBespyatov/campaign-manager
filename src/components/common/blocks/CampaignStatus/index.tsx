@@ -19,7 +19,7 @@ export const CampaignStatus: FC<Props> = ({ status, daysRemaining }) => {
 
     return (
         <CampaignStatusWrapper>
-            <Row alignCenter marginBottom="10px">
+            <Row alignCenter marginBottom="2px">
                 {status === 'paused' && (
                     <MarginWrapper marginRight="8px">
                         <CustomImg src={pauseImg} />
@@ -27,7 +27,11 @@ export const CampaignStatus: FC<Props> = ({ status, daysRemaining }) => {
                 )}
                 <StatusText color={color}>{status}</StatusText>
             </Row>
-            {status === 'running' && <RemainingText>{`${daysRemaining} Days Remaining`}</RemainingText>}
+            {status === 'running' && (
+                <Row alignCenter marginBottom="2px">
+                    <RemainingText>{daysRemaining}&nbsp;Days Remaining</RemainingText>
+                </Row>
+            )}
         </CampaignStatusWrapper>
     );
 };

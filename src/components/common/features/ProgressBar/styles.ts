@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { blue, flexStart } from 'constants/styles';
+import doneIcon from 'assets/img/greenDoneIcon.svg';
 import {
     activePointBackgroundColor,
     donePointItemBackgroundColor,
@@ -16,10 +15,11 @@ import {
     progressBarHorizontalPadding,
     progressBarItemLineHeight
 } from 'components/common/features/ProgressBar/constants';
-import { Active } from 'types';
-import doneIcon from 'assets/img/greenDoneIcon.svg';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Span } from 'components/common/typography/Span';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { flexStart, formGrey5 } from 'constants/styles';
+import styled, { css } from 'styled-components';
+import { Active } from 'types';
 
 export const Wrapper = styled(ContentWrapper)`
     overflow: hidden;
@@ -75,7 +75,7 @@ export const ProgressBarItem = styled.li<ProgressBarItemProps>`
 
     ${ItemSpan} {
         ${({ done, active }) => (done || active) && 'opacity: 1;'}
-        ${({ active }) => active && `color: ${blue};`}
+        ${({ active }) => active && `color: ${formGrey5};`}
     }
 
     &:before {

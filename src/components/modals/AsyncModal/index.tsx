@@ -16,7 +16,7 @@ import {
     textLineHeight
 } from 'components/modals/AsyncModal/constants';
 import { closeIconDiameter } from 'components/modals/CongratsModal/constants';
-import { black, white } from 'constants/styles';
+import { black, grey18, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import React from 'react';
@@ -24,7 +24,7 @@ import { modalEvents, modalStores } from 'stores/modal';
 import { Modal, Wrapper } from './styles';
 
 export const AsyncModal = () => {
-    const [{ visible, title, content, onOk, closeText, okText }] = useStore(modalStores.asyncModalStore);
+    const { visible, title, content, onOk, closeText, okText } = useStore(modalStores.asyncModal);
 
     const okHandler = () => onOk && onOk();
     const onClose = () => modalEvents.closeAsyncModal();
@@ -54,10 +54,9 @@ export const AsyncModal = () => {
                                 {title}
                             </Span>
                         </Section>
-                        <Section marginTop="7px">
+                        <Section marginRight="30px" marginTop="7px">
                             <Span
-                                alignCenter
-                                color="#979797"
+                                color={grey18}
                                 fontSize={textFontSizeContent}
                                 fontWeight={textFontWeightRegular}
                                 lineHeight={textLineHeight}
