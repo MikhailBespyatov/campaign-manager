@@ -8,7 +8,7 @@ export const borderBlockWidth = '300px';
 export const sectionWidth = parseInt(borderBlockWidth) - parseInt(primaryPadding) * 2 + 'px';
 export const dateBlockHeight = '60px';
 export const borderBlockHorizontalPadding = '16px';
-export const borderBlockVerticalPadding = '8px';
+export const borderBlockVerticalPadding = '7px';
 
 export const graphicBlockBorder = `2px solid ${formGrey2}`;
 

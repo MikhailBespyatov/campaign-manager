@@ -5,8 +5,8 @@ import { commaInserter } from 'utils/usefulFunctions';
 
 export const wrapperWidth = '244px';
 
-export const womImgWidth = '25px';
-export const womImgHeight = '29px';
+export const womImgWidth = '20px';
+export const womImgHeight = '23px';
 
 export const inputBackground = '#EDEDED';
 export const inputFontSize = '30px';

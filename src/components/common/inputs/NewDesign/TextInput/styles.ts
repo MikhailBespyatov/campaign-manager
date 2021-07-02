@@ -1,5 +1,14 @@
 import { Span } from 'components/common/typography/Span';
-import { blue, formGrey3, formGrey5, formGrey6, primaryColor, tertiaryBorderRadius } from 'constants/styles';
+import {
+    blue,
+    ellipsisMixin,
+    formGrey3,
+    formGrey5,
+    formGrey6,
+    grey4,
+    primaryColor,
+    tertiaryBorderRadius
+} from 'constants/styles';
 import styled, { css } from 'styled-components';
 import { Disabled, Padding } from 'types';
 
@@ -10,9 +19,8 @@ export const Wrapper = styled.div`
 export const LabelNameSpan = styled(Span)`
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: ${formGrey5};
+    line-height: ${({ lineHeight }) => lineHeight || '17px'};
+    color: ${grey4};
 `;
 
 export const ErrorSpan = styled.span`
@@ -31,8 +39,9 @@ export const TextFieldForm = styled.input<Padding>`
     outline: none;
     appearance: none;
     width: 100%;
-    height: 38px;
+    height: 40px;
     padding-left: ${({ paddingLeft }) => paddingLeft || '16px'};
+    padding-right: ${({ paddingRight }) => paddingRight || '16px'};
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -40,6 +49,8 @@ export const TextFieldForm = styled.input<Padding>`
     ${inputTextColorMixin};
     border: 1px solid ${formGrey3};
     border-radius: ${tertiaryBorderRadius};
+
+    ${ellipsisMixin}
 
     ::placeholder {
         ${inputTextColorMixin};

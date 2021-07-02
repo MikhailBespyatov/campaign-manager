@@ -3,27 +3,31 @@ import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
 import {
     calculatePopoverArrowRight,
     calculatePopoverArrowTop,
-    calculatePopoverRight,
-    calculatePopoverTop
+    calculatePopoverShift,
+    calculatePopoverTop,
+    PopoverType
 } from 'components/modals/InfoPopover/constants';
 import { PopoverAbsoluteWrapper, PopoverArrow } from 'components/modals/InfoPopover/styles';
 import { useRefWidthAndHeight } from 'hooks/getRefProperty';
 import { useModal } from 'hooks/modal';
 import React, { FC, MouseEvent as MouseEventReact, useRef } from 'react';
+import { BackgroundColor, Sizes } from 'types';
 
-export interface InfoPopoverProps {
+export interface InfoPopoverProps extends BackgroundColor, Pick<Sizes, 'width'> {
     popoverText: string;
+    type?: PopoverType;
 }
 
-export const InfoPopover: FC<InfoPopoverProps> = ({ children, popoverText }) => {
+export const InfoPopover: FC<InfoPopoverProps> = ({ children, popoverText, backgroundColor, width, type = 'left' }) => {
     const { visible, close, open } = useModal();
     const childrenRef = useRef<HTMLDivElement>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
     const [childrenWidth, childrenHeight] = useRefWidthAndHeight(childrenRef);
     const popoverArrowRight = calculatePopoverArrowRight(childrenWidth);
     const popoverArrowTop = calculatePopoverArrowTop(childrenHeight);
-    const popoverRight = calculatePopoverRight(childrenWidth);
+
     const popoverTop = calculatePopoverTop(childrenHeight);
+    const popoverHorizontalPosition = calculatePopoverShift(childrenWidth);
 
     const togglePopover = (e: MouseEventReact<HTMLDivElement>) => {
         e.stopPropagation();
@@ -40,12 +44,19 @@ export const InfoPopover: FC<InfoPopoverProps> = ({ children, popoverText }) => 
         >
             {visible && (
                 <>
-                    <PopoverAbsoluteWrapper ref={popoverRef} right={popoverRight} top={popoverTop}>
+                    <PopoverAbsoluteWrapper
+                        ref={popoverRef}
+                        backgroundColor={backgroundColor}
+                        horizontalPosition={popoverHorizontalPosition}
+                        top={popoverTop}
+                        type={type}
+                        width={width}
+                    >
                         <Span fontSize="12px" fontWeight="400">
                             {popoverText}
                         </Span>
                     </PopoverAbsoluteWrapper>
-                    <PopoverArrow right={popoverArrowRight} top={popoverArrowTop} />
+                    <PopoverArrow borderColor={backgroundColor} right={popoverArrowRight} top={popoverArrowTop} />
                 </>
             )}
             {children}

@@ -50,8 +50,7 @@ export const FakeDataPicker = styled.div`
 
 export const FakeBetweenDataPicker = styled.div`
     position: absolute;
-    width: 60px;
-    top: -25px;
+    top: -35px;
     right: -15px;
     z-index: 10;
     opacity: 0;
@@ -161,7 +160,7 @@ export const useStyles = makeStyles(() => ({
 }));
 
 export const TitleSpan = styled(Span)`
-    font-weight: normal;
+    font-weight: 400;
     font-size: 11px;
     line-height: 13px;
     text-transform: uppercase;

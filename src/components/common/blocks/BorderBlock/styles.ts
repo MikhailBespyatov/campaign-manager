@@ -1,5 +1,5 @@
 import { wrapperBorder } from 'components/common/blocks/BorderBlock/constants';
-import { primaryPadding, secondaryBorderRadius, tertiaryMargin } from 'constants/styles';
+import { primaryMargin, primaryPadding, secondaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 import {
     BackgroundColor,
@@ -28,7 +28,7 @@ export const Wrapper = styled.div<WrapperProps>`
     border: ${wrapperBorder};
     ${({ removeBorderRadius }) => !removeBorderRadius && `border-radius: ${secondaryBorderRadius};`};
     margin-right: ${primaryPadding};
-    margin-bottom: ${tertiaryMargin};
+    margin-bottom: ${primaryMargin};
     padding: ${primaryPadding};
     ${({ paddingRight }) => paddingRight && `padding-right: ${paddingRight};padding-left: ${paddingRight};`};
     ${({ paddingBottom }) => paddingBottom && `padding-bottom: ${paddingBottom};padding-top: ${paddingBottom};`};

@@ -1,5 +1,6 @@
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { CampaignItem } from 'components/common/features/CampaignItem';
+import { InfoImg } from 'components/common/imageComponents/InfoImg';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { HistoricalSetSelect } from 'components/common/inputs/HistoricalSetSelect';
 import { RowHeaderRadio } from 'components/common/inputs/RowHeaderRadio';
@@ -12,10 +13,11 @@ import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrappe
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { CampaignStatusLayout } from 'components/Layouts/CampaignStatusLayout';
 import { SelectedVideoCard } from 'components/Layouts/Cards/SelectedVideoCard';
+import { InfoPopover } from 'components/modals/InfoPopover';
 import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
 import { historicalSetsDefault, historicalSetsFilterValues } from 'constants/filters';
 import { noDataAvailableMessage } from 'constants/messages';
-import { grey4, primaryColor, primaryMargin, tertiaryMargin } from 'constants/styles';
+import { grey4, popoverBackground, primaryColor, primaryMargin, tertiaryMargin } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
 import {
@@ -362,11 +364,20 @@ export const Details = () => {
                                         width={borderBlockWidth}
                                     >
                                         <Column noWrap /*marginBottom={primaryPadding}*/>
-                                            <MarginWrapper marginBottom="2px">
+                                            <Row marginBottom="2px">
                                                 <Span fontSize="12px" fontWeight="400" lineHeight="15px">
                                                     Compare Range
                                                 </Span>
-                                            </MarginWrapper>
+                                                <MarginWrapper marginLeft="10px">
+                                                    <InfoPopover
+                                                        backgroundColor={popoverBackground}
+                                                        popoverText="Some additional information"
+                                                        width="250px"
+                                                    >
+                                                        <InfoImg />
+                                                    </InfoPopover>
+                                                </MarginWrapper>
+                                            </Row>
 
                                             <HistoricalSetSelect
                                                 withoutBorder

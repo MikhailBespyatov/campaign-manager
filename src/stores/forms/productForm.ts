@@ -78,7 +78,6 @@ export const productForm = createForm({
     },
     validateOn: ['change', 'blur', 'submit']
 });
-
 //using form for different events
 const editSubmit = createEvent();
 const addSubmit = createEvent();
@@ -110,7 +109,14 @@ forward({ from: [addSubmit, editSubmit], to: productForm.submit });
 
 forward({ from: productForm.formValidated, to: handleProduct });
 
-// productForm.submit.watch();
+// productForm.fields.category.$value.watch(state => {
+//     console.log('category field state', state);
+// });
+
+// productForm.fields.imageUrl.$value.watch(state => {
+//     console.log('imageUrl field state', state);
+// });
+
 // const submitForm = createEvent();
 //
 // forward({ from: productForm.formValidated, to: submitForm });

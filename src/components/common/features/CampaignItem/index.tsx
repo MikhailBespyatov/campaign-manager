@@ -3,19 +3,19 @@ import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
 import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
 import { DateOfDetailsCampaignBlock } from 'components/common/blocks/DateOfDetailsCampaignBlock';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { SimpleButton } from 'components/common/buttons/SimpleButton';
+import { channelNamesArray } from 'components/common/features/CampaignItem/constants';
 import { Span } from 'components/common/typography/Span';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius, white } from 'constants/styles';
+import { blue, primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
 import { themeStores } from 'stores/theme';
 import { Status } from 'types';
-import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, StyledSpan } from './styles';
+import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, IncludedChannelWrapper, StyledSpan } from './styles';
 
 interface CampaignSubtitleProps {
     videosQuantity?: number;
@@ -45,14 +45,19 @@ export const CampaignItem: FC<Props> = ({
     status,
     hideShowStatisticButton
 }) => {
+    //const { value: channelIDsArray } = useField(forms.createCampaignForm.fields.channels);
+
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const isDraftStatus = status === 'draft';
     // const { primaryColor } = useStore(themeStores.theme);
+
     const onMoreInfoClick = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.indexDetails + id);
+
     const onContinueClick = () => {
         campaignsEvents.setFormFromDraft(id);
         history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
     };
+
     const onDeleteDraftClick = () => campaignsEvents.deleteDraftCampaign(id);
 
     return (
@@ -100,6 +105,22 @@ export const CampaignItem: FC<Props> = ({
                             </>
                         ) : null}
                     </Row>
+                    {hideShowStatisticButton && channelNamesArray.length && (
+                        <Section>
+                            <Section marginBottom="8px" marginTop="8px">
+                                <Span color={blue}>Channels Included in This Campaign</Span>
+                            </Section>
+                            <Column noWrap>
+                                {channelNamesArray.map(name => (
+                                    <IncludedChannelWrapper key={name}>
+                                        <Span noWrap fontSize="12px" fontWeight="400">
+                                            {name}
+                                        </Span>
+                                    </IncludedChannelWrapper>
+                                ))}
+                            </Column>
+                        </Section>
+                    )}
                     {/*    <Row marginBottom="0">*/}
                     {/*    {status === 'running' && (*/}
                     {/*        <MarginWrapper marginRight={tertiaryMargin}>*/}
@@ -124,26 +145,29 @@ export const CampaignItem: FC<Props> = ({
                 </Column>
 
                 <CampaignStatusBlock>
-                    <MarginWrapper marginBottom="30px">
+                    <MarginWrapper marginBottom="20px">
                         <CampaignStatus daysRemaining={schedule?.remainingDays} status={status} />
                     </MarginWrapper>
                     {isDetailsPage || hideShowStatisticButton ? null : isDraftStatus ? (
-                        <Row alignCenter>
+                        <Row alignCenter marginTop="10px">
                             <MarginWrapper marginRight="20px">
-                                <SimpleButton
-                                    backgroundColor={white}
-                                    color={red}
+                                <ManualRoundedButton
+                                    background="transparent"
+                                    borderRadius={tertiaryBorderRadius}
+                                    fontSize="14px"
+                                    fontWeight="400"
                                     height={primaryButtonDiameter}
-                                    width="167px"
+                                    mainColor={red}
+                                    minWidth="100px"
                                     onClick={onDeleteDraftClick}
                                 >
                                     Delete
-                                </SimpleButton>
+                                </ManualRoundedButton>
                             </MarginWrapper>
                             <ManualRoundedButton
                                 borderRadius={tertiaryBorderRadius}
                                 height={primaryButtonDiameter}
-                                width="167px"
+                                minWidth="fit-content"
                                 onClick={onContinueClick}
                             >
                                 CONTINUE

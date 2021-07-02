@@ -21,9 +21,9 @@ export const CampaignTopBar = ({ campaignStatusCount, statusRoute, onClick, with
             {viewRoutes.map(({ name, status }) => (
                 <StyledItem key={name} active={statusRoute.status === status} onClick={() => onClick(status)}>
                     <Span
-                        fontSize="12px"
+                        fontSize="14px"
                         fontWeight={defaultFontWeight}
-                        lineHeight="14px"
+                        lineHeight="17px"
                     >{`(${campaignStatusCount[status]}) ${name}`}</Span>
                 </StyledItem>
             ))}

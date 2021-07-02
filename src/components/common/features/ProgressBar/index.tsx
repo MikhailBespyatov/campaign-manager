@@ -1,15 +1,17 @@
-import React from 'react';
-import { ItemSpan, ProgressBarItem, ProgressBarList, Wrapper } from 'components/common/features/ProgressBar/styles';
+import arrow from 'assets/icons/arrow_transparent_right.svg';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import {
+    arrowDiameter,
     progressBarHeight,
     progressBarHorizontalPadding,
     progressBarVerticalPadding
 } from 'components/common/features/ProgressBar/constants';
-import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { SimpleButton } from 'components/common/buttons/SimpleButton';
-import { formGrey6, primaryColor, white } from 'constants/styles';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { ItemSpan, ProgressBarItem, ProgressBarList, Wrapper } from 'components/common/features/ProgressBar/styles';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import React from 'react';
+import { modalEvents } from 'stores/modal';
 import { IsValid, Noop, ProgressBarItemInterface } from 'types';
 
 export interface ProgressBarProps extends IsValid {
@@ -24,10 +26,22 @@ export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPubl
     const nextStep = () => isValid && onChange(true);
     const backStep = () => onChange(false);
 
+    const onPublishButtonClick = () =>
+        modalEvents.openAsyncModal({
+            title: 'Ready To Launch Your Campaign?',
+            content: 'Be sure to double-check your campaign details as these cannot be edited once you publish.',
+            closeText: 'Go Back',
+            okText: 'Publish',
+            onOk: () => {
+                onPublish?.();
+                modalEvents.closeAsyncModal();
+            }
+        });
+
     //TODO: Create flexible SimpleButton
     return (
         <Wrapper padding={`${progressBarVerticalPadding} ${progressBarHorizontalPadding}`}>
-            <Section height={progressBarHeight} marginBottom="17px">
+            <Section height={progressBarHeight} marginBottom="15px">
                 <ProgressBarList>
                     {steps.map(({ title }, index) => (
                         <ProgressBarItem key={title} active={index === activeIndex} done={index < activeIndex}>
@@ -36,32 +50,74 @@ export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPubl
                     ))}
                 </ProgressBarList>
             </Section>
-            <Section justifyBetween>
-                <Row>
-                    <SimpleButton
-                        backgroundColor={white}
-                        color={activeIndex ? primaryColor : formGrey6}
-                        onClick={backStep}
-                    >
-                        BACK
-                    </SimpleButton>
-                </Row>
-                <Row>
-                    <MarginWrapper marginRight="30px">
-                        {activeIndex !== steps.length - 1 ? (
-                            <ManualRoundedButton disabled={!isValid} height="29px" minWidth="97px" onClick={nextStep}>
-                                NEXT
-                            </ManualRoundedButton>
-                        ) : (
-                            <ManualRoundedButton disabled={!isValid} height="29px" minWidth="97px" onClick={onPublish}>
-                                PUBLISH
-                            </ManualRoundedButton>
-                        )}
+            <Section justifyEnd>
+                {activeIndex !== 0 && (
+                    <MarginWrapper marginRight="15px">
+                        <ManualRoundedButton
+                            borderRadius="4px"
+                            fontSize="16px"
+                            fontWeight="400"
+                            height="32px"
+                            img={
+                                <CustomImg
+                                    alt="Arrow down"
+                                    height={arrowDiameter}
+                                    rotate={180}
+                                    src={arrow}
+                                    width={arrowDiameter}
+                                />
+                            }
+                            minWidth="90px"
+                            onClick={backStep}
+                        >
+                            BACK
+                        </ManualRoundedButton>
                     </MarginWrapper>
-                    <SimpleButton backgroundColor={white} color="#FF0606" onClick={onCancel}>
-                        CANCEL
-                    </SimpleButton>
-                </Row>
+                )}
+                <MarginWrapper marginRight="40px">
+                    {activeIndex !== steps.length - 1 ? (
+                        <ManualRoundedButton
+                            imageIsLast
+                            borderRadius="4px"
+                            disabled={!isValid}
+                            fontSize="16px"
+                            fontWeight="400"
+                            height="32px"
+                            img={
+                                <CustomImg alt="Arrow down" height={arrowDiameter} src={arrow} width={arrowDiameter} />
+                            }
+                            minWidth="90px"
+                            onClick={nextStep}
+                        >
+                            NEXT
+                        </ManualRoundedButton>
+                    ) : (
+                        <ManualRoundedButton
+                            borderRadius="4px"
+                            disabled={!isValid}
+                            fontSize="16px"
+                            fontWeight="400"
+                            height="32px"
+                            minWidth="90px"
+                            onClick={onPublishButtonClick}
+                        >
+                            Publish
+                        </ManualRoundedButton>
+                    )}
+                </MarginWrapper>
+
+                <ManualRoundedButton
+                    background="transparent"
+                    borderRadius="4px"
+                    fontSize="12px"
+                    fontWeight="400"
+                    height="32px"
+                    mainColor="#FF0606"
+                    minWidth="90px"
+                    onClick={onCancel}
+                >
+                    CANCEL
+                </ManualRoundedButton>
             </Section>
         </Wrapper>
     );

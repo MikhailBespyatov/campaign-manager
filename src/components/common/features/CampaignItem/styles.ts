@@ -5,7 +5,8 @@ import {
     itemVerticalPadding
 } from 'components/common/features/CampaignItem/constants';
 import { Span } from 'components/common/typography/Span';
-import { black, grey4, tertiaryBorderRadius } from 'constants/styles';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
+import { black, grey4, grey8, tertiaryBorderRadius } from 'constants/styles';
 import styled from 'styled-components';
 import { Background, MarginRight } from 'types';
 
@@ -58,4 +59,12 @@ export const StyledSpan = styled(Span)`
     line-height: 22px;
     letter-spacing: 1px;
     color: ${grey4};
+`;
+
+export const IncludedChannelWrapper = styled(Row)`
+    height: 40px;
+    width: 270px;
+    padding: 10px 40px;
+    margin-bottom: 8px;
+    border: 1px solid ${grey8};
 `;

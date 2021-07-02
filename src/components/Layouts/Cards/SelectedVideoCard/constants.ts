@@ -1,2 +1,2 @@
-export const addIdImgDiameter = '40px';
-export const removeImgTop = '-20px';
+export const addIdImgDiameter = '25px';
+export const removeImgTop = '-7px';

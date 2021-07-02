@@ -1,4 +1,4 @@
-import { combine, createEvent, createStore } from 'effector';
+import { createEvent, createStore } from 'effector';
 import { initializeGenericStoreModal } from 'stores/initialize/initialize.store.modal';
 import { CardModal, Noop, PopUpCampaignManager, StrictTitle } from 'types';
 
@@ -90,10 +90,10 @@ const openAsyncModal = createEvent<AsyncModal>();
 const closeAsyncModal = createEvent();
 
 const asyncModal = createStore<AsyncModal>(initialAsyncModal)
-    .on(openAsyncModal, (_, newState) => ({ ...newState, visible: true }))
+    .on(openAsyncModal, (state, newState) => ({ ...state, ...newState, visible: true }))
     .on(closeAsyncModal, () => initialAsyncModal);
 
-const asyncModalStore = combine(asyncModal);
+//const asyncModalStore = combine(asyncModal);
 
 const modalEvents = {
     openCardModal,
@@ -115,7 +115,8 @@ const modalStores = {
     popUpCampaignManager,
     walletModal,
     congratsModal,
-    asyncModalStore
+    asyncModal
+    //asyncModalStore
 };
 
 export { modalStores, modalEvents };

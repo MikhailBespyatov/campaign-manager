@@ -1,5 +1,6 @@
 import productImg from 'assets/img/product_img.svg';
 import removeButtonImg from 'assets/img/remove_button_img.svg';
+import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
@@ -20,7 +21,6 @@ import { TableSubSpan } from 'components/common/typography/TableSubSpan';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { padding } from 'constants/styles';
 import React from 'react';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 
 export const CampaignTableElement = () => (
     <Table borderSpacing={tableBorderSpacing}>
@@ -155,7 +155,7 @@ export const CampaignTableElement = () => (
                         <Row marginBottom={padding}>
                             <ManualRoundedButton
                                 reverse
-                                Img={
+                                img={
                                     <CustomImg
                                         height={removeButtonImgDiameter}
                                         src={removeButtonImg}

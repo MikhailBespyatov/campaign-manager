@@ -1,7 +1,7 @@
-export const cardWidth = '310px'; // '281px';
-export const cardHeight = '389px';
+export const cardWidth = '310px';
+export const cardHeight = '430px';
 
-export const gridGap = '16px'; //'25px';
+export const gridGap = '16px';
 
 export const verticalPadding = '14px';
 export const horizontalPadding = '22px';

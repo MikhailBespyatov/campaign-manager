@@ -67,6 +67,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
             modalEvents.openAsyncModal({
                 title: 'Delete Channel',
                 content: 'Do you really want to delete channel?',
+                okText: 'Ok',
                 onOk: onRemoveChannelButtonClick
             });
         }
@@ -75,6 +76,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
             modalEvents.openAsyncModal({
                 title: 'Delete Product',
                 content: 'Do you really want delete product?',
+                okText: 'Ok',
                 onOk: onRemoveProductButtonClick
             });
         }

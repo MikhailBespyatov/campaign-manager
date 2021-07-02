@@ -13,12 +13,14 @@ import { ReactClick } from 'types/react';
 // );
 
 interface Props extends ButtonProps, ReactClick<HTMLButtonElement>, Pick<TextProperties, 'fontWeight' | 'fontSize'> {
-    Img?: JSX.Element;
+    img?: JSX.Element;
+    imageIsLast?: boolean;
 }
 
 export const ManualRoundedButton: FC<Props> = ({
     children,
-    Img,
+    img,
+    imageIsLast,
     reverse,
     mainColor,
     fontWeight,
@@ -27,12 +29,23 @@ export const ManualRoundedButton: FC<Props> = ({
     ...rest
 }) => (
     <Button {...rest} height={height} mainColor={mainColor} reverse={reverse}>
-        {Img ? (
+        {img ? (
             <Row alignCenter justifyCenter marginBottom="0">
-                <Column marginRight={padding}>{Img}</Column>
-                <InnerSpan fontSize={fontSize} fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
-                    {children}
-                </InnerSpan>
+                {!imageIsLast ? (
+                    <>
+                        <Column marginRight={padding}>{img}</Column>
+                        <InnerSpan fontSize={fontSize} fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
+                            {children}
+                        </InnerSpan>
+                    </>
+                ) : (
+                    <>
+                        <InnerSpan fontSize={fontSize} fontWeight={fontWeight} lineHeight={height} reverse={reverse}>
+                            {children}
+                        </InnerSpan>
+                        <Column marginLeft={padding}>{img}</Column>
+                    </>
+                )}
             </Row>
         ) : (
             <InnerSpan
