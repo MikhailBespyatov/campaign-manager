@@ -1,15 +1,15 @@
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { Loader } from 'components/dynamic/Loader';
 import {
-    defaultPermissionsValue,
+    //defaultPermissionsValue,
     initialValues,
     onSubmit,
-    permissionsData,
-    permissionsValues,
+    //permissionsData,
+    //permissionsValues,
     validationSchema
 } from 'components/FormComponents/forms/InviteForm/constants';
 import { FormWrapper } from 'components/FormComponents/forms/InviteForm/styles';
-import { InviteUserSelect } from 'components/FormComponents/inputs/InviteUserSelect';
+//import { InviteUserSelect } from 'components/FormComponents/inputs/InviteUserSelect';
 import { UserAdminTextInput } from 'components/FormComponents/inputs/UserAdminTextInput';
 import { primaryButtonDiameter } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -46,13 +46,13 @@ export const InviteForm = () => {
                         width="140px"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
                     /> */}
-                    <InviteUserSelect
+                    {/* <InviteUserSelect
                         data={permissionsData}
                         defaultActive={defaultPermissionsValue}
                         name="permission"
                         values={permissionsValues}
                         // onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
-                    />
+                    /> */}
                     <ManualRoundedButton
                         borderRadius="4px"
                         disabled={loading}

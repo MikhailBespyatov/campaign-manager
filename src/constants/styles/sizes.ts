@@ -13,6 +13,7 @@ export const pageHorizontalPadding = '40px';
 export const primaryBorderRadius = '20px';
 export const secondaryBorderRadius = '10px';
 export const tertiaryBorderRadius = '8px';
+export const quaternaryBorderRadius = '4px';
 
 export const primaryButtonDiameter = '40px';
 

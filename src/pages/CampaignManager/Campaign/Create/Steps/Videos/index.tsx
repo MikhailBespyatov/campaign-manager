@@ -10,6 +10,7 @@ import { defaultPage } from 'constants/defaults';
 import { useField } from 'effector-forms';
 import { useStore } from 'effector-react';
 import {
+    selectedVideosFieldBorder,
     videoSectionMarginBottom,
     videoStepPadding
 } from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
@@ -46,6 +47,7 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
     return (
         <>
             <ContentWrapper
+                border={selectedVideosFieldBorder}
                 height="220px"
                 marginBottom={videoSectionMarginBottom}
                 padding={videoStepPadding}
