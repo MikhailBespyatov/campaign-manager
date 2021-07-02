@@ -1,4 +1,6 @@
-import WOMLogo from 'assets/img/wom_logo.svg';
+//import WOMLogo from 'assets/img/wom_logo.svg';
+import WOMLogo from 'assets/img/sample_logo.png';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
@@ -58,7 +60,9 @@ export const Product = () => {
                 <ContentWrapper borderRadius="0px" padding="15px 40px">
                     <Row alignCenter>
                         <MarginWrapper marginRight="17px">
-                            <ProductThumbnail backgroundImage={imageUrl || WOMLogo} />
+                            <ProductThumbnail>
+                                <CustomImg src={imageUrl || WOMLogo} />
+                            </ProductThumbnail>
                         </MarginWrapper>
                         <Column>
                             <MarginWrapper marginBottom="10px">

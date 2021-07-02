@@ -1,12 +1,12 @@
 import { flexCenter, grey5 } from 'constants/styles';
 import styled from 'styled-components';
-import { BackgroundImage } from 'types';
+import { Sizes } from 'types';
 import { productThumbnailDiameter } from './Product/constants';
 
-export const ProductThumbnail = styled.div<BackgroundImage>`
+export const ProductThumbnail = styled.div<Sizes>`
     ${flexCenter}
-    width: ${productThumbnailDiameter};
-    height: ${productThumbnailDiameter};
+    width:  ${({ width }) => width || productThumbnailDiameter};
+    height: ${({ height }) => height || productThumbnailDiameter};
     border-radius: 50%;
     border: 1px solid ${grey5};
     overflow: hidden;

@@ -1,6 +1,6 @@
 import editButtonIcon from 'assets/img/edit_icon.svg';
 import moreButtonIcon from 'assets/img/gray_arrow.svg';
-import defaultChannelImg from 'assets/img/wom_logo.svg';
+import WOMLogo from 'assets/img/wom_logo.svg';
 import { ImgButton } from 'components/common/buttons/ImgButton';
 import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
 import { CopyableField } from 'components/common/features/CopyableField';
@@ -63,7 +63,7 @@ export const Products = () => {
                 <Row key={id} alignCenter noWrap>
                     <MarginWrapper marginLeft="8px" marginRight="17px">
                         <ProductThumbnail>
-                            <CustomImg src={imageUrl || defaultChannelImg} />
+                            <CustomImg src={imageUrl || WOMLogo} />
                         </ProductThumbnail>
                     </MarginWrapper>
                     <ChannelNameSpan>{name}</ChannelNameSpan>
