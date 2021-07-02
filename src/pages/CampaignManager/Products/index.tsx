@@ -15,12 +15,9 @@ import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout'
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { product, productsEdit, routes } from 'constants/routes';
-import { grey5, primaryMargin, white } from 'constants/styles';
+import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
-import {
-    channelLogoDiameter,
-    copyButtonIconDiameter
-} from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
+import { copyButtonIconDiameter } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
 import { editButtonDiameter } from 'pages/CampaignManager/Channels/constants';
 import {
@@ -32,6 +29,7 @@ import {
     productParameters,
     productsContentPadding
 } from 'pages/CampaignManager/Products/constants';
+import { ProductThumbnail } from 'pages/CampaignManager/Products/styles';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
@@ -64,13 +62,9 @@ export const Products = () => {
             cells: [
                 <Row key={id} alignCenter noWrap>
                     <MarginWrapper marginLeft="8px" marginRight="17px">
-                        <CustomImg
-                            borderColor={grey5}
-                            borderRadius="50%"
-                            height={channelLogoDiameter}
-                            src={imageUrl || defaultChannelImg}
-                            width={channelLogoDiameter}
-                        />
+                        <ProductThumbnail>
+                            <CustomImg src={imageUrl || defaultChannelImg} />
+                        </ProductThumbnail>
                     </MarginWrapper>
                     <ChannelNameSpan>{name}</ChannelNameSpan>
                 </Row>,
