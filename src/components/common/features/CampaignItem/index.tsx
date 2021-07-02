@@ -3,19 +3,19 @@ import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
 import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
 import { DateOfDetailsCampaignBlock } from 'components/common/blocks/DateOfDetailsCampaignBlock';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
-import { channelNamesArray } from 'components/common/features/CampaignItem/constants';
+//import { channelNamesArray } from 'components/common/features/CampaignItem/constants';
 import { Span } from 'components/common/typography/Span';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { blue, primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius } from 'constants/styles';
+import { primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
 import { themeStores } from 'stores/theme';
 import { Status } from 'types';
-import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, IncludedChannelWrapper, StyledSpan } from './styles';
+import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, StyledSpan } from './styles';
 
 interface CampaignSubtitleProps {
     videosQuantity?: number;
@@ -105,7 +105,7 @@ export const CampaignItem: FC<Props> = ({
                             </>
                         ) : null}
                     </Row>
-                    {hideShowStatisticButton && channelNamesArray.length && (
+                    {/* {hideShowStatisticButton && channelNamesArray.length && (
                         <Section>
                             <Section marginBottom="8px" marginTop="8px">
                                 <Span color={blue}>Channels Included in This Campaign</Span>
@@ -120,7 +120,7 @@ export const CampaignItem: FC<Props> = ({
                                 ))}
                             </Column>
                         </Section>
-                    )}
+                    )} */}
                     {/*    <Row marginBottom="0">*/}
                     {/*    {status === 'running' && (*/}
                     {/*        <MarginWrapper marginRight={tertiaryMargin}>*/}

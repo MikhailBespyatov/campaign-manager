@@ -1,6 +1,6 @@
 import editButtonIcon from 'assets/img/edit_icon.svg';
 // import defaultChannelImg from 'assets/img/wom_logo.svg';
-import defaultChannelImg from 'assets/img/sample_logo.png';
+import WOMLogo from 'assets/img/sample_logo.png';
 import { ImgButton } from 'components/common/buttons/ImgButton';
 import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
 import { CopyableField } from 'components/common/features/CopyableField';
@@ -18,6 +18,7 @@ import { primaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { copyButtonIconDiameter } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
+import { ProductThumbnail } from 'pages/CampaignManager/Products/styles';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
@@ -46,7 +47,9 @@ export const Channels = () => {
         cells: [
             <Row key={id} alignCenter>
                 <MarginWrapper marginLeft="8px" marginRight="16px">
-                    <CustomImg height="40px" src={/*imageUrl || */ defaultChannelImg} width="42px" />
+                    <ProductThumbnail>
+                        <CustomImg src={/*imageUrl ||*/ WOMLogo} />
+                    </ProductThumbnail>
                 </MarginWrapper>
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
