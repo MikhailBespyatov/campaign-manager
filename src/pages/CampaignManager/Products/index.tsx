@@ -15,7 +15,7 @@ import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout'
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { product, productsEdit, routes } from 'constants/routes';
-import { primaryMargin, white } from 'constants/styles';
+import { grey5, primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
     channelLogoDiameter,
@@ -65,6 +65,8 @@ export const Products = () => {
                 <Row key={id} alignCenter noWrap>
                     <MarginWrapper marginLeft="8px" marginRight="17px">
                         <CustomImg
+                            borderColor={grey5}
+                            borderRadius="50%"
                             height={channelLogoDiameter}
                             src={imageUrl || defaultChannelImg}
                             width={channelLogoDiameter}
