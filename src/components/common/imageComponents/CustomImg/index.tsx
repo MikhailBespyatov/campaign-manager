@@ -1,9 +1,15 @@
 import { Img } from 'components/common/imageComponents/CustomImg/styles';
 import { defaultImgAlt } from 'constants/defaults';
 import React, { MouseEvent } from 'react';
-import { BorderRadiusProperties, imgProperties, Pointer, Rotation, Sizes } from 'types';
+import { BorderProperties, BorderRadiusProperties, imgProperties, Pointer, Rotation, Sizes } from 'types';
 
-interface Props extends Rotation, Pointer, Sizes, imgProperties, BorderRadiusProperties {
+interface Props
+    extends Rotation,
+        Pointer,
+        Sizes,
+        imgProperties,
+        BorderRadiusProperties,
+        Pick<BorderProperties, 'borderColor'> {
     onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
