@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
 import { routes } from 'constants/routes';
-import { createRule, yupCategory, yupCompanyName, yupId, yupProductName, yupString, yupUrl } from 'constants/yupFields';
+import { createRule, yupCompanyName, yupId, yupProductName, yupString, yupUrl } from 'constants/yupFields';
 import { createEffect, createEvent, createStore, forward } from 'effector';
 import { createForm } from 'effector-forms';
 import { API } from 'services';
@@ -47,12 +47,12 @@ export const productForm = createForm({
             ]
         },
         category: {
-            /* //TODO:  change to empty string when end point is ready */
-            init: 'Cosmetics',
+            /* //TODO:  change validation yupCategory  when end point is ready */
+            init: '',
             rules: [
                 createRule<string>({
                     name: 'category',
-                    schema: yupCategory
+                    schema: yupString
                 })
             ]
         },

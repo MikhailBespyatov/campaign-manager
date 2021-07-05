@@ -88,10 +88,10 @@ export const ProductForm = () => {
                     <ContentWrapper paddingRight={inputHalfHorizontalMargin} width="100%">
                         <FormTextInput
                             disabled
-                            required
+                            // required
                             field={category}
                             label="Product Category"
-                            placeholder="Type product category here..."
+                            //placeholder="Type product category here..."
                         />
                     </ContentWrapper>
                 </FlexGrow>

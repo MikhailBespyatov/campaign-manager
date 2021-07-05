@@ -1,4 +1,4 @@
-import { InfoImg } from 'components/common/imageComponents/InfoImg';
+//import { InfoImg } from 'components/common/imageComponents/InfoImg';
 import { WomCurrencyImg } from 'components/common/imageComponents/WomCurrencyImg';
 import { TextInput } from 'components/common/inputs/NewDesign/TextInput';
 import {
@@ -6,6 +6,7 @@ import {
     inputFieldMarginRight,
     inputFieldWidth,
     logoZIndex,
+    textBlocksMargin,
     textFontWeight
 } from 'components/common/inputs/NewDesign/WomInput/constants';
 import { Select } from 'components/common/inputs/Select';
@@ -15,13 +16,14 @@ import { womImgHeight } from 'components/FormComponents/inputs/WomInput/constant
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { InfoPopover } from 'components/modals/InfoPopover';
-import { grey4, popoverBackground } from 'constants/styles';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+//import { InfoPopover } from 'components/modals/InfoPopover';
+import { grey4 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { walletEffects, walletStores } from 'stores/wallet';
-import { Label } from 'types';
-import { currencyToText, totalCurrency } from 'utils/usefulFunctions';
+import { CurrencyType, Label } from 'types';
+import { totalCurrency } from 'utils/usefulFunctions';
 
 export interface WomInputProps extends Required<Label> {
     errorText?: string;
@@ -30,26 +32,48 @@ export interface WomInputProps extends Required<Label> {
     isValid: boolean;
 }
 
+export interface CurrencyDataProps {
+    balance: string | 0;
+    // toString: () => string;
+    rate: number;
+    sign: string;
+    name: string;
+}
+
 export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInputProps) => {
     const [usdRate, eurRate] = useStore(walletStores.rates);
     const walletBalance = useStore(walletStores.walletBalance);
     const USD = totalCurrency(walletBalance, usdRate);
     const EUR = totalCurrency(walletBalance, eurRate);
 
-    const currencyData = {
+    const currencyData: {
+        [key in CurrencyType]: CurrencyDataProps;
+    } = {
         USD: {
-            rate: usdRate,
-            currencyToString: `$ ${USD}`
+            balance: USD,
+            sign: '$',
+            name: 'USD',
+            rate: usdRate
+            // toString: function () {
+            //     return `$ ${this.value}`;
+            // },
         },
         EUR: {
-            rate: eurRate,
-            currencyToString: `€ ${EUR}`
+            balance: EUR,
+            sign: '€',
+            name: 'EUR',
+            rate: eurRate
+            // toString: function () {
+            //     return `€ ${this.value}`;
+            // },
         }
     };
-    const [selectedCurrency, setSelectedCurrency] = useState<keyof typeof currencyData>('USD');
+
+    const [selectedCurrency, setSelectedCurrency] = useState<CurrencyType>('USD');
+    const { balance, rate, sign, name } = currencyData[selectedCurrency];
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value);
-    const onCurrencySelect = (currency: keyof typeof currencyData) => {
+    const onCurrencySelect = (currency: CurrencyType) => {
         setSelectedCurrency(currency);
     };
 
@@ -59,7 +83,7 @@ export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInpu
 
     return (
         <Section alignEnd justifyCenter>
-            <Row marginRight={inputFieldMarginRight} marginTop="8px" width={inputFieldWidth}>
+            <Row marginRight={inputFieldMarginRight} marginTop={textBlocksMargin} width={inputFieldWidth}>
                 <RelativeWrapper>
                     <AbsoluteWrapper left="20px" top="37px" zIndex={logoZIndex}>
                         <WomCurrencyImg height={womImgHeight} />
@@ -77,11 +101,11 @@ export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInpu
                         value={value}
                         onChange={onChangeInput}
                     />
-                    <AbsoluteWrapper right="20px" top="40px" zIndex={logoZIndex}>
+                    {/* <AbsoluteWrapper right="20px" top="40px" zIndex={logoZIndex}>
                         <InfoPopover backgroundColor={popoverBackground} popoverText="Some additional information">
                             <InfoImg />
                         </InfoPopover>
-                    </AbsoluteWrapper>
+                    </AbsoluteWrapper> */}
 
                     {!isValid && (
                         <AbsoluteWrapper right="45px" top="35px" zIndex={logoZIndex}>
@@ -91,27 +115,36 @@ export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInpu
                 </RelativeWrapper>
             </Row>
 
-            <Row justifyBetween marginRight={inputFieldMarginRight} marginTop="8px" width={inputFieldWidth}>
-                <Select
-                    height={inputFieldHeight}
-                    values={Object.keys(currencyData)}
-                    width="150px"
-                    onChange={() => onCurrencySelect}
-                />
-                <Column justifyBetween height={inputFieldHeight}>
-                    <Row>
+            <Row
+                justifyBetween
+                marginRight={inputFieldMarginRight}
+                marginTop={textBlocksMargin}
+                width={inputFieldWidth}
+            >
+                <MarginWrapper marginBottom={textBlocksMargin} marginRight={textBlocksMargin}>
+                    <Select
+                        height={inputFieldHeight}
+                        values={Object.keys(currencyData)}
+                        width="150px"
+                        onChange={onCurrencySelect as (active: string) => void}
+                    />
+                </MarginWrapper>
+                <Column justifyBetween noWrap height={inputFieldHeight}>
+                    <Section>
                         <Span fontWeight={textFontWeight} lineHeight="17px">
-                            {currencyData[selectedCurrency].currencyToString}
+                            {sign}&nbsp;{balance}
+                            {/* {currencyData[selectedCurrency].toString()} */}
                         </Span>
-                    </Row>
+                    </Section>
 
-                    <Row>
+                    <Section>
                         <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="16px">
                             Current Exchange Rate&nbsp;
-                            {currencyToText(currencyData[selectedCurrency].rate)}
-                            &nbsp;=&nbsp;1&nbsp;WOM
                         </Span>
-                    </Row>
+                        <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="16px">
+                            {sign + Number(rate).toFixed(2)} {name}&nbsp;= 1&nbsp;WOM
+                        </Span>
+                    </Section>
                 </Column>
             </Row>
         </Section>

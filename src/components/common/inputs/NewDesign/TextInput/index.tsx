@@ -1,9 +1,12 @@
+import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
 import { useField } from 'effector-forms';
 import { Field } from 'effector-forms/dist/types';
 import React, { ChangeEvent } from 'react';
 import { Disabled, Label, Padding, Placeholder, Type } from 'types';
-import { ErrorSpan, LabelNameSpan, TextFieldForm, Wrapper } from './styles';
+import { /*ErrorSpan,*/ LabelNameSpan, TextFieldForm, Wrapper } from './styles';
 
 export interface TextInputProps
     extends Disabled,
@@ -44,21 +47,28 @@ export const TextInput = ({
                 {required && '*'}
             </LabelNameSpan>
         </MarginWrapper>
-        <TextFieldForm
-            disabled={disabled}
-            name={name}
-            paddingLeft={paddingLeft}
-            paddingRight={paddingRight}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onChange}
-        />
-        {errorText && (
-            <MarginWrapper marginTop="16px">
-                <ErrorSpan>{errorText}</ErrorSpan>
-            </MarginWrapper>
-        )}
+        <RelativeWrapper>
+            <TextFieldForm
+                disabled={disabled}
+                name={name}
+                paddingLeft={paddingLeft}
+                paddingRight={paddingRight}
+                placeholder={placeholder}
+                type={type}
+                value={value}
+                onChange={onChange}
+            />
+            {errorText && (
+                <>
+                    {/* <MarginWrapper marginTop="16px">
+                        <ErrorSpan>{errorText}</ErrorSpan>
+                    </MarginWrapper> */}
+                    <AbsoluteWrapper right="15px" top="10px" zIndex="4">
+                        <ErrorSpan touched>{errorText}</ErrorSpan>
+                    </AbsoluteWrapper>
+                </>
+            )}
+        </RelativeWrapper>
     </Wrapper>
 );
 

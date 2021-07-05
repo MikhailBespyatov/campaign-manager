@@ -1,10 +1,10 @@
-import { createForm } from 'effector-forms';
 import { createRule, yupDefault, yupDefaultArray } from 'constants/yupFields';
+import { createEvent, forward, sample } from 'effector';
+import { createForm } from 'effector-forms';
 import { nanoid } from 'nanoid';
+import { createCampaignEvents } from 'stores/createCampaignSteps';
 import { walletStores } from 'stores/wallet';
 import { getDateBeforeAndReturnISO, getOrganizationId } from 'utils/usefulFunctions';
-import { createEvent, forward, sample } from 'effector';
-import { createCampaignEvents } from 'stores/createCampaignSteps';
 
 export const createCampaignForm = createForm({
     fields: {
@@ -77,7 +77,21 @@ export const createCampaignForm = createForm({
         //     validateOn: ['change']
         // },
         dateFrom: {
-            init: new Date().toISOString()
+            init: new Date().toISOString(),
+            validateOn: ['change'],
+            rules: [
+                //* added validation, because next field (dateTo) validates ONLY ONCHANGE
+                //* and if change starting date (dateFrom) later after that, validation of dateTO is not triggered
+                //* and field is still valid. Initiated validation manually onFieldsChange in CampaignDatesLayout component
+                {
+                    name: 'dateFrom',
+                    validator: (value, { dateTo }) => {
+                        if (new Date(value) < new Date(getDateBeforeAndReturnISO(1))) return false;
+                        const dateToIsLaterThanDateFrom = new Date(dateTo).getDate() > new Date(value).getDate();
+                        return dateToIsLaterThanDateFrom;
+                    }
+                }
+            ]
         },
         dateTo: {
             init: new Date().toISOString(),
@@ -86,7 +100,7 @@ export const createCampaignForm = createForm({
                 {
                     name: 'dateTo',
                     validator: (value, { dateFrom }) => {
-                        if (new Date(dateFrom) < new Date(getDateBeforeAndReturnISO(1))) return false;
+                        // if (new Date(dateFrom) < new Date(getDateBeforeAndReturnISO(1))) return false;
                         const differenceDates = new Date(value).getDate() - new Date(dateFrom).getDate();
                         return differenceDates >= 1;
                     }
@@ -97,6 +111,7 @@ export const createCampaignForm = createForm({
             init: '',
             validateOn: ['change'],
             rules: [
+                //* removed dependency on dateTo, as if date is invalid  BUDGET FIELD shows error text for budget input not
                 {
                     name: 'budget',
                     source: walletStores.walletBalance,

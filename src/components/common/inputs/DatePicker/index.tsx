@@ -3,7 +3,6 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import calendarImg from 'assets/img/calendar.svg';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { InfoImg } from 'components/common/imageComponents/InfoImg';
 import {
     defaultFormat,
     defaultKeyboardButtonProps,
@@ -24,10 +23,9 @@ import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { InfoPopover } from 'components/modals/InfoPopover';
 import { Noop } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
-import { popoverBackground, primaryMargin } from 'constants/styles';
+import { primaryMargin } from 'constants/styles';
 import 'date-fns';
 import { useField } from 'formik';
 import {
@@ -150,14 +148,14 @@ export const DatePickerBetween = ({
                                         </Span>
                                     </MarginWrapper>
 
-                                    <InfoPopover
+                                    {/* <InfoPopover
                                         backgroundColor={popoverBackground}
                                         popoverText="Some additional information"
                                         type="right"
                                         width="250px"
                                     >
                                         <InfoImg />
-                                    </InfoPopover>
+                                    </InfoPopover> */}
                                 </Row>
                             )}
                             <TextFieldBetweenForm
@@ -213,13 +211,13 @@ export const DatePickerBetween = ({
                                             {titleTo}
                                         </Span>
                                     </MarginWrapper>
-                                    <InfoPopover
+                                    {/* <InfoPopover
                                         backgroundColor={popoverBackground}
                                         popoverText="Some additional information"
                                         width="250px"
                                     >
                                         <InfoImg />
-                                    </InfoPopover>
+                                    </InfoPopover> */}
                                 </Row>
                             )}
                             <TextFieldBetweenForm

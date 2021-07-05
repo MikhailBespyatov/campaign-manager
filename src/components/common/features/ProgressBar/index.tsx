@@ -12,18 +12,28 @@ import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import React from 'react';
 import { modalEvents } from 'stores/modal';
-import { IsValid, Noop, ProgressBarItemInterface } from 'types';
+import { Noop, ProgressBarItemInterface } from 'types';
 
-export interface ProgressBarProps extends IsValid {
+export interface ProgressBarProps {
     steps: Array<Pick<ProgressBarItemInterface, 'title'>>;
     activeIndex?: number;
     onCancel?: Noop;
     onChange: (isForward: boolean) => void;
     onPublish?: Noop;
+    isValidStep?: boolean;
+    isValidForm?: boolean;
 }
 
-export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPublish, isValid }: ProgressBarProps) => {
-    const nextStep = () => isValid && onChange(true);
+export const ProgressBar = ({
+    steps,
+    activeIndex = 0,
+    onCancel,
+    onChange,
+    onPublish,
+    isValidStep,
+    isValidForm
+}: ProgressBarProps) => {
+    const nextStep = () => isValidStep && onChange(true);
     const backStep = () => onChange(false);
 
     const onPublishButtonClick = () =>
@@ -79,7 +89,7 @@ export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPubl
                         <ManualRoundedButton
                             imageIsLast
                             borderRadius="4px"
-                            disabled={!isValid}
+                            disabled={!isValidStep}
                             fontSize="16px"
                             fontWeight="400"
                             height="32px"
@@ -94,7 +104,7 @@ export const ProgressBar = ({ steps, activeIndex = 0, onCancel, onChange, onPubl
                     ) : (
                         <ManualRoundedButton
                             borderRadius="4px"
-                            disabled={!isValid}
+                            disabled={!isValidForm}
                             fontSize="16px"
                             fontWeight="400"
                             height="32px"
