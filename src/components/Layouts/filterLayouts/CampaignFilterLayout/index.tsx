@@ -3,20 +3,32 @@ import { WomInput } from 'components/common/inputs/NewDesign/WomInput';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { useField } from 'effector-forms/dist';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { forms } from 'stores/forms';
 
 export interface CampaignDatesLayoutProps {}
 
 export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) => {
-    const { value: dateFromValue, onChange: onChangeDateFrom } = useField(forms.createCampaignForm.fields.dateFrom);
-    const { value: dateToValue, onChange: onChangeDateTo } = useField(forms.createCampaignForm.fields.dateTo);
+    const { value: dateFromValue, onChange: onChangeDateFrom, validate: validateDateFrom } = useField(
+        forms.createCampaignForm.fields.dateFrom
+    );
+    const { value: dateToValue, onChange: onChangeDateTo, validate: validateDateTo } = useField(
+        forms.createCampaignForm.fields.dateTo
+    );
+
     const { value, onChange, isValid } = useField(forms.createCampaignForm.fields.budget);
 
     const onDatesBetweenChange = (dateFrom: string, dateTo: string) => {
         dateFromValue !== dateFrom && onChangeDateFrom(dateFrom);
         dateToValue !== dateTo && onChangeDateTo(dateTo);
     };
+
+    useEffect(() => {
+        validateDateFrom();
+        validateDateTo();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateFromValue, dateToValue]);
 
     return (
         <>

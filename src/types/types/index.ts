@@ -11,6 +11,7 @@ export type AlignmentType = 'start' | 'center' | 'end';
 export type SubjectType = string | boolean;
 export type OkHandlerType = (subject: SubjectType) => Promise<void>;
 export type SortType = 'none' | 'descending' | 'ascending';
+export type CurrencyType = 'USD' | 'EUR';
 
 /**
  * contentOrderByProperty
