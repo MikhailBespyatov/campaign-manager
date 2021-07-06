@@ -11,6 +11,9 @@ import { SelectLi, SelectUl, Wrapper } from 'components/common/inputs/Select/sty
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
+import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapper/constants';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { defaultFontSize } from 'constants/defaults';
 import { Noop } from 'constants/global';
 import React, { FC, useState } from 'react';
 import {
@@ -24,27 +27,41 @@ import {
     Sizes
 } from 'types';
 import { multiplyPixels, pixelsAddition } from 'utils/parsers';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapper/constants';
-import { defaultFontSize } from 'constants/defaults';
 
-interface WrapperProps extends RadioProperties, Sizes, AdditionalTitle, IsWithoutBorder, PaddingRight, Disabled {
+interface ItemTextProperties {
+    itemFontSize?: string;
+    itemFontWeight?: string;
+}
+
+interface WrapperProps
+    extends RadioProperties,
+        Sizes,
+        AdditionalTitle,
+        IsWithoutBorder,
+        PaddingRight,
+        Disabled,
+        ItemTextProperties {
     top?: boolean;
     isDarkStyle?: boolean;
 }
 
-interface ItemSpanProps extends AdditionalTitle {}
+interface ItemSpanProps extends AdditionalTitle, ItemTextProperties {}
 
-interface Props extends Active, ItemRadioProperties {}
+interface Props extends Active, ItemRadioProperties, ItemTextProperties {}
 
-const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle }) => (
+const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle, itemFontSize, itemFontWeight }) => (
     <>
-        <Span fontSize={defaultFontSize} fontWeight="500" lineHeight="17px">
+        <Span fontSize={itemFontSize || defaultFontSize} fontWeight={itemFontWeight || '500'} lineHeight="17px">
             {children}
         </Span>
         {additionalTitle && (
             <MarginWrapper marginLeft="5px">
-                <Span fontSize="13px" fontWeight="500" lineHeight="20px" opacity={0.5}>
+                <Span
+                    fontSize={itemFontSize || '13px'}
+                    fontWeight={itemFontWeight || '500'}
+                    lineHeight="20px"
+                    opacity={0.5}
+                >
                     {additionalTitle}
                 </Span>
             </MarginWrapper>
@@ -52,9 +69,11 @@ const ItemSpan: FC<ItemSpanProps> = ({ children, additionalTitle }) => (
     </>
 );
 
-const Item = ({ active, value, data = value, onClick }: Props) => (
+const Item = ({ active, value, data = value, onClick, itemFontSize, itemFontWeight }: Props) => (
     <SelectLi active={active} onClick={() => onClick(value)}>
-        <ItemSpan>{data}</ItemSpan>
+        <ItemSpan itemFontSize={itemFontSize} itemFontWeight={itemFontWeight}>
+            {data}
+        </ItemSpan>
     </SelectLi>
 );
 
@@ -68,6 +87,8 @@ export const Select = ({
     disabled,
     height = wrapperHeight,
     isDarkStyle,
+    itemFontSize,
+    itemFontWeight,
     ...styles
 }: WrapperProps) => {
     const [isClosed, setIsClosed] = useState(true);
@@ -101,7 +122,9 @@ export const Select = ({
 
     return (
         <Wrapper disabled={disabled} height={height} isDarkStyle={isDarkStyle} onClick={onClose} {...styles}>
-            <ItemSpan additionalTitle={additionalTitle}>{selected}</ItemSpan>
+            <ItemSpan additionalTitle={additionalTitle} itemFontSize={itemFontSize} itemFontWeight={itemFontWeight}>
+                {selected}
+            </ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={arrowTop}>
                 <ClickableWrapper width="20px">
                     <CustomImg pointer height={imgHeight} rotate={isClosed ? 0 : 180} src={arrowImg} width={imgWidth} />
@@ -114,6 +137,8 @@ export const Select = ({
                             key={item.value}
                             active={item.active}
                             data={data[i]}
+                            itemFontSize={itemFontSize}
+                            itemFontWeight={itemFontWeight}
                             value={item.value}
                             onClick={onClick}
                         />

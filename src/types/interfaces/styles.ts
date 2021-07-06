@@ -17,6 +17,7 @@ export interface FlexBooleanAlignment extends NoWrap {
     alignCenter?: boolean;
     alignBaseline?: boolean;
     alignEnd?: boolean;
+    alignContentEnd?: boolean;
     justifyCenter?: boolean;
     justifyEnd?: boolean;
     justifyAround?: boolean;

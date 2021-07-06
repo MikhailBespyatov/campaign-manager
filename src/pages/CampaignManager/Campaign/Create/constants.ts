@@ -17,12 +17,12 @@ export const createCampaignSteps: ProgressBarItemInterface[] = [
         component: Videos,
         isValidField: 'videos'
     },
+
     // {
     //     title: 'Configuration',
     //     component: Configuration,
     //     isValidField: 'videos'
     // },
-
     {
         title: 'Dates & Budget',
         component: Dates,

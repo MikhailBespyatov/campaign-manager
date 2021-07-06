@@ -1,8 +1,11 @@
-export const configurationContentHorizontalPadding = '20px';
-export const configurationContentPadding = `32px ${configurationContentHorizontalPadding} 38px`;
+export const configurationContentHorizontalPadding = '90px';
+export const configurationContentPadding = `16px 0px 0px`;
+export const checkboxBlockMargin = '4px';
+export const biasTitleMarginTop = '16px';
+export const biasBlockMargin = '8px';
 
 //40 - from Figma design
-export const ConfigurationItemHorizontalPadding = 40 - parseInt(configurationContentHorizontalPadding) + 'px';
+//export const ConfigurationItemHorizontalPadding = 40 - parseInt(configurationContentHorizontalPadding) + 'px';
 
 //Mock
 export const biasValues = ['1', '2', '3', '5', '10'];
