@@ -1,12 +1,17 @@
-import styled, { css } from 'styled-components';
-import { blue, blue2, grey4, grey6, grey8, white } from 'constants/styles';
-import { Section } from 'components/grid/wrappers/FlexWrapper';
-import { ConfigurationItemHorizontalPadding } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/types';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { blue, blue2, grey4, grey6, grey8, white } from 'constants/styles';
+import { configurationContentHorizontalPadding } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
+import styled, { css } from 'styled-components';
 
 export const ConfigurationItemWrapper = styled(Section)`
-    padding: 0 ${ConfigurationItemHorizontalPadding} 25px;
+    padding: 0px ${configurationContentHorizontalPadding};
+    margin: 16px 0px;
+
+    @media (max-width: 1200px) {
+        max-height: fit-content;
+    }
 `;
 
 export const ConfigurationItemTitle = styled.span`
@@ -18,6 +23,7 @@ export const ConfigurationItemTitle = styled.span`
 `;
 
 export const ConfigurationItemSubtitle = styled.span`
+    width: 350px;
     font-style: normal;
     font-weight: normal;
     font-size: 13px;

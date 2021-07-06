@@ -41,41 +41,41 @@ export const createCampaignForm = createForm({
                 })
             ]
         },
-        // age: {
-        //     init: [] as number[],
-        //     validateOn: ['change'],
-        //     rules: [
-        //         createRule<number[]>({
-        //             name: 'age',
-        //             schema: yupDefaultArray
-        //         })
-        //     ]
-        // },
-        // locale: {
-        //     init: [] as number[],
-        //     validateOn: ['change'],
-        //     rules: [
-        //         createRule<number[]>({
-        //             name: 'locale',
-        //             schema: yupDefaultArray
-        //         })
-        //     ]
-        // },
-        // hashtags: {
-        //     init: [] as Array<{ hashtag: string; bias: string }>,
-        //     validateOn: ['change'],
-        //     rules: [
-        //         createRule<Array<{ hashtag: string; bias: string }>>({
-        //             name: 'hashtags',
-        //             schema: yupDefaultArray
-        //         })
-        //     ]
-        // },
-        // overrides: {
-        //     //any - because it is MOCK data
-        //     init: { override: '2', boostVideo: '2', boostCreator: '2', mustWatch: false } as { [key: string]: any },
-        //     validateOn: ['change']
-        // },
+        age: {
+            init: [] as number[],
+            validateOn: ['change'],
+            rules: [
+                createRule<number[]>({
+                    name: 'age',
+                    schema: yupDefaultArray
+                })
+            ]
+        },
+        locale: {
+            init: [] as number[],
+            validateOn: ['change'],
+            rules: [
+                createRule<number[]>({
+                    name: 'locale',
+                    schema: yupDefaultArray
+                })
+            ]
+        },
+        hashtags: {
+            init: [] as Array<{ hashtag: string; bias: string }>,
+            validateOn: ['change'],
+            rules: [
+                createRule<Array<{ hashtag: string; bias: string }>>({
+                    name: 'hashtags',
+                    schema: yupDefaultArray
+                })
+            ]
+        },
+        overrides: {
+            //any - because it is MOCK data
+            init: { override: '2', boostVideo: '2', boostCreator: '2', mustWatch: false } as { [key: string]: any },
+            validateOn: ['change']
+        },
         dateFrom: {
             init: new Date().toISOString(),
             validateOn: ['change'],
