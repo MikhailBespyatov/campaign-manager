@@ -1,6 +1,8 @@
+import { black } from 'constants/styles';
+import { channelBorder, tableHeaderBorder } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import React from 'react';
-import { Cell, RowWrapper, TableBody, TableHeader, TableHeaderColumnSpan } from './styles';
 import { AlignmentType, DataTable } from 'types';
+import { Cell, RowWrapper, TableBody, TableHeader, TableHeaderColumnSpan } from './styles';
 
 export interface TableProps {
     columns: string[];
@@ -13,10 +15,10 @@ export const Table = ({ columns, columnSizes = new Array<number>(columns.length)
 
     return (
         <>
-            <TableHeader alignCenter>
+            <TableHeader alignCenter border={tableHeaderBorder} height="48px">
                 {columns.map((title, index) => (
                     <Cell key={title} justifyCenter flexBasis={flexBasisValues[index]}>
-                        <TableHeaderColumnSpan>{title}</TableHeaderColumnSpan>
+                        <TableHeaderColumnSpan color={black}>{title}</TableHeaderColumnSpan>
                     </Cell>
                 ))}
             </TableHeader>
@@ -26,7 +28,13 @@ export const Table = ({ columns, columnSizes = new Array<number>(columns.length)
                         { cells, isCheckedRow, alignment = new Array<AlignmentType>(columns.length).fill('start') },
                         index
                     ) => (
-                        <RowWrapper key={index.toString()} alignCenter justifyAround checked={isCheckedRow}>
+                        <RowWrapper
+                            key={index.toString()}
+                            alignCenter
+                            justifyAround
+                            borderBottom={channelBorder}
+                            checked={isCheckedRow}
+                        >
                             {cells.map((cell, index) => (
                                 <Cell
                                     key={index.toString()}

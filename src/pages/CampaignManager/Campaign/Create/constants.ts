@@ -22,7 +22,7 @@ export const createCampaignSteps: ProgressBarItemInterface[] = [
     //     component: Configuration,
     //     isValidField: 'videos'
     // },
-    /* //TODO validation for Dates 'dateTo' */
+
     {
         title: 'Dates & Budget',
         component: Dates,
