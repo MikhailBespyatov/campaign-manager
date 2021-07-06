@@ -1,11 +1,16 @@
+import WOMLogo from 'assets/img/sample_logo.png';
 import { CopyableField } from 'components/common/features/CopyableField';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
 import { Table } from 'components/common/tables/NewDesign/Table';
+import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { OverflowAutoLayout } from 'components/Layouts';
 import { PaginationLayout } from 'components/Layouts/PaginationLayout';
+import { blue, formGrey5 } from 'constants/styles';
 import { useField } from 'effector-forms';
 import { useStore } from 'effector-react';
 import {
@@ -16,7 +21,7 @@ import React, { FC, useEffect } from 'react';
 import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
 import { forms } from 'stores/forms';
 import { CreateCampaignStepsProps, DataTable } from 'types';
-import { ChannelNameSpan, TitlePublicChannel } from './styles';
+import { ChannelNameSpan, ChannelThumbnail, TitlePublicChannel } from './styles';
 
 interface ChannelTableProps {
     selectedPublicChannel?: string;
@@ -35,8 +40,17 @@ const ChannelTable = ({
         ?.filter(({ isPrivate }) => isPrivate)
         .map(({ name, id = '' }) => ({
             cells: [
-                <ChannelNameSpan key={id}>{name}</ChannelNameSpan>,
-                <CopyableField key={id} subject={id} />,
+                <Row key={id} alignCenter>
+                    <MarginWrapper marginLeft="8px" marginRight="17px">
+                        <ChannelThumbnail>
+                            <CustomImg src={/*imageUrl ||*/ WOMLogo} />
+                        </ChannelThumbnail>
+                    </MarginWrapper>
+                    <ChannelNameSpan>{name}</ChannelNameSpan>
+                </Row>,
+                <Row key={id} alignCenter maxWidth="410px">
+                    <CopyableField key={id} subject={id} />
+                </Row>,
                 <Checkbox
                     key={id}
                     defaultValue={selectedChannelNames.includes(id)}
@@ -44,11 +58,22 @@ const ChannelTable = ({
                 />
             ],
             isCheckedRow: selectedChannelNames.includes(id),
-            alignment: ['center', 'center', 'center']
+            alignment: ['start', 'center', 'center']
         }));
 
     return (
         <>
+            <Section marginBottom="16px">
+                <MarginWrapper marginRight="75px">
+                    <Span color={formGrey5} fontSize="14px" fontWeight="600" lineHeight="15px">
+                        Public (0)
+                    </Span>
+                </MarginWrapper>
+
+                <Span color={blue} fontSize="14px" fontWeight="600" lineHeight="15px">
+                    Private ({channels?.length || 0})
+                </Span>
+            </Section>
             {selectedPublicChannel && (
                 <MarginWrapper marginBottom="10px">
                     <TitlePublicChannel>{selectedPublicChannel}</TitlePublicChannel>

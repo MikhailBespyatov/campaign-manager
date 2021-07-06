@@ -1,4 +1,5 @@
 import { itemHorizontalMargin } from 'components/common/dividers/BarItem/constants';
+import { grey8 } from 'constants/styles';
 
 export const channelsItem = [{ path: 'Public' }, { path: 'Private' }];
 export const publicChannelParameters = ['Channel Name', 'Channel Link', 'Add to Campaign'];
@@ -6,16 +7,17 @@ export const publicChannelParameters = ['Channel Name', 'Channel Link', 'Add to 
 // 75 - from origin design
 export const channelsItemMarginRight = 75 - parseInt(itemHorizontalMargin) + 'px';
 
+export const tableHeaderBorder = `1px solid ${grey8};`;
+
 export const scrollBarWidth = '8px';
-export const channelsPaddingRight = '78px';
-export const channelsPaddingLeft = '106px';
 export const publicChannelsPaddingLeft = '22px';
-export const channelsPadding = `24px ${channelsPaddingRight} 38px ${channelsPaddingLeft}`;
+export const channelsPadding = `16px 106px`;
 
 export const copyButtonIconDiameter = '16px';
 export const copyButtonDiameter = '32px';
 
 export const channelLogoDiameter = '48px';
+export const channelBorder = '1px solid #dedede';
 
 //Mock data
 export const publicChannelsMock = [
