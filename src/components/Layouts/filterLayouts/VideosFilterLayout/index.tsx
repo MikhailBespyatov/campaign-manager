@@ -6,7 +6,7 @@ import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
 import { Column, FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
-import { defaultPage } from 'constants/defaults';
+import { defaultCampaignContentValues, defaultPage } from 'constants/defaults';
 import { secondaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
@@ -15,6 +15,7 @@ import {
 } from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
 import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
+import { productsStores } from 'stores/products';
 import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
 import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
 import { defaultSortsState } from './constants';
@@ -27,6 +28,7 @@ interface Props extends TotalRecords, Loading {
 
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading, isSelectedProductPage }) => {
     const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
+    const { brand, name } = useStore(productsStores.item);
 
     const [sortsState, setSortsState] = useState(defaultSortsState);
     const isFirst = useStore(campaignContentStores.isFirst);
@@ -93,7 +95,12 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
 
     const onReset = () => {
         setSortsState(defaultSortsState);
-        setDefaultValues();
+
+        updateValues({
+            tagsAny: [name, brand, `${name} ${brand}`],
+            tagsAll: undefined,
+            ...defaultCampaignContentValues
+        });
     };
 
     useEffect(() => {
