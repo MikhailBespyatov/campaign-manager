@@ -55,9 +55,9 @@ export const RowWrapper = styled(Section)<Pick<CheckboxProps, 'checked'>>`
 
 export const ChannelNameSpan = styled(Span)`
     font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
 `;
 
 export const ChannelThumbnail = styled.div<Sizes>`

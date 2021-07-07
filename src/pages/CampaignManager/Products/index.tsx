@@ -37,6 +37,7 @@ import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
 
 const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
+const { getItems } = productsEffects;
 
 export const Products = () => {
     const history = useHistory();
@@ -144,7 +145,10 @@ export const Products = () => {
         if (isFirst) {
             invokeGetProducts();
             setIsFirstToFalse();
+        } else {
+            getItems({ pageIndex, limit, returnQueryCount: true });
         }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
