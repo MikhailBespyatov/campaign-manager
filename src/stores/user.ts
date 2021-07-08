@@ -2,6 +2,7 @@ import history from 'BrowserHistory';
 import { InviteRequestProps } from 'components/FormComponents/forms/InviteForm/types';
 import { Noop, themeStorageName, userStorageName } from 'constants/global';
 import {
+    asyncErrorMessage,
     errorDataMessage,
     incorrectOrgIdMessage,
     notEntryAllowedMessage,
@@ -155,9 +156,10 @@ const acceptInvitationAndLoadToken = createEffect({
             //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
         } catch (errors) {
+            const errorMessage = errors?.data?.message;
             loadingEffects.updateLoading();
             setErrors({
-                inviteCode: wrongInviteCodeMessage
+                inviteCode: errorMessage || wrongInviteCodeMessage
             });
             return {};
         }
@@ -180,10 +182,11 @@ const resetPasswordAndLoadToken = createEffect({
             localStorage.setItem(themeStorageName, JSON.stringify({ prefix }));
             //localStorage.setItem(userStorageName, JSON.stringify(data));
             return data;
-        } catch {
+        } catch (errors) {
+            const errorMessage = errors?.data?.message;
             loadingEffects.updateLoading();
             setErrors({
-                confirmationToken: wrongInviteCodeMessage
+                confirmationToken: errorMessage || asyncErrorMessage
             });
             return {};
         }
