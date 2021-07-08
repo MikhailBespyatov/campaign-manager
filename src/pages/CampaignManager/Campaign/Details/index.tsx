@@ -229,10 +229,10 @@ export const Details = () => {
         // graphic do not update series lines quantity after first query
         // so i need a double query, do not know how resolve this problem so far
         campaignsEvents.updateStatisticsValues({
-            historicalSets: Number(value)
+            historicalSets: historicalSetsFilterValues.findIndex(historicalValue => historicalValue === value)
         });
         campaignsEvents.updateStatisticsValues({
-            historicalSets: Number(value)
+            historicalSets: historicalSetsFilterValues.findIndex(historicalValue => historicalValue === value)
         });
     };
 
@@ -256,7 +256,9 @@ export const Details = () => {
                 campaignId: campaignId,
                 dateFrom: utcToStart,
                 dateTo: utcToEnd,
-                historicalSets: Number(historicalSetsDefault)
+                historicalSets: historicalSetsFilterValues.findIndex(
+                    historicalValue => historicalValue === historicalSetsDefault
+                )
             });
     }, [utcToStart, utcToEnd, campaignId]);
 
