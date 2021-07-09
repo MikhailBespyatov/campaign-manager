@@ -4,6 +4,8 @@ import {
     BackgroundColor,
     MarginBottom,
     MarginRight,
+    MaxSizes,
+    MinSizes,
     PaddingBottom,
     PaddingRight,
     RemoveBorderRadius,
@@ -12,6 +14,8 @@ import {
 
 interface Props
     extends Sizes,
+        Pick<MinSizes, 'minWidth'>,
+        Pick<MaxSizes, 'maxWidth'>,
         PaddingRight,
         PaddingBottom,
         MarginRight,

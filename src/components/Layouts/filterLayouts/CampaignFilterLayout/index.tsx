@@ -1,5 +1,6 @@
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { WomInput } from 'components/common/inputs/NewDesign/WomInput';
+import { inputFieldWidth, maxContainerWidth } from 'components/common/inputs/NewDesign/WomInput/constants';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { useField } from 'effector-forms/dist';
@@ -33,28 +34,32 @@ export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) 
     return (
         <>
             <Section>
-                <ContentWrapper padding="16px 155px 25px" width="100%">
-                    <Section alignCenter justifyCenter>
+                <ContentWrapper align="center" padding="16px 155px 25px" width="100%">
+                    <Section alignCenter justifyCenter maxWidth={maxContainerWidth}>
                         <DatePickerBetween
                             defaultDateFrom={dateFromValue}
                             defaultDateTo={dateToValue}
                             height="40px"
                             //marginBottom="13px"
+                            maxWidth={inputFieldWidth}
                             minDate={new Date().toISOString()}
+                            minWidth="250px"
                             title={['START OF CAMPAIGN', 'END OF CAMPAIGN']}
                             titleType="outer"
-                            width="500px"
+                            width="95%"
                             onChange={onDatesBetweenChange}
                         />
                     </Section>
 
-                    <WomInput
-                        errorText="Insufficient funds"
-                        isValid={isValid}
-                        label="Budget amount"
-                        value={value}
-                        onChange={onChange}
-                    />
+                    <Section maxWidth={maxContainerWidth}>
+                        <WomInput
+                            errorText="Insufficient funds"
+                            isValid={isValid}
+                            label="Budget amount"
+                            value={value}
+                            onChange={onChange}
+                        />
+                    </Section>
                 </ContentWrapper>
             </Section>
 

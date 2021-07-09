@@ -5,6 +5,8 @@ import {
     BackgroundColor,
     MarginBottom,
     MarginRight,
+    MaxSizes,
+    MinSizes,
     PaddingBottom,
     PaddingRight,
     RemoveBorderRadius,
@@ -13,6 +15,8 @@ import {
 
 interface WrapperProps
     extends Sizes,
+        Pick<MinSizes, 'minWidth'>,
+        Pick<MaxSizes, 'maxWidth'>,
         PaddingRight,
         PaddingBottom,
         MarginRight,
@@ -23,6 +27,8 @@ interface WrapperProps
 export const Wrapper = styled.div<WrapperProps>`
     display: flex;
     flex-direction: column;
+    ${({ minWidth }) => minWidth && `min-width: ${minWidth};`};
+    ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`};
     ${({ width }) => width && `width: ${width};`};
     ${({ height }) => height && `height: ${height};`};
     border: ${wrapperBorder};

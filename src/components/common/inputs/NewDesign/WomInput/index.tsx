@@ -82,70 +82,75 @@ export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInpu
     }, []);
 
     return (
-        <Section alignEnd justifyCenter>
-            <Row marginRight={inputFieldMarginRight} marginTop={textBlocksMargin} width={inputFieldWidth}>
-                <RelativeWrapper>
-                    <AbsoluteWrapper left="20px" top="37px" zIndex={logoZIndex}>
-                        <WomCurrencyImg height={womImgHeight} />
-                    </AbsoluteWrapper>
+        <Section alignEnd justifyBetween noWrap>
+            <Row
+                /* marginBottom={textBlocksMargin}*/
+                marginRight={inputFieldMarginRight}
+                marginTop={textBlocksMargin}
+                width="50%"
+            >
+                <Column maxWidth={inputFieldWidth} width="100%">
+                    <RelativeWrapper>
+                        <AbsoluteWrapper left="20px" top="37px" zIndex={logoZIndex}>
+                            <WomCurrencyImg height={womImgHeight} />
+                        </AbsoluteWrapper>
 
-                    <TextInput
-                        labelUppercase
-                        label={label}
-                        labelFontSize="11px"
-                        labelLineHeight="14px"
-                        name="wom"
-                        paddingLeft="60px"
-                        paddingRight="170px"
-                        type="number"
-                        value={value}
-                        onChange={onChangeInput}
-                    />
-                    {/* <AbsoluteWrapper right="20px" top="40px" zIndex={logoZIndex}>
+                        <TextInput
+                            labelUppercase
+                            label={label}
+                            labelFontSize="11px"
+                            labelLineHeight="14px"
+                            name="wom"
+                            paddingLeft="60px"
+                            paddingRight="170px"
+                            type="number"
+                            value={value}
+                            onChange={onChangeInput}
+                        />
+
+                        {/* <AbsoluteWrapper right="20px" top="40px" zIndex={logoZIndex}>
                         <InfoPopover backgroundColor={popoverBackground} popoverText="Some additional information">
                             <InfoImg />
                         </InfoPopover>
                     </AbsoluteWrapper> */}
 
-                    {!isValid && (
-                        <AbsoluteWrapper right="45px" top="35px" zIndex={logoZIndex}>
-                            <ErrorSpan touched>{errorText}</ErrorSpan>
-                        </AbsoluteWrapper>
-                    )}
-                </RelativeWrapper>
+                        {!isValid && (
+                            <AbsoluteWrapper right="45px" top="35px" zIndex={logoZIndex}>
+                                <ErrorSpan touched>{errorText}</ErrorSpan>
+                            </AbsoluteWrapper>
+                        )}
+                    </RelativeWrapper>
+                </Column>
             </Row>
 
-            <Row
-                justifyBetween
-                marginRight={inputFieldMarginRight}
-                marginTop={textBlocksMargin}
-                width={inputFieldWidth}
-            >
-                <MarginWrapper marginBottom={textBlocksMargin} marginRight={textBlocksMargin}>
-                    <Select
-                        height={inputFieldHeight}
-                        values={Object.keys(currencyData)}
-                        width="150px"
-                        onChange={onCurrencySelect as (active: string) => void}
-                    />
-                </MarginWrapper>
-                <Column justifyBetween noWrap height={inputFieldHeight}>
-                    <Section>
-                        <Span fontWeight={textFontWeight} lineHeight="17px">
-                            {sign}&nbsp;{balance}
-                            {/* {currencyData[selectedCurrency].toString()} */}
-                        </Span>
-                    </Section>
+            <Row marginRight={inputFieldMarginRight} marginTop={textBlocksMargin} width="50%">
+                <Section alignEnd justifyBetween noWrap maxWidth={inputFieldWidth}>
+                    <MarginWrapper /*marginBottom={textBlocksMargin}*/ marginRight={inputFieldMarginRight}>
+                        <Select
+                            height={inputFieldHeight}
+                            values={Object.keys(currencyData)}
+                            width="150px"
+                            onChange={onCurrencySelect as (active: string) => void}
+                        />
+                    </MarginWrapper>
+                    <Column justifyBetween noWrap /*height={inputFieldHeight}*/>
+                        <Section>
+                            <Span fontWeight={textFontWeight} lineHeight="17px">
+                                {sign}&nbsp;{balance}
+                                {/* {currencyData[selectedCurrency].toString()} */}
+                            </Span>
+                        </Section>
 
-                    <Section>
-                        <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="16px">
-                            Current Exchange Rate&nbsp;
-                        </Span>
-                        <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="16px">
-                            {sign + Number(rate).toFixed(2)} {name}&nbsp;= 1&nbsp;WOM
-                        </Span>
-                    </Section>
-                </Column>
+                        <Section>
+                            <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="20px">
+                                Current Exchange Rate&nbsp;
+                            </Span>
+                            <Span color={grey4} fontSize="13px" fontWeight={textFontWeight} lineHeight="16px">
+                                {sign + Number(rate).toFixed(2)} {name}&nbsp;= 1&nbsp;WOM
+                            </Span>
+                        </Section>
+                    </Column>
+                </Section>
             </Row>
         </Section>
     );

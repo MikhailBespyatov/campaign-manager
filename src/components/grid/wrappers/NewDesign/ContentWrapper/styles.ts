@@ -34,6 +34,7 @@ export const ContentWrapper = styled.div<ContentWrapperProps>`
     ${({ padding }) => padding && `padding: ${padding}`};
     ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`};
     ${({ justify }) => justify && `justify-content: ${justify}`};
+    ${({ align }) => align && `align-items: ${align}`};
     ${({ border }) => border && `border: ${border}`};
     border-radius: ${({ borderRadius }) => borderRadius || contentWrapperBorderRadius};
     background-color: ${({ backgroundColor }) => backgroundColor || white};

@@ -35,12 +35,12 @@ import {
 import React, { useEffect, useState } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
 import { ThemeProvider } from 'styled-components';
-import { DefaultValueString, Label, MarginBottom, Name, Sizes } from 'types';
+import { DefaultValueString, Label, MarginBottom, MaxSizes, MinSizes, Name, Sizes } from 'types';
 import { getDate } from 'utils/usefulFunctions';
 
 type dateType = Date | null;
 
-interface Props extends Sizes, MarginBottom {
+interface Props extends Sizes, MarginBottom, Pick<MinSizes, 'minWidth'>, Pick<MaxSizes, 'maxWidth'> {
     defaultDateFrom: string;
     defaultDateTo: string;
     minDate?: string;
@@ -54,6 +54,8 @@ export const DatePickerBetween = ({
     defaultDateFrom,
     defaultDateTo,
     width,
+    minWidth,
+    maxWidth,
     height,
     maxDate,
     minDate,
@@ -126,7 +128,7 @@ export const DatePickerBetween = ({
             {/*        onChange={handleDateChangeTo}*/}
             {/*    />*/}
             {/*</MuiPickersUtilsProvider>*/}
-            <Column>
+            <Column width="50%">
                 {!isInnerType && (
                     <MarginWrapper marginBottom={titleMarginBottom}>
                         <TitleSpan>{titleFrom}</TitleSpan>
@@ -134,6 +136,8 @@ export const DatePickerBetween = ({
                 )}
                 <BorderBlock
                     height={height}
+                    maxWidth={maxWidth}
+                    minWidth={minWidth}
                     paddingBottom={borderBlockVerticalPadding}
                     paddingRight={borderBlockHorizontalPadding}
                     width={width}
@@ -190,7 +194,7 @@ export const DatePickerBetween = ({
                     </Section>
                 </BorderBlock>
             </Column>
-            <Column>
+            <Column width="50%">
                 {!isInnerType && (
                     <MarginWrapper marginBottom={titleMarginBottom}>
                         <TitleSpan>{titleTo}</TitleSpan>
@@ -198,6 +202,8 @@ export const DatePickerBetween = ({
                 )}
                 <BorderBlock
                     height={height}
+                    maxWidth={maxWidth}
+                    minWidth={minWidth}
                     paddingBottom={borderBlockVerticalPadding}
                     paddingRight={borderBlockHorizontalPadding}
                     width={width}
