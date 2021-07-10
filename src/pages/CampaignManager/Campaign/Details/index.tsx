@@ -347,16 +347,18 @@ export const Details = () => {
                                     </Row>
                                 </Column>
                                 <Section>
-                                    {utcToStart && utcToEnd && (
-                                        <DatePickerBetween
-                                            defaultDateFrom={utcToStart}
-                                            defaultDateTo={utcToEnd}
-                                            height={dateBlockHeight}
-                                            //marginBottom={primaryPadding}
-                                            width={borderBlockWidth}
-                                            onChange={onDatesBetweenChange}
-                                        />
-                                    )}
+                                    <Row>
+                                        {utcToStart && utcToEnd && (
+                                            <DatePickerBetween
+                                                defaultDateFrom={utcToStart}
+                                                defaultDateTo={utcToEnd}
+                                                height={dateBlockHeight}
+                                                //marginBottom={primaryPadding}
+                                                width={borderBlockWidth}
+                                                onChange={onDatesBetweenChange}
+                                            />
+                                        )}
+                                    </Row>
                                     <BorderBlock
                                         height={dateBlockHeight}
                                         paddingBottom={borderBlockVerticalPadding}
