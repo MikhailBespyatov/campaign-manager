@@ -15,7 +15,6 @@ import {
 } from 'pages/CampaignManager/Campaign/Create/Steps/Videos/constants';
 import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
-import { productsStores } from 'stores/products';
 import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
 import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
 import { defaultSortsState } from './constants';
@@ -28,7 +27,7 @@ interface Props extends TotalRecords, Loading {
 
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading, isSelectedProductPage }) => {
     const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
-    const { brand, name } = useStore(productsStores.item);
+    //const { brand, name } = useStore(productsStores.item);
 
     const [sortsState, setSortsState] = useState(defaultSortsState);
     const isFirst = useStore(campaignContentStores.isFirst);
@@ -97,7 +96,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
         setSortsState(defaultSortsState);
 
         updateValues({
-            tagsAny: [name, brand, `${name} ${brand}`],
+            tagsAny: undefined,
             tagsAll: undefined,
             ...defaultCampaignContentValues
         });
@@ -193,7 +192,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
             </Section>
 
             <FlexGrow marginBottom={videoSectionMarginBottom}>
-                {isSelectedProductPage && (
+                {isSelectedProductPage && tagsAny && (
                     <Section marginBottom={secondaryMargin}>
                         <Span fontSize="12px" lineHeight="15px">
                             Videos Associated with This Product
