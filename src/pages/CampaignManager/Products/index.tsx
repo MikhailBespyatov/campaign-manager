@@ -14,6 +14,7 @@ import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { PaginationLayout } from 'components/Layouts/PaginationLayout';
+import { defaultProductsValues } from 'constants/defaults/products';
 import { product, productsEdit, routes } from 'constants/routes';
 import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -32,15 +33,17 @@ import {
 import { ProductThumbnail } from 'pages/CampaignManager/Products/styles';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { organizationsStores } from 'stores/organizations';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
 
-const { setIsFirstToFalse, invokeGetProducts, updateValues } = productsEvents;
+const { setIsFirstToFalse, /*invokeGetProducts,*/ updateValues } = productsEvents;
 const { getItems } = productsEffects;
 
 export const Products = () => {
     const history = useHistory();
+    const organizationId = useStore(organizationsStores.organizationId);
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const { items, totalRecords } = useStore(productsStores.items);
     const isFirst = useStore(productsStores.isFirst);
@@ -143,10 +146,11 @@ export const Products = () => {
 
     useEffect(() => {
         if (isFirst) {
-            invokeGetProducts();
+            //invokeGetProducts();
+            getItems({ organizationId, ...defaultProductsValues });
             setIsFirstToFalse();
         } else {
-            getItems({ pageIndex, limit, returnQueryCount: true });
+            getItems({ organizationId, pageIndex, limit, returnQueryCount: true });
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
