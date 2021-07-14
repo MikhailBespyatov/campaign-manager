@@ -185,7 +185,7 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
                         <Loader />
                     ) : (
                         <ChannelTable
-                            channels={privateChannels}
+                            channels={privateChannels || undefined}
                             selectedChannelNames={value}
                             onChangeChannelItem={onChangeChannelItem}
                         />

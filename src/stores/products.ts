@@ -73,9 +73,26 @@ const updateProduct = createEffect({
 const resetItem = createEvent();
 
 // Set form when get data from endpoint
-forward({
-    from: getItemById.doneData,
-    to: productForm.setForm
+// forward({
+//     from: getItemById.doneData,
+//     to: productForm.setForm
+// });
+
+//* this interface is needed to eliminate type discrepancy
+//*as model return 'string | undefined | null' and we need  'string | undefined'
+interface StateProps {
+    id?: string;
+    name?: string;
+    brand?: string;
+    publicId?: string;
+    url?: string;
+    imageUrl?: string;
+}
+
+getItemById.doneData.watch(state => {
+    const { id, name, brand, publicId, url, imageUrl } = state as StateProps;
+
+    productForm.setForm({ id, name, brand, publicId, url, imageUrl });
 });
 
 const item = createStore<WOM.RemoteProductResponse>({})

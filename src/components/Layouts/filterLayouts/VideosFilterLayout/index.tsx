@@ -1,5 +1,6 @@
 import { ResetButton } from 'components/common/buttons/ResetButton';
 import { SortSelectorButton } from 'components/common/buttons/SortSelectorButton';
+import { SelectorFilter } from 'components/common/inputs/SelectorFilter';
 import { Span } from 'components/common/typography/Span';
 import { TagFilter } from 'components/filters/TagFilter';
 import { onTagsFilterChangeType } from 'components/filters/TagFilter/type';
@@ -7,7 +8,7 @@ import { Column, FlexGrow, Section } from 'components/grid/wrappers/FlexWrapper'
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { Pagination } from 'components/Layouts/Pagination';
 import { defaultCampaignContentValues, defaultPage } from 'constants/defaults';
-import { secondaryMargin } from 'constants/styles';
+import { secondaryMargin, tertiaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import {
     videoSectionMarginBottom,
@@ -17,7 +18,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
 import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
-import { defaultSortsState } from './constants';
+import { defaultSortsState, getLanguageCode } from './constants';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
@@ -28,6 +29,7 @@ interface Props extends TotalRecords, Loading {
 export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading, isSelectedProductPage }) => {
     const { tagsAll, pageIndex, limit, tagsAny } = useStore(campaignContentStores.values);
     //const { brand, name } = useStore(productsStores.item);
+    const [activeLanguage, setActiveLanguage] = useState<string>('');
 
     const [sortsState, setSortsState] = useState(defaultSortsState);
     const isFirst = useStore(campaignContentStores.isFirst);
@@ -94,10 +96,11 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
 
     const onReset = () => {
         setSortsState(defaultSortsState);
-
+        setActiveLanguage('');
         updateValues({
             tagsAny: undefined,
             tagsAll: undefined,
+            language: undefined,
             ...defaultCampaignContentValues
         });
     };
@@ -110,12 +113,12 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    //Mock
-    // const valuesLanguage = ['Russian', 'Chinese', 'Latin', 'Spanish', 'French'];
-    // const [activeLanguage, setActiveLanguage] = useState<string[]>([]);
+    //Mock;
+    const valuesLanguage = ['Russian', 'English', 'Chinese', 'Italian', 'Spanish', 'French'];
 
-    // const onChangeLanguage = (language: string) =>
-    //     activeLanguage.includes(language) ? setActiveLanguage([]) : setActiveLanguage([language]);
+    const onChangeLanguage = (language: string) => {
+        activeLanguage?.includes(language) ? setActiveLanguage('') : setActiveLanguage(language);
+    };
 
     // const valuesRegion = [
     //     'North America',
@@ -135,6 +138,15 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
     //         ? setCheckedRegion(regions => regions.filter(item => item !== region))
     //         : setCheckedRegion(regions => [...regions, region]);
 
+    useEffect(() => {
+        updateValues({
+            ...defaultCampaignContentValues,
+            language: getLanguageCode(activeLanguage)
+        });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeLanguage]);
+
     return (
         <>
             <Section marginBottom={videoSectionMarginBottom}>
@@ -149,15 +161,15 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
                     </Column>
 
                     <FlexGrow alignCenter justifyEnd noWrap flexDirection="row">
-                        {/* <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight={tertiaryMargin} width="120px">
+                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight={tertiaryMargin} width="120px">
                             <SelectorFilter
-                                checkedValues={activeLanguage}
+                                checkedValues={[activeLanguage]}
                                 title="Language"
                                 values={valuesLanguage}
                                 onChange={onChangeLanguage}
                             />
                         </FlexGrow>
-                        <FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="20px" width="140px">
+                        {/*<FlexGrow flexGrow="0" flexShrink="0" height="32px" marginRight="20px" width="140px">
                             <SelectorFilter
                                 checkedValues={checkedRegion}
                                 title="Region"

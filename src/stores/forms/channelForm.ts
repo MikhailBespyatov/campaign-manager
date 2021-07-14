@@ -1,6 +1,6 @@
-import { createForm } from 'effector-forms';
 import { createRule, yupCompanyName } from 'constants/yupFields';
 import { createEvent, forward, sample } from 'effector';
+import { createForm } from 'effector-forms';
 import { channelsEffects } from 'stores/channels';
 
 export const channelForm = createForm({
@@ -54,9 +54,23 @@ forward({
 });
 
 // Set form when get data from endpoint
-forward({
-    from: channelsEffects.getItemById.doneData,
-    to: channelForm.setForm
+// forward({
+//     from: channelsEffects.getItemById.doneData,
+//     to: channelForm.setForm
+// });
+
+//* this interface is needed to eliminate type discrepancy
+//* as model return 'string | undefined | null' and we need  'string | undefined'
+interface StateProps {
+    id?: string;
+    name?: string;
+    isPrivate?: boolean;
+}
+
+channelsEffects.getItemById.doneData.watch(state => {
+    const { id, name, isPrivate } = state as StateProps;
+
+    channelForm.setForm({ id, name, isPrivate });
 });
 
 export const channelFormEvents = { editSubmit, addSubmit };
