@@ -1,28 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BooleanCheckbox, OnStringChange, RadioProperties, SelectorFilterType, Sizes, Title } from 'types';
-import { Noop } from 'constants/global';
-import { useModal } from 'hooks/modal';
-import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
-import { ItemsWrapper, SelectorBorderWrapper, SelectorItemSpan, SelectorWrapper, TitleSpan } from './styles';
-import { Section, Row, FlexGrow } from 'components/grid/wrappers/FlexWrapper';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import selector_arrow from 'assets/icons/selector_arrow.svg';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
     columnTypeSelectorWrapperWidth,
     getArrowLeft,
     getItemsWrapperTop,
+    getTitleSpanWidth,
     listTypeSelectorWrapperWidth,
     selectorItemHeight,
     selectorItemMarginBottom,
     selectorItemWidth,
-    selectorItemWrapperPadding,
-    getTitleSpanWidth
+    selectorItemWrapperPadding
 } from 'components/common/inputs/SelectorFilter/constants';
-import { BooleanCircleCheckbox } from '../BooleanCircleCheckbox';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
+import { Column, FlexGrow, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { useRefWidthAndHeight } from 'hooks/getRefProperty';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
+import { Noop } from 'constants/global';
 import { useCloseClick } from 'hooks/closeClick';
+import { useRefWidthAndHeight } from 'hooks/getRefProperty';
+import { useModal } from 'hooks/modal';
+import React, { useEffect, useRef, useState } from 'react';
+import { BooleanCheckbox, OnStringChange, RadioProperties, SelectorFilterType, Sizes, Title } from 'types';
+import { BooleanCircleCheckbox } from '../BooleanCircleCheckbox';
+import { ItemsWrapper, SelectorBorderWrapper, SelectorItemSpan, SelectorWrapper, TitleSpan } from './styles';
 
 interface SelectorItemProps extends Omit<Partial<BooleanCheckbox>, 'onChange'>, Required<OnStringChange> {
     children: string;
@@ -53,6 +53,30 @@ const SelectorItem = ({ children, onChange, defaultChecked = false, ...checkboxP
     );
 };
 
+interface ValuesListProps {
+    values: string[];
+    checkedValues?: string[];
+    type: 'select' | 'checkbox';
+    close: () => void;
+    onChange: (active: string) => void;
+}
+
+const ValuesList = ({ values, checkedValues, type, onChange, close }: ValuesListProps) => (
+    <Column justifyBetween>
+        {values.map(value => (
+            <MarginWrapper
+                key={value}
+                marginBottom={selectorItemMarginBottom}
+                onClick={type === 'select' ? close : Noop}
+            >
+                <SelectorItem defaultChecked={checkedValues?.includes(value)} onChange={onChange}>
+                    {value}
+                </SelectorItem>
+            </MarginWrapper>
+        ))}
+    </Column>
+);
+
 export interface SelectorFilterProps
     extends Sizes,
         Omit<RadioProperties, 'data' | 'defaultActive'>,
@@ -73,6 +97,9 @@ export const SelectorFilter = ({
     width
 }: SelectorFilterProps) => {
     const { visible, open, close } = useModal();
+    const firstColumnLength = Math.round(values.length / 2);
+    const firstColumnValues = values.slice(0, firstColumnLength);
+    const secondColumnValues = values.slice(firstColumnLength);
 
     const selectorRef = useRef<HTMLDivElement>(null);
     const [selectorWidth, selectorHeight] = useRefWidthAndHeight(selectorRef);
@@ -106,18 +133,22 @@ export const SelectorFilter = ({
                         padding={selectorItemWrapperPadding}
                         width={view === 'columns' ? columnTypeSelectorWrapperWidth : listTypeSelectorWrapperWidth}
                     >
-                        <Section justifyBetween>
-                            {values.map(value => (
-                                <MarginWrapper
-                                    key={value}
-                                    marginBottom={selectorItemMarginBottom}
-                                    onClick={type === 'select' ? close : Noop}
-                                >
-                                    <SelectorItem defaultChecked={checkedValues?.includes(value)} onChange={onChange}>
-                                        {value}
-                                    </SelectorItem>
-                                </MarginWrapper>
-                            ))}
+                        <Section justifyAround>
+                            <ValuesList
+                                checkedValues={checkedValues}
+                                close={close}
+                                type={type}
+                                values={firstColumnValues}
+                                onChange={onChange}
+                            />
+
+                            <ValuesList
+                                checkedValues={checkedValues}
+                                close={close}
+                                type={type}
+                                values={secondColumnValues}
+                                onChange={onChange}
+                            />
                         </Section>
                     </ItemsWrapper>
                 </AbsoluteWrapper>

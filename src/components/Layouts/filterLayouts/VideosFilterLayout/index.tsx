@@ -17,8 +17,8 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { FilterProperty, Loading, SortType, TotalRecords } from 'types';
-import { getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
-import { defaultSortsState, getLanguageCode } from './constants';
+import { getLanguageISO6391Code, getOrderByDescState, getTotalItems, toggleSortType } from 'utils/usefulFunctions';
+import { defaultSortsState, languagesNames } from './constants';
 
 const { updateAndRemoveValues, updateValues, updateIsFirst, setDefaultValues } = campaignContentEvents;
 
@@ -113,9 +113,6 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    //Mock;
-    const valuesLanguage = ['Russian', 'English', 'Chinese', 'Italian', 'Spanish', 'French'];
-
     const onChangeLanguage = (language: string) => {
         activeLanguage?.includes(language) ? setActiveLanguage('') : setActiveLanguage(language);
     };
@@ -141,7 +138,7 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
     useEffect(() => {
         updateValues({
             ...defaultCampaignContentValues,
-            language: getLanguageCode(activeLanguage)
+            language: getLanguageISO6391Code(activeLanguage)
         });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -165,7 +162,8 @@ export const VideosFilterLayout: FC<Props> = ({ totalRecords, children, loading,
                             <SelectorFilter
                                 checkedValues={[activeLanguage]}
                                 title="Language"
-                                values={valuesLanguage}
+                                values={languagesNames}
+                                view="columns"
                                 onChange={onChangeLanguage}
                             />
                         </FlexGrow>
