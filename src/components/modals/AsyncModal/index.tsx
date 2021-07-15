@@ -1,5 +1,6 @@
 import closeImg from 'assets/icons/remove-icon.svg';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { buttonBorderRadius } from 'components/common/features/ProgressBar/constants';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
@@ -19,7 +20,7 @@ import {
     textMarginRight
 } from 'components/modals/AsyncModal/constants';
 import { closeIconDiameter } from 'components/modals/CongratsModal/constants';
-import { black, grey18, quaternaryBorderRadius, white } from 'constants/styles';
+import { black, grey18, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import React from 'react';
@@ -72,7 +73,7 @@ export const AsyncModal = () => {
                         <MarginWrapper marginRight="20px">
                             <ManualRoundedButton
                                 background={white}
-                                borderRadius={quaternaryBorderRadius}
+                                borderRadius={buttonBorderRadius}
                                 fontSize={textFontSizeDefault}
                                 fontWeight={textFontWeightRegular}
                                 height={buttonHeight}
@@ -85,7 +86,7 @@ export const AsyncModal = () => {
                         </MarginWrapper>
 
                         <ManualRoundedButton
-                            borderRadius={quaternaryBorderRadius}
+                            borderRadius={buttonBorderRadius}
                             fontSize={textFontSizeDefault}
                             fontWeight={textFontWeightRegular}
                             height={buttonHeight}

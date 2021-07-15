@@ -37,7 +37,6 @@ export const CampaignContent = () => {
                     draftCampaign.map(({ id, budget, campaignName, videos }) => (
                         <Section key={id} marginBottom="20px">
                             <BorderBlock
-                                removeBorderRadius
                                 height="100%"
                                 marginBottom="0"
                                 marginRight="0"
@@ -64,7 +63,6 @@ export const CampaignContent = () => {
                     {campaignData.map(item => (
                         <Section key={item.id} marginBottom={primaryMargin}>
                             <BorderBlock
-                                removeBorderRadius
                                 backgroundColor={white}
                                 height="100%"
                                 marginBottom="0"

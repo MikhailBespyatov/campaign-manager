@@ -1,4 +1,5 @@
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { buttonBorderRadius } from 'components/common/features/ProgressBar/constants';
 import { Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Noop as NoopClick } from 'constants/global';
@@ -110,7 +111,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                         {!withoutAction && (
                             <MarginWrapper marginRight="15px">
                                 <ManualRoundedButton
-                                    borderRadius="4px"
+                                    borderRadius={buttonBorderRadius}
                                     disabled={!isValid}
                                     fontSize="16px"
                                     fontWeight="400"
@@ -127,7 +128,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
                             <MarginWrapper marginRight="15px">
                                 <ManualRoundedButton
                                     background={lightPink}
-                                    borderRadius="4px"
+                                    borderRadius={buttonBorderRadius}
                                     fontSize="16px"
                                     fontWeight="400"
                                     height={primaryButtonDiameter}
@@ -143,7 +144,7 @@ export const ModifyingLayout: FC<ModifyingLayoutProps> = ({
 
                         <ManualRoundedButton
                             background="transparent"
-                            borderRadius="4px"
+                            borderRadius={buttonBorderRadius}
                             fontSize="16px"
                             fontWeight="400"
                             height={primaryButtonDiameter}

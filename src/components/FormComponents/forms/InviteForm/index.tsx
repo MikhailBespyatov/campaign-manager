@@ -1,4 +1,5 @@
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { buttonBorderRadius } from 'components/common/features/ProgressBar/constants';
 import { Loader } from 'components/dynamic/Loader';
 import {
     //defaultPermissionsValue,
@@ -54,7 +55,7 @@ export const InviteForm = () => {
                         // onChange={(e: ChangeEvent<HTMLInputElement>) => onPermissionChange(e, setFieldValue)}
                     /> */}
                     <ManualRoundedButton
-                        borderRadius="4px"
+                        borderRadius={buttonBorderRadius}
                         disabled={loading}
                         fontSize="16px"
                         fontWeight="400"

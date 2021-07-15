@@ -1,15 +1,14 @@
 import {
     wrapperBackground,
     wrapperBorderColor,
-    wrapperBorderRadius,
     wrapperHeight,
     wrapperHorizontalPadding,
     wrapperVerticalPadding,
     wrapperWidth
 } from 'components/filters/TagFilter/constants';
+import { SearchAbsoluteWrapperProps } from 'components/filters/TagFilter/type';
 import { flexCenter } from 'constants/styles';
 import styled from 'styled-components';
-import { SearchAbsoluteWrapperProps } from 'components/filters/TagFilter/type';
 
 export const Wrapper = styled.div`
     width: ${wrapperWidth};
@@ -17,7 +16,7 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     flex-direction: row;
     height: ${wrapperHeight};
-    border-radius: ${wrapperBorderRadius};
+    border-radius: 25px;
     background-color: ${wrapperBackground};
     border: 1px solid ${wrapperBorderColor};
     padding: ${wrapperVerticalPadding} ${wrapperHorizontalPadding};

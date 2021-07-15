@@ -3,6 +3,7 @@ import { CampaignStatus } from 'components/common/blocks/CampaignStatus';
 import { DateOfCampaignBlock } from 'components/common/blocks/DateOfCampaignBlock';
 import { DateOfDetailsCampaignBlock } from 'components/common/blocks/DateOfDetailsCampaignBlock';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
+import { buttonBorderRadius } from 'components/common/features/CampaignItem/constants';
 //import { channelNamesArray } from 'components/common/features/CampaignItem/constants';
 import { Span } from 'components/common/typography/Span';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
@@ -165,7 +166,7 @@ export const CampaignItem: FC<Props> = ({
                                 </ManualRoundedButton>
                             </MarginWrapper>
                             <ManualRoundedButton
-                                borderRadius={tertiaryBorderRadius}
+                                borderRadius={buttonBorderRadius}
                                 height={primaryButtonDiameter}
                                 minWidth="fit-content"
                                 onClick={onContinueClick}
@@ -178,7 +179,7 @@ export const CampaignItem: FC<Props> = ({
                             {/* <MarginWrapper marginRight={secondaryMargin}>
                                 <ManualRoundedButton
                                     background={lightPink}
-                                    borderRadius= {tertiaryBorderRadius}
+                                    borderRadius= {buttonBorderRadius}
                                     fontWeight="700"
                                     height={primaryButtonDiameter}
                                     mainColor={red}
@@ -190,7 +191,7 @@ export const CampaignItem: FC<Props> = ({
                             </MarginWrapper>
                             <MarginWrapper marginRight={secondaryMargin}>
                                 <ManualRoundedButton
-                                    borderRadius= {tertiaryBorderRadius}
+                                    borderRadius= {buttonBorderRadius}
                                     fontWeight="700"
                                     height={primaryButtonDiameter}
                                     minWidth="65px"
@@ -200,7 +201,7 @@ export const CampaignItem: FC<Props> = ({
                                 </ManualRoundedButton>
                             </MarginWrapper> */}
                             <ManualRoundedButton
-                                borderRadius={tertiaryBorderRadius}
+                                borderRadius={buttonBorderRadius}
                                 fontWeight="700"
                                 height={primaryButtonDiameter}
                                 minWidth="148px"
