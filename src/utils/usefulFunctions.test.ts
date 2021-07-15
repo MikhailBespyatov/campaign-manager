@@ -10,6 +10,7 @@ import {
     getDateFromString,
     getFlexBasisPercent,
     getFormattedDate,
+    getLanguageISO6391Code,
     getPublicTheme,
     getStoriesTitle,
     getTotalItems,
@@ -420,5 +421,14 @@ describe('getDateFromString', () => {
         expect(getDateFromString()).toBe('');
         expect(getDateFromString('adadaasdasd')).toBe('adadaasdasd');
         expect(getDateFromString('adadaTasdasd')).toBe('adada');
+    });
+});
+
+fdescribe('getLanguageISO6391Code from language name', () => {
+    it('Test for getLanguageISO6391Code', () => {
+        expect(getLanguageISO6391Code('Polish')).toEqual(['pl']);
+        expect(getLanguageISO6391Code('Bulgarian')).toEqual(['bg']);
+        expect(getLanguageISO6391Code('')).toBe(undefined);
+        expect(getLanguageISO6391Code('adadaasdasd')).toBe(undefined);
     });
 });

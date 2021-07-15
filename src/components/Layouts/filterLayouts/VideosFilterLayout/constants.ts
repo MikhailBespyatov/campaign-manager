@@ -1,3 +1,4 @@
+import ISO6391 from 'iso-639-1';
 import { SortType } from 'types';
 
 export interface SortsState {
@@ -13,34 +14,80 @@ export const defaultSortsState: SortsState = {
     dateAdded: 'none'
 };
 
-export function getLanguageCode(language: string) {
-    var languageCode: string[] | undefined;
+// TODO replace Mock with API response when endpoint is ready;
+export const languagesCodesArray = [
+    'pl',
+    'sv',
+    'fa',
+    'lv',
+    'fr',
+    'ro',
+    'km',
+    'ko',
+    'lt',
+    'sl',
+    'mk',
+    'de',
+    'he',
+    'sk',
+    'da',
+    'it',
+    'bg',
+    'sr',
+    'th',
+    'nb',
+    'fi',
+    'hr',
+    'az',
+    'tr',
+    'nl',
+    'fo',
+    'ru',
+    'pt',
+    'el',
+    'ar',
+    'vi',
+    'sq',
+    'es',
+    'ja',
+    'cs',
+    'en',
+    'mn',
+    'zh',
+    'uk'
+];
 
-    switch (language) {
-        case 'Russian':
-            languageCode = ['ru'];
-            break;
+export const languagesDataArray = ISO6391.getLanguages(languagesCodesArray);
+export const languagesNames = languagesDataArray.map(item => item.name).sort();
 
-        case 'Chinese':
-            languageCode = ['zh'];
-            break;
+// export function getLanguageCode(language: string) {
+//     var languageCode: string[] | undefined;
 
-        case 'Italian':
-            languageCode = ['it'];
-            break;
-        case 'Spanish':
-            languageCode = ['es'];
-            break;
-        case 'French':
-            languageCode = ['fr'];
-            break;
-        case 'English':
-            languageCode = ['en'];
-            break;
-        default:
-            languageCode = undefined;
-            break;
-    }
+//     switch (language) {
+//         case 'Russian':
+//             languageCode = ['ru'];
+//             break;
 
-    return languageCode;
-}
+//         case 'Chinese':
+//             languageCode = ['zh'];
+//             break;
+
+//         case 'Italian':
+//             languageCode = ['it'];
+//             break;
+//         case 'Spanish':
+//             languageCode = ['es'];
+//             break;
+//         case 'French':
+//             languageCode = ['fr'];
+//             break;
+//         case 'English':
+//             languageCode = ['en'];
+//             break;
+//         default:
+//             languageCode = undefined;
+//             break;
+//     }
+
+//     return languageCode;
+// }

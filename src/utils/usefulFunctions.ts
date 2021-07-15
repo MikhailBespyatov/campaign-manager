@@ -3,6 +3,7 @@ import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
 import format from 'date-fns/format';
+import ISO6391 from 'iso-639-1';
 import { AuthUserResponse, SortType, StatusType } from 'types';
 
 // Triggered copy to clipboard
@@ -201,3 +202,8 @@ export const toggleSortType = (state: SortType) =>
     state === 'none' ? 'descending' : state === 'descending' ? 'ascending' : 'none';
 
 export const getOrderByDescState = (state: SortType) => (state === 'none' ? undefined : state === 'descending');
+
+export function getLanguageISO6391Code(language: string) {
+    const languageCode = ISO6391.getCode(language);
+    return languageCode ? [languageCode] : undefined;
+}
