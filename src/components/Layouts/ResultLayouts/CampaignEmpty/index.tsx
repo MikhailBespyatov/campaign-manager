@@ -4,7 +4,7 @@ import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { titleMarginBottom } from 'components/Layouts/ResultLayouts/CampaignEmpty/constants';
 import { CampaignEmptyWrapper } from 'components/Layouts/ResultLayouts/CampaignEmpty/styles';
 import { routes } from 'constants/routes';
-import { primaryColor } from 'constants/styles';
+import { black, grey4 } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React from 'react';
 import { useHistory } from 'react-router';
@@ -18,19 +18,19 @@ export const CampaignEmpty = () => {
 
     return (
         <CampaignEmptyWrapper>
-            <Row marginBottom={titleMarginBottom}>
-                <Span color={primaryColor} fontSize="26px" lineHeight="32px">
-                    No Campaigns
-                </Span>
-            </Row>
-            <Row marginBottom={titleMarginBottom}>
-                <Span color={primaryColor} fontSize="16" lineHeight="19px">
-                    It looks like you haven't created any Campaigns yet
-                </Span>
-            </Row>
             <ManualRoundedButton height="44px" onClick={onClick}>
                 CREATE CAMPAIGN
             </ManualRoundedButton>
+            <Row marginBottom={titleMarginBottom} marginTop={titleMarginBottom}>
+                <Span uppercase color={black} fontSize="18px" fontWeight="700" lineHeight="22px">
+                    No Campaigns
+                </Span>
+            </Row>
+            <Row>
+                <Span color={grey4} fontSize="13" fontWeight="400" letterSpacing="1px" lineHeight="19px">
+                    Its look like you haven’t created any campaigns yet
+                </Span>
+            </Row>
         </CampaignEmptyWrapper>
     );
 };

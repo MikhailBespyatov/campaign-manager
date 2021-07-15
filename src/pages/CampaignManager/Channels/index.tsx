@@ -13,8 +13,9 @@ import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { EmptyLayout } from 'components/Layouts/EmptyLayout';
 import { channelsEdit, routes } from 'constants/routes';
-import { primaryMargin } from 'constants/styles';
+import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { copyButtonIconDiameter } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import { ChannelNameSpan } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/styles';
@@ -24,7 +25,14 @@ import { useHistory } from 'react-router';
 import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
-import { channelParameters, channelsContentPadding, editButtonDiameter } from './constants';
+import {
+    channelParameters,
+    channelsContentPadding,
+    editButtonDiameter,
+    emptyChannelSubtitle,
+    emptyChannelTitle,
+    noChannelsContentPadding
+} from './constants';
 
 const { invokeGetChannels, setIsFirstToFalse } = channelsEvents;
 
@@ -35,6 +43,8 @@ export const Channels = () => {
     const isFirst = useStore(channelsStores.isFirst);
     // const { limit, pageIndex } = useStore(channelsStores.values);
     const loading = useStore(channelsEffects.getItems.pending);
+    const contentWrapperPadding = items?.length ? channelsContentPadding : noChannelsContentPadding;
+    const contentWrapperBackground = items?.length ? white : 'transparent';
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.channels.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + channelsEdit + `/${id}`);
@@ -133,7 +143,12 @@ export const Channels = () => {
                 {/* </Section> */}
             </Section>
             <Section>
-                <ContentWrapper padding={channelsContentPadding} width="100%">
+                <ContentWrapper
+                    backgroundColor={contentWrapperBackground}
+                    //padding={channelsContentPadding}
+                    padding={contentWrapperPadding}
+                    width="100%"
+                >
                     {/*<PaginationLayout*/}
                     {/*    limit={limit}*/}
                     {/*    pageIndex={pageIndex}*/}
@@ -143,6 +158,8 @@ export const Channels = () => {
                     {/*>*/}
                     {loading ? (
                         <Loader />
+                    ) : !items?.length ? (
+                        <EmptyLayout subtitle={emptyChannelSubtitle} title={emptyChannelTitle} />
                     ) : (
                         <OverflowAutoLayout>
                             <Table columnSizes={[2, 3, 1, 1]} columns={channelParameters} data={dataTable} />

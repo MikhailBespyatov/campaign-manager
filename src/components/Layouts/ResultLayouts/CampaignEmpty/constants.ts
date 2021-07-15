@@ -1,2 +1,2 @@
-export const wrapperVerticalMargin = '280px';
-export const titleMarginBottom = '25px';
+export const wrapperVerticalMargin = '200px';
+export const titleMarginBottom = '30px';

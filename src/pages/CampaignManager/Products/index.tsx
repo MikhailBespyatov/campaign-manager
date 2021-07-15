@@ -180,11 +180,7 @@ export const Products = () => {
                     {loading ? (
                         <Loader />
                     ) : !items?.length ? (
-                        <EmptyLayout
-                            subtitle={emptyProductSubtitle}
-                            title={emptyProductTitle}
-                            onClickAddButton={onClickAddButton}
-                        />
+                        <EmptyLayout subtitle={emptyProductSubtitle} title={emptyProductTitle} />
                     ) : (
                         <PaginationLayout
                             limit={limit}
