@@ -1,6 +1,6 @@
 export const filtersMarginRight = '24px';
 export const productsContentPadding = '16px 54px';
-export const noProductsContentPadding = '175px 20px';
+export const noProductsContentPadding = '200px 20px';
 
 export const copyButtonIconDiameter = '16px';
 export const moreButtonIconHeight = '15px';
