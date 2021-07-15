@@ -5,6 +5,7 @@ import { InviteForm } from 'components/FormComponents/forms/InviteForm';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
+import { tertiaryBorderRadius } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { headersMarginBottom } from 'pages/UserAdmin/constants';
 import React, { useEffect } from 'react';
@@ -70,7 +71,7 @@ export const UserAdmin = () => {
                 {/* </ContentWrapper> */}
             </Section>
             <Section noWrap>
-                <ContentWrapper borderRadius="0px" padding="10px 30px" width="100%">
+                <ContentWrapper borderRadius={tertiaryBorderRadius} padding="10px 30px" width="100%">
                     {initialLoading ? <Loader /> : <UserAdminTable {...items} />}
                 </ContentWrapper>
             </Section>

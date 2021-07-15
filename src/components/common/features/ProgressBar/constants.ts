@@ -24,3 +24,5 @@ export const progressBarVerticalPadding = '12px';
 export const progressBarHorizontalPadding = '20px';
 
 export const arrowDiameter = '11px';
+
+export const buttonBorderRadius = '25px';

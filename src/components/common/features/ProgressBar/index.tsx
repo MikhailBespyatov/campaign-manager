@@ -2,6 +2,7 @@ import arrow from 'assets/icons/arrow_transparent_right.svg';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import {
     arrowDiameter,
+    buttonBorderRadius,
     progressBarHeight,
     progressBarHorizontalPadding,
     progressBarVerticalPadding
@@ -64,7 +65,7 @@ export const ProgressBar = ({
                 {activeIndex !== 0 && (
                     <MarginWrapper marginRight="15px">
                         <ManualRoundedButton
-                            borderRadius="4px"
+                            borderRadius={buttonBorderRadius}
                             fontSize="16px"
                             fontWeight="400"
                             height="32px"
@@ -88,7 +89,7 @@ export const ProgressBar = ({
                     {activeIndex !== steps.length - 1 ? (
                         <ManualRoundedButton
                             imageIsLast
-                            borderRadius="4px"
+                            borderRadius={buttonBorderRadius}
                             disabled={!isValidStep}
                             fontSize="16px"
                             fontWeight="400"
@@ -103,7 +104,7 @@ export const ProgressBar = ({
                         </ManualRoundedButton>
                     ) : (
                         <ManualRoundedButton
-                            borderRadius="4px"
+                            borderRadius={buttonBorderRadius}
                             disabled={!isValidForm}
                             fontSize="16px"
                             fontWeight="400"

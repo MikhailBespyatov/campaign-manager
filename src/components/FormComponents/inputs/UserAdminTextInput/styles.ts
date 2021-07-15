@@ -1,7 +1,6 @@
 import {
     wrapperBackground,
     wrapperBorderColor,
-    wrapperBorderRadius,
     wrapperBorderWidth,
     wrapperHeight,
     wrapperHorizontalPadding,
@@ -17,7 +16,7 @@ export const Wrapper = styled.div<InputWrapperProps>`
     align-items: center;
     width: ${({ width }) => (width ? width : wrapperWidth)};
     height: ${wrapperHeight};
-    border-radius: ${wrapperBorderRadius};
+    border-radius: 20px;
     border-width: ${wrapperBorderWidth};
     border-style: solid;
     border-color: ${({ color }) => (color ? color : wrapperBorderColor)};
