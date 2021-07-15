@@ -10,7 +10,7 @@ import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { defaultFontSize } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { primaryButtonDiameter, red, secondaryMargin, tertiaryBorderRadius } from 'constants/styles';
+import { primaryButtonDiameter, red, secondaryMargin } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { campaignsEvents } from 'stores/campaigns';
@@ -154,7 +154,7 @@ export const CampaignItem: FC<Props> = ({
                             <MarginWrapper marginRight="20px">
                                 <ManualRoundedButton
                                     background="transparent"
-                                    borderRadius={tertiaryBorderRadius}
+                                    borderRadius={buttonBorderRadius}
                                     fontSize="14px"
                                     fontWeight="400"
                                     height={primaryButtonDiameter}
