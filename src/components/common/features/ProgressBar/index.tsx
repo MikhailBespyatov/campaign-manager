@@ -119,7 +119,7 @@ export const ProgressBar = ({
 
                 <ManualRoundedButton
                     background="transparent"
-                    borderRadius="4px"
+                    borderRadius={buttonBorderRadius}
                     fontSize="12px"
                     fontWeight="400"
                     height="32px"
