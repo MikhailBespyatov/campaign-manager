@@ -1,8 +1,6 @@
 import closeImg from 'assets/img/add_video.svg';
-import history from 'BrowserHistory';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { InternalLink } from 'components/common/links/InternalLink';
@@ -20,11 +18,11 @@ import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constan
 import { defaultFontSize } from 'constants/defaults';
 import { noContentMessage } from 'constants/messages';
 import { routes } from 'constants/routes';
-import { blue, grey4, primaryMargin, primaryPadding, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
+import { blue, grey4, primaryMargin, primaryPadding, tertiaryMargin, tertiaryPadding } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
-import { campaignsEffects, campaignsEvents, campaignsStores } from 'stores/campaigns';
+import { campaignsEffects, campaignsStores } from 'stores/campaigns';
 import { loadingStores } from 'stores/loading';
 import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
@@ -115,9 +113,9 @@ export const CardModal = () => {
     const itemsInUse = useStore(campaignsStores.itemsInUse);
     const loading = useStore(loadingStores.loading);
     const itemsInUseLoading = useStore(loadingStores.initialLoading);
-    const { primaryColor } = useStore(themeStores.theme);
-
     const productsItem = useMemo(() => products?.[0] || {}, [products]);
+
+    //const { primaryColor } = useStore(themeStores.theme);
     //const extraTags = productsItem.extraTags;
     // const username = userDetails && userDetails?.username;
     // const imageUrl = userDetails && userDetails?.profile && userDetails?.profile?.imageUrl;
@@ -133,11 +131,11 @@ export const CardModal = () => {
     //     modalEvents.closeCardModal();
     // };
 
-    const onPromoteClick = () => {
-        campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
-        modalEvents.closeCardModal();
-        history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
-    };
+    // const onPromoteClick = () => {
+    //     campaignsEvents.pushContentId({ womContentId: id, uriPrimary, womQualityScore, products });
+    //     modalEvents.closeCardModal();
+    //     history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
+    // };
 
     useEffect(() => {
         if (visible) {
@@ -187,7 +185,7 @@ export const CardModal = () => {
                                         womQualityScore={womQualityScore}
                                     />
                                 )}
-                                <MarginWrapper marginTop="6px">
+                                {/* <MarginWrapper marginTop="6px">
                                     <ManualRoundedButton
                                         reverse
                                         background={white}
@@ -201,7 +199,7 @@ export const CardModal = () => {
                                     >
                                         PROMOTE
                                     </ManualRoundedButton>
-                                </MarginWrapper>
+                                </MarginWrapper> */}
                             </Column>
                             <Section>
                                 <Section marginBottom={tertiaryMargin}>

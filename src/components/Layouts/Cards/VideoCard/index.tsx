@@ -1,8 +1,10 @@
-import playVideoImg from 'assets/img/play_video_icon.svg';
 import addIdImg from 'assets/img/add_video.svg';
 import defaultImage from 'assets/img/default_image.svg';
+import playVideoImg from 'assets/img/play_video_icon.svg';
+import { ViewStatsButton } from 'components/common/buttons/ViewStatsButton';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { Span } from 'components/common/typography/Span';
 import { AbsoluteVideo } from 'components/common/Video';
 import { Card, Description, StatsCell } from 'components/grid/Card';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
@@ -15,14 +17,13 @@ import {
     qualityScoreLineHeight
 } from 'components/Layouts/Cards/VideoCard/constants';
 import { secondaryPadding, white } from 'constants/styles';
+import { useField } from 'effector-forms';
 import React, { useMemo, useState } from 'react';
+import { useLocation } from 'react-router';
+import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
 import { Unselectable } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
-import { Span } from 'components/common/typography/Span';
-import { ViewStatsButton } from 'components/common/buttons/ViewStatsButton';
-import { useField } from 'effector-forms';
-import { forms } from 'stores/forms';
 
 interface Props extends WOM.ContentItemResponse, Unselectable {}
 
@@ -32,13 +33,17 @@ export const VideoCard = ({
     womQualityScore,
     products,
     streamDetails,
-    engagement,
+    //engagement,
     unselectable
 }: Props) => {
     //const history = useHistory();
     //const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     // const contentIds = useStore(campaignsStores.contentIds);
     const { value: contentIds, onChange } = useField(forms.createCampaignForm.fields.videos);
+    const location = useLocation();
+    const isDiscoverPage = location.pathname.includes('discover');
+    const isProductPage = location.pathname.includes('products/product');
+    const buttonsPositionLeft = isDiscoverPage || isProductPage ? '128px' : '72px';
 
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -66,24 +71,27 @@ export const VideoCard = ({
         <Card active={active} unselectableStyled={unselectable}>
             <Description>
                 {!unselectable && (
-                    <AbsoluteWrapper left="72px" top="168px" zIndex="5">
+                    <AbsoluteWrapper left={buttonsPositionLeft} top="168px" zIndex="5">
                         <Row>
-                            <MarginWrapper marginRight="34px">
-                                <CustomImg
-                                    pointer
-                                    height={addIdImgDiameter}
-                                    src={playVideoImg}
-                                    width={addIdImgDiameter}
-                                    onClick={onVideoPlay}
-                                />
-                            </MarginWrapper>
                             <CustomImg
                                 pointer
                                 height={addIdImgDiameter}
-                                src={addIdImg}
+                                src={playVideoImg}
                                 width={addIdImgDiameter}
-                                onClick={addIdHandler}
+                                onClick={onVideoPlay}
                             />
+
+                            {!isDiscoverPage && !isProductPage && (
+                                <MarginWrapper marginLeft="34px">
+                                    <CustomImg
+                                        pointer
+                                        height={addIdImgDiameter}
+                                        src={addIdImg}
+                                        width={addIdImgDiameter}
+                                        onClick={addIdHandler}
+                                    />
+                                </MarginWrapper>
+                            )}
                         </Row>
                     </AbsoluteWrapper>
                 )}
