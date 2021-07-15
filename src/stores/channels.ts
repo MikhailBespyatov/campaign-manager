@@ -1,8 +1,8 @@
+import { defaultChannelsValues } from 'constants/defaults/channels';
 import { createEffect, createEvent, createStore, forward, restore } from 'effector';
 import { API } from 'services';
-import { loadingEffects } from 'stores/loading';
-import { defaultChannelsValues } from 'constants/defaults/channels';
 import { initializeIsFirstStore } from 'stores/initialize/initialize.isFirst.store';
+import { loadingEffects } from 'stores/loading';
 
 const getItemById = createEffect({
     handler: async (id: string) => {
@@ -78,6 +78,72 @@ const updateChannel = createEffect({
         }
     }
 });
+
+// const getPublicChannels = createEffect({
+//     handler: async (values: WOM.OrganizationChannelQueryRequest) => {
+//         try {
+//             loadingEffects.updateInitialLoading();
+//             const data = await API.channels.getPublicChannels(values);
+//             loadingEffects.updateInitialLoading();
+
+//             return data || {};
+//         } catch {
+//             loadingEffects.updateInitialLoading();
+//             return {};
+//         }
+//     }
+// });
+
+// getPublicChannels({
+//     merchantId: '60502f360b62caccafa06037',
+//     pageIndex: 0,
+//     limit: 20,
+//     returnQueryCount: true
+// });
+
+// const getPrivateChannels = createEffect({
+//     handler: async (values: WOM.QueryPrivateChannelsRequest) => {
+//         try {
+//             loadingEffects.updateInitialLoading();
+//             const data = await API.channels.getPrivateChannels(values);
+//             loadingEffects.updateInitialLoading();
+
+//             return data || {};
+//         } catch {
+//             loadingEffects.updateInitialLoading();
+//             return {};
+//         }
+//     }
+// });
+
+// getPrivateChannels({
+//     pageIndex: 0,
+//     limit: 20,
+//     returnQueryCount: true
+// });
+
+// const getChannelPlaylist = createEffect({
+//     handler: async (values: WOM.QueryChannelPlaylistRequest) => {
+//         try {
+//             loadingEffects.updateInitialLoading();
+//             const data = await API.channels.getChannelPlaylist(values);
+//             loadingEffects.updateInitialLoading();
+
+//             return data || {};
+//         } catch {
+//             loadingEffects.updateInitialLoading();
+//             return {};
+//         }
+//     }
+// });
+
+// getChannelPlaylist({
+//     channelId: '6054b8fe7343a8327256883a',
+//     merchantId: '60502f360b62caccafa06037',
+//     pageIndex: 0,
+//     limit: 20,
+//     returnQueryCount: true
+// });
 
 const item = restore<WOM.ChannelResponse>(getItemById.doneData, {});
 const items = createStore<WOM.ChannelsResponse>({})
