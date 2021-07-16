@@ -29,3 +29,21 @@ export const deleteChannelById = (data: WOM.DeleteChannelRequest) =>
         url: '/channel/delete',
         data
     });
+
+export const getPublicChannels = (data: WOM.OrganizationChannelQueryRequest) =>
+    axios<WOM.OrganizationChannelQueryResponse>({
+        url: '/campaign/channel/query-public',
+        data
+    });
+
+export const getPrivateChannels = (data: WOM.QueryPrivateChannelsRequest) =>
+    axios<WOM.QueryPrivateChannelsResponse>({
+        url: '/campaign/channel/query-private',
+        data
+    });
+
+export const getChannelPlaylist = (data: WOM.QueryChannelPlaylistRequest) =>
+    axios<WOM.QueryChannelPlaylistResponse>({
+        url: '/channel/query-playlist',
+        data
+    });

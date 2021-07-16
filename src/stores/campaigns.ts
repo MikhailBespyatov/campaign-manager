@@ -1,14 +1,14 @@
 import { Props } from 'components/FormComponents/forms/CreateCampaignForm/types';
+import { countCampaignDrafts, defaultCampaignStatus } from 'constants/defaults';
 import { createEffect, createEvent, createStore, forward, sample } from 'effector';
+import connectLocalStorage from 'effector-localstorage';
 import { API } from 'services';
+import { forms } from 'stores/forms';
 import { loadingEffects } from 'stores/loading';
+import { modalEvents } from 'stores/modal';
 import { organizationsStores } from 'stores/organizations';
 import { getCampaignStatus } from 'utils/usefulFunctions';
-import { countCampaignDrafts, defaultCampaignStatus } from 'constants/defaults';
-import { forms } from 'stores/forms';
-import connectLocalStorage from 'effector-localstorage';
 import { createCampaignEvent } from './forms/createCampaignForm';
-import { modalEvents } from 'stores/modal';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -99,6 +99,24 @@ const getItems = createEffect({
         }
     }
 });
+
+// const getMerchantQuery = createEffect({
+//     handler: async (values: WOM.CampaignMerchantQueryRequest) => {
+//         try {
+//             loadingEffects.updateInitialLoading();
+//             const data = await API.campaigns.getMerchantQuery(values);
+//             loadingEffects.updateInitialLoading();
+
+//             console.log(data);
+//             return data || {};
+//         } catch {
+//             loadingEffects.updateInitialLoading();
+//             return {};
+//         }
+//     }
+// });
+
+//getMerchantQuery({ pageIndex: 0, limit: 20, returnQueryCount: true });
 
 const getStatisticsItems = createEffect({
     handler: async (values: WOM.CampaignStatisticsQueryRequest) => {

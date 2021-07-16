@@ -35,3 +35,9 @@ export const getItemsByContentId = (data: WOM.CampaignsContentRequest) =>
         url: '/campaign/query-by-content',
         data
     });
+
+export const getMerchantQuery = (data: WOM.CampaignMerchantQueryRequest) =>
+    axios<WOM.CampaignMerchantQueryResponse>({
+        url: '/campaign/merchant/query',
+        data
+    });
