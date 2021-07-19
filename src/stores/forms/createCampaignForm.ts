@@ -22,14 +22,14 @@ export const createCampaignForm = createForm({
             ]
         },
         channels: {
-            init: [] as string[]
-            // validateOn: ['change'],
-            // rules: [
-            //     createRule<string[]>({
-            //         name: 'channels',
-            //         schema: yupDefaultArray
-            //     })
-            // ]
+            init: [] as string[],
+            validateOn: ['change'],
+            rules: [
+                createRule<string[]>({
+                    name: 'channels',
+                    schema: yupDefaultArray
+                })
+            ]
         },
         videos: {
             init: [] as WOM.ContentItemResponse[],
@@ -136,11 +136,12 @@ sample({
     source: createCampaignForm.$values,
     clock: createCampaignForm.submit,
     target: createCampaignEvent,
-    fn: ({ campaignName, dateFrom, dateTo, videos, budget }, _) => ({
+    fn: ({ campaignName, dateFrom, dateTo, videos, budget, channels }, _) => ({
         organizationId: getOrganizationId(),
         title: campaignName,
         // tags: [],
         contentIds: videos.map(({ womContentId }) => womContentId) as string[],
+        channels: channels,
         schedule: {
             utcToStart: dateFrom,
             utcToEnd: dateTo
