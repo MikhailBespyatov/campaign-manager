@@ -2,7 +2,7 @@ import { itemHorizontalMargin } from 'components/common/dividers/BarItem/constan
 import { grey8 } from 'constants/styles';
 
 export const channelsItem = [{ path: 'Public' }, { path: 'Private' }];
-export const publicChannelParameters = ['Channel Name', 'Channel Link', 'Add to Campaign'];
+export const publicChannelParameters = ['Channel Name', /* 'Channel Link', */ 'Add to Campaign'];
 
 // 75 - from origin design
 export const channelsItemMarginRight = 75 - parseInt(itemHorizontalMargin) + 'px';

@@ -4,6 +4,8 @@ import { API } from 'services';
 import { initializeIsFirstStore } from 'stores/initialize/initialize.isFirst.store';
 import { loadingEffects } from 'stores/loading';
 
+const { isFirst, setIsFirstToFalse, setIsFirstToTrue } = initializeIsFirstStore();
+
 const getItemById = createEffect({
     handler: async (id: string) => {
         try {
@@ -79,72 +81,6 @@ const updateChannel = createEffect({
     }
 });
 
-// const getPublicChannels = createEffect({
-//     handler: async (values: WOM.OrganizationChannelQueryRequest) => {
-//         try {
-//             loadingEffects.updateInitialLoading();
-//             const data = await API.channels.getPublicChannels(values);
-//             loadingEffects.updateInitialLoading();
-
-//             return data || {};
-//         } catch {
-//             loadingEffects.updateInitialLoading();
-//             return {};
-//         }
-//     }
-// });
-
-// getPublicChannels({
-//     merchantId: '60502f360b62caccafa06037',
-//     pageIndex: 0,
-//     limit: 20,
-//     returnQueryCount: true
-// });
-
-// const getPrivateChannels = createEffect({
-//     handler: async (values: WOM.QueryPrivateChannelsRequest) => {
-//         try {
-//             loadingEffects.updateInitialLoading();
-//             const data = await API.channels.getPrivateChannels(values);
-//             loadingEffects.updateInitialLoading();
-
-//             return data || {};
-//         } catch {
-//             loadingEffects.updateInitialLoading();
-//             return {};
-//         }
-//     }
-// });
-
-// getPrivateChannels({
-//     pageIndex: 0,
-//     limit: 20,
-//     returnQueryCount: true
-// });
-
-// const getChannelPlaylist = createEffect({
-//     handler: async (values: WOM.QueryChannelPlaylistRequest) => {
-//         try {
-//             loadingEffects.updateInitialLoading();
-//             const data = await API.channels.getChannelPlaylist(values);
-//             loadingEffects.updateInitialLoading();
-
-//             return data || {};
-//         } catch {
-//             loadingEffects.updateInitialLoading();
-//             return {};
-//         }
-//     }
-// });
-
-// getChannelPlaylist({
-//     channelId: '6054b8fe7343a8327256883a',
-//     merchantId: '60502f360b62caccafa06037',
-//     pageIndex: 0,
-//     limit: 20,
-//     returnQueryCount: true
-// });
-
 const item = restore<WOM.ChannelResponse>(getItemById.doneData, {});
 const items = createStore<WOM.ChannelsResponse>({})
     .on(getItems.doneData, (_, newState) => newState)
@@ -174,10 +110,131 @@ forward({
     to: [getItems]
 });
 
-const { isFirst, setIsFirstToFalse, setIsFirstToTrue } = initializeIsFirstStore();
+const getPublicChannels = createEffect({
+    handler: async (values: WOM.OrganizationChannelQueryRequest) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const data = await API.channels.getPublicChannels(values);
+            loadingEffects.updateInitialLoading();
+
+            return data || {};
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return {};
+        }
+    }
+});
+
+const publicChannels = restore<WOM.OrganizationChannelQueryResponse>(getPublicChannels.doneData, {});
+
+const updatePublicChannelsValues = createEvent<Partial<WOM.OrganizationChannelQueryRequest>>();
+const setDefaultPublicChannelsValues = createEvent();
+const invokeGetPublicChannels = createEvent();
+
+const publicChannelsValues = createStore<WOM.OrganizationChannelQueryRequest>(defaultChannelsValues)
+    .on(invokeGetPublicChannels, state => state)
+    .on(updatePublicChannelsValues, (state, values) => ({ ...state, ...values }))
+    .on(setDefaultPublicChannelsValues, _ => defaultChannelsValues);
+
+publicChannelsValues.watch(invokeGetPublicChannels, values => getPublicChannels(values));
+
+forward({
+    from: [publicChannelsValues],
+    to: [getPublicChannels]
+});
+
+const getPrivateChannels = createEffect({
+    handler: async (values: WOM.QueryPrivateChannelsRequest) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const data = await API.channels.getPrivateChannels(values);
+            loadingEffects.updateInitialLoading();
+
+            return data || {};
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return {};
+        }
+    }
+});
+
+const privateChannels = restore<WOM.QueryPrivateChannelsResponse>(getPrivateChannels.doneData, {});
+
+const updatePrivateChannelsValues = createEvent<Partial<WOM.QueryPrivateChannelsRequest>>();
+const setDefaultPrivateChannelsValues = createEvent();
+const invokeGetPrivateChannels = createEvent();
+
+const privateChannelsValues = createStore<WOM.QueryPrivateChannelsRequest>(defaultChannelsValues)
+    .on(invokeGetPrivateChannels, state => state)
+    .on(updatePrivateChannelsValues, (state, values) => ({ ...state, ...values }))
+    .on(setDefaultPrivateChannelsValues, _ => defaultChannelsValues);
+
+privateChannelsValues.watch(invokeGetPrivateChannels, values => getPrivateChannels(values));
+
+forward({
+    from: [privateChannelsValues],
+    to: [getPrivateChannels]
+});
+
+// const getChannelPlaylist = createEffect({
+//     handler: async (values: WOM.QueryChannelPlaylistRequest) => {
+//         try {
+//             loadingEffects.updateInitialLoading();
+//             const data = await API.channels.getChannelPlaylist(values);
+//             loadingEffects.updateInitialLoading();
+
+//             return data || {};
+//         } catch {
+//             loadingEffects.updateInitialLoading();
+//             return {};
+//         }
+//     }
+// });
+
+// getChannelPlaylist({
+//     channelId: '6054b8fe7343a8327256883a',
+//     merchantId: '60502f360b62caccafa06037',
+//     pageIndex: 0,
+//     limit: 20,
+//     returnQueryCount: true
+// });
 
 const channelsEvents = { updateValues, setDefaultValues, invokeGetChannels, setIsFirstToFalse, setIsFirstToTrue };
-const channelsEffects = { getItemById, getItems, createChannel, updateChannel, removeChannel };
+const channelsEffects = {
+    getItemById,
+    getItems,
+    createChannel,
+    updateChannel,
+    removeChannel
+};
 const channelsStores = { item, items, values, isFirst };
 
-export { channelsEvents, channelsEffects, channelsStores };
+const publicChannelsEvents = {
+    updatePublicChannelsValues,
+    setDefaultPublicChannelsValues,
+    invokeGetPublicChannels
+};
+
+const privateChannelsEvents = {
+    updatePrivateChannelsValues,
+    setDefaultPrivateChannelsValues,
+    invokeGetPrivateChannels
+};
+
+const publicChannelsEffects = { getPublicChannels };
+const privateChannelsEffects = { getPrivateChannels };
+
+const publicChannelsStores = { publicChannels, publicChannelsValues };
+const privateChannelsStores = { privateChannels, privateChannelsValues };
+
+export {
+    channelsStores,
+    channelsEvents,
+    channelsEffects,
+    publicChannelsStores,
+    publicChannelsEvents,
+    publicChannelsEffects,
+    privateChannelsStores,
+    privateChannelsEffects,
+    privateChannelsEvents
+};
