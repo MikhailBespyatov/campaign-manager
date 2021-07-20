@@ -30,6 +30,7 @@ export interface WomInputProps extends Required<Label> {
     value: string;
     onChange: (value: string) => void;
     isValid: boolean;
+    isTouched?: boolean;
 }
 
 export interface CurrencyDataProps {
@@ -40,7 +41,7 @@ export interface CurrencyDataProps {
     name: string;
 }
 
-export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInputProps) => {
+export const WomInput = ({ label, errorText, value, onChange, isValid, isTouched }: WomInputProps) => {
     const [usdRate, eurRate] = useStore(walletStores.rates);
     const walletBalance = useStore(walletStores.walletBalance);
     const USD = totalCurrency(walletBalance, usdRate);
@@ -114,7 +115,7 @@ export const WomInput = ({ label, errorText, value, onChange, isValid }: WomInpu
                         </InfoPopover>
                     </AbsoluteWrapper> */}
 
-                        {!isValid && (
+                        {!isValid && isTouched && (
                             <AbsoluteWrapper right="45px" top="35px" zIndex={logoZIndex}>
                                 <ErrorSpan touched>{errorText}</ErrorSpan>
                             </AbsoluteWrapper>
