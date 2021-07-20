@@ -20,8 +20,6 @@ import {
 } from 'pages/CampaignManager/Campaign/Create/Steps/Channels/constants';
 import React, { FC, useEffect, useState } from 'react';
 import {
-    channelsEvents,
-    channelsStores,
     privateChannelsEffects,
     privateChannelsEvents,
     privateChannelsStores,
@@ -84,7 +82,7 @@ const { getPublicChannels } = publicChannelsEffects;
 const { getPrivateChannels } = privateChannelsEffects;
 
 const { updatePublicChannelsValues } = publicChannelsEvents;
-const { setIsFirstToFalse /* setIsFirstToTrue*/ } = channelsEvents;
+//const { setIsFirstToFalse /* setIsFirstToTrue*/ } = channelsEvents;
 
 const { updatePrivateChannelsValues, invokeGetPrivateChannels } = privateChannelsEvents;
 
@@ -104,7 +102,7 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
         publicChannelsStores.publicChannels
     );
 
-    const isFirst = useStore(channelsStores.isFirst);
+    //const isFirst = useStore(channelsStores.isFirst);
 
     const { limit: publicChannelsLimit, pageIndex: publicChannelsPageIndex } = useStore(
         publicChannelsStores.publicChannelsValues
@@ -163,17 +161,15 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
         });
 
     useEffect(() => {
-        if (isFirst && publicId) {
+        if (publicId) {
             updatePublicChannelsValues({
                 merchantId: publicId?.slice(-24)
             });
-
-            invokeGetPrivateChannels();
-
-            setIsFirstToFalse();
         }
+        invokeGetPrivateChannels();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [publicId]);
+    }, []);
 
     return (
         <>
