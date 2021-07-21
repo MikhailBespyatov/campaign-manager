@@ -164,8 +164,16 @@ export const getDateFromString = (dateISOString?: string) => {
 };
 
 //TODO: status and test for status
-export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (item: WOM.CampaignDetailResponse) =>
-    'running';
+export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (
+    item: WOM.CampaignDetailResponse
+) => {
+    const { isActive, schedule } = item;
+    //const currentDate = getMilliseconds(startOfToday());
+    // const startDate = Date.parse(schedule?.utcToStart || '');
+    //const endDate = Date.parse(schedule?.utcToEnd || '');
+
+    return !isActive && schedule?.hasStarted && schedule?.hasEnded ? 'completed' : 'running';
+};
 
 export const engagementStatusTypes = (parameter?: number) => (parameter && parameter > 0 ? 'success' : 'error');
 
