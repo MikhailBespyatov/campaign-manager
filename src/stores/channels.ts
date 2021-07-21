@@ -176,23 +176,31 @@ forward({
     to: [getPrivateChannels]
 });
 
-// const getChannelPlaylist = createEffect({
-//     handler: async (values: WOM.QueryChannelPlaylistRequest) => {
-//         try {
-//             loadingEffects.updateInitialLoading();
-//             const data = await API.channels.getChannelPlaylist(values);
-//             loadingEffects.updateInitialLoading();
+const getChannelPlaylist = createEffect({
+    handler: async (values: WOM.QueryChannelPlaylistRequest) => {
+        try {
+            loadingEffects.updateInitialLoading();
+            const data = await API.channels.getChannelPlaylist(values);
+            loadingEffects.updateInitialLoading();
 
-//             return data || {};
-//         } catch {
-//             loadingEffects.updateInitialLoading();
-//             return {};
-//         }
-//     }
-// });
+            return data || {};
+        } catch {
+            loadingEffects.updateInitialLoading();
+            return {};
+        }
+    }
+});
 
 // getChannelPlaylist({
 //     channelId: '6054b8fe7343a8327256883a',
+//     merchantId: '60502f360b62caccafa06037',
+//     pageIndex: 0,
+//     limit: 20,
+//     returnQueryCount: true
+// });
+
+// getChannelPlaylist({
+//     channelId: '60f167121922d91800c35251',
 //     merchantId: '60502f360b62caccafa06037',
 //     pageIndex: 0,
 //     limit: 20,
@@ -205,7 +213,8 @@ const channelsEffects = {
     getItems,
     createChannel,
     updateChannel,
-    removeChannel
+    removeChannel,
+    getChannelPlaylist
 };
 const channelsStores = { item, items, values, isFirst };
 
