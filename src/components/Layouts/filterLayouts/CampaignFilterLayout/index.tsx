@@ -17,7 +17,9 @@ export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) 
         forms.createCampaignForm.fields.dateTo
     );
 
-    const { value, onChange, isValid } = useField(forms.createCampaignForm.fields.budget);
+    const { value, onChange, isValid, isTouched, validate: validateBudget } = useField(
+        forms.createCampaignForm.fields.budget
+    );
 
     const onDatesBetweenChange = (dateFrom: string, dateTo: string) => {
         dateFromValue !== dateFrom && onChangeDateFrom(dateFrom);
@@ -27,6 +29,7 @@ export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) 
     useEffect(() => {
         validateDateFrom();
         validateDateTo();
+        validateBudget();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateFromValue, dateToValue]);
@@ -54,6 +57,7 @@ export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) 
                     <Section maxWidth={maxContainerWidth}>
                         <WomInput
                             errorText="Insufficient funds"
+                            isTouched={isTouched}
                             isValid={isValid}
                             label="Budget amount"
                             value={value}

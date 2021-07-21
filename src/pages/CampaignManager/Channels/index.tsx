@@ -14,6 +14,7 @@ import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrappe
 import { OverflowAutoLayout } from 'components/Layouts';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { EmptyLayout } from 'components/Layouts/EmptyLayout';
+import { PaginationLayout } from 'components/Layouts/PaginationLayout';
 import { channelsEdit, routes } from 'constants/routes';
 import { primaryMargin, white } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -34,14 +35,15 @@ import {
     noChannelsContentPadding
 } from './constants';
 
-const { invokeGetChannels, setIsFirstToFalse } = channelsEvents;
+const { invokeGetChannels, setIsFirstToFalse, updateValues } = channelsEvents;
+const { getItems } = channelsEffects;
 
 export const Channels = () => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
-    const { items } = useStore(channelsStores.items);
+    const { items, totalRecords } = useStore(channelsStores.items);
     const isFirst = useStore(channelsStores.isFirst);
-    // const { limit, pageIndex } = useStore(channelsStores.values);
+    const { limit, pageIndex } = useStore(channelsStores.values);
     const loading = useStore(channelsEffects.getItems.pending);
     const contentWrapperPadding = items?.length ? channelsContentPadding : noChannelsContentPadding;
     const contentWrapperBackground = items?.length ? white : 'transparent';
@@ -116,10 +118,23 @@ export const Channels = () => {
     //         limit: size
     //     });
 
+    const onPaginationChange = (current: number) =>
+        updateValues({
+            pageIndex: current
+        });
+
+    const onSizeChange = (current: number, size: number) =>
+        updateValues({
+            pageIndex: current,
+            limit: size
+        });
+
     useEffect(() => {
         if (isFirst) {
             invokeGetChannels();
             setIsFirstToFalse();
+        } else {
+            getItems({ pageIndex, limit, returnQueryCount: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -161,9 +176,17 @@ export const Channels = () => {
                     ) : !items?.length ? (
                         <EmptyLayout subtitle={emptyChannelSubtitle} title={emptyChannelTitle} />
                     ) : (
-                        <OverflowAutoLayout>
-                            <Table columnSizes={[2, 3, 1, 1]} columns={channelParameters} data={dataTable} />
-                        </OverflowAutoLayout>
+                        <PaginationLayout
+                            limit={limit}
+                            pageIndex={pageIndex}
+                            totalRecords={totalRecords}
+                            onPaginationChange={onPaginationChange}
+                            onSizeChange={onSizeChange}
+                        >
+                            <OverflowAutoLayout>
+                                <Table columnSizes={[2, 3, 1, 1]} columns={channelParameters} data={dataTable} />
+                            </OverflowAutoLayout>
+                        </PaginationLayout>
                     )}
                     {/*</PaginationLayout>*/}
                 </ContentWrapper>
