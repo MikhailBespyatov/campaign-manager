@@ -141,7 +141,7 @@ sample({
         title: campaignName,
         // tags: [],
         contentIds: videos.map(({ womContentId }) => womContentId) as string[],
-        channels: channels,
+        channelIds: channels,
         schedule: {
             utcToStart: dateFrom,
             utcToEnd: dateTo
