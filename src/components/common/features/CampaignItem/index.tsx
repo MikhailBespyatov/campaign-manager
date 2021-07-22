@@ -21,11 +21,14 @@ import { CampaignDetail, CampaignStatusBlock, CampaignSubtitle, StyledSpan } fro
 interface CampaignSubtitleProps {
     videosQuantity?: number;
     womAmount?: number;
+    womSpentAmount?: number;
 }
 
-export const CampaignSubtitleBlock: FC<CampaignSubtitleProps> = ({ videosQuantity, womAmount }) => (
+export const CampaignSubtitleBlock: FC<CampaignSubtitleProps> = ({ videosQuantity, womAmount, womSpentAmount }) => (
     <CampaignSubtitle>
-        Content <StyledSpan>{videosQuantity} videos,</StyledSpan> Total Budget <StyledSpan>{womAmount} WOM</StyledSpan>
+        Content&nbsp;<StyledSpan>{videosQuantity}&nbsp;videos,</StyledSpan>
+        &nbsp;Total Budget&nbsp;<StyledSpan>{womAmount || 0}&nbsp;WOM</StyledSpan>
+        &nbsp;Spent&nbsp;<StyledSpan>{womSpentAmount ? womSpentAmount.toFixed(1) : 0}&nbsp;WOM</StyledSpan>
     </CampaignSubtitle>
 );
 
@@ -72,7 +75,11 @@ export const CampaignItem: FC<Props> = ({
                         </Span>
                     </MarginWrapper>
                     <MarginWrapper marginBottom={secondaryMargin}>
-                        <CampaignSubtitleBlock videosQuantity={contentIds?.length} womAmount={budget?.budgetTotal} />
+                        <CampaignSubtitleBlock
+                            videosQuantity={contentIds?.length}
+                            womAmount={budget?.budgetTotal}
+                            womSpentAmount={budget?.budgetSpent}
+                        />
                     </MarginWrapper>
                     <Row marginBottom="4px">
                         {isDetailsPage ? (

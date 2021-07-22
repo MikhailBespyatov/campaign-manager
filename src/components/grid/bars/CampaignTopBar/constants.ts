@@ -1,5 +1,5 @@
-import { Path, Status } from 'types';
 import { routes } from 'constants/routes';
+import { Path, Status } from 'types';
 
 export interface RoutesArray extends Status, Path {
     name: string;
@@ -11,21 +11,21 @@ export const routesArray: RoutesArray[] = [
         status: 'running',
         path: routes.campaignManager.campaign.running
     },
-    {
-        name: 'Paused Campaigns',
-        status: 'paused',
-        path: routes.campaignManager.campaign.paused
-    },
+    // {
+    //     name: 'Paused Campaigns',
+    //     status: 'paused',
+    //     path: routes.campaignManager.campaign.paused
+    // },
     {
         name: 'Completed Campaigns',
         status: 'completed',
         path: routes.campaignManager.campaign.completed
     },
-    {
-        name: 'Expired Campaigns',
-        status: 'expired',
-        path: routes.campaignManager.campaign.expired
-    },
+    // {
+    //     name: 'Expired Campaigns',
+    //     status: 'expired',
+    //     path: routes.campaignManager.campaign.expired
+    // },
     {
         name: 'Draft Campaigns',
         status: 'draft',
