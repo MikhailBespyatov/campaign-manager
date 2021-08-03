@@ -1,10 +1,13 @@
 import { createRule, yupDefault, yupDefaultArray } from 'constants/yupFields';
+import addDays from 'date-fns/addDays';
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
+import startOfToday from 'date-fns/startOfToday';
 import { createEvent, forward, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import { nanoid } from 'nanoid';
 import { createCampaignEvents } from 'stores/createCampaignSteps';
 import { walletStores } from 'stores/wallet';
-import { getDateBeforeAndReturnISO, getOrganizationId } from 'utils/usefulFunctions';
+import { getOrganizationId } from 'utils/usefulFunctions';
 
 export const createCampaignForm = createForm({
     fields: {
@@ -86,23 +89,49 @@ export const createCampaignForm = createForm({
                 {
                     name: 'dateFrom',
                     validator: (value, { dateTo }) => {
-                        if (new Date(value) < new Date(getDateBeforeAndReturnISO(1))) return false;
-                        const dateToIsLaterThanDateFrom = new Date(dateTo).getDate() > new Date(value).getDate();
-                        return dateToIsLaterThanDateFrom;
+                        const calendarDaysBetweenStartDateAndTodayDate = differenceInCalendarDays(
+                            new Date(value),
+                            startOfToday()
+                        );
+                        const calendarDaysBetweenStartDateAndEndDate = differenceInCalendarDays(
+                            new Date(dateTo),
+                            new Date(value)
+                        );
+
+                        //console.log('***form between Start and T0 >= 0', calendarDaysBetweenStartDateAndTodayDate >= 0);
+                        //console.log('***form between Start And End >= 1', calendarDaysBetweenStartDateAndEndDate >= 1);
+
+                        return (
+                            calendarDaysBetweenStartDateAndTodayDate >= 0 && calendarDaysBetweenStartDateAndEndDate >= 1
+                        );
                     }
                 }
             ]
         },
         dateTo: {
-            init: new Date().toISOString(),
+            init: addDays(new Date(), 1).toISOString(),
             validateOn: ['change'],
             rules: [
                 {
                     name: 'dateTo',
                     validator: (value, { dateFrom }) => {
                         // if (new Date(dateFrom) < new Date(getDateBeforeAndReturnISO(1))) return false;
-                        const differenceDates = new Date(value).getDate() - new Date(dateFrom).getDate();
-                        return differenceDates >= 1;
+
+                        const calendarDaysBetweenTodayDateAndEndDate = differenceInCalendarDays(
+                            new Date(value),
+                            startOfToday()
+                        );
+                        const calendarDaysBetweenStartDateAndEndDate = differenceInCalendarDays(
+                            new Date(value),
+                            new Date(dateFrom)
+                        );
+
+                        //console.log('***form days between start and end ', calendarDaysBetweenStartDateAndEndDate >= 1);
+                        // console.log('** form days between T0 and end', calendarDaysBetweenStartDateAndEndDate >= 1);
+
+                        return (
+                            calendarDaysBetweenStartDateAndEndDate >= 1 && calendarDaysBetweenTodayDateAndEndDate >= 1
+                        );
                     }
                 }
             ]
