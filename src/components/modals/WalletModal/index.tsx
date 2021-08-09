@@ -1,13 +1,36 @@
 import closeImg from 'assets/img/add_video.svg';
+import bithumbLogo from 'assets/img/logo-bithumb.svg';
+import gateIoLogo from 'assets/img/logo-gateio.svg';
+import kuCoinLogo from 'assets/img/logo-kucoin.svg';
+import liquidLogo from 'assets/img/logo-liquid.svg';
 import WOMIcon from 'assets/img/wom-token-logo.png';
 import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
+import { ExternalLink } from 'components/common/links/ExternalLink';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
-import { marginMSize, marginSSize, marginXSSize, qrCodeImageDiameter } from 'components/modals/WalletModal/constants';
+import {
+    bithumbLogoHeight,
+    bithumbLogoWidth,
+    bithumHref,
+    gateIoHref,
+    gateIoLogoHeight,
+    gateIoLogoWidth,
+    kuCoinHref,
+    kuCoinLogoHeight,
+    kuCoinLogoWidth,
+    liquidHref,
+    liquidLogoHeight,
+    liquidLogoWidth,
+    marginMSize,
+    marginSSize,
+    marginXSSize,
+    qrCodeImageDiameter
+} from 'components/modals/WalletModal/constants';
 import { blue7, blue9, tertiaryMargin, tertiaryPadding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
@@ -99,7 +122,7 @@ export const WalletModal = () => {
                             <MarginWrapper marginBottom={marginSSize}>
                                 <WalletSubtitleSpan>WALLET OWNER</WalletSubtitleSpan>
                             </MarginWrapper>
-                            <WalletTitleSpan>{walletOwner}</WalletTitleSpan>
+                            <WalletTitleSpan>@{walletOwner}</WalletTitleSpan>
                         </Column>
                         <Column alignCenter>
                             <MarginWrapper marginBottom={marginSSize}>
@@ -119,6 +142,35 @@ export const WalletModal = () => {
                             <WalletTitleSpan>WALLET ADDRESS</WalletTitleSpan>
                         </MarginWrapper>
                         <CopyableField backgroundColor={blue9} color={white} subject={walletAddress} />
+
+                        <MarginWrapper marginBottom="15px" marginTop="30px">
+                            <WalletTitleSpan>GET WOM</WalletTitleSpan>
+                        </MarginWrapper>
+                        <ContentWrapper borderRadius="0px 0px 8px 8px" width="100%">
+                            <Section alignCenter justifyCenter>
+                                <Row alignCenter justifyBetween height="42px" width="400px">
+                                    <ExternalLink href={bithumHref} target="_blank">
+                                        <CustomImg
+                                            height={bithumbLogoHeight}
+                                            src={bithumbLogo}
+                                            width={bithumbLogoWidth}
+                                        />
+                                    </ExternalLink>
+
+                                    <ExternalLink href={gateIoHref} target="_blank">
+                                        <CustomImg height={gateIoLogoHeight} src={gateIoLogo} width={gateIoLogoWidth} />
+                                    </ExternalLink>
+
+                                    <ExternalLink href={liquidHref} target="_blank">
+                                        <CustomImg height={liquidLogoHeight} src={liquidLogo} width={liquidLogoWidth} />
+                                    </ExternalLink>
+
+                                    <ExternalLink href={kuCoinHref} target="_blank">
+                                        <CustomImg height={kuCoinLogoHeight} src={kuCoinLogo} width={kuCoinLogoWidth} />
+                                    </ExternalLink>
+                                </Row>
+                            </Section>
+                        </ContentWrapper>
                     </Column>
                 </Section>
             </Modal>

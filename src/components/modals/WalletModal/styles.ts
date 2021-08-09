@@ -2,7 +2,6 @@ import { Span } from 'components/common/typography/Span';
 import {
     modalBackground,
     modalBoxShadow,
-    modalHorizontalPadding,
     modalVerticalPadding,
     wrapperBackground,
     wrapperHorizontalPadding,
@@ -37,7 +36,7 @@ export const Modal = styled.div`
     box-shadow: ${modalBoxShadow};
     background: ${modalBackground};
     margin: auto;
-    padding: ${modalVerticalPadding} ${modalHorizontalPadding};
+    padding: ${modalVerticalPadding} 0px 0px;
     z-index: 10;
 `;
 

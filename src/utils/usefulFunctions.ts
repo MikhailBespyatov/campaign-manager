@@ -163,6 +163,12 @@ export const getDateFromString = (dateISOString?: string) => {
     return dateISOString.split('T')[0];
 };
 
+export const getFormattedSlashDividedDate = (date: string) => {
+    if (!Date.parse(date)) return '';
+
+    return format(Date.parse(date), 'dd/MM/yyyy'); //16/01/2021
+};
+
 //TODO: status and test for status
 export const getCampaignStatus: (item: WOM.CampaignDetailResponse) => StatusType = (
     item: WOM.CampaignDetailResponse
