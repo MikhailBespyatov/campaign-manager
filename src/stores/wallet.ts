@@ -1,6 +1,6 @@
 import { combine, createEffect, createEvent, createStore } from 'effector';
 import { API } from 'services';
-import { getDateFromString } from 'utils/usefulFunctions';
+import { getFormattedSlashDividedDate } from 'utils/usefulFunctions';
 
 const updateLoading = createEvent();
 const setLoading = createEvent<boolean>();
@@ -46,7 +46,8 @@ export const walletBalance = createStore(0).on(getItemById.doneData, (_, wallet)
 export const walletAddress = createStore('').on(getItemById.doneData, (_, wallet) => wallet?.items?.[0]?.address || '');
 
 const walletCreated = createStore('').on(getItemById.doneData, (_, wallet) =>
-    getDateFromString(wallet?.items?.[0]?.utcCreated || '')
+    //getDateFromString(wallet?.items?.[0]?.utcCreated || '')
+    getFormattedSlashDividedDate(wallet?.items?.[0]?.utcCreated || '')
 );
 
 const usdRate = createStore(0)

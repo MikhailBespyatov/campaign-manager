@@ -10,6 +10,7 @@ import {
     getDateFromString,
     getFlexBasisPercent,
     getFormattedDate,
+    getFormattedSlashDividedDate,
     getLanguageISO6391Code,
     getPublicTheme,
     getStoriesTitle,
@@ -424,7 +425,18 @@ describe('getDateFromString', () => {
     });
 });
 
-fdescribe('getLanguageISO6391Code from language name', () => {
+fdescribe('getDateFromStringWithSlashAsDivider', () => {
+    it('Test for getSlashDividedDateFromString', () => {
+        expect(getFormattedSlashDividedDate('2021-01-09T13:57:15.832Z')).toBe('09/01/2021');
+        expect(getFormattedSlashDividedDate('')).toBe('');
+        expect(getFormattedSlashDividedDate('adadaasdasd')).toBe('');
+        expect(getFormattedSlashDividedDate('09/01/2021')).toBe('01/09/2021');
+        expect(getFormattedSlashDividedDate('09-01-2021')).toBe('01/09/2021');
+        expect(getFormattedSlashDividedDate('123')).toBe('01/01/0123');
+    });
+});
+
+describe('getLanguageISO6391Code from language name', () => {
     it('Test for getLanguageISO6391Code', () => {
         expect(getLanguageISO6391Code('Polish')).toEqual(['pl']);
         expect(getLanguageISO6391Code('Bulgarian')).toEqual(['bg']);
