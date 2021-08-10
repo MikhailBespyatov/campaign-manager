@@ -1,4 +1,4 @@
-import { createRule, yupDefault, yupDefaultArray } from 'constants/yupFields';
+import { createRule, yupChannels, yupDefault, yupDefaultArray } from 'constants/yupFields';
 import addDays from 'date-fns/addDays';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import startOfToday from 'date-fns/startOfToday';
@@ -30,7 +30,8 @@ export const createCampaignForm = createForm({
             rules: [
                 createRule<string[]>({
                     name: 'channels',
-                    schema: yupDefaultArray
+                    schema: yupChannels
+                    //schema: yupDefaultArray
                 })
             ]
         },

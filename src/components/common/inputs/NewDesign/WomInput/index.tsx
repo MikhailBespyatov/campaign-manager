@@ -137,7 +137,7 @@ export const WomInput = ({ label, errorText, value, onChange, isValid, isTouched
                     <Column justifyBetween noWrap /*height={inputFieldHeight}*/>
                         <Section>
                             <Span fontWeight={textFontWeight} lineHeight="17px">
-                                {sign}&nbsp;{balance}
+                                {sign}&nbsp;{balance} ({walletBalance}&nbsp;WOM)
                                 {/* {currencyData[selectedCurrency].toString()} */}
                             </Span>
                         </Section>
