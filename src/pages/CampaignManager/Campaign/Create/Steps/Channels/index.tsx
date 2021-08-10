@@ -183,11 +183,10 @@ export const Channels: FC<CreateCampaignStepsProps> = () => {
                                 path={path}
                                 onClick={onChangeChannelType}
                             >
-                                {`${path} (${
-                                    path === channelsItem[0].path
-                                        ? publicTypeChannels?.length
-                                        : privateTypeChannels?.length
-                                })`}
+                                {path}&nbsp;
+                                {path === channelsItem[0].path
+                                    ? publicTypeChannels?.length && `(${publicTypeChannels?.length})`
+                                    : privateTypeChannels?.length && `(${privateTypeChannels?.length})`}
                             </BarItem>
                         </MarginWrapper>
                     ))}

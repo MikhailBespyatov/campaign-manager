@@ -26,6 +26,7 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
     const [{ items, totalRecords }, loading] = useStore(campaignContentStores.combinedItems);
     const { value: initialContentIds } = useField(forms.createCampaignForm.fields.videos);
     const { mandatoryTags } = useStore(organizationsStores.item);
+    const { validate } = useField(forms.createCampaignForm.fields.videos);
 
     useEffect(
         () => {
@@ -43,6 +44,12 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
     const unselectedVideos = items?.filter(
         ({ womContentId }) => !initialContentIds.some(item => item.womContentId === womContentId)
     );
+
+    useEffect(() => {
+        validate();
+
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

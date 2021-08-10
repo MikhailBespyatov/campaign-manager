@@ -43,6 +43,7 @@ export function createRule<V, T = any>({ schema, name }: { schema: Yup.Schema<T>
 
 export const yupDefault = Yup.string().required(requiredFieldMessage);
 export const yupDefaultArray = Yup.array().of(yupDefault).required(requiredSetMessage);
+export const yupChannels = Yup.array();
 
 export const yupCompanyName = yupDefault.matches(onlySimpleCharactersAllowedRegExp, onlySimpleCharactersAllowedMessage);
 export const yupId = yupDefault.min(4).matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
