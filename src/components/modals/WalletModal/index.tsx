@@ -40,7 +40,15 @@ import { modalEvents, modalStores } from 'stores/modal';
 import { themeStores } from 'stores/theme';
 import { walletStores } from 'stores/wallet';
 import { totalCurrency } from 'utils/usefulFunctions';
-import { CurrencySpan, Modal, WalletBalanceSpan, WalletSubtitleSpan, WalletTitleSpan, Wrapper } from './styles';
+import {
+    CurrencySpan,
+    Modal,
+    WalletBalanceSpan,
+    WalletHeaderSpan,
+    WalletSubtitleSpan,
+    WalletTitleSpan,
+    Wrapper
+} from './styles';
 
 export const WalletModal = () => {
     const { visible } = useStore(modalStores.walletModal);
@@ -83,7 +91,7 @@ export const WalletModal = () => {
             </AbsoluteWrapper>
             <Modal>
                 <Section justifyCenter marginBottom={tertiaryMargin}>
-                    <WalletTitleSpan>MY WALLET</WalletTitleSpan>
+                    <WalletHeaderSpan>MY WALLET</WalletHeaderSpan>
                 </Section>
                 <Section justifyCenter marginBottom="24px">
                     <Column alignCenter justifyCenter>
@@ -122,13 +130,13 @@ export const WalletModal = () => {
                             <MarginWrapper marginBottom={marginSSize}>
                                 <WalletSubtitleSpan>WALLET OWNER</WalletSubtitleSpan>
                             </MarginWrapper>
-                            <WalletTitleSpan>@{walletOwner}</WalletTitleSpan>
+                            <WalletHeaderSpan>@{walletOwner}</WalletHeaderSpan>
                         </Column>
                         <Column alignCenter>
                             <MarginWrapper marginBottom={marginSSize}>
                                 <WalletSubtitleSpan>WALLET CREATION DATE</WalletSubtitleSpan>
                             </MarginWrapper>
-                            <WalletTitleSpan>{walletCreated}</WalletTitleSpan>
+                            <WalletHeaderSpan>{walletCreated}</WalletHeaderSpan>
                         </Column>
                     </Row>
                 </Section>

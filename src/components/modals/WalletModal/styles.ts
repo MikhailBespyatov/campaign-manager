@@ -40,13 +40,17 @@ export const Modal = styled.div`
     z-index: 10;
 `;
 
-export const WalletTitleSpan = styled.div`
+export const WalletHeaderSpan = styled.div`
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
     letter-spacing: 1px;
     color: ${white};
+`;
+
+export const WalletTitleSpan = styled(WalletHeaderSpan)`
+    font-size: 12px;
 `;
 
 export const WalletSubtitleSpan = styled.div`

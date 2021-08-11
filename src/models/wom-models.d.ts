@@ -92,7 +92,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        countries?: string[] | null;
+        countries?: /* countryResponse */ CountryResponse[] | null;
     }
     /**
      * adminAllRegionsByCountryResponse
@@ -112,9 +112,21 @@ declare namespace WOM {
      */
     export interface AdminGetRegionsByCountryRequest {
         /**
+         * countryInfo
+         * example:
          * string
          */
-        country?: string | null;
+        country?: string | null; // string
+    }
+    /**
+     * allLanguagesResponse
+     */
+    export interface AllLanguagesResponse {
+        /**
+         * list1
+         * List of Languages
+         */
+        languages?: string[] | null;
     }
     /**
      * analyzeEmailRequest
@@ -153,6 +165,19 @@ declare namespace WOM {
          * <br/><br/>Values:<br/>0 = Exists<br/>1 = NotFoundInSystem<br/>-2 = PendingVerification<br/>-1 = InvalidFormat
          */
         MobileNumberValidity /* int32 */;
+    }
+    /**
+     * area
+     */
+    export interface Area {
+        /**
+         * string
+         */
+        city?: string | null;
+        /**
+         * string
+         */
+        region?: string | null;
     }
     /**
      * authenticateWithTokenRequest
@@ -312,6 +337,19 @@ declare namespace WOM {
         readonly isBalanced?: boolean;
     }
     /**
+     * campaignAgePromotion
+     */
+    export interface CampaignAgePromotion {
+        /**
+         * int32
+         */
+        ageFrom?: number; // int32
+        /**
+         * int32
+         */
+        ageTo?: number; // int32
+    }
+    /**
      * campaignBudget
      */
     export interface CampaignBudget {
@@ -343,6 +381,21 @@ declare namespace WOM {
          * boolean
          */
         readonly isCurrentlyPaid?: boolean;
+    }
+    /**
+     * campaignCreatorPromotion
+     */
+    export interface CampaignCreatorPromotion {
+        /**
+         * objectId
+         * example:
+         * 000000000000000000000000
+         */
+        creatorId?: string; // objectId
+        /**
+         * decimal
+         */
+        weight?: number; // double
     }
     /**
      * campaignDetailResponse
@@ -421,6 +474,56 @@ declare namespace WOM {
         isActive?: boolean;
     }
     /**
+     * campaignGetPromotionDetailsRequest
+     */
+    export interface CampaignGetPromotionDetailsRequest {
+        /**
+         * objectId
+         * The unique identifier of the campaign you are retreiving.
+         * example:
+         * 000000000000000000000000
+         */
+        campaignId?: string; // objectId
+    }
+    /**
+     * campaignGetPromotionDetailsResponse
+     */
+    export interface CampaignGetPromotionDetailsResponse {
+        /**
+         * objectId
+         * This campaign's unique identifier.
+         * example:
+         * 000000000000000000000000
+         */
+        id?: string; // objectId
+        /**
+         * string
+         * The user generated name of this campaign.
+         */
+        title?: string | null;
+        /**
+         * boolean
+         * Determines the visibility of this campaign.
+         */
+        isHidden?: boolean;
+        /**
+         * dateTime
+         * The UTC creation date
+         */
+        utcCreated?: string; // date-time
+        /**
+         * dateTime
+         * The UTC date of the last change.
+         */
+        utcLastUpdated?: string; // date-time
+        /**
+         * hashSet1
+         * The IDs of the content items used for this campaign.
+         */
+        remoteContentIds?: string /* objectId */[] | null;
+        settings?: /* campaignSettings */ CampaignSettings;
+    }
+    /**
      * campaignGetRequest
      */
     export interface CampaignGetRequest {
@@ -436,6 +539,21 @@ declare namespace WOM {
          * If set the query will return statistics based on the period (in days) specified here.
          */
         returnStatisticsPeriod?: number; // int32
+    }
+    /**
+     * campaignLanguagePromotion
+     */
+    export interface CampaignLanguagePromotion {
+        /**
+         * languageInfo
+         * example:
+         * string
+         */
+        languageCode?: string | null; // string
+        /**
+         * decimal
+         */
+        weight?: number; // double
     }
     /**
      * campaignMerchantQueryRequest
@@ -553,11 +671,12 @@ declare namespace WOM {
      * campaignSettings
      */
     export interface CampaignSettings {
+        watchOverride?: /* watchOverride */ WatchOverride;
         /**
-         * boolean
-         * Enable / disable 'watch override'
+         * list1
+         * List of countries used to target set of people.
          */
-        watchOverride?: boolean;
+        countries?: string /* string */[] | null;
         /**
          * boolean
          * Enable / disable 'must watch'
@@ -573,6 +692,26 @@ declare namespace WOM {
          * Boost the creator by supplied value.
          */
         boostCreatorValue?: number; // int32
+        /**
+         * list1
+         * Boost the content by supplied value of tag with weight.
+         */
+        tagPromotions?: /* campaignTagPromotion */ CampaignTagPromotion[] | null;
+        /**
+         * list1
+         * Boost the content by supplied languags.
+         */
+        languagePromotions?: /* campaignLanguagePromotion */ CampaignLanguagePromotion[] | null;
+        /**
+         * list1
+         * Boost the creator by supplied weight value.
+         */
+        creatorPromotions?: /* campaignCreatorPromotion */ CampaignCreatorPromotion[] | null;
+        /**
+         * list1
+         * Boost the content based on user ages.
+         */
+        agePromotions?: /* campaignAgePromotion */ CampaignAgePromotion[] | null;
     }
     /**
      * campaignStatisticsQueryRequest
@@ -658,6 +797,21 @@ declare namespace WOM {
          * list1
          */
         items?: /* dailyAggregatedCampaignStatistics */ DailyAggregatedCampaignStatistics[] | null;
+    }
+    /**
+     * campaignTagPromotion
+     */
+    export interface CampaignTagPromotion {
+        /**
+         * tag
+         * example:
+         * string
+         */
+        tag?: string; // string
+        /**
+         * decimal
+         */
+        weight?: number; // double
     }
     /**
      * campaignUpsertRequest
@@ -1360,16 +1514,6 @@ declare namespace WOM {
          */
         facilitatorUserId?: string; // objectId
         /**
-         * nullable1
-         * If requested in a query, this field shows if the requesting user has hidden this content for validation / authentication.
-         */
-        userValidatorHidden?: boolean | null;
-        /**
-         * nullable1
-         * If requested in a query, this field shows if the requesting user has marked this content as inappropriate.
-         */
-        userFlagInappropriate?: boolean | null;
-        /**
          * boolean
          * Has this content been deleted
          */
@@ -1768,6 +1912,19 @@ declare namespace WOM {
         uriPrimary?: string | null;
         videoDetails?: /* videoDetailsRequest */ VideoDetailsRequest;
         videoAnalysis?: /* videoAnalysisResponse */ VideoAnalysisResponse;
+    }
+    /**
+     * countryResponse
+     */
+    export interface CountryResponse {
+        /**
+         * string
+         */
+        countryCode?: string | null;
+        /**
+         * string
+         */
+        countryName?: string | null;
     }
     /**
      * createBrandRequest
@@ -2278,6 +2435,19 @@ declare namespace WOM {
         id?: string; // objectId
     }
     /**
+     * earningItem
+     */
+    export interface EarningItem {
+        /**
+         * string
+         */
+        code?: string | null;
+        /**
+         * decimal
+         */
+        value?: number; // double
+    }
+    /**
      * earningReportRequest
      */
     export interface EarningReportRequest {
@@ -2444,114 +2614,9 @@ declare namespace WOM {
          */
         readonly value?: number; // double
         /**
-         * dictionary2
+         * list1
          */
-        values?: {
-            /**
-             * decimal
-             */
-            None?: number; // double
-            /**
-             * decimal
-             */
-            Deposit?: number; // double
-            /**
-             * decimal
-             */
-            Withdrawal?: number; // double
-            /**
-             * decimal
-             */
-            CreatorStake?: number; // double
-            /**
-             * decimal
-             */
-            CreatorReward?: number; // double
-            /**
-             * decimal
-             */
-            CreatorStakeRefund?: number; // double
-            /**
-             * decimal
-             */
-            CreatorBonus?: number; // double
-            /**
-             * decimal
-             */
-            ValidationStake?: number; // double
-            /**
-             * decimal
-             */
-            ValidationReward?: number; // double
-            /**
-             * decimal
-             */
-            ValidationStakeRefund?: number; // double
-            /**
-             * decimal
-             */
-            ValidationProfit?: number; // double
-            /**
-             * decimal
-             */
-            Exchange?: number; // double
-            /**
-             * decimal
-             */
-            UserTransfer?: number; // double
-            /**
-             * decimal
-             */
-            Reward?: number; // double
-            /**
-             * decimal
-             */
-            MigrationSync?: number; // double
-            /**
-             * decimal
-             */
-            CampaignPayment?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePayment?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentCreator?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentAuthenticator?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentFacilitator?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentPublisher?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentDisplayNetwork?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentAdvertiser?: number; // double
-            /**
-             * decimal
-             */
-            PerformancePaymentBrand?: number; // double
-            /**
-             * decimal
-             */
-            GiftCardPayment?: number; // double
-            /**
-             * decimal
-             */
-            GiftCardRefund?: number; // double
-        } | null;
+        values?: /* earningItem */ EarningItem[] | null;
     }
     /**
      * earningsStatisticsQueryRequest
@@ -3021,6 +3086,10 @@ declare namespace WOM {
         isAccountVerified?: boolean;
     }
     /**
+     * getLanguagesRequest
+     */
+    export interface GetLanguagesRequest {}
+    /**
      * getNotificationsRequest
      */
     export interface GetNotificationsRequest {
@@ -3178,7 +3247,13 @@ declare namespace WOM {
          * Unique key of the organization.
          */
         organizationKey?: string | null;
-        geoLocation?: /* userGeoLocation */ UserGeoLocation;
+        location?: /* location */ Location;
+        /**
+         * cultureInfo
+         * example:
+         * en-GB
+         */
+        locale?: string | null; // string
         /**
          * dateTime
          */
@@ -3470,6 +3545,28 @@ declare namespace WOM {
          * 000000000000000000000000
          */
         brandId?: string; // objectId
+    }
+    /**
+     * location
+     */
+    export interface Location {
+        /**
+         * string
+         */
+        countryCode?: string | null;
+        /**
+         * string
+         */
+        countryName?: string | null;
+        area?: /* area */ Area;
+        /**
+         * string
+         */
+        ip?: string | null;
+        /**
+         * int64
+         */
+        ipNumber?: number; // int64
     }
     /**
      * logLevel
@@ -4595,6 +4692,19 @@ declare namespace WOM {
         items?: /* productResponse */ ProductResponse[] | null;
     }
     /**
+     * queryActiveCampaignsRequest
+     */
+    export interface QueryActiveCampaignsRequest {}
+    /**
+     * queryActiveCampaignsResponse
+     */
+    export interface QueryActiveCampaignsResponse {
+        /**
+         * list1
+         */
+        campaignIds?: string /* objectId */[] | null;
+    }
+    /**
      * queryBrandsRequest
      */
     export interface QueryBrandsRequest {
@@ -4650,11 +4760,9 @@ declare namespace WOM {
          */
         channelId?: string; // objectId
         /**
-         * objectId
-         * example:
-         * 000000000000000000000000
+         * string
          */
-        merchantId?: string; // objectId
+        merchantId?: string | null;
         /**
          * int32
          */
@@ -5677,6 +5785,28 @@ declare namespace WOM {
         transactionId?: string; // objectId
     }
     /**
+     * transactionLimitCreateRequest
+     */
+    export interface TransactionLimitCreateRequest {
+        /**
+         * decimal
+         */
+        minimalWithdrawalValue?: number; // double
+    }
+    /**
+     * transactionLimitGetRequest
+     */
+    export interface TransactionLimitGetRequest {}
+    /**
+     * transactionLimitGetResponse
+     */
+    export interface TransactionLimitGetResponse {
+        /**
+         * decimal
+         */
+        minimalWithdrawalValue?: number; // double
+    }
+    /**
      * transactionQueryRequest
      */
     export interface TransactionQueryRequest {
@@ -6144,13 +6274,17 @@ declare namespace WOM {
      */
     export type UserAuditType = 0 | 1 | 2; // int32
     /**
-     * userAuthChallengeEmailOrPhoneRequest
+     * userAuthChallengeEmailOrUsernameOrPhoneRequest
      */
-    export interface UserAuthChallengeEmailOrPhoneRequest {
+    export interface UserAuthChallengeEmailOrUsernameOrPhoneRequest {
         /**
          * string
          */
-        email: string;
+        usernameOrEmail?: string | null;
+        /**
+         * string
+         */
+        email?: string | null;
         /**
          * string
          */
@@ -6206,21 +6340,6 @@ declare namespace WOM {
          * boolean
          */
         isDisabled?: boolean;
-    }
-    /**
-     * userGeoLocation
-     */
-    export interface UserGeoLocation {
-        /**
-         * string
-         * Country of the user's geoLocation
-         */
-        country?: string | null;
-        /**
-         * string
-         * Region of the user's geoLocation
-         */
-        region?: string | null;
     }
     /**
      * userJwtTokenResponse
@@ -6303,9 +6422,11 @@ declare namespace WOM {
          */
         rolesAny?: string /* string */[] | null;
         /**
+         * countryInfo
+         * example:
          * string
          */
-        country?: string | null;
+        country?: string | null; // string
         /**
          * string
          */
@@ -6414,6 +6535,14 @@ declare namespace WOM {
          * string
          */
         email?: string | null;
+        /**
+         * string
+         */
+        mobileNumber?: string | null;
+        /**
+         * string
+         */
+        smsVerificationCode?: string | null;
     }
     /**
      * userValidationDetails
@@ -7273,6 +7402,21 @@ declare namespace WOM {
          * A strongly typed entity representing the amount of tokens in a user's account.
          */
         AddressResponse[] | null;
+    }
+    /**
+     * watchOverride
+     */
+    export interface WatchOverride {
+        /**
+         * boolean
+         * Enable / disable 'watch override'
+         */
+        isActive?: boolean;
+        /**
+         * decimal
+         * Supplied Value for override views.
+         */
+        weight?: number; // double
     }
     /**
      * withdrawalRequest
