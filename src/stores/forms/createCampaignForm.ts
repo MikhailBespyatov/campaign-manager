@@ -180,8 +180,11 @@ sample({
             budgetTotal: Number(budget)
         },
         settings: {
-            watchOverride: false,
-            mustWatch: false
-        }
+            watchOverride: {
+                isActive: true,
+                weight: 0
+            }
+        },
+        mustWatch: false
     })
 });

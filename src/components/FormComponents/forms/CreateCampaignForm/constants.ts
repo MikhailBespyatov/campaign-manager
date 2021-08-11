@@ -69,7 +69,10 @@ export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) =>
             budgetTotal: Number(values.amount.replaceAll(',', ''))
         },
         settings: {
-            watchOverride: false,
+            watchOverride: {
+                isActive: true,
+                weight: 0
+            },
             mustWatch: false
         }
     });
