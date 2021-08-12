@@ -46,30 +46,30 @@ export const createCampaignForm = createForm({
             ]
         },
         age: {
-            init: [] as number[],
+            init: [] as WOM.CampaignAgePromotion[],
             validateOn: ['change'],
             rules: [
-                createRule<number[]>({
+                createRule<WOM.CampaignAgePromotion[]>({
                     name: 'age',
                     schema: yupDefaultArray
                 })
             ]
         },
         locale: {
-            init: [] as number[],
+            init: [] as string[],
             validateOn: ['change'],
             rules: [
-                createRule<number[]>({
+                createRule<string[]>({
                     name: 'locale',
                     schema: yupDefaultArray
                 })
             ]
         },
         hashtags: {
-            init: [] as Array<{ hashtag: string; bias: string }>,
+            init: [] as WOM.CampaignTagPromotion[],
             validateOn: ['change'],
             rules: [
-                createRule<Array<{ hashtag: string; bias: string }>>({
+                createRule<WOM.CampaignTagPromotion[]>({
                     name: 'hashtags',
                     schema: yupDefaultArray
                 })
@@ -166,10 +166,11 @@ sample({
     source: createCampaignForm.$values,
     clock: createCampaignForm.submit,
     target: createCampaignEvent,
-    fn: ({ campaignName, dateFrom, dateTo, videos, budget, channels }, _) => ({
+    fn: ({ campaignName, dateFrom, dateTo, videos, budget, channels, overrides, age, locale, hashtags }, _) => ({
         organizationId: getOrganizationId(),
         title: campaignName,
-        // tags: [],
+        isHidden: false,
+        tags: [],
         contentIds: videos.map(({ womContentId }) => womContentId) as string[],
         channelIds: channels,
         schedule: {
@@ -182,9 +183,16 @@ sample({
         settings: {
             watchOverride: {
                 isActive: true,
-                weight: 0
-            }
-        },
-        mustWatch: false
+                weight: overrides.override
+            },
+            countries: locale,
+            tagPromotions: hashtags,
+            languagePromotions: [] /* //TODO */,
+            creatorPromotions: [] /* //TODO */,
+            agePromotions: age,
+            boostContentValue: overrides.boostVideo,
+            boostCreatorValue: overrides.boostCreator,
+            mustWatch: overrides.mustWatch
+        }
     })
 });

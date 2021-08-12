@@ -125,14 +125,17 @@ const HashtagCheckbox = ({
                 <FlexGrow flexBasis={flexBasis}>
                     <Hashtag onClick={() => onChange(!defaultValue)}>{hashtag}</Hashtag>
                 </FlexGrow>
-                <FlexGrow alignCenter flexBasis={flexBasis}>
-                    <Span color={grey4} fontSize="13px" fontWeight="400" lineHeight="16px">
-                        Viewers:
-                        <Span fontSize="13px" fontWeight="400" lineHeight="16px">
-                            {` ${subtitle}`}
+
+                {!!subtitle && (
+                    <FlexGrow alignCenter flexBasis={flexBasis}>
+                        <Span color={grey4} fontSize="13px" fontWeight="400" lineHeight="16px">
+                            Viewers:
+                            <Span fontSize="13px" fontWeight="400" lineHeight="16px">
+                                {` ${subtitle}`}
+                            </Span>
                         </Span>
-                    </Span>
-                </FlexGrow>
+                    </FlexGrow>
+                )}
                 <FlexGrow alignEnd flexBasis={flexBasis}>
                     {isTitleCheckbox ? (
                         <BiasTitleLayout>
@@ -228,24 +231,41 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const hashtagsData = hashtagsMock;
     const overridesData = overridesMock;
     const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
-    //const { value: localeValue, onChange: onChangeLocale } = useField(forms.createCampaignForm.fields.locale);
+    const { value: localeValue, onChange: onChangeLocale } = useField(forms.createCampaignForm.fields.locale);
     const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
     const { value: overridesValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.overrides);
 
-    const onChangeAgeCheckbox = (index: number) => (checked: boolean) =>
-        checked ? onChangeAge([...ageValue, index]) : onChangeAge(ageValue.filter(item => item !== index));
+    const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
+        ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
 
-    // const onChangeLocaleCheckbox = (index: number) => (checked: boolean) =>
-    //     checked ? onChangeLocale([...localeValue, index]) : onChangeLocale(localeValue.filter(item => item !== index));
+    const getHashtagWeight = (hashtag: string) => hashtagsValue.find(item => item.tag === hashtag)?.weight?.toString();
+
+    //console.log('hashtagsValue', hashtagsValue);
+
+    const onChangeAgeCheckbox = (range: WOM.CampaignAgePromotion) => (checked: boolean) =>
+        checked
+            ? onChangeAge([...ageValue, range])
+            : onChangeAge(ageValue.filter(item => item.ageFrom !== range.ageFrom));
+
+    const isAgeRangeChecked = (ageItem: WOM.CampaignAgePromotion) =>
+        ageValue.some(item => item.ageFrom === ageItem.ageFrom);
+
+    const onChangeLocaleCheckbox = (locale: string) => (checked: boolean) =>
+        checked
+            ? onChangeLocale([...localeValue, locale])
+            : onChangeLocale(localeValue.filter(item => item !== locale));
 
     const onChangeHashtagCheckbox = (hashtag: string) => (checked: boolean) => {
         checked
-            ? onChangeHashtags([...hashtagsValue, { hashtag, bias: '2' }])
-            : onChangeHashtags(hashtagsValue.filter(item => item.hashtag !== hashtag));
+            ? onChangeHashtags([...hashtagsValue, { tag: hashtag, weight: 2 }])
+            : onChangeHashtags(hashtagsValue.filter(item => item.tag !== hashtag));
     };
 
     const onChangeHashtagSelect = (hashtag: string) => (active: string) =>
-        onChangeHashtags([...hashtagsValue.filter(item => item.hashtag !== hashtag), { hashtag, bias: active }]);
+        onChangeHashtags([
+            ...hashtagsValue.filter(item => item.tag !== hashtag),
+            { tag: hashtag, weight: Number(active) }
+        ]);
 
     const onChangeOverrideSelect = (form: string) => (active: string) =>
         onChangeOverrides({ ...overridesValue, [form]: active });
@@ -257,45 +277,52 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 title="Demographic Targeting"
             />
             <ConfigurationItem maxHeight="218px" subtitle="Target people based on their age range" title="Age">
-                {ageData.map(({ range, viewers }, index) => (
-                    <MarginWrapper
-                        key={range}
-                        marginBottom={checkboxBlockMargin}
-                        marginRight={primaryMargin}
-                        marginTop={checkboxBlockMargin}
-                    >
-                        <CheckboxBlock
-                            defaultValue={ageValue.includes(index)}
-                            subtitle={viewers}
-                            title={range}
-                            onChange={onChangeAgeCheckbox(index)}
-                        />
-                    </MarginWrapper>
-                ))}
+                {ageData.map(ageItem => {
+                    const { range /*, viewers*/ } = ageItem;
+                    return (
+                        <MarginWrapper
+                            key={range.ageFrom}
+                            marginBottom={checkboxBlockMargin}
+                            marginRight={primaryMargin}
+                            marginTop={checkboxBlockMargin}
+                        >
+                            <CheckboxBlock
+                                defaultValue={isAgeRangeChecked(range)}
+                                //subtitle={viewers}
+                                title={getAgeRange(range)}
+                                onChange={onChangeAgeCheckbox(range)}
+                            />
+                        </MarginWrapper>
+                    );
+                })}
             </ConfigurationItem>
             <ConfigurationItem maxHeight="290px" subtitle="Target people based on their location" title="Locale">
-                {localeData.map(({ locale, viewers }, index) => (
-                    <MarginWrapper
-                        key={locale}
-                        marginBottom={checkboxBlockMargin}
-                        marginRight={primaryMargin}
-                        marginTop={checkboxBlockMargin}
-                    >
-                        <CheckboxBlock
-                            // defaultValue={localeValue.includes(index)}
-                            subtitle={viewers}
-                            title={locale}
-                            // onChange={onChangeLocaleCheckbox(index)}
-                        />
-                    </MarginWrapper>
-                ))}
+                {localeData.map(localeItem => {
+                    const { locale /*, viewers */ } = localeItem;
+
+                    return (
+                        <MarginWrapper
+                            key={locale}
+                            marginBottom={checkboxBlockMargin}
+                            marginRight={primaryMargin}
+                            marginTop={checkboxBlockMargin}
+                        >
+                            <CheckboxBlock
+                                defaultValue={localeValue.includes(locale)}
+                                //subtitle={viewers}
+                                title={locale}
+                                onChange={onChangeLocaleCheckbox(locale)}
+                            />
+                        </MarginWrapper>
+                    );
+                })}
             </ConfigurationItem>
             <ConfigurationItem
                 subtitle="Target people based on hashtags tagged to your selected videos"
                 title="Hashtags"
             >
                 <MarginWrapper marginTop={biasTitleMarginTop}>
-                    {hashtagsData.map(({ hashtag, viewers }, index) => (
+                    {hashtagsData.map(({ hashtag /*, viewers*/ }, index) => (
                         <Row
                             key={hashtag}
                             marginBottom={biasBlockMargin}
@@ -304,11 +331,11 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                             width="600px"
                         >
                             <HashtagCheckbox
-                                bias={hashtagsValue.find(item => item.hashtag === hashtag)?.bias || '2'}
-                                defaultValue={hashtagsValue.some(item => item.hashtag === hashtag)}
+                                bias={getHashtagWeight(hashtag) || '2'}
+                                defaultValue={hashtagsValue.some(item => item.tag === hashtag)}
                                 hashtag={hashtag}
                                 isTitleCheckbox={index === 0}
-                                subtitle={viewers}
+                                //subtitle={viewers}
                                 onChange={onChangeHashtagCheckbox(hashtag)}
                                 onChangeSelect={onChangeHashtagSelect(hashtag)}
                             />
@@ -344,9 +371,9 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
 
                 <MarginWrapper marginTop="24px">
                     <CheckboxBlock
-                        //defaultValue={overridesValue.mustWatch}
+                        defaultValue={overridesValue.mustWatch}
                         title="Must watch"
-                        // onChange={(checked: boolean) => onChangeOverrides({ ...overridesValue, mustWatch: checked })}
+                        onChange={(checked: boolean) => onChangeOverrides({ ...overridesValue, mustWatch: checked })}
                     />
                 </MarginWrapper>
             </ConfigurationItem>
