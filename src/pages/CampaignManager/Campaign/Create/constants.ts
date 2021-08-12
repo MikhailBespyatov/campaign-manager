@@ -1,5 +1,5 @@
 import { ProgressBarItemInterface } from 'types';
-import { CampaignName, Channels, Dates, Videos } from './Steps';
+import { CampaignName, Channels, Configuration, Dates, Videos } from './Steps';
 
 export const createCampaignSteps: ProgressBarItemInterface[] = [
     {
@@ -18,11 +18,11 @@ export const createCampaignSteps: ProgressBarItemInterface[] = [
         isValidField: 'videos'
     },
 
-    // {
-    //     title: 'Configuration',
-    //     component: Configuration,
-    //     isValidField: 'videos'
-    // },
+    {
+        title: 'Configuration',
+        component: Configuration,
+        isValidField: 'videos'
+    },
     {
         title: 'Dates & Budget',
         component: Dates,

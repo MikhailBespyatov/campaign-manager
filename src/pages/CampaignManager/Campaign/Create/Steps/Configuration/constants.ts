@@ -11,11 +11,11 @@ export const biasBlockMargin = '8px';
 export const biasValues = ['1', '2', '3', '5', '10'];
 
 export const ageMock = [
-    { range: '15-18', viewers: '4356' },
-    { range: '19-25', viewers: '2123' },
-    { range: '26-30', viewers: '2212' },
-    { range: '30+', viewers: '2234' },
-    { range: 'Unknown', viewers: '1234' }
+    { range: { ageFrom: 15, ageTo: 18 }, viewers: '4356' },
+    { range: { ageFrom: 19, ageTo: 25 }, viewers: '5321' },
+    { range: { ageFrom: 26, ageTo: 30 }, viewers: '732' },
+    { range: { ageFrom: 30, ageTo: undefined }, viewers: '4356' },
+    { range: { ageFrom: undefined, ageTo: undefined }, viewers: '4356' }
 ];
 
 export const localeMock = [
