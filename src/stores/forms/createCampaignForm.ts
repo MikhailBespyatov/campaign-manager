@@ -55,12 +55,12 @@ export const createCampaignForm = createForm({
                 })
             ]
         },
-        locale: {
+        countries: {
             init: [] as string[],
             validateOn: ['change'],
             rules: [
                 createRule<string[]>({
-                    name: 'locale',
+                    name: 'countries',
                     schema: yupDefaultArray
                 })
             ]
@@ -75,9 +75,14 @@ export const createCampaignForm = createForm({
                 })
             ]
         },
-        overrides: {
+        override: {
             //any - because it is MOCK data
-            init: { override: '2', boostVideo: '2', boostCreator: '2', mustWatch: false } as { [key: string]: any },
+            init: { override: '2' } as { [key: string]: any },
+            validateOn: ['change']
+        },
+        boostValues: {
+            //any - because it is MOCK data
+            init: { boostContent: '2', boostCreator: '2', mustWatch: false } as { [key: string]: any },
             validateOn: ['change']
         },
         dateFrom: {
@@ -166,7 +171,21 @@ sample({
     source: createCampaignForm.$values,
     clock: createCampaignForm.submit,
     target: createCampaignEvent,
-    fn: ({ campaignName, dateFrom, dateTo, videos, budget, channels, overrides, age, locale, hashtags }, _) => ({
+    fn: (
+        {
+            campaignName,
+            dateFrom,
+            dateTo,
+            videos,
+            budget,
+            channels,
+            override,
+            boostValues,
+            age
+            /*countries, hashtags*/
+        },
+        _
+    ) => ({
         organizationId: getOrganizationId(),
         title: campaignName,
         isHidden: false,
@@ -183,16 +202,16 @@ sample({
         settings: {
             watchOverride: {
                 isActive: true,
-                weight: overrides.override
+                weight: override.override
             },
-            countries: locale,
-            tagPromotions: hashtags,
+            //countries: countries,
+            //tagPromotions: hashtags,
             languagePromotions: [] /* //TODO */,
-            creatorPromotions: [] /* //TODO */,
+            //creatorPromotions: [],
             agePromotions: age,
-            boostContentValue: overrides.boostVideo,
-            boostCreatorValue: overrides.boostCreator,
-            mustWatch: overrides.mustWatch
+            boostContentValue: boostValues.boostContent,
+            boostCreatorValue: boostValues.boostCreator,
+            mustWatch: boostValues.mustWatch
         }
     })
 });
