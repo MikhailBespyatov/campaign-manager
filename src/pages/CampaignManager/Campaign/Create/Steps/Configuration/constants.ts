@@ -1,10 +1,10 @@
-export const configurationContentHorizontalPadding = '90px';
 export const configurationContentPadding = `16px 0px 0px`;
 export const checkboxBlockMargin = '4px';
 export const biasTitleMarginTop = '16px';
 export const biasBlockMargin = '8px';
 
 //40 - from Figma design
+//export const configurationContentHorizontalPadding = '90px';
 //export const ConfigurationItemHorizontalPadding = 40 - parseInt(configurationContentHorizontalPadding) + 'px';
 
 //Mock
@@ -18,15 +18,15 @@ export const ageMock = [
     { range: { ageFrom: undefined, ageTo: undefined }, viewers: '4356' }
 ];
 
-export const localeMock = [
-    { locale: 'Eastern Europe', viewers: '4356' },
-    { locale: 'Western Europe', viewers: '2123' },
-    { locale: 'Middle east', viewers: '2212' },
-    { locale: 'Africa', viewers: '2234' },
-    { locale: 'North America', viewers: '2234' },
-    { locale: 'Asia', viewers: '2234' },
-    { locale: 'Oceania', viewers: '2234' },
-    { locale: 'Unknown', viewers: '2234' }
+export const countriesMock = [
+    { country: 'Eastern Europe', viewers: '4356' },
+    { country: 'Western Europe', viewers: '2123' },
+    { country: 'Middle east', viewers: '2212' },
+    { country: 'Africa', viewers: '2234' },
+    { country: 'North America', viewers: '2234' },
+    { country: 'Asia', viewers: '2234' },
+    { country: 'Oceania', viewers: '2234' },
+    { country: 'Unknown', viewers: '2234' }
 ];
 
 export const hashtagsMock = [
@@ -36,8 +36,9 @@ export const hashtagsMock = [
     { hashtag: 'YEAY Hashtag', viewers: '4356' }
 ];
 
-export const overridesMock = [
-    { title: 'Override views', form: 'override' },
-    { title: 'Boost video', form: 'boostVideo' },
-    { title: 'Boost creator', form: 'boostCreator' }
+export const boostMock = [
+    { title: 'Boost Content', form: 'boostContent' },
+    { title: 'Boost Creator', form: 'boostCreator' }
 ];
+
+export const overrideMock = [{ title: 'Override Views', form: 'override' }];

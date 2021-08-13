@@ -1,16 +1,20 @@
 import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/types';
-import { Section } from 'components/grid/wrappers/FlexWrapper';
+import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { blue, blue2, grey4, grey6, grey8, white } from 'constants/styles';
-import { configurationContentHorizontalPadding } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
 import styled, { css } from 'styled-components';
+import { MaxSizes, Sizes } from 'types';
 
-export const ConfigurationItemWrapper = styled(Section)`
-    padding: 0px ${configurationContentHorizontalPadding};
+export const ConfigurationItemWrapper = styled(Row)`
+    padding: 0px 20px;
+    width: 100%;
+    max-width: 1200px;
     margin: 16px 0px;
+    flex-wrap: wrap;
 
-    @media (max-width: 1200px) {
-        max-height: fit-content;
+    @media (max-width: 850px) {
+        flex-direction: column;
+        align-items: center;
     }
 `;
 
@@ -49,7 +53,10 @@ export const Hashtag = styled.div`
     cursor: pointer;
 `;
 
-export const CheckboxBlockWrapper = styled(ContentWrapper)<Partial<Pick<CheckboxProps, 'checked'>>>`
+interface CheckboxBlockWrapperProps extends Pick<MaxSizes, 'maxWidth'>, Partial<Pick<CheckboxProps, 'checked'>> {}
+
+export const CheckboxBlockWrapper = styled(ContentWrapper)<CheckboxBlockWrapperProps>`
+    width: 350px;
     height: 64px;
     border: 1px solid ${grey8};
     padding: 12px 18px;
@@ -66,6 +73,42 @@ export const CheckboxBlockWrapper = styled(ContentWrapper)<Partial<Pick<Checkbox
             }
         `}
 `;
+
+export const RowWrapper = styled(Row)`
+    margin-bottom: 16px;
+    min-width: 350px;
+    width: 50%;
+
+    @media (max-width: 850px) {
+        width: 100%;
+        justify-content: center;
+    }
+`;
+
+export const ColumnWrapper = styled(Column)<Pick<Sizes, 'height'>>`
+    width: 50%;
+
+    @media (max-width: 850px) {
+        width: 100%;
+        align-content: center;
+    }
+`;
+
+export const AgeBlockWrapper = styled(Column)<Pick<Sizes, 'height'>>`
+    height: 218px;
+
+    @media (max-width: 1540px) {
+        width: 100%;
+        height: fit-content;
+        align-content: flex-start;
+    }
+    @media (max-width: 850px) {
+        width: 100%;
+        height: fit-content;
+        align-content: center;
+    }
+`;
+
 //
 // export const BiasSelectWrapper = styled(ContentWrapper)`
 //     border: 1px solid ${grey8};
