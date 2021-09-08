@@ -1,13 +1,14 @@
 import * as admin from './admin';
 import * as campaignContent from './campaignContent';
 import * as campaigns from './campaigns';
+import * as channels from './channels';
+import * as location from './location';
 import * as organizations from './organizations';
+import * as products from './products';
 import * as user from './user';
 import * as userAdmin from './userAdmin';
 import * as users from './users';
 import * as wallet from './wallet';
-import * as products from './products';
-import * as channels from './channels';
 
 export const API = {
     user,
@@ -19,5 +20,6 @@ export const API = {
     userAdmin,
     wallet,
     products,
-    channels
+    channels,
+    location
 };

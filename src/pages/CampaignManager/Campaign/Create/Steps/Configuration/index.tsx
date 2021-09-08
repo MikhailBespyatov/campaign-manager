@@ -1,5 +1,7 @@
+import { ClearInputButton } from 'components/common/buttons/ClearInputButton';
 import { LineBorder } from 'components/common/dividers/LineBorder';
 import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
+import { SearchSelect } from 'components/common/inputs/SearchSelect';
 import { Select } from 'components/common/inputs/Select';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
@@ -7,9 +9,17 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
-import { defaultFontSize, defaultFontWeight } from 'constants/defaults';
+import {
+    defaultFontSize,
+    defaultFontWeight,
+    largeFontSize,
+    largeLineHeight,
+    smallFontSize,
+    smallLineHeight
+} from 'constants/defaults';
 import { grey4, primaryMargin } from 'constants/styles';
 import { useField } from 'effector-forms/dist';
+import { useStore } from 'effector-react';
 import {
     ageMock,
     biasBlockMargin,
@@ -17,20 +27,31 @@ import {
     boostMock,
     checkboxBlockMargin,
     configurationContentPadding,
-    overrideMock
+    overrideMock,
+    VISIBLE_COUNTRIES
 } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { forms } from 'stores/forms';
+import { countriesEffects, countriesStores } from 'stores/location';
 import { Bias, CreateCampaignStepsProps, MaxSizes, OnChangeSelect, Sizes, Title } from 'types';
 import {
     AgeBlockWrapper,
+    AllCountryModalWrapper,
     BiasTitle,
     CheckboxBlockWrapper,
     ColumnWrapper,
     ConfigurationItemSubtitle,
     ConfigurationItemTitle,
     ConfigurationItemWrapper,
-    RowWrapper
+    CountryBlock,
+    CountryBlockWrapper,
+    CountryItemWrapper,
+    CountryListWrapper,
+    GrayWrapper,
+    HiddenScrollBar,
+    LargeClearButton,
+    RowWrapper,
+    ShowAllButton
 } from './styles';
 
 const BiasTitleLayout: FC = ({ children }) => (
@@ -194,6 +215,26 @@ const CheckboxBlock = ({ title, subtitle, defaultValue, ...rest }: CheckboxBlock
     </CheckboxBlockWrapper>
 );
 
+interface CountrySelectBlockProps {
+    title: string;
+    onRemoveCountryBlock: (value: string) => void;
+}
+
+const CountrySelectBlock = ({ title, onRemoveCountryBlock }: CountrySelectBlockProps) => (
+    <CountryBlock>
+        <Section alignCenter justifyBetween height="100%">
+            <Span fontSize={smallFontSize} fontWeight={defaultFontWeight} lineHeight={smallLineHeight}>
+                {title}
+            </Span>
+            <ClearInputButton
+                onClick={() => {
+                    onRemoveCountryBlock(title);
+                }}
+            />
+        </Section>
+    </CountryBlock>
+);
+
 interface ConfigurationItemProps extends Title, Pick<Sizes, 'height'> {
     withoutLine?: boolean;
 }
@@ -202,7 +243,7 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
     <>
         <ConfigurationItemWrapper>
             <RowWrapper>
-                <Column width="350px">
+                <Column marginTop="10px" width="350px">
                     <ConfigurationItemTitle>{title}</ConfigurationItemTitle>
 
                     <MarginWrapper marginRight="20px" marginTop={primaryMargin}>
@@ -223,18 +264,26 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
 );
 
 export const Configuration: FC<CreateCampaignStepsProps> = () => {
+    const [displayCountryPopup, setDisplayCountryPopup] = useState(true);
+    const countriesData = useStore(countriesStores.locations);
+    const countries = countriesData.countries
+        ? countriesData.countries.map(it => it.countryName).filter((item): item is string => typeof item === 'string')
+        : [''];
     const ageData = ageMock;
-    //const countriesData = countriesMock;
     //const hashtagsData = hashtagsMock;
     const overridesData = overrideMock;
     const boostData = boostMock;
     const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
-    //const { value: countriesValue, onChange: onChangeCountry } = useField(forms.createCampaignForm.fields.countries);
+    const { value: countriesValue, onChange: onChangeCountry } = useField(forms.createCampaignForm.fields.countries);
     //const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
     const { value: overrideValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.override);
     const { value: boostValues /*, onChange: onChangeBoostValues*/ } = useField(
         forms.createCampaignForm.fields.boostValues
     );
+
+    useEffect(() => {
+        countriesEffects.getLocations();
+    }, []);
 
     const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
         ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
@@ -250,6 +299,18 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
 
     const isAgeRangeChecked = (ageItem: WOM.CampaignAgePromotion) =>
         ageValue.some(item => item.ageFrom === ageItem.ageFrom);
+
+    const onChangeCountrySelect = (country: string) => {
+        if (!countriesValue.includes(country)) {
+            onChangeCountry([...countriesValue, country]);
+        }
+    };
+
+    const onRemoveCountryBlock = (country: string) => {
+        const newCountries = countriesValue.filter(it => it !== country);
+
+        onChangeCountry(newCountries);
+    };
 
     // const onChangeCountryCheckbox = (country: string) => (checked: boolean) =>
     //     checked
@@ -315,6 +376,42 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     );
                 })}
             </ConfigurationItem> */}
+
+                <ConfigurationItem subtitle="Target people based on their location" title="Country">
+                    <Column minHeight="126px">
+                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="46px">
+                            <SearchSelect
+                                defaultValue=""
+                                itemsList={countries}
+                                placeholder="Add countries"
+                                onItemSelect={onChangeCountrySelect}
+                            />
+                        </MarginWrapper>
+                        <CountryBlockWrapper>
+                            {countriesValue.length !== 0 &&
+                                countriesValue.slice(0, VISIBLE_COUNTRIES).map(it => (
+                                    <MarginWrapper
+                                        key={it}
+                                        marginBottom={checkboxBlockMargin}
+                                        marginRight={primaryMargin}
+                                        marginTop={checkboxBlockMargin}
+                                    >
+                                        <CountrySelectBlock title={it} onRemoveCountryBlock={onRemoveCountryBlock} />
+                                    </MarginWrapper>
+                                ))}
+                        </CountryBlockWrapper>
+                        {countriesValue.length > VISIBLE_COUNTRIES && (
+                            <ShowAllButton
+                                onClick={() => {
+                                    setDisplayCountryPopup(false);
+                                }}
+                            >
+                                Show All
+                            </ShowAllButton>
+                        )}
+                    </Column>
+                </ConfigurationItem>
+
                 <ConfigurationItem>
                     <Column>
                         <CheckboxBlock
@@ -387,6 +484,45 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     </AgeBlockWrapper>
                 </ConfigurationItem>
             </Column>
+            <GrayWrapper isClosed={displayCountryPopup}>
+                <AllCountryModalWrapper>
+                    <MarginWrapper marginBottom="16px" marginLeft="35px" marginTop="44px">
+                        <Row justifyBetween width="419px">
+                            <Span fontSize={largeFontSize} fontWeight={defaultFontWeight} lineHeight={largeLineHeight}>
+                                Country Names
+                            </Span>
+                            <LargeClearButton
+                                onClick={() => {
+                                    setDisplayCountryPopup(true);
+                                }}
+                            />
+                        </Row>
+                    </MarginWrapper>
+                    <CountryListWrapper>
+                        <HiddenScrollBar>
+                            {countriesValue.length !== 0 &&
+                                countriesValue.map(it => (
+                                    <CountryItemWrapper key={it}>
+                                        <Row alignCenter justifyBetween height="65px" marginLeft="38px" width="418px">
+                                            <Span
+                                                fontSize={largeFontSize}
+                                                fontWeight={defaultFontWeight}
+                                                lineHeight={largeLineHeight}
+                                            >
+                                                {it}
+                                            </Span>
+                                            <ClearInputButton
+                                                onClick={() => {
+                                                    onRemoveCountryBlock(it);
+                                                }}
+                                            />
+                                        </Row>
+                                    </CountryItemWrapper>
+                                ))}
+                        </HiddenScrollBar>
+                    </CountryListWrapper>
+                </AllCountryModalWrapper>
+            </GrayWrapper>
         </ContentWrapper>
     );
 };

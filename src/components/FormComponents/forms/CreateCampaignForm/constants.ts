@@ -55,7 +55,7 @@ export const onCurrencyChange = (
     if (Number.isInteger(wom) && wom >= 0) setFieldValue(field, commaInserter(value), true);
 };
 
-export const onSubmit = (values: Props, { setErrors }: SetErrorsFormikProps) =>
+export const onSubmit = (values: Props) =>
     campaignsEffects.upsertItem({
         organizationId: getOrganizationId(),
         title: values.title,
