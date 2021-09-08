@@ -44,6 +44,7 @@ export const blue6 = '#F6FAFF';
 export const blue7 = '#5F6FB4';
 export const blue8 = '#6a75a3';
 export const blue9 = '#576397';
+export const blue10 = '#222DFF';
 
 export const lightPink = '#ffeeee';
 

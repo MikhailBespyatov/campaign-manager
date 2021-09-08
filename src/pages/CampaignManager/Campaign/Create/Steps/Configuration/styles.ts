@@ -1,14 +1,47 @@
 import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/types';
+import { FixedWrapper } from 'components/grid/wrappers/FixedWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { blue, blue2, grey4, grey6, grey8, white } from 'constants/styles';
+import { black, blue, blue10, blue2, grey4, grey6, grey8, white } from 'constants/styles';
 import styled, { css } from 'styled-components';
-import { MaxSizes, Sizes } from 'types';
+import { IsClosed, MaxSizes, Sizes } from 'types';
+
+export const ShowAllButton = styled.button`
+    border: none;
+    background-color: transparent;
+    color: ${blue10};
+    cursor: pointer;
+`;
+
+export const LargeClearButton = styled.button`
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    &:before,
+    &:after {
+        position: absolute;
+        left: 9px;
+        top: 3px;
+        content: '';
+        width: 2px;
+        height: 14px;
+        background-color: ${black};
+    }
+    &:before {
+        transform: rotate(45deg);
+    }
+    &:after {
+        transform: rotate(-45deg);
+    }
+`;
 
 export const ConfigurationItemWrapper = styled(Row)`
-    padding: 0px 20px;
+    padding: 0;
+    padding-left: 90px;
     width: 100%;
-    max-width: 1200px;
     margin: 16px 0px;
     flex-wrap: wrap;
 
@@ -74,6 +107,18 @@ export const CheckboxBlockWrapper = styled(ContentWrapper)<CheckboxBlockWrapperP
         `}
 `;
 
+export const CountryBlock = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 8px;
+    min-width: 70px;
+    height: 26px;
+    border: 1px solid #c6c7d1;
+    box-sizing: border-box;
+    border-radius: 32px;
+`;
+
 export const RowWrapper = styled(Row)`
     margin-bottom: 16px;
     min-width: 350px;
@@ -107,6 +152,62 @@ export const AgeBlockWrapper = styled(Column)<Pick<Sizes, 'height'>>`
         height: fit-content;
         align-content: center;
     }
+`;
+
+export const CountryBlockWrapper = styled(Row)`
+    width: 100%;
+
+    @media (max-width: 950px) {
+        width: 100%;
+        align-content: center;
+    }
+`;
+
+export const AllCountryModalWrapper = styled(FixedWrapper)`
+    left: 50%;
+    top: 370px;
+    transform: translateX(-245px);
+    width: 491px;
+    height: 407px;
+    background: ${white};
+    border-radius: 40px;
+    z-index: 10;
+`;
+
+export const CountryListWrapper = styled.div`
+    width: 491px;
+    height: 325px;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+export const HiddenScrollBar = styled.div`
+    width: 105%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 17px;
+    box-sizing: content-box;
+`;
+
+export const CountryItemWrapper = styled.div`
+    width: 100%;
+    height: 65px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    &:last-child {
+        border-bottom: none;
+    }
+`;
+
+export const GrayWrapper = styled(FixedWrapper)<IsClosed>`
+    position: fixed;
+    top: -50%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 150%;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.26);
+    display: ${({ isClosed }) => (isClosed ? 'none' : 'block')};
 `;
 
 //

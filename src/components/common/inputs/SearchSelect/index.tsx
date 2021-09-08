@@ -64,7 +64,7 @@ export const SearchSelect = ({
 
                         {!loading &&
                             searchResultList.map(item => (
-                                <ListItemWrapper key={item} onClick={() => onItemClick(value)}>
+                                <ListItemWrapper key={item} onClick={() => onItemClick(item)}>
                                     {item}
                                 </ListItemWrapper>
                             ))}

@@ -1,8 +1,14 @@
+export const VISIBLE_COUNTRIES = 14;
 export const configurationContentPadding = `16px 0px 0px`;
 export const checkboxBlockMargin = '4px';
 export const biasTitleMarginTop = '16px';
 export const biasBlockMargin = '8px';
+export const searchSelectMarginTop = '16px';
 
+interface CountriesTypes {
+    country: string;
+    viewers: string;
+}
 //40 - from Figma design
 //export const configurationContentHorizontalPadding = '90px';
 //export const ConfigurationItemHorizontalPadding = 40 - parseInt(configurationContentHorizontalPadding) + 'px';
@@ -18,7 +24,7 @@ export const ageMock = [
     { range: { ageFrom: undefined, ageTo: undefined }, viewers: '4356' }
 ];
 
-export const countriesMock = [
+export const countriesMock: CountriesTypes[] = [
     { country: 'Eastern Europe', viewers: '4356' },
     { country: 'Western Europe', viewers: '2123' },
     { country: 'Middle east', viewers: '2212' },

@@ -30,7 +30,6 @@ interface Props extends MarginRightBottom, Sizes, WOM.ContentItemResponse {
 }
 
 export const CreateCampaignMiniCard = ({
-    marginBottom,
     marginRight,
     onRemove,
     womContentId,
