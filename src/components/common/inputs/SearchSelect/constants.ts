@@ -1,5 +1,5 @@
 export const searchSelectWidth = '405px';
-export const inputWidth = '355px';
+export const inputWidth = '405px';
 export const inputHeight = '32px';
 
 export const inputFontWeight = '400';

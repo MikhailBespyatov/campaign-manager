@@ -32,7 +32,7 @@ import {
 } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
 import React, { FC, useEffect, useState } from 'react';
 import { forms } from 'stores/forms';
-import { countriesEffects, countriesStores } from 'stores/location';
+import { countriesEffects, countriesEvents, countriesStores } from 'stores/location';
 import { Bias, CreateCampaignStepsProps, MaxSizes, OnChangeSelect, Sizes, Title } from 'types';
 import {
     AgeBlockWrapper,
@@ -266,43 +266,42 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
 export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const [displayCountryPopup, setDisplayCountryPopup] = useState(true);
     const countriesData = useStore(countriesStores.locations);
-    const countries = countriesData.countries
-        ? countriesData.countries.map(it => it.countryName).filter((item): item is string => typeof item === 'string')
-        : [''];
     const ageData = ageMock;
+    const countries = countriesData ? countriesData : [''];
     //const hashtagsData = hashtagsMock;
     const overridesData = overrideMock;
     const boostData = boostMock;
-    const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
+    //const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
     const { value: countriesValue, onChange: onChangeCountry } = useField(forms.createCampaignForm.fields.countries);
     //const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
     const { value: overrideValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.override);
     const { value: boostValues /*, onChange: onChangeBoostValues*/ } = useField(
         forms.createCampaignForm.fields.boostValues
     );
-
+    console.log('test');
     useEffect(() => {
         countriesEffects.getLocations();
     }, []);
 
-    const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
-        ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
+    // const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
+    //     ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
 
-    //const getHashtagWeight = (hashtag: string) => hashtagsValue.find(item => item.tag === hashtag)?.weight?.toString();
+    // //const getHashtagWeight = (hashtag: string) => hashtagsValue.find(item => item.tag === hashtag)?.weight?.toString();
 
-    //console.log('hashtagsValue', hashtagsValue);
+    // //console.log('hashtagsValue', hashtagsValue);
 
-    const onChangeAgeCheckbox = (range: WOM.CampaignAgePromotion) => (checked: boolean) =>
-        checked
-            ? onChangeAge([...ageValue, range])
-            : onChangeAge(ageValue.filter(item => item.ageFrom !== range.ageFrom));
+    // const onChangeAgeCheckbox = (range: WOM.CampaignAgePromotion) => (checked: boolean) =>
+    //     checked
+    //         ? onChangeAge([...ageValue, range])
+    //         : onChangeAge(ageValue.filter(item => item.ageFrom !== range.ageFrom));
 
-    const isAgeRangeChecked = (ageItem: WOM.CampaignAgePromotion) =>
-        ageValue.some(item => item.ageFrom === ageItem.ageFrom);
+    // const isAgeRangeChecked = (ageItem: WOM.CampaignAgePromotion) =>
+    //     ageValue.some(item => item.ageFrom === ageItem.ageFrom);
 
     const onChangeCountrySelect = (country: string) => {
         if (!countriesValue.includes(country)) {
             onChangeCountry([...countriesValue, country]);
+            countriesEvents.removeCountry(country);
         }
     };
 
@@ -310,6 +309,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
         const newCountries = countriesValue.filter(it => it !== country);
 
         onChangeCountry(newCountries);
+        countriesEvents.addCountry(country);
     };
 
     // const onChangeCountryCheckbox = (country: string) => (checked: boolean) =>
@@ -473,10 +473,10 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                     marginTop={checkboxBlockMargin}
                                 >
                                     <CheckboxBlock
-                                        defaultValue={isAgeRangeChecked(range)}
-                                        //subtitle={viewers}
-                                        title={getAgeRange(range)}
-                                        onChange={onChangeAgeCheckbox(range)}
+                                    // defaultValue={isAgeRangeChecked(range)}
+                                    // //subtitle={viewers}
+                                    // title={getAgeRange(range)}
+                                    // onChange={onChangeAgeCheckbox(range)}
                                     />
                                 </MarginWrapper>
                             );

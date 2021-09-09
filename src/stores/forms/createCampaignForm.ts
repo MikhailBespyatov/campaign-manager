@@ -181,37 +181,52 @@ sample({
             channels,
             override,
             boostValues,
-            age
-            /*countries, hashtags*/
+            age,
+            countries,
+            hashtags,
+            id
         },
         _
     ) => ({
+        id: `${id}`,
         organizationId: getOrganizationId(),
         title: campaignName,
         isHidden: false,
-        tags: [],
+        tags: [''],
         contentIds: videos.map(({ womContentId }) => womContentId) as string[],
         channelIds: channels,
         schedule: {
+            utcCreated: dateTo,
+            utcStarted: dateFrom,
+            utcEnded: dateTo,
             utcToStart: dateFrom,
             utcToEnd: dateTo
         },
         budget: {
-            budgetTotal: Number(budget)
+            budgetTotal: Number(budget),
+            budgetSpent: 0,
+            budgetPerDay: 0,
+            utcPaidUntil: dateTo
         },
         settings: {
-            watchOverride: {
-                isActive: true,
-                weight: override.override
-            },
-            //countries: countries,
-            //tagPromotions: hashtags,
-            languagePromotions: [] /* //TODO */,
-            //creatorPromotions: [],
-            agePromotions: age,
+            // watchOverride: {
+            //     isActive: true,
+            //     weight: override.override
+            // },
+            watchOverride: false,
             boostContentValue: boostValues.boostContent,
             boostCreatorValue: boostValues.boostCreator,
-            mustWatch: boostValues.mustWatch
+            mustWatch: boostValues.mustWatch,
+            countries: countries,
+            tagPromotions: hashtags,
+            languagePromotions: [
+                {
+                    languageCode: 'string',
+                    weight: 0
+                }
+            ] /* //TODO */,
+            creatorPromotions: [{ creatorId: '000000000000000000000000', weight: override.override }],
+            agePromotions: age
         }
     })
 });

@@ -291,7 +291,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -330,25 +330,16 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly missingFromEscrow?: number; // double
+        missingFromEscrow?: number; // double
         /**
          * boolean
          */
-        readonly isBalanced?: boolean;
+        isBalanced?: boolean;
     }
     /**
      * campaignAgePromotion
      */
-    export interface CampaignAgePromotion {
-        /**
-         * int32
-         */
-        ageFrom?: number; // int32
-        /**
-         * int32
-         */
-        ageTo?: number; // int32
-    }
+    export type CampaignAgePromotion = 0 | 1 | 2; // int32
     /**
      * campaignBudget
      */
@@ -372,7 +363,7 @@ declare namespace WOM {
          * decimal
          * The remaining amount to be spent.
          */
-        readonly budgetRemaining?: number; // double
+        budgetRemaining?: number; // double
         /**
          * dateTime
          */
@@ -380,7 +371,20 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isCurrentlyPaid?: boolean;
+        isCurrentlyPaid?: boolean;
+    }
+    /**
+     * campaignCreator
+     */
+    export interface CampaignCreator {
+        /**
+         * string
+         */
+        creatorId?: string | null;
+        /**
+         * string
+         */
+        creatorName?: string | null;
     }
     /**
      * campaignCreatorPromotion
@@ -541,6 +545,26 @@ declare namespace WOM {
         returnStatisticsPeriod?: number; // int32
     }
     /**
+     * campaignGetTagsRequest
+     */
+    export interface CampaignGetTagsRequest {
+        /**
+         * list1
+         * The unique identifiers of Requested contentIds which will be used to fetch hashtags.
+         */
+        contentIds?: string /* objectId */[] | null;
+    }
+    /**
+     * campaignGetTagsResponse
+     */
+    export interface CampaignGetTagsResponse {
+        /**
+         * tags
+         * The tags associated with this content.
+         */
+        tags?: string /* string */[] | null;
+    }
+    /**
      * campaignLanguagePromotion
      */
     export interface CampaignLanguagePromotion {
@@ -597,7 +621,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -649,29 +673,33 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly durationDays?: number; // int32
+        durationDays?: number; // int32
         /**
          * int32
          */
-        readonly remainingDays?: number; // int32
+        remainingDays?: number; // int32
         /**
          * boolean
          */
-        readonly hasStarted?: boolean;
+        hasStarted?: boolean;
         /**
          * boolean
          */
-        readonly hasEnded?: boolean;
+        hasEnded?: boolean;
         /**
          * boolean
          */
-        readonly inDateWindow?: boolean;
+        inDateWindow?: boolean;
     }
     /**
      * campaignSettings
      */
     export interface CampaignSettings {
-        watchOverride?: /* watchOverride */ WatchOverride;
+        /**
+         * boolean
+         * Contains enable/disable 'watch override'.
+         */
+        watchOverride?: boolean;
         /**
          * list1
          * List of countries used to target set of people.
@@ -711,7 +739,7 @@ declare namespace WOM {
          * list1
          * Boost the content based on user ages.
          */
-        agePromotions?: /* campaignAgePromotion */ CampaignAgePromotion[] | null;
+        agePromotions?: /* campaignAgePromotion */ CampaignAgePromotion /* int32 */[] | null;
     }
     /**
      * campaignStatisticsQueryRequest
@@ -763,7 +791,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        readonly sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
+        sets?: /* campaignStatisticsQuerySetResponse */ CampaignStatisticsQuerySetResponse[] | null;
         /**
          * int32
          */
@@ -771,7 +799,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
     }
     /**
      * campaignStatisticsQuerySetResponse
@@ -792,7 +820,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -945,7 +973,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -1023,6 +1051,10 @@ declare namespace WOM {
         audioLanguage?: string[] | null;
         streaming?: /* streamingInfo */ StreamingInfo;
         engagement?: /* contentEngagement */ ContentEngagement;
+        /**
+         * tags
+         */
+        tags?: string /* string */[] | null;
     }
     /**
      * channelContentsResponse
@@ -1049,7 +1081,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -1137,7 +1169,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -1168,7 +1200,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -1356,7 +1388,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * contentFlagInappropriateRequest
@@ -1486,12 +1518,12 @@ declare namespace WOM {
          * boolean
          * True if this content is currently in use in any campaigns.
          */
-        readonly inCampaignUse?: boolean;
+        inCampaignUse?: boolean;
         /**
          * boolean
          * True if this content is currently in use in any promotions.
          */
-        readonly inCampaignPromotionUse?: boolean;
+        inCampaignPromotionUse?: boolean;
         /**
          * tags
          * The tags associated with this content.
@@ -1574,6 +1606,11 @@ declare namespace WOM {
         facilitatorUserId?: string | null;
         /**
          * string
+         * The id of the facilitator on the calling network. Leave null if none specified.
+         */
+        facilitatorOrganizationId?: string | null;
+        /**
+         * string
          * The id of the publisher organization/system/user.
          */
         publisherId?: string | null;
@@ -1598,6 +1635,15 @@ declare namespace WOM {
      * contentQueryPromoted
      */
     export interface ContentQueryPromoted {}
+    /**
+     * contentQueryPromotedResponse
+     */
+    export interface ContentQueryPromotedResponse {
+        /**
+         * list1
+         */
+        remoteContentIds?: string[] | null;
+    }
     /**
      * contentQueryRequest
      */
@@ -1796,7 +1842,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -1822,6 +1868,10 @@ declare namespace WOM {
         audioLanguage?: string[] | null;
         streaming?: /* streamingInfo */ StreamingInfo;
         engagement?: /* contentEngagement */ ContentEngagement;
+        /**
+         * tags
+         */
+        tags?: string /* string */[] | null;
     }
     /**
      * contentStatisticsQueryRequest
@@ -1883,7 +1933,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -2017,6 +2067,11 @@ declare namespace WOM {
          * The mandatory tags of this organization.
          */
         mandatoryTags?: string /* string */[] | null;
+        /**
+         * string
+         * The origin of the request. For now only empty or shopify
+         */
+        origin?: string | null;
     }
     /**
      * createProductRequest
@@ -2139,7 +2194,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD1Percentage?: number; // double
+        viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
@@ -2148,7 +2203,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD2Percentage?: number; // double
+        viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
@@ -2157,7 +2212,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD3Percentage?: number; // double
+        viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
@@ -2166,7 +2221,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD4Percentage?: number; // double
+        viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
@@ -2175,7 +2230,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly likesPercentage?: number; // double
+        likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
@@ -2184,7 +2239,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly ratingsPercentage?: number; // double
+        ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
@@ -2193,7 +2248,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly savesPercentage?: number; // double
+        savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
@@ -2202,7 +2257,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sharesPercentage?: number; // double
+        sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
@@ -2211,7 +2266,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly commentsPercentage?: number; // double
+        commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
@@ -2220,7 +2275,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly clicksPercentage?: number; // double
+        clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
@@ -2229,12 +2284,12 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly buysPercentage?: number; // double
+        buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * dailyAggregatedOrganizationStatistics
@@ -2282,7 +2337,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD1Percentage?: number; // double
+        viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
@@ -2291,7 +2346,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD2Percentage?: number; // double
+        viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
@@ -2300,7 +2355,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD3Percentage?: number; // double
+        viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
@@ -2309,7 +2364,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD4Percentage?: number; // double
+        viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
@@ -2318,7 +2373,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly likesPercentage?: number; // double
+        likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
@@ -2327,7 +2382,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly ratingsPercentage?: number; // double
+        ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
@@ -2336,7 +2391,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly savesPercentage?: number; // double
+        savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
@@ -2345,7 +2400,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sharesPercentage?: number; // double
+        sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
@@ -2354,7 +2409,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly commentsPercentage?: number; // double
+        commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
@@ -2363,7 +2418,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly clicksPercentage?: number; // double
+        clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
@@ -2372,12 +2427,12 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly buysPercentage?: number; // double
+        buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * deleteBrandRequest
@@ -2439,9 +2494,9 @@ declare namespace WOM {
      */
     export interface EarningItem {
         /**
-         * string
+         * int32
          */
-        code?: string | null;
+        code?: number; // int32
         /**
          * decimal
          */
@@ -2483,7 +2538,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly value?: number; // double
+        value?: number; // double
         /**
          * dictionary2
          */
@@ -2608,11 +2663,11 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly week?: number; // int32
+        week?: number; // int32
         /**
          * decimal
          */
-        readonly value?: number; // double
+        value?: number; // double
         /**
          * list1
          */
@@ -2689,7 +2744,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -2744,7 +2799,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD1Percentage?: number; // double
+        viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
@@ -2753,7 +2808,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD2Percentage?: number; // double
+        viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
@@ -2762,7 +2817,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD3Percentage?: number; // double
+        viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
@@ -2771,7 +2826,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD4Percentage?: number; // double
+        viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
@@ -2780,7 +2835,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly likesPercentage?: number; // double
+        likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
@@ -2789,7 +2844,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly ratingsPercentage?: number; // double
+        ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
@@ -2798,7 +2853,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly savesPercentage?: number; // double
+        savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
@@ -2807,7 +2862,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sharesPercentage?: number; // double
+        sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
@@ -2816,7 +2871,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly commentsPercentage?: number; // double
+        commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
@@ -2825,7 +2880,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly clicksPercentage?: number; // double
+        clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
@@ -2834,12 +2889,12 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly buysPercentage?: number; // double
+        buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * engagementStatisticsHistorical
@@ -2864,47 +2919,47 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsDelta?: number; // double
+        viewsDelta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD1Delta?: number; // double
+        viewsD1Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD2Delta?: number; // double
+        viewsD2Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD3Delta?: number; // double
+        viewsD3Delta?: number; // double
         /**
          * decimal
          */
-        readonly viewsD4Delta?: number; // double
+        viewsD4Delta?: number; // double
         /**
          * decimal
          */
-        readonly likesDelta?: number; // double
+        likesDelta?: number; // double
         /**
          * decimal
          */
-        readonly ratingsDelta?: number; // double
+        ratingsDelta?: number; // double
         /**
          * decimal
          */
-        readonly savesDelta?: number; // double
+        savesDelta?: number; // double
         /**
          * decimal
          */
-        readonly sharesDelta?: number; // double
+        sharesDelta?: number; // double
         /**
          * decimal
          */
-        readonly clicksDelta?: number; // double
+        clicksDelta?: number; // double
         /**
          * decimal
          */
-        readonly buysDelta?: number; // double
+        buysDelta?: number; // double
     }
     /**
      * error400BadRequest
@@ -2927,7 +2982,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isSuccess?: boolean;
+        isSuccess?: boolean;
         loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
@@ -2936,7 +2991,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
     }
     /**
      * error404NotFoundResponse
@@ -2945,7 +3000,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isSuccess?: boolean;
+        isSuccess?: boolean;
         loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
@@ -2954,7 +3009,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
     }
     /**
      * error409ConflictResponse
@@ -2963,7 +3018,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isSuccess?: boolean;
+        isSuccess?: boolean;
         loggingLevel?: /**
          * logLevel
          * <br/><br/>Values:<br/>0 = Trace<br/>1 = Debug<br/>2 = Information<br/>3 = Warning<br/>4 = Error<br/>5 = Critical<br/>6 = None
@@ -2972,7 +3027,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
     }
     /**
      * exchangeRateItem
@@ -3199,7 +3254,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly fullName?: string | null;
+        fullName?: string | null;
         /**
          * string
          * The user's remote id (not WOM userId) if it exists.
@@ -3247,6 +3302,11 @@ declare namespace WOM {
          * Unique key of the organization.
          */
         organizationKey?: string | null;
+        /**
+         * string
+         * Unique key of the organization.
+         */
+        organizationOrigin?: string | null;
         location?: /* location */ Location;
         /**
          * cultureInfo
@@ -3368,7 +3428,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -3389,7 +3449,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
         /**
          * boolean
          */
@@ -3437,15 +3497,15 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly monthLeftUsd?: number; // double
+        monthLeftUsd?: number; // double
         /**
          * decimal
          */
-        readonly monthLeftWom?: number; // double
+        monthLeftWom?: number; // double
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
         /**
          * boolean
          */
@@ -3473,7 +3533,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isDefault?: boolean;
+        isDefault?: boolean;
     }
     /**
      * initializeWebRecorderRequest
@@ -3580,7 +3640,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly message?: string | null;
+        message?: string | null;
         /**
          * boolean
          */
@@ -3743,7 +3803,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -3835,6 +3895,47 @@ declare namespace WOM {
      */
     export type OrganizationPermission = 0 | 1 | 2; // int32
     /**
+     * organizationPurchaseRequest
+     */
+    export interface OrganizationPurchaseRequest {
+        /**
+         * string
+         */
+        sessionId?: string | null;
+        /**
+         * string
+         */
+        merchantId?: string | null;
+        /**
+         * decimal
+         */
+        value?: number; // double
+        /**
+         * string
+         */
+        currencyCode?: string | null;
+        /**
+         * boolean
+         */
+        isPaymentAttempted?: boolean;
+        /**
+         * string
+         */
+        errorMessage?: string | null;
+        /**
+         * string
+         */
+        remoteOrderId?: string | null;
+        /**
+         * string
+         */
+        sourceName?: string | null;
+        /**
+         * string
+         */
+        sourceUrl?: string | null;
+    }
+    /**
      * organizationQueryUsersRequest
      */
     export interface OrganizationQueryUsersRequest {
@@ -3890,7 +3991,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -3949,6 +4050,11 @@ declare namespace WOM {
          * True if this organization has a token wallet.
          */
         hasWallet?: boolean;
+        /**
+         * string
+         * The origin of the organization.
+         */
+        origin?: string | null;
     }
     /**
      * organizationSendInvitationsRequest
@@ -4014,7 +4120,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        readonly sets?: /* organizationStatisticsQuerySetResponse */ OrganizationStatisticsQuerySetResponse[] | null;
+        sets?: /* organizationStatisticsQuerySetResponse */ OrganizationStatisticsQuerySetResponse[] | null;
         /**
          * int32
          */
@@ -4022,7 +4128,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
     }
     /**
      * organizationStatisticsQuerySetResponse
@@ -4043,7 +4149,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4088,7 +4194,7 @@ declare namespace WOM {
          * decimal
          * The remaining amount to be spent.
          */
-        readonly budgetRemaining?: number; // double
+        budgetRemaining?: number; // double
         /**
          * dateTime
          */
@@ -4096,7 +4202,7 @@ declare namespace WOM {
         /**
          * boolean
          */
-        readonly isCurrentlyPaid?: boolean;
+        isCurrentlyPaid?: boolean;
     }
     /**
      * organizationTagsResponse
@@ -4115,6 +4221,10 @@ declare namespace WOM {
          * string
          */
         email: string;
+        /**
+         * string
+         */
+        origin?: string | null;
         /**
          * string
          */
@@ -4163,7 +4273,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4282,7 +4392,7 @@ declare namespace WOM {
         /**
          * dateTime
          */
-        readonly utcDate?: string; // date-time
+        utcDate?: string; // date-time
         /**
          * dateTime
          */
@@ -4326,7 +4436,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly value?: number; // double
+        value?: number; // double
         /**
          * dictionary2
          */
@@ -4443,7 +4553,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly url?: string | null;
+        url?: string | null;
     }
     /**
      * performancePaymentsItem
@@ -4535,7 +4645,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4622,7 +4732,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        readonly id?: string; // objectId
+        id?: string; // objectId
         /**
          * string
          * This product's brand name
@@ -4685,7 +4795,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4724,6 +4834,24 @@ declare namespace WOM {
          * boolean
          */
         returnQueryCount?: boolean;
+    }
+    /**
+     * queryCampaignCreatorsRequest
+     */
+    export interface QueryCampaignCreatorsRequest {
+        /**
+         * list1
+         */
+        contentIds?: string /* objectId */[] | null;
+    }
+    /**
+     * queryCampaignCreatorsResponse
+     */
+    export interface QueryCampaignCreatorsResponse {
+        /**
+         * list1
+         */
+        creators?: /* campaignCreator */ CampaignCreator[] | null;
     }
     /**
      * queryChannelContentsRequest
@@ -4801,7 +4929,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4891,7 +5019,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -4966,7 +5094,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -5022,7 +5150,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -5143,7 +5271,7 @@ declare namespace WOM {
         /**
          * list1
          */
-        readonly states?: /* validationStateResponse */ ValidationStateResponse[] | null;
+        states?: /* validationStateResponse */ ValidationStateResponse[] | null;
     }
     /**
      * queryVoucherStatisticsRequest
@@ -5216,7 +5344,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -5316,7 +5444,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -5383,7 +5511,7 @@ declare namespace WOM {
         /**
          * string
          */
-        readonly mobileNumberE164?: string | null;
+        mobileNumberE164?: string | null;
     }
     /**
      * statisticsDaily
@@ -5442,7 +5570,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD1Percentage?: number; // double
+        viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
@@ -5451,7 +5579,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD2Percentage?: number; // double
+        viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
@@ -5460,7 +5588,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD3Percentage?: number; // double
+        viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
@@ -5469,7 +5597,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD4Percentage?: number; // double
+        viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
@@ -5478,7 +5606,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly likesPercentage?: number; // double
+        likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
@@ -5487,7 +5615,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly ratingsPercentage?: number; // double
+        ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
@@ -5496,7 +5624,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly savesPercentage?: number; // double
+        savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
@@ -5505,7 +5633,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sharesPercentage?: number; // double
+        sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
@@ -5514,7 +5642,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly commentsPercentage?: number; // double
+        commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
@@ -5523,7 +5651,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly clicksPercentage?: number; // double
+        clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
@@ -5532,12 +5660,12 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly buysPercentage?: number; // double
+        buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * statisticsHourly
@@ -5561,7 +5689,7 @@ declare namespace WOM {
          * example:
          * 000000000000000000000000
          */
-        readonly id?: string; // objectId
+        id?: string; // objectId
         /**
          * objectId
          * example:
@@ -5585,7 +5713,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD1Percentage?: number; // double
+        viewsD1Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 25-49%
@@ -5594,7 +5722,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD2Percentage?: number; // double
+        viewsD2Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 50-74%
@@ -5603,7 +5731,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD3Percentage?: number; // double
+        viewsD3Percentage?: number; // double
         /**
          * int32
          * Views that had a duration inclusive 75-100%
@@ -5612,7 +5740,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly viewsD4Percentage?: number; // double
+        viewsD4Percentage?: number; // double
         /**
          * int32
          * The total number of likes
@@ -5621,7 +5749,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly likesPercentage?: number; // double
+        likesPercentage?: number; // double
         /**
          * int32
          * The total number of ratings by users (not authenticators)
@@ -5630,7 +5758,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly ratingsPercentage?: number; // double
+        ratingsPercentage?: number; // double
         /**
          * int32
          * The total number of times this item was saved.
@@ -5639,7 +5767,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly savesPercentage?: number; // double
+        savesPercentage?: number; // double
         /**
          * int32
          * The amount of times this item was shared.
@@ -5648,7 +5776,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sharesPercentage?: number; // double
+        sharesPercentage?: number; // double
         /**
          * int32
          * The amount of comments.
@@ -5657,7 +5785,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly commentsPercentage?: number; // double
+        commentsPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a click.
@@ -5666,7 +5794,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly clicksPercentage?: number; // double
+        clicksPercentage?: number; // double
         /**
          * int32
          * The amount of times this item received a buy event.
@@ -5675,12 +5803,12 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly buysPercentage?: number; // double
+        buysPercentage?: number; // double
         /**
          * int32
          * The total engagements of this item.
          */
-        readonly total?: number; // int32
+        total?: number; // int32
     }
     /**
      * statisticsHourlyUploadRequest
@@ -5735,15 +5863,15 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly sumBalance?: number; // double
+        sumBalance?: number; // double
         /**
          * decimal
          */
-        readonly escrowBalance?: number; // double
+        escrowBalance?: number; // double
         /**
          * decimal
          */
-        readonly circulationBalance?: number; // double
+        circulationBalance?: number; // double
     }
     /**
      * transactionCreateRequest
@@ -5884,7 +6012,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -6473,7 +6601,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -6772,7 +6900,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly returnedRecords?: number; // int32
+        returnedRecords?: number; // int32
         /**
          * list1
          */
@@ -6817,7 +6945,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly womStaked?: number; // double
+        womStaked?: number; // double
         /**
          * objectId
          * example:
@@ -6877,7 +7005,7 @@ declare namespace WOM {
         /**
          * decimal
          */
-        readonly payoutValue?: number; // double
+        payoutValue?: number; // double
         /**
          * objectId
          * example:
@@ -7115,7 +7243,7 @@ declare namespace WOM {
         /**
          * int32
          */
-        readonly week?: number; // int32
+        week?: number; // int32
         /**
          * int32
          */
@@ -7404,21 +7532,6 @@ declare namespace WOM {
         AddressResponse[] | null;
     }
     /**
-     * watchOverride
-     */
-    export interface WatchOverride {
-        /**
-         * boolean
-         * Enable / disable 'watch override'
-         */
-        isActive?: boolean;
-        /**
-         * decimal
-         * Supplied Value for override views.
-         */
-        weight?: number; // double
-    }
-    /**
      * withdrawalRequest
      */
     export interface WithdrawalRequest {
@@ -7440,6 +7553,80 @@ declare namespace WOM {
     }
 }
 declare namespace Paths {
+    namespace BrandCreate {
+        namespace Post {
+            export type RequestBody = /* createBrandRequest */ Components.Schemas.CreateBrandRequest;
+            namespace Responses {
+                export type $200 = /* brandResponse */ Components.Schemas.BrandResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace BrandDelete {
+        namespace Post {
+            export type RequestBody = /* deleteBrandRequest */ Components.Schemas.DeleteBrandRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace BrandGet {
+        namespace Post {
+            export type RequestBody = /* getBrandRequest */ Components.Schemas.GetBrandRequest;
+            namespace Responses {
+                export type $200 = /* brandResponse */ Components.Schemas.BrandResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace BrandQuery {
+        namespace Post {
+            export type RequestBody = /* queryBrandsRequest */ Components.Schemas.QueryBrandsRequest;
+            namespace Responses {
+                export type $200 = /* brandsResponse */ Components.Schemas.BrandsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace BrandUpdate {
+        namespace Post {
+            export type RequestBody = /* updateBrandRequest */ Components.Schemas.UpdateBrandRequest;
+            namespace Responses {
+                export type $200 = /* brandResponse */ Components.Schemas.BrandResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace CampaignChannelQueryPrivate {
+        namespace Post {
+            export type RequestBody = /* queryPrivateChannelsRequest */ Components.Schemas.QueryPrivateChannelsRequest;
+            namespace Responses {
+                export type $200 = /* queryPrivateChannelsResponse */ Components.Schemas.QueryPrivateChannelsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace CampaignChannelQueryPublic {
+        namespace Post {
+            export type RequestBody = /* organizationChannelQueryRequest */ Components.Schemas.OrganizationChannelQueryRequest;
+            namespace Responses {
+                export type $200 = /* organizationChannelQueryResponse */ Components.Schemas.OrganizationChannelQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
     namespace CampaignGet {
         namespace Post {
             export type RequestBody = /* campaignGetRequest */ Components.Schemas.CampaignGetRequest;
@@ -7448,6 +7635,38 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CampaignGetPromotionDetails {
+        namespace Post {
+            export type RequestBody = /* campaignGetPromotionDetailsRequest */ Components.Schemas.CampaignGetPromotionDetailsRequest;
+            namespace Responses {
+                export type $200 = /* campaignGetPromotionDetailsResponse */ Components.Schemas.CampaignGetPromotionDetailsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CampaignGetTags {
+        namespace Post {
+            export type RequestBody = /* campaignGetTagsRequest */ Components.Schemas.CampaignGetTagsRequest;
+            namespace Responses {
+                export type $200 = /* campaignGetTagsResponse */ Components.Schemas.CampaignGetTagsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace CampaignMerchantQuery {
+        namespace Post {
+            export type RequestBody = /* campaignMerchantQueryRequest */ Components.Schemas.CampaignMerchantQueryRequest;
+            namespace Responses {
+                export type $200 = /* campaignMerchantQueryResponse */ Components.Schemas.CampaignMerchantQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
             }
         }
     }
@@ -7461,6 +7680,15 @@ declare namespace Paths {
             }
         }
     }
+    namespace CampaignQueryActive {
+        namespace Post {
+            export type RequestBody = /* queryActiveCampaignsRequest */ Components.Schemas.QueryActiveCampaignsRequest;
+            namespace Responses {
+                export type $200 = /* queryActiveCampaignsResponse */ Components.Schemas.QueryActiveCampaignsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
     namespace CampaignQueryByContent {
         namespace Post {
             export type RequestBody = /* campaignsContentRequest */ Components.Schemas.CampaignsContentRequest;
@@ -7469,6 +7697,16 @@ declare namespace Paths {
                  * list1
                  */
                 export type $200 = /* campaignDetailResponse */ Components.Schemas.CampaignDetailResponse[];
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace CampaignQueryCreators {
+        namespace Post {
+            export type RequestBody = /* queryCampaignCreatorsRequest */ Components.Schemas.QueryCampaignCreatorsRequest;
+            namespace Responses {
+                export type $200 = /* queryCampaignCreatorsResponse */ Components.Schemas.QueryCampaignCreatorsResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
             }
@@ -7494,6 +7732,38 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CatalogueDelete {
+        namespace Post {
+            export type RequestBody = /* contentDeleteRequest */ Components.Schemas.ContentDeleteRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CatalogueDeleteByUser {
+        namespace Post {
+            export type RequestBody = /* contentDeleteByUserRequest */ Components.Schemas.ContentDeleteByUserRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace CatalogueEarnings {
+        namespace Post {
+            export type RequestBody = /* earningReportRequest */ Components.Schemas.EarningReportRequest;
+            namespace Responses {
+                export type $200 = /* earningReportResponse */ Components.Schemas.EarningReportResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
             }
         }
     }
@@ -7540,14 +7810,23 @@ declare namespace Paths {
             }
         }
     }
+    namespace CatalogueQueryEarningsStatistics {
+        namespace Post {
+            export type RequestBody = /* earningsStatisticsQueryRequest */ Components.Schemas.EarningsStatisticsQueryRequest;
+            namespace Responses {
+                export type $200 = /* earningsStatisticsQueryResponse */ Components.Schemas.EarningsStatisticsQueryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
     namespace CatalogueQueryPromoted {
         namespace Post {
             export type RequestBody = /* contentQueryPromoted */ Components.Schemas.ContentQueryPromoted;
             namespace Responses {
-                /**
-                 * contentQueryPromotedResponse
-                 */
-                export type $200 = string /* objectId */[];
+                export type $200 = /* contentQueryPromotedResponse */ Components.Schemas.ContentQueryPromotedResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
             }
@@ -7588,11 +7867,171 @@ declare namespace Paths {
             }
         }
     }
+    namespace ChannelContentCreate {
+        namespace Post {
+            export type RequestBody = /* createChannelContentRequest */ Components.Schemas.CreateChannelContentRequest;
+            namespace Responses {
+                export type $200 = /* channelContentResponse */ Components.Schemas.ChannelContentResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelContentDelete {
+        namespace Post {
+            export type RequestBody = /* deleteChannelContentRequest */ Components.Schemas.DeleteChannelContentRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelContentGet {
+        namespace Post {
+            export type RequestBody = /* getChannelContentRequest */ Components.Schemas.GetChannelContentRequest;
+            namespace Responses {
+                export type $200 = /* channelContentResponse */ Components.Schemas.ChannelContentResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelContentQuery {
+        namespace Post {
+            export type RequestBody = /* queryChannelContentsRequest */ Components.Schemas.QueryChannelContentsRequest;
+            namespace Responses {
+                export type $200 = /* channelContentsResponse */ Components.Schemas.ChannelContentsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelContentQueryPublic {
+        namespace Post {
+            export type RequestBody = /* queryChannelViewerContentRequest */ Components.Schemas.QueryChannelViewerContentRequest;
+            namespace Responses {
+                export type $200 = /* channelViewerContentItemsResponse */ Components.Schemas.ChannelViewerContentItemsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelContentUpdate {
+        namespace Post {
+            export type RequestBody = /* updateChannelContentRequest */ Components.Schemas.UpdateChannelContentRequest;
+            namespace Responses {
+                export type $200 = /* channelContentResponse */ Components.Schemas.ChannelContentResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelCreate {
+        namespace Post {
+            export type RequestBody = /* createChannelRequest */ Components.Schemas.CreateChannelRequest;
+            namespace Responses {
+                export type $200 = /* channelResponse */ Components.Schemas.ChannelResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelDelete {
+        namespace Post {
+            export type RequestBody = /* deleteChannelRequest */ Components.Schemas.DeleteChannelRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelGet {
+        namespace Post {
+            export type RequestBody = /* getChannelRequest */ Components.Schemas.GetChannelRequest;
+            namespace Responses {
+                export type $200 = /* channelResponse */ Components.Schemas.ChannelResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelQuery {
+        namespace Post {
+            export type RequestBody = /* queryChannelsRequest */ Components.Schemas.QueryChannelsRequest;
+            namespace Responses {
+                export type $200 = /* channelsResponse */ Components.Schemas.ChannelsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ChannelQueryPlaylist {
+        namespace Post {
+            export type RequestBody = /* queryChannelPlaylistRequest */ Components.Schemas.QueryChannelPlaylistRequest;
+            namespace Responses {
+                export type $200 = /* queryChannelPlaylistResponse */ Components.Schemas.QueryChannelPlaylistResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ChannelUpdate {
+        namespace Post {
+            export type RequestBody = /* updateChannelRequest */ Components.Schemas.UpdateChannelRequest;
+            namespace Responses {
+                export type $200 = /* channelResponse */ Components.Schemas.ChannelResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace LanguageQuery {
+        namespace Post {
+            export type RequestBody = /* getLanguagesRequest */ Components.Schemas.GetLanguagesRequest;
+            namespace Responses {
+                export type $200 = /* allLanguagesResponse */ Components.Schemas.AllLanguagesResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace LocationQueryCountries {
+        namespace Post {
+            export type RequestBody = /* adminGetCountriesRequest */ Components.Schemas.AdminGetCountriesRequest;
+            namespace Responses {
+                export type $200 = /* adminAllCountriesResponse */ Components.Schemas.AdminAllCountriesResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace LocationQueryRegions {
+        namespace Post {
+            export type RequestBody = /* adminGetRegionsByCountryRequest */ Components.Schemas.AdminGetRegionsByCountryRequest;
+            namespace Responses {
+                export type $200 = /* adminAllRegionsByCountryResponse */ Components.Schemas.AdminAllRegionsByCountryResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
     namespace NotificationGet {
         namespace Post {
             export type RequestBody = /* getNotificationsRequest */ Components.Schemas.GetNotificationsRequest;
             namespace Responses {
                 export type $200 = /* notificationsResponse */ Components.Schemas.NotificationsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace NotificationQuery {
+        namespace Post {
+            export type RequestBody = /* queryNotificationsRequest */ Components.Schemas.QueryNotificationsRequest;
+            namespace Responses {
+                export type $200 = /* queryNotificationsResponse */ Components.Schemas.QueryNotificationsResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
@@ -7649,6 +8088,16 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace OrganizationPurchaseRequest {
+        namespace Post {
+            export type RequestBody = /* organizationPurchaseRequest */ Components.Schemas.OrganizationPurchaseRequest;
+            namespace Responses {
+                export interface $200 {}
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
             }
         }
     }
@@ -7800,13 +8249,237 @@ declare namespace Paths {
             }
         }
     }
-    namespace TestRebuildStatistics {
+    namespace PerformancePaymentsQueryContent {
+        namespace Post {
+            export type RequestBody = /* performancePaymentsContentPaymentsRequest */ Components.Schemas.PerformancePaymentsContentPaymentsRequest;
+            namespace Responses {
+                export type $200 = /* performancePaymentsContentPaymentsResponse */ Components.Schemas.PerformancePaymentsContentPaymentsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace ProductControllerLegacyUpdate {
+        namespace Post {
+            export type RequestBody = /* updateProductRequestLegacy */ Components.Schemas.UpdateProductRequestLegacy;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace ProductCreate {
+        namespace Post {
+            export type RequestBody = /* createProductRequest */ Components.Schemas.CreateProductRequest;
+            namespace Responses {
+                export type $200 = /* productResponse */ Components.Schemas.ProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductDelete {
+        namespace Post {
+            export type RequestBody = /* deleteProductRequest */ Components.Schemas.DeleteProductRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductGet {
+        namespace Post {
+            export type RequestBody = /* getProductRequest */ Components.Schemas.GetProductRequest;
+            namespace Responses {
+                export type $200 = /* productResponse */ Components.Schemas.ProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductQuery {
+        namespace Post {
+            export type RequestBody = /* queryProductsRequest */ Components.Schemas.QueryProductsRequest;
+            namespace Responses {
+                export type $200 = /* productsResponse */ Components.Schemas.ProductsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteCreate {
+        namespace Post {
+            export type RequestBody = /* createRemoteProductRequest */ Components.Schemas.CreateRemoteProductRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductResponse */ Components.Schemas.RemoteProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteDelete {
+        namespace Post {
+            export type RequestBody = /* deleteRemoteProductRequest */ Components.Schemas.DeleteRemoteProductRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteGet {
+        namespace Post {
+            export type RequestBody = /* getRemoteProductRequest */ Components.Schemas.GetRemoteProductRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductResponse */ Components.Schemas.RemoteProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteInitialize {
+        namespace Post {
+            export type RequestBody = /* initializeWebRecorderRequest */ Components.Schemas.InitializeWebRecorderRequest;
+            namespace Responses {
+                export type $200 = /* initializeWebRecorderResponse */ Components.Schemas.InitializeWebRecorderResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ProductRemoteLink {
+        namespace Post {
+            export type RequestBody = /* linkRemoteProductRequest */ Components.Schemas.LinkRemoteProductRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductResponse */ Components.Schemas.RemoteProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteQuery {
+        namespace Post {
+            export type RequestBody = /* queryRemoteProductsRequest */ Components.Schemas.QueryRemoteProductsRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductsResponse */ Components.Schemas.RemoteProductsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteQueryContent {
+        namespace Post {
+            export type RequestBody = /* queryProductViewerContentRequest */ Components.Schemas.QueryProductViewerContentRequest;
+            namespace Responses {
+                export type $200 = /* queryProductViewerContentResponse */ Components.Schemas.QueryProductViewerContentResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ProductRemoteQueryUnlinked {
+        namespace Post {
+            export type RequestBody = /* queryUnlinkedRemoteProductsRequest */ Components.Schemas.QueryUnlinkedRemoteProductsRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductsResponse */ Components.Schemas.RemoteProductsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductRemoteUpdate {
+        namespace Post {
+            export type RequestBody = /* updateRemoteProductRequest */ Components.Schemas.UpdateRemoteProductRequest;
+            namespace Responses {
+                export type $200 = /* remoteProductResponse */ Components.Schemas.RemoteProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace ProductUpdate {
+        namespace Post {
+            export type RequestBody = /* updateProductRequest */ Components.Schemas.UpdateProductRequest;
+            namespace Responses {
+                export type $200 = /* productResponse */ Components.Schemas.ProductResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace TestCancelAndResetStatistics {
         namespace Post {
             namespace Responses {
                 export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace TestEarningsSync {
+        namespace Get {
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace TestMigrateEarnings {
+        namespace Get {
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace TestMisc {
+        namespace Get {
+            namespace Parameters {
+                /**
+                 * string
+                 */
+                export type Command = string;
+            }
+            export interface QueryParameters {
+                command?: /* string */ Parameters.Command;
+            }
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace TestRewrite {
+        namespace Get {
+            namespace Parameters {
+                /**
+                 * string
+                 */
+                export type Name = string;
+            }
+            export interface QueryParameters {
+                name?: /* string */ Parameters.Name;
+            }
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+            }
+        }
+    }
+    namespace UserAdminAudit {
+        namespace Post {
+            export type RequestBody = /* userAuditRequest */ Components.Schemas.UserAuditRequest;
+            namespace Responses {
+                export type $200 = /* userAuditResponse */ Components.Schemas.UserAuditResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
             }
         }
     }
@@ -7839,6 +8512,28 @@ declare namespace Paths {
                 export type $200 = /* userQueryResponse */ Components.Schemas.UserQueryResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
+            }
+        }
+    }
+    namespace UserAdminWithdrawalCheck {
+        namespace Post {
+            export type RequestBody = /* checkWithdrawalRequest */ Components.Schemas.CheckWithdrawalRequest;
+            namespace Responses {
+                export type $200 = /* checkWithdrawalResponse */ Components.Schemas.CheckWithdrawalResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace UserDisable {
+        namespace Post {
+            export type RequestBody = /* userDisableRequest */ Components.Schemas.UserDisableRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
             }
         }
     }
@@ -7882,6 +8577,17 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace UserUpdateLocale {
+        namespace Post {
+            export type RequestBody = /* userLocaleUpdateRequest */ Components.Schemas.UserLocaleUpdateRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
             }
         }
     }
@@ -7942,6 +8648,16 @@ declare namespace Paths {
             }
         }
     }
+    namespace ValidationQueryStates {
+        namespace Post {
+            export type RequestBody = /* queryValidationStatesRequest */ Components.Schemas.QueryValidationStatesRequest;
+            namespace Responses {
+                export type $200 = /* queryValidationStatesResponse */ Components.Schemas.QueryValidationStatesResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
     namespace ValidationReleaseHold {
         namespace Post {
             export type RequestBody = /* validationReleaseHoldRequest */ Components.Schemas.ValidationReleaseHoldRequest;
@@ -7967,7 +8683,7 @@ declare namespace Paths {
     }
     namespace ValidationUserAuthenticate {
         namespace Post {
-            export type RequestBody = /* userAuthChallengeRequest */ Components.Schemas.UserAuthChallengeRequest;
+            export type RequestBody = /* userAuthChallengeEmailOrUsernameOrPhoneRequest */ Components.Schemas.UserAuthChallengeEmailOrUsernameOrPhoneRequest;
             namespace Responses {
                 export type $200 = /* userJwtTokenResponse */ Components.Schemas.UserJwtTokenResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
@@ -8016,6 +8732,51 @@ declare namespace Paths {
             }
         }
     }
+    namespace ValidationUserSmsAnalyzeMobileNumber {
+        namespace Post {
+            export type RequestBody = /* analyzeMobileNumberRequest */ Components.Schemas.AnalyzeMobileNumberRequest;
+            namespace Responses {
+                export type $200 = /* analyzeMobileNumberResponse */ Components.Schemas.AnalyzeMobileNumberResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ValidationUserSmsChangeUserPassword {
+        namespace Post {
+            export type RequestBody = /* changeUserPasswordViaSmsRequest */ Components.Schemas.ChangeUserPasswordViaSmsRequest;
+            namespace Responses {
+                export type $200 = /* changeUserPasswordViaSmsResponse */ Components.Schemas.ChangeUserPasswordViaSmsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ValidationUserSmsCheckVerificationCode {
+        namespace Post {
+            export type RequestBody = /* checkSmsCodeRequest */ Components.Schemas.CheckSmsCodeRequest;
+            namespace Responses {
+                export type $200 = /* checkSmsCodeResponse */ Components.Schemas.CheckSmsCodeResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ValidationUserSmsSendForgottenPassword {
+        namespace Post {
+            export type RequestBody = /* sendForgottenPasswordSmsRequest */ Components.Schemas.SendForgottenPasswordSmsRequest;
+            namespace Responses {
+                export type $200 = /* sendForgottenPasswordSmsResponse */ Components.Schemas.SendForgottenPasswordSmsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
+    namespace ValidationUserSmsSendVerification {
+        namespace Post {
+            export type RequestBody = /* sendVerificationSmsRequest */ Components.Schemas.SendVerificationSmsRequest;
+            namespace Responses {
+                export type $200 = /* sendVerificationSmsResponse */ Components.Schemas.SendVerificationSmsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+            }
+        }
+    }
     namespace ValidationUserUpdate {
         namespace Post {
             export type RequestBody = /* userUpdateRequest */ Components.Schemas.UserUpdateRequest;
@@ -8033,10 +8794,13 @@ declare namespace Paths {
                 /**
                  * string
                  */
-                export type Id = string | null;
+                export type Id = string;
             }
             export interface PathParameters {
                 id: /* string */ Parameters.Id;
+            }
+            export interface RequestBody {
+                fileName?: string; // binary
             }
             namespace Responses {
                 export type $200 = /* uploadUserProfileImageCommonResponse */ Components.Schemas.UploadUserProfileImageCommonResponse;
@@ -8062,6 +8826,105 @@ declare namespace Paths {
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
                 export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace ValidationValidationEntries {
+        namespace Post {
+            export type RequestBody = /* validationEntriesRequest */ Components.Schemas.ValidationEntriesRequest;
+            namespace Responses {
+                export type $200 = /* validationEntriesResponse */ Components.Schemas.ValidationEntriesResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+                export type $409 = /* error409ConflictResponse */ Components.Schemas.Error409ConflictResponse;
+            }
+        }
+    }
+    namespace VoucherGet {
+        namespace Post {
+            export type RequestBody = /* getVoucherTransactionRequest */ Components.Schemas.GetVoucherTransactionRequest;
+            namespace Responses {
+                export type $200 = /* voucherTransactionResponse */ Components.Schemas.VoucherTransactionResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherGetInfo {
+        namespace Post {
+            export type RequestBody = /* getVoucherInfoRequest */ Components.Schemas.GetVoucherInfoRequest;
+            namespace Responses {
+                export type $200 = /* getVoucherInfoResponse */ Components.Schemas.GetVoucherInfoResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherPurchase {
+        namespace Post {
+            export type RequestBody = /* createVoucherTransactionRequest */ Components.Schemas.CreateVoucherTransactionRequest;
+            namespace Responses {
+                export type $200 = /* voucherTransactionResponse */ Components.Schemas.VoucherTransactionResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherQuery {
+        namespace Post {
+            export type RequestBody = /* queryVoucherTransactionRequest */ Components.Schemas.QueryVoucherTransactionRequest;
+            namespace Responses {
+                export type $200 = /* queryVoucherTransactionResponse */ Components.Schemas.QueryVoucherTransactionResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherQueryBrands {
+        namespace Post {
+            export type RequestBody = /* getVoucherBrandsRequest */ Components.Schemas.GetVoucherBrandsRequest;
+            namespace Responses {
+                export type $200 = /* getVoucherBrandsResponse */ Components.Schemas.GetVoucherBrandsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherQueryCountries {
+        namespace Post {
+            export type RequestBody = /* getVoucherCountriesRequest */ Components.Schemas.GetVoucherCountriesRequest;
+            namespace Responses {
+                export type $200 = /* getVoucherCountriesResponse */ Components.Schemas.GetVoucherCountriesResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace VoucherQueryStatistics {
+        namespace Post {
+            export type RequestBody = /* queryVoucherStatisticsRequest */ Components.Schemas.QueryVoucherStatisticsRequest;
+            namespace Responses {
+                export type $200 = /* queryVoucherStatisticsResponse */ Components.Schemas.QueryVoucherStatisticsResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
+            }
+        }
+    }
+    namespace WalletAdminSetLimits {
+        namespace Post {
+            export type RequestBody = /* transactionLimitCreateRequest */ Components.Schemas.TransactionLimitCreateRequest;
+            namespace Responses {
+                export type $200 = /* messageResponseBase */ Components.Schemas.MessageResponseBase;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
             }
         }
     }
@@ -8106,6 +8969,17 @@ declare namespace Paths {
                 export type $200 = /* cryptoInformationResponse */ Components.Schemas.CryptoInformationResponse;
                 export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
                 export interface $401 {}
+            }
+        }
+    }
+    namespace WalletGetLimits {
+        namespace Post {
+            export type RequestBody = /* transactionLimitGetRequest */ Components.Schemas.TransactionLimitGetRequest;
+            namespace Responses {
+                export type $200 = /* transactionLimitGetResponse */ Components.Schemas.TransactionLimitGetResponse;
+                export type $400 = /* error400BadRequest */ Components.Schemas.Error400BadRequest;
+                export interface $401 {}
+                export type $404 = /* error404NotFoundResponse */ Components.Schemas.Error404NotFoundResponse;
             }
         }
     }
