@@ -69,10 +69,7 @@ export const onSubmit = (values: Props) =>
             budgetTotal: Number(values.amount.replaceAll(',', ''))
         },
         settings: {
-            watchOverride: {
-                isActive: true,
-                weight: 0
-            },
+            watchOverride: true,
             mustWatch: false
         }
     });
