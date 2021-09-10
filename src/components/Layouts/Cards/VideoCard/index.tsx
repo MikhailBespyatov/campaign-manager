@@ -22,6 +22,7 @@ import React, { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
+import { tagsEvents } from 'stores/tags';
 import { Unselectable } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
 
@@ -34,7 +35,8 @@ export const VideoCard = ({
     products,
     streamDetails,
     //engagement,
-    unselectable
+    unselectable,
+    tags
 }: Props) => {
     //const history = useHistory();
     //const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
@@ -44,7 +46,6 @@ export const VideoCard = ({
     const isDiscoverPage = location.pathname.includes('discover');
     const isProductPage = location.pathname.includes('products/product');
     const buttonsPositionLeft = isDiscoverPage || isProductPage ? '128px' : '72px';
-
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
     const ID = useMemo(() => (womContentId ? womContentId : ''), [womContentId]);
@@ -62,9 +63,14 @@ export const VideoCard = ({
     // const handleDetail = () => modalEvents.openCardModal({ id: ID });
     const addIdHandler = () => {
         if (womContentId)
-            active
-                ? onChange(contentIds.filter(items => items.womContentId !== womContentId))
-                : onChange(contentIds.concat([{ womContentId, uriPrimary, womQualityScore, products }]));
+            if (active) {
+                onChange(contentIds.filter(items => items.womContentId !== womContentId));
+            } else {
+                onChange(contentIds.concat([{ womContentId, uriPrimary, womQualityScore, products, tags }]));
+                if (tags) {
+                    tagsEvents.addTags(tags);
+                }
+            }
     };
     // TODO: setting up eslint for emoji
     return (

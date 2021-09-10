@@ -70,9 +70,9 @@ export const Videos: FC<CreateCampaignStepsProps> = () => {
                         </Row>
                     ) : (
                         <SelectedVideoWrapper>
-                            {initialContentIds.map(({ uriPrimary, womContentId }) => (
+                            {initialContentIds.map(({ uriPrimary, womContentId, tags }) => (
                                 <MarginWrapper key={womContentId} marginRight="25px" marginTop="7px">
-                                    <SelectedVideoCard id={womContentId} uriPrimary={uriPrimary} />
+                                    <SelectedVideoCard id={womContentId} tags={tags} uriPrimary={uriPrimary} />
                                 </MarginWrapper>
                             ))}
                         </SelectedVideoWrapper>

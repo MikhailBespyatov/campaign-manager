@@ -65,7 +65,7 @@ export const ItemsAbsoluteWrapper = styled(AbsoluteWrapper)`
     border-radius: 0 0 ${inputBorderRadius} ${inputBorderRadius};
     border: 1px solid #e6e6e6;
     border-top-color: transparent;
-    padding: 5px 0;
+    padding: 0;
     z-index: 4;
 `;
 
