@@ -33,12 +33,14 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 import { forms } from 'stores/forms';
 import { countriesEffects, countriesEvents, countriesStores } from 'stores/location';
+import { tagsStories } from 'stores/tags';
 import { Bias, CreateCampaignStepsProps, MaxSizes, OnChangeSelect, Sizes, Title } from 'types';
 import {
     AgeBlockWrapper,
     AllCountryModalWrapper,
     BiasTitle,
     CheckboxBlockWrapper,
+    ClearButton,
     ColumnWrapper,
     ConfigurationItemSubtitle,
     ConfigurationItemTitle,
@@ -48,8 +50,9 @@ import {
     CountryItemWrapper,
     CountryListWrapper,
     GrayWrapper,
+    Hashtag,
+    HashtagBlock,
     HiddenScrollBar,
-    LargeClearButton,
     RowWrapper,
     ShowAllButton
 } from './styles';
@@ -265,6 +268,7 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
 
 export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const [displayCountryPopup, setDisplayCountryPopup] = useState(true);
+    const [uniqueHashtags, setUniqueHashtags] = useState<string[]>([]);
     const countriesData = useStore(countriesStores.locations);
     const ageData = ageMock;
     const countries = countriesData ? countriesData : [''];
@@ -273,15 +277,17 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const boostData = boostMock;
     //const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
     const { value: countriesValue, onChange: onChangeCountry } = useField(forms.createCampaignForm.fields.countries);
-    //const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
+    const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
     const { value: overrideValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.override);
     const { value: boostValues /*, onChange: onChangeBoostValues*/ } = useField(
         forms.createCampaignForm.fields.boostValues
     );
-    console.log('test');
+    const tagsState = useStore(tagsStories.tags);
+
     useEffect(() => {
         countriesEffects.getLocations();
-    }, []);
+        setUniqueHashtags(Array.from(new Set(tagsState)));
+    }, [tagsState]);
 
     // const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
     //     ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
@@ -317,11 +323,32 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     //         ? onChangeCountry([...countriesValue, country])
     //         : onChangeCountry(countriesValue.filter(item => item !== country));
 
-    // const onChangeHashtagCheckbox = (hashtag: string) => (checked: boolean) => {
-    //     checked
-    //         ? onChangeHashtags([...hashtagsValue, { tag: hashtag, weight: 2 }])
-    //         : onChangeHashtags(hashtagsValue.filter(item => item.tag !== hashtag));
-    // };
+    const onChangeHashtagSearchSelect = (hashtag: string) => {
+        const item = hashtagsValue.find(it => it.tag === hashtag);
+
+        if (!item) {
+            onChangeHashtags([...hashtagsValue, { tag: hashtag, weight: 2 }]);
+            setUniqueHashtags(uniqueHashtags.filter(it => it !== hashtag));
+        }
+    };
+
+    const onChangeHashtagSearchWeight = (hashtag: string | undefined, value: string) => {
+        const itemIndex = hashtagsValue.findIndex(it => it.tag === hashtag);
+
+        if (itemIndex > -1) {
+            const item = hashtagsValue[itemIndex];
+            item.weight = Number(value);
+            onChangeHashtags([...hashtagsValue.slice(0, itemIndex), item, ...hashtagsValue.slice(itemIndex + 1)]);
+        }
+    };
+
+    const onRemoveHashtag = (hashtag: string | undefined) => {
+        const newHashtags = hashtagsValue.filter(it => it.tag !== hashtag);
+
+        onChangeHashtags(newHashtags);
+
+        if (hashtag) setUniqueHashtags([hashtag, ...uniqueHashtags]);
+    };
 
     // const onChangeHashtagSelect = (hashtag: string) => (active: string) =>
     //     onChangeHashtags([
@@ -435,6 +462,44 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                         </Column>
                     </Column>
                 </ConfigurationItem>
+
+                <ConfigurationItem
+                    subtitle="Target people based on hashtags tagged to your selected videos"
+                    title="Hashtags"
+                >
+                    <Column minHeight="126px">
+                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="27px">
+                            <SearchSelect
+                                defaultValue=""
+                                itemsList={uniqueHashtags}
+                                placeholder="Search by Hashtags"
+                                onItemSelect={onChangeHashtagSearchSelect}
+                            />
+                        </MarginWrapper>
+                        <MarginWrapper marginBottom="22px">
+                            {hashtagsValue?.map(({ tag, weight }) => (
+                                <MarginWrapper key={tag} marginBottom={primaryMargin}>
+                                    <HashtagBlock alignCenter justifyBetween>
+                                        <Hashtag>{tag}</Hashtag>
+                                        <AbsoluteWrapper right="52px" top="16px">
+                                            <Select
+                                                defaultActive={`${weight}`}
+                                                itemFontSize="16px"
+                                                itemFontWeight="600"
+                                                values={biasValues}
+                                                width="110px"
+                                                onChange={e => {
+                                                    onChangeHashtagSearchWeight(tag, e);
+                                                }}
+                                            />
+                                        </AbsoluteWrapper>
+                                        <ClearButton height="11px" onClick={() => onRemoveHashtag(tag)} />
+                                    </HashtagBlock>
+                                </MarginWrapper>
+                            ))}
+                        </MarginWrapper>
+                    </Column>
+                </ConfigurationItem>
                 {/* <ConfigurationItem
                 subtitle="Target people based on hashtags tagged to your selected videos"
                 title="Hashtags"
@@ -484,6 +549,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     </AgeBlockWrapper>
                 </ConfigurationItem>
             </Column>
+
             <GrayWrapper isClosed={displayCountryPopup}>
                 <AllCountryModalWrapper>
                     <MarginWrapper marginBottom="16px" marginLeft="35px" marginTop="44px">
@@ -491,7 +557,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                             <Span fontSize={largeFontSize} fontWeight={defaultFontWeight} lineHeight={largeLineHeight}>
                                 Country Names
                             </Span>
-                            <LargeClearButton
+                            <ClearButton
                                 onClick={() => {
                                     setDisplayCountryPopup(true);
                                 }}

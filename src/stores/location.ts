@@ -9,7 +9,7 @@ const getLocations = createEffect({
     handler: async () => {
         try {
             loadingEffects.updateInitialLoading();
-            const data = await API.location.getCountries({}).then(data => data);
+            const data = await API.location.getCountries({});
 
             const sortedData = data.countries
                 ?.map(it => it.countryName)
@@ -19,7 +19,6 @@ const getLocations = createEffect({
             return sortedData || [''];
         } catch {
             loadingEffects.updateInitialLoading();
-
             return [''];
         }
     }

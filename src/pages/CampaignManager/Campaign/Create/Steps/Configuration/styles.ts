@@ -2,7 +2,7 @@ import { CheckboxProps } from 'components/FormComponents/inputs/BooleanCheckbox/
 import { FixedWrapper } from 'components/grid/wrappers/FixedWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { black, blue, blue10, blue2, grey4, grey6, grey8, white } from 'constants/styles';
+import { black, blue, blue10, blue2, grey4, grey8, white } from 'constants/styles';
 import styled, { css } from 'styled-components';
 import { IsClosed, MaxSizes, Sizes } from 'types';
 
@@ -13,7 +13,11 @@ export const ShowAllButton = styled.button`
     cursor: pointer;
 `;
 
-export const LargeClearButton = styled.button`
+interface ClearButton {
+    height?: string;
+}
+
+export const ClearButton = styled.button<ClearButton>`
     position: relative;
     width: 20px;
     height: 20px;
@@ -27,7 +31,7 @@ export const LargeClearButton = styled.button`
         top: 3px;
         content: '';
         width: 2px;
-        height: 14px;
+        height: ${({ height }) => height || '14px'};
         background-color: ${black};
     }
     &:before {
@@ -77,13 +81,14 @@ export const BiasTitle = styled.span`
 
 export const Hashtag = styled.div`
     padding: 9px 20px;
-    background-color: ${grey6};
+    background-color: ${blue};
     border-radius: 22.5px;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 15px;
     cursor: pointer;
+    color: ${white};
 `;
 
 interface CheckboxBlockWrapperProps extends Pick<MaxSizes, 'maxWidth'>, Partial<Pick<CheckboxProps, 'checked'>> {}
@@ -117,6 +122,14 @@ export const CountryBlock = styled.div`
     border: 1px solid #c6c7d1;
     box-sizing: border-box;
     border-radius: 32px;
+`;
+
+export const HashtagBlock = styled(Row)`
+    position: relative;
+    padding: 0 18px;
+    width: 361px;
+    height: 64px;
+    background-color: ${blue2};
 `;
 
 export const RowWrapper = styled(Row)`
