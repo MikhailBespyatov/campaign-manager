@@ -77,7 +77,7 @@ export const ListItemWrapper = styled.button`
     font-weight: 400;
     width: 100%;
     height: 30px;
-    padding: 8px;
+    padding: 8px 16px;
     background-color: ${white};
 
     :hover {

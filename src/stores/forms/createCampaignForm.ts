@@ -75,6 +75,16 @@ export const createCampaignForm = createForm({
                 })
             ]
         },
+        languages: {
+            init: [] as WOM.CampaignLanguagePromotion[],
+            validateOn: ['change'],
+            rules: [
+                createRule<WOM.CampaignLanguagePromotion[]>({
+                    name: 'languages',
+                    schema: yupDefaultArray
+                })
+            ]
+        },
         override: {
             //any - because it is MOCK data
             init: { override: '2' } as { [key: string]: any },
@@ -184,7 +194,8 @@ sample({
             age,
             countries,
             hashtags,
-            id
+            id,
+            languages
         },
         _
     ) => ({
@@ -219,12 +230,7 @@ sample({
             mustWatch: boostValues.mustWatch,
             countries: countries,
             tagPromotions: hashtags,
-            languagePromotions: [
-                {
-                    languageCode: 'string',
-                    weight: 0
-                }
-            ] /* //TODO */,
+            languagePromotions: languages /* //TODO */,
             creatorPromotions: [{ creatorId: '000000000000000000000000', weight: override.override }],
             agePromotions: age
         }

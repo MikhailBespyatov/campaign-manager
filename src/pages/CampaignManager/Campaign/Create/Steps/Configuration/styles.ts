@@ -124,12 +124,16 @@ export const CountryBlock = styled.div`
     border-radius: 32px;
 `;
 
-export const HashtagBlock = styled(Row)`
+export const SelectBlock = styled(Row)`
     position: relative;
-    padding: 0 18px;
+    padding: 0 24px;
     width: 361px;
     height: 64px;
     background-color: ${blue2};
+`;
+
+export const HashtagSelectBlock = styled(SelectBlock)`
+    padding: 0 18px;
 `;
 
 export const RowWrapper = styled(Row)`

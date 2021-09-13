@@ -2,7 +2,8 @@ import * as admin from './admin';
 import * as campaignContent from './campaignContent';
 import * as campaigns from './campaigns';
 import * as channels from './channels';
-import * as location from './location';
+import * as languages from './languages';
+import * as locations from './locations';
 import * as organizations from './organizations';
 import * as products from './products';
 import * as user from './user';
@@ -21,5 +22,6 @@ export const API = {
     wallet,
     products,
     channels,
-    location
+    locations,
+    languages
 };

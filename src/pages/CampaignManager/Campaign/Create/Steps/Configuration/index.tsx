@@ -27,11 +27,13 @@ import {
     boostMock,
     checkboxBlockMargin,
     configurationContentPadding,
+    manyBiasValues,
     overrideMock,
     VISIBLE_COUNTRIES
 } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
 import React, { FC, useEffect, useState } from 'react';
 import { forms } from 'stores/forms';
+import { languagesEffects, languagesEvents, languagesStores } from 'stores/languages';
 import { countriesEffects, countriesEvents, countriesStores } from 'stores/location';
 import { tagsStories } from 'stores/tags';
 import { Bias, CreateCampaignStepsProps, MaxSizes, OnChangeSelect, Sizes, Title } from 'types';
@@ -51,9 +53,10 @@ import {
     CountryListWrapper,
     GrayWrapper,
     Hashtag,
-    HashtagBlock,
+    HashtagSelectBlock,
     HiddenScrollBar,
     RowWrapper,
+    SelectBlock,
     ShowAllButton
 } from './styles';
 
@@ -111,6 +114,37 @@ const BiasSelect = ({
             )}
         </Section>
     </CheckboxBlockWrapper>
+);
+
+interface Props {
+    title: string;
+    onSelectChange: (title: string, e: string) => void;
+    onRemove: (title: string) => void;
+}
+
+const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove }: Props) => (
+    <MarginWrapper marginBottom={primaryMargin}>
+        <SelectBlock alignCenter justifyBetween>
+            <Row>
+                <Span fontSize={defaultFontSize} fontWeight={defaultFontWeight} lineHeight="17px">
+                    {title}
+                </Span>
+            </Row>
+            <AbsoluteWrapper right="52px" top="16px">
+                <Select
+                    defaultActive={'2'}
+                    itemFontSize="16px"
+                    itemFontWeight="600"
+                    values={manyBiasValues}
+                    width="110px"
+                    onChange={e => {
+                        onSelectChange(title, e);
+                    }}
+                />
+            </AbsoluteWrapper>
+            <ClearButton height="11px" onClick={() => onRemove(title)} />
+        </SelectBlock>
+    </MarginWrapper>
 );
 
 // interface HashtagCheckboxProps
@@ -270,6 +304,8 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const [displayCountryPopup, setDisplayCountryPopup] = useState(true);
     const [uniqueHashtags, setUniqueHashtags] = useState<string[]>([]);
     const countriesData = useStore(countriesStores.locations);
+    const languagesISO = useStore(languagesStores.languagesISO);
+    const clientLanguages = useStore(languagesStores.clientLanguages);
     const ageData = ageMock;
     const countries = countriesData ? countriesData : [''];
     //const hashtagsData = hashtagsMock;
@@ -282,10 +318,12 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const { value: boostValues /*, onChange: onChangeBoostValues*/ } = useField(
         forms.createCampaignForm.fields.boostValues
     );
+    const { value: languagesValue, onChange: onChangeLanguages } = useField(forms.createCampaignForm.fields.languages);
     const tagsState = useStore(tagsStories.tags);
 
     useEffect(() => {
         countriesEffects.getLocations();
+        languagesEffects.getLanguages();
         setUniqueHashtags(Array.from(new Set(tagsState)));
     }, [tagsState]);
 
@@ -359,6 +397,40 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const onChangeOverrideSelect = (form: string) => (active: string) =>
         onChangeOverrides({ ...overrideValue, [form]: active });
 
+    const onChangeLanguagesSelect = (language: string) => {
+        const item = languagesISO.find(it => it.name === language);
+
+        if (item) {
+            const languageCode = item.code;
+            onChangeLanguages([...languagesValue, { languageCode, weight: 2 }]);
+            languagesEvents.removeLanguage(language);
+        }
+    };
+
+    const onRemoveLanguage = (language: string) => {
+        const item = languagesISO.find(it => it.name === language);
+
+        if (item) {
+            const languageCode = item.code;
+            const newLanguages = languagesValue.filter(it => it.languageCode !== languageCode);
+            onChangeLanguages(newLanguages);
+            languagesEvents.addLanguage(language);
+        }
+    };
+
+    const onChangeLanguageWeight = (language: string, weight: string) => {
+        const item = languagesISO.find(it => it.name === language);
+
+        if (item) {
+            const languageCode = item.code;
+            const languageIndex = languagesValue.findIndex(it => it.languageCode === languageCode);
+            const newLanguageItem = { ...languagesValue[languageIndex], weight: Number(weight) };
+            const newLanguagesValue = [...languagesValue];
+            newLanguagesValue.splice(languageIndex, 1, newLanguageItem);
+            onChangeLanguages(newLanguagesValue);
+        }
+    };
+
     return (
         <ContentWrapper marginBottom="20px" padding={configurationContentPadding} width="100%">
             <Column alignCenter width="100%">
@@ -404,16 +476,17 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 })}
             </ConfigurationItem> */}
 
-                <ConfigurationItem subtitle="Target people based on their location" title="Country">
+                <ConfigurationItem subtitle="Choose the location(s) of your target audience" title="Country">
                     <Column minHeight="126px">
                         <MarginWrapper marginBottom={biasBlockMargin} marginTop="46px">
                             <SearchSelect
                                 defaultValue=""
-                                itemsList={countries}
+                                itemsList={[...countries].sort()}
                                 placeholder="Add countries"
                                 onItemSelect={onChangeCountrySelect}
                             />
                         </MarginWrapper>
+
                         <CountryBlockWrapper>
                             {countriesValue.length !== 0 &&
                                 countriesValue.slice(0, VISIBLE_COUNTRIES).map(it => (
@@ -463,23 +536,29 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     </Column>
                 </ConfigurationItem>
 
-                <ConfigurationItem
-                    subtitle="Target people based on hashtags tagged to your selected videos"
-                    title="Hashtags"
-                >
+                <ConfigurationItem subtitle="Choose the hashtag(s) your target audience follows" title="Hashtags">
                     <Column minHeight="126px">
-                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="27px">
+                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="30px">
                             <SearchSelect
                                 defaultValue=""
-                                itemsList={uniqueHashtags}
+                                itemsList={[...uniqueHashtags].sort()}
                                 placeholder="Search by Hashtags"
                                 onItemSelect={onChangeHashtagSearchSelect}
                             />
                         </MarginWrapper>
                         <MarginWrapper marginBottom="22px">
+                            {hashtagsValue.length !== 0 && (
+                                <MarginWrapper marginBottom="8px" marginLeft="212px">
+                                    <Row alignCenter width="56px">
+                                        <Span fontSize="13px" fontWeight={defaultFontWeight} lineHeight="17px">
+                                            Bias
+                                        </Span>
+                                    </Row>
+                                </MarginWrapper>
+                            )}
                             {hashtagsValue?.map(({ tag, weight }) => (
                                 <MarginWrapper key={tag} marginBottom={primaryMargin}>
-                                    <HashtagBlock alignCenter justifyBetween>
+                                    <HashtagSelectBlock alignCenter justifyBetween>
                                         <Hashtag>{tag}</Hashtag>
                                         <AbsoluteWrapper right="52px" top="16px">
                                             <Select
@@ -494,9 +573,48 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                             />
                                         </AbsoluteWrapper>
                                         <ClearButton height="11px" onClick={() => onRemoveHashtag(tag)} />
-                                    </HashtagBlock>
+                                    </HashtagSelectBlock>
                                 </MarginWrapper>
                             ))}
+                        </MarginWrapper>
+                    </Column>
+                </ConfigurationItem>
+
+                <ConfigurationItem subtitle="Choose the language(s) of your target audience" title="Language">
+                    <Column minHeight="126px">
+                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="27px">
+                            <SearchSelect
+                                defaultValue=""
+                                itemsList={[...clientLanguages].sort()}
+                                placeholder="Add Language"
+                                onItemSelect={onChangeLanguagesSelect}
+                            />
+                        </MarginWrapper>
+                        <MarginWrapper marginBottom="22px">
+                            {languagesValue.length !== 0 && (
+                                <MarginWrapper marginBottom="8px" marginLeft="212px">
+                                    <Row alignCenter width="56px">
+                                        <Span fontSize="13px" fontWeight={defaultFontWeight} lineHeight="17px">
+                                            Bias
+                                        </Span>
+                                    </Row>
+                                </MarginWrapper>
+                            )}
+                            {languagesValue?.map(it => {
+                                const item = languagesISO.find(lang => lang.code === it.languageCode);
+                                if (item) {
+                                    const title = typeof item.name === 'string' ? item.name : '';
+
+                                    return (
+                                        <LanguageAndCreatorsBiasSelect
+                                            key={title}
+                                            title={title}
+                                            onRemove={onRemoveLanguage}
+                                            onSelectChange={onChangeLanguageWeight}
+                                        />
+                                    );
+                                }
+                            })}
                         </MarginWrapper>
                     </Column>
                 </ConfigurationItem>
@@ -526,7 +644,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     ))}
                 </MarginWrapper>
             </ConfigurationItem> */}
-                <ConfigurationItem withoutLine subtitle="Target people based on their age range" title="Age">
+                <ConfigurationItem withoutLine subtitle="Choose the age(s) of your target audience" title="Age">
                     <AgeBlockWrapper>
                         {ageData.map(ageItem => {
                             const { range /*, viewers*/ } = ageItem;
