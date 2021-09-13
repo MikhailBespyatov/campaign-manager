@@ -6,7 +6,9 @@ declare namespace WOM {
     // export interface GetUserResponse {
     //     organizationId: string;
     // }
-
+    export interface AllLanguagesResponse {
+        languages: string[];
+    }
     export interface ContentItemResponse {
         inCampaignIds?: string[];
     }

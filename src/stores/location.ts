@@ -9,7 +9,7 @@ const getLocations = createEffect({
     handler: async () => {
         try {
             loadingEffects.updateInitialLoading();
-            const data = await API.location.getCountries({});
+            const data = await API.locations.getCountries({});
 
             const sortedData = data.countries
                 ?.map(it => it.countryName)
