@@ -1,4 +1,4 @@
-import { ClearInputButton } from 'components/common/buttons/ClearInputButton';
+import { ClearInputButton, TrashButton } from 'components/common/buttons/ClearInputButton';
 import { LineBorder } from 'components/common/dividers/LineBorder';
 import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
 import { SearchSelect } from 'components/common/inputs/SearchSelect';
@@ -652,7 +652,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                             {countriesValue.length !== 0 &&
                                 countriesValue.map(it => (
                                     <ModalItemWrapper key={it}>
-                                        <Row alignCenter justifyBetween height="65px" marginLeft="38px" width="418px">
+                                        <Row alignCenter justifyBetween height="65px" marginLeft="38px" width="395px">
                                             <Span
                                                 fontSize={largeFontSize}
                                                 fontWeight={defaultFontWeight}
@@ -660,7 +660,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                             >
                                                 {it}
                                             </Span>
-                                            <ClearInputButton
+                                            <TrashButton
                                                 onClick={() => {
                                                     onRemoveCountryBlock(it);
                                                 }}
@@ -715,7 +715,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                                 height="65px"
                                                 marginLeft="107px"
                                                 marginRight="80px"
-                                                width="436px"
+                                                width="444px"
                                             >
                                                 <Span
                                                     fontSize={largeFontSize}
@@ -736,7 +736,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                                         }}
                                                     />
                                                 </AbsoluteWrapper>
-                                                <ClearInputButton
+                                                <TrashButton
                                                     onClick={() => {
                                                         onRemoveCreator(title);
                                                     }}
