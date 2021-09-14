@@ -16,7 +16,7 @@ const setOrganizationId = createEvent<string>();
 const organizationId = createStore('').on(setOrganizationId, (_, newState) => newState);
 
 const createOrganization = createEffect({
-    handler: async ({ values, setErrors }: CreateOrganizationRequestProps) => {
+    handler: async ({ values }: CreateOrganizationRequestProps) => {
         try {
             loadingEffects.updateLoading();
             await API.organizations.createOrganization(values);
@@ -35,7 +35,6 @@ const createOrganization = createEffect({
                 type: 'success'
             });
         } catch ({ status, data }) {
-            console.log('catch block');
             loadingEffects.updateLoading();
 
             const errorMessage = data?.message || asyncErrorMessage;

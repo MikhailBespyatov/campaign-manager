@@ -7,7 +7,7 @@ import { defaultFontSize } from 'constants/defaults';
 import { errorColor, formGrey5, primaryColor, secondaryMargin, successColor } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React, { useEffect } from 'react';
-import { campaignContentEffects, campaignContentStores } from 'stores/campaignContent';
+import { campaignContentEffects } from 'stores/campaignContent';
 import { loadingStores } from 'stores/loading';
 import { Id, Visibility } from 'types';
 
@@ -16,7 +16,6 @@ interface Props extends Id, Visibility {
 }
 
 export const CampaignContentCard = ({ buttonTop, id, visible }: Props) => {
-    const {} = useStore(campaignContentStores.item);
     const loading = useStore(loadingStores.loading);
 
     useEffect(() => {

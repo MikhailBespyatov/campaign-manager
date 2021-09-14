@@ -9,13 +9,13 @@ import { StyledItem } from 'components/common/dividers/BarItem/styles';
 import { Span } from 'components/common/typography/Span';
 import { SubPageSpan } from 'components/common/typography/special';
 import { subPageSpanHeight } from 'components/common/typography/special/constants';
+import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
 import { useStore } from 'effector-react';
 import React, { FC } from 'react';
 import { themeStores } from 'stores/theme';
 import { Path } from 'types';
-import { RelativeWrapper } from 'components/grid/wrappers/RelativeWrapper';
-import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 
 interface Props extends Path {
     active?: boolean;
@@ -24,7 +24,7 @@ interface Props extends Path {
     withoutBorderLine?: boolean;
 }
 
-export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage, withoutBorderLine }) => {
+export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }) => {
     const { primaryColor } = useStore(themeStores.theme);
 
     return (

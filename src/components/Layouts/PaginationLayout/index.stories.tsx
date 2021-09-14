@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { Section } from 'components/grid/wrappers/FlexWrapper';
+import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
+import { PaginationLayout, PaginationLayoutProps } from 'components/Layouts/PaginationLayout/index';
 import { nameProject } from 'constants/global';
 import { GlobalStyle, white } from 'constants/styles';
 import base from 'paths.macro';
 import React from 'react';
 import { getStoriesTitle } from 'utils/usefulFunctions';
-import { Section } from 'components/grid/wrappers/FlexWrapper';
-import { PaginationLayout, PaginationLayoutProps } from 'components/Layouts/PaginationLayout/index';
-import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 
 export default {
     title: getStoriesTitle(base),
@@ -39,8 +39,8 @@ const Template: Story<PaginationLayoutProps> = args => (
 
 export const DefaultPaginationLayout = Template.bind({});
 DefaultPaginationLayout.args = {
-    onPaginationChange: (current: number) => {},
-    onSizeChange: (current: number, size: number) => {},
+    onPaginationChange: () => {},
+    onSizeChange: () => {},
     totalRecords: 100,
     limit: 10,
     pageIndex: 0
