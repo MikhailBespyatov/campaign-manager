@@ -36,4 +36,10 @@ declare namespace WOM {
     export interface CampaignScheduleStatus {
         isEnabled?: boolean;
     }
+
+    export enum CampaignAgePromotion {
+        Age15To20 = 0,
+        Age20To50 = 1,
+        Age50Plus = 2
+    }
 }

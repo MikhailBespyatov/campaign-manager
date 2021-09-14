@@ -19,6 +19,8 @@ export const biasValues = ['1', '2', '3', '5', '10'];
 
 export const manyBiasValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
+export const ageData = [0, 1, 2];
+
 export const ageMock = [
     { range: { ageFrom: 15, ageTo: 18 }, viewers: '4356' },
     { range: { ageFrom: 19, ageTo: 25 }, viewers: '5321' },

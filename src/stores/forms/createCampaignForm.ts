@@ -199,7 +199,6 @@ sample({
             videos,
             budget,
             channels,
-            override,
             boostValues,
             age,
             countries,

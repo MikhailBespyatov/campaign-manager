@@ -264,7 +264,7 @@ export const DatePickerBetween = ({
 
 interface InputPickerProps extends Name, Label, DefaultValueString {}
 
-export const DatePickerInput = ({ name = '', label, defaultValue = new Date().toISOString() }: InputPickerProps) => {
+export const DatePickerInput = ({ name = '', label }: InputPickerProps) => {
     // eslint-disable-next-line
     const [field, _, { setValue }] = useField(name);
 

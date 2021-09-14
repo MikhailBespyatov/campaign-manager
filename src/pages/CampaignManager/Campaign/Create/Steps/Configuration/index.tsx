@@ -21,7 +21,7 @@ import { grey4, primaryMargin } from 'constants/styles';
 import { useField } from 'effector-forms/dist';
 import { useStore } from 'effector-react';
 import {
-    ageMock,
+    ageData,
     biasBlockMargin,
     biasValues,
     boostMock,
@@ -152,74 +152,6 @@ const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove, weight
     </MarginWrapper>
 );
 
-// interface HashtagCheckboxProps
-//     extends DefaultValueBoolean,
-//         OnChangeBoolean,
-//         Pick<Title, 'subtitle'>,
-//         OnChangeSelect,
-//         Bias {
-//     hashtag: string;
-//     isTitleCheckbox?: boolean;
-// }
-
-// const HashtagCheckbox = ({
-//     hashtag,
-//     subtitle,
-//     bias,
-//     defaultValue,
-//     onChange = Noop,
-//     onChangeSelect,
-//     isTitleCheckbox
-// }: HashtagCheckboxProps) => {
-//     const flexBasis = getFlexBasisPercent(3);
-
-//     return (
-//         <CheckboxBlockWrapper checked={defaultValue} width="100%">
-//             <Section alignCenter justifyBetween height="100%">
-//                 <FlexGrow flexBasis={flexBasis}>
-//                     <Hashtag onClick={() => onChange(!defaultValue)}>{hashtag}</Hashtag>
-//                 </FlexGrow>
-
-//                 {!!subtitle && (
-//                     <FlexGrow alignCenter flexBasis={flexBasis}>
-//                         <Span color={grey4} fontSize="13px" fontWeight="400" lineHeight="16px">
-//                             Viewers:
-//                             <Span fontSize="13px" fontWeight="400" lineHeight="16px">
-//                                 {` ${subtitle}`}
-//                             </Span>
-//                         </Span>
-//                     </FlexGrow>
-//                 )}
-//                 <FlexGrow alignEnd flexBasis={flexBasis}>
-//                     {isTitleCheckbox ? (
-//                         <BiasTitleLayout>
-//                             <Select
-//                                 defaultActive={bias}
-//                                 disabled={!defaultValue}
-//                                 itemFontSize="16px"
-//                                 itemFontWeight="600"
-//                                 values={biasValues}
-//                                 width="110px"
-//                                 onChange={onChangeSelect}
-//                             />
-//                         </BiasTitleLayout>
-//                     ) : (
-//                         <Select
-//                             defaultActive={bias}
-//                             disabled={!defaultValue}
-//                             itemFontSize="16px"
-//                             itemFontWeight="600"
-//                             values={biasValues}
-//                             width="110px"
-//                             onChange={onChangeSelect}
-//                         />
-//                     )}
-//                 </FlexGrow>
-//             </Section>
-//         </CheckboxBlockWrapper>
-//     );
-// };
-
 interface CheckboxBlockProps extends CheckboxProps, Title {}
 
 const CheckboxBlock = ({ title, subtitle, defaultValue, ...rest }: CheckboxBlockProps) => (
@@ -316,12 +248,10 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const creatorsNames = Array.from(new Set(creators))
         .map(it => it.creatorName)
         .filter((item): item is string => typeof item === 'string');
-    const ageData = ageMock;
     const countries = countriesData ? countriesData : [''];
-    //const hashtagsData = hashtagsMock;
     const overridesData = overrideMock;
     const boostData = boostMock;
-    //const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
+    const { value: ageValue, onChange: onChangeAge } = useField(forms.createCampaignForm.fields.age);
     const { value: countriesValue, onChange: onChangeCountry } = useField(forms.createCampaignForm.fields.countries);
     const { value: hashtagsValue, onChange: onChangeHashtags } = useField(forms.createCampaignForm.fields.hashtags);
     const { value: overrideValue, onChange: onChangeOverrides } = useField(forms.createCampaignForm.fields.override);
@@ -341,20 +271,21 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
         setUniqueHashtags(Array.from(new Set(tagsState)));
     }, [tagsState, creatorsIds]);
 
-    // const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
-    //     ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
+    const getAgeRange = (value: WOM.CampaignAgePromotion) => {
+        switch (value) {
+            case 0:
+                return '15-20';
+            case 1:
+                return '20-50';
+            case 2:
+                return '50+';
+        }
+    };
 
-    // //const getHashtagWeight = (hashtag: string) => hashtagsValue.find(item => item.tag === hashtag)?.weight?.toString();
+    const onChangeAgeCheckbox = (value: WOM.CampaignAgePromotion) => (checked: boolean) =>
+        checked ? onChangeAge([...ageValue, value]) : onChangeAge(ageValue.filter(item => item !== value));
 
-    // //console.log('hashtagsValue', hashtagsValue);
-
-    // const onChangeAgeCheckbox = (range: WOM.CampaignAgePromotion) => (checked: boolean) =>
-    //     checked
-    //         ? onChangeAge([...ageValue, range])
-    //         : onChangeAge(ageValue.filter(item => item.ageFrom !== range.ageFrom));
-
-    // const isAgeRangeChecked = (ageItem: WOM.CampaignAgePromotion) =>
-    //     ageValue.some(item => item.ageFrom === ageItem.ageFrom);
+    const isAgeRangeChecked = (value: WOM.CampaignAgePromotion) => ageValue.some(item => item === value);
 
     const onChangeCountrySelect = (country: string) => {
         if (!countriesValue.includes(country)) {
@@ -369,11 +300,6 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
         onChangeCountry(newCountries);
         countriesEvents.addCountry(country);
     };
-
-    // const onChangeCountryCheckbox = (country: string) => (checked: boolean) =>
-    //     checked
-    //         ? onChangeCountry([...countriesValue, country])
-    //         : onChangeCountry(countriesValue.filter(item => item !== country));
 
     const onChangeHashtagSearchSelect = (hashtag: string) => {
         const item = hashtagsValue.find(it => it.tag === hashtag);
@@ -400,12 +326,6 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
 
         if (hashtag) setUniqueHashtags([hashtag, ...uniqueHashtags]);
     };
-
-    // const onChangeHashtagSelect = (hashtag: string) => (active: string) =>
-    //     onChangeHashtags([
-    //         ...hashtagsValue.filter(item => item.tag !== hashtag),
-    //         { tag: hashtag, weight: Number(active) }
-    //     ]);
 
     const onChangeOverrideSelect = (form: string) => (active: string) =>
         onChangeOverrides({ ...overrideValue, [form]: active });
@@ -501,27 +421,6 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                         </Section>
                     </Column>
                 </ConfigurationItem>
-                {/* <ConfigurationItem maxHeight="290px" subtitle="Target people based on their location" title="Country">
-                {countriesData.map(item => {
-                    const { country , viewers  } = item;
-
-                    return (
-                        <MarginWrapper
-                            key={country}
-                            marginBottom={checkboxBlockMargin}
-                            marginRight={primaryMargin}
-                            marginTop={checkboxBlockMargin}
-                        >
-                            <CheckboxBlock
-                                defaultValue={countriesValue.includes(country)}
-                                subtitle={viewers}
-                                title={country}
-                                onChange={onChangeCountryCheckbox(country)}
-                            />
-                        </MarginWrapper>
-                    );
-                })}
-            </ConfigurationItem> */}
 
                 <ConfigurationItem subtitle="Choose the location(s) of your target audience" title="Country">
                     <Column minHeight="126px">
@@ -715,56 +614,25 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                     </Column>
                 </ConfigurationItem>
 
-                {/* <ConfigurationItem
-                subtitle="Target people based on hashtags tagged to your selected videos"
-                title="Hashtags"
-            >
-                <MarginWrapper marginTop={biasTitleMarginTop}>
-                    {hashtagsData.map(({ hashtag , viewers }, index) => (
-                        <Row
-                            key={hashtag}
-                            marginBottom={biasBlockMargin}
-                            marginRight={primaryMargin}
-                            marginTop={biasBlockMargin}
-                            width="600px"
-                        >
-                            <HashtagCheckbox
-                                bias={getHashtagWeight(hashtag) || '2'}
-                                defaultValue={hashtagsValue.some(item => item.tag === hashtag)}
-                                hashtag={hashtag}
-                                isTitleCheckbox={index === 0}
-                                subtitle={viewers}
-                                onChange={onChangeHashtagCheckbox(hashtag)}
-                                onChangeSelect={onChangeHashtagSelect(hashtag)}
-                            />
-                        </Row>
-                    ))}
-                </MarginWrapper>
-            </ConfigurationItem> */}
                 <ConfigurationItem withoutLine subtitle="Choose the age(s) of your target audience" title="Age">
                     <AgeBlockWrapper>
-                        {ageData.map(ageItem => {
-                            const { range /*, viewers*/ } = ageItem;
-                            return (
-                                <MarginWrapper
-                                    key={range.ageFrom}
-                                    marginBottom={checkboxBlockMargin}
-                                    marginRight={primaryMargin}
-                                    marginTop={checkboxBlockMargin}
-                                >
-                                    <CheckboxBlock
-                                    // defaultValue={isAgeRangeChecked(range)}
-                                    // //subtitle={viewers}
-                                    // title={getAgeRange(range)}
-                                    // onChange={onChangeAgeCheckbox(range)}
-                                    />
-                                </MarginWrapper>
-                            );
-                        })}
+                        {ageData.map(it => (
+                            <MarginWrapper
+                                key={it}
+                                marginBottom={checkboxBlockMargin}
+                                marginRight={primaryMargin}
+                                marginTop={checkboxBlockMargin}
+                            >
+                                <CheckboxBlock
+                                    defaultValue={isAgeRangeChecked(it)}
+                                    title={getAgeRange(it)}
+                                    onChange={onChangeAgeCheckbox(it)}
+                                />
+                            </MarginWrapper>
+                        ))}
                     </AgeBlockWrapper>
                 </ConfigurationItem>
             </Column>
-
             <GrayWrapper isClosed={displayCountryPopup}>
                 <AllCountryModalWrapper>
                     <MarginWrapper marginBottom="16px" marginLeft="35px" marginTop="44px">
@@ -881,7 +749,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                         </CreatorListWrapper>
                     </AllCreatorsModalWrapper>
                 </GrayWrapper>
-            )}
+            )}{' '}
         </ContentWrapper>
     );
 };
