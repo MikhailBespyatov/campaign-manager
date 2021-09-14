@@ -5,6 +5,7 @@ import { addIdImgDiameter, removeImgTop } from 'components/Layouts/Cards/Selecte
 import { VideoCard } from 'components/Layouts/Cards/SelectedVideoCard/styles';
 import { useField } from 'effector-forms';
 import React, { FC } from 'react';
+import { creatorsEvents } from 'stores/creators';
 import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
 import { tagsEvents } from 'stores/tags';
@@ -24,6 +25,7 @@ export const SelectedVideoCard: FC<Props> = ({ id = '', uriPrimary, removeDelete
         onChange(contentIds.filter(items => items.womContentId !== id));
 
         if (tags) tagsEvents.removeTags(tags);
+        if (id) creatorsEvents.removeCreatorsId(id);
     };
     const openCardModal = () => modalEvents.openCardModal({ id });
 

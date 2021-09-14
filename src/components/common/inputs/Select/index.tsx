@@ -92,7 +92,6 @@ export const Select = ({
     ...styles
 }: WrapperProps) => {
     const [isClosed, setIsClosed] = useState(true);
-    const [selected, setSelected] = useState(defaultActive);
     const [radio, setRadio] = useState(
         values.map(i => ({
             value: i,
@@ -109,7 +108,6 @@ export const Select = ({
                 active: i.value === value
             }))
         );
-        setSelected(value);
         onChange(value);
         onClose();
     };
@@ -123,7 +121,7 @@ export const Select = ({
     return (
         <Wrapper disabled={disabled} height={height} isDarkStyle={isDarkStyle} onClick={onClose} {...styles}>
             <ItemSpan additionalTitle={additionalTitle} itemFontSize={itemFontSize} itemFontWeight={itemFontWeight}>
-                {selected}
+                {defaultActive}
             </ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={arrowTop}>
                 <ClickableWrapper width="20px">
