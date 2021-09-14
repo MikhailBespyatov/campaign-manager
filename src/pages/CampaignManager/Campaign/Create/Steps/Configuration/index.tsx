@@ -29,9 +29,11 @@ import {
     configurationContentPadding,
     manyBiasValues,
     overrideMock,
-    VISIBLE_COUNTRIES
+    VISIBLE_COUNTRIES,
+    VISIBLE_CREATORS
 } from 'pages/CampaignManager/Campaign/Create/Steps/Configuration/constants';
 import React, { FC, useEffect, useState } from 'react';
+import { combinedCreatorsStories, creatorsEffects, creatorsEvents } from 'stores/creators';
 import { forms } from 'stores/forms';
 import { languagesEffects, languagesEvents, languagesStores } from 'stores/languages';
 import { countriesEffects, countriesEvents, countriesStores } from 'stores/location';
@@ -40,6 +42,7 @@ import { Bias, CreateCampaignStepsProps, MaxSizes, OnChangeSelect, Sizes, Title 
 import {
     AgeBlockWrapper,
     AllCountryModalWrapper,
+    AllCreatorsModalWrapper,
     BiasTitle,
     CheckboxBlockWrapper,
     ClearButton,
@@ -49,12 +52,13 @@ import {
     ConfigurationItemWrapper,
     CountryBlock,
     CountryBlockWrapper,
-    CountryItemWrapper,
     CountryListWrapper,
+    CreatorListWrapper,
     GrayWrapper,
     Hashtag,
     HashtagSelectBlock,
     HiddenScrollBar,
+    ModalItemWrapper,
     RowWrapper,
     SelectBlock,
     ShowAllButton
@@ -120,9 +124,10 @@ interface Props {
     title: string;
     onSelectChange: (title: string, e: string) => void;
     onRemove: (title: string) => void;
+    weight?: number;
 }
 
-const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove }: Props) => (
+const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove, weight = 2 }: Props) => (
     <MarginWrapper marginBottom={primaryMargin}>
         <SelectBlock alignCenter justifyBetween>
             <Row>
@@ -132,7 +137,7 @@ const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove }: Prop
             </Row>
             <AbsoluteWrapper right="52px" top="16px">
                 <Select
-                    defaultActive={'2'}
+                    defaultActive={`${weight}`}
                     itemFontSize="16px"
                     itemFontWeight="600"
                     values={manyBiasValues}
@@ -302,10 +307,15 @@ const ConfigurationItem: FC<ConfigurationItemProps> = ({ children, title, subtit
 
 export const Configuration: FC<CreateCampaignStepsProps> = () => {
     const [displayCountryPopup, setDisplayCountryPopup] = useState(true);
+    const [displayCreatorsPopup, setDisplayCreatorsPopup] = useState(true);
     const [uniqueHashtags, setUniqueHashtags] = useState<string[]>([]);
     const countriesData = useStore(countriesStores.locations);
     const languagesISO = useStore(languagesStores.languagesISO);
     const clientLanguages = useStore(languagesStores.clientLanguages);
+    const [creatorsIds, creators, creatorsData] = useStore(combinedCreatorsStories);
+    const creatorsNames = Array.from(new Set(creators))
+        .map(it => it.creatorName)
+        .filter((item): item is string => typeof item === 'string');
     const ageData = ageMock;
     const countries = countriesData ? countriesData : [''];
     //const hashtagsData = hashtagsMock;
@@ -319,13 +329,17 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
         forms.createCampaignForm.fields.boostValues
     );
     const { value: languagesValue, onChange: onChangeLanguages } = useField(forms.createCampaignForm.fields.languages);
+    const { value: creatorsValue, onChange: onChangeCreators } = useField(forms.createCampaignForm.fields.creators);
     const tagsState = useStore(tagsStories.tags);
 
     useEffect(() => {
         countriesEffects.getLocations();
         languagesEffects.getLanguages();
+        creatorsEffects.getCreators({
+            contentIds: creatorsIds
+        });
         setUniqueHashtags(Array.from(new Set(tagsState)));
-    }, [tagsState]);
+    }, [tagsState, creatorsIds]);
 
     // const getAgeRange = ({ ageFrom, ageTo }: WOM.CampaignAgePromotion) =>
     //     ageFrom && ageTo ? `${ageFrom}-${ageTo}` : ageFrom && !ageTo ? `${ageFrom}+` : 'Unknown';
@@ -382,7 +396,6 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
 
     const onRemoveHashtag = (hashtag: string | undefined) => {
         const newHashtags = hashtagsValue.filter(it => it.tag !== hashtag);
-
         onChangeHashtags(newHashtags);
 
         if (hashtag) setUniqueHashtags([hashtag, ...uniqueHashtags]);
@@ -428,6 +441,40 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
             const newLanguagesValue = [...languagesValue];
             newLanguagesValue.splice(languageIndex, 1, newLanguageItem);
             onChangeLanguages(newLanguagesValue);
+        }
+    };
+
+    const onChangeCreatorsSelect = (creatorName: string) => {
+        const item = creatorsData.find(it => it.creatorName === creatorName);
+
+        if (item) {
+            const id = typeof item.creatorId === 'string' ? item.creatorId : '';
+            onChangeCreators([...creatorsValue, { creatorId: id, weight: 1 }]);
+            creatorsEvents.removeCreator(creatorName);
+        }
+    };
+
+    const onRemoveCreator = (creatorName: string) => {
+        const item = creatorsData.find(it => it.creatorName === creatorName);
+
+        if (item) {
+            const index = creatorsValue.findIndex(it => it.creatorId === item.creatorId);
+            const newCreatorsValue = [...creatorsValue];
+            newCreatorsValue.splice(index, 1);
+            onChangeCreators(newCreatorsValue);
+            creatorsEvents.addCreator({ creatorName, creatorId: item.creatorId });
+        }
+    };
+
+    const onChangeCreatorsWeight = (creatorName: string, weight: string) => {
+        const item = creatorsData.find(it => it.creatorName === creatorName);
+
+        if (item) {
+            const index = creatorsValue.findIndex(it => it.creatorId === item.creatorId);
+            const newCreatorItem = { ...creatorsValue[index], weight: Number(weight) };
+            const newCreatorsValue = [...creatorsValue];
+            newCreatorsValue.splice(index, 1, newCreatorItem);
+            onChangeCreators(newCreatorsValue);
         }
     };
 
@@ -609,6 +656,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                         <LanguageAndCreatorsBiasSelect
                                             key={title}
                                             title={title}
+                                            weight={it.weight}
                                             onRemove={onRemoveLanguage}
                                             onSelectChange={onChangeLanguageWeight}
                                         />
@@ -618,6 +666,55 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                         </MarginWrapper>
                     </Column>
                 </ConfigurationItem>
+
+                <ConfigurationItem subtitle="" title="Creator">
+                    <Column minHeight="126px">
+                        <MarginWrapper marginBottom={biasBlockMargin} marginTop="27px">
+                            <SearchSelect
+                                defaultValue=""
+                                itemsList={[...creatorsNames].sort()}
+                                placeholder="Add Creator"
+                                onItemSelect={onChangeCreatorsSelect}
+                            />
+                        </MarginWrapper>
+                        <MarginWrapper marginBottom="22px">
+                            {creatorsValue.length !== 0 && (
+                                <MarginWrapper marginBottom="8px" marginLeft="212px">
+                                    <Row alignCenter width="56px">
+                                        <Span fontSize="13px" fontWeight={defaultFontWeight} lineHeight="17px">
+                                            Bias
+                                        </Span>
+                                    </Row>
+                                </MarginWrapper>
+                            )}
+                            {creatorsValue.slice(0, VISIBLE_CREATORS).map(({ creatorId, weight }) => {
+                                const item = creatorsData.find(it => it.creatorId === creatorId);
+
+                                const title = typeof item?.creatorName === 'string' ? item?.creatorName : '';
+
+                                return (
+                                    <LanguageAndCreatorsBiasSelect
+                                        key={title}
+                                        title={title}
+                                        weight={weight}
+                                        onRemove={onRemoveCreator}
+                                        onSelectChange={onChangeCreatorsWeight}
+                                    />
+                                );
+                            })}
+                            {creatorsValue.length > VISIBLE_CREATORS && (
+                                <ShowAllButton
+                                    onClick={() => {
+                                        setDisplayCreatorsPopup(false);
+                                    }}
+                                >
+                                    Show All
+                                </ShowAllButton>
+                            )}
+                        </MarginWrapper>
+                    </Column>
+                </ConfigurationItem>
+
                 {/* <ConfigurationItem
                 subtitle="Target people based on hashtags tagged to your selected videos"
                 title="Hashtags"
@@ -686,7 +783,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                         <HiddenScrollBar>
                             {countriesValue.length !== 0 &&
                                 countriesValue.map(it => (
-                                    <CountryItemWrapper key={it}>
+                                    <ModalItemWrapper key={it}>
                                         <Row alignCenter justifyBetween height="65px" marginLeft="38px" width="418px">
                                             <Span
                                                 fontSize={largeFontSize}
@@ -701,12 +798,90 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                                 }}
                                             />
                                         </Row>
-                                    </CountryItemWrapper>
+                                    </ModalItemWrapper>
                                 ))}
                         </HiddenScrollBar>
                     </CountryListWrapper>
                 </AllCountryModalWrapper>
             </GrayWrapper>
+            {displayCreatorsPopup ? null : (
+                <GrayWrapper>
+                    <AllCreatorsModalWrapper>
+                        <MarginWrapper marginBottom="16px" marginLeft="129px" marginRight="202px" marginTop="44px">
+                            <Row alignCenter justifyBetween width="302px">
+                                <Span
+                                    fontSize={largeFontSize}
+                                    fontWeight={defaultFontWeight}
+                                    lineHeight={largeLineHeight}
+                                >
+                                    Creators
+                                </Span>
+                                <Span
+                                    fontSize={largeFontSize}
+                                    fontWeight={defaultFontWeight}
+                                    lineHeight={largeLineHeight}
+                                >
+                                    Bias
+                                </Span>
+                                <AbsoluteWrapper right="40px" top="26px">
+                                    <ClearButton
+                                        onClick={() => {
+                                            setDisplayCreatorsPopup(true);
+                                        }}
+                                    />
+                                </AbsoluteWrapper>
+                            </Row>
+                        </MarginWrapper>
+                        <CreatorListWrapper>
+                            <HiddenScrollBar>
+                                {creatorsValue.map(({ creatorId, weight }) => {
+                                    const item = creatorsData.find(it => it.creatorId === creatorId);
+
+                                    const title = typeof item?.creatorName === 'string' ? item?.creatorName : '';
+
+                                    return (
+                                        <ModalItemWrapper key={title}>
+                                            <Row
+                                                alignCenter
+                                                justifyBetween
+                                                height="65px"
+                                                marginLeft="107px"
+                                                marginRight="80px"
+                                                width="436px"
+                                            >
+                                                <Span
+                                                    fontSize={largeFontSize}
+                                                    fontWeight={defaultFontWeight}
+                                                    lineHeight={largeLineHeight}
+                                                >
+                                                    {item?.creatorName}
+                                                </Span>
+                                                <AbsoluteWrapper right="176px" top="16px">
+                                                    <Select
+                                                        defaultActive={`${weight}`}
+                                                        itemFontSize="16px"
+                                                        itemFontWeight="600"
+                                                        values={manyBiasValues}
+                                                        width="110px"
+                                                        onChange={e => {
+                                                            onChangeCreatorsWeight(title, e);
+                                                        }}
+                                                    />
+                                                </AbsoluteWrapper>
+                                                <ClearInputButton
+                                                    onClick={() => {
+                                                        onRemoveCreator(title);
+                                                    }}
+                                                />
+                                            </Row>
+                                        </ModalItemWrapper>
+                                    );
+                                })}
+                            </HiddenScrollBar>
+                        </CreatorListWrapper>
+                    </AllCreatorsModalWrapper>
+                </GrayWrapper>
+            )}
         </ContentWrapper>
     );
 };

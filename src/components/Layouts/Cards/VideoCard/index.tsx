@@ -20,6 +20,7 @@ import { secondaryPadding, white } from 'constants/styles';
 import { useField } from 'effector-forms';
 import React, { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
+import { creatorsEvents } from 'stores/creators';
 import { forms } from 'stores/forms';
 import { modalEvents } from 'stores/modal';
 import { tagsEvents } from 'stores/tags';
@@ -36,7 +37,8 @@ export const VideoCard = ({
     streamDetails,
     //engagement,
     unselectable,
-    tags
+    tags,
+    remoteContentId
 }: Props) => {
     //const history = useHistory();
     //const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
@@ -66,10 +68,12 @@ export const VideoCard = ({
             if (active) {
                 onChange(contentIds.filter(items => items.womContentId !== womContentId));
             } else {
-                onChange(contentIds.concat([{ womContentId, uriPrimary, womQualityScore, products, tags }]));
-                if (tags) {
-                    tagsEvents.addTags(tags);
-                }
+                onChange(
+                    contentIds.concat([{ womContentId, uriPrimary, womQualityScore, products, tags, remoteContentId }])
+                );
+
+                if (tags) tagsEvents.addTags(tags);
+                if (womContentId) creatorsEvents.addCreatorId(womContentId);
             }
     };
     // TODO: setting up eslint for emoji

@@ -1,4 +1,5 @@
 export const VISIBLE_COUNTRIES = 10;
+export const VISIBLE_CREATORS = 2;
 export const configurationContentPadding = `16px 0px 0px`;
 export const checkboxBlockMargin = '4px';
 export const biasTitleMarginTop = '16px';

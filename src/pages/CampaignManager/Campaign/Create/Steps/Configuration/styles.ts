@@ -182,10 +182,21 @@ export const CountryBlockWrapper = styled(Row)`
 
 export const AllCountryModalWrapper = styled(FixedWrapper)`
     left: 50%;
-    top: 370px;
-    transform: translateX(-245px);
+    top: 50%;
+    transform: translateX(-245px) translateY(-203px);
     width: 491px;
     height: 407px;
+    background: ${white};
+    border-radius: 40px;
+    z-index: 10;
+`;
+
+export const AllCreatorsModalWrapper = styled(FixedWrapper)`
+    left: 50%;
+    top: 50%;
+    transform: translateX(-317px) translateY(-304px);
+    width: 633px;
+    height: 608px;
     background: ${white};
     border-radius: 40px;
     z-index: 10;
@@ -198,6 +209,13 @@ export const CountryListWrapper = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
+export const CreatorListWrapper = styled.div`
+    width: 633px;
+    height: 608px;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
 export const HiddenScrollBar = styled.div`
     width: 105%;
     height: 100%;
@@ -206,7 +224,8 @@ export const HiddenScrollBar = styled.div`
     box-sizing: content-box;
 `;
 
-export const CountryItemWrapper = styled.div`
+export const ModalItemWrapper = styled.div`
+    position: relative;
     width: 100%;
     height: 65px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);

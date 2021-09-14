@@ -85,6 +85,16 @@ export const createCampaignForm = createForm({
                 })
             ]
         },
+        creators: {
+            init: [] as WOM.CampaignCreatorPromotion[],
+            validateOn: ['change'],
+            rules: [
+                createRule<WOM.CampaignCreatorPromotion[]>({
+                    name: 'creators',
+                    schema: yupDefaultArray
+                })
+            ]
+        },
         override: {
             //any - because it is MOCK data
             init: { override: '2' } as { [key: string]: any },
@@ -195,7 +205,8 @@ sample({
             countries,
             hashtags,
             id,
-            languages
+            languages,
+            creators
         },
         _
     ) => ({
@@ -231,7 +242,7 @@ sample({
             countries: countries,
             tagPromotions: hashtags,
             languagePromotions: languages /* //TODO */,
-            creatorPromotions: [{ creatorId: '000000000000000000000000', weight: override.override }],
+            creatorPromotions: creators,
             agePromotions: age
         }
     })

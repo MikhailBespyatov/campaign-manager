@@ -41,3 +41,9 @@ export const getMerchantQuery = (data: WOM.CampaignMerchantQueryRequest) =>
         url: '/campaign/merchant/query',
         data
     });
+
+export const getCreators = (data: WOM.QueryCampaignCreatorsRequest) =>
+    axios<WOM.QueryCampaignCreatorsResponse>({
+        url: '/campaign/query-creators',
+        data
+    });
