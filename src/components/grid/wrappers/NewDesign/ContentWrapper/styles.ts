@@ -6,6 +6,7 @@ import {
     BorderRadius,
     FlexAlignment,
     MarginBottom,
+    MarginTop,
     MinSizes,
     Padding,
     Sizes
@@ -20,6 +21,7 @@ export interface ContentWrapperProps
         BorderRadius,
         Pick<BorderProperties, 'border'>,
         MarginBottom,
+        MarginTop,
         FlexAlignment {}
 
 export const ContentWrapper = styled.div<ContentWrapperProps>`
@@ -33,6 +35,7 @@ export const ContentWrapper = styled.div<ContentWrapperProps>`
     ${({ paddingBottom }) => paddingBottom && `padding-bottom: ${paddingBottom}`};
     ${({ padding }) => padding && `padding: ${padding}`};
     ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`};
+    ${({ marginTop }) => marginTop && `margin-top: ${marginTop}`};
     ${({ justify }) => justify && `justify-content: ${justify}`};
     ${({ align }) => align && `align-items: ${align}`};
     ${({ border }) => border && `border: ${border}`};

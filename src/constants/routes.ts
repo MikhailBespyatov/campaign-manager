@@ -101,7 +101,8 @@ export const dynamicRoutes = {
         channels: {
             index: `${channelsPrefix}`,
             create: `${channelsPrefix}/create_channels`,
-            edit: `${channelsEdit}/:channelId`
+            edit: `${channelsEdit}/:channelId`,
+            help: `${channelsPrefix}/help`
         },
         products: {
             index: `${productsPrefix}`,

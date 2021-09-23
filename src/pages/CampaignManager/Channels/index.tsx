@@ -7,6 +7,7 @@ import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
 import { Table } from 'components/common/tables/NewDesign/Table';
+import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -50,6 +51,7 @@ export const Channels = () => {
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.channels.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + channelsEdit + `/${id}`);
+    const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.channels.help);
 
     //Mock
     // const channels = channelsMock;
@@ -141,7 +143,7 @@ export const Channels = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section alignCenter noWrap marginBottom={primaryMargin}>
+            <Section alignCenter justifyBetween noWrap marginBottom={primaryMargin}>
                 {/* <Section noWrap> */}
                 {/*<FlexGrow marginRight="24px">*/}
                 {/*    <TagFilter*/}
@@ -155,6 +157,9 @@ export const Channels = () => {
                     <Search />
                 </MarginWrapper> */}
                 <AddButton onClick={onClickAddButton}>Add Channel</AddButton>
+                <Span pointer color="#3333FF" textDecoration="underline" onClick={onClickHowItWork}>
+                    How it works?
+                </Span>
                 {/* </Section> */}
             </Section>
             <Section>
