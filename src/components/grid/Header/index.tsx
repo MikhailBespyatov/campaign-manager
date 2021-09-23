@@ -1,4 +1,5 @@
 import arrowDown from 'assets/icons/arrow_down_grey.svg';
+import shopifyLogo from 'assets/img/shopify_logo.svg';
 import { CopyButton } from 'components/common/buttons/CopyButton';
 import { Version } from 'components/common/dividers/Version';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
@@ -31,7 +32,7 @@ export const Header = () => {
     const { logo } = useStore(themeStores.theme);
     const { publicId: organizationPublicId } = useStore(organizationsStores.item);
     const loading = useStore(organizationsEffects.getItemById.pending);
-
+    const { origin } = useStore(organizationsStores.item);
     const username = user && user?.username;
     // const imageUrl = user && user?.profile?.imageUrl;
 
@@ -49,6 +50,11 @@ export const Header = () => {
                 <Column alignEnd marginRight={padding}>
                     <LogOutPopover>
                         <Row alignCenter marginBottom="6px">
+                            {origin === 'shopify' ? (
+                                <MarginWrapper margin="6px 10px">
+                                    <CustomImg alt="Shopify account" height="20px" src={shopifyLogo} width="62px" />
+                                </MarginWrapper>
+                            ) : null}
                             <StyledSpan2 color={white}>{username ? username : noContentMessage}</StyledSpan2>
                             <MarginWrapper margin="6px 10px">
                                 <CustomImg

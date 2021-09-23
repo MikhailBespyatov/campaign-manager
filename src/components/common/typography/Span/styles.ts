@@ -24,4 +24,8 @@ export const Span = styled.span<SpanProps>`
     ${({ alignEnd }) => (alignEnd ? 'text-align: end' : '')};
     ${({ textDecoration }) => (textDecoration ? `text-decoration: ${textDecoration}` : ``)};
     ${({ uppercase }) => uppercase && `text-transform: uppercase`};
+
+    :hover {
+        ${({ pointer }) => pointer && `cursor: pointer`}
+    }
 `;
