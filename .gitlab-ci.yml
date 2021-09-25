@@ -10,6 +10,7 @@ cache:
 stages:
     - lint/build
     - build/deploy-stage-dev
+    - build/deploy-stage-prod
     - build/deploy-prod
 
 lint/build:
@@ -51,6 +52,30 @@ build/deploy-stage-dev:
         - echo "Deploying to DO (dev droplet) server"
         - sshpass -e ssh -p 22 -oStrictHostKeyChecking=no -tt "$SERVER" 'rm -rf "$TARGET_DIR_ON_DO_FOR_DEV"/static'
         - sshpass -e scp -P 22 -o stricthostkeychecking=no -r build/* "$SERVER":"$TARGET_DIR_ON_DO_FOR_DEV"
+        - echo "Deployed"
+    only:
+        - master
+
+build/deploy-stage-prod:
+    stage: build/deploy-stage-prod
+    variables:
+        SERVER: '$USER_DO@$HOST_DO'
+    before_script:
+        - apk update
+        - apk add --update --no-cache openssh sshpass
+        - apk add --no-cache python make g++
+        - export SSHPASS=$USER_PASS_DO
+    script:
+        - echo "Building dev version deploy package"
+        - yarn
+        # * react-scripts
+        - yarn build:prod
+        # * vite
+        #- yarn build:vite:stage
+        - echo "Build successful"
+        - echo "Deploying to DO server"
+        - sshpass -e ssh -p 22 -oStrictHostKeyChecking=no -tt "$SERVER" 'rm -rf "$TARGET_DIR_ON_DO_FOR_PROD"/static'
+        - sshpass -e scp -P 22 -o stricthostkeychecking=no -r build/* "$SERVER":"$TARGET_DIR_ON_DO_FOR_PROD"
         - echo "Deployed"
     only:
         - master
