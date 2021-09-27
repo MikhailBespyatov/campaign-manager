@@ -25,8 +25,10 @@ import { ProductThumbnail } from 'pages/CampaignManager/Products/styles';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
+import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
+import { getFullScriptString } from 'utils/usefulFunctions';
 import {
     channelParameters,
     channelsContentPadding,
@@ -46,16 +48,14 @@ export const Channels = () => {
     const isFirst = useStore(channelsStores.isFirst);
     const { limit, pageIndex } = useStore(channelsStores.values);
     const loading = useStore(channelsEffects.getItems.pending);
+    const { publicId: organizationPublicId } = useStore(organizationsStores.item);
     const contentWrapperPadding = items?.length ? channelsContentPadding : noChannelsContentPadding;
     const contentWrapperBackground = items?.length ? white : 'transparent';
+    const organizationPublicIdString = typeof organizationPublicId === 'string' ? organizationPublicId : '';
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.channels.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + channelsEdit + `/${id}`);
     const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.channels.help);
-
-    //Mock
-    // const channels = channelsMock;
-    const channelLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
 
     const dataTable: DataTable[] | undefined = items?.map(({ name, id = '', /*imageUrl,*/ isPrivate }) => ({
         cells: [
@@ -68,7 +68,7 @@ export const Channels = () => {
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
             <Row key={id}>
-                <CopyableField subject={channelLink} />
+                <CopyableField data={getFullScriptString(organizationPublicIdString, id)} subject={`channelId=${id}`} />
             </Row>,
             // <ToggleButton key={id} disabled value={isPrivate} />,
             <Checkbox key={id} disabled defaultValue={isPrivate} />,

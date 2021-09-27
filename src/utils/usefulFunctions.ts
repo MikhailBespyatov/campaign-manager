@@ -1,3 +1,4 @@
+import { defaultChannelScriptLink } from 'constants/defaults/channels';
 import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
@@ -221,3 +222,19 @@ export function getLanguageISO6391Code(language: string) {
     const languageCode = ISO6391.getCode(language);
     return languageCode ? [languageCode] : undefined;
 }
+
+//TODO: сохранить пробелы при копировании
+export const getFullScriptString = (organizationPublicId: string, channelId: string) => `
+<script src=${defaultChannelScriptLink}></script>
+<script>
+    document.addEventListener('wom-channel-viewer-init', function () {
+        window.womChannelViewer.init({
+            merchantId: '${organizationPublicId}',
+            selector: '#wom-channel-viewer-plugin',
+            channelId: '${channelId}',
+            isDev: false
+        });
+    });
+</script>
+<div id="wom-channel-viewer-plugin"></div>
+`;

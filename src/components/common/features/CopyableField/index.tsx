@@ -9,19 +9,23 @@ import { BackgroundColor, Color } from 'types';
 import { buttonColor, copyButtonIconDiameter } from './consntants';
 import { CopyableFieldSpan, CopyableFieldWrapper } from './styles';
 
-interface CopyableFieldProps extends BackgroundColor, Color, Partial<Omit<CopyButtonProps, 'customCopyIcon'>> {}
+interface CopyableFieldProps extends BackgroundColor, Color, Partial<Omit<CopyButtonProps, 'customCopyIcon'>> {
+    organizationPublicId?: string;
+}
 
 export const CopyableField = ({
     backgroundColor = blue4,
     color = blue,
     subject,
-    success = 'Copied successfully'
-}: CopyableFieldProps) => (
+    success = 'Copied successfully',
+    data
+}: // data
+CopyableFieldProps) => (
     <CopyableFieldWrapper backgroundColor={backgroundColor} padding="4px">
         <MarginWrapper margin="0 10px">
             <CopyableFieldSpan color={color}>{subject}</CopyableFieldSpan>
         </MarginWrapper>
-        <CustomCopyButton subject={subject} success={success}>
+        <CustomCopyButton data={data} subject={subject} success={success}>
             <ImgButton backgroundColor={buttonColor}>
                 <CustomImg height={copyButtonIconDiameter} src={copyButtonIcon} width={copyButtonIconDiameter} />
             </ImgButton>
