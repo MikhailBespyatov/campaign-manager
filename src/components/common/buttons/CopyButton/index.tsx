@@ -1,14 +1,15 @@
 import copyIcon from 'assets/img/copy_button_icon.svg';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import React, { FC } from 'react';
 import { message } from 'stores/alerts';
 import { Success } from 'types/data';
 import { triggerCopy } from 'utils/usefulFunctions';
 import { CopyButtonImg } from './styles';
-import { Row } from 'components/grid/wrappers/FlexWrapper';
 
 export interface CopyButtonProps extends Success {
     subject?: string | null;
     customCopyIcon?: string;
+    data?: string;
 }
 
 export const CopyButton = ({ subject, success, customCopyIcon }: CopyButtonProps) => {
@@ -22,9 +23,9 @@ export const CopyButton = ({ subject, success, customCopyIcon }: CopyButtonProps
     return <CopyButtonImg pointer src={customCopyIcon || copyIcon} onClick={triggerButtonCopy} />;
 };
 
-export const CustomCopyButton: FC<CopyButtonProps> = ({ subject, success, children }) => {
+export const CustomCopyButton: FC<CopyButtonProps> = ({ subject, success, children, data }) => {
     const triggerButtonCopy = () => {
-        triggerCopy(subject || '');
+        triggerCopy(data || subject || '');
         message.success(success);
     };
 

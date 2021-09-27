@@ -18,27 +18,24 @@ import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 import React, { FC, useEffect } from 'react';
 import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
 import { forms } from 'stores/forms';
-import { organizationsStores } from 'stores/organizations';
 import { CreateCampaignStepsProps } from 'types';
 import { NoVideoSpan, SelectedVideoWrapper } from './styles';
 
 export const Videos: FC<CreateCampaignStepsProps> = () => {
     const [{ items, totalRecords }, loading] = useStore(campaignContentStores.combinedItems);
     const { value: initialContentIds } = useField(forms.createCampaignForm.fields.videos);
-    const { mandatoryTags } = useStore(organizationsStores.item);
     const { validate } = useField(forms.createCampaignForm.fields.videos);
 
     useEffect(
         () => {
-            mandatoryTags &&
-                campaignContentEvents.updateValues({
-                    tagsAny: mandatoryTags,
-                    tagsAll: undefined,
-                    pageIndex: defaultPage
-                });
+            campaignContentEvents.updateValues({
+                tagsAny: undefined,
+                tagsAll: undefined,
+                pageIndex: defaultPage
+            });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [mandatoryTags]
+        []
     );
 
     const unselectedVideos = items?.filter(
