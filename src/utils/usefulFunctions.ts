@@ -1,5 +1,4 @@
-import { defaultChannelScriptLink } from 'constants/defaults/channels';
-import { numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
+import { defaultChannelScriptLink, numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
@@ -225,7 +224,7 @@ export function getLanguageISO6391Code(language: string) {
 
 //TODO: сохранить пробелы при копировании
 export const getFullScriptString = (organizationPublicId: string, channelId: string) => `
-<script src=${defaultChannelScriptLink}></script>
+<script src='${defaultChannelScriptLink}'></script>
 <script>
     document.addEventListener('wom-channel-viewer-init', function () {
         window.womChannelViewer.init({
