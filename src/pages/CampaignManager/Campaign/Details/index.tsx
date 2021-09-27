@@ -31,7 +31,8 @@ import {
     engagementName4,
     engagementName5,
     graphicOption,
-    growSpread
+    growSpread,
+    postfixsLegendWeek
 } from 'pages/CampaignManager/Campaign/Details/constants';
 import { Wrapper } from 'pages/CampaignManager/Campaign/Details/styles';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -122,19 +123,19 @@ export const Details = () => {
 
     const series =
         sets?.map((_, i) => ({
-            name: graphicName,
+            name: `${graphicName} ${postfixsLegendWeek[i]}`,
             type: 'line',
+            labelLine: {
+                show: true
+            },
             smooth: true,
-            stack: 'Buy',
             symbolSize: 10,
             label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                    color: primaryColor,
-                    fontSize: 12,
-                    lineHeight: 16
-                }
+                show: true,
+                position: 'top',
+                color: primaryColor,
+                fontSize: 12,
+                lineHeight: 16
             },
             itemStyle: {
                 color: colors[i],
@@ -165,7 +166,7 @@ export const Details = () => {
             },
             data: setsData?.length ? setsData[i] : []
         })) || [];
-
+    console.log(setsData);
     const xAxis = [
         {
             type: 'category',
@@ -176,7 +177,6 @@ export const Details = () => {
             data:
                 sets?.length && sets[0]?.items
                     ? [
-                          '',
                           ...sets[0].items.map(
                               i =>
                                   new Date(i?.dateUtc || '').getDate() +
