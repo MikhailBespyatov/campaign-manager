@@ -1,6 +1,7 @@
 // * react scripts
 export const baseURL = process.env.REACT_APP_API_URL as string;
 export const appVersion = process.env.REACT_APP_VERSION as string;
+export const defaultChannelScriptLink = process.env.REACT_APP_SCRIPT_URL as string;
 // *
 
 // * vite

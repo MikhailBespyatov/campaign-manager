@@ -5,5 +5,3 @@ export const defaultChannelsValues: WOM.QueryChannelsRequest = {
     limit: defaultLimit,
     returnQueryCount: true
 };
-
-export const defaultChannelScriptLink = 'https://wom.channel.viewer.incodewetrust.online/static/js/wom.js';
