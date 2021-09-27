@@ -47,6 +47,8 @@ export const engagementName3 = 'Saves';
 export const engagementName4 = 'Comments';
 export const engagementName5 = 'Shares';
 
+export const postfixsLegendWeek = ['current week', '1 week (before)', '2 weeks (before)', '3 weeks (before)'];
+
 // export const previewColor = '#FF6B00';
 // export const viewColor = '#FC4237';
 // export const engageColor = '#03A3D6';
@@ -65,6 +67,7 @@ export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 0.
 
 export const graphicOption = {
     backgroundColor: '#FBFBFB',
+    legend: { show: true },
     textStyle: { color: graphicTextColor },
     tooltip: {
         trigger: 'axis',
