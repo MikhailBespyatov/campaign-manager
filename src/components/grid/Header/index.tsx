@@ -13,14 +13,17 @@ import {
     popoverText
 } from 'components/grid/Header/constants';
 import { MerchantIdWrapper, StyledHeader, StyledSpan1, StyledSpan2 } from 'components/grid/Header/style';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
 import { InfoPopover } from 'components/modals/InfoPopover';
 import { LogOutPopover } from 'components/modals/LogOutPopover';
 import { siteName } from 'constants/global';
 import { noContentMessage } from 'constants/messages';
+import { routes } from 'constants/routes';
 import { grey10, padding, white } from 'constants/styles';
 import { useStore } from 'effector-react';
 import React from 'react';
+import { useHistory } from 'react-router';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 //import { userEvents, userStores } from 'stores/user';
@@ -33,9 +36,13 @@ export const Header = () => {
     const { publicId: organizationPublicId } = useStore(organizationsStores.item);
     const loading = useStore(organizationsEffects.getItemById.pending);
     const { origin } = useStore(organizationsStores.item);
+    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const username = user && user?.username;
+    const history = useHistory();
     // const imageUrl = user && user?.profile?.imageUrl;
-
+    const onHeaderLogo = () => {
+        history.push(globalPrefixUrl + routes.campaignManager.discover.index);
+    };
     //MOCK
     // const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
 
@@ -43,8 +50,12 @@ export const Header = () => {
         <StyledHeader>
             <Version />
             <Row alignCenter noWrap marginBottom="0" width="500px">
-                <CustomImg height={headerLogoHeight} src={logo} />
-                <StyledSpan1 color={white}>{siteName}</StyledSpan1>
+                <ClickableWrapper height="auto" width="auto" onClick={onHeaderLogo}>
+                    <CustomImg height={headerLogoHeight} src={logo} />
+                </ClickableWrapper>
+                <StyledSpan1 color={white} onClick={onHeaderLogo}>
+                    {siteName}
+                </StyledSpan1>
             </Row>
             <Row alignCenter marginBottom="0">
                 <Column alignEnd marginRight={padding}>

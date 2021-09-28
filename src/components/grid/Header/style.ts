@@ -30,6 +30,10 @@ export const StyledSpan1 = styled.span`
     font-size: ${styledSpanFontSize1};
     line-height: ${styledSpanLineHeight1};
     margin-left: ${styledSpanMarginLeft};
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const StyledSpan2 = styled.span`
