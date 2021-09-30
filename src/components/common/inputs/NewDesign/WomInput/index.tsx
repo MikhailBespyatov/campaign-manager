@@ -2,21 +2,18 @@
 import { WomCurrencyImg } from 'components/common/imageComponents/WomCurrencyImg';
 import { TextInput } from 'components/common/inputs/NewDesign/TextInput';
 import {
-    inputFieldHeight,
     inputFieldMarginRight,
     inputFieldWidth,
     logoZIndex,
     textBlocksMargin,
     textFontWeight
 } from 'components/common/inputs/NewDesign/WomInput/constants';
-import { Select } from 'components/common/inputs/Select';
 import { Span } from 'components/common/typography/Span';
 import { ErrorSpan } from 'components/FormComponents/inputs/TextInput';
 import { womImgHeight } from 'components/FormComponents/inputs/WomInput/constants';
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 //import { InfoPopover } from 'components/modals/InfoPopover';
 import { grey4 } from 'constants/styles';
 import { useStore } from 'effector-react';
@@ -70,13 +67,13 @@ export const WomInput = ({ label, errorText, value, onChange, isValid, isTouched
         }
     };
 
-    const [selectedCurrency, setSelectedCurrency] = useState<CurrencyType>('USD');
+    const [selectedCurrency /*setSelectedCurrency*/] = useState<CurrencyType>('USD');
     const { balance, rate, sign, name } = currencyData[selectedCurrency];
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value);
-    const onCurrencySelect = (currency: CurrencyType) => {
-        setSelectedCurrency(currency);
-    };
+    // const onCurrencySelect = (currency: CurrencyType) => {
+    //     setSelectedCurrency(currency);
+    // };
 
     useEffect(() => {
         walletEffects.getTokenInfo();
@@ -126,14 +123,6 @@ export const WomInput = ({ label, errorText, value, onChange, isValid, isTouched
 
             <Row marginRight={inputFieldMarginRight} marginTop={textBlocksMargin} width="50%">
                 <Section alignEnd justifyBetween noWrap maxWidth={inputFieldWidth}>
-                    <MarginWrapper /*marginBottom={textBlocksMargin}*/ marginRight={inputFieldMarginRight}>
-                        <Select
-                            height={inputFieldHeight}
-                            values={Object.keys(currencyData)}
-                            width="150px"
-                            onChange={onCurrencySelect as (active: string) => void}
-                        />
-                    </MarginWrapper>
                     <Column justifyBetween noWrap /*height={inputFieldHeight}*/>
                         <Section>
                             <Span fontWeight={textFontWeight} lineHeight="17px">

@@ -1,6 +1,6 @@
 import history from 'BrowserHistory';
 import { InviteRequestProps } from 'components/FormComponents/forms/InviteForm/types';
-import { Noop, themeStorageName, userStorageName } from 'constants/global';
+import { draftCampaign, Noop, themeStorageName, userStorageName } from 'constants/global';
 import {
     asyncErrorMessage,
     errorDataMessage,
@@ -225,6 +225,9 @@ const user = createStore<WOM.UserJwtTokenResponse>(counterLocalStorage.init(0))
     .on(logout, () => {
         //localStorage.removeItem(userStorageName);
         localStorage.removeItem(themeStorageName);
+        localStorage.removeItem(userStorageName);
+        localStorage.removeItem(draftCampaign);
+
         // themeEvents.setGlobalPublicPrefix(themeStores.globalPrefix.getState().prefix || '');
         return {};
     })

@@ -10,10 +10,10 @@ export const popoverArrowDiameter = '14px';
 export const popoverArrowHalfDiameter = '7px';
 
 export const calculatePopoverLeft = (childrenWidth: string, popoverWidth: string) =>
-    parseInt(childrenWidth) - parseInt(popoverWidth) + 10 + 'px';
+    parseInt(childrenWidth) - parseInt(popoverWidth) + 25 + 'px';
 
 export const calculatePopoverArrowLeft = (childrenWidth: string) =>
-    parseInt(childrenWidth) - parseInt(popoverArrowHalfDiameter) - 14 + 'px';
+    parseInt(childrenWidth) - parseInt(popoverArrowHalfDiameter) - 16 + 'px';
 
 export const calculatePopoverArrowTop = (childrenHeight: string) => parseInt(childrenHeight) + 'px';
 export const calculatePopoverTop = (childrenHeight: string) => parseInt(childrenHeight) + 6 + 'px';
