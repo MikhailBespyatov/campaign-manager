@@ -13,6 +13,7 @@ export const environment = baseURL === 'https://wom-dev.xc.io/' ? 'DEV' : 'PROD'
 
 export const userStorageName = 'campaignManagerUser';
 export const themeStorageName = 'campaignManagerTheme';
+export const draftCampaign = 'draftCampaign';
 
 export const siteName = 'Campaign Manager';
 

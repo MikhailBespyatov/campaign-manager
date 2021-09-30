@@ -7,6 +7,7 @@ import { onCurrencyChange, womImgHeight } from 'components/FormComponents/inputs
 import { RelativeWrapper } from 'components/FormComponents/inputs/WomInput/styles';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Noop, numbersAfterDotWom } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
 import { formGrey5, primaryMargin, primaryPadding } from 'constants/styles';
@@ -16,7 +17,6 @@ import React, { ChangeEvent, useState } from 'react';
 import { walletStores } from 'stores/wallet';
 import { Disabled, Label, Placeholder, Type } from 'types';
 import { currencyToText, removeLastNulls } from 'utils/usefulFunctions';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 
 interface Props extends Disabled, Placeholder, Type, Label {
     setStatus?: (status?: any) => void;
