@@ -22,6 +22,7 @@ import { Discover } from 'pages/CampaignManager/Discover';
 import { Products } from 'pages/CampaignManager/Products';
 import { CreateProduct } from 'pages/CampaignManager/Products/Create';
 import { EditProduct } from 'pages/CampaignManager/Products/Edit';
+import { HelpProduct } from 'pages/CampaignManager/Products/Help';
 import { Product } from 'pages/CampaignManager/Products/Product';
 import { Home } from 'pages/Home';
 import { SignIn } from 'pages/SignIn';
@@ -166,6 +167,11 @@ const App = () => {
                             exact
                             component={EditProduct}
                             path={globalPrefixUrl + routes.campaignManager.products.edit}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={HelpProduct}
+                            path={globalPrefixUrl + routes.campaignManager.products.help}
                         />
                         {/* <CampaignManagerRoute
                             exact

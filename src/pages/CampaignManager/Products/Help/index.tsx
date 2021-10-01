@@ -1,9 +1,8 @@
-import nonShopifyStep1Img from 'assets/img/non-shopify_step_1.png';
-import nonShopifyStep2Img1 from 'assets/img/non-shopify_step_2_1.png';
-import nonShopifyStep2Img2 from 'assets/img/non-shopify_step_2_2.png';
-import nonShopifyStep2Img3 from 'assets/img/non-shopify_step_2_3.png';
-import step2Img from 'assets/img/step_2.png';
-import step3Img from 'assets/img/step_3.png';
+import nonShopifyStep1Img from 'assets/img/non-shopify_product_step_1.svg';
+import nonShopifyStep2Img1 from 'assets/img/non-shopify_product_step_2_1.svg';
+import nonShopifyStep2Img2 from 'assets/img/non-shopify_product_step_2_2.svg';
+import nonShopifyStep2Img3 from 'assets/img/non-shopify_product_step_2_3.svg';
+import shopifyDescriptionImg from 'assets/img/shopify_product_description.png';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
@@ -21,14 +20,7 @@ import {
     contentWrapperMarginTop,
     contentWrapperPadding
 } from 'pages/CampaignManager/Channels/Help/constants';
-import {
-    Description,
-    NodeDescription,
-    StepDescription,
-    StepText,
-    Tag,
-    Title
-} from 'pages/CampaignManager/Channels/Help/styles';
+import { Description, StepDescription, StepText, Tag, Title } from 'pages/CampaignManager/Channels/Help/styles';
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { modalEvents } from 'stores/modal';
@@ -36,7 +28,7 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 
-export const HelpChannel = () => {
+export const HelpProduct = () => {
     const { user } = useStore(userStores.user);
     const { origin } = useStore(organizationsStores.item);
     const organizationId = typeof user?.organizationId === 'string' ? user.organizationId : '';
@@ -87,66 +79,25 @@ export const HelpChannel = () => {
                     borderRadius={contentWrapperBorderRadius}
                     marginBottom={contentWrapperMarginBottom}
                     marginTop={contentWrapperMarginTop}
-                    minHeight="1000px"
                     padding={contentWrapperPadding}
                 >
                     {origin === 'shopify' ? (
                         <>
-                            <Title>How to add channels in shopify</Title>
-                            <MarginWrapper marginBottom="70px">
-                                <Description>
-                                    The following instructions shows how to add a channel to a page in shopify so as to
-                                    allow you to show any products videos that you like.
-                                </Description>
-                            </MarginWrapper>
-
-                            <StepText>Step 1</StepText>
-                            <MarginWrapper marginBottom="50px">
-                                <StepDescription>Within Shopify, create a new page.</StepDescription>
-                            </MarginWrapper>
-
-                            <StepText>Step 2</StepText>
+                            <Title>Control Products in Shopify Admin Panel</Title>
                             <MarginWrapper marginBottom="24px">
-                                <StepDescription>Change the display to HTML using the {`<>`} button</StepDescription>
+                                <StepDescription>
+                                    You can control if you want to show the product viewer for a product in the shopify
+                                    admin panel
+                                </StepDescription>
                             </MarginWrapper>
+
                             <MarginWrapper marginBottom="50px">
-                                <CustomImg alt="Step 2 description" height="245px" src={step2Img} width="297px" />
+                                <CustomImg alt="Description" height="335px" src={shopifyDescriptionImg} width="671px" />
                             </MarginWrapper>
-
-                            <StepText>Step 3</StepText>
-                            <MarginWrapper marginBottom="58px">
-                                <StepDescription>Copy Embedded Link from the copy icon</StepDescription>
-                            </MarginWrapper>
-                            <MarginWrapper marginBottom="75px">
-                                <CustomImg alt="Step 3 description" height="88px" src={step3Img} width="423px" />
-                            </MarginWrapper>
-
-                            <StepText>Step 4</StepText>
-                            <MarginWrapper marginBottom="37px">
-                                <StepDescription>
-                                    Paste the code into the form and click the {`<>`} button again
-                                </StepDescription>
-                            </MarginWrapper>
-                            <MarginWrapper marginBottom="37px">
-                                <CustomImg alt="Step 2 description" height="245px" src={step2Img} width="297px" />
-                            </MarginWrapper>
-
-                            <StepText>Step 4</StepText>
-                            <MarginWrapper marginBottom="76px">
-                                <StepDescription>
-                                    Add any additional content you require, save the page and include the page in your
-                                    navigation
-                                </StepDescription>
-                            </MarginWrapper>
-
-                            <NodeDescription>
-                                NOTE :- You must create a campaign using the Campangin Manager to select content for the
-                                channels viewer.
-                            </NodeDescription>
                         </>
                     ) : (
                         <>
-                            <Title>How to add channels to your website</Title>
+                            <Title>How to add PRODUCT VIEWER to your website</Title>
                             <MarginWrapper marginBottom="54px">
                                 <Description>
                                     The following instructions shows how to add a channel to a page on your website so
@@ -201,7 +152,7 @@ export const HelpChannel = () => {
                             </MarginWrapper>
                             <MarginWrapper marginBottom="13px">
                                 <StepDescription>
-                                    A place where the channel viewer is going to be rendered
+                                    A place where the product viewer is going to be rendered
                                 </StepDescription>
                             </MarginWrapper>
                             <MarginWrapper marginBottom="38px">

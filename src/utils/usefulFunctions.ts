@@ -1,4 +1,10 @@
-import { defaultChannelScriptLink, numbersAfterComma, numbersAfterDotWom, userStorageName } from 'constants/global';
+import {
+    defaultChannelScriptLink,
+    defaultProductScriptLink,
+    numbersAfterComma,
+    numbersAfterDotWom,
+    userStorageName
+} from 'constants/global';
 import { commaInserterRegExp, removeRightSlashRegExp, slashInserterRegExp } from 'constants/regExp';
 import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
@@ -222,8 +228,7 @@ export function getLanguageISO6391Code(language: string) {
     return languageCode ? [languageCode] : undefined;
 }
 
-//TODO: сохранить пробелы при копировании
-export const getFullScriptString = (organizationPublicId: string, channelId: string) => `
+export const getFullScriptStringChannelViewer = (organizationPublicId: string, channelId: string) => `
 <script src='${defaultChannelScriptLink}'></script>
 <script>
     document.addEventListener('wom-channel-viewer-init', function () {
@@ -235,5 +240,20 @@ export const getFullScriptString = (organizationPublicId: string, channelId: str
         });
     });
 </script>
-<div id="wom-channel-viewer-plugin"></div>
+<div id="wom-channel-viewer-plugin" style="width: 500px; height: 700px;"></div>
+`;
+
+export const getFullScriptStringProductViewer = (organizationPublicId: string, productId: string) => `
+<script src="${defaultProductScriptLink}"></script>
+<script>
+    document.addEventListener('wom-viewer-init', function () {
+        window.wom.init({
+            organizationPublicId: '${organizationPublicId}',
+            selector: '#wom-viewer-plugin',
+            remoteProductId: '${productId}',
+            isDev: false
+        });
+    });
+</script>
+<div id="wom-viewer-plugin" style="width: 500px; height: 700px;"></div>
 `;

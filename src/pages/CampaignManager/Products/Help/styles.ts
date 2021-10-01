@@ -8,7 +8,7 @@ export const Title = styled(Span)`
     line-height: 32px;
     font-weight: 800;
     text-transform: uppercase;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
 
     color: ${titleColor};
 `;

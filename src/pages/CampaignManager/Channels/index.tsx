@@ -28,7 +28,7 @@ import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels
 import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
-import { getFullScriptString } from 'utils/usefulFunctions';
+import { getFullScriptStringChannelViewer } from 'utils/usefulFunctions';
 import {
     channelParameters,
     channelsContentPadding,
@@ -68,7 +68,10 @@ export const Channels = () => {
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
             <Row key={id}>
-                <CopyableField data={getFullScriptString(organizationPublicIdString, id)} subject={`channelId=${id}`} />
+                <CopyableField
+                    data={getFullScriptStringChannelViewer(organizationPublicIdString, id)}
+                    subject={`channelId=${id}`}
+                />
             </Row>,
             // <ToggleButton key={id} disabled value={isPrivate} />,
             <Checkbox key={id} disabled defaultValue={isPrivate} />,
@@ -157,8 +160,8 @@ export const Channels = () => {
                     <Search />
                 </MarginWrapper> */}
                 <AddButton onClick={onClickAddButton}>Add Channel</AddButton>
-                <Span pointer color="#3333FF" textDecoration="underline" onClick={onClickHowItWork}>
-                    How it works?
+                <Span pointer uppercase color="#3333FF" textDecoration="underline" onClick={onClickHowItWork}>
+                    How it works
                 </Span>
                 {/* </Section> */}
             </Section>

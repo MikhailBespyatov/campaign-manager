@@ -108,7 +108,8 @@ export const dynamicRoutes = {
             index: `${productsPrefix}`,
             product: `${product}/:productId`,
             create: `${productsPrefix}/create_products`,
-            edit: `${productsEdit}/:productId`
+            edit: `${productsEdit}/:productId`,
+            help: `${productsPrefix}/help`
         }
     }
 };
