@@ -6,6 +6,7 @@ import { AddButton } from 'components/common/buttons/NewDesign/AddButton';
 import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Table } from 'components/common/tables/NewDesign/Table';
+import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
@@ -37,6 +38,7 @@ import { organizationsStores } from 'stores/organizations';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { DataTable } from 'types';
+import { getFullScriptStringProductViewer } from 'utils/usefulFunctions';
 
 const { setIsFirstToFalse, /*invokeGetProducts,*/ updateValues } = productsEvents;
 const { getItems } = productsEffects;
@@ -51,55 +53,59 @@ export const Products = () => {
     const loading = useStore(productsEffects.getItems.pending);
     const contentWrapperPadding = items?.length ? productsContentPadding : noProductsContentPadding;
     const contentWrapperBackground = items?.length ? white : 'transparent';
+    const { publicId: organizationPublicId } = useStore(organizationsStores.item);
+    const organizationPublicIdString = typeof organizationPublicId === 'string' ? organizationPublicId : '';
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + productsEdit + `/${id}`);
     const onClickMoreButton = (id: string) => () => history.push(globalPrefixUrl + product + `/${id}`);
+    const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.products.help);
 
     //Mock
     // const products = productsMock;
     // const productViewerLink = 'https://something.yeay.com/?merchantid=22&channelid&channelid';
     // const products: typeof productsMock = [];
 
-    const dataTable: DataTable[] | undefined = items?.map(
-        ({ id = '', name, imageUrl /*, publicId = '', */ /*brand*/ }) => ({
-            cells: [
-                <Row key={id} alignCenter noWrap>
-                    <MarginWrapper marginLeft="8px" marginRight="17px">
-                        <ProductThumbnail>
-                            <CustomImg src={imageUrl || WOMLogo} />
-                        </ProductThumbnail>
-                    </MarginWrapper>
-                    <ChannelNameSpan>{name}</ChannelNameSpan>
-                </Row>,
-                // <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
-                // TODO change mock link to product viewer link
-                <Row key={id}>
-                    <CopyableField subject="https://something.yeay.com/?merchantid=22&channelid..." />
-                </Row>,
-                <Row key={id} alignCenter>
-                    <MarginWrapper marginRight="10px">
-                        <ImgButton
-                            backgroundColor="transparent"
-                            height={editButtonDiameter}
-                            width={editButtonDiameter}
-                            onClick={onClickEditButton(id)}
-                        >
-                            <CustomImg
-                                height={copyButtonIconDiameter}
-                                src={editButtonIcon}
-                                width={copyButtonIconDiameter}
-                            />
-                        </ImgButton>
-                    </MarginWrapper>
-                    <ImgButton backgroundColor="transparent" height="39px" width="36px" onClick={onClickMoreButton(id)}>
-                        <CustomImg height={moreButtonIconHeight} src={moreButtonIcon} width={moreButtonIconWidth} />
+    const dataTable: DataTable[] | undefined = items?.map(({ id = '', name, imageUrl, publicId = '' /*brand*/ }) => ({
+        cells: [
+            <Row key={id} alignCenter noWrap>
+                <MarginWrapper marginLeft="8px" marginRight="17px">
+                    <ProductThumbnail>
+                        <CustomImg src={imageUrl || WOMLogo} />
+                    </ProductThumbnail>
+                </MarginWrapper>
+                <ChannelNameSpan>{name}</ChannelNameSpan>
+            </Row>,
+            // <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
+            // TODO change mock link to product viewer link
+            <Row key={id}>
+                <CopyableField
+                    data={getFullScriptStringProductViewer(organizationPublicIdString, id)}
+                    subject={`publicId=${publicId}`}
+                />
+            </Row>,
+            <Row key={id} alignCenter>
+                <MarginWrapper marginRight="10px">
+                    <ImgButton
+                        backgroundColor="transparent"
+                        height={editButtonDiameter}
+                        width={editButtonDiameter}
+                        onClick={onClickEditButton(id)}
+                    >
+                        <CustomImg
+                            height={copyButtonIconDiameter}
+                            src={editButtonIcon}
+                            width={copyButtonIconDiameter}
+                        />
                     </ImgButton>
-                </Row>
-            ],
-            alignment: ['start', ...new Array(2).fill('center')]
-        })
-    );
+                </MarginWrapper>
+                <ImgButton backgroundColor="transparent" height="39px" width="36px" onClick={onClickMoreButton(id)}>
+                    <CustomImg height={moreButtonIconHeight} src={moreButtonIcon} width={moreButtonIconWidth} />
+                </ImgButton>
+            </Row>
+        ],
+        alignment: ['start', ...new Array(2).fill('center')]
+    }));
     //
     // const dataTable: DataTable[] = products.map(({ productName, channelName, productViewerLink }) => ({
     //     cells: [
@@ -158,22 +164,11 @@ export const Products = () => {
 
     return (
         <CampaignManagerLayout>
-            <Section alignCenter noWrap marginBottom={primaryMargin}>
-                {/*<FlexGrow marginRight={filtersMarginRight}>*/}
-                {/*    <TagFilter*/}
-                {/*        defaultChecked*/}
-                {/*        tagsValues={['test']}*/}
-                {/*        onChange={(checked: boolean, values: string[]) => {}}*/}
-                {/*    />*/}
-                {/*</FlexGrow>*/}
-                {/*<Row marginRight={filtersMarginRight}>*/}
-                {/*    <Select height="57px" values={productsSelectorMock} width="190px" />*/}
-                {/*</Row>*/}
-
-                {/* <MarginWrapper marginRight="10px">
-                    <Search />
-                    </MarginWrapper> */}
+            <Section alignCenter justifyBetween noWrap marginBottom={primaryMargin}>
                 <AddButton onClick={onClickAddButton}>Add Product</AddButton>
+                <Span pointer uppercase color="#3333FF" textDecoration="underline" onClick={onClickHowItWork}>
+                    How it works
+                </Span>
             </Section>
             <Section>
                 <ContentWrapper backgroundColor={contentWrapperBackground} padding={contentWrapperPadding} width="100%">
