@@ -10,7 +10,8 @@ import {
 } from 'components/common/inputs/SearchSelect/styles';
 import { Loader } from 'components/dynamic/Loader';
 import { Column, Section } from 'components/grid/wrappers/FlexWrapper';
-import React, { ChangeEvent, useState } from 'react';
+import { useCloseClick } from 'hooks/closeClick';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { DefaultValueString, Loading, Placeholder } from 'types';
 
 export interface SearchSelectProps extends Placeholder, DefaultValueString, Loading {
@@ -27,11 +28,20 @@ export const SearchSelect = ({
 }: SearchSelectProps) => {
     const [value, setValue] = useState<string>(defaultValue);
     const [searchResultList, setSearchResultList] = useState<string[]>([]);
-    const isExpanded = !!searchResultList.length && !!value;
+    const [focusState, setFocusState] = useState<boolean>(false);
+    const isExpanded = !!searchResultList.length && !!focusState;
+    const inputRef = useRef(null);
+
+    useCloseClick(inputRef, () => setFocusState(false));
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setValue(value);
+        setSearchResultList(filterItems(value, itemsList));
+    };
+
+    const onFocus = () => {
+        setFocusState(true);
         setSearchResultList(filterItems(value, itemsList));
     };
 
@@ -42,12 +52,19 @@ export const SearchSelect = ({
     const onItemClick = (value: string) => {
         setValue('');
         onItemSelect(value);
+        setFocusState(false);
     };
 
     return (
         <SearchSelectWrapper isExpanded={isExpanded}>
             <SearchInputWrapper isExpanded={isExpanded}>
-                <SearchInput placeholder={placeholder} value={value} onChange={onInputChange} />
+                <SearchInput
+                    ref={inputRef}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onInputChange}
+                    onFocus={onFocus}
+                />
                 <IconAbsoluteWrapper right="0px" top="0px">
                     {value && <ClearInputButton onClick={onClearSearchClick} />}
                 </IconAbsoluteWrapper>
