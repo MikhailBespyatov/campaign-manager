@@ -19,6 +19,7 @@ import { CreateChannel } from 'pages/CampaignManager/Channels/Create';
 import { EditChannel } from 'pages/CampaignManager/Channels/Edit';
 import { HelpChannel } from 'pages/CampaignManager/Channels/Help';
 import { Discover } from 'pages/CampaignManager/Discover';
+import { Financials } from 'pages/CampaignManager/Financials';
 import { Products } from 'pages/CampaignManager/Products';
 import { CreateProduct } from 'pages/CampaignManager/Products/Create';
 import { EditProduct } from 'pages/CampaignManager/Products/Edit';
@@ -202,6 +203,11 @@ const App = () => {
                             exact
                             component={HelpChannel}
                             path={globalPrefixUrl + routes.campaignManager.channels.help}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={Financials}
+                            path={globalPrefixUrl + routes.campaignManager.financials.index}
                         />
                         {/* <CampaignManagerRoute
                             exact

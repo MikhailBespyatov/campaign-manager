@@ -1,3 +1,4 @@
+import { codeDictionary } from 'constants/dictionarys';
 import {
     defaultChannelScriptLink,
     defaultProductScriptLink,
@@ -10,6 +11,7 @@ import { accessRoles, accessValues } from 'constants/roles';
 import { publicPrefix, signInPrefix } from 'constants/routes';
 import format from 'date-fns/format';
 import ISO6391 from 'iso-639-1';
+import moment from 'moment';
 import { AuthUserResponse, SortType, StatusType } from 'types';
 
 // Triggered copy to clipboard
@@ -227,6 +229,36 @@ export function getLanguageISO6391Code(language: string) {
     const languageCode = ISO6391.getCode(language);
     return languageCode ? [languageCode] : undefined;
 }
+
+export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+export const convert = (string: string) => string.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
+
+export const dateToShortString = (date: string) =>
+    new Date(date || '').getDate() +
+    ' ' +
+    new Date(date || '').toLocaleDateString('en-US', {
+        month: 'short'
+    });
+
+export const dateToLongString = (date: string) =>
+    new Date(date || '').getDate() +
+    ' ' +
+    new Date(date || '').toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+    });
+
+export const addDaysToDate = (date: string, days: number) =>
+    moment(new Date(date || ''))
+        .add(days, 'day')
+        .toISOString();
+
+export const codeToString = (code: number | undefined) => {
+    const value = Object.entries(codeDictionary).find(it => it.includes(code));
+
+    return value ? convert(capitalizeFirstLetter(value[0])) : '';
+};
 
 export const getFullScriptStringChannelViewer = (organizationPublicId: string, channelId: string) => `
 <script src='${defaultChannelScriptLink}'></script>

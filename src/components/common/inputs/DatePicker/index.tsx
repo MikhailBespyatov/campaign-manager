@@ -25,7 +25,7 @@ import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { Noop } from 'constants/global';
 import { requiredFieldMessage } from 'constants/messages';
-import { primaryMargin } from 'constants/styles';
+import { grey4, primaryMargin } from 'constants/styles';
 import 'date-fns';
 import { useField } from 'formik';
 import {
@@ -48,6 +48,12 @@ interface Props extends Sizes, MarginBottom, Pick<MinSizes, 'minWidth'>, Pick<Ma
     onChange?: (dateFrom: string, dateTo: string) => void;
     titleType?: 'inner' | 'outer';
     title?: [string, string];
+    borderRadius?: string;
+    backgroundColor?: string;
+    titleFontSize?: string;
+    titleFontWeight?: string;
+    titleLineHeight?: string;
+    hovered?: boolean;
 }
 
 export const DatePickerBetween = ({
@@ -62,7 +68,13 @@ export const DatePickerBetween = ({
     marginBottom,
     onChange = Noop,
     titleType = 'inner',
-    title = ['Date From', 'Date to']
+    title = ['Date From', 'Date to'],
+    borderRadius,
+    backgroundColor,
+    titleFontSize,
+    titleFontWeight,
+    titleLineHeight,
+    hovered
 }: Props) => {
     const [selectedDateFrom, setSelectedDateFrom] = useState<dateType>(new Date(defaultDateFrom));
     const [selectedDateTo, setSelectedDateTo] = useState<dateType>(new Date(defaultDateTo));
@@ -135,7 +147,10 @@ export const DatePickerBetween = ({
                     </MarginWrapper>
                 )}
                 <BorderBlock
+                    backgroundColor={backgroundColor}
+                    borderRadius={borderRadius}
                     height={height}
+                    hovered={hovered}
                     maxWidth={maxWidth}
                     minWidth={minWidth}
                     paddingBottom={borderBlockVerticalPadding}
@@ -147,7 +162,12 @@ export const DatePickerBetween = ({
                             {isInnerType && (
                                 <Row alignCenter>
                                     <MarginWrapper marginBottom="3px" marginRight="10px">
-                                        <Span fontSize="12px" fontWeight="400" lineHeight="15px">
+                                        <Span
+                                            color={grey4}
+                                            fontSize={titleFontSize || '12px'}
+                                            fontWeight={titleFontWeight || '400'}
+                                            lineHeight={titleLineHeight || '15px'}
+                                        >
                                             {titleFrom}
                                         </Span>
                                     </MarginWrapper>
@@ -197,11 +217,21 @@ export const DatePickerBetween = ({
             <Column width="50%">
                 {!isInnerType && (
                     <MarginWrapper marginBottom={titleMarginBottom}>
-                        <TitleSpan>{titleTo}</TitleSpan>
+                        <Span
+                            color={grey4}
+                            fontSize={titleFontSize || '12px'}
+                            fontWeight={titleFontWeight || '400'}
+                            lineHeight={titleLineHeight || '15px'}
+                        >
+                            {titleTo}
+                        </Span>
                     </MarginWrapper>
                 )}
                 <BorderBlock
+                    backgroundColor={backgroundColor}
+                    borderRadius={borderRadius}
                     height={height}
+                    hovered={hovered}
                     maxWidth={maxWidth}
                     minWidth={minWidth}
                     paddingBottom={borderBlockVerticalPadding}
@@ -234,7 +264,7 @@ export const DatePickerBetween = ({
                                 // onChange={handleDateChangeTo1}
                             />
                         </Column>
-                        <Column>
+                        <Row>
                             <DataPickerWrapper>
                                 <FakeBetweenDataPicker>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -254,7 +284,7 @@ export const DatePickerBetween = ({
                                 <CustomImg pointer src={calendarImg} />
                                 {/* </AbsoluteWrapper> */}
                             </DataPickerWrapper>
-                        </Column>
+                        </Row>
                     </Section>
                 </BorderBlock>
             </Column>

@@ -1,6 +1,6 @@
 import { wrapperBorder } from 'components/common/blocks/BorderBlock/constants';
-import { primaryMargin, primaryPadding, tertiaryBorderRadius } from 'constants/styles';
-import styled from 'styled-components';
+import { blue, primaryMargin, primaryPadding, tertiaryBorderRadius } from 'constants/styles';
+import styled, { css } from 'styled-components';
 import {
     BackgroundColor,
     MarginBottom,
@@ -22,7 +22,10 @@ interface WrapperProps
         MarginRight,
         MarginBottom,
         RemoveBorderRadius,
-        BackgroundColor {}
+        BackgroundColor {
+    borderRadius?: string;
+    hovered?: boolean;
+}
 
 export const Wrapper = styled.div<WrapperProps>`
     display: flex;
@@ -41,4 +44,15 @@ export const Wrapper = styled.div<WrapperProps>`
     ${({ marginRight }) => marginRight && `margin-right: ${marginRight};margin-left: ${marginRight};`};
     ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};margin-top: ${marginBottom};`};
     ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`};
+
+    ${({ hovered }) =>
+        hovered &&
+        css`
+            &:hover {
+                border-color: ${blue};
+                transition: border-color 0.3s;
+            }
+        `}
+
+    ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}`}
 `;

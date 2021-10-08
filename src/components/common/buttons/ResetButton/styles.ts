@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import { blue, buttonDisabledMixin, disableDefaultButtonStyleMixin } from 'constants/styles';
+import styled from 'styled-components';
 
 export const ResetButton = styled.button`
     ${disableDefaultButtonStyleMixin};
     font-style: normal;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 12px;
     line-height: 16px;
     color: ${blue};

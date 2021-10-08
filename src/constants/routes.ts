@@ -14,6 +14,7 @@ export const campaignPrefix = campaignManagerPrefix + '/campaign';
 const discoverPrefix = campaignManagerPrefix + '/discover';
 const channelsPrefix = campaignManagerPrefix + '/channels';
 const productsPrefix = campaignManagerPrefix + '/products';
+const financialsPrefix = campaignManagerPrefix + '/financials';
 
 export const channelsEdit = channelsPrefix + '/edit_channels';
 export const productsEdit = productsPrefix + '/edit_products';
@@ -110,6 +111,9 @@ export const dynamicRoutes = {
             create: `${productsPrefix}/create_products`,
             edit: `${productsEdit}/:productId`,
             help: `${productsPrefix}/help`
+        },
+        financials: {
+            index: `${financialsPrefix}`
         }
     }
 };
@@ -160,5 +164,9 @@ export const routesArray = [
         path: routes.userAdmin.index,
         name: 'Users',
         proxy: [1]
+    },
+    {
+        path: routes.campaignManager.financials.index,
+        name: 'Financials'
     }
 ];

@@ -105,8 +105,28 @@ const statistics = createStore<WOM.OrganizationStatisticsResponse>({}).on(
     (_, newState) => newState
 );
 
+const getTurnoverStatisticsById = createEffect({
+    handler: async (value: WOM.TurnoverStatisticsQuerySetRequest) => {
+        try {
+            updateLoading();
+            const data = await API.organizations.getTurnoverStatisticsById(value);
+            updateLoading();
+
+            return data;
+        } catch {
+            updateLoading();
+            return {};
+        }
+    }
+});
+
+const turnoverStatistics = createStore<WOM.TurnoverStatisticsQueryResponse>({}).on(
+    getTurnoverStatisticsById.doneData,
+    (_, newState) => newState
+);
+
 const organizationsEvents = { setOrganizationId };
-const organizationsEffects = { getStatisticsById, getItemById, createOrganization };
-const organizationsStores = { statistics, loading, item, organizationId };
+const organizationsEffects = { getStatisticsById, getItemById, createOrganization, getTurnoverStatisticsById };
+const organizationsStores = { statistics, loading, item, organizationId, turnoverStatistics };
 
 export { organizationsEffects, organizationsStores, organizationsEvents };

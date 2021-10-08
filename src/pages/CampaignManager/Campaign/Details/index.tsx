@@ -166,7 +166,7 @@ export const Details = () => {
             },
             data: setsData?.length ? setsData[i] : []
         })) || [];
-    console.log(setsData);
+
     const xAxis = [
         {
             type: 'category',

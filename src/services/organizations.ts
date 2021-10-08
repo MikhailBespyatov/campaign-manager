@@ -35,6 +35,12 @@ export const manageRoles = (data: ManageRolesValues) =>
         }
     });
 
+export const getTurnoverStatisticsById = (data: WOM.TurnoverStatisticsQuerySetRequest) =>
+    axios<WOM.TurnoverStatisticsQueryResponse>({
+        url: 'organization/query-turnover-statistics',
+        data
+    });
+
 // export const getUsersByOrganizationId = (data: WOM.OrganizationQueryUsersRequest) =>
 //     axios<WOM.OrganizationQueryUsersResponse>({
 //         url: '/organization/user/query',
