@@ -32,6 +32,7 @@ export const grey16 = '#787878';
 export const grey17 = '#4e4e4e';
 export const grey18 = '#8383A0';
 export const grey19 = '#dfdfe9';
+export const grey20 = '#FBFBFB';
 export const disabledGrey = '#F0F0F0';
 export const hoverGrey = '#f5f5f5';
 
@@ -45,6 +46,7 @@ export const blue7 = '#5F6FB4';
 export const blue8 = '#6a75a3';
 export const blue9 = '#576397';
 export const blue10 = '#222DFF';
+export const blue11 = '#F7F7FF';
 
 export const lightPink = '#ffeeee';
 
@@ -52,6 +54,7 @@ export const backgroundColor = secondaryColor; /* '#121217';*/
 export const popoverBackground = '#F4F5FD';
 
 export const red = '#FC4237';
+export const red2 = '#FE2323';
 
 export const infoColor = 'rgb(25, 118, 210)';
 export const successColor = '#4CD964'; //'rgb(67, 160, 71)';

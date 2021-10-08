@@ -21,6 +21,9 @@ interface Props
         MarginRight,
         MarginBottom,
         RemoveBorderRadius,
-        BackgroundColor {}
+        BackgroundColor {
+    borderRadius?: string;
+    hovered?: boolean;
+}
 
 export const BorderBlock: FC<Props> = ({ children, ...props }) => <Wrapper {...props}>{children}</Wrapper>;
