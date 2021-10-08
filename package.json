@@ -1,6 +1,6 @@
 {
-  "name": "yeay-cm",
-  "version": "0.1.0",
+  "name": "wom-cm",
+  "version": "2.3.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "1.x",
