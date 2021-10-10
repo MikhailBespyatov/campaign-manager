@@ -1,7 +1,7 @@
 import defaultImage from 'assets/img/default_image.svg';
 import group1img from 'assets/img/group_1.svg';
 import group4img from 'assets/img/group_4.svg';
-import playImg from 'assets/img/play.svg';
+import { ReactComponent as PlayImg } from 'assets/img/play_video_icon.svg';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { ProductSpan, RatingSpan } from 'components/common/typography/special';
@@ -23,6 +23,7 @@ import { primaryButtonDiameter, primaryPadding, secondaryPadding, white } from '
 import React, { useState } from 'react';
 import { MarginRightBottom, Sizes } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
+import { HoveredButton } from './styles';
 
 interface Props extends MarginRightBottom, Sizes, WOM.ContentItemResponse {
     // uriPrimary?: string;
@@ -45,7 +46,6 @@ export const CreateCampaignCard = ({
 }: Props) => {
     const hlsUrl = streamDetails?.hlsUrl;
     const productsItem = products && products.length && products[0] !== 0 ? products[0] : {};
-
     const [startLoading, setStartLoading] = useState(false);
 
     const goLoading = () => setStartLoading(true);
@@ -63,13 +63,13 @@ export const CreateCampaignCard = ({
                 ) : (
                     <>
                         <AbsoluteWrapper left={playImgLeft} top={playImgTop}>
-                            <CustomImg
-                                pointer
+                            <HoveredButton
                                 height={primaryButtonDiameter}
-                                src={playImg}
                                 width={primaryButtonDiameter}
                                 onClick={goLoading}
-                            />
+                            >
+                                <PlayImg />
+                            </HoveredButton>
                         </AbsoluteWrapper>
                         <AbsoluteImg pointer src={uriPrimary ? uriPrimary : defaultImage} />
                     </>

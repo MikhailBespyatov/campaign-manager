@@ -1,4 +1,4 @@
-import { disableDefaultButtonStyleMixin } from 'constants/styles';
+import { black, disableDefaultButtonStyleMixin } from 'constants/styles';
 import styled from 'styled-components';
 
 export const ViewStatsButton = styled.button`
@@ -13,4 +13,9 @@ export const ViewStatsButton = styled.button`
     padding: 9px 21px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 24px;
+
+    &:hover {
+        background-color: ${black};
+        transition: background-color 0.3s;
+    }
 `;

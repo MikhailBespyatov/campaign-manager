@@ -1,12 +1,5 @@
-import {
-    inactiveColor,
-    spanFontSize,
-    spanFontWeight,
-    spanLineHeight,
-    subPageTitleMarginTop
-} from 'components/common/dividers/BarItem/constants';
-import { StyledItem } from 'components/common/dividers/BarItem/styles';
-import { Span } from 'components/common/typography/Span';
+import { inactiveColor, subPageTitleMarginTop } from 'components/common/dividers/BarItem/constants';
+import { StyledBarText, StyledItem } from 'components/common/dividers/BarItem/styles';
 import { SubPageSpan } from 'components/common/typography/special';
 import { subPageSpanHeight } from 'components/common/typography/special/constants';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
@@ -31,15 +24,12 @@ export const BarItem: FC<Props> = ({ path, onClick, active, children, namePage }
         <StyledItem key={path} onClick={() => onClick(path)}>
             <RelativeWrapper>
                 <Column alignCenter>
-                    <Span
+                    <StyledBarText
                         color={active && !namePage ? primaryColor : inactiveColor}
-                        fontSize={spanFontSize}
-                        fontWeight={spanFontWeight}
-                        lineHeight={spanLineHeight}
                         // opacity={1}
                     >
                         {children}
-                    </Span>
+                    </StyledBarText>
                     {namePage && (
                         <AbsoluteWrapper bottom={subPageTitleMarginTop} left="0" width="100%">
                             <Row justifyCenter height={subPageSpanHeight} marginBottom="5px">

@@ -1,6 +1,6 @@
 import DateFnsUtils from '@date-io/date-fns';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import calendarImg from 'assets/img/calendar.svg';
+import calendarImg, { ReactComponent as CalendarImg } from 'assets/img/calendar.svg';
 import { BorderBlock } from 'components/common/blocks/BorderBlock';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import {
@@ -10,6 +10,7 @@ import {
     titleMarginBottom
 } from 'components/common/inputs/DatePicker/constants';
 import {
+    CalendarButton,
     DataPickerWrapper,
     FakeBetweenDataPicker,
     FakeDataPicker,
@@ -208,7 +209,9 @@ export const DatePickerBetween = ({
                                 </FakeBetweenDataPicker>
                             </DataPickerWrapper>
                             {/* <AbsoluteWrapper right={imagePositionRight} top={imagePositionTop}> */}
-                            <CustomImg pointer src={calendarImg} width="25px" />
+                            <CalendarButton>
+                                <CalendarImg />
+                            </CalendarButton>
                             {/* </AbsoluteWrapper> */}
                         </Column>
                     </Section>
@@ -281,7 +284,9 @@ export const DatePickerBetween = ({
                                     </MuiPickersUtilsProvider>
                                 </FakeBetweenDataPicker>
                                 {/* <AbsoluteWrapper right={imagePositionRight} top={imagePositionTop}> */}
-                                <CustomImg pointer src={calendarImg} />
+                                <CalendarButton>
+                                    <CalendarImg />
+                                </CalendarButton>
                                 {/* </AbsoluteWrapper> */}
                             </DataPickerWrapper>
                         </Row>

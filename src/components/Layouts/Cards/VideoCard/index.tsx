@@ -1,15 +1,14 @@
-import addIdImg from 'assets/img/add_video.svg';
+import { ReactComponent as AddIdImg } from 'assets/img/add_video.svg';
 import defaultImage from 'assets/img/default_image.svg';
-import playVideoImg from 'assets/img/play_video_icon.svg';
+import { ReactComponent as PauseVideoImg } from 'assets/img/pause.svg';
+import { ReactComponent as PlayVideoImg } from 'assets/img/play_video_icon.svg';
 import { ViewStatsButton } from 'components/common/buttons/ViewStatsButton';
 import { AbsoluteImg } from 'components/common/imageComponents/AbsoluteImg';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
 import { AbsoluteVideo } from 'components/common/Video';
 import { Card, Description, StatsCell } from 'components/grid/Card';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
-import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import {
     addIdImgDiameter,
     qualityScoreFontSize,
@@ -26,6 +25,7 @@ import { modalEvents } from 'stores/modal';
 import { tagsEvents } from 'stores/tags';
 import { Unselectable } from 'types';
 import { roundScore } from 'utils/usefulFunctions';
+import { HoveredAddButton, HoveredPlayButton } from './styles';
 
 interface Props extends WOM.ContentItemResponse, Unselectable {}
 
@@ -49,6 +49,7 @@ export const VideoCard = ({
     const isProductPage = location.pathname.includes('products/product');
     const buttonsPositionLeft = isDiscoverPage || isProductPage ? '128px' : '72px';
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [playState, setPlayState] = useState(true);
 
     const ID = useMemo(() => (womContentId ? womContentId : ''), [womContentId]);
     // const productsItem = useMemo(() => (products && products.length && products[0] !== 0 ? products[0] : {}), [
@@ -60,7 +61,10 @@ export const VideoCard = ({
     );
 
     const openCardModal = () => modalEvents.openCardModal({ id: ID });
-    const onVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
+    const onVideoPlay = () => {
+        setPlayState(!playState);
+        setIsVideoPlaying(!isVideoPlaying);
+    };
     // const handleDetail = () => history.push(globalPrefixUrl + routes.campaignManager.discover.indexDetails + ID);
     // const handleDetail = () => modalEvents.openCardModal({ id: ID });
     const addIdHandler = () => {
@@ -76,6 +80,7 @@ export const VideoCard = ({
                 if (womContentId) creatorsEvents.addCreatorId(womContentId);
             }
     };
+
     // TODO: setting up eslint for emoji
     return (
         <Card active={active} unselectableStyled={unselectable}>
@@ -83,24 +88,17 @@ export const VideoCard = ({
                 {!unselectable && (
                     <AbsoluteWrapper left={buttonsPositionLeft} top="168px" zIndex="5">
                         <Row>
-                            <CustomImg
-                                pointer
-                                height={addIdImgDiameter}
-                                src={playVideoImg}
-                                width={addIdImgDiameter}
-                                onClick={onVideoPlay}
-                            />
-
+                            <HoveredPlayButton height={addIdImgDiameter} width={addIdImgDiameter} onClick={onVideoPlay}>
+                                {playState ? <PlayVideoImg /> : <PauseVideoImg />}
+                            </HoveredPlayButton>
                             {!isDiscoverPage && !isProductPage && (
-                                <MarginWrapper marginLeft="34px">
-                                    <CustomImg
-                                        pointer
-                                        height={addIdImgDiameter}
-                                        src={addIdImg}
-                                        width={addIdImgDiameter}
-                                        onClick={addIdHandler}
-                                    />
-                                </MarginWrapper>
+                                <HoveredAddButton
+                                    height={addIdImgDiameter}
+                                    width={addIdImgDiameter}
+                                    onClick={addIdHandler}
+                                >
+                                    <AddIdImg />
+                                </HoveredAddButton>
                             )}
                         </Row>
                     </AbsoluteWrapper>

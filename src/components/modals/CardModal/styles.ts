@@ -1,3 +1,5 @@
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
+import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import {
     cardPadding,
     modalBackground,
@@ -9,9 +11,25 @@ import {
     wrapperHorizontalPadding,
     wrapperVerticalPadding
 } from 'components/modals/CardModal/constants';
-import { flexStart, lg_2, primaryPadding, tertiaryBorderRadius, transitionTime } from 'constants/styles';
+import { black, flexStart, lg_2, primaryPadding, tertiaryBorderRadius, transitionTime } from 'constants/styles';
 import styled from 'styled-components';
 import { Visibility } from 'types';
+
+export const CloseButton = styled(ClickableWrapper)`
+    width: ${addIdImgDiameter};
+    height: ${addIdImgDiameter};
+    transform: rotate(45deg);
+
+    svg {
+        width: 100%;
+        height: auto;
+    }
+
+    &:hover svg circle {
+        fill: ${black};
+        transition: fill 0.3s;
+    }
+`;
 
 export const Wrapper = styled.div<Visibility>`
     position: fixed;

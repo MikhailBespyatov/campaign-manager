@@ -15,7 +15,8 @@ import { clickableWrapperDiameter } from 'components/grid/wrappers/ClicableWrapp
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { defaultFontSize } from 'constants/defaults';
 import { Noop } from 'constants/global';
-import React, { FC, useState } from 'react';
+import { useCloseClick } from 'hooks/closeClick';
+import React, { FC, useRef, useState } from 'react';
 import {
     Active,
     AdditionalTitle,
@@ -80,7 +81,7 @@ const Item = ({ active, value, data = value, onClick, itemFontSize, itemFontWeig
 export const Select = ({
     values,
     additionalTitle,
-    defaultActive = values[0],
+    defaultActive = values[1],
     data = values,
     onChange = Noop,
     top,
@@ -91,7 +92,8 @@ export const Select = ({
     itemFontWeight,
     ...styles
 }: WrapperProps) => {
-    const [isClosed, setIsClosed] = useState(true);
+    const inputRef = useRef(null);
+    const [isClosed, setIsClosed] = useState(false);
     const [radio, setRadio] = useState(
         values.map(i => ({
             value: i,
@@ -100,6 +102,8 @@ export const Select = ({
     );
 
     const onClose = () => !disabled && setIsClosed(!isClosed);
+
+    useCloseClick(inputRef, () => setIsClosed(false));
 
     const onClick = (value: string) => {
         setRadio(
@@ -119,30 +123,45 @@ export const Select = ({
         : parseInt(ulWrapperTop) + parseInt(height) / 2 + 'px';
 
     return (
-        <Wrapper disabled={disabled} height={height} isDarkStyle={isDarkStyle} onClick={onClose} {...styles}>
+        <Wrapper
+            ref={inputRef}
+            disabled={disabled}
+            height={height}
+            isDarkStyle={isDarkStyle}
+            onClick={onClose}
+            {...styles}
+        >
             <ItemSpan additionalTitle={additionalTitle} itemFontSize={itemFontSize} itemFontWeight={itemFontWeight}>
                 {defaultActive}
             </ItemSpan>
             <AbsoluteWrapper right={wrapperImgRight} top={arrowTop}>
                 <ClickableWrapper width="20px">
-                    <CustomImg pointer height={imgHeight} rotate={isClosed ? 0 : 180} src={arrowImg} width={imgWidth} />
+                    <CustomImg
+                        pointer
+                        height={imgHeight}
+                        rotate={!isClosed ? 0 : 180}
+                        src={arrowImg}
+                        width={imgWidth}
+                    />
                 </ClickableWrapper>
             </AbsoluteWrapper>
-            <AbsoluteWrapper isClosed={isClosed} left="0" top={selectTop} width="100%" zIndex="5">
-                <SelectUl>
-                    {radio.map((item, i) => (
-                        <Item
-                            key={item.value}
-                            active={item.active}
-                            data={data[i]}
-                            itemFontSize={itemFontSize}
-                            itemFontWeight={itemFontWeight}
-                            value={item.value}
-                            onClick={onClick}
-                        />
-                    ))}
-                </SelectUl>
-            </AbsoluteWrapper>
+            {isClosed && (
+                <AbsoluteWrapper left="0" top={selectTop} width="100%" zIndex="5">
+                    <SelectUl>
+                        {radio.map((item, i) => (
+                            <Item
+                                key={item.value}
+                                active={item.active}
+                                data={data[i]}
+                                itemFontSize={itemFontSize}
+                                itemFontWeight={itemFontWeight}
+                                value={item.value}
+                                onClick={onClick}
+                            />
+                        ))}
+                    </SelectUl>
+                </AbsoluteWrapper>
+            )}
         </Wrapper>
     );
 };

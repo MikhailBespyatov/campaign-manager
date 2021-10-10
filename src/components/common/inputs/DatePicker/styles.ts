@@ -2,6 +2,7 @@ import { TextField } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { dateInputHeight } from 'components/common/inputs/DatePicker/constants';
 import { Span } from 'components/common/typography/Span';
+import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { defaultFontFamily, defaultFontSize, defaultFontStyle, defaultFontWeight } from 'constants/defaults';
 import {
     errorColor,
@@ -20,6 +21,11 @@ export const DataPickerWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+`;
+
+export const CalendarButton = styled(ClickableWrapper)`
+    width: '25px';
+    height: auto;
 `;
 
 export const TextFieldForm = styled.input`
