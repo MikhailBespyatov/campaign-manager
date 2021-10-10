@@ -37,6 +37,7 @@ const SelectorItem = ({ children, onChange, defaultChecked = false, ...checkboxP
 
     return (
         <SelectorBorderWrapper
+            hovered
             pointer
             height={selectorItemHeight}
             padding="0 8px"

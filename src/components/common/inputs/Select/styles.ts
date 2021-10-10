@@ -9,7 +9,7 @@ import {
     wrapperHorizontalPadding,
     wrapperWidth
 } from 'components/common/inputs/Select/constants';
-import { flexStart, hoverGrey } from 'constants/styles';
+import { blue2, flexStart, hoverGrey } from 'constants/styles';
 import styled, { css } from 'styled-components';
 import { Active, Disabled, IsWithoutBorder, PaddingRight, Sizes } from 'types';
 
@@ -55,4 +55,9 @@ export const SelectLi = styled.li<Active>`
     padding-left: ${wrapperHorizontalPadding};
     background: ${({ active }) => (active ? itemActiveColor : itemDefaultColor)};
     cursor: pointer;
+
+    &:hover {
+        background-color: ${blue2};
+        transition: background-color 0.3s;
+    }
 `;

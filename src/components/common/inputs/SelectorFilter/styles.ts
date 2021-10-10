@@ -1,6 +1,6 @@
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { ellipsisMixin, grey12, grey13, grey14 } from 'constants/styles';
-import styled from 'styled-components';
+import { blue2, ellipsisMixin, grey12, grey13, grey14 } from 'constants/styles';
+import styled, { css } from 'styled-components';
 import { AbsoluteLocation, Pointer } from 'types';
 import { arrowBorder, selectorWrapperHorizontalPadding } from './constants';
 
@@ -27,11 +27,20 @@ export const TitleSpan = styled.span<Ellipsis>`
     ${({ ellipsis }) => ellipsis && ellipsisMixin};
 `;
 
-interface SelectorBorderWrapper extends Pointer {}
+interface SelectorBorderWrapper extends Pointer {
+    hovered?: boolean;
+}
 
 export const SelectorBorderWrapper = styled(ContentWrapper)<SelectorBorderWrapper>`
     border: 1px solid ${grey14};
     ${({ pointer }) => pointer && 'cursor: pointer;'};
+    ${({ hovered }) =>
+        hovered &&
+        css`
+            &:hover {
+                background: ${blue2};
+            }
+        `}
 `;
 
 export const ItemsWrapper = styled(SelectorBorderWrapper)<Pick<AbsoluteLocation, 'left'>>`

@@ -1,4 +1,5 @@
-import { ClearInputButton, TrashButton } from 'components/common/buttons/ClearInputButton';
+import { ClearInputButton } from 'components/common/buttons/ClearInputButton';
+import { TrashButton } from 'components/common/buttons/TrashButton';
 import { LineBorder } from 'components/common/dividers/LineBorder';
 import { Checkbox, CheckboxProps } from 'components/common/inputs/NewDesign/Checkbox';
 import { SearchSelect } from 'components/common/inputs/SearchSelect';
@@ -154,8 +155,8 @@ const LanguageAndCreatorsBiasSelect = ({ title, onSelectChange, onRemove, weight
 
 interface CheckboxBlockProps extends CheckboxProps, Title {}
 
-const CheckboxBlock = ({ title, subtitle, defaultValue, ...rest }: CheckboxBlockProps) => (
-    <CheckboxBlockWrapper checked={defaultValue}>
+const CheckboxBlock = ({ title, subtitle, defaultValue, checked, ...rest }: CheckboxBlockProps) => (
+    <CheckboxBlockWrapper checked={checked}>
         <Section alignCenter height="100%">
             <MarginWrapper marginRight="20px">
                 <Checkbox defaultValue={defaultValue} {...rest} />
@@ -327,8 +328,10 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
         if (hashtag) setUniqueHashtags([hashtag, ...uniqueHashtags]);
     };
 
-    const onChangeOverrideSelect = (form: string) => (active: string) =>
+    const onChangeOverrideSelect = (form: string) => (active: string) => {
         onChangeOverrides({ ...overrideValue, [form]: active });
+        console.log(overrideValue);
+    };
 
     const onChangeLanguagesSelect = (language: string) => {
         const item = languagesISO.find(it => it.name === language);
@@ -459,26 +462,28 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                 </ConfigurationItem>
 
                 <ConfigurationItem>
-                    <Column>
+                    <Column marginBottom={biasBlockMargin} marginTop={biasBlockMargin}>
                         <CheckboxBlock
-                            defaultValue={boostValues.mustWatch}
+                            checked={overrideValue.mustWatch}
                             title="Must Watch"
                             onChange={(checked: boolean) => onChangeOverrides({ ...boostValues, mustWatch: checked })}
                         />
+                    </Column>
+                </ConfigurationItem>
 
-                        <Column>
-                            {boostData.map(({ title, form }) => (
-                                <Section key={title} marginBottom={biasBlockMargin} marginTop={biasBlockMargin}>
-                                    <BiasSelect
-                                        bias={boostValues[form]}
-                                        itemFontSize="16px"
-                                        itemFontWeight="600"
-                                        title={title}
-                                        onChangeSelect={onChangeOverrideSelect(form)}
-                                    />
-                                </Section>
-                            ))}
-                        </Column>
+                <ConfigurationItem>
+                    <Column>
+                        {boostData.map(({ title, form }) => (
+                            <Section key={title} marginBottom={biasBlockMargin} marginTop={biasBlockMargin}>
+                                <BiasSelect
+                                    bias={overrideValue[form]}
+                                    itemFontSize="16px"
+                                    itemFontWeight="600"
+                                    title={title}
+                                    onChangeSelect={onChangeOverrideSelect(form)}
+                                />
+                            </Section>
+                        ))}
                     </Column>
                 </ConfigurationItem>
 
@@ -624,7 +629,7 @@ export const Configuration: FC<CreateCampaignStepsProps> = () => {
                                 marginTop={checkboxBlockMargin}
                             >
                                 <CheckboxBlock
-                                    defaultValue={isAgeRangeChecked(it)}
+                                    checked={isAgeRangeChecked(it)}
                                     title={getAgeRange(it)}
                                     onChange={onChangeAgeCheckbox(it)}
                                 />

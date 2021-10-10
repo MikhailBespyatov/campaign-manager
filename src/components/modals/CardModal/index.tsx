@@ -1,8 +1,7 @@
-import closeImg from 'assets/img/add_video.svg';
+import { ReactComponent as CloseImg } from 'assets/img/add_video.svg';
 import { RowBlockCell } from 'components/common/blocks/BlockCell';
 import { HighlightedTitleBlock } from 'components/common/blocks/HighlightedTitleBlock';
 import { PercentageGrowth } from 'components/common/features/PercentageGrowth';
-import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { InternalLink } from 'components/common/links/InternalLink';
 import { ClosableTag } from 'components/common/tags/ClosableTag';
 import { Span } from 'components/common/typography/Span';
@@ -11,9 +10,8 @@ import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { CreateCampaignCard } from 'components/Layouts/Cards/CreateCampaignCard';
-import { addIdImgDiameter } from 'components/Layouts/Cards/CreateCampaignMiniCard/constants';
 import { mediaIpadWidth, viewersMarginBottom } from 'components/modals/CardModal/constants';
-import { TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
+import { CloseButton, TitleWrapper, VideoDetailsWrapper, Wrapper } from 'components/modals/CardModal/styles';
 import { wrapperVerticalPadding } from 'components/modals/QexWidgetModal/constants';
 import { defaultFontSize } from 'constants/defaults';
 import { noContentMessage } from 'constants/messages';
@@ -150,14 +148,9 @@ export const CardModal = () => {
     return (
         <Wrapper visible={visible}>
             <AbsoluteWrapper right={tertiaryPadding} top={wrapperVerticalPadding} zIndex="5">
-                <CustomImg
-                    pointer
-                    height={addIdImgDiameter}
-                    rotate={45}
-                    src={closeImg}
-                    width={addIdImgDiameter}
-                    onClick={onClose}
-                />
+                <CloseButton onClick={onClose}>
+                    <CloseImg />
+                </CloseButton>
             </AbsoluteWrapper>
             <HighlightedTitleBlock marginRight="0" title="Video Name">
                 {loading ? (

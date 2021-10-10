@@ -64,10 +64,11 @@ export const CampaignDatesLayout: FC<CampaignDatesLayoutProps> = ({ children }) 
                 <ContentWrapper align="center" padding="16px 155px 25px" width="100%">
                     <Section alignCenter justifyCenter maxWidth={maxContainerWidth}>
                         <DatePickerBetween
+                            hovered
                             defaultDateFrom={startDate}
                             defaultDateTo={endDate}
-                            height="40px"
                             //marginBottom="13px"
+                            height="40px"
                             maxWidth={inputFieldWidth}
                             minDate={new Date().toISOString()}
                             minWidth="250px"

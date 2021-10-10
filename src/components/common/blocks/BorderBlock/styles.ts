@@ -52,6 +52,11 @@ export const Wrapper = styled.div<WrapperProps>`
                 border-color: ${blue};
                 transition: border-color 0.3s;
             }
+
+            &:hover svg path {
+                stroke: ${blue};
+                transition: stroke 0.3s;
+            }
         `}
 
     ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius}`}
