@@ -20,6 +20,7 @@ export const ChartWrapper = styled(Section)`
     padding-right: 27px;
     padding-bottom: 33px;
     margin-bottom: 16px;
+    min-height: 324px;
 
     background-color: ${white};
 `;
