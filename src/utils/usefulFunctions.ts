@@ -230,9 +230,9 @@ export function getLanguageISO6391Code(language: string) {
     return languageCode ? [languageCode] : undefined;
 }
 
-export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalizeFirstLetter = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 
-export const convert = (string: string) => string.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
+export const convert = (text: string) => text.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
 
 export const dateToShortString = (date: string) =>
     new Date(date || '').getDate() +

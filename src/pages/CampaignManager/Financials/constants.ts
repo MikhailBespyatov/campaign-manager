@@ -15,16 +15,6 @@ export const getRequestObject = (organizationId: string, dateFrom: string, dateT
 export const areaCommonStyle = { origin: 'start', shadowColor: 'rgba(0, 0, 0, 0.1)', shadowBlur: 3, opacity: 0.1 };
 
 export const graphicOption = {
-    title: {
-        text: `Current WOM Balance`,
-        textStyle: {
-            color: 'rgba(0, 0, 0, 0.5)',
-            fontSize: 18,
-            lineHeight: 22,
-            fontWeight: 'normal',
-            fontFamily: 'Montserrat'
-        }
-    },
     backgroundColor: white,
     legend: { show: true },
     textStyle: { color: primaryColor },

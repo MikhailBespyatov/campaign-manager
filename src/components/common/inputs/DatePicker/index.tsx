@@ -200,7 +200,7 @@ export const DatePickerBetween = ({
                                             format={defaultFormat}
                                             label="Choose date from"
                                             margin="normal"
-                                            maxDate={maxDate}
+                                            maxDate={maxDate || selectedDateTo}
                                             minDate={minDate}
                                             value={selectedDateFrom}
                                             onChange={handleDateChangeFrom}
@@ -277,7 +277,7 @@ export const DatePickerBetween = ({
                                             label="Choose date to"
                                             margin="normal"
                                             maxDate={maxDate}
-                                            minDate={minDate}
+                                            minDate={minDate || selectedDateFrom}
                                             value={selectedDateTo}
                                             onChange={handleDateChangeTo}
                                         />

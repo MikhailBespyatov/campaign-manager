@@ -16,7 +16,7 @@ import { ContentText } from 'components/Layouts/CampaignManagerLayout/styles';
 import { MainLayout } from 'components/Layouts/MainLayout';
 import { defaultTextColor } from 'constants/defaults';
 import { routes } from 'constants/routes';
-import { grey4, primaryColor, red2, white } from 'constants/styles';
+import { black, grey4, primaryColor, red2, white } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
 import {
@@ -43,6 +43,19 @@ import {
     StatsWrapper,
     Title
 } from './styles';
+
+const NothingFound = () => (
+    <Column alignCenter justifyCenter height="324px" width="100%">
+        <MarginWrapper marginBottom="26px">
+            <Span uppercase color={black} fontSize="18px" fontWeight="bold" lineHeight="22px">
+                No Data Found
+            </Span>
+        </MarginWrapper>
+        <Span color={grey4} fontSize="13px" fontWeight="normal" lineHeight="22px">
+            We don’t have any data to show here.
+        </Span>
+    </Column>
+);
 
 interface Props extends Background {}
 
@@ -196,19 +209,31 @@ export const Financials = ({ background }: Props) => {
                     <Title>Financials</Title>
                 </MarginWrapper>
                 <ChartWrapper alignCenter noWrap>
-                    <ReactEcharts
-                        option={{ series, ...graphicOption, xAxis }}
-                        style={{ height: '506px', width: '100%' }}
-                    />
-                    <AbsoluteWrapper left="27px" top="61px">
-                        <Row alignCenter>
-                            <CustomImg alt="wom" height="auto" src={womLogo} width="38px" />
-                            <MarginWrapper marginLeft="16px">
-                                <Span fontSize="40px" lineHeight="49px">
-                                    {walletBalance}
+                    {items?.length !== 0 ? (
+                        <ReactEcharts
+                            option={{ series, ...graphicOption, xAxis }}
+                            style={{ height: '506px', width: '100%' }}
+                        />
+                    ) : (
+                        <NothingFound />
+                    )}
+
+                    <AbsoluteWrapper left="27px" top="24px">
+                        <Column>
+                            <MarginWrapper marginBottom="12px">
+                                <Span color={black} fontSize="18px" fontWeight="normal" lineHeight="22px" opacity={0.5}>
+                                    Current WOM Balance
                                 </Span>
                             </MarginWrapper>
-                        </Row>
+                            <Row alignCenter>
+                                <CustomImg alt="wom" height="auto" src={womLogo} width="38px" />
+                                <MarginWrapper marginLeft="16px">
+                                    <Span fontSize="40px" lineHeight="49px">
+                                        {walletBalance}
+                                    </Span>
+                                </MarginWrapper>
+                            </Row>
+                        </Column>
                     </AbsoluteWrapper>
                 </ChartWrapper>
                 <Section noWrap marginBottom="10px">
@@ -243,48 +268,52 @@ export const Financials = ({ background }: Props) => {
                     </ResetButtonWrapper>
                 </Section>
                 <StatsWrapper>
-                    {!loading ? (
-                        items?.map((it, i) => {
-                            const date = typeof it?.date === 'string' ? it.date : '';
+                    {items?.length !== 0 ? (
+                        !loading ? (
+                            items?.map((it, i) => {
+                                const date = typeof it?.date === 'string' ? it.date : '';
 
-                            const dayTitle = dateToLongString(date);
-                            const weekTitle = `${dayTitle} - ${dateToLongString(addDaysToDate(date, 7))}`;
+                                const dayTitle = dateToLongString(date);
+                                const weekTitle = `${dayTitle} - ${dateToLongString(addDaysToDate(date, 7))}`;
 
-                            const profit = it.value && it.value !== 0 && it.value > 0;
+                                const profit = it.value && it.value !== 0 && it.value > 0;
 
-                            const title = groupByWeek ? weekTitle : dayTitle;
+                                const title = groupByWeek ? weekTitle : dayTitle;
 
-                            return (
-                                <MarginWrapper key={i} marginBottom="24px">
-                                    <DropdownSection profit={profit} title={title} wom={walletBalance}>
-                                        {it?.values ? (
-                                            it?.values?.map(({ value, code }, j) => (
-                                                <StatsItemWrapper key={j} justifyBetween>
-                                                    <Span fontSize="18px" lineHeight="22px" opacity={0.5}>
-                                                        {codeToString(code)}
-                                                    </Span>{' '}
-                                                    <Span
-                                                        color={(value && value < 0 && red2) || defaultTextColor}
-                                                        fontSize="18px"
-                                                        lineHeight="22px"
-                                                    >
-                                                        {value}
+                                return (
+                                    <MarginWrapper key={i} marginBottom="24px">
+                                        <DropdownSection profit={profit} title={title} wom={it.value}>
+                                            {it?.values ? (
+                                                it?.values?.map(({ value, code }, j) => (
+                                                    <StatsItemWrapper key={j} justifyBetween>
+                                                        <Span fontSize="18px" lineHeight="22px" opacity={0.5}>
+                                                            {codeToString(code)}
+                                                        </Span>{' '}
+                                                        <Span
+                                                            color={(value && value < 0 && red2) || defaultTextColor}
+                                                            fontSize="18px"
+                                                            lineHeight="22px"
+                                                        >
+                                                            {value}
+                                                        </Span>
+                                                    </StatsItemWrapper>
+                                                ))
+                                            ) : (
+                                                <EmptyWrapper>
+                                                    <Span uppercase fontSize="18px" lineHeight="22px" opacity={0.5}>
+                                                        Empty
                                                     </Span>
-                                                </StatsItemWrapper>
-                                            ))
-                                        ) : (
-                                            <EmptyWrapper>
-                                                <Span uppercase fontSize="18px" lineHeight="22px" opacity={0.5}>
-                                                    Empty
-                                                </Span>
-                                            </EmptyWrapper>
-                                        )}
-                                    </DropdownSection>
-                                </MarginWrapper>
-                            );
-                        })
+                                                </EmptyWrapper>
+                                            )}
+                                        </DropdownSection>
+                                    </MarginWrapper>
+                                );
+                            })
+                        ) : (
+                            <Loader size="large" />
+                        )
                     ) : (
-                        <Loader size="large" />
+                        <NothingFound />
                     )}
                 </StatsWrapper>
             </Column>
