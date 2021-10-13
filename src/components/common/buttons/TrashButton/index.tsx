@@ -4,7 +4,7 @@ import { HoveredWrapper } from 'components/common/buttons/TrashButton/styles';
 import React, { FC } from 'react';
 import { ReactClick } from 'types/react';
 
-export const TrashButton: FC<ReactClick<HTMLButtonElement>> = ({ children, ...props }) => (
+export const TrashButton: FC<ReactClick<HTMLButtonElement>> = ({ ...props }) => (
     <HoveredWrapper height={trashButtonDiameter} width={trashButtonDiameter} {...props}>
         <TrashIcon />
     </HoveredWrapper>

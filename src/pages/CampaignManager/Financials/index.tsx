@@ -209,7 +209,7 @@ export const Financials = ({ background }: Props) => {
                     <Title>Financials</Title>
                 </MarginWrapper>
                 <ChartWrapper alignCenter noWrap>
-                    {items?.length !== 0 ? (
+                    {items && items?.length !== 0 ? (
                         <ReactEcharts
                             option={{ series, ...graphicOption, xAxis }}
                             style={{ height: '506px', width: '100%' }}
@@ -268,7 +268,7 @@ export const Financials = ({ background }: Props) => {
                     </ResetButtonWrapper>
                 </Section>
                 <StatsWrapper>
-                    {items?.length !== 0 ? (
+                    {items && items?.length !== 0 ? (
                         !loading ? (
                             items?.map((it, i) => {
                                 const date = typeof it?.date === 'string' ? it.date : '';
