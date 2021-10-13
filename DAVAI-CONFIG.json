@@ -1,0 +1,27 @@
+{
+  "PROJECT_NAME": "BULLZ PLAYER",
+  "STARTUP_BRANCH": "master",
+  "STARTUP_FILES": [
+    "DEV_VERSION",
+    "PROD_VERSION",
+    "package.json"
+  ],
+  "FILES_TO_UPDATE_WITH_VERSION": [
+    {
+      "fileName": "DEV_VERSION"
+    },
+    {
+      "fileName": "PROD_VERSION"
+    },
+    {
+      "fileName": "package.json",
+      "lookingFor": "version",
+      "isJson": true
+    }
+  ],
+  "VERSION_FILE": "DEV_VERSION",
+  "GIT_RELEASE_BRANCH_NAME_BASE": "BUWP-RELEASE",
+  "GIT_RELEASE_TAG_NAME_BASE": "BUWP-BUILD",
+  "GIT_INTEGRATION_RELEASE_BRANCH_BASE": "IN-RELEASE",
+  "BUILDING_SCRIPT": "yarn && yarn build:prod"
+}
