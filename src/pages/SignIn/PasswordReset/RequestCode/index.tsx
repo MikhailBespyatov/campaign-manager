@@ -62,7 +62,6 @@ export const RequestCode = () => {
                             />
 
                             <TextInput
-                                offAutoComplete
                                 label="CREATE PASSWORD"
                                 marginBottom="5px"
                                 name="password"
@@ -73,10 +72,9 @@ export const RequestCode = () => {
                             {/* //TODO logic for password confirm
                              */}
                             <TextInput
-                                offAutoComplete
                                 label="RETYPE PASSWORD"
                                 marginBottom="20px"
-                                name="password"
+                                name="repeatPassword"
                                 placeholder="Retype your new password"
                                 type="password"
                                 untouchedWarning=" "
@@ -94,7 +92,7 @@ export const RequestCode = () => {
                                 </Column>
                             </MarginWrapper> */}
                             <MarginWrapper marginTop="26px">
-                                <Button background={isValid && dirty ? blue : undefined} disabled={loading}>
+                                <Button background={isValid && dirty ? blue : undefined} disabled={loading && !isValid}>
                                     {loading ? <Loader /> : 'RESET PASSWORD'}
                                 </Button>
                             </MarginWrapper>

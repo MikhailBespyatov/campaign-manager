@@ -1,5 +1,5 @@
 import arrowDown from 'assets/icons/arrow_down_grey.svg';
-import shopifyLogo from 'assets/img/shopify_logo.svg';
+import shopifyLogo from 'assets/img/shopify_logo.png';
 import { CopyButton } from 'components/common/buttons/CopyButton';
 import { Version } from 'components/common/dividers/Version';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
