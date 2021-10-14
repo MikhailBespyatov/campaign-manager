@@ -1,4 +1,4 @@
-import { yupDefault, yupEmail, yupPassword } from 'constants/yupFields';
+import { yupDefault, yupEmail, yupPassword, yupRepeatPassword } from 'constants/yupFields';
 import { SetErrorsResetPasswordRequest } from 'pages/SignIn/PasswordReset/RequestCode/types';
 import { userEffects } from 'stores/user';
 import * as Yup from 'yup';
@@ -13,7 +13,8 @@ export const initialValues = { email: '', confirmationToken: '', password: '' };
 export const validationSchema = Yup.object().shape({
     email: yupEmail,
     confirmationToken: yupDefault,
-    password: yupPassword
+    password: yupPassword,
+    repeatPassword: yupRepeatPassword
 });
 
 interface SetErrorsFormikProps extends SetErrorsResetPasswordRequest {}
