@@ -3,6 +3,7 @@ import { getDateBeforeAndReturnISO } from 'utils/usefulFunctions';
 
 export const defaultUtsTo = new Date().toISOString();
 export const defaultUtsFrom = getDateBeforeAndReturnISO(7);
+export const numbersAfterDecimalPoint = 4;
 
 export const getRequestObject = (organizationId: string, dateFrom: string, dateTo: string, groupByWeek: boolean) => ({
     organizationId: organizationId,
@@ -65,6 +66,16 @@ export const graphicOption = {
                 show: false
             },
             axisLabel: { show: true, color: grey4 }
+        }
+    ],
+    dataZoom: [
+        {
+            type: 'slider',
+            throttle: 50
+        },
+        {
+            type: 'inside',
+            throttle: 50
         }
     ]
 };

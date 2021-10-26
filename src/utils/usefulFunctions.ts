@@ -289,3 +289,6 @@ export const getFullScriptStringProductViewer = (organizationPublicId: string, p
 </script>
 <div id="wom-viewer-plugin" style="width: 500px; height: 700px;"></div>
 `;
+
+export const getFixedNumber = (value: number, countAfterDecimalPoint: number) =>
+    Number(value.toFixed(countAfterDecimalPoint));
