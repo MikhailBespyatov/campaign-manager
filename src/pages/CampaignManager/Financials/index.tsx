@@ -24,7 +24,8 @@ import {
     defaultUtsFrom,
     defaultUtsTo,
     getRequestObject,
-    graphicOption
+    graphicOption,
+    numbersAfterDecimalPoint
 } from 'pages/CampaignManager/Financials/constants';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -33,7 +34,13 @@ import { organizationsEffects, organizationsStores } from 'stores/organizations'
 import { themeStores } from 'stores/theme';
 import { walletEffects, walletStores } from 'stores/wallet';
 import { Background } from 'types';
-import { addDaysToDate, codeToString, dateToLongString, dateToShortString } from 'utils/usefulFunctions';
+import {
+    addDaysToDate,
+    codeToString,
+    dateToLongString,
+    dateToShortString,
+    getFixedNumber
+} from 'utils/usefulFunctions';
 import {
     ChartWrapper,
     EmptyWrapper,
@@ -169,7 +176,7 @@ export const Financials = ({ background }: Props) => {
                 ]
             }
         },
-        data: items?.length ? items.map(i => i.value) : []
+        data: items?.length ? items.map(i => getFixedNumber(i.value as number, numbersAfterDecimalPoint)) : []
     };
 
     return (
@@ -282,7 +289,11 @@ export const Financials = ({ background }: Props) => {
 
                                 return (
                                     <MarginWrapper key={i} marginBottom="24px">
-                                        <DropdownSection profit={profit} title={title} wom={it.value}>
+                                        <DropdownSection
+                                            profit={profit}
+                                            title={title}
+                                            wom={getFixedNumber(it.value as number, numbersAfterDecimalPoint)}
+                                        >
                                             {it?.values ? (
                                                 it?.values?.map(({ value, code }, j) => (
                                                     <StatsItemWrapper key={j} justifyBetween>
@@ -294,7 +305,7 @@ export const Financials = ({ background }: Props) => {
                                                             fontSize="18px"
                                                             lineHeight="22px"
                                                         >
-                                                            {value}
+                                                            {getFixedNumber(value as number, numbersAfterDecimalPoint)}
                                                         </Span>
                                                     </StatsItemWrapper>
                                                 ))
