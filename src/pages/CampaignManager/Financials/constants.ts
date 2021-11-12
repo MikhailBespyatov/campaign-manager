@@ -4,6 +4,10 @@ import { getDateBeforeAndReturnISO } from 'utils/usefulFunctions';
 export const defaultUtsTo = new Date().toISOString();
 export const defaultUtsFrom = getDateBeforeAndReturnISO(7);
 export const numbersAfterDecimalPoint = 4;
+export const titleFontSize = '12px';
+export const titleLineHeight = '15px';
+export const titleFontSizeStatsItem = '15px';
+export const titleLineHeightStatsItem = '18px';
 
 export const getRequestObject = (organizationId: string, dateFrom: string, dateTo: string, groupByWeek: boolean) => ({
     organizationId: organizationId,
