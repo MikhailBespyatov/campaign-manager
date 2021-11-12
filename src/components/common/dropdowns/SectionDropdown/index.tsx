@@ -3,12 +3,16 @@ import womLogo from 'assets/img/wom-token-logo.png';
 import {
     dropdownWrapperWidth,
     rightArrowIconHeight,
-    rightArrowIconWidth
+    rightArrowIconWidth,
+    titleFontSizeDropdownSection,
+    titleLineHeightDropdownSection
 } from 'components/common/dropdowns/SectionDropdown/constants';
 import {
     DropdownSectionButton,
     DropdownSectionProps,
-    DropdownSectionWrapper
+    DropdownSectionWrapper,
+    StyledRow,
+    StyledRowNoShrink
 } from 'components/common/dropdowns/SectionDropdown/style';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
@@ -21,40 +25,58 @@ import React, { FC } from 'react';
 export const DropdownColumn: FC = ({ children }) => <Column width={dropdownWrapperWidth}>{children}</Column>;
 
 export interface Props extends DropdownSectionProps {
-    title: string;
+    date: string;
+    endDate?: string;
     defaultValue?: boolean;
     wom?: number;
     profit?: boolean | 0;
 }
 
-export const DropdownSection: FC<Props> = ({ children, title, defaultValue = false, wom, profit, ...rest }) => {
+export const DropdownSection: FC<Props> = ({ children, date, endDate, defaultValue = false, wom, profit, ...rest }) => {
     const [isOpened, toggleIsOpened] = useToggle(defaultValue);
 
     return (
         <DropdownSectionWrapper isOpened={isOpened} {...rest}>
             <DropdownSectionButton onClick={toggleIsOpened}>
-                <Span fontSize="16px" fontWeight="700">
-                    {title}
-                </Span>
-                <Row alignCenter>
-                    {profit !== undefined && (
-                        <MarginWrapper marginRight="40px">
-                            <Span color={profit ? blue : red2} fontSize="18px" lineHeight="22px">
-                                {profit ? 'Profit' : 'Loss'}
+                <StyledRowNoShrink>
+                    <Span fontSize={titleFontSizeDropdownSection} fontWeight="600">
+                        {date}
+                    </Span>
+                    {!!endDate && (
+                        <>
+                            <Span fontSize={titleFontSizeDropdownSection} fontWeight="600">
+                                &nbsp;-&nbsp;
                             </Span>
-                        </MarginWrapper>
+
+                            <Span fontSize={titleFontSizeDropdownSection} fontWeight="600">
+                                {endDate}
+                            </Span>
+                        </>
                     )}
+                </StyledRowNoShrink>
+                <Row alignCenter justifyCenter margin="0 20px" width="50px">
+                    {profit !== undefined && (
+                        <Span
+                            color={profit ? blue : red2}
+                            fontSize={titleFontSizeDropdownSection}
+                            fontWeight="400"
+                            lineHeight={titleLineHeightDropdownSection}
+                        >
+                            {profit ? 'Profit' : 'Loss'}
+                        </Span>
+                    )}
+                </Row>
+                <StyledRow>
                     {wom ? (
-                        <MarginWrapper marginRight="14px">
-                            <Row>
-                                <MarginWrapper marginRight="4px">
-                                    <Span fontSize="18px" lineHeight="22px">
-                                        {wom}
-                                    </Span>
-                                </MarginWrapper>
-                                <CustomImg alt="logo" height="auto" src={womLogo} width="20" />
-                            </Row>
-                        </MarginWrapper>
+                        <Row noWrap>
+                            <Span fontSize={titleFontSizeDropdownSection} lineHeight={titleLineHeightDropdownSection}>
+                                {wom}
+                            </Span>
+
+                            <MarginWrapper marginLeft="14px" marginRight="42px">
+                                <CustomImg alt="logo" height="auto" src={womLogo} width="20px" />
+                            </MarginWrapper>
+                        </Row>
                     ) : null}
                     <CustomImg
                         alt="Arrow"
@@ -63,7 +85,7 @@ export const DropdownSection: FC<Props> = ({ children, title, defaultValue = fal
                         src={arrowRight}
                         width={rightArrowIconWidth}
                     />
-                </Row>
+                </StyledRow>
             </DropdownSectionButton>
             {isOpened && children}
         </DropdownSectionWrapper>

@@ -1,6 +1,7 @@
 import { Span } from 'components/common/typography/Span';
 import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
-import { blue, flexCenter, grey20, white } from 'constants/styles';
+import { black, blue, flexCenter, grey20, white } from 'constants/styles';
+import { titleFontSize, titleLineHeight } from 'pages/CampaignManager/Financials/constants';
 import styled from 'styled-components';
 
 export const Title = styled(Span)`
@@ -41,6 +42,12 @@ export const GroupByWeekWrapper = styled.div`
     }
 `;
 
+export const HeadingWrapper = styled(Section)`
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 20px 30px 20px 16px;
+`;
+
 export const StatsWrapper = styled.div`
     width: 100%;
     padding: 16px;
@@ -50,11 +57,19 @@ export const StatsWrapper = styled.div`
 
 export const StatsItemWrapper = styled(Row)`
     width: 100%;
-    padding: 16px;
+    padding: 16px 82px 16px 16px;
 
     :hover {
         background-color: ${grey20};
     }
+`;
+
+export const StatsItemTitle = styled(Row)`
+    color: ${black};
+    font-size: ${titleFontSize};
+    line-height: ${titleLineHeight};
+    font-weight: 400;
+    opacity: 0.6;
 `;
 
 export const EmptyWrapper = styled.div`

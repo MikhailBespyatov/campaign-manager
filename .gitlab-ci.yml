@@ -17,7 +17,7 @@ lint/build:
     stage: lint/build
     before_script:
         - apk update
-        - apk add --no-cache python make g++
+        - apk add --no-cache make g++
     script:
         - echo "Linting"
         - yarn
@@ -39,7 +39,7 @@ build/deploy-stage-dev:
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
-        - apk add --no-cache python make g++
+        - apk add --no-cache make g++
         - export SSHPASS=$USER_PASS_DO
     script:
         - echo "Building dev version deploy package"
@@ -63,7 +63,7 @@ build/deploy-stage-prod:
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
-        - apk add --no-cache python make g++
+        - apk add --no-cache make g++
         - export SSHPASS=$USER_PASS_DO
     script:
         - echo "Building dev version deploy package"
@@ -85,7 +85,7 @@ build/deploy-prod:
     before_script:
         - apk update
         - apk add --update --no-cache openssh sshpass
-        - apk add --no-cache python make g++
+        - apk add --no-cache make g++
         - export SSHPASS=$SSH_PRIVATE_KEY
     script:
         - echo "Building deploy package"

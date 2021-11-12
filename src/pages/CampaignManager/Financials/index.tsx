@@ -2,6 +2,7 @@ import womLogo from 'assets/img/wom-token-logo.png';
 import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { ResetButton } from 'components/common/buttons/ResetButton';
 import { DropdownSection } from 'components/common/dropdowns/SectionDropdown';
+import { StyledRow, StyledRowNoShrink } from 'components/common/dropdowns/SectionDropdown/style';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
@@ -25,7 +26,11 @@ import {
     defaultUtsTo,
     getRequestObject,
     graphicOption,
-    numbersAfterDecimalPoint
+    numbersAfterDecimalPoint,
+    titleFontSize,
+    titleFontSizeStatsItem,
+    titleLineHeight,
+    titleLineHeightStatsItem
 } from 'pages/CampaignManager/Financials/constants';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -45,7 +50,9 @@ import {
     ChartWrapper,
     EmptyWrapper,
     GroupByWeekWrapper,
+    HeadingWrapper,
     ResetButtonWrapper,
+    StatsItemTitle,
     StatsItemWrapper,
     StatsWrapper,
     Title
@@ -227,7 +234,7 @@ export const Financials = ({ background }: Props) => {
 
                     <AbsoluteWrapper left="27px" top="24px">
                         <Column>
-                            <MarginWrapper marginBottom="12px">
+                            <MarginWrapper marginBottom="20px">
                                 <Span color={black} fontSize="18px" fontWeight="normal" lineHeight="22px" opacity={0.5}>
                                     Current WOM Balance
                                 </Span>
@@ -235,7 +242,7 @@ export const Financials = ({ background }: Props) => {
                             <Row alignCenter>
                                 <CustomImg alt="wom" height="auto" src={womLogo} width="38px" />
                                 <MarginWrapper marginLeft="16px">
-                                    <Span fontSize="40px" lineHeight="49px">
+                                    <Span fontSize="40px" lineHeight="47px">
                                         {walletBalance}
                                     </Span>
                                 </MarginWrapper>
@@ -246,7 +253,13 @@ export const Financials = ({ background }: Props) => {
                 <Section noWrap marginBottom="10px">
                     <Column marginRight="20px">
                         <MarginWrapper marginBottom="8px">
-                            <Span uppercase color={grey4} fontSize="11px" fontWeight="400" lineHeight="13px">
+                            <Span
+                                uppercase
+                                color={grey4}
+                                fontSize={titleFontSize}
+                                fontWeight="400"
+                                lineHeight={titleLineHeight}
+                            >
                                 Group by
                             </Span>
                         </MarginWrapper>
@@ -263,8 +276,8 @@ export const Financials = ({ background }: Props) => {
                             defaultDateTo={dateTo}
                             height="40px"
                             title={['FROM', 'TO']}
-                            titleFontSize="11px"
-                            titleLineHeight="13px"
+                            titleFontSize={titleFontSize}
+                            titleLineHeight={titleLineHeight}
                             titleType="outer"
                             width="296px"
                             onChange={onDatesBetweenChange}
@@ -276,53 +289,75 @@ export const Financials = ({ background }: Props) => {
                 </Section>
                 <StatsWrapper>
                     {items && items?.length !== 0 ? (
-                        !loading ? (
-                            items?.map((it, i) => {
-                                const date = typeof it?.date === 'string' ? it.date : '';
-
-                                const dayTitle = dateToLongString(date);
-                                const weekTitle = `${dayTitle} - ${dateToLongString(addDaysToDate(date, 7))}`;
-
-                                const profit = it.value && it.value !== 0 && it.value > 0;
-
-                                const title = groupByWeek ? weekTitle : dayTitle;
-
-                                return (
-                                    <MarginWrapper key={i} marginBottom="24px">
-                                        <DropdownSection
-                                            profit={profit}
-                                            title={title}
-                                            wom={getFixedNumber(it.value as number, numbersAfterDecimalPoint)}
-                                        >
-                                            {it?.values ? (
-                                                it?.values?.map(({ value, code }, j) => (
-                                                    <StatsItemWrapper key={j} justifyBetween>
-                                                        <Span fontSize="18px" lineHeight="22px" opacity={0.5}>
-                                                            {codeToString(code)}
-                                                        </Span>{' '}
-                                                        <Span
-                                                            color={(value && value < 0 && red2) || defaultTextColor}
-                                                            fontSize="18px"
-                                                            lineHeight="22px"
-                                                        >
-                                                            {getFixedNumber(value as number, numbersAfterDecimalPoint)}
-                                                        </Span>
-                                                    </StatsItemWrapper>
-                                                ))
-                                            ) : (
-                                                <EmptyWrapper>
-                                                    <Span uppercase fontSize="18px" lineHeight="22px" opacity={0.5}>
-                                                        Empty
-                                                    </Span>
-                                                </EmptyWrapper>
-                                            )}
-                                        </DropdownSection>
+                        <>
+                            <HeadingWrapper>
+                                <StyledRowNoShrink>
+                                    <StatsItemTitle>Date</StatsItemTitle>
+                                </StyledRowNoShrink>
+                                <Row alignCenter justifyCenter margin="0 20px" width="50px">
+                                    <StatsItemTitle>P/L</StatsItemTitle>
+                                </Row>
+                                <StyledRow>
+                                    <MarginWrapper marginRight="50px">
+                                        <StatsItemTitle>WOM</StatsItemTitle>
                                     </MarginWrapper>
-                                );
-                            })
-                        ) : (
-                            <Loader size="large" />
-                        )
+                                </StyledRow>
+                            </HeadingWrapper>
+
+                            {!loading ? (
+                                items?.map((it, i) => {
+                                    const date = typeof it?.date === 'string' ? it.date : '';
+
+                                    const dateTitle = dateToLongString(date);
+                                    const endDateTitle = dateToLongString(addDaysToDate(date, 7));
+
+                                    const profit = it.value && it.value !== 0 && it.value > 0;
+
+                                    return (
+                                        <MarginWrapper key={i} marginBottom="1px">
+                                            <DropdownSection
+                                                date={dateTitle}
+                                                endDate={groupByWeek ? endDateTitle : undefined}
+                                                profit={profit}
+                                                wom={getFixedNumber(it.value as number, numbersAfterDecimalPoint)}
+                                            >
+                                                {it?.values ? (
+                                                    it?.values?.map(({ value, code }, j) => (
+                                                        <StatsItemWrapper key={j} justifyBetween>
+                                                            <Span
+                                                                fontSize={titleFontSizeStatsItem}
+                                                                lineHeight={titleLineHeightStatsItem}
+                                                                opacity={0.5}
+                                                            >
+                                                                {codeToString(code)}
+                                                            </Span>{' '}
+                                                            <Span
+                                                                color={(value && value < 0 && red2) || defaultTextColor}
+                                                                fontSize={titleFontSizeStatsItem}
+                                                                lineHeight={titleLineHeightStatsItem}
+                                                            >
+                                                                {getFixedNumber(
+                                                                    value as number,
+                                                                    numbersAfterDecimalPoint
+                                                                )}
+                                                            </Span>
+                                                        </StatsItemWrapper>
+                                                    ))
+                                                ) : (
+                                                    <EmptyWrapper>
+                                                        <Span uppercase fontSize="18px" lineHeight="22px" opacity={0.5}>
+                                                            Empty
+                                                        </Span>
+                                                    </EmptyWrapper>
+                                                )}
+                                            </DropdownSection>
+                                        </MarginWrapper>
+                                    );
+                                })
+                            ) : (
+                                <Loader size="large" />
+                            )}
+                        </>
                     ) : (
                         <NothingFound />
                     )}
