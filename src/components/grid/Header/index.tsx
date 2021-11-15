@@ -43,6 +43,8 @@ export const Header = () => {
     const onHeaderLogo = () => {
         history.push(globalPrefixUrl + routes.campaignManager.discover.index);
     };
+
+    const isShopify = origin === 'shopify';
     //MOCK
     // const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
 
@@ -61,7 +63,7 @@ export const Header = () => {
                 <Column alignEnd marginRight={padding}>
                     <LogOutPopover>
                         <Row alignCenter marginBottom="6px">
-                            {origin === 'shopify' ? (
+                            {isShopify ? (
                                 <MarginWrapper margin="6px 10px">
                                     <CustomImg alt="Shopify account" height="20px" src={shopifyLogo} width="62px" />
                                 </MarginWrapper>

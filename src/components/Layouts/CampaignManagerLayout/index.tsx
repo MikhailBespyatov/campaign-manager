@@ -22,14 +22,14 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
     const history = useHistory();
     const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const organizationId = useStore(organizationsStores.organizationId);
-    const { walletId } = useStore(organizationsStores.item);
+    const { walletId, origin } = useStore(organizationsStores.item);
     // const usdRate = useStore(walletStores.usdRate);
     // const walletBalance = useStore(walletStores.walletBalance);
     // const { budgetTotal, budgetSpent, budgetPerDay, budgetRemaining, campaignsRunning } = useStore(
     //     organizationsStores.statistics
     // );
     //const { buyWOMButtonBackgroundColor, buyWOMButtonTextColor } = useStore(themeStores.theme);
-
+    const isShopify = origin === 'shopify';
     const goToCreateCampaign = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
     const onWomBuy = () => modalEvents.openQexWidgetModal();
     const onWalletOpen = () => modalEvents.openWalletModal();
@@ -62,11 +62,13 @@ export const CampaignManagerLayout: FC<Props> = ({ children, background }) => {
                                     <ContentText noWrap>MY WALLET</ContentText>
                                 </ClickableWrapper>
                             </Column>
-                            <Column marginRight={topBarButtonMarginRight}>
-                                <ClickableWrapper width="fit-content" onClick={onWomBuy}>
-                                    <ContentText noWrap>BUY WOM</ContentText>
-                                </ClickableWrapper>
-                            </Column>
+                            {!isShopify && (
+                                <Column marginRight={topBarButtonMarginRight}>
+                                    <ClickableWrapper width="fit-content" onClick={onWomBuy}>
+                                        <ContentText noWrap>BUY WOM</ContentText>
+                                    </ClickableWrapper>
+                                </Column>
+                            )}
                             <Column>
                                 <ManualRoundedButton
                                     height="44px"

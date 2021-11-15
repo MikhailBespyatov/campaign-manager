@@ -1,5 +1,4 @@
 import womLogo from 'assets/img/wom-token-logo.png';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { ResetButton } from 'components/common/buttons/ResetButton';
 import { DropdownSection } from 'components/common/dropdowns/SectionDropdown';
 import { StyledRow, StyledRowNoShrink } from 'components/common/dropdowns/SectionDropdown/style';
@@ -8,15 +7,11 @@ import { DatePickerBetween } from 'components/common/inputs/DatePicker';
 import { Checkbox } from 'components/common/inputs/NewDesign/Checkbox';
 import { Span } from 'components/common/typography/Span';
 import { Loader } from 'components/dynamic/Loader';
-import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
 import { AbsoluteWrapper } from 'components/grid/wrappers/AbsoluteWrapper';
-import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
-import { ContentText } from 'components/Layouts/CampaignManagerLayout/styles';
-import { MainLayout } from 'components/Layouts/MainLayout';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { defaultTextColor } from 'constants/defaults';
-import { routes } from 'constants/routes';
 import { black, grey4, primaryColor, red2, white } from 'constants/styles';
 import ReactEcharts from 'echarts-for-react';
 import { useStore } from 'effector-react';
@@ -33,12 +28,8 @@ import {
     titleLineHeightStatsItem
 } from 'pages/CampaignManager/Financials/constants';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router';
-import { modalEvents } from 'stores/modal';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
-import { themeStores } from 'stores/theme';
 import { walletEffects, walletStores } from 'stores/wallet';
-import { Background } from 'types';
 import {
     addDaysToDate,
     codeToString,
@@ -71,14 +62,10 @@ const NothingFound = () => (
     </Column>
 );
 
-interface Props extends Background {}
-
-export const Financials = ({ background }: Props) => {
-    const history = useHistory();
+export const Financials = () => {
     const [dateFrom, setDateFrom] = useState<string>(defaultUtsFrom);
     const [dateTo, setDateTo] = useState<string>(defaultUtsTo);
     const [groupByWeek, setGroupByWeek] = useState<boolean>(false);
-    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
     const { items } = useStore(organizationsStores.turnoverStatistics);
     const organizationId = useStore(organizationsStores.organizationId);
     const { walletId } = useStore(organizationsStores.item);
@@ -105,10 +92,6 @@ export const Financials = ({ background }: Props) => {
     useEffect(() => {
         organizationsEffects.getTurnoverStatisticsById(memoizedRequestObject);
     }, [memoizedRequestObject]);
-
-    const goToCreateCampaign = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
-    const onWomBuy = () => modalEvents.openQexWidgetModal();
-    const onWalletOpen = () => modalEvents.openWalletModal();
 
     const onDatesBetweenChange = (dateFrom: string, dateTo: string) => {
         setDateFrom(dateFrom);
@@ -187,37 +170,7 @@ export const Financials = ({ background }: Props) => {
     };
 
     return (
-        <MainLayout
-            background={background}
-            topBar={
-                <TopBarWithButton
-                    buttons={
-                        <Row alignCenter marginBottom="0">
-                            <Column marginRight="25px">
-                                <ClickableWrapper width="fit-content" onClick={onWalletOpen}>
-                                    <ContentText noWrap>MY WALLET</ContentText>
-                                </ClickableWrapper>
-                            </Column>
-                            <Column marginRight="25px">
-                                <ClickableWrapper width="fit-content" onClick={onWomBuy}>
-                                    <ContentText noWrap>BUY WOM</ContentText>
-                                </ClickableWrapper>
-                            </Column>
-                            <Column>
-                                <ManualRoundedButton
-                                    height="44px"
-                                    minWidth="150px"
-                                    width="150px"
-                                    onClick={goToCreateCampaign}
-                                >
-                                    CREATE CAMPAIGN
-                                </ManualRoundedButton>
-                            </Column>
-                        </Row>
-                    }
-                />
-            }
-        >
+        <CampaignManagerLayout>
             <Column>
                 <MarginWrapper marginBottom="24px">
                     <Title>Financials</Title>
@@ -363,6 +316,6 @@ export const Financials = ({ background }: Props) => {
                     )}
                 </StatsWrapper>
             </Column>
-        </MainLayout>
+        </CampaignManagerLayout>
     );
 };

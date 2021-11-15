@@ -37,6 +37,7 @@ import { useNonScrolledBackground } from 'hooks/nonScrolledBackground';
 import QRCode from 'qrcode';
 import React, { useEffect, useState } from 'react';
 import { modalEvents, modalStores } from 'stores/modal';
+import { organizationsStores } from 'stores/organizations';
 import { themeStores } from 'stores/theme';
 import { walletStores } from 'stores/wallet';
 import { totalCurrency } from 'utils/usefulFunctions';
@@ -59,10 +60,10 @@ export const WalletModal = () => {
     const [qrCodeImage, setQRCodeImage] = useState('');
     const [usdRate, eurRate] = useStore(walletStores.rates);
     const walletBalance = useStore(walletStores.walletBalance);
-
+    const { origin } = useStore(organizationsStores.item);
     const USD = totalCurrency(walletBalance, usdRate);
     const EUR = totalCurrency(walletBalance, eurRate);
-
+    const isShopify = origin === 'shopify';
     const onClose = () => modalEvents.closeWalletModal();
 
     const generateQR = async (text: string) => {
@@ -140,47 +141,63 @@ export const WalletModal = () => {
                         </Column>
                     </Row>
                 </Section>
-                <Section justifyCenter>
-                    <Column alignCenter width="100%">
-                        <MarginWrapper marginBottom={marginSSize}>
-                            <WalletTitleSpan>QR CODE</WalletTitleSpan>
-                        </MarginWrapper>
-                        <CustomImg height={qrCodeImageDiameter} src={qrCodeImage} width={qrCodeImageDiameter} />
-                        <MarginWrapper marginBottom="10px" marginTop={marginMSize}>
-                            <WalletTitleSpan>WALLET ADDRESS</WalletTitleSpan>
-                        </MarginWrapper>
-                        <CopyableField backgroundColor={blue9} color={white} subject={walletAddress} />
+                {!isShopify ? (
+                    <Section justifyCenter>
+                        <Column alignCenter width="100%">
+                            <MarginWrapper marginBottom={marginSSize}>
+                                <WalletTitleSpan>QR CODE</WalletTitleSpan>
+                            </MarginWrapper>
+                            <CustomImg height={qrCodeImageDiameter} src={qrCodeImage} width={qrCodeImageDiameter} />
+                            <MarginWrapper marginBottom="10px" marginTop={marginMSize}>
+                                <WalletTitleSpan>WALLET ADDRESS</WalletTitleSpan>
+                            </MarginWrapper>
+                            <CopyableField backgroundColor={blue9} color={white} subject={walletAddress} />
 
-                        <MarginWrapper marginBottom="15px" marginTop="30px">
-                            <WalletTitleSpan>GET WOM</WalletTitleSpan>
-                        </MarginWrapper>
-                        <ContentWrapper borderRadius="0px 0px 8px 8px" width="100%">
-                            <Section alignCenter justifyCenter>
-                                <Row alignCenter justifyBetween height="42px" width="400px">
-                                    <ExternalLink href={bithumHref} target="_blank">
-                                        <CustomImg
-                                            height={bithumbLogoHeight}
-                                            src={bithumbLogo}
-                                            width={bithumbLogoWidth}
-                                        />
-                                    </ExternalLink>
+                            <MarginWrapper marginBottom="15px" marginTop="30px">
+                                <WalletTitleSpan>GET WOM</WalletTitleSpan>
+                            </MarginWrapper>
+                            <ContentWrapper borderRadius="0px 0px 8px 8px" width="100%">
+                                <Section alignCenter justifyCenter>
+                                    <Row alignCenter justifyBetween height="42px" width="400px">
+                                        <ExternalLink href={bithumHref} target="_blank">
+                                            <CustomImg
+                                                height={bithumbLogoHeight}
+                                                src={bithumbLogo}
+                                                width={bithumbLogoWidth}
+                                            />
+                                        </ExternalLink>
 
-                                    <ExternalLink href={gateIoHref} target="_blank">
-                                        <CustomImg height={gateIoLogoHeight} src={gateIoLogo} width={gateIoLogoWidth} />
-                                    </ExternalLink>
+                                        <ExternalLink href={gateIoHref} target="_blank">
+                                            <CustomImg
+                                                height={gateIoLogoHeight}
+                                                src={gateIoLogo}
+                                                width={gateIoLogoWidth}
+                                            />
+                                        </ExternalLink>
 
-                                    <ExternalLink href={liquidHref} target="_blank">
-                                        <CustomImg height={liquidLogoHeight} src={liquidLogo} width={liquidLogoWidth} />
-                                    </ExternalLink>
+                                        <ExternalLink href={liquidHref} target="_blank">
+                                            <CustomImg
+                                                height={liquidLogoHeight}
+                                                src={liquidLogo}
+                                                width={liquidLogoWidth}
+                                            />
+                                        </ExternalLink>
 
-                                    <ExternalLink href={kuCoinHref} target="_blank">
-                                        <CustomImg height={kuCoinLogoHeight} src={kuCoinLogo} width={kuCoinLogoWidth} />
-                                    </ExternalLink>
-                                </Row>
-                            </Section>
-                        </ContentWrapper>
-                    </Column>
-                </Section>
+                                        <ExternalLink href={kuCoinHref} target="_blank">
+                                            <CustomImg
+                                                height={kuCoinLogoHeight}
+                                                src={kuCoinLogo}
+                                                width={kuCoinLogoWidth}
+                                            />
+                                        </ExternalLink>
+                                    </Row>
+                                </Section>
+                            </ContentWrapper>
+                        </Column>
+                    </Section>
+                ) : (
+                    <ContentWrapper borderRadius="0px 0px 8px 8px" height="21px" width="100%" />
+                )}
             </Modal>
         </Wrapper>
     );

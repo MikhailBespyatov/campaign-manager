@@ -3,16 +3,11 @@ import nonShopifyStep2Img1 from 'assets/img/non-shopify_product_step_2_1.svg';
 import nonShopifyStep2Img2 from 'assets/img/non-shopify_product_step_2_2.svg';
 import nonShopifyStep2Img3 from 'assets/img/non-shopify_product_step_2_3.svg';
 import shopifyDescriptionImg from 'assets/img/shopify_product_description.png';
-import { ManualRoundedButton } from 'components/common/buttons/ManualRoundedButton';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
-import { TopBarWithButton } from 'components/grid/bars/TopBarWithButton';
-import { ClickableWrapper } from 'components/grid/wrappers/ClicableWrapper';
-import { Column, Row } from 'components/grid/wrappers/FlexWrapper';
+import { Row } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
-import { ContentText } from 'components/Layouts/CampaignManagerLayout/styles';
-import { MainLayout } from 'components/Layouts/MainLayout';
-import { routes } from 'constants/routes';
+import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
 import { useStore } from 'effector-react';
 import {
     contentWrapperBorderRadius,
@@ -22,58 +17,20 @@ import {
 } from 'pages/CampaignManager/Channels/Help/constants';
 import { Description, StepDescription, StepText, Tag, Title } from 'pages/CampaignManager/Channels/Help/styles';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { modalEvents } from 'stores/modal';
 import { organizationsEffects, organizationsStores } from 'stores/organizations';
-import { themeStores } from 'stores/theme';
 import { userStores } from 'stores/user';
 
 export const HelpProduct = () => {
     const { user } = useStore(userStores.user);
     const { origin } = useStore(organizationsStores.item);
     const organizationId = typeof user?.organizationId === 'string' ? user.organizationId : '';
-    const history = useHistory();
-    const globalPrefixUrl = useStore(themeStores.globalPrefixUrl);
 
     useEffect(() => {
         organizationsEffects.getItemById(organizationId);
     }, [organizationId]);
 
-    const goToCreateCampaign = () => history.push(globalPrefixUrl + routes.campaignManager.campaign.create);
-    const onWomBuy = () => modalEvents.openQexWidgetModal();
-    const onWalletOpen = () => modalEvents.openWalletModal();
-
     return (
-        <MainLayout
-            topBar={
-                <TopBarWithButton
-                    buttons={
-                        <Row alignCenter marginBottom="0">
-                            <Column marginRight="25px">
-                                <ClickableWrapper width="fit-content" onClick={onWalletOpen}>
-                                    <ContentText noWrap>MY WALLET</ContentText>
-                                </ClickableWrapper>
-                            </Column>
-                            <Column marginRight="25px">
-                                <ClickableWrapper width="fit-content" onClick={onWomBuy}>
-                                    <ContentText noWrap>BUY WOM</ContentText>
-                                </ClickableWrapper>
-                            </Column>
-                            <Column>
-                                <ManualRoundedButton
-                                    height="44px"
-                                    minWidth="150px"
-                                    width="150px"
-                                    onClick={goToCreateCampaign}
-                                >
-                                    CREATE CAMPAIGN
-                                </ManualRoundedButton>
-                            </Column>
-                        </Row>
-                    }
-                />
-            }
-        >
+        <CampaignManagerLayout>
             <Row alignCenter justifyCenter height="100%" margin="0 auto" width="876px">
                 <ContentWrapper
                     borderRadius={contentWrapperBorderRadius}
@@ -167,6 +124,6 @@ export const HelpProduct = () => {
                     )}
                 </ContentWrapper>
             </Row>
-        </MainLayout>
+        </CampaignManagerLayout>
     );
 };
