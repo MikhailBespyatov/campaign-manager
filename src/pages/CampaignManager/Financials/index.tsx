@@ -35,7 +35,8 @@ import {
     codeToString,
     dateToLongString,
     dateToShortString,
-    getFixedNumber
+    getFixedNumber,
+    sortByDate
 } from 'utils/usefulFunctions';
 import {
     ChartWrapper,
@@ -71,6 +72,7 @@ export const Financials = () => {
     const { walletId } = useStore(organizationsStores.item);
     const walletBalance = useStore(walletStores.walletBalance);
     const loading = useStore(organizationsStores.loading);
+    const reverseItems = items ? [...items].sort(sortByDate) : [];
 
     const memoizedRequestObject = useMemo(() => getRequestObject(organizationId, dateFrom, dateTo, groupByWeek), [
         dateFrom,
@@ -78,7 +80,6 @@ export const Financials = () => {
         groupByWeek,
         organizationId
     ]);
-
     useEffect(() => {
         if (organizationId) {
             organizationsEffects.getItemById(organizationId);
@@ -258,7 +259,7 @@ export const Financials = () => {
                             </HeadingWrapper>
 
                             {!loading ? (
-                                items?.map((it, i) => {
+                                reverseItems?.map((it, i) => {
                                     const date = typeof it?.date === 'string' ? it.date : '';
 
                                     const dateTitle = dateToLongString(date);
