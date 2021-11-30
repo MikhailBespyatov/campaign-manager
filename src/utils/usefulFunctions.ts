@@ -292,3 +292,5 @@ export const getFullScriptStringProductViewer = (organizationPublicId: string, p
 
 export const getFixedNumber = (value: number, countAfterDecimalPoint: number) =>
     Number(value.toFixed(countAfterDecimalPoint));
+
+export const sortByDate = (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime();
