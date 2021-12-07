@@ -71,7 +71,7 @@ export const productForm = createForm({
                 createRule<string>({
                     name: 'thumbnailImage',
                     /* //TODO add validation back to yupUrl if necessary */
-                    schema: yupString
+                    schema: yupUrl
                 })
             ]
         }
@@ -92,6 +92,7 @@ export const handleProduct = createEffect({
             loadingEffects.updateInitialLoading();
             const isCreate = isCreateProduct.getState();
             const data = isCreate ? await API.products.createProduct(values) : await API.products.updateProduct(values);
+            console.log(data);
 
             loadingEffects.updateInitialLoading();
             history.push(themeStores.globalPrefixUrl.getState() + routes.campaignManager.products.index);

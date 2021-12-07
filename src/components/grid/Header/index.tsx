@@ -43,7 +43,6 @@ export const Header = () => {
     const onHeaderLogo = () => {
         history.push(globalPrefixUrl + routes.campaignManager.discover.index);
     };
-
     const isShopify = origin === 'shopify';
     //MOCK
     // const organizationPublicId = 'ADIDAS_603e01e0ad55d331b3b4642f';
