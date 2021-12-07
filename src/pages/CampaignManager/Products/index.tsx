@@ -80,7 +80,7 @@ export const Products = () => {
             // TODO change mock link to product viewer link
             <Row key={id}>
                 <CopyableField
-                    data={getFullScriptStringProductViewer(organizationPublicIdString, id)}
+                    data={getFullScriptStringProductViewer(organizationPublicIdString, publicId || '')}
                     subject={`publicId=${publicId}`}
                 />
             </Row>,
