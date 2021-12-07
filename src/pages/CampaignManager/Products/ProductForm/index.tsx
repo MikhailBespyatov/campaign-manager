@@ -14,10 +14,9 @@ import { productsEffects, productsStores } from 'stores/products';
 import { themeStores } from 'stores/theme';
 import { getFlexBasisPercent } from 'utils/usefulFunctions';
 
-const { name, brand, publicId, url, category, imageUrl } = forms.productForm.fields;
+const { name, brand, publicId, url, imageUrl } = forms.productForm.fields;
 
 export interface ProductFormProps {}
-
 interface ParamsProps {
     productId: string;
 }
@@ -52,15 +51,7 @@ export const ProductForm = () => {
             <Section marginBottom="24px">
                 <TitleFormSpan>{isEditPage ? 'Edit' : 'Add New'} product</TitleFormSpan>
             </Section>
-            {/* <Section marginBottom="42px">
-                <ImageTextInput
-                    required
-                    field={imageUrl}
-                    label="Thumbnail Image"
-                    placeholder="Set product thumbnail image here"
-                    src={imageUrlValue || ''}
-                />
-            </Section> */}
+
             <Section marginBottom={tertiaryMargin}>
                 <FlexGrow flexBasis={flexBasisInput}>
                     <ContentWrapper paddingRight={inputHalfHorizontalMargin} width="100%">
@@ -84,7 +75,7 @@ export const ProductForm = () => {
                 </FlexGrow>
             </Section>
             <Section marginBottom={tertiaryMargin}>
-                <FlexGrow flexBasis={flexBasisInput}>
+                {/* <FlexGrow flexBasis={flexBasisInput}>
                     <ContentWrapper paddingRight={inputHalfHorizontalMargin} width="100%">
                         <FormTextInput
                             disabled
@@ -94,9 +85,9 @@ export const ProductForm = () => {
                             //placeholder="Type product category here..."
                         />
                     </ContentWrapper>
-                </FlexGrow>
+                </FlexGrow> */}
                 <FlexGrow flexBasis={flexBasisInput}>
-                    <ContentWrapper paddingLeft={inputHalfHorizontalMargin} width="100%">
+                    <ContentWrapper width="100%">
                         <FormTextInput
                             required
                             field={publicId}
@@ -105,6 +96,7 @@ export const ProductForm = () => {
                         />
                     </ContentWrapper>
                 </FlexGrow>
+
                 {/*{isEditPage && (*/}
                 {/*    <FlexGrow flexBasis={flexBasisInput}>*/}
                 {/*        <ContentWrapper paddingLeft={inputHalfHorizontalMargin} width="100%">*/}
@@ -118,8 +110,11 @@ export const ProductForm = () => {
                 {/*    </FlexGrow>*/}
                 {/*)}*/}
             </Section>
+            <Section marginBottom={tertiaryMargin}>
+                <FormTextInput required field={url} label="Product URL" placeholder="Paste product URL here..." />
+            </Section>
             <Section>
-                <FormTextInput required field={url} label="Product URL" placeholder="Type product URL here..." />
+                <FormTextInput required field={imageUrl} label="Image URL" placeholder="Paste image URL here..." />
             </Section>
         </>
     );

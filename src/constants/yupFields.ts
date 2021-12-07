@@ -46,7 +46,7 @@ export const yupDefaultArray = Yup.array().of(yupDefault).required(requiredSetMe
 export const yupChannels = Yup.array();
 
 export const yupCompanyName = yupDefault.matches(onlySimpleCharactersAllowedRegExp, onlySimpleCharactersAllowedMessage);
-export const yupId = yupDefault.min(4).matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
+export const yupId = yupDefault.matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
 export const yupCategory = yupDefault.matches(onlySymbolAndNumbersRegExp, incorrectIdMessage);
 export const yupUsername = yupDefault;
 export const yupProductName = yupDefault;
