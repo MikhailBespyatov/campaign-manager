@@ -21,6 +21,8 @@ export const productsEdit = productsPrefix + '/edit_products';
 
 export const product = productsPrefix + '/product';
 
+export const channel = channelsPrefix + '/channel';
+
 const userAdminPrefix = globalPrefix + '/user_admin';
 
 // * without global prefix
@@ -89,11 +91,6 @@ export const dynamicRoutes = {
         campaign: {
             index: `${campaignPrefix}`,
             ...parseCampaignRoutes(Object.keys(campaignRoutes)),
-            // running: `${campaignPrefix}/running/`,
-            // paused: `${campaignPrefix}/paused/`,
-            // completed: `${campaignPrefix}/completed/`,
-            // expired: `${campaignPrefix}/expired/`,
-            // status: `${campaignPrefix}/:status(running|paused|completed|expired)/`,
             indexDetails: `${campaignPrefix}/details/`,
             details: `${campaignPrefix}/details/:campaignId`,
             create: `${campaignPrefix}/create_campaign`,
@@ -101,6 +98,7 @@ export const dynamicRoutes = {
         },
         channels: {
             index: `${channelsPrefix}`,
+            channel: `${channel}/:channelId`,
             create: `${channelsPrefix}/create_channels`,
             edit: `${channelsEdit}/:channelId`,
             help: `${channelsPrefix}/help`

@@ -1,23 +1,22 @@
-//import WOMLogo from 'assets/img/wom_logo.svg';
+import noVideosProductViewer from 'assets/img/noVideosProductViewer.png';
 import WOMLogo from 'assets/img/sample_logo.png';
+import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
-import { Loader } from 'components/dynamic/Loader';
 import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
-import { VideoCard } from 'components/Layouts/Cards/VideoCard';
-import { EmptySearchResult } from 'components/Layouts/EmptySearchResult';
-import { VideosFilterLayout } from 'components/Layouts/filterLayouts/VideosFilterLayout';
 import { defaultPage } from 'constants/defaults';
 import { useStore } from 'effector-react';
-import { CardCatalogGrid } from 'pages/CampaignManager/Discover/styles';
 import React, { useEffect } from 'react';
+import DocViewer, { DocViewerRenderers } from 'react-doc-viewer';
 import { useParams } from 'react-router';
-import { campaignContentEvents, campaignContentStores } from 'stores/campaignContent';
+import { campaignContentEvents } from 'stores/campaignContent';
+import { organizationsStores } from 'stores/organizations';
 import { productsEffects, productsEvents, productsStores } from 'stores/products';
-import { ProductThumbnail } from '../styles';
+import { getFullScriptStringProductViewer } from 'utils/usefulFunctions';
+import { NoVideosContainer, NoVideosText, ProductThumbnail, ProductViewerWrapper } from '../styles';
 import { productContentMarginBottom } from './constants';
 
 interface ParamsProps {
@@ -25,8 +24,10 @@ interface ParamsProps {
 }
 export const Product = () => {
     const { productId } = useParams<ParamsProps>();
-    const { imageUrl, brand, name } = useStore(productsStores.item);
-    const [{ items, totalRecords }, loading] = useStore(campaignContentStores.combinedItems);
+    const { imageUrl, brand, name, publicId } = useStore(productsStores.item);
+
+    const { publicId: organizationPublicId } = useStore(organizationsStores.item);
+    const organizationPublicIdString = typeof organizationPublicId === 'string' ? organizationPublicId : '';
 
     useEffect(
         () => {
@@ -54,53 +55,103 @@ export const Product = () => {
         []
     );
 
+    useEffect(
+        () => {
+            console.log('here publicId', publicId);
+
+            !organizationPublicIdString || !publicId
+                ? document.body.dispatchEvent(new Event('wom-viewer-init', { bubbles: true }))
+                : organizationPublicIdString &&
+                  publicId &&
+                  document.addEventListener('wom-viewer-init', async () => {
+                      console.log('publicId', publicId);
+                      const initData = {
+                          organizationPublicId: organizationPublicIdString,
+                          selector: '#wom-viewer-plugin',
+                          remoteProductId: publicId,
+                          color: '#3333FF',
+                          textColor: 'white'
+                      };
+                      // @ts-ignore
+                      const result = await window.wom.check(initData);
+                      // @ts-ignore
+                      if (result[0].isSuccess) window.wom.init(initData);
+                      else console.log('no videos');
+                  });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [publicId]
+    );
+
+    const docs = [{ uri: require('assets/pdf/WOM_Product_Viewer.pdf') }];
+
     return (
         <CampaignManagerLayout>
             <Section marginBottom={productContentMarginBottom}>
-                <ContentWrapper borderRadius="0px" padding="15px 40px">
-                    <Row alignCenter>
-                        <MarginWrapper marginRight="17px">
-                            <ProductThumbnail>
-                                <CustomImg src={imageUrl || WOMLogo} />
-                            </ProductThumbnail>
+                <ProductViewerWrapper height="720px">
+                    <div>
+                        <MarginWrapper marginBottom="20px" marginTop="10px">
+                            <Row alignCenter>
+                                <MarginWrapper marginRight="17px">
+                                    <ProductThumbnail>
+                                        <CustomImg src={imageUrl || WOMLogo} />
+                                    </ProductThumbnail>
+                                </MarginWrapper>
+                                <Column>
+                                    <MarginWrapper marginBottom="10px">
+                                        <Span fontWeight="400" lineHeight="17px">
+                                            {name}
+                                        </Span>
+                                    </MarginWrapper>
+                                </Column>
+                            </Row>
                         </MarginWrapper>
-                        <Column>
-                            <MarginWrapper marginBottom="10px">
-                                <Span fontWeight="400" lineHeight="17px">
-                                    {name}
-                                </Span>
+                        <MarginWrapper marginBottom="20px">
+                            <MarginWrapper marginBottom="20px">
+                                <Row>
+                                    <CopyableField
+                                        data={getFullScriptStringProductViewer(
+                                            organizationPublicIdString,
+                                            publicId || ''
+                                        )}
+                                        subject={`publicId=${publicId}`}
+                                    />
+                                </Row>
                             </MarginWrapper>
-                            <Span fontWeight="400" lineHeight="17px">
-                                {brand}
-                            </Span>
-                        </Column>
-                    </Row>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <div id="wom-viewer-plugin" style={{ width: '245px', height: '530px' }}>
+                                    <NoVideosContainer>
+                                        <CustomImg src={noVideosProductViewer} />
+                                        <NoVideosText>
+                                            <Span alignCenter color="#fff" fontWeight="400" lineHeight="17px">
+                                                There are no videos for this product recorded.
+                                            </Span>
+                                        </NoVideosText>
+                                    </NoVideosContainer>
+                                </div>
+                            </div>
+                        </MarginWrapper>
+                    </div>
+                </ProductViewerWrapper>
+                <ContentWrapper
+                    borderRadius="8px"
+                    padding="15px 40px"
+                    style={{ height: '720px', width: 'calc(100% - 400px)', maxWidth: '1000px' }}
+                >
+                    {organizationPublicIdString && publicId && (
+                        <DocViewer
+                            config={{
+                                header: {
+                                    disableHeader: true,
+                                    disableFileName: true
+                                }
+                            }}
+                            documents={docs}
+                            pluginRenderers={DocViewerRenderers}
+                        />
+                    )}
                 </ContentWrapper>
             </Section>
-            {/* <ModifyingLayout withoutAction padding="0px" width="100%"> */}
-
-            <VideosFilterLayout isSelectedProductPage loading={loading} totalRecords={totalRecords}>
-                {loading ? (
-                    <Section>
-                        <Loader />
-                    </Section>
-                ) : (
-                    <>
-                        {!!items?.length ? (
-                            <CardCatalogGrid>
-                                {items.map(item => (
-                                    <VideoCard key={item.womContentId} {...item} />
-                                ))}
-                            </CardCatalogGrid>
-                        ) : (
-                            <Section justifyCenter>
-                                <EmptySearchResult title="Sorry! No result found" />
-                            </Section>
-                        )}
-                    </>
-                )}
-            </VideosFilterLayout>
-            {/* </ModifyingLayout> */}
         </CampaignManagerLayout>
     );
 };

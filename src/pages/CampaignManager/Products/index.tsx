@@ -58,7 +58,7 @@ export const Products = () => {
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + productsEdit + `/${id}`);
-    const onClickMoreButton = (id: string) => () => history.push(globalPrefixUrl + product + `/${id}`);
+    const onClickMoreButton = (id: string) => () => window.open(globalPrefixUrl + product + `/${id}`, '_blank');
     const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.products.help);
 
     //Mock
@@ -76,8 +76,6 @@ export const Products = () => {
                 </MarginWrapper>
                 <ChannelNameSpan>{name}</ChannelNameSpan>
             </Row>,
-            // <ChannelNameSpan key={id}>{brand}</ChannelNameSpan>,
-            // TODO change mock link to product viewer link
             <Row key={id}>
                 <CopyableField
                     data={getFullScriptStringProductViewer(organizationPublicIdString, publicId || '')}
@@ -106,39 +104,7 @@ export const Products = () => {
         ],
         alignment: ['start', ...new Array(2).fill('center')]
     }));
-    //
-    // const dataTable: DataTable[] = products.map(({ productName, channelName, productViewerLink }) => ({
-    //     cells: [
-    //         <Row key={productName} alignCenter>
-    //             <MarginWrapper marginLeft="8px" marginRight="17px">
-    //                 <CustomImg height={channelLogoDiameter} src={mockChannelImg} width={channelLogoDiameter} />
-    //             </MarginWrapper>
-    //             <ChannelNameSpan>{productName}</ChannelNameSpan>
-    //         </Row>,
-    //         <ChannelNameSpan key={channelName}>{channelName}</ChannelNameSpan>,
-    //         <CopyableField key={productName} copyData={productViewerLink} />,
-    //         <ImgButton
-    //             key={productName}
-    //             backgroundColor={blue5}
-    //             height={editButtonDiameter}
-    //             width={editButtonDiameter}
-    //             onClick={onClickEditButton(productName)}
-    //         >
-    //             <CustomImg height={copyButtonIconDiameter} src={editButtonIcon} width={copyButtonIconDiameter} />
-    //         </ImgButton>,
-    //         <ImgButton
-    //             key={productName}
-    //             backgroundColor={blue5}
-    //             height="39px"
-    //             width="36px"
-    //             onClick={onClickMoreButton(productName)}
-    //         >
-    //             <CustomImg height={moreButtonIconDiameter} src={moreButtonIcon} width={moreButtonIconDiameter} />
-    //         </ImgButton>
-    //     ],
-    //     alignment: ['start', ...new Array(5).fill('center')]
-    // }));
-    //
+
     const onPaginationChange = (current: number) =>
         updateValues({
             pageIndex: current
@@ -152,7 +118,6 @@ export const Products = () => {
 
     useEffect(() => {
         if (isFirst) {
-            //invokeGetProducts();
             getItems({ organizationId, ...defaultProductsValues });
             setIsFirstToFalse();
         } else {

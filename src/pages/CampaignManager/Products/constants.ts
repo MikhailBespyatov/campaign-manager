@@ -10,7 +10,7 @@ export const emptyProductTitle = 'Your Products';
 export const emptyProductSubtitle =
     'When you add a product you will automatically be shown all of the approved recommendations that have been previously recorded for the product';
 
-export const productParameters = ['Product Name', /*'Brand',*/ 'Product Viewer Link', 'Actions' /*, 'More info'*/];
+export const productParameters = ['Product Name', /*'Brand',*/ 'Product Viewer Script', 'Actions' /*, 'More info'*/];
 
 //Mock
 export const productsSelectorMock = ['All products', 'Mock'];

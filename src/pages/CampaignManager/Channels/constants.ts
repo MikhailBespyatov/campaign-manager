@@ -1,7 +1,10 @@
 export const channelsContentPadding = '10px 40px';
 export const noChannelsContentPadding = '200px 20px';
 
-export const channelParameters = ['Channel Name', 'Embedded Script', 'Private', 'Edit'];
+export const moreButtonIconHeight = '15px';
+export const moreButtonIconWidth = '9px';
+
+export const channelParameters = ['Channel Name', 'Embedded Script', 'Private', 'Actions'];
 
 export const editButtonDiameter = '49px';
 

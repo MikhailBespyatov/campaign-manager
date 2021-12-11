@@ -15,6 +15,7 @@ import { Campaign } from 'pages/CampaignManager/Campaign';
 import { Create } from 'pages/CampaignManager/Campaign/Create';
 import { Details as CampaignDetails } from 'pages/CampaignManager/Campaign/Details';
 import { Channels } from 'pages/CampaignManager/Channels';
+import { Channel } from 'pages/CampaignManager/Channels/Channel';
 import { CreateChannel } from 'pages/CampaignManager/Channels/Create';
 import { EditChannel } from 'pages/CampaignManager/Channels/Edit';
 import { HelpChannel } from 'pages/CampaignManager/Channels/Help';
@@ -137,6 +138,11 @@ const App = () => {
                             exact
                             component={Channels}
                             path={globalPrefixUrl + routes.campaignManager.channels.index}
+                        />
+                        <CampaignManagerRoute
+                            exact
+                            component={Channel}
+                            path={globalPrefixUrl + routes.campaignManager.channels.channel}
                         />
                         <CampaignManagerRoute
                             exact

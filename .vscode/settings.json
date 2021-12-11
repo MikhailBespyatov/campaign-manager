@@ -1,29 +1,20 @@
 {
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "typescript.preferences.importModuleSpecifier": "non-relative",
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveTimeout": 1000,
+    "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "eslint.autoFixOnSave": true,
-    "eslint.validate": [
-        {
-            "language": "typescript",
-            "autoFix": true
-        },
-        {
-            "language": "typescriptreact",
-            "autoFix": true
-        }
-    ],
-    "files.autoSave": "onFocusChange",
-    "[typescriptreact], [typescript], [css], [scss], [json], [jsonc]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveTimeout": 1000,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "editor.codeActionsOnSave": {
         "source.organizeImports": true,
         "source.fixAll.eslint": true
     },
-    "cSpell.words": ["Echarts", "Swal", "Unselectable", "WOM", "estee", "formik", "sweetalert", "upsert"]
+    "cSpell.words": [
+        "Echarts",
+        "Swal",
+        "Unselectable",
+        "WOM",
+        "estee",
+        "formik",
+        "sweetalert",
+        "upsert"
+    ]
 }
