@@ -3,7 +3,7 @@ import WOMLogo from 'assets/img/sample_logo.png';
 import { CopyableField } from 'components/common/features/CopyableField';
 import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { Span } from 'components/common/typography/Span';
-import { Column, Row, Section } from 'components/grid/wrappers/FlexWrapper';
+import { Row, Section } from 'components/grid/wrappers/FlexWrapper';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { ContentWrapper } from 'components/grid/wrappers/NewDesign/ContentWrapper';
 import { CampaignManagerLayout } from 'components/Layouts/CampaignManagerLayout';
@@ -45,93 +45,104 @@ export const Product = () => {
 
     useEffect(
         () => {
-            productsEffects.getItemById(productId);
+            productsEffects.getItemById(productId).then(({ publicId }) => {
+                if (organizationPublicIdString !== '') {
+                    const initData = {
+                        organizationPublicId: organizationPublicIdString,
+                        selector: '#wom-viewer-plugin',
+                        remoteProductId: publicId,
+                        color: '#3333FF',
+                        textColor: 'white'
+                    };
+                    // @ts-ignore
+                    window.wom.check(initData).then(result => {
+                        if (result[0].isSuccess) {
+                            // @ts-ignore
+                            window.wom.init(initData);
+                        } else {
+                            console.log('no videos');
+                        }
+                    });
+                }
+            });
             return () => {
                 campaignContentEvents.setDefaultValues();
                 productsEvents.resetItem();
             };
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        []
+        [organizationPublicIdString]
     );
 
-    useEffect(
-        () => {
-            console.log('here publicId', publicId);
+    // useEffect(
+    //     () => {
+    //         console.log('here publicId', publicId);
+    //         console.log(organizationPublicIdString);
 
-            !organizationPublicIdString || !publicId
-                ? document.body.dispatchEvent(new Event('wom-viewer-init', { bubbles: true }))
-                : organizationPublicIdString &&
-                  publicId &&
-                  document.addEventListener('wom-viewer-init', async () => {
-                      console.log('publicId', publicId);
-                      const initData = {
-                          organizationPublicId: organizationPublicIdString,
-                          selector: '#wom-viewer-plugin',
-                          remoteProductId: publicId,
-                          color: '#3333FF',
-                          textColor: 'white'
-                      };
-                      // @ts-ignore
-                      const result = await window.wom.check(initData);
-                      // @ts-ignore
-                      if (result[0].isSuccess) window.wom.init(initData);
-                      else console.log('no videos');
-                  });
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [publicId]
-    );
+    //         !organizationPublicIdString || !publicId
+    //             ? document.body.dispatchEvent(new Event('wom-viewer-init', { bubbles: true }))
+    //             : organizationPublicIdString &&
+    //               publicId &&
+    //               document.addEventListener('wom-viewer-init', async () => {
+    //                   await productsEffects.getItemById(productId);
+    //                   console.log('publicId', publicId);
+    //                   const initData = {
+    //                       organizationPublicId: organizationPublicIdString,
+    //                       selector: '#wom-viewer-plugin',
+    //                       remoteProductId: publicId,
+    //                       color: '#3333FF',
+    //                       textColor: 'white'
+    //                   };
+    //                   // @ts-ignore
+    //                   const result = await window.wom.check(initData);
+    //                   // @ts-ignore
+    //                   if (result[0].isSuccess) window.wom.init(initData);
+    //                   else console.log('no videos');
+    //               });
+    //     },
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    //     [publicId]
+    // );
 
     const docs = [{ uri: require('assets/pdf/WOM_Product_Viewer.pdf') }];
 
     return (
         <CampaignManagerLayout>
             <Section marginBottom={productContentMarginBottom}>
-                <ProductViewerWrapper height="720px">
-                    <div>
-                        <MarginWrapper marginBottom="20px" marginTop="10px">
-                            <Row alignCenter>
-                                <MarginWrapper marginRight="17px">
-                                    <ProductThumbnail>
-                                        <CustomImg src={imageUrl || WOMLogo} />
-                                    </ProductThumbnail>
-                                </MarginWrapper>
-                                <Column>
-                                    <MarginWrapper marginBottom="10px">
-                                        <Span fontWeight="400" lineHeight="17px">
-                                            {name}
+                <ProductViewerWrapper height="720px" width="325px">
+                    <Section alignCenter noWrap marginBottom="20px" marginTop="10px">
+                        <MarginWrapper marginRight="17px">
+                            <ProductThumbnail>
+                                <CustomImg src={imageUrl || WOMLogo} />
+                            </ProductThumbnail>
+                        </MarginWrapper>
+                        <Row marginBottom="10px" width="200px">
+                            <Span noWrap fontWeight="400" lineHeight="17px">
+                                {name}
+                            </Span>
+                        </Row>
+                    </Section>
+                    <MarginWrapper marginBottom="20px">
+                        <Row marginBottom="20px">
+                            <CopyableField
+                                data={getFullScriptStringProductViewer(organizationPublicIdString, publicId || '')}
+                                maxWidth="300px"
+                                subject={`publicId=${publicId}`}
+                            />
+                        </Row>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div id="wom-viewer-plugin" style={{ width: '245px', height: '530px' }}>
+                                <NoVideosContainer>
+                                    <CustomImg src={noVideosProductViewer} />
+                                    <NoVideosText>
+                                        <Span alignCenter color="#fff" fontWeight="400" lineHeight="17px">
+                                            There are no videos for this product recorded.
                                         </Span>
-                                    </MarginWrapper>
-                                </Column>
-                            </Row>
-                        </MarginWrapper>
-                        <MarginWrapper marginBottom="20px">
-                            <MarginWrapper marginBottom="20px">
-                                <Row>
-                                    <CopyableField
-                                        data={getFullScriptStringProductViewer(
-                                            organizationPublicIdString,
-                                            publicId || ''
-                                        )}
-                                        subject={`publicId=${publicId}`}
-                                    />
-                                </Row>
-                            </MarginWrapper>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <div id="wom-viewer-plugin" style={{ width: '245px', height: '530px' }}>
-                                    <NoVideosContainer>
-                                        <CustomImg src={noVideosProductViewer} />
-                                        <NoVideosText>
-                                            <Span alignCenter color="#fff" fontWeight="400" lineHeight="17px">
-                                                There are no videos for this product recorded.
-                                            </Span>
-                                        </NoVideosText>
-                                    </NoVideosContainer>
-                                </div>
+                                    </NoVideosText>
+                                </NoVideosContainer>
                             </div>
-                        </MarginWrapper>
-                    </div>
+                        </div>
+                    </MarginWrapper>
                 </ProductViewerWrapper>
                 <ContentWrapper
                     borderRadius="8px"

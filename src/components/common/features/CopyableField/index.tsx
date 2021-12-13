@@ -5,11 +5,15 @@ import { CustomImg } from 'components/common/imageComponents/CustomImg';
 import { MarginWrapper } from 'components/grid/wrappers/MarginWrapper';
 import { blue, blue4 } from 'constants/styles';
 import React from 'react';
-import { BackgroundColor, Color } from 'types';
+import { BackgroundColor, Color, MaxSizes } from 'types';
 import { buttonColor, copyButtonIconDiameter } from './consntants';
 import { CopyableFieldSpan, CopyableFieldWrapper } from './styles';
 
-interface CopyableFieldProps extends BackgroundColor, Color, Partial<Omit<CopyButtonProps, 'customCopyIcon'>> {
+interface CopyableFieldProps
+    extends BackgroundColor,
+        Color,
+        Partial<Omit<CopyButtonProps, 'customCopyIcon'>>,
+        MaxSizes {
     organizationPublicId?: string;
 }
 
@@ -18,12 +22,15 @@ export const CopyableField = ({
     color = blue,
     subject,
     success = 'Copied successfully',
-    data
+    data,
+    maxWidth
 }: // data
 CopyableFieldProps) => (
-    <CopyableFieldWrapper backgroundColor={backgroundColor} padding="4px">
+    <CopyableFieldWrapper backgroundColor={backgroundColor} maxWidth={maxWidth} padding="4px">
         <MarginWrapper margin="0 10px">
-            <CopyableFieldSpan color={color}>{subject}</CopyableFieldSpan>
+            <CopyableFieldSpan color={color} maxWidth={`calc(${maxWidth} - 100px)`}>
+                {subject}
+            </CopyableFieldSpan>
         </MarginWrapper>
         <CustomCopyButton data={data} subject={subject} success={success}>
             <ImgButton backgroundColor={buttonColor}>
