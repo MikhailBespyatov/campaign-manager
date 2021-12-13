@@ -58,7 +58,7 @@ export const Products = () => {
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.products.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + productsEdit + `/${id}`);
-    const onClickMoreButton = (id: string) => () => window.open(globalPrefixUrl + product + `/${id}`, '_blank');
+    const onClickMoreButton = (id: string) => () => history.push(globalPrefixUrl + product + `/${id}`, '_blank');
     const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.products.help);
 
     //Mock

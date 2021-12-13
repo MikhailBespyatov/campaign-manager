@@ -55,7 +55,7 @@ export const Channels = () => {
 
     const onClickAddButton = () => history.push(globalPrefixUrl + routes.campaignManager.channels.create);
     const onClickEditButton = (id: string) => () => history.push(globalPrefixUrl + channelsEdit + `/${id}`);
-    const onClickMoreButton = (id: string) => () => window.open(globalPrefixUrl + channel + `/${id}`, '_blank');
+    const onClickMoreButton = (id: string) => () => history.push(globalPrefixUrl + channel + `/${id}`, '_blank');
     const onClickHowItWork = () => history.push(globalPrefixUrl + routes.campaignManager.channels.help);
 
     const dataTable: DataTable[] | undefined = items?.map(({ name, id = '', isPrivate }) => ({
