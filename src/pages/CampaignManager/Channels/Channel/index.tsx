@@ -11,11 +11,13 @@ import React, { useEffect } from 'react';
 import DocViewer, { DocViewerRenderers } from 'react-doc-viewer';
 import { useParams } from 'react-router';
 import { campaignContentEvents } from 'stores/campaignContent';
-import { channelsEffects, channelsStores } from 'stores/channels';
+import { channelsEffects, channelsEvents, channelsStores } from 'stores/channels';
 import { organizationsStores } from 'stores/organizations';
 import { getFullScriptStringChannelViewer } from 'utils/usefulFunctions';
 import { NoVideosContainer, NoVideosText, ProductViewerWrapper } from '../styles';
 import { productContentMarginBottom } from './constants';
+
+const docs = [{ uri: require('assets/pdf/WOM_Channel_Viewer.pdf') }];
 
 interface ParamsProps {
     channelId: string;
@@ -23,7 +25,6 @@ interface ParamsProps {
 export const Channel = () => {
     const { channelId } = useParams<ParamsProps>();
     const { name } = useStore(channelsStores.item);
-
     const { publicId: organizationPublicId } = useStore(organizationsStores.item);
 
     const organizationPublicIdString = typeof organizationPublicId === 'string' ? organizationPublicId : '';
@@ -40,7 +41,7 @@ export const Channel = () => {
                         textColor: 'white'
                     };
                     // @ts-ignore
-                    if (window.womChannelViewer) {
+                    if (window && window.womChannelViewer) {
                         // @ts-ignore
                         window.womChannelViewer.check(initData).then(result => {
                             if (result[0].isSuccess) {
@@ -50,50 +51,17 @@ export const Channel = () => {
                                 console.log('no videos');
                             }
                         });
-                    } else {
-                        return;
                     }
                 }
             });
             return () => {
                 campaignContentEvents.setDefaultValues();
+                channelsEvents.resetItem();
             };
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [channelId, organizationPublicIdString]
+        [organizationPublicIdString]
     );
-
-    // useEffect(
-    //     () => {
-    //         console.log('start', channelId, organizationPublicIdString);
-
-    //         !organizationPublicIdString || !channelId
-    //             ? document.body.dispatchEvent(new Event('wom-channel-viewer-init', { bubbles: true }))
-    //             : organizationPublicIdString &&
-    //               channelId &&
-    //               document.addEventListener('wom-channel-viewer-init', async () => {
-    //                   console.log('finish', channelId);
-
-    //                   await channelsEffects.getItemById(channelId);
-    //                   const initData = {
-    //                       merchantId: organizationPublicIdString,
-    //                       selector: '#wom-channel-viewer-plugin',
-    //                       channelId: channelId,
-    //                       color: '#3333FF',
-    //                       textColor: 'white'
-    //                   };
-    //                   // @ts-ignore
-    //                   const result = await window.womChannelViewer.check(initData);
-    //                   // @ts-ignore
-    //                   if (result[0].isSuccess) window.womChannelViewer.init(initData);
-    //                   else console.log('no videos');
-    //               });
-    //     },
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    //     [channelId, organizationPublicIdString]
-    // );
-
-    const docs = [{ uri: require('assets/pdf/WOM_Channel_Viewer.pdf') }];
 
     return (
         <CampaignManagerLayout>
