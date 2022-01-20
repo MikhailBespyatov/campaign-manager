@@ -81,7 +81,9 @@ const updateChannel = createEffect({
     }
 });
 
-const item = restore<WOM.ChannelResponse>(getItemById.doneData, {});
+const resetItem = createEvent();
+
+const item = restore<WOM.ChannelResponse>(getItemById.doneData, {}).on(resetItem, _ => ({}));
 const items = createStore<WOM.ChannelsResponse>({})
     .on(getItems.doneData, (_, newState) => newState)
     .on(createChannel.doneData, (state, newState) => ({ ...state, items: [...(state?.items || []), newState] }))
@@ -207,7 +209,14 @@ const getChannelPlaylist = createEffect({
 //     returnQueryCount: true
 // });
 
-const channelsEvents = { updateValues, setDefaultValues, invokeGetChannels, setIsFirstToFalse, setIsFirstToTrue };
+const channelsEvents = {
+    updateValues,
+    setDefaultValues,
+    invokeGetChannels,
+    setIsFirstToFalse,
+    setIsFirstToTrue,
+    resetItem
+};
 const channelsEffects = {
     getItemById,
     getItems,

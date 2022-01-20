@@ -22,6 +22,9 @@ import { productContentMarginBottom } from './constants';
 interface ParamsProps {
     productId: string;
 }
+
+const docs = [{ uri: require('assets/pdf/WOM_Product_Viewer.pdf') }];
+
 export const Product = () => {
     const { productId } = useParams<ParamsProps>();
     const { imageUrl, brand, name, publicId } = useStore(productsStores.item);
@@ -55,14 +58,17 @@ export const Product = () => {
                         textColor: 'white'
                     };
                     // @ts-ignore
-                    window.wom.check(initData).then(result => {
-                        if (result[0].isSuccess) {
-                            // @ts-ignore
-                            window.wom.init(initData);
-                        } else {
-                            console.log('no videos');
-                        }
-                    });
+                    if (window && window.wom) {
+                        // @ts-ignore
+                        window.wom.check(initData).then(result => {
+                            if (result[0].isSuccess) {
+                                // @ts-ignore
+                                window.wom.init(initData);
+                            } else {
+                                console.log('no videos');
+                            }
+                        });
+                    }
                 }
             });
             return () => {
@@ -73,38 +79,6 @@ export const Product = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [organizationPublicIdString]
     );
-
-    // useEffect(
-    //     () => {
-    //         console.log('here publicId', publicId);
-    //         console.log(organizationPublicIdString);
-
-    //         !organizationPublicIdString || !publicId
-    //             ? document.body.dispatchEvent(new Event('wom-viewer-init', { bubbles: true }))
-    //             : organizationPublicIdString &&
-    //               publicId &&
-    //               document.addEventListener('wom-viewer-init', async () => {
-    //                   await productsEffects.getItemById(productId);
-    //                   console.log('publicId', publicId);
-    //                   const initData = {
-    //                       organizationPublicId: organizationPublicIdString,
-    //                       selector: '#wom-viewer-plugin',
-    //                       remoteProductId: publicId,
-    //                       color: '#3333FF',
-    //                       textColor: 'white'
-    //                   };
-    //                   // @ts-ignore
-    //                   const result = await window.wom.check(initData);
-    //                   // @ts-ignore
-    //                   if (result[0].isSuccess) window.wom.init(initData);
-    //                   else console.log('no videos');
-    //               });
-    //     },
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    //     [publicId]
-    // );
-
-    const docs = [{ uri: require('assets/pdf/WOM_Product_Viewer.pdf') }];
 
     return (
         <CampaignManagerLayout>
